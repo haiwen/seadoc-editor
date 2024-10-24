@@ -1,0 +1,13 @@
+{
+  "cSpell.words": [
+    "commitlint",
+    "linebreak"
+  ],
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.nodeEnv": "development",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+}
