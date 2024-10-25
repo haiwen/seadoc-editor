@@ -1,7 +1,6 @@
 .log
 .DS_Store
 .jest-*
+dist
 lib
 node_modules
-!.prettierrc.js
-!.eslintrc.js
