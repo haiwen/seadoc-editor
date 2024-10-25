@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "lerna exec --scope example npm run start",
-    "build": "lerna exec --parallel --ignore 'example' -- babel src -d dist",
+    "build": "lerna exec --parallel --ignore 'example' -- babel src -d dist -w",
     "lint": "export NODE_ENV=development && lint-staged",
     "format": "prettier --write .",
     "prepare": "husky"
