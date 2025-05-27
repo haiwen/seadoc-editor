@@ -1,0 +1,149 @@
+.select-container {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+  font-weight: normal;
+}
+
+.select-container .control-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+  height: 24px;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+  user-select: none;
+}
+
+.select-container .control-container.active,
+.select-container .control-container:hover {
+  border: 1px solid #3C88FD;
+  box-shadow: 0 0 0 2px rgb(70 127 207 / 25%);
+}
+
+.select-container .control-container .placeholder {
+  color: #BFBFBF;
+}
+
+.select-container .control-container .control-icon {
+  font-size: 13px;
+  color: rgb(170, 170, 170);
+  cursor: default;
+  margin-right: 5px;
+}
+
+.select-container .control-container .operation {
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-container .control-container .arrow {
+  color: #949494;
+  display: inline-block;
+  font-size: 12px;
+  transform: scale(.8);
+  transition: all .1s;
+}
+
+.select-container .control-container .arrow:hover {
+  color: #666;
+}
+
+.select-container .select-popover {
+  position: absolute;
+  left: 0;
+  display: flex;
+  min-width: 80px;
+  max-height: 265px;
+  margin-top: 4px;
+  padding: 8px 0;
+  flex-direction: column;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 10px #eee;
+  border-radius: 4px;
+  background: #fff;
+  z-index: 10;
+}
+
+.select-popover .option-item-divider {
+  margin-top: 8px;
+  border-top: 1px solid #EFEFEF;
+}
+
+.select-popover .sdoc-field-setting {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.select-popover .sdoc-field-setting .icon-container {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-popover .sdoc-field-setting .sdoc-text-style {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.select-popover .sdoc-field-setting .op-icon {
+  font-size: 12px;
+  transform: rotate(90deg);
+  color: #aaa;
+}
+
+.select-popover .option-item-wrapper {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+}
+
+.select-popover .option-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+  height: 32px;
+  padding: 0 12px;
+  cursor: pointer;
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+
+.select-popover .option-item:hover {
+  background-color: #F5F5F5;
+}
+
+.select-popover .option-item.active {
+  background-color: #39A0FF;
+  color: #fff;
+}
+
+.select-popover .option-item.disable {
+  color: #aaa;
+  cursor: default;
+}
+
+.select-popover .option-item .item-icon {
+  font-size: 14px;
+  color: rgb(170, 170, 170);
+  cursor: default;
+}
+
+.select-popover .option-item.active .item-icon {
+  color: #fff;
+}
+
+.select-popover .option-item .label {
+  margin: 0 5px;
+}

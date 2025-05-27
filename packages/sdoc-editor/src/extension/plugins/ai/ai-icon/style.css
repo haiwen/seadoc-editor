@@ -1,0 +1,22 @@
+.sdoc-ask-ai-icon.big {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 16px;
+}
+
+.sdoc-ask-ai-icon.small {
+  width: 12px;
+  height: 13px;
+  margin-right: 4px;
+}
+
+.sdoc-ai-result-header div {
+  display: flex;
+}
+
+.sdoc-ai-result-header .sdoc-ask-ai-icon.big {
+  position: relative;
+  left: 0;
+  margin-right: 10px;
+}

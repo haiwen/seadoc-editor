@@ -1,0 +1,24 @@
+.sdoc-context-menu .sdoc-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.sdoc-table-alignment-menu .sdoc-dropdown-menu-item {
+    padding: 4px 10px !important;
+}
+
+.sdoc-table-alignment-menu .sdoc-dropdown-menu-item .sdoc-checked {
+    margin-right: 6px;
+    height: 21px;
+    line-height: 21px;
+    width: 12px;
+}
+
+.sdoc-table-alignment-menu .sdoc-dropdown-menu-item .sdoc-check-mark {
+    display: none;
+    font-size: 12px !important;
+}
+
+.sdoc-table-alignment-menu .sdoc-dropdown-menu-item .sdoc-check-mark.active {
+    display: inline;
+}

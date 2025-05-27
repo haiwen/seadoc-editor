@@ -1,0 +1,47 @@
+.sdoc-side-toolbar-container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+}
+
+.sdoc-side-toolbar-container:hover {
+  background-color: #EFEFEF;
+}
+
+.sdoc-side-toolbar-container .sdoc-side-op-icon {
+  border-radius: 3px;
+  padding: 0px 3px;
+  height: 24px;
+  color: #AFAFAD;
+  margin-right: 1px;
+  cursor: pointer;
+}
+
+.sdoc-side-toolbar-container .sdoc-side-op-icon :first-child {
+  font-size: 14px;
+}
+
+.sdoc-side-toolbar-container .side-op-icon-active {
+  background-color: #F2F2F2;
+  border-radius: 2px;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
+
+.fade-out {
+  animation: fade-out 0.15s ease-out;
+}

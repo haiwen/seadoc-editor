@@ -1,0 +1,7 @@
+.sdoc-custom-table-size-dialog .sdoc-custom-table-size-container {
+  width: 100%;
+}
+
+.sdoc-custom-table-size-dialog .sdoc-custom-table-size-item {
+  width: calc(50% - 16px);
+}

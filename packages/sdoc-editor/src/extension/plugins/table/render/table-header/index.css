@@ -1,0 +1,84 @@
+/* column-header */
+.sdoc-table-wrapper .sdoc-table-columns-header {
+  height: 12px;
+  top: -12px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sdoc-table-wrapper .sdoc-table-columns-header .sdoc-table-column-header {
+  flex-shrink: 0;
+  border-right: 1px solid rgba(0, 0, 0, .08);
+  background-color: rgb(243, 245, 247);
+  cursor: pointer;
+}
+
+.sdoc-table-wrapper .sdoc-table-columns-header .sdoc-table-column-header.drag {
+  cursor: move;
+}
+
+/* row-header */
+.sdoc-table-wrapper .sdoc-table-rows-header {
+  width: 12px;
+  height: 100%;
+  position: absolute;
+  left: -12px;
+}
+
+.sdoc-table-wrapper .sdoc-table-rows-header .sdoc-table-row-header:first-child {
+  border-top: 1px solid rgba(0, 0, 0, .08);
+}
+
+.sdoc-table-wrapper .sdoc-table-row-header {
+  width: 100%;
+  background-color: rgb(243, 245, 247);
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
+  cursor: pointer;
+}
+
+.sdoc-table-wrapper .sdoc-table-rows-header .sdoc-table-row-header.drag {
+  cursor: move;
+}
+
+.sdoc-table-wrapper .sdoc-table-rows-columns-header {
+  height: 13px;
+  width: 13px;
+  position: absolute;
+  left: -12px;
+  top: -12px;
+  background-color: rgb(243, 245, 247);
+  border-right: 1px solid rgba(0, 0, 0, .08);
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
+  border-top-left-radius: 3px;
+}
+
+/* common */
+.sdoc-table-wrapper .sdoc-table-row-header.range-selected,
+.sdoc-table-wrapper .sdoc-table-column-header.range-selected,
+.sdoc-table-wrapper .sdoc-table-rows-columns-header.range-selected {
+  background-color: #81868F !important;
+}
+
+.sdoc-table-wrapper .sdoc-table-row-header.range-selected-tip,
+.sdoc-table-wrapper .sdoc-table-column-header.range-selected-tip,
+.sdoc-table-wrapper .sdoc-table-rows-columns-header.range-selected-tip {
+  background-color: rgb(233, 235, 237);
+}
+
+/* add-icon */
+.sdoc-table-wrapper .sdoc-table-add-element-icon-content {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  z-index: 1;
+  line-height: 10px;
+  text-align: center;
+  cursor: default;
+}
+
+.sdoc-table-wrapper .sdoc-table-add-element-icon-content:hover {
+  cursor: pointer;
+}
+

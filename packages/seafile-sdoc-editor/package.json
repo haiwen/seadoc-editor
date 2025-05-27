@@ -1,0 +1,26 @@
+{
+  "name": "seafile-sdoc-editor",
+  "version": "1.0.0",
+  "author": "shuntian <978987373@qq.com>",
+  "homepage": "https://github.com/seafileltd/sea-sdoc-editor#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seafileltd/sea-sdoc-editor.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/seafile-sdoc-editor.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/seafileltd/sea-sdoc-editor/issues"
+  },
+  "description": ""
+}

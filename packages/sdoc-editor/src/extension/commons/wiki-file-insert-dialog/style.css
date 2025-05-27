@@ -1,0 +1,116 @@
+.wiki-history-files-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 400px;
+  max-width: 400px;
+  max-height: 350px;
+  /* The same as hierarchy of comment drawer  */
+  z-index: 103;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 4px 8px 3px rgba(0, 0, 0, .15);
+}
+
+.wiki-history-files-content .wiki-history-files-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-top: 8px;
+  padding: 0px 16px;
+  height: 32px;
+  width: 100%;
+  color: #999999;
+  font-size: 14px;
+  user-select: none;
+  cursor: default;
+}
+
+.wiki-history-files-content .sdoc-history-files {
+  flex-grow: 1;
+  overflow-y: auto;
+  cursor: pointer;
+}
+
+.wiki-history-files-content .no-header {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item {
+  padding: 6px 16px;
+  height: 32px;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item .file-item-icon {
+  font-size: 16px;
+  margin-right: 8px;
+  color: #666666;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item .file-item-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item:hover {
+  background-color: #f5f5f5;
+}
+
+.wiki-history-files-content .sdoc-history-files-add {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 0px 16px;
+  height: 32px;
+  width: 100%;
+  border-top: 1px solid #e9ecef;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.wiki-history-files-content .sdoc-history-files-add :first-child {
+  color: #444444;
+  margin-right: 10px;
+}
+
+.wiki-history-files-content .sdoc-history-files-add .new-file-name {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item.files-item-has-dir {
+  height: 51px;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item .file-item-emoticons {
+  font-size: 14px;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item .file-item-name-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wiki-history-files-content .sdoc-history-files .sdoc-history-files-item .file-item-name-wrapper .name-dir {
+  color: #666;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

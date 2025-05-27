@@ -1,0 +1,52 @@
+.sdoc-callout-white-wrapper {
+  padding: 5px 0;
+}
+
+.sdoc-callout-container {
+  position: relative;
+  padding: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  display: flex;
+}
+
+.sdoc-callout-container .callout-content {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+}
+
+.sdoc-callout-container .sdoc-callout-placeholder {
+  position: absolute;
+  top: 5px;
+  color: #b8b6b6;
+  pointer-events: none;
+}
+
+.sdoc-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols;
+  white-space: nowrap;
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  font-size: 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sdoc-emoji.wraning {
+  color: block;
+}
+
+.sdoc-callout-container .callout-icon {
+  width: 18px;
+  margin-right: 8px;
+  margin-top: 2px;
+}
+
+.sdoc-callout-container .callout-icon .sdoc-emoji {
+  font-size: 16px;
+}
+

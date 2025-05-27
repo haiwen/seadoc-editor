@@ -1,0 +1,29 @@
+.sdoc-editor__article {
+  width: 100%;
+  min-height: 800px;
+  padding: 40px 60px;
+  background-color: #fff;
+  border: 1px solid #e5e6e8;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+  font-size: 11pt;
+}
+
+.sdoc-editor__article>div {
+  caret-color: blue;
+}
+
+.sdoc-editor__article .sdoc-drag-cover::before {
+  content: ' ';
+  width: 59px;
+  display: inline-block;
+  position: absolute;
+  left: -60px;
+}
+
+.sdoc-editor__article .sdoc-draging {
+  border-bottom: 2px solid rgba(35, 131, 226);
+}
+
+.sdoc-editor__article .sdoc-code-block-pre {
+  font-size: 10pt;
+}

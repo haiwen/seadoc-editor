@@ -1,0 +1,60 @@
+.sdoc-comment-caret-list {
+  background: #fff;
+  position: absolute;
+  padding: 10px 0;
+  max-height: 200px;
+  overflow: auto;
+  min-width: 150px;
+  z-index: 1049;
+  border-radius: 5px;
+  border: 1px solid #ededed;
+  max-width: 200px;
+}
+
+.sdoc-comment-caret-list .comment-participant-item {
+  padding: 5px 0;
+}
+
+.sdoc-comment-caret-list .comment-participant-item.active,
+.sdoc-comment-caret-list .comment-participant-item:hover {
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.sdoc-comment-caret-list .comment-participant-item .comment-participant-container {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.sdoc-comment-caret-list .comment-participant-item .comment-participant-avatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.sdoc-comment-caret-list .comment-participant-item .comment-participant-name {
+  margin-left: 4px;
+  font-size: 14px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sdoc-mention-temp-ipt {
+  padding: 0 5px;
+  display: inline-block;
+  border-radius: 5px;
+  margin: 0 1px;
+}
+
+.sdoc-mention {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 0 2px;
+  border: none;
+  background-color: transparent;
+  cursor: default;
+}

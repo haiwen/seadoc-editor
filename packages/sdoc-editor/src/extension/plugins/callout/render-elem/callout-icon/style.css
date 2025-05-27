@@ -1,0 +1,33 @@
+.sdoc-callout-icon-selector-container {
+  position: absolute;
+  padding: 4px;
+  left: 40px;
+  top: 36.5px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  display: flex;
+  min-width: 100px;
+  z-index: 100;
+}
+
+.sdoc-callout-icon-selector-container .icon-item {
+  width: 32px;
+  height: 32px;
+  margin: 0 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sdoc-callout-icon-selector-container .icon-item:hover {
+  background-color: #f2f2f2;
+}
+
+.sdoc-callout-icon-selector-container .icon-item img {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}

@@ -1,0 +1,48 @@
+.file-link-selected,
+.sdoc-file-link-render:hover {
+  background-color: #e5e5e5 !important;
+}
+
+.sdoc-file-card-link {
+  position: relative;
+  background-color: #f3f3f3;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  height: 50px;
+  width: 420px;
+  margin-bottom: -3px;
+}
+
+.sdoc-file-link-render .sdoc-file-link-icon {
+  padding-right: 5px;
+  color: #ff9800;
+}
+
+.sdoc-file-card-link .sdoc-file-link-icon :first-child {
+  font-size: 24px;
+}
+
+.sdoc-file-card-link .sdoc-file-link-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sdoc-file-card-link .sdoc-file-text-link {
+  position: absolute;
+  left: 42px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 330px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sdoc-file-card-link .sdoc-file-text-link a {
+  text-decoration: none;
+  color: #333;
+}

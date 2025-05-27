@@ -1,0 +1,148 @@
+.sdoc-ai-module-container {
+  position: absolute;
+  z-index: 101;
+  width: 100%;
+  max-width: 672px;
+  display: none;
+  pointer-events: none;
+}
+
+.sdoc-ai-module-container .sdoc-ai-content {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sdoc-ai-content .sdoc-ai-search {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.sdoc-ai-content .sdoc-ai-search input {
+  border: none;
+  padding: 0 44px;
+  border-radius: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.sdoc-ai-content .sdoc-ai-search input {
+  border: none;
+  padding: 0 44px;
+  border-radius: 10px;
+  width: 100%;
+  pointer-events: all;
+}
+
+.sdoc-ai-content .sdoc-ai-search .sdoc-send-arrow {
+  position: absolute;
+  right: 16px;
+  color: #ff9800;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.sdoc-ai-content .sdoc-ai-search .sdoc-send-arrow.disable {
+  color: #BDBDBD;
+  cursor: text;
+}
+
+.sdoc-ai-content .sdoc-ai-result {
+  position: relative;
+  height: 50px;
+}
+
+.sdoc-ai-module-container .sdoc-ai-operations {
+  width: 200px;
+  margin-top: 8px;
+  padding: 8px 0;
+  border: 1px solid #e5e6e8;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #ccc;
+  background-color: #fff;
+  pointer-events: all;
+  overflow: hidden;
+}
+
+.sdoc-ai-module-container .sdoc-ai-operations .op-type {
+  color: #666;
+  font-size: 14px;
+  min-height: 32px;
+  padding: 3px 12px;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  height: auto;
+  max-height: 300px;
+  pointer-events: all;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-content {
+  font-size: 11pt;
+  height: auto;
+  overflow-y: auto;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header span {
+  color: #666;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header .sdocfont {
+  font-size: 14px;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header .sdoc-ask-ai {
+  margin-right: 10px;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header .sdoc-close {
+  color: #999;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header .sdoc-close:hover {
+  color: #555;
+}
+
+.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-statistic {
+  color: #666;
+}
+
+.ai-lang-sub-menu .popover,
+.ai-adjust-sub-menu .popover {
+  padding: 8px 0;
+  border: 1px solid #e5e6e8;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #ccc;
+  background-color: #fff;
+}
+
+.md-rendered-html table {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+.md-rendered-html th,
+.md-rendered-html tr,
+.md-rendered-html td {
+  padding: 6px;
+  border: 1px solid #ccc;
+}
+
+.md-rendered-html p {
+  padding-bottom: 5px;
+  line-height: 1.6;
+  margin-bottom: 0 !important;
+}

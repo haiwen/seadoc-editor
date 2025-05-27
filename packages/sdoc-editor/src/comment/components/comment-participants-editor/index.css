@@ -1,0 +1,132 @@
+.sdoc-comments-participants-popover .popover {
+  max-width: 282px;
+  margin-top: 0px;
+}
+
+.sdoc-comments-participants-popover .sdoc-comments-participants-editor-container {
+  min-height: 160px;
+  width: 280px;
+}
+
+.sdoc-comments-participants-popover .sdoc-selected-participants {
+  background-color: #f6f6f6;
+  padding: 5px;
+  border-bottom: 1px solid #dde2ea;
+  border-radius: 3px 3px 0 0;
+  min-height: 34px;
+}
+
+.sdoc-comments-participants-popover .sdoc-selected-participant {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  margin-right: 10px;
+  padding: 0 8px 0 2px;
+  font-size: 13px;
+  border-radius: 10px;
+  background: #eaeaea;
+}
+
+.sdoc-comments-participants-popover .sdoc-selected-participant img {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-name {
+  margin-left: 4px;
+  flex: 1 1;
+  color: #16181b;
+}
+
+.sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-delete {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 1px;
+  cursor: pointer;
+}
+
+.sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-delete .sdocfont {
+  display: inline-block;
+  font-size: 12px;
+  color: #909090;
+}
+
+.sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-delete:hover .sdocfont {
+  color: #5a5a5a;
+}
+
+.sdoc-comments-participants-popover .sdoc-search-collaborators {
+  padding: 10px;
+}
+
+.sdoc-comments-participants-popover .sdoc-search-collaborators input {
+  height: 28px;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborators {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 200px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborators.sdoc-searched-collaborators-empty-tip {
+  opacity: .5;
+  font-size: 14px;
+  align-items: flex-start;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborator {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.25rem 0;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  height: 30px;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborator:hover {
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborator img {
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborator .sdoc-selected-participant-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 4px;
+  color: #16181b;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborator .sdoc-searched-collaborator-operation {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sdoc-comments-participants-popover .sdoc-searched-collaborator .sdoc-searched-collaborator-operation .sdocfont {
+  font-size: 12px;
+  color: #798d99;
+}

@@ -1,0 +1,12 @@
+/* insert element dropdown item */
+.sdoc-dropdown-item-with-left-icon .sdoc-dropdown-item-content .sdoc-dropdown-item-content-icon {
+  color: #444;
+}
+
+.sdoc-link-dropdown-menu-item .sdoc-dropdown-item-content{
+  justify-content: space-between;
+}
+
+.sdoc-dropdown-menu-item-relative {
+  position: relative;
+}

@@ -1,0 +1,37 @@
+.sdoc-side-menu-popover {
+  position: absolute;
+}
+
+.sdoc-side-menu {
+  position: absolute;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  transform: translateX(-200px);
+  padding: 8px 0px;
+  box-shadow: 0 2px 12px 2px rgba(68, 73, 77, .16);
+  z-index: 999;
+}
+
+.sdoc-side-menu .sdoc-side-menu-search-wrapper {
+  padding: 12px;
+}
+
+.sdoc-side-menu .sdoc-side-menu-search-wrapper input {
+  max-height: 30px;
+  font-size: 14px;
+}
+
+.sdoc-side-menu .sdoc-side-menu-insert-wrapper {
+  max-height: 278px;
+  overflow-y: auto;
+}
+
+.sdoc-side-menu-insert-below-popover .popover {
+  background-color: #fff;
+  min-width: 150px;
+  border-radius: 2px;
+  left: -6px !important;
+  cursor: pointer;
+}

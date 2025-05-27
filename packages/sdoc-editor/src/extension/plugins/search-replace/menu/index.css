@@ -1,0 +1,14 @@
+.sdoc-search-highlight-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  overflow: hidden;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.sdoc-find-search-highlight-canvas {
+  position: absolute;
+}

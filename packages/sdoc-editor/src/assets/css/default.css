@@ -1,0 +1,27 @@
+/* modify default css */
+.element-icon {
+  color: #444 !important;
+}
+
+.sdoc-icon-btn {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.sdoc-icon-btn:hover {
+  background-color: #EFEFEF;
+  cursor: pointer;
+}
+
+.sdoc-icon-btn .sdocfont {
+  color: #999;
+  font-size: 16px;
+}
+
+.sdoc-icon-btn:hover .sdocfont {
+  color: #5a5a5a;
+}

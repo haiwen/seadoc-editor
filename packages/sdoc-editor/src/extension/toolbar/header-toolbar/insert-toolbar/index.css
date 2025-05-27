@@ -1,0 +1,28 @@
+.menu-group .menu-group-item.sdoc-insert-toolbar-btn {
+  width: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-group .menu-group-item.sdoc-insert-toolbar-btn.disabled {
+  /* 64: 76 - 12 */
+  width: 64px !important;
+  color: #BDBDBD;
+}
+
+.menu-group .sdoc-insert-toolbar-btn .sdoc-menu-with-dropdown-icon {
+  flex: 1;
+  justify-content: flex-start;
+  padding-left: 6px;
+  padding-right: 2px;
+  font-size: 14px;
+}
+
+.sdoc-insert-menu-popover .popover {
+  min-width: 200px;
+}
+
+.sdoc-insert-menu-popover .sdoc-insert-menu-container {
+  padding: 8px 0;
+}

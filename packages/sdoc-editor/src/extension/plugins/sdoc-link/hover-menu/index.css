@@ -1,0 +1,89 @@
+.sdoc-link-hover-menu-container {
+  position: absolute;
+  height: 42px;
+  z-index: 101;
+  width: auto;
+}
+  
+.sdoc-link-hover-menu-container .hover-menu-container {
+  height: 36px;
+  padding: 7px 8px;
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.sdoc-link-hover-menu-container .hover-menu-container > span:not(:last-of-type) {
+  padding-right: 8px;
+  border-right: 1px solid #e5e5e5;
+}
+
+.sdoc-link-hover-menu-container .hover-menu-container .op-item {
+  position: relative;
+  font-size: 12px;
+  color: #212529;
+  padding: 0 5px;
+  border-radius: 2px;
+  min-width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sdoc-link-hover-menu-container .hover-menu-container .op-item:hover {
+  color: #212529;
+  text-decoration: none;
+  background: #f1f1f1;
+}
+
+.sdoc-link-hover-menu-container .op-group-item:last-child .op-item {
+  margin-left: 8px;
+}
+
+.sdoc-link-hover-menu-container .hover-menu-container .link-style-icon-active {
+  background: #f1f1f1;
+}
+
+.sdoc-link-hover-menu-container .hover-menu-container .op-tooltip:hover::after {
+  position: absolute;
+  color: #212529;
+  content: attr(op-item-tooltip);
+  top: -40px;
+  left: -20px;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #e8e8e8;
+  font-size: 12px;
+  box-shadow: 0 0 5px #ccc;
+}
+
+.sdoc-link-hover-menu-container .hover-menu-container .icon-font {
+  font-size: 12px;
+  color: #444;
+}
+
+.sdoc-link-hover-menu-container .sdoc-file-display-style-popover {
+  position: absolute;
+  top: 37px;
+  right: -80px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #e5e6e8;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 101;
+  white-space: nowrap;
+}

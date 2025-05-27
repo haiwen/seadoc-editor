@@ -1,0 +1,26 @@
+.sdoc-notification-count {
+  position: absolute;
+  color: #fff;
+  font-size: 12px;
+  top: -7px;
+  right: -10px;
+  padding: 2px;
+  background: #fc6440;
+  border-radius: 50%;
+  min-width: 20px;
+  min-height: 20px;
+  transform: scale(.7);
+  text-align: center;
+}
+
+.sdoc-plugin-operation-btn-container .sdoc-unread-message-tip {
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background-color: #fc6440;
+  margin-left: 6px;
+}

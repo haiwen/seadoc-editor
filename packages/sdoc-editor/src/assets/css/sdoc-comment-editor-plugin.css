@@ -1,0 +1,19 @@
+/* List */
+.sdoc-editor-container .sdoc-comment-editor .list-container {
+  padding-left: 2em !important; 
+}
+
+.sdoc-comment-editor .list-container li p {
+  margin: 0 !important;
+}
+
+/* Paragraph */
+.sdoc-comment-editor .sdoc-comment-editor-paragraph {
+  margin: 0.8em 0 !important;
+  padding: 0 !important;
+}
+
+/* Image */
+.sdoc-comment-editor .sdoc-image-wrapper  {
+  padding: 1px !important;
+}

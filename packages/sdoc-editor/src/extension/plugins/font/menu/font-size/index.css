@@ -1,0 +1,40 @@
+.menu-group .sdoc-menu-with-dropdown.sdoc-font-size-menu {
+  width: 46px;
+}
+
+.menu-group .sdoc-menu-with-dropdown.sdoc-font-size-menu.disabled {
+  width: 34px !important;
+}
+
+.menu-group .sdoc-font-size-menu .sdoc-menu-with-dropdown-icon,
+.menu-group .sdoc-font-size-menu .sdoc-menu-with-dropdown-icon div {
+  width: 34px;
+  font-size: 14px;
+}
+
+.menu-group .sdoc-font-size-menu .sdoc-menu-with-dropdown-icon div {
+  padding-left: 5px;
+  color: #212529;
+}
+
+.menu-group .sdoc-menu-with-dropdown.sdoc-font-size-menu.disabled .sdoc-menu-with-dropdown-icon div {
+  padding-right: 5px;
+  color: #BDBDBD;
+}
+
+.sdoc-font-size-menu-popover .sdoc-dropdown-menu-item .sdoc-check-mark {
+  position: absolute;
+  left: 8px;
+  color: #798d99;
+}
+
+.sdoc-font-size-menu-popover .sdoc-font-size-menu-container {
+  height: fit-content;
+  padding: 8px 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.sdoc-font-size-menu-popover .sdoc-dropdown-menu-item {
+  font-size: 14px;
+}

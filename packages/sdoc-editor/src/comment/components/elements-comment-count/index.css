@@ -1,0 +1,29 @@
+.sdoc-comment-container .comment-container-right .element-comments-count {
+  position: absolute;
+  left: -22px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.sdoc-comment-container .comment-container-right .element-comments-count:hover {
+  color: #333;
+  cursor: pointer;
+}
+
+.sdoc-comment-container .comment-container-right .element-comments-count-value {
+  width: 16px;
+  height: 14px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  pointer-events: none;
+  font-size: 12px;
+  color: #fff;
+  line-height: 13px;
+  text-align: center;
+}

@@ -15,7 +15,9 @@ module.exports = {
   extends: [
     'react-app',
     'eslint:recommended',
-    'plugin:prettier/recommended', // Make sure this is always the last configuration in the extends array.
+    "plugin:react-hooks/recommended",
+    'plugin:import/errors',
+    'plugin:import/warnings',
   ],
   // Add your custom rules here
   rules: {
@@ -63,5 +65,24 @@ module.exports = {
     'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1 }],
     'no-multi-spaces': 'error',
     'react/jsx-closing-tag-location': 'error',
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "pathGroups": [
+          {
+            "pattern": "react*",
+            "group": "builtin",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
   },
 };

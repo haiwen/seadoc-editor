@@ -1,0 +1,40 @@
+.menu-group .menu-group-item.sdoc-menu-with-dropdown.sdoc-font-family-menu {
+  width: 76px;
+  max-width: 76px;
+}
+
+.menu-group .menu-group-item.sdoc-menu-with-dropdown.sdoc-font-family-menu.disabled {
+  width: 70px !important;
+}
+
+.sdoc-font-family-menu .sdoc-menu-with-dropdown-icon,
+.sdoc-font-family-menu .sdoc-menu-with-dropdown-icon div {
+  width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.sdoc-font-family-menu .sdoc-menu-with-dropdown-icon div {
+  padding-left: 5px;
+  color: #212529;
+}
+
+.menu-group .menu-group-item.sdoc-menu-with-dropdown.sdoc-font-family-menu.disabled .sdoc-menu-with-dropdown-icon {
+  width: 70px !important;
+}
+
+.menu-group .menu-group-item.sdoc-menu-with-dropdown.sdoc-font-family-menu.disabled .sdoc-menu-with-dropdown-icon div {
+  padding-right: 5px;
+  width: 70px;
+  color: #BDBDBD;
+}
+
+/* sdoc-font-family-menu-popover */
+.sdoc-font-family-menu-popover .sdoc-dropdown-menu-title-name {
+  padding: 8px 10px;
+  color: gray;
+  cursor: default;
+  font-size: 14px;
+}

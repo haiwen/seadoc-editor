@@ -1,0 +1,28 @@
+.sdoc-search-list {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+.sdoc-search-list .sdoc-search-list-wrapper {
+  padding: 12px;
+}
+
+.sdoc-search-list .sdoc-search-list-wrapper>input {
+  font-size: 12px;
+  max-height: 30px;
+}
+
+.sdoc-search-list .sdoc-search-list-content-wrapper {
+  min-height: 0;
+  min-width: 0;
+  flex: 1;
+  overflow: auto;
+  max-height: 300px;
+}
+
+.sdoc-search-list .sdoc-search-list-with-no-results {
+  font-size: 12px;
+  padding: 4px 16px;
+}

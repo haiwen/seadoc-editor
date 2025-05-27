@@ -1,0 +1,18 @@
+.sdoc-shortcut-prompt-container kbd {
+  display: inline-block;
+  margin-bottom: 0px;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 1px 3px;
+  min-width: 12px;
+  border: none;
+  font: inherit;
+  text-align: center;
+  color: #999;
+  background-color: transparent;
+}
+
+.sdoc-shortcut-prompt-container kbd:last-child {
+  margin-right: 0px;
+  padding-right: 0px;
+}

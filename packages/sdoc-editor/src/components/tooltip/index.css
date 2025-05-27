@@ -1,0 +1,29 @@
+.sdoc-tooltip {
+  pointer-events: none;
+}
+
+.sdoc-tooltip .tooltip-inner {
+  font-weight: lighter;
+  text-align: start;
+  background-color: #303133;
+}
+
+.sdoc-tooltip.bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
+  border-bottom-color: #303133;
+}
+
+.sdoc-tooltip.bs-tooltip-auto[x-placement^="top"] {
+  margin-bottom: -2px;
+}
+
+.sdoc-tooltip.bs-tooltip-auto[x-placement^="top"] .arrow::before {
+  border-top-color: #303133;
+}
+
+.sdoc-tooltip.bs-tooltip-auto[x-placement^="right"] .arrow::before {
+  border-right-color: #303133;
+}
+
+.sdoc-tooltip.bs-tooltip-auto[x-placement^="left"] .arrow::before {
+  border-left-color: #303133;
+}

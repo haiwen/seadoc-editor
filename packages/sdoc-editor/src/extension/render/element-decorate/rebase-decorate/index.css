@@ -1,0 +1,47 @@
+.sdoc-rebase-btn-group {
+  display: flex;
+  width: 100%;
+  color: #aaa;
+  margin-bottom: 3px;
+}
+
+.sdoc-rebase-btn-group .sdoc-rebase-btn {
+  cursor: pointer;
+}
+
+.sdoc-rebase-other-changes-title {
+  width: 100%;
+  padding-left: 4px;
+  background-color: rgb(202, 232, 254);
+  border-radius: 3px 3px 0 0;
+}
+
+.sdoc-rebase-other-changes {
+  background-color: rgba(202, 232, 254, .8);
+  border-radius: 0 0 3px 3px;
+  margin-bottom: 3px;
+}
+
+.sdoc-rebase-my-changes-title {
+  width: 100%;
+  padding-left: 4px;
+  background-color: rgb(212, 212, 254);
+  border-radius: 3px 3px 0 0;
+}
+
+.sdoc-rebase-my-changes {
+  background-color: rgb(222, 232, 254);
+  border-radius: 0 0 3px 3px;
+}
+
+.sdoc-rebase-my-changes.empty,
+.sdoc-rebase-other-changes.empty {
+  height: 3px;
+}
+
+.sdoc-rebase-my-changes > *:first-child,
+.sdoc-rebase-other-changes > *:first-child {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0.8em 0 0.8em 0.2em;
+}

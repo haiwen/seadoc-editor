@@ -1,0 +1,40 @@
+.sdoc-context-menu .sdoc-table-context-menu {
+  display: block;
+  font-size: 0.875rem;
+}
+
+.sdoc-table-context-menu .insert-number {
+  margin-left: 50px;
+}
+
+.sdoc-table-context-menu .insert-number-input {
+  width: 36px;
+  height: 20px;
+  margin-right: .25rem;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: center;
+  transition: none;
+}
+
+.sdoc-table-context-menu .dropdown-item:hover .insert-number-input {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.sdoc-table-context-menu .dropdown-item:disabled .insert-number-input {
+  color: #adb5bd;
+}
+
+.side-extendable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 12px;
+}
+
+.side-extendable .sdoc-right-slide {
+  color: #fff;
+  transform: scale(.6);
+}

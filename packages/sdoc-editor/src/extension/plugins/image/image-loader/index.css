@@ -1,0 +1,49 @@
+.sdoc-image-process-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.sdoc-image-process-container .loading-spinner {
+  border: 3px solid #d8d8d8;
+  border-top: 3px solid #939393;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  user-select: none;
+  pointer-events: none;
+  margin-left: 15px;
+}
+
+.sdoc-image-process-container .copyright {
+  margin-top: 4px;
+  color: #fff;
+}
+
+.sdoc-image-content.upload-error>span {
+  min-height: 300px;
+  min-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

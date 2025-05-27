@@ -1,0 +1,148 @@
+.sdoc-code-block-hover-menu-container {
+  position: absolute;
+  height: 42px;
+  z-index: 101;
+  width: fit-content;
+  max-width: 250px;
+}
+
+.sdoc-code-block-hover-menu-container .hover-menu-container {
+  height: 36px;
+  width: 100%;
+  padding: 7px 8px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.sdoc-code-block-hover-menu-container .hover-menu-container .active {
+  color: #212529;
+  text-decoration: none;
+  background: #f2f2f2;
+}
+
+.sdoc-code-block-hover-menu-container .hover-menu-container .op-item {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  font-size: 12px;
+  color: #212529;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-item.sdoc-code-block-hover-operation-lang .op-item {
+  padding: 0 5px;
+}
+
+.sdoc-code-block-hover-menu-container .hover-menu-container .sdoc-code-block-hover-operation-lang .icon-font {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-item {
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  justify-content: center;
+}
+
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-item.sdoc-code-block-hover-operation-lang {
+  width: fit-content;
+}
+
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-lang .icon-font {
+  color: #999;
+}
+
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-divider {
+  height: 20px;
+  width: 1px;
+  background-color: #e5e5e5;
+  margin: 0 8px;
+}
+
+.sdoc-code-block-hover-menu-container .hover-menu-container .op-item:hover {
+  color: #212529;
+  text-decoration: none;
+  background: #f2f2f2;
+}
+
+.sdoc-code-block-hover-menu-container .icon-font {
+  font-size: 12px;
+  color: #444;
+}
+
+.sdoc-langs-list-container {
+  position: absolute;
+  top: 38px;
+  left: 0px;
+  width: 200px;
+  overflow-y: hidden;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 5px #ccc;
+  border: 1px solid #dedede;
+}
+
+.sdoc-langs-list-container .sdoc-search-langs {
+  padding: 10px 10px 0;
+}
+
+.sdoc-langs-list-container .sdoc-search-langs input {
+  max-height: 30px;
+  font-size: 14px;
+}
+
+.langs-list-empty {
+  padding: 10px;
+  width: 100%;
+  font-size: 13px;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+.sdoc-langs-list-container .langs-list-ul {
+  list-style: none;
+  overflow-y: auto;
+  max-height: 280px;
+  min-height: 100px;
+  padding: 10px;
+}
+
+.sdoc-langs-list-container .langs-list-ul .langs-list-li {
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: 30px;
+  height: 30px;
+  font-size: 13px;
+  padding-left: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sdoc-langs-list-container .langs-list-ul .langs-list-li.active {
+  background-color: #f5f5f5;
+}
+
+.sdoc-langs-list-container .langs-list-ul .langs-list-li.hover {
+  background-color: #f5f5f5;
+}
+
+.sdoc-langs-list-container .langs-list-ul .langs-list-li .li-check-mark {
+  opacity: 0;
+  padding: 0 10px;
+}
+
+.sdoc-langs-list-container .langs-list-ul .langs-list-li .li-checked {
+  opacity: 1;
+}

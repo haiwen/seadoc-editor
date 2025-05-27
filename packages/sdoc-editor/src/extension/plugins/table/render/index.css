@@ -1,0 +1,169 @@
+.sdoc-table-wrapper {
+  width: 100%;
+  margin: 16px 0;
+  page-break-inside:avoid;
+}
+
+.sdoc-table-wrapper+.sdoc-table-wrapper {
+  margin-top: 32px;
+}
+
+.sdoc-table-wrapper .sdoc-table-scroll-wrapper {
+  max-width: 100%;
+  width: fit-content;
+  overflow-x: auto;
+  cursor: default;
+}
+
+.sdoc-table-wrapper.scroll .sdoc-table-scroll-wrapper.scroll-at-right::before,
+.sdoc-table-wrapper.scroll .sdoc-table-scroll-wrapper.scroll-at-center::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to left, transparent, rgba(0, 0, 0, .1));
+}
+
+.sdoc-table-wrapper.scroll .sdoc-table-scroll-wrapper.scroll-at-center::after,
+.sdoc-table-wrapper.scroll .sdoc-table-scroll-wrapper.scroll-at-left::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, .1));
+}
+
+.sdoc-table-wrapper .sdoc-table-container {
+  width: fit-content;
+  display: grid;
+  overflow: hidden;
+  cursor: text;
+}
+
+.sdoc-table-wrapper .table-row {
+  height: auto;
+}
+
+.sdoc-table-wrapper .table-cell {
+  display: flex;
+  padding: 10px 10px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  line-height: 1.5;
+  align-items: flex-start;
+
+}
+
+.sdoc-cell-container {
+  width: 100%;
+}
+
+.table-cell>span {
+  min-width: 1px;
+}
+
+.sdoc-table-wrapper .cell-selected {
+  caret-color: transparent;
+  position: relative;
+}
+
+.sdoc-table-wrapper .table-row-height-just {
+  width: 100%;
+  height: 5px;
+  bottom: -2.5px;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sdoc-table-wrapper .table-row-height-just:hover {
+  cursor: row-resize;
+  z-index: 2;
+}
+
+.sdoc-table-wrapper .table-row-height-just.resizing .table-row-height-just-color-tip {
+  margin-top: 1.5;
+  height: 2px;
+  width: 100%;
+  background-color: #2d7ff9;
+  border-radius: 1px;
+}
+
+.sdoc-table-wrapper .table-cell-width-just {
+  height: 100%;
+  width: 5px;
+  top: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sdoc-table-wrapper .table-cell-width-just:hover {
+  cursor: col-resize;
+  z-index: 2;
+}
+
+.sdoc-table-wrapper .table-cell-width-just.resizing .table-cell-width-just-color-tip {
+  margin-left: 1.5px;
+  height: 100%;
+  width: 2px;
+  background-color: #2d7ff9;
+  border-radius: 1px;
+}
+
+.sdoc-table-wrapper .background-color-tip-blue {
+  background-color: #2d7ff9 !important;
+}
+
+.sdoc-table-wrapper .sdoc-table-selected-range .table-cell *::selection {
+  background-color: unset;
+}
+
+.sdoc-table-resize-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sdoc-table-resize-mask .sdoc-table-resize-top {
+  position: absolute;
+  top: 1px;
+  width: 100%;
+  height: 1px;
+  cursor: row-resize;
+}
+
+.sdoc-table-resize-mask>div {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.sdoc-table-resize-mask .sdoc-table-resize-bottom {
+  bottom: 1px;
+  width: 100%;
+  height: 1px;
+  cursor: row-resize;
+}
+
+.sdoc-table-resize-mask .sdoc-table-resize-right {
+  right: -1px;
+  width: 1px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.sdoc-table-resize-mask .sdoc-table-resize-left {
+  left: -1px;
+  width: 1px;
+  height: 100%;
+  cursor: col-resize;
+}

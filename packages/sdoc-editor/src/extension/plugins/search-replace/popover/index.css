@@ -1,0 +1,98 @@
+.sdoc-search-replace-popover-container {
+  position: absolute;
+  width: 400px;
+  height: 280px;
+  z-index: 103;
+  background: #fff;
+  border: 1px solid #ebebeb;
+}
+
+.sdoc-search-replace-popover-container .sdoc-search-replace-popover-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ebebeb;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sdoc-search-replace-popover-container .sdoc-search-replace-popover-title .sdoc-search-replace-title-text {
+  font-weight: 600;
+  color: #333;
+}
+
+.sdoc-search-replace-popover-container .sdoc-search-replace-popover-title .sdoc-search-replace-title-close {
+  cursor: pointer;
+  pointer-events: all;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.sdoc-search-replace-popover-container .sdoc-search-replace-popover-title .sdoc-search-replace-title-close:hover {
+  background-color: #EFEFEF;
+  cursor: pointer;
+}
+
+.sdoc-search-replace-popover-container .sdoc-search-replace-popover-body {
+  padding: 10px 15px;
+  pointer-events: visibleFill;
+  pointer-events: none;
+}
+
+.sdoc-search-replace-popover-body label,
+.sdoc-search-replace-popover-body input,
+.sdoc-search-replace-popover-body button {
+  pointer-events: auto;
+}
+
+.sdoc-search-replace-popover-body label {
+  user-select: none;
+}
+
+.sdoc-search-replace-popover-body .sdoc-replace-ipt-label {
+  margin-top: 10px;
+}
+
+.sdoc-search-replace-popover-body .sdoc-search-replace-popover-btn-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sdoc-search-replace-popover-body .sdoc-search-replace-popover-btn-group .btn {
+  padding: 0;
+  width: 23%;
+  min-height: 35px;
+  border-radius: 5px;
+}
+
+.sdoc-replace-all-confirm-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 104;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.sdoc-replace-ipt-container {
+  display: flex;
+  position: relative;
+}
+
+.sdoc-replace-ipt-container input {
+  padding-right: 85px;
+}
+
+.sdoc-replace-ipt-container .sdoc-replace-ipt-tip {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,8 @@
+.sdoc-insert-element-toolbar .sdoc-dropdown-menu-item.sdoc-dropdown-item-selected {
+  background-color: #e3e3e3;
+}
+
+.sdoc-insert-element-toolbar .sdoc-insert-element-content-wrapper {
+  max-height: 278px;
+  overflow-y: auto;
+}

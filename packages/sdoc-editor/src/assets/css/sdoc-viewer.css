@@ -1,0 +1,14 @@
+.sdoc-editor-container .sdoc-editor-content.no-outline .sdoc-article-container {
+  margin-left: 0 !important;
+}
+
+.sdoc-editor-container.mobile .sdoc-editor-content.readonly .sdoc-article-container {
+  padding: 0;
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+.sdoc-editor-container.mobile .sdoc-editor-content.readonly .article {
+  width: 100vw !important;
+  padding: 1rem;
+}

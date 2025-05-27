@@ -1,0 +1,161 @@
+.menu-group .sdoc-color-menu.menu-show {
+  background: #e5e5e5;
+  border-radius: 2px;
+}
+
+.menu-group .sdoc-color-menu .last-used-color-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-group .sdoc-color-menu .last-used-color-container.disabled {
+  padding-right: 0;
+}
+
+.menu-group .sdoc-color-menu .sdoc-color-toggle {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-group .sdoc-color-menu .sdoc-color-toggle:hover,
+.menu-group .sdoc-color-menu .last-used-color-container:not(.disabled):hover {
+  background-color: #E5E5E5;
+}
+
+.menu-group .sdoc-color-menu.disabled .sdoc-color-toggle .sdocfont {
+  color: #BDBDBD;
+}
+
+.sdoc-color-menu .sdoc-color-icon {
+  height: 12px;
+  width: 12px;
+  transform: scale(.85);
+  line-height: 12px;
+}
+
+.sdoc-color-menu .last-used-color {
+  width: 14px;
+  height: 3px;
+  border-radius: 1px;
+  margin-top: 1px;
+  border: 1px solid rgba(0, 0, 0, .08);
+}
+
+.sdoc-color-menu-popover .popover {
+  left: -24px !important;
+}
+
+.sdoc-color-menu-popover .sdoc-color-dropdown-menu {
+  width: 251px;
+  padding: 0 0 12px 0;
+}
+
+.sdoc-color-menu-popover .sdoc-color-no-color-container {
+  width: 100%;
+  height: 24px;
+  margin-bottom: 5px;
+}
+
+.sdoc-color-menu-popover .sdoc-color-no-color-content {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 2px;
+  font-size: 12px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.sdoc-color-menu-popover .sdoc-color-default-colors-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sdoc-color-menu-popover .sdoc-color-item {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  border: 0.5px solid rgba(0, 0, 0, .08);
+}
+
+.sdoc-color-menu-popover .sdoc-color-item:not(.selected):hover::before {
+  content: '';
+  position: absolute;
+  width: calc(100% + 5px);
+  height: calc((100% + 5px));
+  top: -2.5px;
+  left: -2.5px;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, .24);
+}
+
+.sdoc-color-menu-popover .sdoc-color-item.selected::after {
+  content: '';
+  position: absolute;
+  width: calc(100% + 5px);
+  height: calc((100% + 5px));
+  top: -2.5px;
+  left: -2.5px;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, .88);
+}
+
+.sdoc-color-menu-popover .sdoc-color-item:hover {
+  cursor: pointer;
+}
+
+.sdoc-color-menu-popover .sdoc-color-item:nth-child(10n) {
+  margin-right: 0px;
+}
+
+.sdoc-color-menu-popover .sdoc-color-sub-title {
+  font-size: 11px;
+  line-height: 16px;
+  margin: 7px 0;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.sdoc-color-menu-popover .sdoc-colors-divider {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 0px 0 8px 0;
+}
+
+.sdoc-color-menu-popover .sdoc-more-colors {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  font-size: 12px;
+  padding: 0 12px;
+}
+
+.sdoc-color-menu-popover .sdoc-more-colors .sdocfont {
+  font-size: 12px;
+  transform: scale(.6);
+  color: #888;
+}
+
+.sdoc-color-menu-popover .sdoc-more-colors.show-pick {
+  cursor: pointer;
+  background-color: rgba(51, 77, 102, .06);
+}
+
+.sdoc-more-colors-popover .popover {
+  left: 10px !important;
+}
+
+/* commission */
+.menu-group #button-sdoc-highlight-color .sdoc-color-icon {
+  position: relative;
+  left: 1px;
+}

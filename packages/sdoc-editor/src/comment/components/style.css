@@ -1,0 +1,40 @@
+/* editor-comment css */
+.sdoc-comment-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.sdoc-comment-container .comment-container-main {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.sdoc-comment-container .comment-container-right {
+  position: absolute;
+  left: 100%;
+}
+
+.sdoc-comment-container .comment-container-right .comment-add-wrapper {
+  position: absolute;
+  left: -22px;
+  width: 20px;
+}
+
+.sdoc-comment-container .comment-container-right .comment-add-wrapper .sdocfont {
+  color: #999;
+  background-color: #FFF;
+}
+
+.sdoc-comment-container .comment-container-right .comment-add-wrapper .sdocfont:hover {
+  color: #333;
+  cursor: pointer;
+}
+
+.sdoc-comment-container .comment-container-right .comment-list-wrapper {
+  position: absolute;
+  left: 14px;
+  width: 280px;
+}

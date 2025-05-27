@@ -1,0 +1,12 @@
+.menu-group-item.sdoc-ask-ai-menu-container {
+  width: auto;
+  color: #212529;
+  font-size: 14px;
+}
+
+.sdoc-context-menu-divider {
+  margin-right: 8px;
+  border-left: 1px solid #e5e5e5;
+  width: 1px;
+  height: 24px;
+}

@@ -1,0 +1,45 @@
+.sdoc-wiki-viewer-outline {
+  border-left: 1px solid #ddd;
+  padding: .5rem 1rem .5rem 0;
+}
+
+.sdoc-wiki-viewer-outline .outline-h2, 
+.sdoc-wiki-viewer-outline .outline-h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sdoc-wiki-viewer-outline .outline-h2 {
+  margin-left: 20px;
+  line-height: 2.5;
+  color:#364149;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sdoc-wiki-viewer-outline .outline-h2:hover {
+  color: #eb8205;
+}
+
+.sdoc-wiki-viewer-outline .outline-h3 {
+  margin-left: 40px;
+  line-height: 2.5;
+  color:#364149;
+  white-space: nowrap;
+  cursor:pointer;
+}
+
+.sdoc-wiki-viewer-outline .outline-h3:hover {
+  color: #eb8205;
+}
+
+.sdoc-wiki-viewer-outline .empty-container {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.sdoc-wiki-viewer-outline .outline-h2.active,
+.sdoc-wiki-viewer-outline .outline-h3.active {
+  color: #eb8205;
+}

@@ -1,0 +1,16 @@
+.sdoc-callout-paste-unsupportable-type-alert {
+  display: none;
+  position: absolute;
+  top: 140px;
+  z-index: 1001;
+  left: 50%;
+  margin: auto;
+  transform: translateX(-50%);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+.sdoc-callout-paste-unsupportable-type-alert.display {
+  display: block;
+  transition: all 0.3s;
+}

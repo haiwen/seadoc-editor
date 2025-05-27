@@ -1,0 +1,326 @@
+.sdoc-comment-drawer {
+  width: 100%;
+  height: 100%;
+}
+
+.sdoc-comment-drawer .comments-panel-wrapper {
+  /* 100vh - toolbar height*/
+  height: calc(100vh - 93px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.sdoc-comment-drawer .sdoc-comment-resize-handler {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  margin-right: -2px;
+  width: 6px;
+  cursor: ew-resize;
+  z-index: 103;
+}
+
+.sdoc-comment-drawer .sdoc-comment-resize-handler:hover {
+  border-left: 1px solid #d8d8d8;
+}
+
+.sdoc-comment-resize-handler .sdoc-comment-move-dragger {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: -4px;
+  width: 6px;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #2674f8;
+  cursor: ew-resize;
+}
+
+.sdoc-comment-drawer .comments-panel-header {
+  padding: 0 16px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #EAECEF;
+}
+
+.sdoc-comment-drawer .comments-panel-header .comments-panel-header-left {
+  display: flex;
+}
+
+.sdoc-comment-drawer .comments-panel-header .comments-panel-header-left .title {
+  color: #212529;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.sdoc-comment-drawer .comments-panel-header .comments-panel-header-left .goback {
+  margin-right: 4px;
+}
+
+.sdoc-comment-drawer .comments-panel-header .comments-panel-header-right {
+  display: flex;
+}
+
+.sdoc-comment-drawer .comments-panel-header-right .sdoc-icon-btn:not(:last-child) {
+  margin-right: 4px;
+}
+
+.sdoc-comment-drawer .comments-panel-header .sdoc-icon-btn .sdocfont.sdoc-sm-close {
+  font-weight: 700;
+}
+
+.sdoc-comment-drawer .comments-panel-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+}
+
+.sdoc-comment-drawer .comments-panel-body__header {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.sdoc-comment-drawer .comments-panel-body__header .comments-types-count {
+  height: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.sdoc-comment-drawer .comments-panel-body__header .comment-type {
+  color: #212529;
+  font-size: 12px;
+}
+
+.sdoc-comment-drawer .comments-panel-body__header .comment-type {
+  color: #212529;
+  font-size: 12px;
+}
+
+.sdoc-comment-drawer .comments-panel-body__header .comment-count-tip {
+  color: #999;
+  font-size: 12px;
+}
+
+.sdoc-comment-drawer .comments-panel-body__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0px;
+  margin-bottom: 16px;
+  overflow: auto;
+  border-bottom: 1px solid #e1e2e5;
+}
+
+.sdoc-comment-drawer .comments-panel-body__content .sdoc-comment-list-container {
+  position: relative;
+  margin-top: 0px;
+}
+
+.sdoc-comment-drawer .comments-panel-body__content .comment-ui-container.active {
+  left: 0;
+  background: #fff;
+  box-shadow: unset;
+}
+
+.sdoc-dropdown-menu .dropdown-item {
+  font-size: 14px;
+  color: #212529;
+}
+
+/* doc comment add editor */
+.sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper {
+  padding: 0 16px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control[readonly] {
+  background-color: #fff;
+}
+
+.sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control {
+  font-size: 14px;
+  font-weight: unset;
+  border: 1px solid #ececec;
+}
+
+.sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper.active .form-control {
+  padding-top: 14px;
+}
+
+.sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control:focus {
+  box-shadow: none;
+  border-color: #e1e2e5;
+}
+
+.sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control::placeholder {
+  color: rgb(191, 191, 191);
+}
+
+.sdoc-comment-drawer .comments-panel-body .sdoc-doc-comment-editor-container {
+  position: relative;
+  width: 100%;
+}
+
+.sdoc-comment-drawer .sdoc-doc-comment-editor-container .sdoc-doc-comment-editor-content {
+  position: relative;
+  margin-bottom: 0;
+  padding: 0px;
+  left: 0;
+  border: 0px;
+  background-color: #FFF;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+/* custom */
+.sdoc-comment-drawer .sdoc-comment-list-container {
+  margin-top: 0px;
+  left: 0;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-collapse-wrapper {
+  cursor: pointer;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-ui-container {
+  background-color: #FFF;
+  margin-bottom: 0px;
+  box-shadow: none;
+  padding: 16px;
+  border-radius: 0px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-ui-container:hover {
+  background-color: #f5f5f5;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-ui-container.active .comment-item:hover {
+  background-color: unset;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-header .comment-author__avatar {
+  width: 24px;
+  height: 24px;
+  margin-top: -5px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-header .comment-author__avatar img {
+  border-radius: 50%;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-content {
+  margin-left: 35px;
+  display: flex;
+  align-items: center;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-footer .comments-count {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-footer .comments-count .comments-count-number {
+  margin-left: 8px;
+  margin-top: -2px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-footer .comment-author {
+  margin-left: 20px;
+  align-items: unset;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-item-operation-wrapper .comment-operation {
+  width: 24px;
+  height: 24px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-footer .comment-author__avatar {
+  width: 16px;
+  height: 16px;
+  margin-top: -1px
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-footer .comment-author__avatar img {
+  border-radius: 50%;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-footer .comment-author__latest-reply {
+  margin-left: 8px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item .comment-footer .comment-author__latest-reply p {
+  margin: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 220px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .comment-item-selected-text-container {
+  width: 100%;
+  height: auto;
+  color: #666666;
+  display: flex;
+  align-items: center;
+  padding: 0px 0px 16px 0px;
+  border-radius: 3px 3px 0 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .detail-context-comment {
+  align-items: start !important;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .detail-context-comment .sdoc-comment-quote {
+  padding-top: 1px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container {
+  padding: 16px 16px 0 16px;
+  color: #666;
+  display: flex;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container .sdoc-comment-quote {
+  font-size: 12px;
+  padding-top: 1px;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container .context-comment-items {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.comments-panel-body__header .sdoc-comment-filter-dropdown.sdoc-dropdown-menu {
+  border: 1px solid #dee3eb;
+}
+
+/* global detail */
+.sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper {
+  border-bottom: 0px
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper:hover {
+  background-color: #FFF;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper .comment-operation .sdoc-confirm {
+  color: rgb(70, 77, 90);
+  font-weight: unset;
+}
+
+.sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper .comment-item:not(:last-child){
+  margin-bottom: 16px;
+}

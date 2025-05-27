@@ -1,0 +1,51 @@
+.sdoc-multicolumn-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 16px 0;
+  display: grid;
+  height: auto;
+}
+
+.sdoc-multicolumn-wrapper .sdoc-multicolumn-container {
+  min-height: 43px;
+  position: relative;
+  display: grid;
+  cursor: text;
+}
+
+.sdoc-multicolumn-wrapper .column {
+  display: flex;
+  left: 3px;
+  align-items: flex-start;
+}
+
+.sdoc-column-container {
+  width: calc(100% - 50px);
+  max-width: 100%;
+  position: relative;
+  padding: 5px 5px 5px 0px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.sdoc-multicolumn-container .column-resize-handler {
+  height: 100%;
+  position: absolute;
+}
+
+.sdoc-multicolumn-container .column-resize-handler .column-width-just {
+  height: 100%;
+  width: 4px;
+  top: 0;
+  z-index: 1;
+  margin-right: 1.5px;
+  position: absolute;
+  cursor: col-resize;
+}
+
+.sdoc-multicolumn-container .column-resize-handler .column-width-just.active,
+.sdoc-multicolumn-container .column-resize-handler .column-width-just:hover  {
+  background-color: lightgray;
+  cursor: col-resize;
+}

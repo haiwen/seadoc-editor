@@ -1,0 +1,164 @@
+.sdoc-outline-wrapper {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  margin: 20px 30px 20px 16px;
+  min-height: 0;
+  z-index: 101;
+  pointer-events: none;
+}
+
+.sdoc-outline-wrapper.active {
+  pointer-events: all;
+}
+
+.wiki-outline-wrapper {
+  position: fixed;
+  right: 0;
+  left: unset;
+  margin: 0;
+  pointer-events: unset !important;
+  flex: none;
+  max-height: 400px;
+}
+
+.wiki-outline-wrapper .sdoc-outline {
+  width: 59px;
+}
+
+.wiki-outline-wrapper .sdoc-outline .sdoc-outline-list-container {
+  flex: none;
+  max-height: 400px;
+  overflow-y: hidden;
+}
+
+.wiki-outline-wrapper .sdoc-outline .sdoc-outline-list-container .sdoc-outline-item .wiki-outline-context {
+  background-color: rgb(227, 226, 224);
+  height: 2px;
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+.wiki-outline-wrapper .sdoc-outline .sdoc-outline-list-container .sdoc-outline-item .active {
+  background-color: rgb(50, 48, 44);
+}
+
+.wiki-outline-wrapper .wiki-outline-popover {
+  position: absolute;
+  right: 0;
+  width: 242px;
+  max-height: 538px;
+  padding: 12px;
+  margin-right: 10px;
+  background-color: white;
+  box-shadow: rgba(15, 15, 15, 0.04) 0px 0px 0px 1px, rgba(15, 15, 15, 0.03) 0px 3px 6px, rgba(15, 15, 15, 0.06) 0px 9px 24px;
+  border: 1px solid rgba(55, 53, 47, 0.06);
+  border-radius: 14px;
+  overflow-y: auto;
+}
+
+.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container {
+  padding: 6px;
+}
+
+.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item {
+  color: rgb(120, 119, 116);
+  transition: color 0.15s;
+  cursor: pointer;
+  padding: 4px 6px 4px 4px;
+  font-size: 14px;
+}
+
+.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .wiki-outline-active {
+  color: rgb(35, 131, 226)
+}
+
+.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item:hover {
+  background: rgba(55, 53, 47, 0.06);
+  border-radius: 6px;
+}
+
+.sdoc-outline {
+  flex: 1;
+  width: 220px;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  font-size: 14px;
+  position: relative;
+}
+
+.sdoc-outline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  color: #999;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.sdoc-outline-header__title {
+  font-size: 14px;
+  line-height: 1.1;
+  margin: 0 !important;
+}
+
+.sdoc-outline-header__close {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sdoc-outline-header__close:hover {
+  color: #555;
+}
+
+.sdoc-outline-list-container {
+  list-style: none;
+  padding: 0.5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sdoc-outline-item {
+  padding: 4px 0;
+  padding-right: 6px;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.sdoc-outline-item.active {
+  color: #ff8000;
+}
+
+.sdoc-outline-menu {
+  line-height: 1;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  border-radius: 0 50% 50% 0;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 20px;
+  left: -15px;
+  pointer-events: all;
+}
+
+.sdoc-outline-menu.disabled {
+  opacity: .65;
+}
+
+.sdoc-outline-menu:not(.disabled):hover {
+  color: #333;
+}

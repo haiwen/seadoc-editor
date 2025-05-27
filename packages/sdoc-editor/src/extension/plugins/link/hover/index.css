@@ -1,0 +1,66 @@
+.link-op-menu {
+  height: 36px;
+  padding: 7px 8px;
+  display: flex;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  z-index: 101;
+}
+
+.link-op-menu .link-op-menu-triangle {
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  background: #fff;
+  border-right: 1px solid rgba(0, 40, 100, 0.12);
+  border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+  position: absolute;
+  top: 31px;
+  right: 50%;
+  z-index: 1001;
+}
+
+.link-op-menu-link {
+  font-size: 12px;
+  color: #212529;
+  padding: 0 5px;
+  border-radius: 2px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.link-op-menu-link:hover {
+  color: #212529;
+  text-decoration: none;
+  background: #f1f1f1;
+}
+
+.link-op-icons {
+  margin-left: 8px;
+  border-left: 1px solid #e5e5e5;
+}
+
+.link-op-icon {
+  color: #999999;
+  padding: 4px;
+  border-radius: 2px;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.link-op-icon .sdocfont {
+  font-size: 12px;
+  color: #444;
+}
+
+.link-op-icon:hover {
+  background: #f2f2f2;
+}
+
+.seafile-ed-hovermenu-mouseclick {
+  background-color: #e5e5e5;
+}

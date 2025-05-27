@@ -1,0 +1,38 @@
+.sdoc-resize-width-handler {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 6px;
+}
+
+.sdoc-resize-width-handler.resize-handler-placement-right {
+  left: 0;
+  right: auto;
+}
+
+.sdoc-resize-width-handler:hover {
+  cursor: col-resize;
+}
+
+.sdoc-resize-width-handler .sdoc-resize-width-handler-content {
+  background-color: initial;
+  height: 100%;
+  position: relative;
+  width: 2px;
+}
+
+.sdoc-resize-width-handler:hover .sdoc-resize-width-handler-content {
+  background-color: #ccc;
+}
+
+.sdoc-resize-width-handler .sdoc-resize-width-handler-bar {
+  background-color: #2d7ff9;
+  border-radius: 3px;
+  content: "";
+  left: 50%;
+  margin-left: -3px;
+  position: absolute;
+  width: 6px;
+}
+

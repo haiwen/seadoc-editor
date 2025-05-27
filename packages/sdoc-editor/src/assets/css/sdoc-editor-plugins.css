@@ -1,0 +1,320 @@
+/* header */
+.sdoc-editor__article .sdoc-header-title,
+.sdoc-editor__article .sdoc-header-subtitle,
+.sdoc-editor__article .sdoc-header-1,
+.sdoc-editor__article .sdoc-header-2,
+.sdoc-editor__article .sdoc-header-3,
+.sdoc-editor__article .sdoc-header-4,
+.sdoc-editor__article .sdoc-header-5,
+.sdoc-editor__article .sdoc-header-6 {
+  line-height: 1.1;
+  margin: 1.2em 0 0.4em;
+  font-weight: bold;
+}
+
+.sdoc-editor__article .sdoc-header-2,
+.sdoc-editor__article .sdoc-header-3 {
+  line-height: 1.5;
+}
+
+.sdoc-editor__article .sdoc-header-4 {
+  line-height: 1.125;
+}
+
+/* list  */
+.sdoc-editor__article .list-container {
+  margin: 0;
+  /* override seafile-ui padding */
+  padding-left: 1.2em !important;
+}
+
+.sdoc-editor__article .list-container .sdoc-li-bold::marker {
+  font-weight: bold;
+}
+
+/* check list  */
+.sdoc-editor__article .sdoc-checkbox-container {
+  padding: 0px 2px;
+}
+
+.sdoc-editor__article .sdoc-checkbox-container .sdoc-checkbox-input-wrapper {
+  display: flex;
+  align-items: normal;
+}
+
+.sdoc-editor__article .sdoc-checkbox-container .sdoc-checkbox-input-wrapper .sdoc-checkbox-input {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.sdoc-editor__article .sdoc-checkbox-container .sdoc-checkbox-input-wrapper .sdoc-checkbox-content-container {
+  word-break: normal;
+  width: calc(100% - 1em);
+  margin: 0;
+  padding: 5px 0;
+}
+
+/* image */
+.sdoc-editor__article .sdoc-image-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 5px 0.15em;
+  caret-color: transparent;
+}
+
+.sdoc-editor__article .sdoc-image-wrapper .sdoc-image-placeholder-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 0 3%;
+  max-width: 100%;
+  user-select: all;
+  pointer-events: all;
+}
+
+.sdoc-editor__article .sdoc-image-wrapper .sdoc-image-tip-content,
+.sdoc-editor__article .sdoc-image-wrapper .sdoc-image-title {
+  user-select: none;
+  pointer-events: none;
+}
+
+.sdoc-editor__article .sdoc-image-title .sdoc-exclamation-circle {
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  display: flex;
+}
+
+.sdoc-editor__article .sdoc-image-title .sdoc-image-tip-title {
+  color: red;
+  font-size: 18px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.sdoc-editor__article .sdoc-image-inner {
+  position: relative;
+  display: inline-block;
+  margin: 0 3px;
+}
+
+.sdoc-editor__article .sdoc-image-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sdoc-editor__article .sdoc-image-content :first-child {
+  position: relative;
+}
+
+.sdoc-editor__article .sdoc-image-content .sdoc-image-caption-input-wrapper {
+  border: 0;
+  outline: none;
+  margin-top: 8px;
+  color: #8A8F8D;
+  background-color: transparent;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  caret-color: blue;
+}
+
+.sdoc-editor__article .sdoc-image-content .sdoc-image-caption-input-wrapper::placeholder {
+  color: #bec0bf
+}
+
+.sdoc-editor__article .image-selected {
+  box-shadow: 0 0 0 2px #007bff;
+}
+
+.sdoc-editor__article .image-resizer {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  background-color: #007bff;
+  border: 1px solid #fff;
+  cursor: se-resize;
+}
+
+.sdoc-editor__article .image-full-screen {
+  position: absolute;
+  height: 26px;
+  display: inline-block;
+  width: 26px;
+  top: 0;
+  right: -32px;
+  text-align: center;
+  line-height: 20px;
+  padding: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  border: 1px solid rgba(0, 40, 100, 0.12);
+  background-color: #fff;
+  user-select: none !important;
+  z-index: 1000;
+}
+
+.sdoc-editor__article .image-full-screen:hover {
+  display: block;
+  background-color: #efefef;
+}
+
+.sdoc-editor__article .image-size {
+  display: inline-block;
+  padding: 5px;
+  white-space: nowrap;
+  height: 22px;
+  position: absolute;
+  bottom: -25px;
+  left: 100%;
+  z-index: 1;
+  transform: translateX(5px);
+  border-radius: 3px;
+  line-height: 12px;
+  color: #fff;
+  background-color: #4c4c4c;
+  font-size: 12px;
+}
+
+.sdoc-insert-image-menu-popover-container {
+  padding: 8px 0;
+}
+
+.sdoc-insert-video-menu-popover-container {
+  padding: 8px 0;
+}
+
+/* caret */
+.sdoc-editor__article .caret-item .caret-name::before {
+  content: attr(name);
+}
+
+.sdoc-editor__article .caret-item .caret-name {
+  display: none;
+}
+
+.sdoc-editor__article .caret-item:hover .caret-name {
+  display: block;
+}
+
+/* link */
+.sdoc-editor__article .virtual-link {
+  color: #eb8205;
+}
+
+.sdoc-editor__article .virtual-link:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+/* code_block */
+.sdoc-code-block-container {
+  position: relative;
+}
+
+.sdoc-code-block-pre {
+  background: #FAFAFA;
+  border: 1px solid #f0f0f0;
+}
+
+.sdoc-code-block-pre .sdoc-code-no-wrap {
+  white-space: nowrap;
+}
+
+.sdoc-code-block-pre .sdoc-code-no-wrap .sdoc-code-line>span {
+  white-space: pre;
+}
+
+.sdoc-code-block-code .sdoc-code-line {
+  position: relative;
+  counter-increment: number;
+  margin-left: 32px;
+}
+
+.sdoc-code-block-code .sdoc-code-line::before {
+  content: counter(number);
+  color: #ccc;
+  width: 40px;
+  text-align: end;
+  position: absolute;
+  left: -50px;
+}
+
+.sdoc-code-line .token.comment,
+.sdoc-code-line .token.prolog,
+.sdoc-code-line .token.doctype,
+.sdoc-code-line .token.cdata {
+  color: slategray;
+}
+
+.sdoc-code-line .token.punctuation {
+  color: #999;
+}
+
+.sdoc-code-line .token.namespace {
+  opacity: .7;
+}
+
+.sdoc-code-line .token.property,
+.sdoc-code-line .token.tag,
+.sdoc-code-line .token.boolean,
+.sdoc-code-line .token.number,
+.sdoc-code-line .token.constant,
+.sdoc-code-line .token.symbol,
+.sdoc-code-line .token.deleted {
+  color: #905;
+  padding: 0rem;
+}
+
+.sdoc-code-line .token.selector,
+.sdoc-code-line .token.attr-name,
+.sdoc-code-line .token.string,
+.sdoc-code-line .token.char,
+.sdoc-code-line .token.builtin,
+.sdoc-code-line .token.inserted {
+  color: #690;
+}
+
+.sdoc-code-line .token.operator,
+.sdoc-code-line .token.entity,
+.sdoc-code-line .token.url,
+.sdoc-code-line .language-css .token.string,
+.sdoc-code-line .style .token.string {
+  color: #9a6e3a;
+}
+
+.sdoc-code-line .token.atrule,
+.sdoc-code-line .token.attr-value,
+.sdoc-code-line .token.keyword {
+  color: #07a;
+}
+
+.sdoc-code-line .token.function,
+.sdoc-code-line .token.class-name {
+  color: #DD4A68;
+}
+
+.sdoc-code-line .token.regex,
+.sdoc-code-line .token.important,
+.sdoc-code-line .token.variable {
+  color: #e90;
+}
+
+.sdoc-code-line .sdoc-code-line .token.important,
+.sdoc-code-line .token.bold {
+  font-weight: bold;
+}
+
+.sdoc-code-line .token.italic {
+  font-style: italic;
+}
+
+.sdoc-code-line .token.entity {
+  cursor: help;
+}
