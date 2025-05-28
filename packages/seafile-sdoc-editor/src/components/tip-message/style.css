@@ -1,0 +1,15 @@
+.sdoc-editor-page-wrapper .tip-message {
+  margin-left: 12px;
+  font-size: 12px;
+  opacity: 0.75;
+  color: #999;
+  width: max-content;
+  height: 27px;
+  line-height: 27px;
+  display: inline-flex;
+}
+
+.sdoc-editor-page-wrapper .tip-message .sdocfont {
+  padding-top: 1px;
+  font-size: 14px;
+}

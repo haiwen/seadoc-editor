@@ -1,0 +1,93 @@
+.doc-ops {
+  display: flex;
+  align-items: center;
+}
+
+.doc-ops .op-item {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+}
+
+.doc-ops .collaborators-op-item {
+  width: 40px;
+}
+
+.doc-ops .op-item .sdocfont {
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+}
+
+.doc-ops .op-item:hover {
+  background-color: #EFEFEF;
+  cursor: pointer;
+}
+
+.doc-ops .popover-wrapper {
+  width: 300px;
+}
+
+.sdoc-dropdown-print-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu {
+  padding: 8px 0;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item {
+  padding: 4px 16px;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-operator-folder-divider {
+  margin: 8px 0;
+  border-top: 1px solid #e6e9ed;
+  height: 1px;
+  width: 100%;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch {
+  padding-left: 0px;
+  width: 100%;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-description {
+  margin-left: 0px;
+  color: unset;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-indicator {
+  width: 22px;
+  height: 12px;
+  border-radius: 6px;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-indicator:before {
+  height: 8px;
+  width: 8px;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-input:checked ~ .custom-switch-indicator:before {
+  left: 12px;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-input:checked~.custom-switch-indicator {
+  background: #ff8000;
+}
+
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-input:focus~.custom-switch-indicator {
+  box-shadow: 0 0 0 2px rgba(255, 128, 0, .25);
+  border-color: #ff8000;
+}

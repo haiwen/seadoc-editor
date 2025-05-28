@@ -1,0 +1,9 @@
+/* reset common css */
+.sdoc-editor-page-wrapper .dropdown-item,
+.sdoc-context-menu .dropdown-item:not(:disabled) {
+  color: #212529;
+}
+
+.sdoc-context-menu .dropdown-item:hover {
+  color: #fff;
+}

@@ -1,0 +1,32 @@
+body {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+#root, #wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.sdoc-editor-page-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.sdoc-editor-page-wrapper .sdoc-editor-page-header {
+  border-bottom: 1px solid #e5e6e8;
+  flex-shrink: 0;
+  height: 56px;
+  position: relative;
+  z-index: 103;
+  background-color: #fff;
+}
+
+.sdoc-editor-page-wrapper .sdoc-editor-page-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}

@@ -1,0 +1,102 @@
+.sdoc-editor-page-header .doc-info {
+  display: flex;
+  align-items: center;
+}
+
+.sdoc-editor-page-header .doc-info .doc-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #212529;
+}
+
+.sdoc-editor-page-header .doc-info .doc-icon {
+  margin-left: 0.5rem;
+  color: #999;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.sdoc-editor-page-header .doc-info .doc-icon:hover {
+  margin-left: 0.5rem;
+  color: #333;
+}
+
+.sdoc-editor-page-header .doc-info .sdoc-link {
+  font-size: 14px;
+}
+
+.sdoc-editor-page-header .doc-info .sdoc-freezed {
+  color: red;
+}
+
+.sdoc-editor-page-header .doc-state {
+  font-size: 0.8125rem;
+}
+
+.sdoc-editor-page-header .doc-info .sdoc-revision-avatar {
+  width: 44px;
+  margin-right: 6px;
+}
+
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-avatar {
+  width: 44px;
+  height: 44px;
+  margin-right: 6px;
+  overflow: hidden;
+}
+
+.sdoc-editor-page-header .sdoc-revision-avatar img {
+  height: 100%;
+  width: 100%;
+}
+
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-order {
+  display: inline-block;
+  font-size: 14px;
+  color: #888;
+  background: #eee;
+  padding: 0 8px; 
+  height: 20px;
+  line-height: 20px;
+  border-radius: 10px;
+  margin-left: 0.5rem;
+  cursor: default;
+}
+
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-published-tip {
+  display: inline-block;
+  font-size: 14px;
+  color: #fff;
+  background: #5EBA00;
+  padding: 0 8px; 
+  height: 20px;
+  line-height: 20px;
+  border-radius: 10px;
+  margin-left: 0.5rem;
+  cursor: default;
+}
+
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-jump-to {
+  font-size: 14px;
+  color: #999;
+}
+
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-jump-to {
+  color: #333;
+}

@@ -1,0 +1,18 @@
+.sdoc-add-link-close-icon {
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: 28px;
+}
+
+.sdoc-add-link-close-icon .sdocfont {
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+}
+
+.sdoc-add-link-close-icon:hover {
+  background-color: #efefef;
+}

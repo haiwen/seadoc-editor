@@ -1,0 +1,34 @@
+.sdoc-revision-operation-toggle-container {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.sdoc-revision-operation-toggle-container:hover {
+  background-color: #E5E5E5;
+  cursor: pointer;
+}
+
+.sdoc-revision-operation-toggle {
+  display: none;
+  font-size: 16px;
+  color: #999;
+}
+
+.revisions-body .sdoc-revision:hover .sdoc-revision-operation-toggle,
+.revisions-dialog .revisions-body .sdoc-revision.operating .sdoc-revision-operation-toggle {
+  display: inline-block;
+}
+
+.sdoc-revision-operation-toggle:hover {
+  cursor: pointer;
+  color: #333;
+}
+
+.sdoc-revision-menu-popover .popover {
+  margin-top: 0;
+}
+

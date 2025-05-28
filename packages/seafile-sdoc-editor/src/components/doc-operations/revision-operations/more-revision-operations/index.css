@@ -1,0 +1,53 @@
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle {
+  width: 66px;
+  height: 28px;
+  border-radius: 14px;
+  background-color: #F0F0F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle:hover {
+  cursor: pointer;
+  background-color: #E4E4E4;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle .sdoc-revise {
+  margin-right: 10px;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle .sdocfont {
+  font-size: 14px;
+}
+
+.sdoc-more-revision-operations-dropdown .dropdown-item {
+  padding: 12px;
+  height: 64px;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation {
+  width: 373px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title .sdocfont {
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title-name {
+  color: #212529;
+  font-size: 14px;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-describe {
+  padding-left: 20px;
+  color: #999;
+  font-size: 13px;
+  width: 100%;
+  white-space: break-spaces;
+}

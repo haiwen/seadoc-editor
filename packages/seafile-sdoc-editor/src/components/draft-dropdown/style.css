@@ -1,0 +1,43 @@
+.sdoc-draft-menu {
+  position: relative;
+  margin-left: 0.5rem;
+}
+
+.sdoc-draft-identifier {
+  display: inline-block;
+  font-size: 14px;
+  color: #888;
+  background: #eee;
+  padding: 0 8px; 
+  height: 20px;
+  line-height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sdoc-draft-identifier:hover {
+  background: #dbdbdb;
+}
+
+.sdoc-draft-menu .draft-popover {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 178px;
+  background-color: #fff;
+  border: 1px solid #e5e6e8;
+  border-radius: 2px;
+  padding: 8px 0;
+  box-shadow: 0 0 10px #e5e6e8;
+  z-index: 10;
+}
+
+.sdoc-draft-menu .draft-popover .draft-menu-item {
+  cursor: pointer;
+  width: 100%;
+  padding: 4px 12px;
+}
+
+.sdoc-draft-menu .draft-popover .draft-menu-item:hover {
+  background-color: rgb(245, 245, 245);
+}
