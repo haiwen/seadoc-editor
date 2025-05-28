@@ -5,7 +5,7 @@ import slugid from 'slugid';
 import toaster from '../../../../components/toast';
 import context from '../../../../context';
 import { getErrorMsg } from '../../../../utils/common-utils';
-import { addDataToTree, getSdocFileIcon, getVideoFileIcon } from '../helpers';
+import { addDataToTree, parcelFileTypeIcon } from '../helpers';
 
 import './index.css';
 
@@ -115,6 +115,9 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
     return data.map((item) => {
       if (!item) return null;
       const { type, indexId, name } = item;
+      // Get file type icon
+      const fileTypeIcon = parcelFileTypeIcon(name);
+
       const result = item.fullpath?.split('/').filter(Boolean);
       item.fullpath && result.pop();
       const folderPath = item.fullpath && result.join('/');
@@ -150,9 +153,8 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
               onSelectFile(e, item);
             }}>
               <div className='sdoc-file-icon-container'>
-                <i className={classnames('sdoc-file-icon', { 'sdocfont sdoc-link-file': fileType === 'file' })}></i>
-                {fileType === 'sdoc' && <img className='sdoc-file-img' src={getSdocFileIcon()} alt='' />}
-                {fileType === 'video' && <img className='video-file-img' src={getVideoFileIcon()} alt='' />}
+                <i className={classnames('sdoc-file-icon', { 'sdocfont sdoc-link-file': !fileTypeIcon })}></i>
+                {fileTypeIcon && <img className='sdoc-file-img' src={fileTypeIcon} alt='' />}
               </div>
               <span className='sdoc-file-name'>{name}</span>
               {item.fullpath && folderPath.length !== 0 && (<span className='sdoc-search-folder-name'>{folderPath}</span>)}

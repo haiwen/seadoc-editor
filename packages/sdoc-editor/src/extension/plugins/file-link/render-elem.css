@@ -31,6 +31,14 @@
   transform: translateY(-50%);
 }
 
+.sdoc-file-link-render .sdoc-file-link-icon .file-link-img {
+  width: 20px;
+}
+
+.sdoc-file-card-link .sdoc-file-link-icon .file-link-img {
+  width: 28px;
+}
+
 .sdoc-file-card-link .sdoc-file-text-link {
   position: absolute;
   left: 42px;

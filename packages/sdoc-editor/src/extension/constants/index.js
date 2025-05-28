@@ -169,6 +169,24 @@ export const FILE_TYPE = {
   [VIDEO]: 'video'
 };
 
+export const FILEEXT_TYPE = {
+  VIDEO: ['mp4', 'ogv', 'webm', 'mov'],
+  MUSIC: ['mp3', 'oga', 'ogg', 'wav', 'flac', 'opus'],
+  SPREADSHEET: ['xls', 'xlsx', 'ods', 'fods'],
+  MARKDOWN: ['markdown', 'md'],
+  EXCALIDRAW: ['exdraw'],
+  DOCUMENT: ['doc', 'docx', 'docxf', 'oform', 'ppt', 'pptx', 'odt', 'fodt', 'odp', 'fodp', 'odg'],
+};
+
+export const FILEEXT_TYPE_MAP = {
+  VIDEO: 'video',
+  MUSIC: 'music',
+  SPREADSHEET: 'excel',
+  MARKDOWN: 'md',
+  EXCALIDRAW: 'draw',
+  DOCUMENT: 'word'
+};
+
 export const SUPPORTED_SIDE_OPERATION_TYPE = [
   PARAGRAPH,
   SUBTITLE,

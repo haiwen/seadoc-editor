@@ -27,7 +27,7 @@ export const generateFileNode = (uuid, text) => {
     type: FILE_LINK,
     doc_uuid: uuid,
     title: text,
-    display_type: INSERT_FILE_DISPLAY_TYPE[0],
+    display_type: INSERT_FILE_DISPLAY_TYPE[1],
     children: [{
       id: slugid.nice(),
       text: text || ''

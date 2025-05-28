@@ -49,9 +49,6 @@ export const INTERNAL_EVENT = {
   IMAGE_COLUMN_TOGGLE: 'Image_column_toggle',
 };
 
-export const REVISION_DIFF_KEY = 'diff';
-export const REVISION_DIFF_VALUE = '1';
-
 export const PAGE_EDIT_AREA_WIDTH = 672; // 672 = 794 - 2[borderLeft + borderRight] - 120[paddingLeft + paddingRight]
 export const COMMENT_EDITOR_EDIT_AREA_WIDTH = 364;
 export const WIKI_EDITOR_EDIT_AREA_WIDTH = 714;

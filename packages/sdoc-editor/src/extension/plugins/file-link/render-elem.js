@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useReadOnly, useSelected } from '@seafile/slate-react';
 import classnames from 'classnames';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
+import { parcelFileTypeIcon } from '../../commons/select-file-dialog/helpers';
 import { DELETED_STYLE, ADDED_STYLE } from '../../constants';
 import { FILE_LINK_TYPE } from './constants';
 import { unwrapLinkNode, getUrl } from './helpers';
@@ -16,6 +17,9 @@ const FileLink = ({ editor, element, children, attributes }) => {
   const [isShowInsertHoverMenu, setIsShowInsertHoverMenu] = useState(false);
   const [menuPosition, setMenuPosition] = useState({});
   const isSelected = useSelected();
+
+  // Get file type icon
+  const fileTypeIcon = parcelFileTypeIcon(element.title);
 
   const registerEventHandle = useCallback(() => {
     document.addEventListener('click', onHideInsertHoverMenu);
@@ -122,7 +126,8 @@ const FileLink = ({ editor, element, children, attributes }) => {
       <span ref={fileRef}>
         {[FILE_LINK_TYPE.ICON_LINK, FILE_LINK_TYPE.CARD_LINK].includes(element.display_type) && (
           <span className='sdoc-file-link-icon' style={style}>
-            <i className="sdocfont sdoc-link-file"></i>
+            {!fileTypeIcon && <i className="sdocfont sdoc-link-file"></i>}
+            {fileTypeIcon && <img className='file-link-img' src={fileTypeIcon} alt='' />}
           </span>
         )}
         <span className='sdoc-file-text-link' style={style}>

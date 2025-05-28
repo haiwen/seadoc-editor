@@ -1,3 +1,4 @@
+import React from 'react';
 import { Path, Text, Transforms } from '@seafile/slate';
 import { PARAGRAPH } from '../../../constants';
 import { generateEmptyElement } from '../../../core';

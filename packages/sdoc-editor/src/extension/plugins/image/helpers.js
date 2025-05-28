@@ -141,7 +141,7 @@ export const getImageURL = (data, editor) => {
   if (column_key) {
     const column = getColumnByKey(editor.columns || [], column_key);
     const { type } = column || {};
-    // TODO: seatable constants
+    // TODO: Plugin contants, image digital-sign
     if (type === 'image') {
       const imgUrl = editor.getColumnCellValue(column_key) || '';
       const firstSrc = imgUrl.split(',')[0];
