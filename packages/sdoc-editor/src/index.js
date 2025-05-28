@@ -6,6 +6,7 @@ import { INTERNAL_EVENT, FULL_WIDTH_MODE, PLUGIN_BTN_POSITION } from './constant
 import context from './context';
 import RevisionEditor from './editor/revision-editor';
 import SDocEditor from './editor/sdoc-editor';
+import DropdownMenuItem from './extension/commons/dropdown-menu-item';
 import MenuShortcutPrompt from './extension/commons/menu-shortcut-indicator';
 import { CollaboratorsProvider, useCollaborators } from './hooks/use-collaborators';
 import { PluginsProvider, usePlugins } from './hooks/use-plugins';
@@ -54,4 +55,5 @@ export {
   FULL_WIDTH_MODE,
   PLUGIN_BTN_POSITION,
   MenuShortcutPrompt,
+  DropdownMenuItem
 };
