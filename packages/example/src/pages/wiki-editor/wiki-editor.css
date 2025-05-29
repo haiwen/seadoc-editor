@@ -1,0 +1,80 @@
+.wiki-editor-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* wiki editor style */
+.wiki-editor-container .sdoc-editor-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+  min-width: 1100px;
+  width: 100%;
+}
+
+.wiki-editor-container .sdoc-editor-container .sdoc-content-wrapper {
+  height: auto;
+}
+
+.wiki-editor-container .sdoc-editor-container .sdoc-content-wrapper .sdoc-editor-content {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-width: 1100px;
+}
+
+/* Sdoc viewer layout */
+.wiki-editor-container .sdoc-article-container {
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.wiki-editor-container .sdoc-editor-container .article {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-height: 800px;
+  padding: 15px 142px 0;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background-color: #fff;
+}
+
+.wiki-editor-container .sdoc-editor-container .article #sdoc-editor {
+  width: 100%;
+}
+
+.wiki-editor-container .sdoc-editor-container .article :first-child {
+  margin-top: 0;
+}
+
+.wiki-editor-container .wiki-page-title {
+  padding: 0 142px;
+}
+
+.wiki-editor-container .wiki-page-title .ops {
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.wiki-editor-container .wiki-page-title .ops .op-item {
+  border-radius: 4px;
+  color: #949491;
+  cursor: pointer;
+  display: flex;
+  padding: 2px 8px;
+}
+
+.wiki-editor-container .wiki-page-title .ops .op-item:hover {
+  background-color: #efefef;
+  border-radius: 4px;
+}

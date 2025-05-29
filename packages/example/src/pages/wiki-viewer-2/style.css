@@ -1,0 +1,17 @@
+.wiki-page-container {
+  margin: 0 -1rem -1.25rem;
+  padding: 30px 1rem 1.25rem;
+  display: flex;
+  flex: 1 1;
+  padding-left: 30px;
+  overflow-y: auto;
+}
+
+.wiki-page-container .wiki-page-content {
+  width: calc(100% - 200px);
+  padding-right: 30px;
+}
+
+.wiki-page-content .sdoc-wiki-outline-container {
+  width: 200px;
+}

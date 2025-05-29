@@ -3,9 +3,9 @@ import { withTranslation } from 'react-i18next';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import printJS from '@seafile/print-js';
 import { EventBus, Tooltip, isMac, isMobile, context, LocalStorage, INTERNAL_EVENT, FULL_WIDTH_MODE, MenuShortcutPrompt } from '@seafile/sdoc-editor';
-import { DTableSwitch } from 'dtable-ui-component';
 import PropTypes from 'prop-types';
 import { EXTERNAL_EVENT } from '../../constants';
+import Switch from '../switch';
 
 const MoreOperations = ({ isStarred, t }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -148,10 +148,10 @@ const MoreOperations = ({ isStarred, t }) => {
         </DropdownItem>
         {!isMobile && (
           <DropdownItem id='sdoc-full-width-mode-wrapper' className='sdoc-dropdown-menu-item'>
-            <DTableSwitch
+            <Switch
               checked={isFullWidthMode}
               placeholder={t('Full_width_mode')}
-              switchClassName="sdoc-full-width-mode-wrapper w-100"
+              className="sdoc-full-width-mode-wrapper w-100"
               onChange={onSwitchMode}
             />
           </DropdownItem>

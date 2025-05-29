@@ -1,0 +1,40 @@
+let config = null;
+
+// used for load base data
+const baseConfig = {
+  // dtable api token (required)
+  APIToken: '5bc0306d4e39696e3978d114d8631044f8261d31',
+  // server URL of the dtable of the plugin (required)
+  server: 'http://127.0.0.1:80',
+  // id of the workspace with the dtable of the plugin (required, workspace must exist)
+  workspaceID: '4',
+  // name of the dtable to add the plugin to (required, dtable must exist under this name)
+  dtableName: 'all-type(base)',
+  dtableUuid: '5bdcd630-2ff4-4772-bbce-f697175276db',
+  // default language ('en' or 'zh-cn' are common, see "src/locale/index.js" for all lang keys)
+  lang: 'zh-cn',
+  mediaUrl: '/media/',
+  userId: '001',
+  userDepartmentIdsMap: {},
+  departments: [],
+  dtableDb: 'http://127.0.0.1:80/dtable-db/',
+  accessToken: ''
+};
+
+const sdocConfig = {
+  'serviceUrl': 'http://127.0.0.1:80',
+  'docName': 'NTMQWkuQS0KpKT_NqdCqYg',
+  'docUuid': '5d583e27-e7f4-4181-ba45-fb1a2518c38f',
+  'accessToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaWxlX3V1aWQiOiI1ZDU4M2UyNy1lN2Y0LTQxODEtYmE0NS1mYjFhMjUxOGMzOGYiLCJmaWxlbmFtZSI6Ik5UTVFXa3VRUzBLcEtUX05xZENxWWcuc2RvYyIsInVzZXJuYW1lIjoiZDAyMzcxNjkzYjJlNDAxMGE3ZWFiYTZkOTQwODRkM2NAYXV0aC5sb2NhbCIsIm5hbWUiOiJhZG1pbiIsImF2YXRhcl91cmwiOiJodHRwOi8vMTI3LjAuMC4xOjgwL21lZGlhL2F2YXRhcnMvZGVmYXVsdC5wbmciLCJwZXJtaXNzaW9uIjoicnciLCJleHAiOjE3MTg5NTAxNTh9.JXlePGfgYqjKPmXRoJJbuKCTetHKtPrhVCfUlW-09co',
+  'isOpenSocket': true,
+  'sdocServer': 'http://127.0.0.1:7070',
+  'username': '214407373@qq.com',
+  'assetsUrl': '/api/v2.1/seadoc/download-image/5d583e27-e7f4-4181-ba45-fb1a2518c38f',
+};
+
+config = { ...sdocConfig, ...baseConfig };
+
+
+config.password = ''; // required
+
+export default config;

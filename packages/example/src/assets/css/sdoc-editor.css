@@ -1,0 +1,39 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto !important;
+}
+
+.sdoc-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.sdoc-editor .sdoc-editor-header {
+  padding: 4px 16px;
+  height: 56px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 3px 2px -2px hsla(0,0%,78%,.15);
+}
+
+.sdoc-editor .sdoc-editor-header .helper {
+  cursor: pointer;
+}
+
+.sdoc-editor .sdoc-editor-header .helper:hover {
+  color: #999;
+}
+
+.markdown-viewer-container {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
