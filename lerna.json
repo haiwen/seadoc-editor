@@ -4,9 +4,10 @@
   "npmClient": "npm",
   "command": {
     "publish": {
-    "ignoreChanges": ["**/*.md"],
-    "message": "chore(release): publish",
-    "conventionalCommits": true,
-    "exec": "npx commitlint --from $LERNA_PACKAGE_NAME"
+      "ignoreChanges": ["**/*.md"],
+      "message": "chore(release): publish",
+      "conventionalCommits": true,
+      "exec": "npx commitlint --from $LERNA_PACKAGE_NAME"
+    }
   }
 }
