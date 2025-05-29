@@ -1,6 +1,6 @@
 {
   "name": "@seafile/sdoc-editor",
-  "version": "1.0.0",
+  "version": "1.0.99",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
@@ -31,7 +31,6 @@
     "randomcolor": "0.6.2",
     "react-color": "2.19.3",
     "react-transition-group": "4.4.5",
-    "reactstrap": "9.2.3",
     "rehype-format": "5.0.0",
     "rehype-mathjax": "5.0.0",
     "rehype-raw": "7.0.0",
@@ -50,6 +49,15 @@
     "unified": "11.0.3",
     "url-join": "4.0.1",
     "url-parse": "1.5.10"
+  },
+  "peerDependencies": {
+    "i18next": "^22.4.0",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-xhr-backend": "^3.2.2",
+    "react-i18next": "^12.1.4",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.1",
+    "reactstrap": "^9.2.3"
   },
   "devDependencies": {
     "jest": "29.7.0",
