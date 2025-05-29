@@ -6,8 +6,7 @@
     "publish": {
       "ignoreChanges": ["**/*.md"],
       "message": "chore(release): publish",
-      "conventionalCommits": true,
-      "exec": "npx commitlint --from $LERNA_PACKAGE_NAME"
+      "conventionalCommits": true
     }
   }
 }
