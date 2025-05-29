@@ -18,7 +18,9 @@
     "url": "git+https://github.com/seafileltd/sea-sdoc-editor.git"
   },
   "scripts": {
-    "test": "node ./__tests__/seafile-sdoc-editor.test.js"
+    "test": "node ./__tests__/seafile-sdoc-editor.test.js",
+    "pub:dist": "export BABEL_ENV=production && ./node_modules/.bin/babel src --out-dir dist --copy-files",
+    "prepublishOnly": "npm run clean && npm run pub:dist"
   },
   "bugs": {
     "url": "https://github.com/seafileltd/sea-sdoc-editor/issues"
