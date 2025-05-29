@@ -124,9 +124,12 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   // Handle presentation fullscreen mode
   const handleFullScreenPresentation = useCallback(({ isShowFullScreen }) => {
     if (isShowFullScreen) {
+      // Boundary situation
+      removeMarks(validEditor);
+
       setShowFullScreen(true);
     }
-  }, []);
+  }, [validEditor]);
 
   useEffect(() => {
     const eventBus = EventBus.getInstance();

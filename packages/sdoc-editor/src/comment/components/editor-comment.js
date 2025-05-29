@@ -130,7 +130,7 @@ const EditorComment = ({ editor }) => {
 
     const handleClickCommentedText = (event) => {
       const parentDom = event.target.parentElement;
-      if (parentDom.className.split(/\s+/).some(cls => cls.startsWith('sdoc_comment'))) {
+      if (parentDom?.className.split(/\s+/).some(cls => cls.startsWith('sdoc_comment'))) {
         commentedDomRef.current = parentDom;
         const matchedAttributes = parentDom.className.split(' ').filter(cls => cls.startsWith('sdoc_comment_'));
         const clickedCommmentIdArray = matchedAttributes.map(item => item.replace('sdoc_comment_', ''));
