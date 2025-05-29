@@ -20,7 +20,7 @@
   "scripts": {
     "test": "node ./__tests__/seafile-sdoc-editor.test.js",
     "clean": "rm -rf dist && mkdir dist",
-    "pub:dist": "export BABEL_ENV=production && ./node_modules/.bin/babel src --out-dir dist --copy-files",
+    "pub:dist": "export BABEL_ENV=production && babel src --out-dir dist --copy-files",
     "prepublishOnly": "npm run clean && npm run pub:dist"
   },
   "bugs": {
