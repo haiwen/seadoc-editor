@@ -1,0 +1,23 @@
+import { mdStringToSlate } from '../../../src';
+import { formatChildren } from '../../core';
+
+describe('paragraph test', () => {
+  it('paragraph > bold > italic', () => {
+    const mdString = '***nihaode***';
+    const nodes = mdStringToSlate(mdString);
+    const expectResult = [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            bold: true,
+            italic: true,
+            text: 'nihaode'
+          }
+        ]
+      },
+    ];
+
+    expect(formatChildren(nodes)).toEqual(expectResult);
+  });
+});

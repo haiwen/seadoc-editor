@@ -1,0 +1,668 @@
+{
+  "version": 3,
+  "format_version": 3,
+  "children": [
+    {
+      "id": "VYNPJ2SwSZ6deOv5O_FBfw",
+      "type": "title",
+      "children": [
+        {
+          "id": "FUmVccqcQFqhHPNMtNrUkw",
+          "text": "Revision 不变"
+        }
+      ]
+    }, {
+      "id": "VbK14CJNSMy2r8SP3QGLiw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "IcwYIIasQi2h2Avf0LFONw",
+          "text": "测试类型："
+        }
+      ]
+    }, {
+      "id": "BxBOdNSsSxW1UwlD5agePQ_new",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "M8ntvGlfQQenYhaCK-SOqw_new",
+          "text": "段落测试"
+        }
+      ],
+      "old_element": {
+        "id": "BxBOdNSsSxW1UwlD5agePQ",
+        "type": "paragraph",
+        "children": [
+          {
+            "id": "M8ntvGlfQQenYhaCK-SOqw",
+            "text": "段落测试"
+          }
+        ]
+      },
+      "origin": "other",
+      "rebase_type": "modify_modify"
+    }, {
+      "id": "BxBOdNSsSxW1UwlD5agePQ",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "M8ntvGlfQQenYhaCK-SOqw",
+          "text": "新建的段落测试rebase"
+        }
+      ],
+      "origin": "my",
+      "rebase_type": "modify_modify"
+    }, {
+      "id": "Jz5RSTAORrW1RlUNGFzL7A",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "BxZlcLtZSqm47FTvrLF6rw",
+          "text": "SeaTable",
+          "color": "#FF0000"
+        }, {
+          "id": "WYUNVZM5Q3-y2IrlZp5RaQ",
+          "text": " 是一款以智能表格为基础的新型数字化平台。它支持“"
+        }, {
+          "id": "e6igTDtOR_ec8nr9EITnmw",
+          "text": "文件",
+          "color": "#D58EFF"
+        }, {
+          "id": "Dcsnjz-nQlCKQGODpbwl8w",
+          "text": "”、“"
+        }, {
+          "id": "AFrRxSvyRMqkiLkwW0Pg-g",
+          "text": "图片",
+          "color": "#D58EFF"
+        }, {
+          "id": "QJQKJlX1TFy3GE58TwXlUw",
+          "text": "”、“"
+        }, {
+          "id": "PKe5rBwnQOGkCX1ukZ4PxA",
+          "text": "单选项",
+          "color": "#D58EFF"
+        }, {
+          "id": "XuIA2mD0T7a0_tvLP5R-FQ",
+          "text": "”、“"
+        }, {
+          "id": "DNZNn2z8QbSJSD2Ue4LMvQ",
+          "text": "协作人",
+          "color": "#D58EFF"
+        }, {
+          "id": "PQ_PcKNVTFCtwhdT4rQb5w",
+          "text": "”、“"
+        }, {
+          "id": "Ta9I6KZXRWCrv-jkFHzB6g",
+          "text": "计算公式",
+          "color": "#D58EFF"
+        }, {
+          "id": "OlU6Ca6OQLW7_NkVPhP_Vg",
+          "text": "”等丰富的数据类型，帮助用户用表格的形式来组织和管理各类信息。在表格基础上，它还支持"
+        }, {
+          "id": "L7GchvbFRrS00Zm2EgaArw",
+          "text": "自定义工作流",
+          "color": "#00B0F0"
+        }, {
+          "id": "DFFH8X0MQs6ZYzHcnjgOwQ",
+          "text": "、"
+        }, {
+          "id": "Fa8m2RKcS565JJV_5y8_ew",
+          "text": "应用搭建",
+          "color": "#00B0F0"
+        }, {
+          "id": "COqLnGv9TBm_g9aJH0sy0Q",
+          "text": "、"
+        }, {
+          "id": "TeiNODVSQyy2HM9GvfMYiw",
+          "text": "数据分析",
+          "color": "#00B0F0"
+        }, {
+          "id": "GZSOat5VTn6NxMqAG99UYw",
+          "text": "等丰富的扩展功能，让团队和企业快速搭建出灵活的业务系统和软件应用，"
+        }, {
+          "id": "Fq3G41mBSiyYMUo2nlcUkw",
+          "text": "低门槛实现工作的数字化",
+          "highlight_color": "#C3EAD5"
+        }, {
+          "id": "RXhJRUJmTdGpyUDJO5WEOg",
+          "text": "。"
+        }
+      ]
+    }, {
+      "id": "e59cVhwWQrSeYhsvsukNrw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "aJAJTVswTP2RcyL9F89KAg",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "TyTyqbdVQIiaTzvgY0fTjA",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "JP1VZGL_T4at4OfLPjOq4w",
+          "text": "副标题"
+        }
+      ]
+    }, {
+      "id": "HRbghLO4TWKRi3W6Y_Js-A",
+      "type": "subtitle",
+      "children": [
+        {
+          "id": "FT7fbvdoSFu4I0nxqcChkA",
+          "text": "SeaDoc"
+        }
+      ]
+    }, {
+      "id": "Ney45zBETrq0TB6JHr1Dkw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "Y5xphR8eTIeuWhAKkYMmnA",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "VmuLCPEmTfGdmpZ86QBdNg",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "aYwFtuqFQBWCCTq_oyUoIA",
+          "text": "标题"
+        }
+      ]
+    }, {
+      "id": "Oqm_4WZHSo-k1wi1EPCE0A",
+      "type": "blockquote",
+      "children": [
+        {
+          "id": "V9xg-BI4TMihgq7bGWVpJQ",
+          "text": "二级标题为例"
+        }
+      ]
+    }, {
+      "id": "EY3cNo2RTTCNbIKHi14qWg",
+      "type": "header2",
+      "children": [
+        {
+          "id": "eSdUjXtfSWqa8_vqr3gxpw",
+          "text": "这是一个二级标题"
+        }
+      ]
+    }, {
+      "id": "Hf0RN8ZrRpWWWYYDRF8aeQ",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "VzVWHIBjRMyqN08V6DJYUg",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "Lj20BmVATRqwIeAetfnoVg",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "fAsBRhF-Q2G03p1b1R3miQ",
+          "text": "列表"
+        }
+      ]
+    }, {
+      "id": "VbOPN2kGTkWzZVa-UzKdGA",
+      "type": "ordered_list",
+      "children": [
+        {
+          "id": "DJo6lIg0TrS55xNMObc6ow",
+          "type": "list_item",
+          "children": [
+            {
+              "id": "ei6EZOQaQHuBEhj_XScWVg",
+              "type": "paragraph",
+              "children": [
+                {
+                  "id": "cjqBcAPqRwiDf6XilSfwgw",
+                  "text": "列表项1"
+                }
+              ]
+            }
+          ]
+        }, {
+          "id": "NePY9SroSEe8ZEtJ4QmKFQ",
+          "type": "list_item",
+          "children": [
+            {
+              "id": "G8BbiDM5QqaQkcKLzU-wiw",
+              "type": "paragraph",
+              "children": [
+                {
+                  "id": "cq62IhwjRZScAzzNrWKugw",
+                  "text": "列表项2"
+                }
+              ]
+            }
+          ]
+        }, {
+          "id": "BMATf_o_REa7_acrkf3YjA",
+          "type": "list_item",
+          "children": [
+            {
+              "id": "VRktqXfeQmexaYFtXRP2gg",
+              "type": "paragraph",
+              "children": [
+                {
+                  "id": "Z5YV-JV8STq6qEtBNC6wpQ",
+                  "text": "列表项3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }, {
+      "id": "c8gL-WbITFq8OBrLuLi2Fw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "bN_7EHMiSAuN5i-U4QP_9g",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "ZbUxG7EcRASnVYYrjh7gzw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "dw3pQmiUR2KIcT3tRJsAaA",
+          "text": "勾选盒子"
+        }
+      ]
+    }, {
+      "id": "FCdefSKMSziKmE_ubBfOnQ",
+      "type": "check_list_item",
+      "children": [
+        {
+          "id": "NsCH5JKFRQu4UCzgAaNGfQ",
+          "text": "勾选"
+        }
+      ],
+      "checked": true
+    }, {
+      "id": "RUT6t2CJS22vsouEq-JsIg",
+      "type": "check_list_item",
+      "children": [
+        {
+          "id": "TBNScURjSwemZ649gKoRhg",
+          "text": "未勾选"
+        }
+      ]
+    }, {
+      "id": "NGO5Xh1rSK-XW0JeJrJTIg",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "N_acQ0IxTQKmjWskcClqUA",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "NTRIbfUkQkyzbjxMeqOVCA",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "L2waKS5fToi22PvPAMyq7Q",
+          "text": "图片"
+        }
+      ]
+    }, {
+      "id": "QAWErkS3Rhi1Rd83h8vnng",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "JuwPSO-VT5CotconvsoJNQ",
+          "text": ""
+        }, {
+          "id": "CqtKMaktTC2IKUC4XKvAfg",
+          "type": "image",
+          "children": [
+            {
+              "id": "HzT454SHReCGuJBKSnJnVQ",
+              "text": ""
+            }
+          ],
+          "data": {
+            "src": "/image-1700805277237.webp",
+            "width": 499
+          }
+        }, {
+          "text": "",
+          "id": "K5AZa8NeSSiEzR47fM4w1A"
+        }
+      ]
+    }, {
+      "id": "HZ-SEl3aTbOk8BcHw_xQDw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "UPD8Q8VEQuCsGtW5J-yvEw",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "ePLKH7Z3R-W9SMppafA0Lg",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "LVOnUh2iT-6yHhHKI4Qq2Q",
+          "text": "表格"
+        }
+      ]
+    }, {
+      "id": "WnWzefURTw-bspLQDeDnMg",
+      "type": "table",
+      "children": [
+        {
+          "id": "PLhEi48hQM6EWv2MCGKPUg",
+          "type": "table_row",
+          "children": [
+            {
+              "id": "BduqYWw8T1-kwXmQtWQMlg",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": "q w q w",
+                  "id": "baDCphdYSs68OU1GcVBVBg"
+                }
+              ]
+            }, {
+              "id": "PoYu3HBoTymbvlBvoLUhyg",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": " 列1",
+                  "id": "KdxI426hRVa74glM1QEwFg"
+                }
+              ]
+            }, {
+              "id": "CGIKcX74Ryq53Q9N_63JNA",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": "请问去是的",
+                  "id": "H-1fgwhYSm--eyC8JK61mQ"
+                }
+              ]
+            }, {
+              "id": "M8nsL39-RN-tnumbcpR7jg",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": "我去玩请问去多少的",
+                  "id": "QjzUgP8jRreBbH_L5OTC1Q"
+                }
+              ]
+            }
+          ],
+          "style": {
+            "min_height": 42
+          }
+        },
+        {
+          "id": "UqdxpBE3SNW3ijQjtbPZMg",
+          "type": "table_row",
+          "children": [
+            {
+              "id": "KhowBd0VQPOuTY_TlsdiWQ",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": "",
+                  "id": "SGHXW7fQT0G4tGiptvtcdA"
+                }
+              ]
+            },
+            {
+              "id": "CXlEEN2DQgidhn8FRoxDlA",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": "",
+                  "id": "BM45_mzgSRyznT5UkjrUwA"
+                }
+              ]
+            },
+            {
+              "id": "RT-awh8aQWObAvyx0td2Xg",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": "",
+                  "id": "NO6QTZaWRIaiILGVlBijlw"
+                }
+              ]
+            },
+            {
+              "id": "ehCVspyQQo6_Y7jagIXfag",
+              "type": "table_cell",
+              "children": [
+                {
+                  "text": "",
+                  "id": "SDnBOW1tTu-K7WgHBWG83w"
+                }
+              ]
+            }
+          ],
+          "style": {
+            "min_height": 42
+          }
+        }
+      ],
+      "columns": [
+        {
+          "width": 168
+        }, {
+          "width": 168
+        }, {
+          "width": 168
+        }, {
+          "width": 168
+        }
+      ],
+      "style": {
+        "alternate_highlight": true,
+        "alternate_highlight_color": "#3f495d"
+      }
+    }, {
+      "id": "Yrs9r4b-Rm6NC6oBRwx4IQ",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "P-Uki4lZQzGckV1-_AMgWQ",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "XKkJ0fDWS1Wf2HqeEd4T-Q",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "Cx9ly5y9TKiHaqqsRSoQYg",
+          "text": "链接"
+        }
+      ]
+    }, {
+      "id": "KQSeC_XDTh-wzWYhCMxSDA",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "Auh6MRZARCCkuy9LbxkV3A",
+          "text": ""
+        }, {
+          "id": "IqjrMEnzSBCycEby89Pfow",
+          "type": "link",
+          "href": "http://127.0.0.1:9000/editor",
+          "title": "本地开发环境",
+          "children": [
+            {
+              "id": "WMDeqcJNTc2bh_St7QiM1Q",
+              "text": "本地开发环境"
+            }
+          ]
+        }, {
+          "id": "PCS5NAc2QUCeZXWasuXwEA",
+          "text": " "
+        }
+      ]
+    }, {
+      "id": "T3GMOAv7RJyxFyHxmAgxDg",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "W-w5vY9XQqSOSw0nSbl1Pw",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "bh3BDTiYRMmEV0PUETzuaw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "EQ5UG-yKSGW1L30ldphmaA",
+          "text": "代码块"
+        }
+      ]
+    }, {
+      "id": "Z_unhOwjQTiRnP4qD3Jp-w",
+      "type": "code_block",
+      "language": "css",
+      "style": {
+        "white_space": "nowrap"
+      },
+      "children": [
+        {
+          "id": "CLB4DqmuTg6_7wbk1NMtLg",
+          "type": "code_line",
+          "children": [
+            {
+              "text": ".div {",
+              "id": "EJ0FFeFxSBKn1IsXKTkWyA"
+            }
+          ]
+        }, {
+          "id": "W5FEwiDCSsKMY20JvD19GA",
+          "type": "code_line",
+          "children": [
+            {
+              "id": "UoDFKcsOQnS7WRM9ub3KSA",
+              "text": "    border: 1px solid #ccc;"
+            }
+          ]
+        }, {
+          "id": "eM_EwW78Tb-6hD3K45CAYg",
+          "type": "code_line",
+          "children": [
+            {
+              "id": "Drk-7yV0SpSYT4JXXGiKug",
+              "text": "    color: #fff;"
+            }
+          ]
+        }, {
+          "id": "YjuKeUtGRiiaB604os7eeQ",
+          "type": "code_line",
+          "children": [
+            {
+              "id": "DSNApp84S_CimexPKScQTA",
+              "text": "}"
+            }
+          ]
+        }
+      ]
+    }, {
+      "id": "T_72XWdDQma7hydM3sjXQA",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "WeYYMBiJS_eZ-kj8igPdpw",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "FFJf06n5QIahJFrjIFsw1Q",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "HEm4uBS0QzqBQPalne7cEA",
+          "text": "链接SDOC文档"
+        }
+      ]
+    }, {
+      "id": "JV55cEFbSRKNxAvKTrw9SA",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "ejyDR2aSScqJxflXQGoazw",
+          "text": " "
+        }, {
+          "id": "DL_-KbdRSIeOyCWecC0Vvg",
+          "type": "sdoc_link",
+          "doc_uuid": "e6f763c1-2f8f-487c-9979-7a8bd874c7eb",
+          "title": "xiaoqiang.sdoc",
+          "display_type": "icon_link",
+          "children": [
+            {
+              "id": "NMrmSU37RNmIEiKvtmhRIQ",
+              "text": "xiaoqiang.sdoc"
+            }
+          ]
+        }, {
+          "id": "YRCFxA9NQ-KR4ECq8Giu-Q",
+          "text": " "
+        }
+      ]
+    }, {
+      "id": "d476B2zqT6mb48W0iVmubA",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "eHM1OJNnSGmXy2uZhX3cuQ",
+          "text": ""
+        }
+      ]
+    }, {
+      "id": "A26rr87mQ-27nmo1t9rAkA",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "QOnAWUqrQFeuaL3zrT0ijg",
+          "text": "链接普通文档"
+        }
+      ]
+    }, {
+      "id": "EzsYPgjPQrW8lecNA4vAqw",
+      "type": "paragraph",
+      "children": [
+        {
+          "id": "fo8HAj_5Q2OtitbWgaXxXw",
+          "text": " "
+        }, {
+          "id": "GHXGUdP_QOuUOSfO5fgLvw",
+          "type": "file_link",
+          "doc_uuid": "dfd3b229-04b2-4f1c-b340-da224b9aec16",
+          "title": "test.md",
+          "display_type": "text_link",
+          "children": [
+            {
+              "id": "eW0nj9uBR1qXTFFYO2i2Aw",
+              "text": "test.md"
+            }
+          ]
+        }, {
+          "id": "T_GtMfR9TuCh0ag56STUjg",
+          "text": " "
+        }
+      ]
+    }
+  ],
+  "last_modify_user": "ygx@ygx.com"
+}
