@@ -35,6 +35,7 @@
     "start": "npm run build && lerna exec --scope example npm run start",
     "build": "export NODE_ENV=production &&  lerna exec --parallel --ignore 'example' -- babel src -d dist --copy-files",
     "lint": "export NODE_ENV=development && lint-staged",
+    "publish": "lerna version",
     "prepare": "husky"
   },
   "lint-staged": {
