@@ -87,9 +87,9 @@ const CommentItemContent = ({
         {(isUnseen && !isActive) && (
           <span className="sdoc-unread-message-tip"></span>
         )}
-        {isActive && comment.user_email === user.username && (
+        {isActive && [comment?.user_email, comment?.author].includes(user.username) && (
           <div className='d-flex comment-item-operation-wrapper'>
-            {!comment.resolved && (
+            {(!comment.resolved || comment?.isContextComment) && (
               <>
                 <div id={`tooltip_${menuId}`} className="comment-operation mr-2" onClick={markAsResolved}>
                   <i className='sdocfont sdoc-confirm'></i>
