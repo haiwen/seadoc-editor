@@ -11,17 +11,33 @@ git clone git@github.com:seafileltd/sea-sdoc-editor.git
 ```
 
 ### Install Dependencies
+
 ```
 npm install
 ```
 
 ### Packaging and assembly library
+
 ```
 npm run build
 ```
 
 ### Release version
+
 ```
-npm publish
+npm run release
 ```
 
+## Developer test
+
+### Install Dependencies
+
+```
+npm install
+```
+
+### Open test page
+
+```
+npm start
+```
