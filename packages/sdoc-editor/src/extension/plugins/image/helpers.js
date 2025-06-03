@@ -75,8 +75,7 @@ export const insertImage = (editor, imgInfos, selection, position = INSERT_POSIT
   }
 
   const imageNodes = imgInfos.map(({ src, file_uuid }) => {
-    const isCommentEditor = editor.editorType === COMMENT_EDITOR;
-    const imgSrc = isCommentEditor ? getImageURL({ src }) : src;
+    const imgSrc = src;
     return generateImageNode(imgSrc, file_uuid);
   });
 
@@ -265,6 +264,10 @@ export const isImageUrlIsFromCopy = (url) => {
 export const isImageUrlIsFromUpload = (url) => {
   if (url && url.startsWith('blob:http')) return true;
   return false;
+};
+
+export const isCommentEditor = (editor) => {
+  return editor.editorType === COMMENT_EDITOR;
 };
 
 export const generateImageInfos = (files) => {

@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import context from '../../../context';
-import { isImageUrlIsFromUpload } from './helpers';
+import { getImageURL, isCommentEditor, isImageUrlIsFromUpload } from './helpers';
 import ImageCache from './image-cache';
 
 const updateImageNode = async (editor, element, newUrl) => {
+  const url = isCommentEditor(editor) ? getImageURL({ src: newUrl }, editor) : newUrl;
   const nodePath = ReactEditor.findPath(editor, element);
-  const newData = { src: newUrl };
+  const newData = { src: url, is_comment: true };
   Transforms.setNodes(editor, { data: newData }, { at: nodePath });
 };
 
