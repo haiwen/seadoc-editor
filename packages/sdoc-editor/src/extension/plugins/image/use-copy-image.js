@@ -12,13 +12,14 @@ const updateImageNode = async (editor, element, newUrl, isError = false) => {
 
 const useCopyImage = ({ editor, element }) => {
   const { data } = element;
-  const { is_copy_error = false } = data;
+  const { is_copy_error = false, is_comment: isComment } = data;
   const [isLoading, setIsLoading] = useState();
   const [isCopyError, setIsCopyError] = useState(is_copy_error);
 
   useEffect(() => {
     const { src: url } = data;
     if (isCopyError) return;
+    if (isComment) return;
     if (!isImageUrlIsFromCopy(url)) return;
 
     const downloadAndUploadImages = async (url) => {

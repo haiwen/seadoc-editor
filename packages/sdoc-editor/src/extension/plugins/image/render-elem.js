@@ -10,7 +10,7 @@ import EventBus from '../../../utils/event-bus';
 import { ADDED_STYLE, DELETED_STYLE, IMAGE_BLOCK } from '../../constants';
 import { IMAGE_BORDER_TYPE } from './constants';
 import Svg from './copy-image-error-svg';
-import { getImageURL, handleBase64Image, isImageUrlIsFromCopy, selectImageWhenSelectPartial, updateImage } from './helpers';
+import { getImageURL, handleBase64Image, isCommentEditor, isImageUrlIsFromCopy, selectImageWhenSelectPartial, updateImage } from './helpers';
 import ImageHoverMenu from './hover-menu';
 import ImageLoader from './image-loader';
 import useCopyImage from './use-copy-image';
@@ -176,10 +176,10 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   }, [data, editor]);
 
   const onImageLoaded = useCallback(() => {
-    if (isImageUrlIsFromCopy(data.src)) {
+    if (isImageUrlIsFromCopy(data.src) && !isCommentEditor(editor)) {
       setCopyImageLoading(true);
     }
-  }, [data.src, setCopyImageLoading]);
+  }, [data.src, editor, setCopyImageLoading]);
 
   const onImageLoadError = useCallback(() => {
     // Check is due to the image is pasted from the clipboard in base64
