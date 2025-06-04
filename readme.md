@@ -1,6 +1,6 @@
 # Sea-sdoc-editor Introduction
 
-Sea-sdoc-editor contains two projects, namely sdoc-editor, seafile-sdoc-editor.sdoc-editor is a basic editor developed based on slate. seafile-sdoc-editor is a further extension of sdoc-editor, providing a complete UI and interaction.
+Sea-sdoc-editor contains two projects, namely sdoc-editor, seafile-sdoc-editor. sdoc-editor is a basic editor developed based on slate. seafile-sdoc-editor is a further extension of sdoc-editor, providing a complete UI and interaction. seafile-sdoc-editor powers the SeaDoc feature and Wiki page editing feature in Seafile.
 
 ## Project usage steps
 
