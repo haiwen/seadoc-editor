@@ -247,11 +247,8 @@ export const syncRemoteCursorLocation = (editor, user, location, cursorData) => 
     const { anchor, focus } = location;
     let newLocation = location;
     if (!Point.equals(anchor, focus)) {
-      if (Point.compare(anchor, focus) === -1) {
-        newLocation = { anchor: anchor, focus: anchor };
-      } else {
-        newLocation = { anchor: focus, focus: focus };
-      }
+      const frontPoint = Editor.start(editor, location);
+      newLocation = { anchor: frontPoint, focus: frontPoint };
     }
 
     setCursor(editor, user, newLocation, cursorData);
