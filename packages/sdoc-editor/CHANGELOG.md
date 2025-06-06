@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.89](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.88...@seafile/sdoc-editor@2.0.89) (2025-06-06)
+
+### Bug Fixes
+
+- **socket:** optimize code ([c3bc72b](https://github.com/seafileltd/sea-sdoc-editor/commit/c3bc72bc89328dbf34c4a91980c1d2b67126e7fa))
+- **socket:** update collobrate sync cursor ([5767cc0](https://github.com/seafileltd/sea-sdoc-editor/commit/5767cc07c1bc79d8f7958d43154209cab8e1097b))
+
 ## [2.0.88](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.87...@seafile/sdoc-editor@2.0.88) (2025-06-04)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
