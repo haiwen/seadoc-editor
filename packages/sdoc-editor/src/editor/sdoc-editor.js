@@ -38,6 +38,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   }, []);
 
   const [slateValue, setSlateValue] = useState(document.elements);
+  const [isEdit, setIsEdit] = useState(false);
 
   // Fix: The editor's children are not updated when the document is updated in revision
   // In revision mode, the document is updated, but the editor's children are not updated,as onValueChange override the new document.elements. This unexpected action cause the editor to display the old content
@@ -139,6 +140,18 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
     };
   }, [handleFullScreenPresentation]);
 
+  const handleEditToggle = useCallback(({ isEdit }) => {
+    setIsEdit(isEdit);
+  }, []);
+
+  useEffect(() => {
+    const eventBus = EventBus.getInstance();
+    const unsubscribeViewOrEdit = eventBus.subscribe('ViewOrEdit', handleEditToggle);
+    return () => {
+      unsubscribeViewOrEdit();
+    };
+  }, [handleEditToggle]);
+
   useEffect(() => {
     const handleExit = (e) => {
       if (isHotkey('esc', e)) {
@@ -207,7 +220,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
     );
   }
 
-  if (isMobile || showFullScreen) {
+  if (isMobile && !isEdit || showFullScreen) {
     return (
       <EditorContainer editor={validEditor} readonly={true} fullscreen={showFullScreen}>
         <ColorProvider>
@@ -233,6 +246,22 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   }
 
   const isShowComment = typeof showComment === 'boolean' ? showComment : true;
+
+  if (isMobile && isEdit) {
+    return (
+      <>
+        <EditorContainer editor={validEditor}>
+          <ColorProvider>
+            <EditorContent docValue={slateValue} showOutline={false} editor={validEditor} showComment={false}>
+              <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={false} />
+            </EditorContent>
+            {isShowHeaderToolbar && <HeaderToolbar editor={validEditor} />}
+          </ColorProvider>
+        </EditorContainer>
+        <InsertElementDialog editor={validEditor} />
+      </>
+    );
+  }
 
   return (
     <>

@@ -65,6 +65,11 @@
   z-index: 101;
 }
 
+.header-menu .sdoc-dropdown-menu-mobile {
+  top: auto;
+  bottom: 100%;
+}
+
 .header-menu .header-popover .sdoc-dropdown-menu-item {
   font-size: 14px;
   height: auto;

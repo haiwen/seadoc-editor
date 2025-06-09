@@ -79,7 +79,7 @@
   width: 8px;
 }
 
-.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-input:checked ~ .custom-switch-indicator:before {
+.sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-input:checked~.custom-switch-indicator:before {
   left: 12px;
 }
 
@@ -90,4 +90,9 @@
 .sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item .sdoc-full-width-mode-wrapper .custom-switch .custom-switch-input:focus~.custom-switch-indicator {
   box-shadow: 0 0 0 2px rgba(255, 128, 0, .25);
   border-color: #ff8000;
+}
+
+.doc-ops #op-edit {
+  width: 44px;
+  height: 44px;
 }
