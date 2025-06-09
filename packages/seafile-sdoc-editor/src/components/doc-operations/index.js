@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';
-import { isMobile, context } from '@seafile/sdoc-editor';
+import { isMobile, context, EventBus } from '@seafile/sdoc-editor';
 import PropTypes from 'prop-types';
 import CollaboratorsOperation from './collaborators-operation';
+import MobileEditing from './mobile-editing';
 import MoreOperations from './more-operations';
 import PluginsOperations from './plugins-operations';
 import PresentationOperation from './presentation-operation';
@@ -14,12 +15,26 @@ import './style.css';
 const DocOperations = ({ isShowChanges, isStarred, isPublished = false, changes, handleViewChangesToggle, handleRevisionMerged, handleRevisionPublished }) => {
   const isSdocRevision = context.getSetting('isSdocRevision');
   const mobileLogin = context.getSetting('mobileLogin');
+  const [isEdit, setIsEdit] = useState(false);
+
+  const handleEditToggle = useCallback(({ isEdit }) => {
+    setIsEdit(isEdit);
+  }, []);
+
+  useEffect(() => {
+    const eventBus = EventBus.getInstance();
+    const unsubscribeViewOrEdit = eventBus.subscribe('ViewOrEdit', handleEditToggle);
+    return () => {
+      unsubscribeViewOrEdit();
+    };
+  }, [handleEditToggle]);
 
   if (isMobile) {
     return (
       <div className="doc-ops">
-        {(!isSdocRevision && !mobileLogin) && <ShareOperation />}
-        {!isSdocRevision && <MoreOperations isStarred={isStarred} />}
+        {/* you can only share after entering the browsing page */}
+        {(!isSdocRevision && !mobileLogin && !isEdit) && <ShareOperation />}
+        {!isSdocRevision && <MobileEditing />}
       </div>
     );
   }

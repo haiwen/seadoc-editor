@@ -15,6 +15,7 @@ import { SetNodeToDecorations } from '../highlight';
 import useForceUpdate from '../hooks/use-force-update';
 import { useScrollContext } from '../hooks/use-scroll-context';
 import { ArticleContainer } from '../layout';
+import { isMobile } from '../utils/common-utils';
 import { getCursorPosition, getDomHeight, getDomMarginTop } from '../utils/dom-utils';
 import EventBus from '../utils/event-bus';
 import EventProxy from '../utils/event-handler';
@@ -180,6 +181,12 @@ const EditableArticle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollRef]);
 
+  const onCompositionEnd = useCallback((event) => {
+    if (event.data && isMobile) {
+      editor.insertText(event.data);
+    }
+  }, []);
+
   const handleScrollIntoView = useCallback((editor, domRange) => {
     try {
       const { selection } = editor;
@@ -202,7 +209,7 @@ const EditableArticle = ({
     <Slate editor={editor} value={slateValue} onChange={updateSlateValue}>
       <ArticleContainer editor={editor}>
         <Fragment>
-          <ContextToolbar />
+          {!isMobile && <ContextToolbar />}
           <SetNodeToDecorations />
           <Editable
             scrollSelectionIntoView={handleScrollIntoView}
@@ -215,6 +222,7 @@ const EditableArticle = ({
             onCut={eventProxy.onCut}
             onCopy={eventProxy.onCopy}
             onCompositionStart={eventProxy.onCompositionStart}
+            onCompositionEnd={onCompositionEnd}
             id='sdoc-editor'
             aria-label='textbox'
           />

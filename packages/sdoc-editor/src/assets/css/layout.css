@@ -158,3 +158,24 @@
   border-right: none;
   padding-left: 0 !important;
 }
+
+.sdoc-editor-container.mobile .sdoc-editor-toolbar {
+  justify-content: space-evenly;
+}
+
+.sdoc-editor-container.mobile .sdoc-editor-toolbar .sdoc-editor-toolbar-right-menu {
+  bottom: 1px;
+}
+
+.sdoc-editor-container.mobile .sdoc-editor-content {
+  min-width: 100%;
+}
+
+.mobile .sdoc-article-container {
+  width: 100% !important;
+}
+
+.sdoc-editor-container.mobile .sdoc-article-container {
+  padding-top: 0;
+  padding-bottom: 0;
+}

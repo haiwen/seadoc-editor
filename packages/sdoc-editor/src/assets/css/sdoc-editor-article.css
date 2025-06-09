@@ -8,6 +8,11 @@
   font-size: 11pt;
 }
 
+.mobile .sdoc-editor__article {
+  padding: 1rem;
+  border: 0px solid #e5e6e8;
+}
+
 .sdoc-editor__article>div {
   caret-color: blue;
 }

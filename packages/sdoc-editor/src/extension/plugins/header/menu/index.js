@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
-import { isMac } from '../../../../utils/common-utils';
+import { isMac, isMobile } from '../../../../utils/common-utils';
 import { HEADERS, HEADER_TITLE_MAP, MAC_HOTKEYS, PARAGRAPH, SDOC_FONT_SIZE, SUBTITLE, TITLE, WIN_HOTKEYS } from '../../../constants';
 import { focusEditor } from '../../../core';
 import { getHeaderType, isMenuDisabled, setHeaderType } from '../helpers';
@@ -108,7 +108,7 @@ class HeaderMenu extends React.Component {
           <span className={headerIconClass}></span>
         </div>
         {isShowHeaderPopover && (
-          <div ref={this.setMenuRef} className='header-popover sdoc-dropdown-menu'>
+          <div ref={this.setMenuRef} className={classnames('header-popover sdoc-dropdown-menu', { 'sdoc-dropdown-menu-mobile': isMobile })}>
             {itemList.map((item, index) => {
               if (item === 'divider') {
                 return (<div key={index} className='sdoc-dropdown-menu-divider'></div>);

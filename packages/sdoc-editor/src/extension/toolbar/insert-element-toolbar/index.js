@@ -5,6 +5,7 @@ import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import { INTERNAL_EVENT, KeyCodes } from '../../../constants';
+import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
 import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT } from '../../constants';
@@ -177,11 +178,24 @@ const QuickInsertBlockMenu = ({
       [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
     };
 
+    if (isMobile) {
+      items = {
+        [UNORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[UNORDERED_LIST]} key="sdoc-insert-menu-unorder-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.UNORDERED_LIST] }} onClick={() => {
+          onInsertList(ELEMENT_TYPE.UNORDERED_LIST);
+        }} />,
+        [ORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[ORDERED_LIST]} key="sdoc-insert-menu-order-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.ORDERED_LIST] }} onClick={() => {
+          onInsertList(ELEMENT_TYPE.ORDERED_LIST);
+        }} />,
+        [CHECK_LIST_ITEM]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CHECK_LIST_ITEM]} key="sdoc-insert-menu-check-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />,
+        [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
+      };
+    }
+
     SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER].forEach((item) => {
       items[item.id.toLowerCase()] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} key={item.id} menuConfig={item} onClick={() => onInsert(item.type)} />;
     });
 
-    SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.MULTI_COLUMN].forEach((item) => {
+    !isMobile && SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.MULTI_COLUMN].forEach((item) => {
       items[item.id.toLowerCase()] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} disabled={isDisableMultiColumn} className="sdoc-insert-menu-multi-column" key={item.id} menuConfig={item} onClick={() => createMultiColumn(item.type)} />;
     });
 

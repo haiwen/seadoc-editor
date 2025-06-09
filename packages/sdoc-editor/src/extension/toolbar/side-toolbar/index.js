@@ -4,6 +4,7 @@ import { ReactEditor, useSlateStatic } from '@seafile/slate-react';
 import classnames from 'classnames';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
+import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import { CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM, CALL_OUT, TABLE_DRAG_KEY, LIST_ITEM, MULTI_COLUMN, ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, IMAGE_BLOCK } from '../../constants';
 import { findPath, focusEditor } from '../../core';
@@ -510,35 +511,39 @@ const SideToolbar = () => {
   }, []);
 
   return (
-    <div
-      onAnimationEnd={() => setIsMoving(false)}
-      className={classnames('sdoc-side-toolbar-container', { 'fade-out': isMoving })}
-      style={sidePosition}
-    >
-      {slateNode && (
+    <>
+      {!isMobile && (
         <div
-          ref={menuRef}
-          onMouseDown={onMouseDown}
-          draggable={true}
-          onDragStart={dragStart}
-          className='sdoc-side-op-icon'
-          onClick={onShowSideMenuToggle}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
+          onAnimationEnd={() => setIsMoving(false)}
+          className={classnames('sdoc-side-toolbar-container', { 'fade-out': isMoving })}
+          style={sidePosition}
         >
-          <span className={classnames('sdocfont', { 'sdoc-more-vertical': !isNodeEmpty && !isEnterMoreVertical, 'sdoc-append': isNodeEmpty, 'sdoc-more-vertical-left': !isNodeEmpty && isEnterMoreVertical })} />
+          {slateNode && (
+            <div
+              ref={menuRef}
+              onMouseDown={onMouseDown}
+              draggable={true}
+              onDragStart={dragStart}
+              className='sdoc-side-op-icon'
+              onClick={onShowSideMenuToggle}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+            >
+              <span className={classnames('sdocfont', { 'sdoc-more-vertical': !isNodeEmpty && !isEnterMoreVertical, 'sdoc-append': isNodeEmpty, 'sdoc-more-vertical-left': !isNodeEmpty && isEnterMoreVertical })} />
+            </div>
+          )}
+          {isShowSideMenu && (
+            <SideMenu
+              slateNode={slateNode}
+              isNodeEmpty={isNodeEmpty}
+              menuPosition={menuPosition}
+              onReset={onReset}
+              ref={sideMenuRef}
+            />
+          )}
         </div>
       )}
-      {isShowSideMenu && (
-        <SideMenu
-          slateNode={slateNode}
-          isNodeEmpty={isNodeEmpty}
-          menuPosition={menuPosition}
-          onReset={onReset}
-          ref={sideMenuRef}
-        />
-      )}
-    </div>
+    </>
   );
 };
 
