@@ -67,7 +67,7 @@ const withTable = (editor) => {
   newEditor.insertBreak = () => {
     const selectedNode = getSelectedNodeByType(newEditor, ELEMENT_TYPE.TABLE);
     if (selectedNode != null) {
-      newEditor.insertText('\n'); // If table is selected, wrap in cell
+      newEditor.insertText('\n\uFEFF'); // If table is selected, wrap in cell
       return;
     }
     insertBreak();
