@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.94](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.93...@seafile/sdoc-editor@2.0.94) (2025-06-20)
+
+### Bug Fixes
+
+- fix sdoc trash history bug ([e9fb2d4](https://github.com/seafileltd/sea-sdoc-editor/commit/e9fb2d48e9c9869623a3f08f9984e5f282c51f93))
+
 ## [2.0.93](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.92...@seafile/sdoc-editor@2.0.93) (2025-06-20)
 
 ### Bug Fixes
