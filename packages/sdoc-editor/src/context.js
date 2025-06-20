@@ -13,6 +13,7 @@ class Context {
 
   initSettings = () => {
     this.settings = window.seafile ? window.seafile : window.seafileConfig;
+    if (!this.settings) return;
     const { name, username, avatarURL } = this.settings;
     const userInfo = { name, username, avatar_url: avatarURL };
     this.user = userInfo;
