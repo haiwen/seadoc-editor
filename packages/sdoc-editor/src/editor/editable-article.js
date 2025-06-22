@@ -181,12 +181,6 @@ const EditableArticle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollRef]);
 
-  const onCompositionEnd = useCallback((event) => {
-    if (event.data && isMobile) {
-      editor.insertText(event.data);
-    }
-  }, []);
-
   const handleScrollIntoView = useCallback((editor, domRange) => {
     try {
       const { selection } = editor;
@@ -222,7 +216,6 @@ const EditableArticle = ({
             onCut={eventProxy.onCut}
             onCopy={eventProxy.onCopy}
             onCompositionStart={eventProxy.onCompositionStart}
-            onCompositionEnd={onCompositionEnd}
             id='sdoc-editor'
             aria-label='textbox'
           />

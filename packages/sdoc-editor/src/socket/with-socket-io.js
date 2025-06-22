@@ -7,7 +7,7 @@ const withSocketIO = (editor, options) => {
   const newEditor = editor;
 
   let socketManager = null;
-
+  let lastOperations = null;
   const { user } = options.config;
   newEditor.user = user;
 
@@ -25,8 +25,15 @@ const withSocketIO = (editor, options) => {
 
   newEditor.onChange = () => {
     if (newEditor.readonly) return;
+
     const { document, config } = options;
     let operations = newEditor.operations;
+    // mobile: If the operation is exactly the same as the previous one, return directly
+    if (JSON.stringify(operations) === JSON.stringify(lastOperations)) {
+      return;
+    }
+
+    lastOperations = operations;
     if (!newEditor.isRemote && operations.length > 0) {
       const isAllSetSelection = operations.every(operation => operation.type === 'set_selection');
       const socketManager = SocketManager.getInstance(newEditor, document, config);
