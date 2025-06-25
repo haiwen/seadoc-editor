@@ -7,6 +7,7 @@ const PluginsOperations = () => {
   const { plugins, updateDisplayPlugin } = usePlugins();
   const { t } = useTranslation('sdoc-editor');
   const iconIdMap = {
+    'sdoc-ai-assistant': 'sdoc_ai_assistant',
     'sdoc-info': 'sdoc_info',
     'sdoc-comment': 'sdoc_comment',
   };
@@ -31,6 +32,11 @@ const PluginsOperations = () => {
     return (
       <span className="op-item sdoc-plugin-operation-btn-container" id={iconIdMap[name]} onClick={(e) => onClick(e, name)} key={name}>
         {iconDom}
+        {name === 'sdoc-ai-assistant' && (
+          <Tooltip target={iconIdMap[name]}>
+            {t('AI_document_assistant')}
+          </Tooltip>)
+        }
         {name === 'sdoc-info' && (
           <Tooltip target={iconIdMap[name]}>
             {t('Property')}

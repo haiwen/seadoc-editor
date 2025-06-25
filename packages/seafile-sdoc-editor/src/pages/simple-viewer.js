@@ -56,12 +56,13 @@ class SimpleViewer extends React.Component {
       return <div className='d-flex justify-content-center'>{t(errorMessage)}</div>;
     }
 
-    const { docName, sharePermissionText, downloadURL } = context.getSettings();
+    const { docName, sharePermissionText, downloadURL, enableSeafileAI } = context.getSettings();
     const sdocViewProps = {
       document: document,
       showToolbar: isMobile ? false : true,
       showOutline: isMobile ? false : true,
       showComment: false,
+      enableAiAssistant: enableSeafileAI
     };
 
     return (

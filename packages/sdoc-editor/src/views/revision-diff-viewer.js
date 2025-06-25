@@ -14,6 +14,7 @@ const RevisionDiffViewer = ({ editor, revisionContent, didMountCallback }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [diff, setDiff] = useState(null);
+  const enableSeafileAI = context.getSetting('enableSeafileAI');
 
   useEffect(() => {
     setIsLoading(true);
@@ -54,6 +55,7 @@ const RevisionDiffViewer = ({ editor, revisionContent, didMountCallback }) => {
         showToolbar={true}
         showOutline={true}
         showComment={true}
+        enableAiAssistant={enableSeafileAI}
       />
       <InsertElementDialog editor={editor} />
     </>

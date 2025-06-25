@@ -34,12 +34,14 @@ class App extends React.Component {
     if (isLoading) return <Loading />;
 
     const isSeaTable = context.getSetting('dtableUuid');
+    const enableSeafileAI = context.getSetting('enableSeafileAI');
 
-    let props = { showComment: true, showDocOperations: true };
+    let props = { showComment: true, showDocOperations: true, enableAiAssistant: enableSeafileAI };
     if (isSeaTable) {
       props = {
         showComment: false,
-        showDocOperations: false
+        showDocOperations: false,
+        enableAiAssistant: false,
       };
     }
 

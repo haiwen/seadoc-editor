@@ -11,7 +11,7 @@ import { resetWebTitle } from '../utils';
 
 import '../assets/css/simple-editor.css';
 
-const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = true, t, plugins = [], collaborators }) => {
+const SimpleEditor = ({ isStarred, isDraft, showComment, enableAiAssistant, showDocOperations = true, t, plugins = [], collaborators }) => {
   context.initApi();
 
   const editorRef = useRef(null);
@@ -110,7 +110,7 @@ const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = tru
   return (
     <ErrorBoundary>
       <CollaboratorsProvider collaborators={collaborators}>
-        <PluginsProvider plugins={plugins} showComment={showComment}>
+        <PluginsProvider plugins={plugins} showComment={showComment} enableAiAssistant={enableAiAssistant}>
           <Layout>
             <Header>
               <DocInfo isStarred={isStarred} isDraft={isDraft} isPublished={isPublished} isEditMode={isPublished ? false : !isShowChanges} />

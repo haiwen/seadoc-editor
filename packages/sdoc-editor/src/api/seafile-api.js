@@ -230,6 +230,18 @@ class SeafileAPI {
     return this.req.post(url, form);
   }
 
+  aiDocumentAssistant(docUuid, repoID, filePath, custom_prompt) {
+    const url = '/api/v2.1/ai/sdoc-general-assistant/';
+    let form = new FormData();
+    if (custom_prompt) {
+      form.append('custom_prompt', custom_prompt);
+    }
+    form.append('repo_id', repoID);
+    form.append('file_path', filePath);
+    form.append('file_uuid', docUuid);
+
+    return this.req.post(url, form);
+  }
 }
 
 export default SeafileAPI;

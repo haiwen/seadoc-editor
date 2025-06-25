@@ -2,10 +2,11 @@ import React, { useCallback, useContext, useMemo, useState } from 'react';
 import CommentWrapper from '../comment';
 import CommentsOperation from '../comment/components/comment-operation';
 import { PLUGIN_DISPLAY_TYPE } from '../constants';
+import AIAssistantWrapper from '../extension/plugins/ai-document-assistant';
 
 const PluginsContext = React.createContext(null);
 
-export const PluginsProvider = ({ showComment, plugins: propsPlugins, children }) => {
+export const PluginsProvider = ({ showComment, enableAiAssistant, plugins: propsPlugins, children }) => {
   const [displayName, setDisplayName] = useState('');
 
   const closePlugin = useCallback(() => {
@@ -13,7 +14,7 @@ export const PluginsProvider = ({ showComment, plugins: propsPlugins, children }
   }, []);
 
   const plugins = useMemo(() => {
-    const allPlugins = propsPlugins;
+    const allPlugins = propsPlugins ? [...propsPlugins] : [];
     if (showComment) {
       allPlugins.push({
         name: 'sdoc-comment',
@@ -23,8 +24,18 @@ export const PluginsProvider = ({ showComment, plugins: propsPlugins, children }
         component: CommentWrapper
       });
     }
+    if (enableAiAssistant) {
+      allPlugins.unshift({
+        name: 'sdoc-ai-assistant',
+        icon: <i className="sdocfont sdoc-ai" />,
+        resizable_width: true,
+        display_type: PLUGIN_DISPLAY_TYPE.RIGHT_PANEL,
+        component: AIAssistantWrapper,
+      });
+    }
+
     return allPlugins;
-  }, [showComment, propsPlugins]);
+  }, [showComment, enableAiAssistant, propsPlugins]);
 
   const updateDisplayPlugin = useCallback((name) => {
     if (!name || displayName === name) {

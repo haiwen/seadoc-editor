@@ -47,6 +47,7 @@ const PublishedRevisionDiffViewer = ({ isShowChanges, revisionContent, didMountC
     return <Loading />;
   }
 
+  const enableSeafileAI = context.getSetting('enableSeafileAI');
   const document = { elements: (isShowChanges && diff?.value) || revisionContent.elements };
   return (
     <SDocViewer
@@ -54,6 +55,7 @@ const PublishedRevisionDiffViewer = ({ isShowChanges, revisionContent, didMountC
       showToolbar={true}
       showOutline={true}
       showComment={false}
+      enableAiAssistant={enableSeafileAI}
     />
   );
 

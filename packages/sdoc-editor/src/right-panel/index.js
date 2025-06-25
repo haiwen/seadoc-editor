@@ -13,6 +13,7 @@ const MAX_PANEL_WIDTH = 620;
 
 const RightPanel = ({ editor }) => {
   const { plugins, displayPluginName, closePlugin } = usePlugins();
+  const [chatHistories, setChatHistories] = useState([]);
   const [width, setWidth] = useState(MIN_PANEL_WIDTH);
 
   const panelWrapperStyle = useMemo(() => {
@@ -60,6 +61,12 @@ const RightPanel = ({ editor }) => {
   if (!plugin) return null;
   if (plugin.display_type && plugin.display_type !== PLUGIN_DISPLAY_TYPE.RIGHT_PANEL) return null;
   const Component = plugin.component;
+
+  let dynamicProps = {};
+  if (plugin.name === 'sdoc-ai-assistant') {
+    dynamicProps = { chatHistories, setChatHistories };
+  }
+
   if (!Component) return null;
 
   return (
@@ -68,7 +75,7 @@ const RightPanel = ({ editor }) => {
         <ResizeWidth minWidth={MIN_PANEL_WIDTH} maxWidth={MAX_PANEL_WIDTH} resizeWidth={resizeWidth} resizeWidthEnd={resizeWidthEnd} />
       )}
       <div className="sdoc-content-right-panel" id="sdoc-content-right-panel">
-        {<Component editor={editor} type="global" onClose={closePlugin} width={width} />}
+        {<Component editor={editor} type="global" onClose={closePlugin} width={width} {...dynamicProps} />}
       </div>
     </div>
   );

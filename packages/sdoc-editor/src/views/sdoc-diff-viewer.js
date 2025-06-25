@@ -13,6 +13,7 @@ const DiffViewer = ({ currentContent, lastContent, didMountCallback }) => {
   const editor = withNodeId(createDefaultEditor());
   editor.editorType = DIFF_VIEWER;
   context.initApi();
+  const enableSeafileAI = context.getSetting('enableSeafileAI');
 
   const diff = getDiff(currentContent, lastContent);
 
@@ -28,6 +29,7 @@ const DiffViewer = ({ currentContent, lastContent, didMountCallback }) => {
       showToolbar={false}
       showOutline={false}
       showComment={false}
+      enableAiAssistant={enableSeafileAI}
       editor={editor}
     />
   );

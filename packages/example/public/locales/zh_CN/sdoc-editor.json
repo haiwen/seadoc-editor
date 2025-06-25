@@ -636,5 +636,14 @@
   "Property": "属性",
   "Comment_list": "评论列表",
   "Add_Comment": "添加评论",
-  "Finish": "完成"
+  "Finish": "完成",
+  "AI_document_assistant": "AI 文档助手",
+  "Hi_I_am_AI_document_assistant": "你好，我是AI文档助手，我可以阅读文档，帮助你总结文档，为你提供有用的信息，你可以随时向我提问~",
+  "Generating_answers_based_on_this_document ...": "正在根据本篇文档匹配答案",
+  "Response_paused": "回答已暂停",
+  "Resume_generating": "继续生成",
+  "Please_input_your_command": "请输入指令",
+  "Pause_reply": "停止生成回复",
+  "Send": "发送",
+  "Generate_again": "重新生成"
 }
