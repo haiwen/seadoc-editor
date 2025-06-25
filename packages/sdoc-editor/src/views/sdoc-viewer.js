@@ -21,6 +21,7 @@ const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false
   const validEditor = editor || withNodeId(createDefaultEditor());
   const slateValue = (document || generateDefaultDocContent()).elements;
   const Provider = showComment ? CollaboratorsProvider : Fragment;
+  const enableSeafileAI = context.getSetting('enableSeafileAI');
 
   useEffect(() => {
     const mobileLogin = context.getSetting('mobileLogin');
@@ -37,7 +38,7 @@ const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false
 
   return (
     <Provider>
-      <PluginsProvider plugins={plugins} showComment={showComment}>
+      <PluginsProvider plugins={plugins} showComment={showComment} enableAiAssistant={enableSeafileAI}>
         <EditorContainer editor={validEditor} readonly={true}>
           <ColorProvider>
             {showToolbar && <HeaderToolbar editor={validEditor} readonly={true} />}

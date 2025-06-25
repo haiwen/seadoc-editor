@@ -300,6 +300,12 @@ class Context {
     this.config['docUuid'] = docUuid;
   }
 
+  aiDocumentAssistant(custom_prompt) {
+    const docUuid = this.getDocUuid();
+    const repoID = this.getSetting('repoID');
+    const filePath = this.getSetting('docPath');
+    return this.api.aiDocumentAssistant(docUuid, repoID, filePath, custom_prompt);
+  }
 }
 
 const context = new Context();
