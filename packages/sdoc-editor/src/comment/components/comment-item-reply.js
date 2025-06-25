@@ -6,6 +6,7 @@ import context from '../../context';
 import processor from '../../slate-convert/md-to-html';
 import CommentDeletePopover from './comment-delete-popover';
 import CommentEditor from './comment-editor';
+import CommentImagePreviewer from './comment-image-previewer';
 
 const CommentItemReply = ({
   isActive,
@@ -16,6 +17,7 @@ const CommentItemReply = ({
   t
 }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
   const itemRef = useRef(null);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -61,6 +63,12 @@ const CommentItemReply = ({
 
   const user = context.getUserInfo();
 
+  const onCommentContentClick = useCallback((event) => {
+    if (event.target && event.target.tagName === 'IMG' && event.target.src) {
+      setImageUrl(event.target.src);
+    }
+  }, []);
+
   return (
     <div className='comment-item' ref={itemRef}>
       <div className='comment-header'>
@@ -87,7 +95,7 @@ const CommentItemReply = ({
           </div>
         )}
       </div>
-      <div className='comment-content'>
+      <div className='comment-content' onClick={onCommentContentClick}>
         {!isEditing && <div dangerouslySetInnerHTML={{ __html: editorContent }}></div>}
       </div>
       {isEditing && <CommentEditor className="pb-3" type='reply' content={editorContent} updateContent={updateContent} setIsEditing={setIsEditing} />}
@@ -100,6 +108,7 @@ const CommentItemReply = ({
           targetId={replyOpToolsId}
         />
       )}
+      {imageUrl && <CommentImagePreviewer imageUrl={imageUrl} toggle={() => setImageUrl('')} />}
     </div>
   );
 };
