@@ -1,6 +1,7 @@
 .file-link-selected,
 .sdoc-file-link-render:hover {
   background-color: #e5e5e5 !important;
+  padding: 3px 0;
 }
 
 .sdoc-file-card-link {
