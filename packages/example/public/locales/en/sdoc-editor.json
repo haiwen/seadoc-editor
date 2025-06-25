@@ -635,5 +635,14 @@
   "Property": "Property",
   "Comment_list": "Comment list",
   "Add_Comment": "Add Comment",
-  "Finish": "Finish"
+  "Finish": "Finish",
+  "AI_document_assistant": "AI Document Assistant",
+  "Hi_I_am_AI_document_assistant": "Hi, I'm your AI Document Assistant - ready to read, summarize, and deliver the insights you need. Just ask anytime.",
+  "Generating_answers_based_on_this_document ...": "Generating answers based on this document ...",
+  "Response_paused": "Response paused",
+  "Resume_generating": "Resume generating",
+  "Please_input_your_command": "Please input your command",
+  "Pause_reply": "Pause reply",
+  "Send": "Send",
+  "Generate_again": "Generate again"
 }

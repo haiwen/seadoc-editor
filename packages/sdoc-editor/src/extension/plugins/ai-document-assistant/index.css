@@ -149,6 +149,7 @@ ai-assistant-panel-header-right,
 .ai-assistant-panel-body .ai-assistant-body-content .sdoc-ai-assistant-tip {
   display: flex;
   flex-direction: row;
+  margin-top: 20px;
 }
 
 .sdoc-ai-assistant-tip .sdoc-image-process-container {
