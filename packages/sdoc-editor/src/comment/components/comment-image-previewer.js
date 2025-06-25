@@ -1,3 +1,4 @@
+import React from 'react';
 import Lightbox from '@seafile/react-image-lightbox';
 import PropTypes from 'prop-types';
 
