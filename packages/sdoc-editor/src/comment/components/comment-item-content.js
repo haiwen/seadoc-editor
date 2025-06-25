@@ -7,6 +7,7 @@ import context from '../../context';
 import processor from '../../slate-convert/md-to-html';
 import { useNotificationContext } from '../hooks/notification-hooks';
 import CommentEditor from './comment-editor';
+import CommentImagePreviewer from './comment-image-previewer';
 
 const CommentItemContent = ({
   isActive, container, comment, updateComment,
@@ -16,6 +17,8 @@ const CommentItemContent = ({
   const [isEditing, setIsEditing] = useState(false);
   const { notificationsInfo } = useNotificationContext();
   const [editorContent, setEditorContent] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
   const onEditToggle = useCallback((event) => {
     event.stopPropagation();
     setIsEditing(true);
@@ -71,6 +74,12 @@ const CommentItemContent = ({
   const menuId = useMemo(() => `comment_${comment.id}`, [comment]);
   const user = context.getUserInfo();
 
+  const onCommentContentClick = useCallback((event) => {
+    if (event.target && event.target.tagName === 'IMG' && event.target.src) {
+      setImageUrl(event.target.src);
+    }
+  }, []);
+
   return (
     <div className='comment-item'>
       <div className='comment-header'>
@@ -117,10 +126,11 @@ const CommentItemContent = ({
           </div>
         )}
       </div>
-      <div className='comment-content'>
+      <div className='comment-content' onClick={onCommentContentClick}>
         {!isEditing && <div dangerouslySetInnerHTML={{ __html: editorContent }}></div>}
       </div>
       {isEditing && <CommentEditor className="pb-3" content={comment.comment} updateContent={updateContent} setIsEditing={setIsEditing} />}
+      {imageUrl && <CommentImagePreviewer imageUrl={imageUrl} toggle={() => setImageUrl('')} />}
     </div>
   );
 };

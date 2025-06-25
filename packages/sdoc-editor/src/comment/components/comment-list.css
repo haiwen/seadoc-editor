@@ -120,6 +120,10 @@
   margin: 0;
 }
 
+.comment-item .comment-content img {
+  cursor: pointer;
+}
+
 /* footer */
 .comment-item .comment-footer {
   display: flex;
