@@ -427,6 +427,9 @@ export default function AIModule({ editor, element, closeModule }) {
       case OPERATION_TYPES.TRANSLATE:
         onTranslateClick();
         return;
+      case OPERATION_TYPES.MORE_FLUENT:
+        onMoreFluentClick();
+        return;
       case OPERATION_TYPES.MORE_DETAILS:
         onMoreDetailsClick();
         return;
