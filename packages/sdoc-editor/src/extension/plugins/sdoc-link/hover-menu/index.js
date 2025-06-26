@@ -6,10 +6,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
 import { ElementPopover } from '../../../commons';
-import { TABLE_CELL } from '../../../constants';
-import { getCurrentNode } from '../../../core';
 import { SDOC_LINK_TYPE_CONFIG, SDOC_LINK_TYPE, SDOC_LINK_TYPES } from '../constants';
-import { onCopySdocLinkNode } from '../helpers';
+import { isInTable, onCopySdocLinkNode } from '../helpers';
 
 import './index.css';
 
@@ -49,7 +47,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
 
   const selectedType = element.display_type || SDOC_LINK_TYPE.TEXT_LINK;
   const id = `sdoc-link-display-type-${element.id}`;
-  const newSdocFileTypes = SDOC_LINK_TYPES.filter(sdocLinkType => getCurrentNode(editor)[0].type === TABLE_CELL ? sdocLinkType !== SDOC_LINK_TYPE.CARD_LINK : true);
+  const newSdocFileTypes = SDOC_LINK_TYPES.filter(sdocLinkType => isInTable(editor, element) ? sdocLinkType !== SDOC_LINK_TYPE.CARD_LINK : true);
 
   return (
     <ElementPopover>
