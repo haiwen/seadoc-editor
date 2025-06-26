@@ -118,12 +118,41 @@ const renderText = (props) => {
     markedChildren = <span className={`token ${leaf.type}`}>{markedChildren}</span>;
   }
 
-  return (
-    <span data-id={leaf.id} {...attributes} style={style} className={Object.keys(rest).join(' ')}>
-      {leaf.isCaret ? <Caret {...leaf} /> : null}
-      {leaf.isCaret && <span key={Math.random()} data-slate-zero-width="z" data-slate-length="0">{'\uFEFF'}</span>}
-      {!leaf.isCaret && markedChildren}
+  const GenericLeafStyle = () => {
+    return (
+      <span data-id={leaf.id} {...attributes} style={style} className={Object.keys(rest).join(' ')}>
+        {leaf.isCaret ? <Caret {...leaf} /> : null}
+        {leaf.isCaret && <span key={Math.random()} data-slate-zero-width="z" data-slate-length="0">{'\uFEFF'}</span>}
+        {!leaf.isCaret && markedChildren}
+      </span>
+    );
+  };
+
+  const CursorPositonFix = () => (
+    <span
+      contentEditable={false}
+      style={{ fontSize: 1 }}
+    >
+      {String.fromCodePoint(160) /* Non-breaking space */}
     </span>
+  );
+
+  const InlineCodeCustomized = () => {
+    return (
+      <span data-id={leaf.id} {...attributes} style={style} className={Object.keys(rest).join(' ')}>
+        {leaf.isCaret ? <Caret {...leaf} /> : null}
+        {leaf.isCaret && <span key={Math.random()} data-slate-zero-width="z" data-slate-length="0">{'\uFEFF'}</span>}
+        <CursorPositonFix />
+        {!leaf.isCaret && markedChildren}
+        <CursorPositonFix />
+      </span>
+    );
+  };
+
+  return (
+    <>
+      {leaf[TEXT_STYLE_MAP.CODE] && <InlineCodeCustomized /> || <GenericLeafStyle />}
+    </>
   );
 };
 

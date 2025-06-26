@@ -68,6 +68,8 @@ const EditableArticle = ({
     eventProxy.onKeyDown(event);
 
     if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      Transforms.move(editor, { unit: 'offset', reverse: true });
       if (!isSelectionAtBlockStart(editor)) return;
     }
 
@@ -87,6 +89,8 @@ const EditableArticle = ({
     }
 
     if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      Transforms.move(editor, { unit: 'offset' });
       if (!isSelectionAtBlockEnd(editor)) return;
     }
 
