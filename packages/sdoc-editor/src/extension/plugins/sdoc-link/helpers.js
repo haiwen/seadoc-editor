@@ -3,8 +3,8 @@ import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import slugid from 'slugid';
 import context from '../../../context';
-import { SDOC_LINK, LINK, INSERT_FILE_DISPLAY_TYPE, CODE_BLOCK, CODE_LINE, PARAGRAPH, FILE_LINK_INSET_INPUT_TEMP, HEADERS, TITLE, SUBTITLE } from '../../constants';
-import { focusEditor, generateEmptyElement, getNodeType, getSelectedElems } from '../../core';
+import { SDOC_LINK, LINK, INSERT_FILE_DISPLAY_TYPE, CODE_BLOCK, CODE_LINE, PARAGRAPH, FILE_LINK_INSET_INPUT_TEMP, HEADERS, TITLE, SUBTITLE, TABLE } from '../../constants';
+import { focusEditor, generateEmptyElement, getNode, getNodeType, getSelectedElems } from '../../core';
 import { isSelectionInHeader } from '../header/helpers';
 
 export const isMenuDisabled = (editor, readonly) => {
@@ -229,4 +229,10 @@ export const getSdocLinkEntry = (editor, at = editor.selection) => {
     at
   });
   return aboveNodeEntry;
+};
+
+export const isInTable = (editor, element) => {
+  const path = ReactEditor.findPath(editor, element);
+  const isInTable = getNode(editor, [path[0]])?.type === TABLE;
+  return isInTable;
 };
