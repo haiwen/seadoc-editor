@@ -405,7 +405,7 @@ export default function AIModule({ editor, element, closeModule }) {
     if (!element) {
       const end = Range.end(editor.selection);
       const aboveNode = getAboveBlockNode(editor, { at: end });
-      nextPath = Path.next(aboveNode[1]);
+      nextPath = Path.next([aboveNode[1][0]]);
     } else {
       const path = ReactEditor.findPath(editor, element);
       nextPath = Path.next(path);
