@@ -24,7 +24,11 @@ const ContextToolbar = () => {
     const rect = domRange.getBoundingClientRect();
     el.style.top = `${rect.top - 42 - 12}px`; // top = Current top - Element height - Shaded part
     el.style.left = `${rect.left}px`;
-    el.style.display = 'block';
+    if (rect.top - 42 - 12 > window.innerHeight) {
+      el.style.display = 'none';
+    } else {
+      el.style.display = 'block';
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
