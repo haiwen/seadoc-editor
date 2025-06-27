@@ -22,11 +22,17 @@ const ContextToolbar = () => {
     const domSelection = window.getSelection();
     const domRange = domSelection.getRangeAt(0);
     const rect = domRange.getBoundingClientRect();
-    el.style.top = `${rect.top - 42 - 12}px`; // top = Current top - Element height - Shaded part
+    const top = rect.top - 42 - 12;// top = Current top - Element height - Shaded part
+    el.style.top = `${top}px`;
     el.style.left = `${rect.left}px`;
-    if (rect.top - 42 - 12 > window.innerHeight) {
+    if (editor.topOffset && top < editor.topOffset) {
+      // context menu is in top unseen position
+      el.style.display = 'none';
+    } else if (rect.top > window.innerHeight) {
+      // context menu is in bottom unseen position
       el.style.display = 'none';
     } else {
+      // context menu is in current screen
       el.style.display = 'block';
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
