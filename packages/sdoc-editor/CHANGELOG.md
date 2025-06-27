@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.96](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.95...@seafile/sdoc-editor@2.0.96) (2025-06-27)
+
+### Bug Fixes
+
+- **ai:** fix ai insert below in boundary condition ([dc5ded6](https://github.com/seafileltd/sea-sdoc-editor/commit/dc5ded6d62f4f4410469cc5b695baf05719d056a))
+- **ai:** resolve more fluent ([76be8b0](https://github.com/seafileltd/sea-sdoc-editor/commit/76be8b075cc69739bd339921619417b93a00e716))
+- **file-link:** add file link hover style ([21577ab](https://github.com/seafileltd/sea-sdoc-editor/commit/21577aba2e59a6c13cab8936b5a57fb8d7900811))
+
+### Features
+
+- cursor position processing ([09a0399](https://github.com/seafileltd/sea-sdoc-editor/commit/09a0399a099cbe6431e4d5067f300055ec0d2237))
+- **file-link:** resolve file link type display ([cea3fbd](https://github.com/seafileltd/sea-sdoc-editor/commit/cea3fbd7d31ace37703378f9e633a3b0dc73a03f))
+
 ## [2.0.95](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.94...@seafile/sdoc-editor@2.0.95) (2025-06-25)
 
 ### Bug Fixes
