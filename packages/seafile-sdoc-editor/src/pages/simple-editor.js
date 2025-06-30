@@ -112,7 +112,7 @@ const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = tru
       <CollaboratorsProvider collaborators={collaborators}>
         <PluginsProvider plugins={plugins} showComment={showComment}>
           <Layout>
-            { !isSeafileClient() &&
+            {!isSeafileClient() &&
             <Header>
               <DocInfo isStarred={isStarred} isDraft={isDraft} isPublished={isPublished} isEditMode={isPublished ? false : !isShowChanges} />
               {showDocOperations && <DocOperations {...docOperationsProps} />}

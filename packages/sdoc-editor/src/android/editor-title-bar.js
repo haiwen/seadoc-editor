@@ -1,4 +1,4 @@
-import { EventBus } from '@seafile/sdoc-editor';
+import EventBus from '../utils/event-bus';
 import { ACTION_TYPES } from './constants';
 import jsBridge from './js-bridge';
 
