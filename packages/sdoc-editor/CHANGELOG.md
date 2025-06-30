@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.99](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.98...@seafile/sdoc-editor@2.0.99) (2025-06-30)
+
+### Features
+
+- title bar parameter transfer ([b56555d](https://github.com/seafileltd/sea-sdoc-editor/commit/b56555d2cb6caf8428387175aa901062bd31bbeb))
+
 ## [2.0.98](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.97...@seafile/sdoc-editor@2.0.98) (2025-06-27)
 
 ### Bug Fixes
