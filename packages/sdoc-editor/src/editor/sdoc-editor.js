@@ -3,6 +3,7 @@ import { Editor, Text } from '@seafile/slate';
 import deepCopy from 'deep-copy';
 import isHotkey from 'is-hotkey';
 import PropTypes from 'prop-types';
+import { registerTitleBarEventHandler } from '../android/editor-title-bar';
 import jsBridge from '../android/js-bridge';
 import { registerOutlineEventHandler, updateOutlineValue } from '../android/outline-module';
 import FileLoading from '../components/file-loading';
@@ -92,6 +93,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
     if (mobileLogin) {
       jsBridge.init();
       registerOutlineEventHandler();
+      registerTitleBarEventHandler();
       updateOutlineValue(document.elements);
     }
 

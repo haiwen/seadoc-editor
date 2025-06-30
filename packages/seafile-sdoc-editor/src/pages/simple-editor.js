@@ -7,7 +7,7 @@ import DocOperations from '../components/doc-operations';
 import ErrorBoundary from '../components/error-boundary';
 import { useDocument } from '../hooks';
 import Layout, { Header, Content } from '../layout';
-import { resetWebTitle } from '../utils';
+import { resetWebTitle, isSeafileClient } from '../utils';
 
 import '../assets/css/simple-editor.css';
 
@@ -112,10 +112,11 @@ const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = tru
       <CollaboratorsProvider collaborators={collaborators}>
         <PluginsProvider plugins={plugins} showComment={showComment}>
           <Layout>
+            { !isSeafileClient() &&
             <Header>
               <DocInfo isStarred={isStarred} isDraft={isDraft} isPublished={isPublished} isEditMode={isPublished ? false : !isShowChanges} />
               {showDocOperations && <DocOperations {...docOperationsProps} />}
-            </Header>
+            </Header>}
             <Content>
               {!isSdocRevision && (
                 <SDocEditor
