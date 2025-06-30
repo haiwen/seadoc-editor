@@ -39,6 +39,16 @@ export const resetWebTitle = (t) => {
   window.document.getElementsByTagName('title')[0].innerText = `${t('Revision')} - ${originFilename}`;
 };
 
+/**
+ * Check if UA includes Seafile Android/iOS 3.0
+ * @returns {boolean} - If it is a Seafile client, return true; otherwise, return false
+ */
+export const isSeafileClient = () => {
+  const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+
+  return /Seafile (Android|iOS)\/3\.0/.test(userAgent);
+};
+
 export {
   DateUtils,
 };
