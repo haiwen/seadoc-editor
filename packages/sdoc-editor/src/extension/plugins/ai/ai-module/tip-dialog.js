@@ -15,7 +15,9 @@ export default function TipDialog({ closeDialog, discardCurrentContent }) {
   return (
     <Modal isOpen={true} toggle={closeDialog}>
       <ModalHeader close={close}>{t('Tip')}</ModalHeader>
-      <ModalBody>{t('AI_tip_content')}</ModalBody>
+      <ModalBody>
+        <div className='pb-6'>{t('AI_tip_content')}</div>
+      </ModalBody>
       <ModalFooter>
         <Button color="secondary" className="mr-2" onClick={closeDialog}>{t('Cancel')}</Button>
         <Button color="primary" onClick={discardCurrentContent}>
