@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.17](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.16...@seafile/seafile-sdoc-editor@2.0.17) (2025-07-02)
+
+### Bug Fixes
+
+- **css:** add window scroll bar style ([c7734a7](https://github.com/seafileltd/sea-sdoc-editor/commit/c7734a7c888bb7398b7f296b625f1352ebb71c3a))
+
 ## [2.0.16](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.15...@seafile/seafile-sdoc-editor@2.0.16) (2025-06-30)
 
 ### Features
