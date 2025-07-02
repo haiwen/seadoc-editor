@@ -16,6 +16,7 @@ const ContextToolbar = () => {
   const scrollRef = useScrollContext();
   const inFocus = useFocused();
   const readOnly = useReadOnly();
+  const clickedCommentRef = useRef(false);
 
   const setContextToolbarPosition = useCallback(() => {
     const el = ref.current;
@@ -51,6 +52,11 @@ const ContextToolbar = () => {
       return;
     }
 
+    if (clickedCommentRef.current) {
+      clickedCommentRef.current = false;
+      return;
+    }
+
     if (
       readOnly ||
       !selection ||
@@ -67,6 +73,18 @@ const ContextToolbar = () => {
     scrollRef.current && scrollRef.current.addEventListener('scroll', onScroll);
     setContextToolbarPosition();
   });
+
+  useEffect(() => {
+    const handleClickCommentBtn = (e) => {
+      const target = e.target;
+      if (target?.closest('#context-toolbar-comment')) {
+        clickedCommentRef.current = true;
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickCommentBtn);
+    return () => document.removeEventListener('mousedown', handleClickCommentBtn);
+  }, []);
 
   const onMouseDown = useCallback((event) => {
     event.preventDefault(); // prevent toolbar from taking focus away from editor

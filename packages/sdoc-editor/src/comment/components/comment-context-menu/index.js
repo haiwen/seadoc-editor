@@ -7,11 +7,12 @@ import './index.css';
 
 const CommentContextMenu = ({ isRichEditor }) => {
 
-  const onCommentClick = useCallback((event) => {
+  const onCommentClick = useCallback((e) => {
+    e.stopPropagation();
     // Make context toolbar disappear
     const contextToolBarDom = document.querySelector('.sdoc-context-toolbar');
     if (contextToolBarDom) {
-      contextToolBarDom.removeAttribute('style');
+      contextToolBarDom.style.display = 'none';
     }
 
     const eventBus = EventBus.getInstance();
