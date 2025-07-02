@@ -4,6 +4,10 @@ html, body {
   overflow-y: auto !important;
 }
 
+html {
+  scrollbar-width: none;
+}
+
 .sdoc-editor {
   flex: 1;
   display: flex;
@@ -20,7 +24,7 @@ html, body {
   justify-content: flex-end;
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
-  box-shadow: 0 3px 2px -2px hsla(0,0%,78%,.15);
+  box-shadow: 0 3px 2px -2px hsla(0, 0%, 78%, .15);
 }
 
 .sdoc-editor .sdoc-editor-header .helper {

@@ -1,7 +1,3 @@
 .sdoc-editor-container .sdoc-editor-content.no-outline .sdoc-article-container {
   margin: 0 auto !important;
 }
-
-html {
-  scrollbar-width: none;
-}
