@@ -263,6 +263,11 @@
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-radius: 3px;
+  transition: border-color 0.3s ease;
+}
+
+.sdoc-comment-editor-wrapper:focus-within {
+  border-color: #ff8e03;
 }
 
 .comment-editor-wrapper .sdoc-comment-editor-wrapper .article.sdoc-comment-editor {
