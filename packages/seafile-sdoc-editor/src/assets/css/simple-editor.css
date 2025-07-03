@@ -7,3 +7,7 @@
 .sdoc-context-menu .dropdown-item:hover {
   color: #fff;
 }
+
+html {
+  scrollbar-width: none;
+}
