@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.103](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.102...@seafile/sdoc-editor@2.0.103) (2025-07-04)
+
+### Features
+
+- **comment-read:** add auto mark comments as read ([f19f183](https://github.com/seafileltd/sea-sdoc-editor/commit/f19f183a44b6b76bc6f6cd0b950d79d30a947db2))
+
 ## [2.0.102](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.101...@seafile/sdoc-editor@2.0.102) (2025-07-03)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
