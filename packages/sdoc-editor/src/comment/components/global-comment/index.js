@@ -152,6 +152,7 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
                     replyCount={replyCount}
                     latestReply={latestReply}
                     setCurrentCommentGroup={setCurrentCommentGroup}
+                    deleteUnseenNotifications={deleteUnseenNotifications}
                   />
                 );
               })}

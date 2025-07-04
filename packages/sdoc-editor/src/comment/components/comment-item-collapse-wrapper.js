@@ -10,11 +10,14 @@ import { COMMENT_URL_CLASSNAME } from '../constants';
 import { getCommentedTextsByElementId } from '../helper';
 import { useNotificationContext } from '../hooks/notification-hooks';
 
-const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, editor, replyCount, setCurrentCommentGroup, t }) => {
+const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, editor, replyCount, setCurrentCommentGroup, t, deleteUnseenNotifications }) => {
   const scrollRef = useRef(document.querySelector('.sdoc-scroll-container'));
   const { notificationsInfo } = useNotificationContext();
   const [commentContent, setCommentContent] = useState('');
   const [replyContent, setReplyContent] = useState('');
+
+  const CommentItemListRef = useRef();
+  const timeoutRef = useRef(null);
 
   const isUnseen = notificationsInfo.notifications_map[`sdoc_notification_${topLevelComment.id}`] ? true : false;
   const isReplayUnseen = useMemo(() => {
@@ -22,6 +25,41 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
     const isUnseen = notificationsInfo.notifications_map[`sdoc_notification_${topLevelComment.id}_${latestReply.id}`] ? true : false;
     return isUnseen;
   }, [latestReply, notificationsInfo.notifications_map, topLevelComment.id]);
+
+  useEffect(() => {
+    if (!CommentItemListRef.current) return;
+    if (!(isUnseen || isReplayUnseen)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = entry.isIntersecting && entry.intersectionRatio === 1;
+        if (isVisible) {
+          if (!timeoutRef.current) {
+            timeoutRef.current = setTimeout(() => {
+              deleteUnseenNotifications && deleteUnseenNotifications(topLevelComment);
+              timeoutRef.current = null;
+            }, 3000);
+          } else {
+            if (timeoutRef.current) {
+              clearTimeout(timeoutRef.current);
+              timeoutRef.current = null;
+            }
+          }
+        }
+      },
+      { threshold: [1.0] }
+    );
+
+    if (CommentItemListRef.current) observer.observe(CommentItemListRef.current);
+
+    return () => {
+      observer.disconnect();
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
+  }, [deleteUnseenNotifications, isReplayUnseen, isUnseen, topLevelComment]);
 
   useEffect(() => {
     const initCommentContent = async () => {
@@ -90,7 +128,7 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
           <div className="comment-item-selected-text">{Node.string(element)}</div>
         </div>
       )}
-      <div className="comment-item-list">
+      <div className="comment-item-list" ref={CommentItemListRef}>
         <div className='comment-item'>
           <div className='comment-header'>
             <div className='comment-author'>
