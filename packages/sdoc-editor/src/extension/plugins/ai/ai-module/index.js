@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Editor, Node, Path, Range, Transforms } from '@seafile/slate';
+import { Editor, Element, Node, Path, Range, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import isHotkey from 'is-hotkey';
@@ -8,6 +8,7 @@ import toaster from '../../../../components/toast';
 import context from '../../../../context';
 import processor from '../../../../slate-convert/md-to-html';
 import mdStringToSlate from '../../../../slate-convert/md-to-slate';
+import slateToMdString from '../../../../slate-convert/slate-to-md';
 import { ElementPopover } from '../../../commons';
 import DropdownMenuItem from '../../../commons/dropdown-menu-item';
 import { PARAGRAPH } from '../../../constants';
@@ -37,6 +38,90 @@ export default function AIModule({ editor, element, closeModule }) {
   const [currentLang, setCurrentLang] = useState('en');
   const [isShowTipDialog, setIsShowTipDialog] = useState(false);
 
+  function isRangeOverlapping(rangeA, rangeB) {
+    const aStart = Range.start(rangeA);
+    const aEnd = Range.end(rangeA);
+    const bStart = Range.start(rangeB);
+    const bEnd = Range.end(rangeB);
+
+    // The starting or ending point of A is within the range of B
+    const aStartInB =
+      (Path.isBefore(bStart.path, aStart.path) || Path.equals(bStart.path, aStart.path)) &&
+      (Path.isBefore(aStart.path, bEnd.path) || Path.equals(aStart.path, bEnd.path));
+
+    const aEndInB =
+      (Path.isBefore(bStart.path, aEnd.path) || Path.equals(bStart.path, aEnd.path)) &&
+      (Path.isBefore(aEnd.path, bEnd.path) || Path.equals(aEnd.path, bEnd.path));
+
+    // B is included by A
+    const bWithinA =
+      (Path.isBefore(aStart.path, bStart.path) || Path.equals(aStart.path, bStart.path)) &&
+      (Path.isBefore(bEnd.path, aEnd.path) || Path.equals(bEnd.path, aEnd.path));
+
+    return aStartInB || aEndInB || bWithinA;
+  }
+
+  const handleSelectElements = (editor) => {
+    const { selection } = editor;
+    if (!selection || Range.isCollapsed(selection)) return [];
+
+    const selectedElements = [];
+    const addedPaths = new Set();
+    const blockNodes = Editor.nodes(editor, {
+      at: selection,
+      match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
+      mode: 'highest'
+    });
+
+    for (const [node, path] of blockNodes) {
+      const nodePathStr = path.join(',');
+      if (addedPaths.has(nodePathStr)) continue;
+
+      const nodeStart = Editor.start(editor, path);
+      const nodeEnd = Editor.end(editor, path);
+
+      const nodeRange = { anchor: nodeStart, focus: nodeEnd };
+      if (!isRangeOverlapping(selection, nodeRange)) {
+        continue;
+      }
+
+      if (node.type === 'ordered_list' || node.type === 'unordered_list') {
+        const selectedItems = [];
+        for (let i = 0; i < node.children.length; i++) {
+          const itemPath = [...path, i];
+          const itemNode = node.children[i];
+          const itemStart = Editor.start(editor, itemPath);
+          const itemEnd = Editor.end(editor, itemPath);
+
+          const itemRange = { anchor: itemStart, focus: itemEnd };
+
+          if (isRangeOverlapping(selection, itemRange)) {
+            selectedItems.push(itemNode);
+            addedPaths.add(itemPath.join(','));
+          }
+        }
+
+        if (selectedItems.length > 0) {
+          selectedElements.push([
+            {
+              ...node,
+              children: selectedItems
+            },
+            path
+          ]);
+          addedPaths.add(nodePathStr);
+        }
+      } else {
+        const isFullySelected = Range.includes(selection, nodeStart) && Range.includes(selection, nodeEnd);
+        if (isFullySelected) {
+          selectedElements.push([node, path]);
+          addedPaths.add(nodePathStr);
+        }
+      }
+    }
+    return selectedElements;
+  };
+
   const toggleAskAI = useCallback(() => {
     // Add marks for selection
     Editor.addMark(editor, 'sdoc_ai', true);
@@ -44,8 +129,13 @@ export default function AIModule({ editor, element, closeModule }) {
     const { scrollTop, scrollHeight } = scrollRef.current;
 
     if (!element) {
-      const content = window.getSelection().toString();
-      if (content) {
+      const SelectElements = handleSelectElements(editor);
+      let content = '';
+
+      if (SelectElements) {
+        SelectElements.forEach((item) => {
+          content += slateToMdString(item);
+        });
         setSelectedValue(content);
       }
 
