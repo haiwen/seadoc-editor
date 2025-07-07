@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
+import './index.css';
+
 const PublishRevision = ({ publishRevision }) => {
   const { t } = useTranslation('sdoc-editor');
 
@@ -15,7 +17,7 @@ const PublishRevision = ({ publishRevision }) => {
   }, []);
 
   return (
-    <Button color="success" onClick={onPublishRevision} className="ml-4">{t('Publish')}</Button>
+    <Button color="success sdoc-publish-button" onClick={onPublishRevision} className="ml-4">{t('Publish')}</Button>
   );
 };
 
