@@ -85,38 +85,30 @@ export default function AIModule({ editor, element, closeModule }) {
         continue;
       }
 
-      if (node.type === 'ordered_list' || node.type === 'unordered_list') {
-        const selectedItems = [];
-        for (let i = 0; i < node.children.length; i++) {
-          const itemPath = [...path, i];
-          const itemNode = node.children[i];
-          const itemStart = Editor.start(editor, itemPath);
-          const itemEnd = Editor.end(editor, itemPath);
+      const selectedItems = [];
+      for (let i = 0; i < node.children.length; i++) {
+        const itemPath = [...path, i];
+        const itemNode = node.children[i];
+        const itemStart = Editor.start(editor, itemPath);
+        const itemEnd = Editor.end(editor, itemPath);
 
-          const itemRange = { anchor: itemStart, focus: itemEnd };
-
-          if (isRangeOverlapping(selection, itemRange)) {
-            selectedItems.push(itemNode);
-            addedPaths.add(itemPath.join(','));
-          }
+        const itemRange = { anchor: itemStart, focus: itemEnd };
+        // Determine whether a item in the list has been selected
+        if (isRangeOverlapping(selection, itemRange)) {
+          selectedItems.push(itemNode);
+          addedPaths.add(itemPath.join(','));
         }
-
-        if (selectedItems.length > 0) {
-          selectedElements.push([
-            {
-              ...node,
-              children: selectedItems
-            },
-            path
-          ]);
-          addedPaths.add(nodePathStr);
-        }
-      } else {
-        const isFullySelected = Range.includes(selection, nodeStart) && Range.includes(selection, nodeEnd);
-        if (isFullySelected) {
-          selectedElements.push([node, path]);
-          addedPaths.add(nodePathStr);
-        }
+      }
+      // keep only selected items
+      if (selectedItems.length > 0) {
+        selectedElements.push([
+          {
+            ...node,
+            children: selectedItems
+          },
+          path
+        ]);
+        addedPaths.add(nodePathStr);
       }
     }
     return selectedElements;
