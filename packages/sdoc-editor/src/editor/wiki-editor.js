@@ -61,29 +61,6 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useMount: focus editor
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const [firstNode] = validEditor.children;
-      if (firstNode) {
-        const [firstNodeFirstChild] = firstNode.children;
-
-        if (firstNodeFirstChild) {
-          const endOfFirstNode = Editor.end(validEditor, [0, 0]);
-          const range = {
-            anchor: endOfFirstNode,
-            focus: endOfFirstNode,
-          };
-          focusEditor(validEditor, range);
-        }
-      }
-    }, 300);
-    return () => {
-      clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   useEffect(() => {
     if (scrollRef) {
       scrollRef.current.id = 'sdoc-scroll-container';
