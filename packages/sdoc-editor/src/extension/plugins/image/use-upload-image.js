@@ -6,9 +6,10 @@ import { getImageURL, isCommentEditor, isImageUrlIsFromUpload } from './helpers'
 import ImageCache from './image-cache';
 
 const updateImageNode = async (editor, element, newUrl) => {
-  const url = isCommentEditor(editor) ? getImageURL({ src: newUrl }, editor) : newUrl;
+  const isComment = isCommentEditor(editor);
+  const url = isComment ? getImageURL({ src: newUrl }, editor) : newUrl;
   const nodePath = ReactEditor.findPath(editor, element);
-  const newData = { src: url, is_comment: true };
+  const newData = { src: url, is_comment: isComment };
   Transforms.setNodes(editor, { data: newData }, { at: nodePath });
 };
 
@@ -43,6 +44,12 @@ const useUploadImage = ({ editor, element }) => {
     uploadCurrentImage(url);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!isImageUrlIsFromUpload(data.url)) {
+      setIsUploadError(false);
+    }
+  }, [data.url]);
 
   return {
     isUploadLoading: isLoading,

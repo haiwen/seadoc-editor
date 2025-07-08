@@ -51,6 +51,12 @@ const useCopyImage = ({ editor, element }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (!isImageUrlIsFromCopy(data.url)) {
+      setIsCopyError(false);
+    }
+  }, [data.url]);
+
   return {
     isCopyImageLoading: isLoading,
     setCopyImageLoading: setIsLoading,
