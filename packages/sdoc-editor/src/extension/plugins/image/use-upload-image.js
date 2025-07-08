@@ -21,6 +21,7 @@ const useUploadImage = ({ editor, element }) => {
   useEffect(() => {
     const { src: url, file_uuid } = data;
     if (!isImageUrlIsFromUpload(url)) return;
+    if (!ImageCache.getImage(file_uuid)) return;
     setIsLoading(true);
 
     const uploadCurrentImage = async () => {
@@ -44,12 +45,6 @@ const useUploadImage = ({ editor, element }) => {
     uploadCurrentImage(url);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (!isImageUrlIsFromUpload(data.url)) {
-      setIsUploadError(false);
-    }
-  }, [data.url]);
 
   return {
     isUploadLoading: isLoading,

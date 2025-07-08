@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import context from '../../../context';
+import LocalStorage from '../../../utils/local-storage-utils';
+import { RECENT_PASTE_HTML_CONTENT } from '../../constants/font';
 import { isImageUrlIsFromCopy, getImageURL, isCommentEditor } from './helpers';
 
 const updateImageNode = async (editor, element, newUrl, isError = false) => {
@@ -22,6 +24,9 @@ const useCopyImage = ({ editor, element }) => {
     if (isCopyError) return;
     if (isComment) return;
     if (!isImageUrlIsFromCopy(url)) return;
+
+    const cacheContent = LocalStorage.getItem(RECENT_PASTE_HTML_CONTENT);
+    if (!cacheContent || JSON.stringify(cacheContent).indexOf(url) === -1) return;
 
     const downloadAndUploadImages = async (url) => {
       try {
@@ -52,10 +57,16 @@ const useCopyImage = ({ editor, element }) => {
   }, []);
 
   useEffect(() => {
-    if (!isImageUrlIsFromCopy(data.url)) {
+    if (!isImageUrlIsFromCopy(data.src)) {
+      setIsLoading(false);
       setIsCopyError(false);
     }
-  }, [data.url]);
+
+    if (isImageUrlIsFromCopy(data.src) && data.is_copy_error === true) {
+      setIsLoading(false);
+      setIsCopyError(true);
+    }
+  }, [data.is_copy_error, data.src]);
 
   return {
     isCopyImageLoading: isLoading,
