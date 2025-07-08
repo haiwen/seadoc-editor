@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.105](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.104...@seafile/sdoc-editor@2.0.105) (2025-07-08)
+
+### Bug Fixes
+
+- fix sync image to another user bug ([9f13c65](https://github.com/seafileltd/sea-sdoc-editor/commit/9f13c6566157e2c8786c32e8f3025f29b5f58d0f))
+- sync copy image bug ([eefb00a](https://github.com/seafileltd/sea-sdoc-editor/commit/eefb00ae5e4a78d86e42eca428312f518bdf9af5))
+
 ## [2.0.104](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.103...@seafile/sdoc-editor@2.0.104) (2025-07-07)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
