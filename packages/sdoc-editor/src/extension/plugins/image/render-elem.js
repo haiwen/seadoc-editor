@@ -24,6 +24,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const imageStyle = { border: IMAGE_BORDER_TYPE.find((item) => item.type === border_type).value };
   const readOnly = useReadOnly();
   const imageRef = useRef(null);
+  const urlRef = useRef(element?.data);
   const resizerRef = useRef(null);
   const imageCaptionInputRef = useRef(null);
   const scrollRef = useScrollContext();
@@ -195,6 +196,13 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (urlRef.current !== element?.data) {
+      urlRef.current = element?.data;
+      setIsShowImagePlaceholder(false);
+    }
+  }, [element?.data]);
 
   const onSetCaption = useCallback((e) => {
     const path = ReactEditor.findPath(editor, element);
