@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.107](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.106...@seafile/sdoc-editor@2.0.107) (2025-07-09)
+
+### Features
+
+- wiki cursor is after the title ([8c0b363](https://github.com/seafileltd/sea-sdoc-editor/commit/8c0b363ebb7db50b70679a5e9b28d879179680e4))
+
 ## [2.0.106](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.105...@seafile/sdoc-editor@2.0.106) (2025-07-09)
 
 ### Bug Fixes
