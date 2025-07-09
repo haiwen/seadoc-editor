@@ -26,6 +26,10 @@ const ContextToolbar = () => {
     const top = rect.top - 42 - 12;// top = Current top - Element height - Shaded part
     el.style.top = `${top}px`;
     el.style.left = `${rect.left}px`;
+    // 475 is content menu max width
+    if (475 + rect.left > window.innerWidth) {
+      el.style.left = `${window.innerWidth - 475 - 25}px`;
+    }
     if (editor.topOffset && top < editor.topOffset) {
       // context menu is in top unseen position
       el.style.display = 'none';
