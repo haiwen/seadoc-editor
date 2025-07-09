@@ -12,6 +12,24 @@ import ColorItem from './color-item';
 
 import './index.css';
 
+const modifiers = [
+  {
+    name: 'preventOverflow',
+    options: {
+      boundary: 'viewport',
+      altBoundary: true,
+      padding: 16
+    }
+  },
+  {
+    name: 'flip',
+    options: {
+      fallbackPlacements: ['top', 'bottom', 'left'],
+      padding: 16
+    }
+  }
+];
+
 const ColorMenu = ({
   isRichEditor = true,
   className = 'menu-group-item',
@@ -192,6 +210,7 @@ const ColorMenu = ({
               className="sdoc-more-colors-popover"
               trigger="hover"
               placement="right"
+              modifiers={modifiers}
               hideArrow={true}
               fade={false}
               toggle={moreColorsPopoverToggle}
