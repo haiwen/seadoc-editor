@@ -3,9 +3,11 @@ import { ACTION_TYPES } from './constants';
 import jsBridge from './js-bridge';
 
 
-export const handleTitleBar = (value) => {
+export const handleTitleBar = (params) => {
   const eventBus = EventBus.getInstance();
-  eventBus.dispatch('ViewOrEdit', { isEdit: value });
+  if (params?.success && params.success === 'true') {
+    eventBus.dispatch('ViewOrEdit', { isEdit: true });
+  }
 };
 
 export const registerTitleBarEventHandler = () => {
