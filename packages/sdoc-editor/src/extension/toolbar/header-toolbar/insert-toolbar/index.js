@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { UncontrolledPopover } from 'reactstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import Tooltip from '../../../../components/tooltip';
 import EventBus from '../../../../utils/event-bus';
 import CodeBlockMenu from '../../../plugins/code-block/menu';
 import FileLinkMenu from '../../../plugins/file-link/menu';
@@ -69,6 +70,9 @@ const InsertToolbar = ({
           <span className={caretIconClass}></span>
         </div>
       </button>
+      <Tooltip target={insertToolbarId}>
+        {t('Insert')}
+      </Tooltip>
       {!disabled && (
         <UncontrolledPopover
           target={insertToolbarId}
