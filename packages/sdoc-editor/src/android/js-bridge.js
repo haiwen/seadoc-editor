@@ -44,8 +44,9 @@ class JSBridge {
       }
 
       const { action, data } = parsedData;
+      console.error('cc');
+      console.error(parsedData);
       const eventHandler = this.eventHandlerMap[action];
-      console.log('cc');
       const execActionSucceed = eventHandler(JSON.parse(data));
       console.log('dd');
       if (execActionSucceed) {
@@ -65,6 +66,7 @@ class JSBridge {
       throw new Error('The handler function must be a function.');
     }
     this.eventHandlerMap[key] = callback;
+    console.log(this.eventHandlerMap);
   };
 
   callAndroidFunction = (dataString) => {
