@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.108](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.107...@seafile/sdoc-editor@2.0.108) (2025-07-10)
+
+### Features
+
+- add tooltip ([6e3391e](https://github.com/seafileltd/sea-sdoc-editor/commit/6e3391eb23831507d9b2b5181fa4c8939782465c))
+
 ## [2.0.107](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.106...@seafile/sdoc-editor@2.0.107) (2025-07-09)
 
 ### Features
