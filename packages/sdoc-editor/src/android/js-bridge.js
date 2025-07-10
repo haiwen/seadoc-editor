@@ -28,6 +28,7 @@ class JSBridge {
   initJSEventHandler = () => {
     if (!window.WebViewJavascriptBridge) return;
     window.WebViewJavascriptBridge.registerHandler('callJsFunction', (sData, responseCallback) => {
+      console.log('aa');
       if (!sData) return;
       let parsedData = null;
       try {
@@ -36,11 +37,17 @@ class JSBridge {
         console.log('parsed error');
         parsedData = null;
       }
-      if (!parsedData) return;
+      if (!parsedData) {
+        console.log('bb');
+        responseCallback(JSON.stringify({ success: true }));
+        return;
+      }
 
       const { action, data } = parsedData;
       const eventHandler = this.eventHandlerMap[action];
+      console.log('cc');
       const execActionSucceed = eventHandler(JSON.parse(data));
+      console.log('dd');
       if (execActionSucceed) {
         responseCallback(JSON.stringify({ success: true }));
       }
