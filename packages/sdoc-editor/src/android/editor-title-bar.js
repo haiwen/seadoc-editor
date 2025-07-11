@@ -5,9 +5,11 @@ import jsBridge from './js-bridge';
 
 export const handleTitleBar = (params) => {
   const eventBus = EventBus.getInstance();
-  if (params?.success && params.success === 'true') {
+  if (typeof params === 'object' && params.edit) {
     eventBus.dispatch('ViewOrEdit', { isEdit: true });
+    return true;
   }
+  return false;
 };
 
 export const registerTitleBarEventHandler = () => {
