@@ -9,7 +9,7 @@ export const handleTitleBar = (params) => {
     eventBus.dispatch('ViewOrEdit', { isEdit: true });
     return true;
   }
-  return false;
+  return true;
 };
 
 export const registerTitleBarEventHandler = () => {
