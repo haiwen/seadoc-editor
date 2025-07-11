@@ -7,7 +7,8 @@ export const handleTitleBar = (params) => {
   const eventBus = EventBus.getInstance();
   if (typeof params === 'object' && params.edit) {
     eventBus.dispatch('ViewOrEdit', { isEdit: true });
-    return true;
+  } else {
+    eventBus.dispatch('ViewOrEdit', { isEdit: false });
   }
   return true;
 };
