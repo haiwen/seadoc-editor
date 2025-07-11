@@ -33,7 +33,7 @@ class JSBridge {
       try {
         parsedData = JSON.parse(sData);
       } catch (err) {
-        console.log('parsed error');
+        console.error('parsed error');
         parsedData = null;
       }
       if (!parsedData) {
@@ -43,11 +43,16 @@ class JSBridge {
 
       const { action, data } = parsedData;
       const eventHandler = this.eventHandlerMap[action];
-      if (typeof data !== 'object') {
+      let params = null;
+      try {
+        params = JSON.parse(data);
+      } catch (err) {
+        console.error('Param \'data\' is not an object, place check android program to modify item');
+        console.error(data);
         responseCallback(JSON.stringify({ success: false }));
-        return;
       }
-      const execActionSucceed = eventHandler(JSON.parse(data));
+
+      const execActionSucceed = eventHandler(params);
       if (execActionSucceed) {
         responseCallback(JSON.stringify({ success: true }));
       } else {
