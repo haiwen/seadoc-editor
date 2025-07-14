@@ -61,12 +61,78 @@ export default function AIModule({ editor, element, closeModule }) {
     return aStartInB || aEndInB || bWithinA;
   }
 
+  function validateNestedStructure(nodes) {
+
+    const validateNode = (node) => {
+      if (!Array.isArray(node.children) || node.children.length !== 1) {
+        return false;
+      }
+      return validateNestedStructure(node.children);
+    };
+
+    for (const node of nodes) {
+      if (!node.type) continue;
+      if (['unordered_list', 'ordered_list', 'blockquote', 'list_item'].includes(node.type)) {
+        if (!validateNode(node)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  const getSelectedChildren = (editor, parentNode, parentPath) => {
+    const { selection } = editor;
+    const selectedItems = [];
+
+    parentNode.children.forEach((childNode, index) => {
+      const childPath = [...parentPath, index];
+      const childRange = {
+        anchor: Editor.start(editor, childPath),
+        focus: Editor.end(editor, childPath),
+      };
+
+      // Determine whether a child node has been selected
+      if (isRangeOverlapping(selection, childRange)) {
+        // If it is a list node, recursively process its nested sub lists
+        let newChildNode = { ...childNode };
+        if (childNode.type === 'list_item' || childNode.type === 'ordered_list' || childNode.type === 'unordered_list') {
+          const nestedSelectedItems = getSelectedChildren(editor, childNode, childPath);
+          // If there are selected items in the nested list, keep the current list structure
+          // Keep only selected nested sub items
+          if (nestedSelectedItems.length > 0) {
+            selectedItems.push({
+              ...newChildNode,
+              children: nestedSelectedItems
+            });
+          }
+        } else {
+          // non list nodes
+          if (childNode.children) {
+            const nestedSelectedItems = getSelectedChildren(editor, childNode, childPath);
+            if (nestedSelectedItems.length > 0) {
+              selectedItems.push({
+                ...newChildNode,
+                children: nestedSelectedItems
+              });
+            }
+
+            return;
+          }
+          // Add non children nodes directly
+          selectedItems.push(childNode);
+        }
+      }
+    });
+    return selectedItems;
+  };
+
   const handleSelectElements = (editor) => {
     const { selection } = editor;
     if (!selection || Range.isCollapsed(selection)) return [];
 
     const selectedElements = [];
-    const addedPaths = new Set();
     const blockNodes = Editor.nodes(editor, {
       at: selection,
       match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
@@ -74,9 +140,6 @@ export default function AIModule({ editor, element, closeModule }) {
     });
 
     for (const [node, path] of blockNodes) {
-      const nodePathStr = path.join(',');
-      if (addedPaths.has(nodePathStr)) continue;
-
       const nodeStart = Editor.start(editor, path);
       const nodeEnd = Editor.end(editor, path);
 
@@ -84,22 +147,8 @@ export default function AIModule({ editor, element, closeModule }) {
       if (!isRangeOverlapping(selection, nodeRange)) {
         continue;
       }
-
-      const selectedItems = [];
-      for (let i = 0; i < node.children.length; i++) {
-        const itemPath = [...path, i];
-        const itemNode = node.children[i];
-        const itemStart = Editor.start(editor, itemPath);
-        const itemEnd = Editor.end(editor, itemPath);
-
-        const itemRange = { anchor: itemStart, focus: itemEnd };
-        // Determine whether a item in the list has been selected
-        if (isRangeOverlapping(selection, itemRange)) {
-          selectedItems.push(itemNode);
-          addedPaths.add(itemPath.join(','));
-        }
-      }
-      // keep only selected items
+      const selectedItems = getSelectedChildren(editor, node, path);
+      // Keep only selected items
       if (selectedItems.length > 0) {
         selectedElements.push([
           {
@@ -108,7 +157,6 @@ export default function AIModule({ editor, element, closeModule }) {
           },
           path
         ]);
-        addedPaths.add(nodePathStr);
       }
     }
     return selectedElements;
@@ -125,9 +173,13 @@ export default function AIModule({ editor, element, closeModule }) {
       let content = '';
 
       if (SelectElements) {
-        SelectElements.forEach((item) => {
-          content += slateToMdString(item);
-        });
+        if (validateNestedStructure(SelectElements[0])) {
+          content = window.getSelection().toString();
+        } else {
+          SelectElements.forEach((item) => {
+            content += slateToMdString(item);
+          });
+        }
         setSelectedValue(content);
       }
 
