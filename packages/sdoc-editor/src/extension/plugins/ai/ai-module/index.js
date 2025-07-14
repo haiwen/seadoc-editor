@@ -38,7 +38,7 @@ export default function AIModule({ editor, element, closeModule }) {
   const [currentLang, setCurrentLang] = useState('en');
   const [isShowTipDialog, setIsShowTipDialog] = useState(false);
 
-  function isRangeOverlapping(rangeA, rangeB) {
+  const isRangeOverlapping = (rangeA, rangeB) => {
     const aStart = Range.start(rangeA);
     const aEnd = Range.end(rangeA);
     const bStart = Range.start(rangeB);
@@ -59,9 +59,9 @@ export default function AIModule({ editor, element, closeModule }) {
       (Path.isBefore(bEnd.path, aEnd.path) || Path.equals(bEnd.path, aEnd.path));
 
     return aStartInB || aEndInB || bWithinA;
-  }
+  };
 
-  function validateNestedStructure(nodes) {
+  const validateNestedStructure = (nodes) => {
 
     const validateNode = (node) => {
       if (!Array.isArray(node.children) || node.children.length !== 1) {
@@ -80,7 +80,7 @@ export default function AIModule({ editor, element, closeModule }) {
     }
 
     return true;
-  }
+  };
 
   const getSelectedChildren = (editor, parentNode, parentPath) => {
     const { selection } = editor;

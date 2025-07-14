@@ -33,7 +33,7 @@ export const markdownTableRenderer = (searchResult) => {
  * @param {Object} list - Nodes to be judged
  * @returns {boolean}
  */
-const isValidUnorderedList = (list) => {
+const isValidList = (list) => {
   if (![UNORDERED_LIST, ORDERED_LIST].includes(list.type)) return false;
 
   return list.children.every(item => {
@@ -58,7 +58,7 @@ export const findValidLists = (node) => {
   const traverse = (currentNode) => {
     if (!currentNode) return;
     // Check if the current node meets the criteria
-    if ([UNORDERED_LIST, ORDERED_LIST].includes(currentNode.type) && isValidUnorderedList(currentNode)) {
+    if ([UNORDERED_LIST, ORDERED_LIST].includes(currentNode.type) && isValidList(currentNode)) {
       result.push(currentNode);
       return;
     }
