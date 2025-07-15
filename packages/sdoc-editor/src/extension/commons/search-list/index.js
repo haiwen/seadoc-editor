@@ -122,7 +122,7 @@ export default function SearchList({ list: originalList, listItem: ListItem, onL
       <div className='sdoc-search-list-wrapper'>
         <Input
           innerRef={inputWrapperRef}
-          placeholder={t('Search_action')}
+          placeholder={t('Search_1')}
           onChange={onChange}
           onCompositionStart={onCompositionStart}
           onCompositionEnd={onCompositionEnd}
