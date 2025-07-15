@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Editor, Element, Node, Path, Range, Transforms } from '@seafile/slate';
+import { Editor, Node, Path, Range, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import isHotkey from 'is-hotkey';
@@ -16,7 +16,7 @@ import { focusEditor, generateEmptyElement, getAboveBlockNode, getTopLevelBlockN
 import AIIcon from '../ai-icon';
 import { AI_MIN_HEIGHT, OPERATION_MENUS_CONFIG, OPERATION_TYPES } from '../constants';
 import AdjustSubMenu from './adjust-sub-menu';
-import { insertHtmlTransferredNodes, markdownTableRenderer, removeMarks } from './helpers';
+import { handleSelectElements, insertHtmlTransferredNodes, markdownTableRenderer, removeMarks, validateNestedStructure } from './helpers';
 import LangSubMenu from './lang-sub-menu';
 import TipDialog from './tip-dialog';
 
@@ -38,130 +38,6 @@ export default function AIModule({ editor, element, closeModule }) {
   const [currentLang, setCurrentLang] = useState('en');
   const [isShowTipDialog, setIsShowTipDialog] = useState(false);
 
-  const isRangeOverlapping = (rangeA, rangeB) => {
-    const aStart = Range.start(rangeA);
-    const aEnd = Range.end(rangeA);
-    const bStart = Range.start(rangeB);
-    const bEnd = Range.end(rangeB);
-
-    // The starting or ending point of A is within the range of B
-    const aStartInB =
-      (Path.isBefore(bStart.path, aStart.path) || Path.equals(bStart.path, aStart.path)) &&
-      (Path.isBefore(aStart.path, bEnd.path) || Path.equals(aStart.path, bEnd.path));
-
-    const aEndInB =
-      (Path.isBefore(bStart.path, aEnd.path) || Path.equals(bStart.path, aEnd.path)) &&
-      (Path.isBefore(aEnd.path, bEnd.path) || Path.equals(aEnd.path, bEnd.path));
-
-    // B is included by A
-    const bWithinA =
-      (Path.isBefore(aStart.path, bStart.path) || Path.equals(aStart.path, bStart.path)) &&
-      (Path.isBefore(bEnd.path, aEnd.path) || Path.equals(bEnd.path, aEnd.path));
-
-    return aStartInB || aEndInB || bWithinA;
-  };
-
-  const validateNestedStructure = (nodes) => {
-
-    const validateNode = (node) => {
-      if (!Array.isArray(node.children) || node.children.length !== 1) {
-        return false;
-      }
-      return validateNestedStructure(node.children);
-    };
-
-    for (const node of nodes) {
-      if (!node.type) continue;
-      if (['unordered_list', 'ordered_list', 'blockquote', 'list_item'].includes(node.type)) {
-        if (!validateNode(node)) {
-          return false;
-        }
-      }
-    }
-
-    return true;
-  };
-
-  const getSelectedChildren = (editor, parentNode, parentPath) => {
-    const { selection } = editor;
-    const selectedItems = [];
-
-    parentNode.children.forEach((childNode, index) => {
-      const childPath = [...parentPath, index];
-      const childRange = {
-        anchor: Editor.start(editor, childPath),
-        focus: Editor.end(editor, childPath),
-      };
-
-      // Determine whether a child node has been selected
-      if (isRangeOverlapping(selection, childRange)) {
-        // If it is a list node, recursively process its nested sub lists
-        let newChildNode = { ...childNode };
-        if (childNode.type === 'list_item' || childNode.type === 'ordered_list' || childNode.type === 'unordered_list') {
-          const nestedSelectedItems = getSelectedChildren(editor, childNode, childPath);
-          // If there are selected items in the nested list, keep the current list structure
-          // Keep only selected nested sub items
-          if (nestedSelectedItems.length > 0) {
-            selectedItems.push({
-              ...newChildNode,
-              children: nestedSelectedItems
-            });
-          }
-        } else {
-          // non list nodes
-          if (childNode.children) {
-            const nestedSelectedItems = getSelectedChildren(editor, childNode, childPath);
-            if (nestedSelectedItems.length > 0) {
-              selectedItems.push({
-                ...newChildNode,
-                children: nestedSelectedItems
-              });
-            }
-
-            return;
-          }
-          // Add non children nodes directly
-          selectedItems.push(childNode);
-        }
-      }
-    });
-    return selectedItems;
-  };
-
-  const handleSelectElements = (editor) => {
-    const { selection } = editor;
-    if (!selection || Range.isCollapsed(selection)) return [];
-
-    const selectedElements = [];
-    const blockNodes = Editor.nodes(editor, {
-      at: selection,
-      match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
-      mode: 'highest'
-    });
-
-    for (const [node, path] of blockNodes) {
-      const nodeStart = Editor.start(editor, path);
-      const nodeEnd = Editor.end(editor, path);
-
-      const nodeRange = { anchor: nodeStart, focus: nodeEnd };
-      if (!isRangeOverlapping(selection, nodeRange)) {
-        continue;
-      }
-      const selectedItems = getSelectedChildren(editor, node, path);
-      // Keep only selected items
-      if (selectedItems.length > 0) {
-        selectedElements.push([
-          {
-            ...node,
-            children: selectedItems
-          },
-          path
-        ]);
-      }
-    }
-    return selectedElements;
-  };
-
   const toggleAskAI = useCallback(() => {
     // Add marks for selection
     Editor.addMark(editor, 'sdoc_ai', true);
@@ -169,14 +45,15 @@ export default function AIModule({ editor, element, closeModule }) {
     const { scrollTop, scrollHeight } = scrollRef.current;
 
     if (!element) {
-      const SelectElements = handleSelectElements(editor);
+      const selectElements = handleSelectElements(editor);
       let content = '';
 
-      if (SelectElements) {
-        if (validateNestedStructure(SelectElements[0])) {
+      if (selectElements) {
+        if (validateNestedStructure(selectElements[0])) {
+          // list.length === 1
           content = window.getSelection().toString();
         } else {
-          SelectElements.forEach((item) => {
+          selectElements.forEach((item) => {
             content += slateToMdString(item);
           });
         }
