@@ -210,7 +210,7 @@ export const findInsertableLists = (node) => {
     const paragraph = item.children.find(child => child.type === PARAGRAPH);
     if (!paragraph) return false;
     const textNode = paragraph.children.find(child => 'text' in child);
-    return !!textNode; // 文本节点存在则有效
+    return !!textNode;
   };
 
   const traverse = (currentNode) => {
