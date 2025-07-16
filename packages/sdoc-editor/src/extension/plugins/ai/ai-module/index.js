@@ -8,6 +8,7 @@ import toaster from '../../../../components/toast';
 import context from '../../../../context';
 import processor from '../../../../slate-convert/md-to-html';
 import mdStringToSlate from '../../../../slate-convert/md-to-slate';
+import slateToMdString from '../../../../slate-convert/slate-to-md';
 import { ElementPopover } from '../../../commons';
 import DropdownMenuItem from '../../../commons/dropdown-menu-item';
 import { PARAGRAPH } from '../../../constants';
@@ -15,7 +16,7 @@ import { focusEditor, generateEmptyElement, getAboveBlockNode, getTopLevelBlockN
 import AIIcon from '../ai-icon';
 import { AI_MIN_HEIGHT, OPERATION_MENUS_CONFIG, OPERATION_TYPES } from '../constants';
 import AdjustSubMenu from './adjust-sub-menu';
-import { insertHtmlTransferredNodes, markdownTableRenderer, removeMarks } from './helpers';
+import { handleSelectElements, insertHtmlTransferredNodes, markdownTableRenderer, removeMarks, validateNestedStructure } from './helpers';
 import LangSubMenu from './lang-sub-menu';
 import TipDialog from './tip-dialog';
 
@@ -44,8 +45,18 @@ export default function AIModule({ editor, element, closeModule }) {
     const { scrollTop, scrollHeight } = scrollRef.current;
 
     if (!element) {
-      const content = window.getSelection().toString();
-      if (content) {
+      const selectElements = handleSelectElements(editor);
+      let content = '';
+
+      if (selectElements) {
+        if (validateNestedStructure(selectElements[0])) {
+          // list.length === 1
+          content = window.getSelection().toString();
+        } else {
+          selectElements.forEach((item) => {
+            content += slateToMdString(item);
+          });
+        }
         setSelectedValue(content);
       }
 
