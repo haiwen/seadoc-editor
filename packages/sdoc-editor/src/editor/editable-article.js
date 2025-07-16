@@ -188,12 +188,17 @@ const EditableArticle = ({
   const handleScrollIntoView = useCallback((editor, domRange) => {
     try {
       const { selection } = editor;
+
+      if (editor.oldSelection && Range.equals(selection, editor.oldSelection)) return;
+      editor.oldSelection = selection;
+
       // Do not scroll into view, when focus on image
       const [imageNodeEntry] = Editor.nodes(editor, {
         match: n => [IMAGE, IMAGE_BLOCK].includes(n.type),
         at: selection
       });
       if (imageNodeEntry) return;
+
       const focusedNode = Node.get(editor, selection.focus.path);
       const domNode = ReactEditor.toDOMNode(editor, focusedNode);
       if (!domNode) return;
