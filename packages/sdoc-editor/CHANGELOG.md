@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.118](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.117...@seafile/sdoc-editor@2.0.118) (2025-07-16)
+
+### Bug Fixes
+
+- sync scroll bug ([37b35b9](https://github.com/seafileltd/sea-sdoc-editor/commit/37b35b9f5961c2c28322827c972ee65c7ba4e7f9))
+
 ## [2.0.117](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.116...@seafile/sdoc-editor@2.0.117) (2025-07-16)
 
 ### Bug Fixes
