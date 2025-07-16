@@ -190,7 +190,7 @@ const EditableArticle = ({
       const { selection } = editor;
 
       if (editor.oldSelection && Range.equals(selection, editor.oldSelection)) return;
-      editor.oldSelection = selection;
+      editor.oldSelection = { ...selection };
 
       // Do not scroll into view, when focus on image
       const [imageNodeEntry] = Editor.nodes(editor, {
