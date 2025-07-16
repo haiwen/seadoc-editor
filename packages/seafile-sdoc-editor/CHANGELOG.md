@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.33](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.32...@seafile/seafile-sdoc-editor@2.0.33) (2025-07-16)
+
+### Features
+
+- add share link editor ([719d8de](https://github.com/seafileltd/sea-sdoc-editor/commit/719d8de238a375a9f9deb060c3a3a9f44733503e))
+
 ## [2.0.32](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.31...@seafile/seafile-sdoc-editor@2.0.32) (2025-07-15)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor

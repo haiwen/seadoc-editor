@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.116](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.115...@seafile/sdoc-editor@2.0.116) (2025-07-16)
+
+### Features
+
+- add share link editor ([719d8de](https://github.com/seafileltd/sea-sdoc-editor/commit/719d8de238a375a9f9deb060c3a3a9f44733503e))
+- ai translation ([1df73b5](https://github.com/seafileltd/sea-sdoc-editor/commit/1df73b5f2bdfaaab252599546a7929c495f10170))
+- feat ai translation ([f406e69](https://github.com/seafileltd/sea-sdoc-editor/commit/f406e6966340a23b647b4bfb396f91cc59244bc3))
+- feat ai translation about list ([f4f4e75](https://github.com/seafileltd/sea-sdoc-editor/commit/f4f4e751bb932d6da9afa4ccc519909a6cc54f9e))
+
 ## [2.0.115](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.114...@seafile/sdoc-editor@2.0.115) (2025-07-15)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
