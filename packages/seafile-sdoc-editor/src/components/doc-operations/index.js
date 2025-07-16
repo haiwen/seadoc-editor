@@ -12,7 +12,7 @@ import ShareOperation from './share-operation';
 
 import './style.css';
 
-const DocOperations = ({ isShowChanges, isStarred, isPublished = false, changes, handleViewChangesToggle, handleRevisionMerged, handleRevisionPublished }) => {
+const DocOperations = ({ isShowChanges, isPublished = false, changes, handleViewChangesToggle, handleRevisionMerged, handleRevisionPublished }) => {
   const isSdocRevision = context.getSetting('isSdocRevision');
   const mobileLogin = context.getSetting('mobileLogin');
   const [isEdit, setIsEdit] = useState(false);

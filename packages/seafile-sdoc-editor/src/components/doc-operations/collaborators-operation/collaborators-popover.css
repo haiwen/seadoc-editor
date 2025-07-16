@@ -35,13 +35,13 @@
 }
 
 .content-list .collaborator-details {
+  position: relative;
   height: 32px;
   line-height: 32px;
   width: 100%;
   display: flex;
   align-items: center;
   padding: 3px 12px;
-  
 }
 
 .content-list .collaborator-details:hover {
@@ -71,4 +71,38 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #212529;
+}
+
+.content-list .collaborator-details .sdocfont {
+  position: absolute;
+  right: 12px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.content-list .collaborator-details .sdocfont:hover {
+  color: #333;
+  cursor: pointer;
+}
+
+
+.content-list .collaborator-details .rename-container input {
+  box-sizing: content-box;
+  padding: 2px 3px;
+  max-width: 100%;
+  width: auto;
+  height: 22px;
+  line-height: 19px;
+  border-radius: 2px;
+  word-wrap: break-word;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+}
+
+
+.content-list .collaborator-details .rename-container input:focus {
+  background-color: #fff;
+  border-color: #1991eb;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25);
 }

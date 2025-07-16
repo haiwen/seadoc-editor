@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { SimpleEditor, SimpleViewer, EXTERNAL_EVENT, EventBus } from '@seafile/seafile-sdoc-editor';
+import { SimpleEditor, SimpleViewer, EXTERNAL_EVENT, EventBus, ShareLinkEditor } from '@seafile/seafile-sdoc-editor';
 import Home from './pages/home';
 import DiffViewer from './pages/diff-viewer';
 import SdocWikiViewer from './pages/wiki-viewer';
@@ -52,6 +52,7 @@ class App extends React.Component {
         <Route path='/sdoc-wiki-viewer' element={<SdocWikiViewer />}/>
         <Route path='/sdoc-wiki-viewer-2' element={<SdocWikiViewer2 />}/>
         <Route path='/sdoc-wiki-editor' element={<SdocWikiEditor />}/>
+        <Route path='/share-link-editor' element={<ShareLinkEditor showComment={false} collaborators={[]} />}/>
       </Routes>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import { EventBus, Tooltip, context } from '@seafile/sdoc-editor';
+import { EventBus, SocketManager, Tooltip, context } from '@seafile/sdoc-editor';
 import CollaboratorsPopover from './collaborators-popover';
 
 class CollaboratorsOperation extends React.PureComponent {
@@ -29,11 +29,13 @@ class CollaboratorsOperation extends React.PureComponent {
     const eventBus = EventBus.getInstance();
     this.unsubscribeJoinEvent = eventBus.subscribe('join-room', this.onUserJoinRoom);
     this.unsubscribeLeaveEvent = eventBus.subscribe('leave-room', this.onUserLeaveRoom);
+    this.unsubscribeUpdatedEvent = eventBus.subscribe('user-updated', this.onUserUpdated);
   }
 
   componentWillUnmount() {
     this.unsubscribeJoinEvent();
     this.unsubscribeLeaveEvent();
+    this.unsubscribeUpdatedEvent();
   }
 
   onUserJoinRoom = (userInfo) => {
@@ -55,6 +57,32 @@ class CollaboratorsOperation extends React.PureComponent {
     }
   };
 
+  onUserUpdated = (userInfo) => {
+    const { collaborators } = this.state;
+    const newCollaborators = collaborators.map(item => {
+      if (item.username === userInfo.username) {
+        item.name = userInfo.name;
+      }
+      return item;
+    });
+    this.setState({ collaborators: newCollaborators });
+  };
+
+  onRename = (newName) => {
+    const { collaborators } = this.state;
+    const currentUser = this.currentUser;
+    const socketManager = SocketManager.getInstance();
+    socketManager.sendUserUpdated(newName);
+    const newCollaborators = collaborators.map(item => {
+      if (item.username === currentUser.username) {
+        item.name = newName;
+        this.currentUser.name = newName;
+      }
+      return item;
+    });
+    this.setState({ collaborators: newCollaborators });
+  };
+
   render() {
     const { collaborators } = this.state;
     const { t } = this.props;
@@ -68,7 +96,7 @@ class CollaboratorsOperation extends React.PureComponent {
         <Tooltip target='collaborators'>
           {t('Online_members')}
         </Tooltip>
-        <CollaboratorsPopover collaborators={collaborators} />
+        <CollaboratorsPopover collaborators={collaborators} onEditUserName={this.onRename}/>
       </>
     );
   }
