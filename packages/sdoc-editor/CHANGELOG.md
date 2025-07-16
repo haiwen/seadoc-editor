@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.117](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.116...@seafile/sdoc-editor@2.0.117) (2025-07-16)
+
+### Bug Fixes
+
+- update comment editor style ([07e65d8](https://github.com/seafileltd/sea-sdoc-editor/commit/07e65d8de3eb54c56f246d5f3943542254165736))
+
 ## [2.0.116](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.115...@seafile/sdoc-editor@2.0.116) (2025-07-16)
 
 ### Features
