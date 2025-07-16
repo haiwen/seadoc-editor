@@ -16,6 +16,7 @@ class Home extends React.Component {
           <Link to='/sdoc-wiki-viewer'>Sdoc Wiki Viewer</Link>
           <Link to='/sdoc-wiki-viewer-2'>Sdoc wiki Viewer 2</Link>
           <Link to='/sdoc-wiki-editor'>Sdoc wiki editor</Link>
+          <Link to='/share-link-editor'>Share link editor</Link>
         </div>
         <div className='tip-message'>请点击上面链接，测试不同的编辑器功能</div>
       </div>

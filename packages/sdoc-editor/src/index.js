@@ -16,7 +16,7 @@ import { PluginsProvider, usePlugins } from './hooks/use-plugins';
 import withNodeId from './node-id';
 import SDocOutline from './outline';
 import { mdStringToSlate, slateToMdString, deserializeHtml, processor } from './slate-convert';
-import { withSocketIO } from './socket';
+import { withSocketIO, SocketManager } from './socket';
 import { isMac, isMobile } from './utils/common-utils';
 import { getTopLevelChanges, getMergedChanges } from './utils/diff';
 import EventBus from './utils/event-bus';
@@ -66,4 +66,5 @@ export {
   createWikiEditor,
   withNodeId,
   withSocketIO,
+  SocketManager,
 };

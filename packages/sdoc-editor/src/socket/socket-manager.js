@@ -81,6 +81,10 @@ class SocketManager {
     this.eventBus.dispatch(INTERNAL_EVENT.NEW_NOTIFICATION, notification);
   };
 
+  sendUserUpdated = (name) => {
+    this.socketClient.sendUserUpdated(name);
+  };
+
   onReceiveLocalOperations = (operations) => {
     if (this.editor.readonly) return;
 
