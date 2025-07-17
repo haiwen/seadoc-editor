@@ -170,11 +170,8 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   }, [setPosition]);
 
   const reloadImage = useCallback(() => {
-    if (imageRef.current) {
-      imageRef.current['src'] = getImageURL(data, editor);
-      setIsShowImagePlaceholder(false);
-    }
-  }, [data, editor]);
+    setIsShowImagePlaceholder(false);
+  }, []);
 
   const onImageLoaded = useCallback(() => {
     if (isImageUrlIsFromCopy(data.src) && !isCommentEditor(editor)) {
@@ -189,6 +186,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     }
 
     setIsShowImagePlaceholder(true);
+    console.log(data.src);
     // External network images do not reload after failure to load
     if (!data.src.startsWith('http')) {
       const eventBus = EventBus.getInstance();
