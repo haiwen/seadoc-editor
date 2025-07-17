@@ -170,10 +170,8 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   }, [setPosition]);
 
   const reloadImage = useCallback(() => {
-    console.log(imageRef.current);
     if (imageRef.current) {
       imageRef.current['src'] = getImageURL(data, editor);
-      console.log('adddd');
       setIsShowImagePlaceholder(false);
     }
   }, [data, editor]);
@@ -213,8 +211,6 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
       Transforms.setNodes(editor, { data: newData }, { at: path });
     }
   }, [data, editor, element]);
-
-  console.log(isShowImagePlaceholder);
 
   return (
     <>
