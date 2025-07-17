@@ -249,13 +249,16 @@ const QuickInsertBlockMenu = ({
 
     if (keyCode === Enter) {
       e.preventDefault();
+      if (currentSelectIndex === -1) return;
       const item = renderItems[currentSelectIndex];
       if (item === TABLE) {
         tableSizeRef.current.uncontrolledPopoverRef.current.toggle();
         return;
       }
-      const { disabled, onClick } = dropDownItems[item].props;
-      !disabled && onClick();
+      if (dropDownItems[item]) {
+        const { disabled, onClick } = dropDownItems[item].props;
+        !disabled && onClick();
+      }
     }
 
     if (keyCode === Esc) {
