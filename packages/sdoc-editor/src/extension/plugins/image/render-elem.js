@@ -214,6 +214,8 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     }
   }, [data, editor, element]);
 
+  console.log(isShowImagePlaceholder);
+
   return (
     <>
       {isShowImagePlaceholder && (
