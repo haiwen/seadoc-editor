@@ -192,6 +192,7 @@ export const queryCopyMoveProgressView = (taskId, interval = 300) => {
       // Reload image
       const eventBus = EventBus.getInstance();
       eventBus.dispatch(INTERNAL_EVENT.RELOAD_IMAGE);
+      console.log('xiexieni');
     } else {
       timer = setTimeout(start, interval);
     }

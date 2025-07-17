@@ -37,6 +37,7 @@ const withHtml = (editor) => {
         return;
       }
 
+      LocalStorage.setItem(RECENT_PASTE_HTML_CONTENT, data);
       insertData(data);
     }
   };
