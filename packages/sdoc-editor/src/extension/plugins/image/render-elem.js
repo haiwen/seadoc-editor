@@ -186,7 +186,6 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     }
 
     setIsShowImagePlaceholder(true);
-    console.log(data.src);
     // External network images do not reload after failure to load
     if (!data.src.startsWith('http')) {
       const eventBus = EventBus.getInstance();

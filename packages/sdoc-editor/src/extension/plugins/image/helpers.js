@@ -186,8 +186,8 @@ export const queryCopyMoveProgressView = (taskId, interval = 300) => {
   };
   const start = async () => {
     const res = await context.getCopyMoveProgressView(taskId);
-    const { data: { done } } = res;
-    if (done) {
+    const { successful } = res.data;
+    if (successful) {
       stop();
       // Reload image
       const eventBus = EventBus.getInstance();
