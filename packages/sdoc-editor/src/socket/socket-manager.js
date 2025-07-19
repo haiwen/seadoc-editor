@@ -85,6 +85,10 @@ class SocketManager {
     this.socketClient.sendUserUpdated(name);
   };
 
+  sendReloadImage = () => {
+    this.socketClient.sendReloadImage();
+  };
+
   onReceiveLocalOperations = (operations) => {
     if (this.editor.readonly) return;
 

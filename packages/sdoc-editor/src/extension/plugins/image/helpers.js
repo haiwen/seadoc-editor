@@ -4,6 +4,7 @@ import slugId from 'slugid';
 import urlJoin from 'url-join';
 import { COMMENT_EDITOR, INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
+import SocketManager from '../../../socket/socket-manager';
 import EventBus from '../../../utils/event-bus';
 import { CODE_BLOCK, ELEMENT_TYPE, IMAGE, IMAGE_BLOCK, INSERT_POSITION, PARAGRAPH, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, BLOCKQUOTE, CALL_OUT } from '../../constants';
 import { generateEmptyElement, getNodeType, isTextNode, getParentNode, focusEditor, getAboveBlockNode, generateDefaultParagraph } from '../../core';
@@ -192,6 +193,8 @@ export const queryCopyMoveProgressView = (taskId, interval = 300) => {
       // Reload image
       const eventBus = EventBus.getInstance();
       eventBus.dispatch(INTERNAL_EVENT.RELOAD_IMAGE);
+      const socketManager = SocketManager.getInstance();
+      socketManager.sendReloadImage();
     } else {
       timer = setTimeout(start, interval);
     }

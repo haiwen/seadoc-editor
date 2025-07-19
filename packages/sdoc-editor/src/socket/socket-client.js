@@ -20,6 +20,7 @@ class SocketClient {
     this.socket.on('join-room', this.onJoinRoom);
     this.socket.on('leave-room', this.onLeaveRoom);
     this.socket.on('user-updated', this.onUserUpdated);
+    this.socket.on('reload-image', this.onReloadImage);
 
     this.socket.on('update-document', this.onReceiveRemoteOperations);
 
@@ -124,6 +125,11 @@ class SocketClient {
     this.socket.emit('user-updated', { user: { ...user, name }, doc_uuid: docUuid });
   };
 
+  sendReloadImage = () => {
+    const { docUuid } = this.config;
+    this.socket.emit('reload-image', { doc_uuid: docUuid });
+  };
+
   onJoinRoom = (userInfo) => {
     serverDebug('%s joined room success.', userInfo.username);
     const socketManager = SocketManager.getInstance();
@@ -140,6 +146,12 @@ class SocketClient {
     serverDebug('%s name updated: %s', userInfo.username, userInfo.name);
     const socketManager = SocketManager.getInstance();
     socketManager.dispatchConnectState('user-updated', userInfo);
+  };
+
+  onReloadImage = () => {
+    serverDebug('Reload image by other people copy images from different repos');
+    const socketManager = SocketManager.getInstance();
+    socketManager.dispatchConnectState('reload_image');
   };
 
   /**
