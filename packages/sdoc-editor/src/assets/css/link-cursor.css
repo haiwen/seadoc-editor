@@ -1,0 +1,48 @@
+.sdoc-editor__article {
+  position: relative;
+  overflow: auto;
+}
+
+.slate-content.hide-native-cursor {
+  caret-color: transparent;
+}
+
+.custom-cursor {
+  position: absolute;
+  width: 1px;
+  height: 1.2em;
+  background-color: blue;
+  animation: blink 1s infinite;
+}
+
+.custom-cursor.link-start::after,
+.custom-cursor.next-start::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 1px;
+  background-color: blue;
+}
+
+.custom-cursor.link-end::after,
+.custom-cursor.prev-end::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 1px;
+  background-color: blue;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}

@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, Fragment, useEffect } from 'react';
-import { Editor, Node, Range, Transforms } from '@seafile/slate';
+import React, { useCallback, useMemo, Fragment, useEffect, useState } from 'react';
+import { Editor, Element, Node, Range, Text, Transforms } from '@seafile/slate';
 import { Editable, ReactEditor, Slate } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -20,6 +20,8 @@ import { getCursorPosition, getDomHeight, getDomMarginTop } from '../utils/dom-u
 import EventBus from '../utils/event-bus';
 import EventProxy from '../utils/event-handler';
 
+import '../assets/css/link-cursor.css';
+
 const EditableArticle = ({
   showComment = true,
   editor,
@@ -29,6 +31,11 @@ const EditableArticle = ({
   const { cursors } = useCursors(editor);
   const decorate = usePipDecorate(editor);
   const forceUpdate = useForceUpdate();
+  const [cursorState, setCursorState] = useState({
+    top: 0,
+    left: 0,
+    type: null, // 'link-start' | 'link-end' | 'next-start' | 'prev-end'
+  });
 
   // init eventHandler
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,6 +67,75 @@ const EditableArticle = ({
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const { selection } = editor;
+    if (!selection || !Range.isCollapsed(selection)) {
+      setCursorState({ top: 0, left: 0, type: null });
+      return;
+    }
+
+    const domSelection = window.getSelection();
+    if (!domSelection || domSelection.rangeCount === 0) {
+      setCursorState({ top: 0, left: 0, type: null });
+      return;
+    }
+
+    const range = domSelection.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    const editorEl = document.querySelector('.sdoc-editor__article');
+    if (!editorEl) {
+      setCursorState({ top: 0, left: 0, type: null });
+      return;
+    }
+    const editorRect = editorEl.getBoundingClientRect();
+    const top = rect.top - editorRect.top + editorEl.scrollTop;
+    const left = rect.left - editorRect.left + editorEl.scrollLeft;
+
+    const [node, path] = Editor.node(editor, selection.anchor.path);
+    if (!Text.isText(node)) {
+      setCursorState({ top: 0, left: 0, type: null });
+      return;
+    }
+
+    let isInLink = false;
+    for (const [ancestor] of Node.ancestors(editor, path)) {
+      if (ancestor.type === 'link') {
+        isInLink = true;
+        break;
+      }
+    }
+
+    if (isInLink) {
+      const offset = selection.anchor.offset;
+      const isStart = offset === 0;
+      const isEnd = offset === node.text.length;
+      if (!isStart && !isEnd) {
+        setCursorState({ top: 0, left: 0, type: null });
+        return;
+      }
+      setCursorState({
+        top,
+        left,
+        type: isStart ? 'link-start' : 'link-end',
+      });
+    } else {
+      const parent = Node.parent(editor, path);
+      const index = path[path.length - 1];
+      const nextSibling = index < parent.children.length - 1 ? parent.children[index + 1] : null;
+      const prevSibling = index > 0 ? parent.children[index - 1] : null;
+      const isLeftNeighborEnd = nextSibling && Element.isElement(nextSibling) && nextSibling.type === 'link' && selection.anchor.offset === node.text.length;
+      const isRightNeighborStart = prevSibling && Element.isElement(prevSibling) && prevSibling.type === 'link' && selection.anchor.offset === 0;
+
+      if (isLeftNeighborEnd) {
+        setCursorState({ top, left, type: 'prev-end' });
+      } else if (isRightNeighborStart) {
+        setCursorState({ top, left, type: 'next-start' });
+      } else {
+        setCursorState({ top: 0, left: 0, type: null });
+      }
+    }
+  }, [editor.selection]);
 
   const onKeyDown = useCallback((event) => {
 
@@ -222,7 +298,20 @@ const EditableArticle = ({
             onCompositionStart={eventProxy.onCompositionStart}
             id='sdoc-editor'
             aria-label='textbox'
+            className={`slate-content ${
+              cursorState.type ? 'hide-native-cursor' : ''
+            }`}
           />
+
+          {cursorState.type && (
+            <div
+              className={`custom-cursor ${cursorState.type}`}
+              style={{
+                top: cursorState.top,
+                left: cursorState.left,
+              }}
+            />
+          )}
         </Fragment>
         <SideToolbar />
         {showComment && (<CommentWrapper editor={editor} type="editor" />)}
