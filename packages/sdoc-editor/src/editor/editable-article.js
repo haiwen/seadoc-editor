@@ -67,6 +67,11 @@ const EditableArticle = ({
 
     eventProxy.onKeyDown(event);
 
+    const { selection } = editor;
+    if (!Range.isCollapsed(selection)) {
+      return;
+    }
+
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset', reverse: true });
@@ -183,7 +188,7 @@ const EditableArticle = ({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scrollRef]);
+  }, [scrollRef, editor]);
 
   const handleScrollIntoView = useCallback((editor, domRange) => {
     try {
