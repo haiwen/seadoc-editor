@@ -13,12 +13,10 @@ const WhiteboardMenu = ({ editor, readonly, toggle, eventBus }) => {
   const { t } = useTranslation('sdoc-editor');
 
   const onCreateFile = () => {
-    console.log('create');
     onCreateWhiteboardFile(editor);
   };
 
   const openSelectWhiteboardFileDialog = useCallback(() => {
-    console.log('insert');
     eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.WHITEBOARD, insertWhiteboard: insertWhiteboard });
     toggle && toggle();
     // eslint-disable-next-line react-hooks/exhaustive-deps
