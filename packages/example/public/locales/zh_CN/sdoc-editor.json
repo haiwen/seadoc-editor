@@ -639,5 +639,7 @@
   "Property": "属性",
   "Comment_list": "评论列表",
   "Add_Comment": "添加评论",
-  "Finish": "完成"
+  "Finish": "完成",
+  "Select_whiteboard_document": "选择白板文件",
+  "Create_new_whiteboard": "新建 exdraw 文件"
 }

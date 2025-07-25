@@ -41,6 +41,7 @@ import {
   FILE_LINK_INSET_INPUT_TEMP,
   QUICK_INSERT,
   GROUP,
+  WHITEBOARD,
 } from './element-type';
 
 export {
@@ -166,7 +167,8 @@ export const ADD_POSITION_OFFSET_TYPE = [
 export const FILE_TYPE = {
   [FILE_LINK]: 'file',
   [SDOC_LINK]: 'sdoc',
-  [VIDEO]: 'video'
+  [VIDEO]: 'video',
+  [WHITEBOARD]: 'exdraw'
 };
 
 export const FILEEXT_TYPE = {
@@ -203,6 +205,7 @@ export const SUPPORTED_SIDE_OPERATION_TYPE = [
   CALL_OUT,
   IMAGE_BLOCK,
   VIDEO,
+  WHITEBOARD,
 ];
 
 export const MOUSE_ENTER_EVENT_DISABLED_MAP = {
@@ -242,6 +245,7 @@ export const ROOT_ELEMENT_TYPES = [
   CODE_BLOCK,
   IMAGE_BLOCK,
   VIDEO,
+  WHITEBOARD,
 ];
 
 export {
@@ -285,5 +289,6 @@ export {
   FILE_LINK_INSET_INPUT_TEMP,
   QUICK_INSERT,
   GROUP,
+  WHITEBOARD,
 };
 

@@ -639,5 +639,7 @@
   "Comment_list": "Comment list",
   "Add_Comment": "Add Comment",
   "Finish": "Finish",
-  "More_fluent": "More fluent"
+  "More_fluent": "More fluent",
+  "Select_whiteboard_document": "Select whiteboard document",
+  "Create_new_whiteboard": "Create new whiteboard"
 }

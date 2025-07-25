@@ -9,7 +9,7 @@ import {
   ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, CHECK_LIST_ITEM, TABLE, CODE_BLOCK, BLOCKQUOTE,
   LIST_ITEM_CORRELATION_TYPE, ADD_POSITION_OFFSET_TYPE, INSERT_POSITION, ELEMENT_TYPE, CALL_OUT,
   SIDE_TRANSFORM_MENUS_CONFIG, LIST_ITEM_SUPPORTED_TRANSFORMATION, HEADERS, VIDEO,
-  MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK
+  MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK, WHITEBOARD
 } from '../../constants';
 import { generateEmptyElement, findPath, isMultiLevelList, isTopLevelListItem, getNode, focusEditor, getAboveNode, getTopLevelBlockNode } from '../../core';
 import { setBlockQuoteType } from '../../plugins/blockquote/helpers';
@@ -241,7 +241,7 @@ export const getTopValue = (editor, dom, containerDom, slateNode) => {
 };
 
 export const isNotSupportTransform = (node) => {
-  if (node.type && [CODE_BLOCK, TABLE, VIDEO].includes(node.type)) {
+  if (node.type && [CODE_BLOCK, TABLE, VIDEO, WHITEBOARD].includes(node.type)) {
     return true;
   }
   return false;

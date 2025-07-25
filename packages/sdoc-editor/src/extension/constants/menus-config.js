@@ -31,6 +31,7 @@ import {
   FILE_LINK,
   PARAGRAPH,
   CALL_OUT,
+  WHITEBOARD,
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -122,6 +123,11 @@ export const MENUS_CONFIG_MAP = {
     id: `sdoc_${VIDEO}`,
     iconClass: 'sdocfont sdoc-video',
     text: 'Video'
+  },
+  [WHITEBOARD]: {
+    id: `sdoc_${WHITEBOARD}`,
+    iconClass: 'sdocfont sdoc-document',
+    text: 'Whiteboard'
   },
   [TABLE]: {
     id: `sdoc_${TABLE}`,

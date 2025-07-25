@@ -11,7 +11,7 @@ import LocalFiles from './local-files';
 
 import './index.css';
 
-const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallback, insertVideoCallback }) => {
+const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallback, insertVideoCallback, insertWhiteboardFile }) => {
   const { t } = useTranslation('sdoc-editor');
   const [currentSelectedFile, setCurrentSelectedFile] = useState(null);
   const [temSearchContent, setTemSearchContent] = useState('');
@@ -29,6 +29,9 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
     case ELEMENT_TYPE.VIDEO:
       modalTitle = 'Select_video_file';
       break;
+    case ELEMENT_TYPE.WHITEBOARD:
+      modalTitle = 'Select_whiteboard_document';
+      break;
     default:
       break;
   }
@@ -40,6 +43,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
   const insertFile = useCallback((fileInfo) => {
     const { insertFileLinkCallback, insertSdocFileLinkCallback } = insertLinkCallback || {};
     const { insertVideo } = insertVideoCallback || {};
+    const { insertWhiteboard } = insertWhiteboardFile || {};
     switch (dialogType) {
       case ELEMENT_TYPE.FILE_LINK:
         insertFileLinkCallback && insertFileLinkCallback(editor, fileInfo.name, fileInfo.file_uuid);
@@ -55,10 +59,13 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
         const encodedUrl = encodeURI(url);
         insertVideo && insertVideo(editor, [{ name: fileInfo.name }], [encodedUrl]);
         break;
+      case ELEMENT_TYPE.WHITEBOARD:
+        insertWhiteboard && insertWhiteboard(editor, fileInfo.name, fileInfo.path);
+        break;
       default:
         break;
     }
-  }, [insertLinkCallback, insertVideoCallback, dialogType, editor]);
+  }, [insertLinkCallback, insertVideoCallback, insertWhiteboardFile, dialogType, editor]);
 
   const onSubmit = useCallback(() => {
     if (!currentSelectedFile) return;
@@ -68,6 +75,13 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
 
     // Insert video element in sdoc
     if (dialogType === ELEMENT_TYPE.VIDEO) {
+      insertFile(fileInfo);
+      closeDialog();
+      return;
+    }
+
+    // Insert whiteboard file in sdoc
+    if (dialogType === ELEMENT_TYPE.WHITEBOARD) {
       insertFile(fileInfo);
       closeDialog();
       return;

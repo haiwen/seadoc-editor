@@ -148,7 +148,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
               </div>
             </div>
           )}
-          {['file', 'video'].includes(type) && (
+          {['file', 'video', 'exdraw'].includes(type) && (
             <div className={classnames('sdoc-file-info', { 'active': selected })} onClick={(e) => {
               onSelectFile(e, item);
             }}>

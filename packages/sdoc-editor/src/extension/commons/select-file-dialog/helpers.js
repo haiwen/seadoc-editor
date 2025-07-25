@@ -23,6 +23,11 @@ export const getSdocFileIcon = () => {
   return `${server}/media/img/file/256/sdoc.png`;
 };
 
+export const whiteboardFileIcon = () => {
+  const server = context.getSetting('serviceUrl');
+  return `${server}/media/img/file/256/draw.png`;
+};
+
 export const getFileTypeIcon = (fileType) => {
   const imgResource = ['css', 'draw', 'excel', 'md', 'music', 'pdf', 'pic', 'ppt', 'psd', 'sdoc', 'txt', 'video', 'zip', 'word'];
   if (imgResource.includes(fileType)) {

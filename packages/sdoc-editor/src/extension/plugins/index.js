@@ -21,6 +21,7 @@ import TablePlugin from './table';
 import TextAlignPlugin from './text-align';
 import TextPlugin from './text-style';
 import VideoPlugin from './video';
+import WhiteboardPlugin from './whiteboard';
 import WikiLinkPlugin from './wiki-link';
 
 const Plugins = [
@@ -46,6 +47,7 @@ const Plugins = [
   SearchReplacePlugin,
   QuickInsertPlugin,
   GroupPlugin,
+  WhiteboardPlugin,
 ];
 
 const WikiPlugins = [
@@ -93,4 +95,5 @@ export {
   WikiPlugins,
   WikiLinkPlugin,
   GroupPlugin,
+  WhiteboardPlugin,
 };

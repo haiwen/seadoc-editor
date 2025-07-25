@@ -12,6 +12,7 @@ import LinkMenu from '../../../plugins/link/menu';
 import SdocLinkMenu from '../../../plugins/sdoc-link/menu';
 import TableMenu from '../../../plugins/table/menu/table-menu';
 import VideoMenu from '../../../plugins/video/menu';
+import WhiteboardMenu from '../../../plugins/whiteboard/menu';
 
 import './index.css';
 
@@ -88,6 +89,7 @@ const InsertToolbar = ({
             <ImageMenu { ...props } />
             <TableMenu { ...props } />
             <VideoMenu { ...props } />
+            <WhiteboardMenu { ...props } />
             <LinkMenu { ...props } />
             <CodeBlockMenu { ...props } />
             <div className="sdoc-dropdown-menu-divider"></div>
