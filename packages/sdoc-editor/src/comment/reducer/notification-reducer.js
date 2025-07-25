@@ -17,7 +17,7 @@ export const notificationReducer = (state, action) => {
     case DOC_NOTIFICATION_REDUCER_TYPE.FETCHED: {
       const notifications = action.payload;
       let notificationsMap = {};
-      notifications.forEach(n => {
+      notifications?.forEach(n => {
         const newNotification = new Notification(n);
         notificationsMap[newNotification.key] = newNotification;
       });
