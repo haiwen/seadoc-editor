@@ -57,7 +57,13 @@ export default function AIModule({ editor, element, closeModule }) {
             content += slateToMdString(item);
           });
         }
-        setSelectedValue(content);
+
+        // Add paragraph symbol for selected content
+        let newContent = content;
+        if (content.includes('\n')) {
+          newContent = content.replace(/\n/g, '\n\n');
+        }
+        setSelectedValue(newContent);
       }
 
       const domSelection = window.getSelection();
@@ -112,7 +118,11 @@ export default function AIModule({ editor, element, closeModule }) {
 
     const content = Node.string(element);
     if (content) {
-      setSelectedValue(content);
+      let newContent = content;
+      if (content.includes('\n')) {
+        newContent = content.replace(/\n/g, '\n\n');
+      }
+      setSelectedValue(newContent);
     }
 
     const needPaddingBottomHeight = scrollTop + slateRect.bottom + AI_MIN_HEIGHT - scrollHeight;
