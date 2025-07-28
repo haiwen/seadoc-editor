@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.127](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.126...@seafile/sdoc-editor@2.0.127) (2025-07-28)
+
+### Bug Fixes
+
+- resolve selected content tansfer style ([65c5ec8](https://github.com/seafileltd/sea-sdoc-editor/commit/65c5ec860c088b040663756a15d07ec8c3e7acfb))
+- **slash:** resolve compatible browers ([6fa2a02](https://github.com/seafileltd/sea-sdoc-editor/commit/6fa2a02d94c628641fe881f6516fea265098d276))
+
+### Features
+
+- feat link element cursor ([ca7b9d5](https://github.com/seafileltd/sea-sdoc-editor/commit/ca7b9d5d0187de2e7e00c924b1d9be96c6e8eaa9))
+- real-time comment ([7dd36bd](https://github.com/seafileltd/sea-sdoc-editor/commit/7dd36bd2816b7d06de84670c453563cd46b70250))
+
 ## [2.0.126](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.125...@seafile/sdoc-editor@2.0.126) (2025-07-23)
 
 ### Bug Fixes
