@@ -282,9 +282,9 @@ const QuickInsertBlockMenu = ({
 
   const onHandleInputFocus = useCallback((isFocus) => {
     if (inputWrapperRef.current) {
-      queueMicrotask(() => {
+      setTimeout(() => {
         isFocus ? inputWrapperRef.current.focus() : inputWrapperRef.current.blur();
-      });
+      }, 50);
     }
   }, []);
 
