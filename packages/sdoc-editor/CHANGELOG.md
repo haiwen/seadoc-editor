@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.128](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.127...@seafile/sdoc-editor@2.0.128) (2025-07-29)
+
+### Bug Fixes
+
+- reconnect ping timeout bug ([9127d5d](https://github.com/seafileltd/sea-sdoc-editor/commit/9127d5ddf758714047639ceb30db9c0d7d5a241d))
+
 ## [2.0.127](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.126...@seafile/sdoc-editor@2.0.127) (2025-07-28)
 
 ### Bug Fixes
