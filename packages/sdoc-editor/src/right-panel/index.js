@@ -49,6 +49,18 @@ const RightPanel = ({ editor }) => {
 
   useEffect(() => {
     const isShowGlobalComments = displayPluginName === 'sdoc-comment' ? true : false;
+    const commentBox = document.querySelector('.sdoc-content-right-panel-wrapper');
+    if (isShowGlobalComments){
+      const editorEl = document.querySelector('#sdoc-scroll-container');
+      commentBox?.classList.add('with-comment');
+      const commentWidth = commentBox?.offsetWidth;
+      editorEl.scrollTo({
+        left: commentWidth + 36,
+        behavior: 'smooth'
+      });
+    } else {
+      commentBox?.classList.remove('with-comment');
+    }
     const settings = LocalStorage.getItem(SDOC_STORAGE) || {};
     LocalStorage.setItem(SDOC_STORAGE, { ...settings, isShowGlobalComments });
     const eventBus = EventBus.getInstance();

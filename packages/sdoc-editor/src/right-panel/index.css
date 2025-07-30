@@ -5,6 +5,9 @@
   min-width: 360px;
   position: relative;
   right: 0;
+  transform: translate(100%);
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
 }
 
 .sdoc-content-right-panel-wrapper .sdoc-content-right-panel {
@@ -12,4 +15,9 @@
   height: 100%;
   overflow: hidden;
   border-left: 1px solid #d8d8d8;
+}
+
+.sdoc-content-right-panel-wrapper.with-comment {
+  transform: translate(0);
+  opacity: 1;
 }
