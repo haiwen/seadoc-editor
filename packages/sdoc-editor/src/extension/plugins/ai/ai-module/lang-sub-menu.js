@@ -15,17 +15,17 @@ const LangSubMenu = ({ target, onTranslateClick }) => {
     onTranslateClick('zh-cn');
   }, [onTranslateClick]);
 
-  // const onFrClick = useCallback(() => {
-  //   onTranslateClick('fr');
-  // }, [onTranslateClick]);
+  const onFrClick = useCallback(() => {
+    onTranslateClick('fr');
+  }, [onTranslateClick]);
 
-  // const onDeClick = useCallback(() => {
-  //   onTranslateClick('de');
-  // }, [onTranslateClick]);
+  const onDeClick = useCallback(() => {
+    onTranslateClick('de');
+  }, [onTranslateClick]);
 
-  // const onRuClick = useCallback(() => {
-  //   onTranslateClick('ru');
-  // }, [onTranslateClick]);
+  const onItClick = useCallback(() => {
+    onTranslateClick('it');
+  }, [onTranslateClick]);
 
   return (
     <UncontrolledPopover
@@ -38,11 +38,11 @@ const LangSubMenu = ({ target, onTranslateClick }) => {
       fade={false}
     >
       <div className="sdoc-dropdown-menu-container">
-        <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.EN} onClick={onEnClick} />
         <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.ZH_CN} onClick={onZhcnClick} />
-        {/* <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.FR} onClick={onFrClick} /> */}
-        {/* <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.DE} onClick={onDeClick} /> */}
-        {/* <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.RU} onClick={onRuClick} /> */}
+        <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.EN} onClick={onEnClick} />
+        <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.FR} onClick={onFrClick} />
+        <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.DE} onClick={onDeClick} />
+        <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.IT} onClick={onItClick} />
       </div>
     </UncontrolledPopover>
   );
