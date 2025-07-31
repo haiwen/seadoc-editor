@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.46](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.45...@seafile/seafile-sdoc-editor@2.0.46) (2025-07-31)
+
+### Features
+
+- **ai:** add french, italian, german translate ([fb50cf5](https://github.com/seafileltd/sea-sdoc-editor/commit/fb50cf581c54d879e7c0079b25a5093de901879e))
+
 ## [2.0.45](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.44...@seafile/seafile-sdoc-editor@2.0.45) (2025-07-29)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
