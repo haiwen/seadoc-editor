@@ -122,10 +122,10 @@ export const LANG_MENU_CONFIG = {
     text: 'French',
     iconClass: 'sdocfont sdoc-ai-translate',
   },
-  RU: {
-    id: 'ru',
-    type: 'ru',
-    text: 'Russian',
+  IT: {
+    id: 'it',
+    type: 'it',
+    text: 'Italian',
     iconClass: 'sdocfont sdoc-ai-translate',
   },
 };
