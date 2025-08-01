@@ -640,6 +640,6 @@
   "Comment_list": "评论列表",
   "Add_Comment": "添加评论",
   "Finish": "完成",
-  "Select_whiteboard_document": "选择白板文件",
-  "Create_new_whiteboard": "新建 exdraw 文件"
+  "Select_Excalidraw_document": "选择 Excalidraw 文件",
+  "Create_new_excalidraw": "新建 Excalidraw 文件"
 }

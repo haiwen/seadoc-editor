@@ -30,7 +30,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
       modalTitle = 'Select_video_file';
       break;
     case ELEMENT_TYPE.WHITEBOARD:
-      modalTitle = 'Select_whiteboard_document';
+      modalTitle = 'Select_Excalidraw_document';
       break;
     default:
       break;
