@@ -257,7 +257,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
             <EditorContent docValue={slateValue} showOutline={false} editor={validEditor} showComment={false}>
               <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={false} />
             </EditorContent>
-            {isShowHeaderToolbar && <HeaderToolbar editor={validEditor} />}
+            {isShowHeaderToolbar && <HeaderToolbar editor={validEditor} isEdit={isEdit} />}
           </ColorProvider>
         </EditorContainer>
         <InsertElementDialog editor={validEditor} />
