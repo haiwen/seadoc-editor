@@ -8,7 +8,7 @@ import EventBus from '../../../utils/event-bus';
 import './index.css';
 
 const Whiteboard = ({ editor, element }) => {
-  const { filePath, repoID, title, link } = element;
+  const { file_path, repo_id, title, link } = element;
   const whiteboardRef = useRef();
   const isSelected = useSelected();
 
@@ -44,7 +44,7 @@ const Whiteboard = ({ editor, element }) => {
   const handleDoubleClick = (event) => {
     event.preventDefault();
     const siteRoot = context.getSetting('siteRoot');
-    const url = `${siteRoot}lib/${repoID}/file${filePath}`;
+    const url = `${siteRoot}lib/${repo_id}/file${file_path}`;
     window.open(url, '_blank');
     return;
   };

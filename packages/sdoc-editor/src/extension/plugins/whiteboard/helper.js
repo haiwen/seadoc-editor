@@ -45,9 +45,9 @@ export const generateWhiteboardNode = (repoID, filename = '', filePath, exdrawRe
   const whiteboardNode = {
     id: slugid.nice(),
     type: WHITEBOARD,
-    repoID: repoID,
+    repo_id: repoID,
     title: filename,
-    filePath: filePath,
+    file_path: filePath,
     link: exdrawReadOnlyLink,
     children: [{
       id: slugid.nice(),
