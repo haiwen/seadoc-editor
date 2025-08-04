@@ -26,6 +26,7 @@ const InsertElementDialog = ({ editor }) => {
   const [validEditor, setValidEditor] = useState(editor);
   const [linkTitle, setLinkTitle] = useState('');
   const [handleSubmit, setHandleSubmit] = useState(() => void 0);
+  const [insertWhiteboardFile, setInsertWhiteboardFile] = useState(null);
   const [data, setData] = useState({});
   const { t } = useTranslation('sdoc-editor');
 
@@ -83,6 +84,7 @@ const InsertElementDialog = ({ editor }) => {
     insertFileLinkCallback,
     insertSdocFileLinkCallback,
     insertVideo,
+    insertWhiteboard,
     editor: paramEditor,
     linkTitle, // link shortcut wrapping link
     handleSubmit,
@@ -96,6 +98,7 @@ const InsertElementDialog = ({ editor }) => {
       insertSdocFileLinkCallback,
       insertFileLinkCallback
     });
+    setInsertWhiteboardFile({ insertWhiteboard });
     setInsertVideoCallback({ insertVideo });
     setLinkTitle(linkTitle);
     setHandleSubmit(handleSubmit);
@@ -121,6 +124,7 @@ const InsertElementDialog = ({ editor }) => {
     setDialogType('');
     setInsertLinkCallback(null);
     setInsertVideoCallback(null);
+    setInsertWhiteboardFile(null);
     setValidEditor(null);
     setLinkTitle('');
     setData('');
@@ -164,6 +168,15 @@ const InsertElementDialog = ({ editor }) => {
         closeDialog,
       };
       return (<SelectFileDialog {...fileLinkProps} />);
+    }
+    case ELEMENT_TYPE.WHITEBOARD: {
+      const whiteboardProps = {
+        editor: validEditor,
+        dialogType,
+        insertWhiteboardFile,
+        closeDialog,
+      };
+      return (<SelectFileDialog {...whiteboardProps} />);
     }
     case ELEMENT_TYPE.VIDEO: {
       const videoProps = {

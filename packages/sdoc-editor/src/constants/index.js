@@ -47,6 +47,8 @@ export const INTERNAL_EVENT = {
   CREATE_SDOC_FILE: 'create_sdoc_file',
   CREATE_WIKI_PAGE: 'create_wiki_page',
   IMAGE_COLUMN_TOGGLE: 'Image_column_toggle',
+  CREATE_WHITEBOARD_FILE: 'create_whiteboard_file',
+  GENERATE_EXDRAW_READ_ONLY_LINK: 'generate_exdraw_read_only_link',
 };
 
 export const PAGE_EDIT_AREA_WIDTH = 672; // 672 = 794 - 2[borderLeft + borderRight] - 120[paddingLeft + paddingRight]

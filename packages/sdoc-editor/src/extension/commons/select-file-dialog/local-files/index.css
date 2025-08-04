@@ -36,6 +36,7 @@
   left: 0;
 }
 
+.sdoc-file-icon-container .whiteboard-file-img,
 .sdoc-file-icon-container .video-file-img,
 .sdoc-file-icon-container .sdoc-file-img {
   position: absolute;
@@ -96,6 +97,7 @@
   white-space: nowrap;
 }
 
+.sdoc-folder-container.sdoc-folder-search-results .sdoc-file-info .sdoc-file-icon-container .whiteboard-file-img,
 .sdoc-folder-container.sdoc-folder-search-results .sdoc-file-info .sdoc-file-icon-container .sdoc-file-img {
   width: 36px;
   height: 36px;
