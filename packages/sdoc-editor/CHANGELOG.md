@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.131](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.130...@seafile/sdoc-editor@2.0.131) (2025-08-04)
+
+### Bug Fixes
+
+- optimize code ([d1c45bd](https://github.com/seafileltd/sea-sdoc-editor/commit/d1c45bd7e92c87c795cbd034406ae46ae5b648c7))
+- resolve object key ([3932df5](https://github.com/seafileltd/sea-sdoc-editor/commit/3932df50409fbaa21effd49b00636ae0bc977ace))
+- resolve translation ([a2e5063](https://github.com/seafileltd/sea-sdoc-editor/commit/a2e5063e0f6dc73dbab3dcd8eebf4ceec0ab56da))
+
+### Features
+
+- add iframe ([1e0d53b](https://github.com/seafileltd/sea-sdoc-editor/commit/1e0d53b6543ad866092cfcdd749a69c410202bf9))
+- add whiteboard elemet ([46a17b4](https://github.com/seafileltd/sea-sdoc-editor/commit/46a17b403db7948eee61c734c22bd32aabcfe65b))
+- update translation ([33147ed](https://github.com/seafileltd/sea-sdoc-editor/commit/33147edf3d811716fb29c01e2025ed53d0ed66b8))
+
 ## [2.0.130](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.129...@seafile/sdoc-editor@2.0.130) (2025-08-04)
 
 ### Bug Fixes
