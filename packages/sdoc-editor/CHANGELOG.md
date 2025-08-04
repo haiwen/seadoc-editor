@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.130](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.129...@seafile/sdoc-editor@2.0.130) (2025-08-04)
+
+### Bug Fixes
+
+- the last line of text is not fully displayed ([3d3d4a7](https://github.com/seafileltd/sea-sdoc-editor/commit/3d3d4a75d80b623fc1a678866aebc7e7593fecb8))
+
 ## [2.0.129](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.128...@seafile/sdoc-editor@2.0.129) (2025-07-31)
 
 ### Features
