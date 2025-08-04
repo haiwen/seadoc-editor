@@ -18,11 +18,11 @@ import TextAlignMenu from '../../plugins/text-align/menu';
 import TextStyleMenuList from '../../plugins/text-style/menu';
 import InsertToolbar from './insert-toolbar';
 
-const HeaderToolbar = ({ editor, readonly = false }) => {
+const HeaderToolbar = ({ editor, readonly = false, isEdit }) => {
   useSelectionUpdate();
   const isSelectTableCell = getSelectedNodeByType(editor, TABLE_CELL);
 
-  if (isMobile) {
+  if (isMobile && isEdit) {
     return (
       <div className='sdoc-editor-toolbar'>
         <MenuGroup>
