@@ -128,6 +128,17 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
 
   const commentEditorPlaceholder = !activeCommentGroup ? t('Enter_comment_shift_enter_for_new_line_Enter_to_send') : t('Enter_reply_shift_Enter_for_new_line_Enter_to_send');
 
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    if (showEditor) {
+      // Scroll height 63 = 99 - 36. 99 is spread height and 36.4 is default height of input editor
+      contentRef.current.scrollTop += 63;
+    } else {
+      contentRef.current.scrollTop -= 63;
+    }
+  }, [showEditor]);
+
   return (
     <div className="sdoc-comment-drawer">
       <div className="comments-panel-wrapper">
