@@ -50,12 +50,16 @@ const RightPanel = ({ editor }) => {
   useEffect(() => {
     const isShowGlobalComments = displayPluginName === 'sdoc-comment' ? true : false;
     const commentBox = document.querySelector('.sdoc-content-right-panel-wrapper');
-    const editorEl = document.querySelector('#sdoc-scroll-container');
+    const editorEl = document.querySelector('.sdoc-scroll-container');
     const commentWidth = commentBox?.offsetWidth;
-    editorEl.scrollTo({
-      left: commentWidth + 36,
-      behavior: 'smooth'
-    });
+    commentBox?.classList.add('open');
+    setTimeout(() => {
+      editorEl.scrollTo({
+        left: commentWidth + 36,
+        behavior: 'smooth'
+      });
+    }, 300);
+
     const settings = LocalStorage.getItem(SDOC_STORAGE) || {};
     LocalStorage.setItem(SDOC_STORAGE, { ...settings, isShowGlobalComments });
     const eventBus = EventBus.getInstance();
