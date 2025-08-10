@@ -5,7 +5,12 @@
   min-width: 360px;
   position: relative;
   right: 0;
-  animation: rightdrawer .3s 1ms;
+  margin-right: -360px;
+  transition: margin-right .3s ease-in-out;
+}
+
+.sdoc-content-right-panel-wrapper.open {
+  margin-right: 0;
 }
 
 .sdoc-content-right-panel-wrapper .sdoc-content-right-panel {
@@ -13,14 +18,4 @@
   height: 100%;
   overflow: hidden;
   border-left: 1px solid #d8d8d8;
-}
-
-@keyframes rightdrawer {
-  0% {
-    transform: translate(100%);
-  }
-
-  100% {
-    transform: translate(0);
-  }
 }
