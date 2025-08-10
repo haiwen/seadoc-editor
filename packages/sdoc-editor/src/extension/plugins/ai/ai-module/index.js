@@ -49,7 +49,7 @@ export default function AIModule({ editor, element, closeModule }) {
       let content = '';
 
       if (selectElements) {
-        if (validateNestedStructure(selectElements[0])) {
+        if (selectElements.length === 1 && validateNestedStructure(selectElements[0])) {
           // list.length === 1
           content = window.getSelection().toString();
         } else {
