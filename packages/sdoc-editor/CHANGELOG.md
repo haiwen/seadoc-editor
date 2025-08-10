@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.134](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.133...@seafile/sdoc-editor@2.0.134) (2025-08-10)
+
+### Features
+
+- keep the list style after AI translation ([2947c1f](https://github.com/seafileltd/sea-sdoc-editor/commit/2947c1f29b10f8c1348eae8002aedd358298ee42))
+
 ## [2.0.133](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.132...@seafile/sdoc-editor@2.0.133) (2025-08-07)
 
 ### Bug Fixes
