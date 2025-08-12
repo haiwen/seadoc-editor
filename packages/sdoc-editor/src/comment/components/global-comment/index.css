@@ -321,6 +321,6 @@
   font-weight: unset;
 }
 
-.sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper .comment-item:not(:last-child){
+.sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper .comment-item:not(:last-child) {
   margin-bottom: 16px;
 }

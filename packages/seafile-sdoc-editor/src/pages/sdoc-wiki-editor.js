@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, Fragment } from 'react';
 import { withTranslation } from 'react-i18next';
-import { context, WIKI_EDITOR, WIKI_EDITOR_EDIT_AREA_WIDTH, WikiEditor, createWikiEditor, withNodeId, withSocketIO } from '@seafile/sdoc-editor';
+import { context, WIKI_EDITOR, WIKI_EDITOR_EDIT_AREA_WIDTH, WikiEditor, createWikiEditor, withNodeId, withSocketIO, CollaboratorsProvider, PluginsProvider, CommentContextProvider } from '@seafile/sdoc-editor';
 import PropTypes from 'prop-types';
 import ErrorBoundary from '../components/error-boundary';
 
@@ -13,7 +13,7 @@ const propTypes = {
   scrollRef: PropTypes.object.isRequired
 };
 
-const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef }) => {
+const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collaborators, showComment, isShowRightPanel, setEditor }) => {
 
   context.initApi();
 
@@ -38,6 +38,13 @@ const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef }) => {
   }, [docUuid]);
 
   useEffect(() => {
+    if (setEditor && validEditor && isShowRightPanel ) {
+      validEditor.editorType = WIKI_EDITOR;
+      setEditor(validEditor);
+    }
+  }, [setEditor, validEditor, isShowRightPanel]);
+
+  useEffect(() => {
     if (isWikiReadOnly) return;
     validEditor.openConnection();
     return () => {
@@ -45,15 +52,26 @@ const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef }) => {
     };
   }, [isWikiReadOnly, validEditor]);
 
+  // If you don't display comment, use Fragment to replace CommentProvider
+  const WithCommentProvider = showComment ? CommentContextProvider : Fragment;
+
   return (
     <ErrorBoundary>
-      <WikiEditor
-        document={document}
-        docUuid={docUuid}
-        editor={validEditor}
-        isWikiReadOnly={isWikiReadOnly}
-        scrollRef={scrollRef}
-      />
+      <CollaboratorsProvider collaborators={collaborators}>
+        <PluginsProvider plugins={[]} showComment={showComment}>
+          <WithCommentProvider {...(showComment && { editor: validEditor })}>
+            <WikiEditor
+              document={document}
+              docUuid={docUuid}
+              editor={validEditor}
+              isWikiReadOnly={isWikiReadOnly}
+              scrollRef={scrollRef}
+              showComment={showComment}
+              isShowRightPanel={isShowRightPanel}
+            />
+          </WithCommentProvider>
+        </PluginsProvider>
+      </CollaboratorsProvider>
     </ErrorBoundary>
   );
 };

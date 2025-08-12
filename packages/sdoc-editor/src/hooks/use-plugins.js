@@ -5,11 +5,14 @@ import { PLUGIN_DISPLAY_TYPE } from '../constants';
 
 const PluginsContext = React.createContext(null);
 
-export const PluginsProvider = ({ showComment, plugins: propsPlugins, children }) => {
+export const PluginsProvider = ({ showComment, plugins: propsPlugins, children, setIsShowRightPanel }) => {
   const [displayName, setDisplayName] = useState('');
 
   const closePlugin = useCallback(() => {
     setDisplayName('');
+    // Deal with comment component in wiki
+    setIsShowRightPanel && setIsShowRightPanel(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const plugins = useMemo(() => {

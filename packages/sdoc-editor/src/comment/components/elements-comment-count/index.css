@@ -9,6 +9,10 @@
   color: #999;
 }
 
+.sdoc-comment-container .comment-container-right.in-wiki .element-comments-count {
+  left: -100px;
+}
+
 .sdoc-comment-container .comment-container-right .element-comments-count:hover {
   color: #333;
   cursor: pointer;

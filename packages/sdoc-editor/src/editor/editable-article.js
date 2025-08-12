@@ -26,7 +26,8 @@ const EditableArticle = ({
   showComment = true,
   editor,
   slateValue,
-  updateSlateValue
+  updateSlateValue,
+  isShowCommentPanelInWiki
 }) => {
   const { cursors } = useCursors(editor);
   const decorate = usePipDecorate(editor);
@@ -291,7 +292,7 @@ const EditableArticle = ({
 
   return (
     <Slate editor={editor} value={slateValue} onChange={updateSlateValue}>
-      <ArticleContainer editor={editor}>
+      <ArticleContainer editor={editor} isShowCommentPanelInWiki={isShowCommentPanelInWiki}>
         <Fragment>
           {!isMobile && <ContextToolbar />}
           <SetNodeToDecorations />

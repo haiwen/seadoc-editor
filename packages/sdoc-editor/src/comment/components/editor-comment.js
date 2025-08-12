@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Editor } from '@seafile/slate';
 import classNames from 'classnames';
-import { INTERNAL_EVENT } from '../../constants';
+import { INTERNAL_EVENT, WIKI_EDITOR } from '../../constants';
 import { removeMarks } from '../../extension/plugins/ai/ai-module/helpers';
 import { useSelectionElement } from '../../hooks/use-selection-element';
 import useSelectionUpdate from '../../hooks/use-selection-update';
@@ -23,6 +23,7 @@ const EditorComment = ({ editor }) => {
   const commentedDomRef = useRef(null);
 
   const hiddenComment = useCallback(() => {
+    console.log(999);
     setCommentDetail({});
     setIsShowComments(false);
     setIsContextComment(false);
@@ -86,14 +87,17 @@ const EditorComment = ({ editor }) => {
   // Comments are updated to modify the current comment
   useEffect(() => {
     if (isContextComment && activeElementIds) {
+      console.log(2, isContextComment, activeElementIds);
       const unresolvedComments = element_comments_map[activeElementIds[0].element.id].filter(item => !item.resolved);
       if (unresolvedComments.length === 0) {
+        console.log(99);
         setIsShowComments(false);
       }
     }
     if (activeElementIds && !Array.isArray(activeElementIds)) {
       const unresolvedComments = element_comments_map[activeElementIds.id].filter(item => !item.resolved);
       if (unresolvedComments.length === 0) {
+        console.log(9);
         setIsShowComments(false);
       }
     }
@@ -150,7 +154,7 @@ const EditorComment = ({ editor }) => {
   return (
     <div className="sdoc-comment-container">
       <div className="comment-container-main"></div>
-      <div className={classNames('comment-container-right', { 'isContextComment': isContextComment })}>
+      <div className={classNames('comment-container-right', { 'is-context-comment': isContextComment, 'in-wiki': editor.editorType === WIKI_EDITOR })}>
         <ElementsCommentCount
           elementCommentsMap={element_comments_map}
           activeElementIds={activeElementIds}
