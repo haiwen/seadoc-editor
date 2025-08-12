@@ -12,7 +12,7 @@ const GlobalCommentEditor = ({ isScrollDisplayed, globalCommentContent, type, in
     type,
     userInfo: context.getUserInfo(),
     pluginName: 'sdoc',
-    className: 'sdoc-doc-comment-editor 11111',
+    className: 'sdoc-doc-comment-editor',
     hiddenUserInfo: true,
     content: globalCommentContent,
     insertContent: insertDocComment,
