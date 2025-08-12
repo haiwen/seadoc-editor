@@ -4,6 +4,7 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap
 import { SeafileCommentEditor } from '@seafile/comment-editor';
 import dayjs from 'dayjs';
 import context from '../../context';
+import { useCollaborators } from '../../hooks/use-collaborators';
 import processor from '../../slate-convert/md-to-html';
 import { useParticipantsContext } from '../hooks/use-participants';
 import CommentDeletePopover from './comment-delete-popover';
@@ -17,7 +18,8 @@ const CommentItemReply = ({
   updateReply,
   t
 }) => {
-  const { addParticipants } = useParticipantsContext();
+  const { addParticipants, participants } = useParticipantsContext();
+  const { collaborators } = useCollaborators();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const itemRef = useRef(null);
@@ -73,10 +75,10 @@ const CommentItemReply = ({
 
   const commentEditorProps = {
     type: 'reply',
-    userInfo: user,
-    pluginName: 'sdoc',
     className: 'pb-3',
     addParticipants: addParticipants,
+    participants,
+    collaborators,
     content: editorContent,
     insertContent: updateContent,
     hiddenComment: setIsEditing,

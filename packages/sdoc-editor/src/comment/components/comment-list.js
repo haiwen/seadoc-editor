@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import slugid from 'slugid';
 import context from '../../context';
+import { useCollaborators } from '../../hooks/use-collaborators';
 import { useCommentListPosition } from '../../hooks/use-selection-position';
 import { updateElementsAttrs } from '../helper';
 import { useCommentContext } from '../hooks/comment-hooks/use-comment-context';
@@ -31,7 +32,8 @@ const CommentList = ({
   const commentPopover = useRef(null);
   const commentDetailRef = useRef(null);
   const position = useCommentListPosition(activeElementIds, isContextComment, isClickedContextComment, commentedDom, commentDetail, closeComment, editor);
-  const { addParticipants } = useParticipantsContext();
+  const { addParticipants, participants } = useParticipantsContext();
+  const { collaborators } = useCollaborators();
   const { dispatch } = useCommentContext();
   const [showEditor, setShowEditor] = useState(false);
   const [inputContent, setInputContent] = useState(null);
@@ -153,9 +155,9 @@ const CommentList = ({
             <div className='non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
               {isEmptyComment && (
                 <SeafileCommentEditor
-                  userInfo={context.getUserInfo()}
-                  pluginName='sdoc'
                   addParticipants={addParticipants}
+                  participants={participants}
+                  collaborators={collaborators}
                   type="comment"
                   insertContent={addNewComment}
                   hiddenComment={hiddenComment}
@@ -177,11 +179,11 @@ const CommentList = ({
                   )}
                   {isActiveEditor && (
                     <SeafileCommentEditor
-                      userInfo={context.getUserInfo()}
-                      pluginName='sdoc'
                       type="reply"
                       placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
                       addParticipants={addParticipants}
+                      participants={participants}
+                      collaborators={collaborators}
                       content={commentInputs[item.id] || ''}
                       insertContent={(value) => handleReplySubmit(value, item.id)}
                       onContentChange={(content) =>
@@ -201,10 +203,10 @@ const CommentList = ({
         <div className='non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
           {isEmptyComment && (
             <SeafileCommentEditor
-              userInfo={context.getUserInfo()}
-              pluginName='sdoc'
               type="comment"
               addParticipants={addParticipants}
+              participants={participants}
+              collaborators={collaborators}
               insertContent={addNewComment}
               hiddenComment={hiddenComment}
               closePanel={closeComment}
@@ -225,11 +227,11 @@ const CommentList = ({
               )}
               {showEditor && (
                 <SeafileCommentEditor
-                  userInfo={context.getUserInfo()}
-                  pluginName='sdoc'
                   type="reply"
                   placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
                   addParticipants={addParticipants}
+                  participants={participants}
+                  collaborators={collaborators}
                   content={inputContent}
                   insertContent={replyComment}
                   onContentChange={(content) => {

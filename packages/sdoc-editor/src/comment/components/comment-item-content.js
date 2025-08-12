@@ -5,6 +5,7 @@ import { SeafileCommentEditor } from '@seafile/comment-editor';
 import dayjs from 'dayjs';
 import Tooltip from '../../components/tooltip';
 import context from '../../context';
+import { useCollaborators } from '../../hooks/use-collaborators';
 import processor from '../../slate-convert/md-to-html';
 import { useNotificationContext } from '../hooks/notification-hooks';
 import { useParticipantsContext } from '../hooks/use-participants';
@@ -14,7 +15,8 @@ const CommentItemContent = ({
   isActive, container, comment, updateComment,
   updateCommentState, onDeleteComment, t, targetId
 }) => {
-  const { addParticipants } = useParticipantsContext();
+  const { addParticipants, participants } = useParticipantsContext();
+  const { collaborators } = useCollaborators();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { notificationsInfo } = useNotificationContext();
@@ -83,10 +85,10 @@ const CommentItemContent = ({
   }, []);
 
   const commentEditorProps = {
-    userInfo: user,
-    pluginName: 'sdoc',
     className: 'pb-3',
     addParticipants: addParticipants,
+    participants,
+    collaborators,
     content: comment.comment,
     insertContent: updateContent,
     hiddenComment: setIsEditing,

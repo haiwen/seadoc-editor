@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@seafile/seafile-sdoc-editor": "^2.0.51-alpha.0",
+    "@seafile/seafile-sdoc-editor": "^2.0.51-alpha.3",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",

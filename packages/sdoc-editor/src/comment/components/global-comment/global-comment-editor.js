@@ -3,15 +3,15 @@ import { SeafileCommentEditor } from '@seafile/comment-editor';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import context from '../../../context';
+import { useCollaborators } from '../../../hooks/use-collaborators';
 import { useParticipantsContext } from '../../hooks/use-participants';
 
 const GlobalCommentEditor = ({ isScrollDisplayed, globalCommentContent, type, insertDocComment, hiddenCommentEditor, onContentChange }) => {
-  const { addParticipants } = useParticipantsContext();
+  const { addParticipants, participants } = useParticipantsContext();
+  const { collaborators } = useCollaborators();
 
   const commentEditorProps = {
     type,
-    userInfo: context.getUserInfo(),
-    pluginName: 'sdoc',
     className: 'sdoc-doc-comment-editor',
     hiddenUserInfo: true,
     content: globalCommentContent,
@@ -19,6 +19,8 @@ const GlobalCommentEditor = ({ isScrollDisplayed, globalCommentContent, type, in
     onContentChange: onContentChange,
     hiddenComment: hiddenCommentEditor,
     addParticipants: addParticipants,
+    collaborators,
+    participants,
     api: {
       uploadLocalImage: context.uploadLocalImage,
     }
