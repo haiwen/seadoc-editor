@@ -23,7 +23,6 @@ const EditorComment = ({ editor }) => {
   const commentedDomRef = useRef(null);
 
   const hiddenComment = useCallback(() => {
-    console.log(999);
     setCommentDetail({});
     setIsShowComments(false);
     setIsContextComment(false);
@@ -87,17 +86,14 @@ const EditorComment = ({ editor }) => {
   // Comments are updated to modify the current comment
   useEffect(() => {
     if (isContextComment && activeElementIds) {
-      console.log(2, isContextComment, activeElementIds);
       const unresolvedComments = element_comments_map[activeElementIds[0].element.id].filter(item => !item.resolved);
       if (unresolvedComments.length === 0) {
-        console.log(99);
         setIsShowComments(false);
       }
     }
     if (activeElementIds && !Array.isArray(activeElementIds)) {
       const unresolvedComments = element_comments_map[activeElementIds.id].filter(item => !item.resolved);
       if (unresolvedComments.length === 0) {
-        console.log(9);
         setIsShowComments(false);
       }
     }
