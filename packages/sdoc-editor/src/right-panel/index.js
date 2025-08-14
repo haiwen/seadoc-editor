@@ -1,6 +1,8 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { PLUGIN_DISPLAY_TYPE, INTERNAL_EVENT, SDOC_STORAGE } from '../constants';
+import CommentWrapper from '../comment';
+import CommentsOperation from '../comment/components/comment-operation';
+import { PLUGIN_DISPLAY_TYPE, INTERNAL_EVENT, SDOC_STORAGE, WIKI_EDITOR } from '../constants';
 import { usePlugins } from '../hooks/use-plugins';
 import EventBus from '../utils/event-bus';
 import LocalStorage from '../utils/local-storage-utils';
@@ -12,8 +14,19 @@ const MIN_PANEL_WIDTH = 360;
 const MAX_PANEL_WIDTH = 620;
 
 const RightPanel = ({ editor }) => {
-  const { plugins, displayPluginName, closePlugin } = usePlugins();
+  let { plugins, displayPluginName, closePlugin } = usePlugins();
   const [width, setWidth] = useState(MIN_PANEL_WIDTH);
+
+  if (editor.editorType === WIKI_EDITOR) {
+    plugins = [{
+      name: 'sdoc-comment',
+      icon: <CommentsOperation />,
+      resizable_width: true,
+      display_type: PLUGIN_DISPLAY_TYPE.RIGHT_PANEL,
+      component: CommentWrapper
+    }];
+    displayPluginName = 'sdoc-comment';
+  }
 
   const panelWrapperStyle = useMemo(() => {
     if (!displayPluginName) return null;

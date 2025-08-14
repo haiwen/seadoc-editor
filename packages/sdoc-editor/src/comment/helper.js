@@ -1,5 +1,6 @@
 import { Editor, Element, Text, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
+import { WIKI_EDITOR } from '../constants';
 import context from '../context';
 import { findPath } from '../extension/core';
 import { useScrollContext } from '../hooks/use-scroll-context';
@@ -46,6 +47,27 @@ export const getAvatarUrl = () => {
   return avatarUrl;
 };
 
+export const commentContainerWikiTransfer = (result, value) => {
+  let newResult;
+  const isWikiTitleIcon = document.querySelector('.wiki-page-icon-wrapper');
+  const isWikiTitleCover = document.getElementById('wiki-page-cover');
+
+  if (isWikiTitleIcon && !isWikiTitleCover) {
+    // 90 is icon height in wiki
+    newResult = result - value - 90;
+  } else if (!isWikiTitleIcon && isWikiTitleCover) {
+    // 203 is icon height in wiki
+    newResult = result - value - 203;
+  } else if (isWikiTitleIcon && isWikiTitleCover) {
+    // 205 is icon and cover height in wiki
+    newResult = result - value - 205;
+  } else {
+    newResult = result - value;
+  }
+
+  return newResult;
+};
+
 export const getElementCommentCountTop = (editor, element, scrollTop) => {
   let minY;
   const children = element.children || [];
@@ -58,7 +80,13 @@ export const getElementCommentCountTop = (editor, element, scrollTop) => {
     if (!minY) minY = y;
     minY = Math.min(minY, y);
   });
-  return minY - 93 + scrollTop; // 100: header height(56) + toolbar height(37)
+  let resultY;
+  resultY = minY - 93 + scrollTop; // 100: header height(56) + toolbar height(37)
+  if (editor.editorType === WIKI_EDITOR) {
+    // 55 is basic top title height in wiki
+    resultY = commentContainerWikiTransfer(resultY, 55);
+  }
+  return resultY;
 };
 
 export const getSelectedElemIds = (editor) => {

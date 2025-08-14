@@ -1,4 +1,5 @@
 
+import CommentContextProvider from './comment/provider';
 import FileLoading from './components/file-loading';
 import Loading from './components/loading';
 import toaster from './components/toast';
@@ -15,6 +16,7 @@ import { CollaboratorsProvider, useCollaborators } from './hooks/use-collaborato
 import { PluginsProvider, usePlugins } from './hooks/use-plugins';
 import withNodeId from './node-id';
 import SDocOutline from './outline';
+import RightPanel from './right-panel/index';
 import { mdStringToSlate, slateToMdString, deserializeHtml, processor } from './slate-convert';
 import { withSocketIO, SocketManager } from './socket';
 import { isMac, isMobile } from './utils/common-utils';
@@ -23,7 +25,6 @@ import EventBus from './utils/event-bus';
 import LocalStorage from './utils/local-storage-utils';
 import { getRebase, hasConflict } from './utils/rebase';
 import { DiffViewer, SDocViewer, PublishedRevisionDiffViewer, SDocWikiViewer } from './views';
-
 
 export {
   Loading,
@@ -63,6 +64,8 @@ export {
   DropdownMenuItem,
   WIKI_EDITOR, WIKI_EDITOR_EDIT_AREA_WIDTH,
   WikiEditor,
+  RightPanel,
+  CommentContextProvider,
   createWikiEditor,
   withNodeId,
   withSocketIO,

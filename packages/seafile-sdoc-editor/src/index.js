@@ -1,5 +1,6 @@
 import { SDocViewer, EventBus } from '@seafile/sdoc-editor';
 import DocInfo from './components/doc-info';
+import ErrorBoundary from './components/error-boundary';
 import { EXTERNAL_EVENT } from './constants';
 import DiffViewer from './pages/diff-viewer';
 import PublishedRevisionViewer from './pages/published-revision-viewer';
@@ -21,4 +22,5 @@ export {
   DocInfo,
   SdocWikiEditor,
   ShareLinkEditor,
+  ErrorBoundary,
 };

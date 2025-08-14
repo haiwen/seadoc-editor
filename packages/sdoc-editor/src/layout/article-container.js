@@ -6,7 +6,7 @@ import EventBus from '../utils/event-bus';
 import { getStyleByFullWidthMode } from '../utils/full-width-mode';
 import LocalStorage from '../utils/local-storage-utils';
 
-export default function ArticleContainer({ editor, children }) {
+export default function ArticleContainer({ editor, children, isShowCommentPanelInWiki }) {
   const scrollRef = useScrollContext();
   const articleRef = useRef(null);
   const [containerStyle, setContainerStyle] = useState({});
@@ -49,7 +49,6 @@ export default function ArticleContainer({ editor, children }) {
   }, [editor.editorType, handleWindowResize]);
 
   useEffect(() => {
-    if (editor.editorType === WIKI_EDITOR) return;
     if (editor.editorType === DOCUMENT_PLUGIN_EDITOR) return;
     handleWindowResize();
     window.addEventListener('resize', handleWindowResize);
@@ -60,16 +59,16 @@ export default function ArticleContainer({ editor, children }) {
   }, []);
 
   const articleStyle = editor.getArticleStyle && editor.getArticleStyle();
-  const articleContainerStyle = editor.getArticleStyle ? { width: articleStyle.width } : containerStyle;
+  const articleContainerStyle = editor.editorType !== WIKI_EDITOR && editor.getArticleStyle ? { width: articleStyle.width } : containerStyle;
 
   return (
     <div className='sdoc-article-container' style={articleContainerStyle}>
       {React.Children.count(children) === 1 && (
-        <div className="article sdoc-editor__article" style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children}</div>
+        <div className='article sdoc-editor__article' style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children}</div>
       )}
       {React.Children.count(children) > 1 && (
         <>
-          <div className="article sdoc-editor__article" style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children[0]}</div>
+          <div className='article sdoc-editor__article' style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children[0]}</div>
           {[...children.slice(1)]}
         </>
       )}

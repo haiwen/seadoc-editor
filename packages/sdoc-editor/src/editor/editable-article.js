@@ -26,7 +26,7 @@ const EditableArticle = ({
   showComment = true,
   editor,
   slateValue,
-  updateSlateValue
+  updateSlateValue,
 }) => {
   const { cursors } = useCursors(editor);
   const decorate = usePipDecorate(editor);

@@ -4,7 +4,7 @@ import LocalStorage from './local-storage-utils';
 export const getStyleByDefaultMode = (scrollRef, editor) => {
   const sdocStorage = LocalStorage.getItem(SDOC_STORAGE) || {};
   const { outlineOpen: isShowOutline } = sdocStorage;
-  const containerStyle = { width: ARTICLE_DEFAULT_WIDTH };
+  const containerStyle = editor.editorType !== WIKI_EDITOR ? { width: ARTICLE_DEFAULT_WIDTH } : {};
 
   // Has outline
   if (isShowOutline && editor.editorType !== WIKI_EDITOR) {

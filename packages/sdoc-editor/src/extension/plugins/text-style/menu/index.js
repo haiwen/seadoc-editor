@@ -144,7 +144,7 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
           <i className="sdocfont sdoc-reduce-font-size"></i>
         </FontSizeScale>
       </MoreDropdown>
-      {idPrefix && ![DOCUMENT_PLUGIN_EDITOR, WIKI_EDITOR].includes(editor.editorType) && <CommentContextMenu />}
+      {idPrefix && ![DOCUMENT_PLUGIN_EDITOR].includes(editor.editorType) && <CommentContextMenu />}
       {idPrefix && enableSeafileAI && <AIContextMenu isRichEditor={isRichEditor} />}
     </>
   );

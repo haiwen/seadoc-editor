@@ -150,7 +150,7 @@ const EditorComment = ({ editor }) => {
   return (
     <div className="sdoc-comment-container">
       <div className="comment-container-main"></div>
-      <div className={classNames('comment-container-right', { 'isContextComment': isContextComment })}>
+      <div className={classNames('comment-container-right', { 'is-context-comment': isContextComment })}>
         <ElementsCommentCount
           elementCommentsMap={element_comments_map}
           activeElementIds={activeElementIds}

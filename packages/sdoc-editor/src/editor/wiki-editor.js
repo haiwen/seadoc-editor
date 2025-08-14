@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useImperativeHandle, forwardRef, useMemo, useCallback } from 'react';
-import { Editor } from '@seafile/slate';
+import React, { useEffect, useState, useImperativeHandle, forwardRef, useMemo, useCallback, Fragment } from 'react';
+import { Editor, Text } from '@seafile/slate';
 import classNames from 'classnames';
 import deepCopy from 'deep-copy';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import { INTERNAL_EVENT, WIKI_EDITOR_EDIT_AREA_WIDTH } from '../constants';
 import context from '../context';
 import { createDefaultEditor } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
-import { focusEditor } from '../extension/core';
+import { removeMarks } from '../extension/plugins/ai/ai-module/helpers';
 import { ColorProvider } from '../hooks/use-color-context';
 import { ScrollContext } from '../hooks/use-scroll-context';
 import { EditorContainer } from '../layout';
@@ -20,7 +20,7 @@ import EventBus from '../utils/event-bus';
 import ReadOnlyArticle from '../views/readonly-article';
 import EditableArticle from './editable-article';
 
-const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isWikiReadOnly, scrollRef }, ref) => {
+const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isWikiReadOnly, scrollRef, showComment, isShowRightPanel }, ref) => {
 
   const validEditor = useMemo(() => {
     if (propsEditor) return propsEditor;
@@ -75,6 +75,17 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
   useEffect(() => {
     const eventBus = EventBus.getInstance();
     eventBus.subscribe(INTERNAL_EVENT.REFRESH_DOCUMENT, onRefreshDocument);
+
+    // Remove Marks on special conditions like unexpected exit or refresh page using AI or context comment
+    const hasSpecialMark = !Editor.nodes(validEditor, {
+      at: [],
+      match: n => Text.isText(n) && (n.sdoc_ai === true || n.comment === true),
+    }).next().done;
+
+    if (hasSpecialMark) {
+      removeMarks(validEditor);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onRefreshDocument]);
 
   // The parent component can call the method of this component through ref
@@ -139,7 +150,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
           <div className='sdoc-content-wrapper'>
             <ScrollContext.Provider value={{ scrollRef }}>
               <div className={classNames('sdoc-editor-content', { 'readonly': isWikiReadOnly })}>
-                <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={false} />
+                <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={showComment} />
               </div>
               <WikiOutline doc={slateValue} />
             </ScrollContext.Provider>
