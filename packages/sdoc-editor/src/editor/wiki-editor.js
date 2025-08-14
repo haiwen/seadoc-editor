@@ -150,7 +150,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
           <div className='sdoc-content-wrapper'>
             <ScrollContext.Provider value={{ scrollRef }}>
               <div className={classNames('sdoc-editor-content', { 'readonly': isWikiReadOnly })}>
-                <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={showComment} isShowCommentPanelInWiki={isShowRightPanel} />
+                <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={showComment} />
               </div>
               <WikiOutline doc={slateValue} />
             </ScrollContext.Provider>

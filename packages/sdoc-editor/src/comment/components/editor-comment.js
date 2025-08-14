@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Editor } from '@seafile/slate';
 import classNames from 'classnames';
-import { INTERNAL_EVENT, WIKI_EDITOR } from '../../constants';
+import { INTERNAL_EVENT } from '../../constants';
 import { removeMarks } from '../../extension/plugins/ai/ai-module/helpers';
 import { useSelectionElement } from '../../hooks/use-selection-element';
 import useSelectionUpdate from '../../hooks/use-selection-update';
@@ -150,7 +150,7 @@ const EditorComment = ({ editor }) => {
   return (
     <div className="sdoc-comment-container">
       <div className="comment-container-main"></div>
-      <div className={classNames('comment-container-right', { 'is-context-comment': isContextComment, 'in-wiki': editor.editorType === WIKI_EDITOR })}>
+      <div className={classNames('comment-container-right', { 'is-context-comment': isContextComment })}>
         <ElementsCommentCount
           elementCommentsMap={element_comments_map}
           activeElementIds={activeElementIds}

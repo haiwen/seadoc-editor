@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
 import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, WIKI_EDITOR, FULL_WIDTH_MODE } from '../constants';
 import { useScrollContext } from '../hooks/use-scroll-context';
 import { getStyleByDefaultMode } from '../utils/default-mode';
@@ -65,11 +64,11 @@ export default function ArticleContainer({ editor, children, isShowCommentPanelI
   return (
     <div className='sdoc-article-container' style={articleContainerStyle}>
       {React.Children.count(children) === 1 && (
-        <div className={classNames('article sdoc-editor__article', { 'show-comment-in-wiki': isShowCommentPanelInWiki })} style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children}</div>
+        <div className='article sdoc-editor__article' style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children}</div>
       )}
       {React.Children.count(children) > 1 && (
         <>
-          <div className={classNames('article sdoc-editor__article', { 'show-comment-in-wiki': isShowCommentPanelInWiki })} style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children[0]}</div>
+          <div className='article sdoc-editor__article' style={articleStyle} id="sdoc-editor-print-wrapper" ref={articleRef}>{children[0]}</div>
           {[...children.slice(1)]}
         </>
       )}
