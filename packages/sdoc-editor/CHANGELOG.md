@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.135](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.134...@seafile/sdoc-editor@2.0.135) (2025-08-14)
+
+### Bug Fixes
+
+- optimize code ([a38f2a4](https://github.com/seafileltd/sea-sdoc-editor/commit/a38f2a4eadbd508ef3bc6f9262fd6f78add855e9))
+- optimize code ([09896d5](https://github.com/seafileltd/sea-sdoc-editor/commit/09896d59c204bb3348221cd9aa1e7e281d88e945))
+
+### Features
+
+- add whiteboard hover menu ([fc63ad0](https://github.com/seafileltd/sea-sdoc-editor/commit/fc63ad0b83fe20b6b92746a44e019061c63c191d))
+- **comment:** add comment in wiki ([014aa61](https://github.com/seafileltd/sea-sdoc-editor/commit/014aa61bdb875edd602e6df7731fae6b9ec4230d))
+
 ## [2.0.134](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.133...@seafile/sdoc-editor@2.0.134) (2025-08-10)
 
 ### Features
