@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import ObjectUtils from '../../../../../utils/object-utils';
 import { TABLE_DRAG_KEY } from '../../../../constants';
 import { DRAG_HANDLER_COLUMN, DRAG_HANDLER_ROW, EMPTY_SELECTED_RANGE } from '../../constants';
 import { generateDragMoveElement, getTableDragType, getTableRowSelectedRange, getTableColumnSelectedRange } from '../../helpers';
@@ -49,7 +50,11 @@ const TableHeader = ({ editor, table, setSelectedRange, setIsDragMove }) => {
 
   const handleDragStart = (event) => {
     event.stopPropagation();
-    const { tableSelectedRange } = editor;
+    let { tableSelectedRange } = editor;
+    if (ObjectUtils.isSameObject(tableSelectedRange, EMPTY_SELECTED_RANGE)) {
+      event.preventDefault();
+      return;
+    }
     const tableId = table.id;
     const { minColIndex, maxColIndex, minRowIndex, maxRowIndex } = tableSelectedRange;
     const dragType = getTableDragType(table, selectedRange);
@@ -72,7 +77,9 @@ const TableHeader = ({ editor, table, setSelectedRange, setIsDragMove }) => {
   const handleDragEnd = (event) => {
     setIsDragMove(false);
     const indicator = document.getElementById('sdoc-drag-image');
-    indicator.style.display = 'none';
+    if (indicator) {
+      indicator.style.display = 'none';
+    }
   };
 
   return (
