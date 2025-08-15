@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.136](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.135...@seafile/sdoc-editor@2.0.136) (2025-08-15)
+
+### Bug Fixes
+
+- draw row bug ([f7e8072](https://github.com/seafileltd/sea-sdoc-editor/commit/f7e80726fdf9d49388f5dd5c51856fad0917d47f))
+
 ## [2.0.135](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.134...@seafile/sdoc-editor@2.0.135) (2025-08-14)
 
 ### Bug Fixes
