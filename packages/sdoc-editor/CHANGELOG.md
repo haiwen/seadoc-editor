@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.138](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.137...@seafile/sdoc-editor@2.0.138) (2025-08-19)
+
+### Bug Fixes
+
+- resolve hover menu color ([4191d08](https://github.com/seafileltd/sea-sdoc-editor/commit/4191d08bcf8ab0529881d660cb1efa71cbdb948f))
+
 ## [2.0.137](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.136...@seafile/sdoc-editor@2.0.137) (2025-08-19)
 
 ### Bug Fixes
