@@ -11,7 +11,7 @@ import { insertSdocFileLink } from '../sdoc-link/helpers';
 import { genLinkNode, isSdocFile } from './helpers';
 
 const withLink = (editor) => {
-  const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown } = editor;
+  const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown, onCompositionStart } = editor;
   const newEditor = editor;
 
   // Rewrite isInline
@@ -110,14 +110,17 @@ const withLink = (editor) => {
   newEditor.onCompositionStart = (e) => {
     const { selection } = editor;
     if (Range.isCollapsed(selection)) {
+
       const [LinkNodeEntry] = Editor.nodes(editor, {
         match: n => Element.isElement && n.type === LINK,
       });
+      console.log(22, 'withLink', LinkNodeEntry);
       if (LinkNodeEntry) {
         e.preventDefault();
         return true;
       }
     }
+    return onCompositionStart && onCompositionStart(e);
   };
 
   return newEditor;

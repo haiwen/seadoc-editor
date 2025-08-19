@@ -6,7 +6,7 @@ import { getBeforeText } from '../../list/helpers';
 import { genQuickInsert, getQuickInsertEntity, transformToText } from '../helper';
 
 const withQuickInsert = (editor) => {
-  const { insertText, onHotKeyDown, isInline, deleteBackward, deleteForward } = editor;
+  const { insertText, onHotKeyDown, isInline, deleteBackward, deleteForward, onCompositionStart } = editor;
   const newEditor = editor;
   newEditor.isSlashKey = false;
 
@@ -138,6 +138,7 @@ const withQuickInsert = (editor) => {
       event.preventDefault();
       return true;
     }
+    return onCompositionStart && onCompositionStart(event);
   };
 
   newEditor.isInline = (element) => {

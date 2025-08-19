@@ -6,7 +6,7 @@ import { focusEditor } from '../../core';
 import { insertTemporaryMentionInput, getMentionTempIptEntry, transformToText, getMentionEntry, getPrevMentionIptEntry, getPreCharacters } from './helper';
 
 const withMention = (editor) => {
-  const { insertText, onHotKeyDown, isInline, deleteBackward, deleteForward, normalizeNode } = editor;
+  const { insertText, onHotKeyDown, isInline, deleteBackward, deleteForward, normalizeNode, onCompositionStart } = editor;
   const newEditor = editor;
   const eventBus = EventBus.getInstance();
 
@@ -160,6 +160,7 @@ const withMention = (editor) => {
       event.preventDefault();
       return true;
     }
+    return onCompositionStart && onCompositionStart(event);
   };
 
   newEditor.onCompositionEnd = (event) => {
