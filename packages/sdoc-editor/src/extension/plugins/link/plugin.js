@@ -110,11 +110,9 @@ const withLink = (editor) => {
   newEditor.onCompositionStart = (e) => {
     const { selection } = editor;
     if (Range.isCollapsed(selection)) {
-
       const [LinkNodeEntry] = Editor.nodes(editor, {
         match: n => Element.isElement && n.type === LINK,
       });
-      console.log(22, 'withLink', LinkNodeEntry);
       if (LinkNodeEntry) {
         e.preventDefault();
         return true;
