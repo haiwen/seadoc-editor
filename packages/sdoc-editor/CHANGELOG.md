@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.137](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.136...@seafile/sdoc-editor@2.0.137) (2025-08-19)
+
+### Bug Fixes
+
+- optimize code ([07592d5](https://github.com/seafileltd/sea-sdoc-editor/commit/07592d5eeacf3857abd4be38b3d045b98a8558b9))
+- resolve chinese input method ([a8feca2](https://github.com/seafileltd/sea-sdoc-editor/commit/a8feca25029f0e7ab29e3c7bcca29c1bbcdccd76))
+
 ## [2.0.136](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.135...@seafile/sdoc-editor@2.0.136) (2025-08-15)
 
 ### Bug Fixes
