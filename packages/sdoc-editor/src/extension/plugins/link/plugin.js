@@ -11,7 +11,7 @@ import { insertSdocFileLink } from '../sdoc-link/helpers';
 import { genLinkNode, isSdocFile } from './helpers';
 
 const withLink = (editor) => {
-  const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown } = editor;
+  const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown, onCompositionStart } = editor;
   const newEditor = editor;
 
   // Rewrite isInline
@@ -118,6 +118,7 @@ const withLink = (editor) => {
         return true;
       }
     }
+    return onCompositionStart && onCompositionStart(e);
   };
 
   return newEditor;
