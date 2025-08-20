@@ -21,7 +21,7 @@ export default function ArticleContainer({ editor, children, isShowCommentPanelI
     isFullWidth = LocalStorage.getItem(FULL_WIDTH_MODE),
   } = {}) => {
     // Full width mode
-    if (isFullWidth) {
+    if (isFullWidth && editor.editorType !== WIKI_EDITOR) {
       const containerStyle = getStyleByFullWidthMode(scrollRef, editor);
       setContainerStyle(containerStyle);
       return;
