@@ -148,6 +148,25 @@ const EditableArticle = ({
       return;
     }
 
+    if (event.key === 'Enter') {
+      const [match] = Editor.nodes(editor, {
+        match: (n) => Text.isText(n) && n.bold === true,
+        mode: 'leaf',
+      });
+
+      if (match) {
+        const [textNode, path] = match;
+        const { offset } = selection.anchor;
+        if (offset === textNode.text.length) {
+          event.preventDefault();
+
+          Transforms.splitNodes(editor, {
+            at: selection,
+            always: true,
+          });
+        }
+      }
+    }
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset', reverse: true });
