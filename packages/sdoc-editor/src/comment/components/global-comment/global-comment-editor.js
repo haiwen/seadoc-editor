@@ -13,6 +13,7 @@ const GlobalCommentEditor = ({ isScrollDisplayed, globalCommentContent, type, in
   const commentEditorProps = {
     type,
     className: 'sdoc-doc-comment-editor',
+    settings: { ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' },
     hiddenUserInfo: true,
     content: globalCommentContent,
     insertContent: insertDocComment,

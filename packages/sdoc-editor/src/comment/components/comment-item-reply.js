@@ -76,6 +76,7 @@ const CommentItemReply = ({
   const commentEditorProps = {
     type: 'reply',
     className: 'pb-3',
+    settings: { ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' },
     addParticipants: addParticipants,
     participants,
     collaborators,

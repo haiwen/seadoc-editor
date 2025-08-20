@@ -155,6 +155,7 @@ const CommentList = ({
             <div className='non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
               {isEmptyComment && (
                 <SeafileCommentEditor
+                  settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
                   addParticipants={addParticipants}
                   participants={participants}
                   collaborators={collaborators}
@@ -180,6 +181,7 @@ const CommentList = ({
                   {isActiveEditor && (
                     <SeafileCommentEditor
                       type="reply"
+                      settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
                       placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
                       addParticipants={addParticipants}
                       participants={participants}
@@ -204,6 +206,7 @@ const CommentList = ({
           {isEmptyComment && (
             <SeafileCommentEditor
               type="comment"
+              settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
               addParticipants={addParticipants}
               participants={participants}
               collaborators={collaborators}
@@ -228,6 +231,7 @@ const CommentList = ({
               {showEditor && (
                 <SeafileCommentEditor
                   type="reply"
+                  settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
                   placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
                   addParticipants={addParticipants}
                   participants={participants}
