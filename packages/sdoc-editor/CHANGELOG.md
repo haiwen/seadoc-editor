@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.139](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.138...@seafile/sdoc-editor@2.0.139) (2025-08-20)
+
+### Bug Fixes
+
+- resolve dropdown color ([ede3d65](https://github.com/seafileltd/sea-sdoc-editor/commit/ede3d65e3bdf1eafc8c2bbba2600b8084ec42806))
+- wiki code bug ([b9f3c3f](https://github.com/seafileltd/sea-sdoc-editor/commit/b9f3c3fc809024b4429bdd873822a3c84ab14e47))
+
 ## [2.0.138](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.137...@seafile/sdoc-editor@2.0.138) (2025-08-19)
 
 ### Bug Fixes
