@@ -53,6 +53,10 @@
   color: #444444;
 }
 
+.sdoc-image-hover-menu-container .hover-menu-container .sdoc-drop-down {
+  color: #999;
+}
+
 .sdoc-image-hover-menu-container .sdoc-image-popover {
   position: absolute;
   top: 37px;

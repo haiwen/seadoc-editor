@@ -72,6 +72,10 @@
   color: #444444;
 }
 
+.sdoc-file-link-hover-menu-container .hover-menu-container .sdoc-drop-down {
+  color: #999;
+}
+
 .sdoc-file-link-hover-menu-container .sdoc-file-display-style-popover {
   position: absolute;
   top: 37px;
