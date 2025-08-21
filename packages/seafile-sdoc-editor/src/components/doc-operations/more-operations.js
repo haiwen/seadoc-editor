@@ -67,7 +67,7 @@ const MoreOperations = ({ isStarred, t }) => {
       }
       .article {
         width: 673px !important;
-        margin: 40px 0px;
+        margin: 40px 60px;
         border: none !important;
         box-shadow: none !important;
         padding: 0 !important;
