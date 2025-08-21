@@ -241,13 +241,29 @@ export const insertHtmlTransferredNodes = (slateNodeList, nextPath, editor) => {
     // Insert paragraph nodes
     if (childNode.type === PARAGRAPH) {
       if (childNode.children.length > 1) {
-        childNode.children.forEach((textNode, index) => {
-          if (!textNode.text.trim()) return;
+        // Temporary array: Merge links and adjacent content
+        const currentParagraphChildren = [];
+
+        childNode.children.forEach((textNode) => {
+          if (textNode.type !== 'link' && !textNode?.text?.trim()) {
+            if (currentParagraphChildren.length > 0) {
+              const p = generateEmptyElement(PARAGRAPH);
+              p.children = [...currentParagraphChildren];
+              Transforms.insertNodes(editor, p, { at: nextPath });
+              nextPath = Path.next(nextPath);
+              currentParagraphChildren.length = 0;
+            }
+            return;
+          }
+          currentParagraphChildren.push(textNode);
+        });
+        // Process the remaining nodes after traversal is completed
+        if (currentParagraphChildren.length > 0) {
           const p = generateEmptyElement(PARAGRAPH);
-          p.children.push(textNode);
+          p.children = currentParagraphChildren;
           Transforms.insertNodes(editor, p, { at: nextPath });
           nextPath = Path.next(nextPath);
-        });
+        }
       } else {
         Transforms.insertNodes(editor, childNode, { at: nextPath });
         nextPath = Path.next(nextPath);
