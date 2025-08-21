@@ -49,9 +49,10 @@ class Context {
   getPrintCss() {
     const server = this.getSetting('serviceUrl');
     const mediaUrl = this.getSetting('mediaUrl');
-    // const commonCss = `${server}${mediaUrl}css/seafile-ui.css`;
-    const fontCss = `${server}${mediaUrl}/sdoc-editor/sdoc-editor-font.css`;
-    return [fontCss];
+    const commonCss = `${server}${mediaUrl}css/seafile-ui.css`;
+    const fontCss = `${server}${mediaUrl}sdoc-editor/sdoc-editor-font.css`;
+    const sdocEditorCss = `${server}${mediaUrl}sdoc-editor/sdoc-editor-print.css`;
+    return [commonCss, fontCss, sdocEditorCss];
   }
 
   updateSettings(update) {

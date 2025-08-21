@@ -39,12 +39,53 @@ const MoreOperations = ({ isStarred, t }) => {
   }, []);
 
   const handlePrint = useCallback(() => {
+    const pageStyle = `
+      @page {
+        size: auto A4 landscape;
+        margin: 40px 60px;
+        padding: 0;
+      }
+      .d-print-none {
+        display:none !important;
+      }
+      .article {
+        border: none !important;
+        box-shadow: none !important;
+      }
+      html, body {
+        margin: 0;
+        padding: 0
+      }
+      body {
+        min-width: 673px !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        height: auto;
+      }
+      .d-print-none {
+        display:none !important;
+      }
+      .article {
+        width: 673px !important;
+        margin: 40px 0px;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      @media print {
+        img {
+          page-break-inside: avoid;
+          height: auto !important;
+          max-width: 100% !important;
+        }
+      }
+    `;
     printJS({
       printable: 'sdoc-editor-print-wrapper',
       type: 'html',
-      scanStyles: true,
-      targetStyles: ['*'],
-      style: '@page { size: auto A4 landscape;margin:20px auto; padding: 0;} .d-print-none{display:none !important;} .article {border: none !important; box-shadow: none !important; } html, body {margin: 0; padding: 0}',
+      scanStyles: false,
+      // targetStyles: ['*'],
+      style: pageStyle,
       css: cssUrls,
     });
   }
