@@ -42,7 +42,7 @@ const MoreOperations = ({ isStarred, t }) => {
     const pageStyle = `
       @page {
         size: auto A4 landscape;
-        margin: 40px 60px;
+        margin: 20px 0px;
         padding: 0;
       }
       .d-print-none {
