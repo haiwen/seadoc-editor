@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.140](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.139...@seafile/sdoc-editor@2.0.140) (2025-08-21)
+
+### Features
+
+- **comment:** refactor comment module ([4034610](https://github.com/seafileltd/sea-sdoc-editor/commit/4034610dc8c3b7e79a99947ffa913974461bf901))
+
 ## [2.0.139](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.138...@seafile/sdoc-editor@2.0.139) (2025-08-20)
 
 ### Bug Fixes
