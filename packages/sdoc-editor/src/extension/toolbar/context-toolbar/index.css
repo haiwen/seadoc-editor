@@ -12,4 +12,5 @@
 
 .sdoc-context-toolbar .menu-group {
   border-right: none;
+  width: fit-content !important;
 }
