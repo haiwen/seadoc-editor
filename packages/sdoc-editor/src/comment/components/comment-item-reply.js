@@ -1,11 +1,13 @@
 import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { SeafileCommentEditor } from '@seafile/comment-editor';
 import dayjs from 'dayjs';
 import context from '../../context';
+import { useCollaborators } from '../../hooks/use-collaborators';
 import processor from '../../slate-convert/md-to-html';
+import { useParticipantsContext } from '../hooks/use-participants';
 import CommentDeletePopover from './comment-delete-popover';
-import CommentEditor from './comment-editor';
 import CommentImagePreviewer from './comment-image-previewer';
 
 const CommentItemReply = ({
@@ -16,6 +18,8 @@ const CommentItemReply = ({
   updateReply,
   t
 }) => {
+  const { addParticipants, participants } = useParticipantsContext();
+  const { collaborators } = useCollaborators();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const itemRef = useRef(null);
@@ -69,6 +73,21 @@ const CommentItemReply = ({
     }
   }, []);
 
+  const commentEditorProps = {
+    type: 'reply',
+    className: 'pb-3',
+    settings: { ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' },
+    addParticipants: addParticipants,
+    participants,
+    collaborators,
+    content: editorContent,
+    insertContent: updateContent,
+    hiddenComment: setIsEditing,
+    api: {
+      uploadLocalImage: context.uploadLocalImage,
+    }
+  };
+
   return (
     <div className='comment-item' ref={itemRef}>
       <div className='comment-header'>
@@ -98,7 +117,7 @@ const CommentItemReply = ({
       <div className='comment-content' onClick={onCommentContentClick}>
         {!isEditing && <div dangerouslySetInnerHTML={{ __html: editorContent }}></div>}
       </div>
-      {isEditing && <CommentEditor className="pb-3" type='reply' content={editorContent} updateContent={updateContent} setIsEditing={setIsEditing} />}
+      {isEditing && <SeafileCommentEditor {...commentEditorProps} />}
       {isShowDeletePopover && isActive && (
         <CommentDeletePopover
           parentDom={itemRef.current}

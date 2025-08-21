@@ -1,18 +1,22 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { SeafileCommentEditor } from '@seafile/comment-editor';
 import dayjs from 'dayjs';
 import Tooltip from '../../components/tooltip';
 import context from '../../context';
+import { useCollaborators } from '../../hooks/use-collaborators';
 import processor from '../../slate-convert/md-to-html';
 import { useNotificationContext } from '../hooks/notification-hooks';
-import CommentEditor from './comment-editor';
+import { useParticipantsContext } from '../hooks/use-participants';
 import CommentImagePreviewer from './comment-image-previewer';
 
 const CommentItemContent = ({
   isActive, container, comment, updateComment,
   updateCommentState, onDeleteComment, t, targetId
 }) => {
+  const { addParticipants, participants } = useParticipantsContext();
+  const { collaborators } = useCollaborators();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { notificationsInfo } = useNotificationContext();
@@ -80,6 +84,20 @@ const CommentItemContent = ({
     }
   }, []);
 
+  const commentEditorProps = {
+    className: 'pb-3',
+    settings: { ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' },
+    addParticipants: addParticipants,
+    participants,
+    collaborators,
+    content: comment.comment,
+    insertContent: updateContent,
+    hiddenComment: setIsEditing,
+    api: {
+      uploadLocalImage: context.uploadLocalImage,
+    }
+  };
+
   return (
     <div className='comment-item'>
       <div className='comment-header'>
@@ -129,7 +147,7 @@ const CommentItemContent = ({
       <div className='comment-content' onClick={onCommentContentClick}>
         {!isEditing && <div dangerouslySetInnerHTML={{ __html: editorContent }}></div>}
       </div>
-      {isEditing && <CommentEditor className="pb-3" content={comment.comment} updateContent={updateContent} setIsEditing={setIsEditing} />}
+      {isEditing && <SeafileCommentEditor {...commentEditorProps} />}
       {imageUrl && <CommentImagePreviewer imageUrl={imageUrl} toggle={() => setImageUrl('')} />}
     </div>
   );

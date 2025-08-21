@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Input } from 'reactstrap';
+import { SeafileCommentEditor } from '@seafile/comment-editor';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import slugid from 'slugid';
 import context from '../../context';
+import { useCollaborators } from '../../hooks/use-collaborators';
 import { useCommentListPosition } from '../../hooks/use-selection-position';
 import { updateElementsAttrs } from '../helper';
 import { useCommentContext } from '../hooks/comment-hooks/use-comment-context';
-import CommentEditor from './comment-editor';
+import { useParticipantsContext } from '../hooks/use-participants';
 import CommentItemWrapper from './comment-item-wrapper';
 
 import './comment-list.css';
@@ -30,6 +32,8 @@ const CommentList = ({
   const commentPopover = useRef(null);
   const commentDetailRef = useRef(null);
   const position = useCommentListPosition(activeElementIds, isContextComment, isClickedContextComment, commentedDom, commentDetail, closeComment, editor);
+  const { addParticipants, participants } = useParticipantsContext();
+  const { collaborators } = useCollaborators();
   const { dispatch } = useCommentContext();
   const [showEditor, setShowEditor] = useState(false);
   const [inputContent, setInputContent] = useState(null);
@@ -150,7 +154,17 @@ const CommentList = ({
             />
             <div className='non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
               {isEmptyComment && (
-                <CommentEditor type="comment" insertContent={addNewComment} hiddenComment={hiddenComment} isContextComment={isContextComment} closeComment={closeComment} />
+                <SeafileCommentEditor
+                  settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
+                  addParticipants={addParticipants}
+                  participants={participants}
+                  collaborators={collaborators}
+                  type="comment"
+                  insertContent={addNewComment}
+                  hiddenComment={hiddenComment}
+                  closePanel={closeComment}
+                  api={{ uploadLocalImage: context.uploadLocalImage }}
+                />
               )}
               {!isEmptyComment && (
                 <>
@@ -165,15 +179,20 @@ const CommentList = ({
                     />
                   )}
                   {isActiveEditor && (
-                    <CommentEditor
+                    <SeafileCommentEditor
                       type="reply"
+                      settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
                       placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
-                      commentContent={commentInputs[item.id] || ''}
+                      addParticipants={addParticipants}
+                      participants={participants}
+                      collaborators={collaborators}
+                      content={commentInputs[item.id] || ''}
                       insertContent={(value) => handleReplySubmit(value, item.id)}
                       onContentChange={(content) =>
                         handleInputChange(item.id, content)
                       }
                       hiddenComment={hiddenComment}
+                      api={{ uploadLocalImage: context.uploadLocalImage }}
                     />
                   )}
                 </>
@@ -185,7 +204,17 @@ const CommentList = ({
       {Object.values(commentDetail).length === 0 && (
         <div className='non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
           {isEmptyComment && (
-            <CommentEditor type="comment" insertContent={addNewComment} hiddenComment={hiddenComment} isContextComment={isContextComment} closeComment={closeComment} />
+            <SeafileCommentEditor
+              type="comment"
+              settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
+              addParticipants={addParticipants}
+              participants={participants}
+              collaborators={collaborators}
+              insertContent={addNewComment}
+              hiddenComment={hiddenComment}
+              closePanel={closeComment}
+              api={{ uploadLocalImage: context.uploadLocalImage }}
+            />
           )}
           {!isEmptyComment && (
             <>
@@ -200,15 +229,20 @@ const CommentList = ({
                 />
               )}
               {showEditor && (
-                <CommentEditor
+                <SeafileCommentEditor
                   type="reply"
+                  settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
                   placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
-                  commentContent={inputContent}
+                  addParticipants={addParticipants}
+                  participants={participants}
+                  collaborators={collaborators}
+                  content={inputContent}
                   insertContent={replyComment}
                   onContentChange={(content) => {
                     setInputContent(content);
                   }}
                   hiddenComment={hiddenComment}
+                  api={{ uploadLocalImage: context.uploadLocalImage }}
                 />
               )}
             </>
