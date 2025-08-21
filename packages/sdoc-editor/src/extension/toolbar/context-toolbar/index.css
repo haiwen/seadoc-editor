@@ -13,3 +13,7 @@
 .sdoc-context-toolbar .menu-group {
   border-right: none;
 }
+
+.sdoc-context-toolbar .menu-group-item {
+  width: fit-content !important;
+}
