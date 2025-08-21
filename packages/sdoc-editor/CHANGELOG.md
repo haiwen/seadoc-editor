@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.141](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.140...@seafile/sdoc-editor@2.0.141) (2025-08-21)
+
+### Bug Fixes
+
+- print image bug ([1f02aa3](https://github.com/seafileltd/sea-sdoc-editor/commit/1f02aa33abca13c0c59699e0a5e870b40343903d))
+- resolve bontext bar style ([5d0cbf0](https://github.com/seafileltd/sea-sdoc-editor/commit/5d0cbf0d72331922403b6bde2440d1f8aa45672e))
+- resolve bontext bar style ([9566ce8](https://github.com/seafileltd/sea-sdoc-editor/commit/9566ce86b4ecee59de89f1e98fc14e062bc5c292))
+
 ## [2.0.140](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.139...@seafile/sdoc-editor@2.0.140) (2025-08-21)
 
 ### Features
