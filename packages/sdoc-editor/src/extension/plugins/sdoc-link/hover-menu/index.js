@@ -5,6 +5,9 @@ import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
+import { INTERNAL_EVENT } from '../../../../constants';
+import { usePlugins } from '../../../../hooks/use-plugins';
+import EventBus from '../../../../utils/event-bus';
 import { ElementPopover } from '../../../commons';
 import { SDOC_LINK_TYPE_CONFIG, SDOC_LINK_TYPE, SDOC_LINK_TYPES } from '../constants';
 import { isInTable, onCopySdocLinkNode } from '../helpers';
@@ -20,6 +23,7 @@ const propTypes = {
 };
 
 const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode, onHideInsertHoverMenu, t, url }) => {
+  const { updateDisplayPlugin } = usePlugins();
   const readOnly = useReadOnly();
   const [isShowDisplayStylePopover, setIsShowDisplayStylePopover] = useState(false);
 
@@ -45,6 +49,14 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleOpenLinkPreview = useCallback((pluginName) => {
+    updateDisplayPlugin(pluginName, true);
+    const { doc_uuid, title, type } = element;
+
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, { doc_uuid, title, type });
+  }, [updateDisplayPlugin]);
+
   const selectedType = element.display_type || SDOC_LINK_TYPE.TEXT_LINK;
   const id = `sdoc-link-display-type-${element.id}`;
   const newSdocFileTypes = SDOC_LINK_TYPES.filter(sdocLinkType => isInTable(editor, element) ? sdocLinkType !== SDOC_LINK_TYPE.CARD_LINK : true);
@@ -59,23 +71,30 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
             </span>
           </span>
           {!readOnly && (
-            <span className='op-group-item'>
-              <span role="button" className='op-item' onClick={onCopy}>
-                <i className='sdocfont sdoc-copy icon-font'></i>
+            <>
+              <span className='op-group-item'>
+                <span role="button" className='op-item' onClick={onCopy}>
+                  <i className='sdocfont sdoc-copy icon-font'></i>
+                </span>
+                <span
+                  role="button"
+                  className={`op-item ${isShowDisplayStylePopover ? 'link-style-icon-active' : '' }`}
+                  onClick={onShowProver}
+                  id={id}
+                >
+                  <i className={classnames('icon-font mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
+                  <i className='sdocfont sdoc-drop-down icon-font'></i>
+                </span>
               </span>
-              <span
-                role="button"
-                className={`op-item ${isShowDisplayStylePopover ? 'link-style-icon-active' : '' }`}
-                onClick={onShowProver}
-                id={id}
-              >
-                <i className={classnames('icon-font mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
-                <i className='sdocfont sdoc-drop-down icon-font'></i>
+              <span className='op-group-item'>
+                <span role="button" className={'op-item'} onClick={onUnwrapFileLinkNode}>
+                  <i className='sdocfont sdoc-unlink icon-font'></i>
+                </span>
+                <span role="button" className='op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
+                  <i className='sdocfont eye icon-font'></i>
+                </span>
               </span>
-              <span role="button" className={'op-item'} onClick={onUnwrapFileLinkNode}>
-                <i className='sdocfont sdoc-unlink icon-font'></i>
-              </span>
-            </span>
+            </>
           )}
         </div>
         {isShowDisplayStylePopover && (

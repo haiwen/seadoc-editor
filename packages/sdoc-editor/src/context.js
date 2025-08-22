@@ -82,6 +82,14 @@ class Context {
       });
   }
 
+  getFileContentByDocUuid(docUuid) {
+    return this.sdocServerApi.getDocContentByDocUuid(docUuid)
+      .then(res => {
+        this.settings['last_modify_user'] = res.data.last_modify_user;
+        return res;
+      });
+  }
+
   normalizeSdocContent() {
     return this.sdocServerApi.normalizeSdocContent();
   }

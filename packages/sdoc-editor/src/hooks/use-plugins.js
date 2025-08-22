@@ -1,7 +1,8 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import CommentWrapper from '../comment';
 import CommentsOperation from '../comment/components/comment-operation';
 import { PLUGIN_DISPLAY_TYPE } from '../constants';
+import FilePreviewWrapper from '../extension/commons/file-link-preview';
 
 const PluginsContext = React.createContext(null);
 
@@ -17,6 +18,13 @@ export const PluginsProvider = ({ showComment, plugins: propsPlugins, children, 
 
   const plugins = useMemo(() => {
     const allPlugins = propsPlugins;
+    allPlugins.push({
+      name: 'sdoc-file-preview',
+      resizable_width: true,
+      display_type: PLUGIN_DISPLAY_TYPE.RIGHT_PANEL,
+      component: FilePreviewWrapper
+
+    });
     if (showComment) {
       allPlugins.push({
         name: 'sdoc-comment',
@@ -29,8 +37,8 @@ export const PluginsProvider = ({ showComment, plugins: propsPlugins, children, 
     return allPlugins;
   }, [showComment, propsPlugins]);
 
-  const updateDisplayPlugin = useCallback((name) => {
-    if (!name || displayName === name) {
+  const updateDisplayPlugin = useCallback((name, isFilePreview = false) => {
+    if ((!name || displayName === name) && !isFilePreview) {
       setDisplayName('');
       return;
     }
