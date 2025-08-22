@@ -10,6 +10,7 @@ import { parcelFileTypeIcon } from '../select-file-dialog/helpers';
 import './index.css';
 
 const FilePreviewWrapper = ({ docUuid, title }) => {
+  const scrollRef = useRef(null);
   const [fileContent, setFileContent] = useState(null);
   const [Component, setComponent] = useState(null);
   const { closePlugin } = usePlugins();
@@ -75,7 +76,7 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
         </div>
         <div className="file-preview-panel-body">
           {Component && (
-            <ScrollContext.Provider value={{ scrollRef: { current: null } }}>
+            <ScrollContext.Provider value={{ scrollRef: filePreviewRef }}>
               <div className='file-preview-container' ref={filePreviewRef}>
                 <Component
                   key={docUuid}
