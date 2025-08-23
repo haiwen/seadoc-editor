@@ -76,15 +76,15 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
         </div>
         <div className="file-preview-panel-body">
           {Component && (
-            <ScrollContext.Provider value={{ scrollRef: filePreviewRef }}>
-              <div className='file-preview-container' ref={filePreviewRef}>
-                <Component
-                  key={docUuid}
-                  editor={readonlyEditor}
-                  slateValue={fileContent}
-                />
-              </div>
-            </ScrollContext.Provider>
+            // <ScrollContext.Provider value={{ scrollRef: filePreviewRef }}>
+            <div className='file-preview-container' ref={filePreviewRef}>
+              <Component
+                key={docUuid}
+                editor={readonlyEditor}
+                slateValue={fileContent}
+              />
+            </div>
+            // </ScrollContext.Provider>
           )}
         </div>
       </div>
