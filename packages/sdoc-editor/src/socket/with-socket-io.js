@@ -1,3 +1,4 @@
+import deepCopy from 'deep-copy';
 import { generateCursorData } from '../cursor/helper';
 import EventBus from '../utils/event-bus';
 import SocketManager from './socket-manager';
@@ -33,7 +34,7 @@ const withSocketIO = (editor, options) => {
       return;
     }
 
-    lastOperations = operations;
+    lastOperations = deepCopy(operations);
     if (!newEditor.isRemote && operations.length > 0) {
       const isAllSetSelection = operations.every(operation => operation.type === 'set_selection');
       const socketManager = SocketManager.getInstance(newEditor, document, config);
