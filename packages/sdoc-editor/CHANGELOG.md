@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.144](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.143...@seafile/sdoc-editor@2.0.144) (2025-08-25)
+
+### Bug Fixes
+
+- fix blob enter bug ([eda639a](https://github.com/seafileltd/sea-sdoc-editor/commit/eda639ab36630a5a4fb159a42274efe027a0130b))
+- insert link element problem ([6ffe44b](https://github.com/seafileltd/sea-sdoc-editor/commit/6ffe44b7be127dd873b50cc9eb52f9444119fea0))
+
 ## [2.0.143](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.142...@seafile/sdoc-editor@2.0.143) (2025-08-21)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
