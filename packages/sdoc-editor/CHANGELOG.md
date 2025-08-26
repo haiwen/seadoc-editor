@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.145](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.144...@seafile/sdoc-editor@2.0.145) (2025-08-26)
+
+### Bug Fixes
+
+- fix quick insert&translate bug ([81d12d0](https://github.com/seafileltd/sea-sdoc-editor/commit/81d12d0e582f10e3e4304a70acc1423ed7065b13))
+- repair resove comment bug ([166ff62](https://github.com/seafileltd/sea-sdoc-editor/commit/166ff62adfd2d65dfde522e96262be8bd3881290))
+
 ## [2.0.144](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.143...@seafile/sdoc-editor@2.0.144) (2025-08-25)
 
 ### Bug Fixes
