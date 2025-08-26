@@ -146,7 +146,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
         <div className='sdoc-side-menu-search-wrapper'>
           <Input
             autoFocus
-            placeholder={t('Search_action')}
+            placeholder={t('Search_1')}
             onChange={onChange}
             onCompositionStart={onCompositionStart}
             onCompositionEnd={onCompositionEnd}

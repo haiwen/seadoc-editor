@@ -15,7 +15,7 @@ const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) 
   const scrollRef = useScrollContext();
   const insertElmRef = useRef(null);
   const aboveBlockNode = getAboveBlockNode(editor);
-  const isEmptyNode = Editor.isEmpty(editor, aboveBlockNode?.[0]);
+  const isEmptyNode = aboveBlockNode && Editor.isEmpty(editor, aboveBlockNode?.[0]);
   const [isShowPopover, setIsShowPopover] = useState(isSelectionSameWithInsert(editor, element));
 
   const handleClick = useCallback((e) => {

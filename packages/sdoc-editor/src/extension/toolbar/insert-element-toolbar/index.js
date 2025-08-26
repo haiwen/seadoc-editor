@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { Input } from 'reactstrap';
 import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
@@ -29,12 +29,12 @@ const QuickInsertBlockMenu = ({
   callback,
   isEmptyNode,
   handleClosePopover,
-  t
 }) => {
   const editor = useSlateStatic();
   const tableSizeRef = useRef(null);
   const inputWrapperRef = useRef(null);
   const downDownWrapperRef = useRef(null);
+  const { t } = useTranslation('sdoc-editor');
   const [currentSelectIndex, setCurrentSelectIndex] = useState(-1); // -1 is input focus position
   const [quickInsertMenuSearchMap, setQuickInsertMenuSearchMap] = useState(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP);
 
@@ -323,7 +323,7 @@ const QuickInsertBlockMenu = ({
       <div className='sdoc-side-menu-search-wrapper'>
         <Input
           innerRef={inputWrapperRef}
-          placeholder={t('Search_action')}
+          placeholder={t('Search_1')}
           onChange={onChange}
           onCompositionStart={onCompositionStart}
           onCompositionEnd={onCompositionEnd}
