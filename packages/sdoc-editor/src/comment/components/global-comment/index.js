@@ -54,6 +54,7 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
 
   const updateScrollPosition = useCallback(() => {
     const resolvedDom = document.querySelector('.sdoc-resolved');
+    if (!resolvedDom) return;
     contentRef.current?.scrollTo({
       top: resolvedDom.offsetTop,
       behavior: 'smooth',

@@ -185,7 +185,7 @@ export const commentReducer = (state, action) => {
       return {
         ...state,
         element_comments_map: { ...element_comments_map },
-        comment_list: sortCommentList(commentList),
+        comment_list: commentList,
       };
     }
     case 'INSERT_REPLY': {
