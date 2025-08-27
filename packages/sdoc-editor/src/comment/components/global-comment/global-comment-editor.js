@@ -23,7 +23,7 @@ const GlobalCommentEditor = ({ isScrollDisplayed, globalCommentContent, type, in
     collaborators,
     participants,
     api: {
-      uploadLocalImage: context.uploadLocalImage,
+      uploadLocalImage: context.uploadCommentImage,
     }
   };
 

@@ -107,6 +107,19 @@ class Context {
     );
   };
 
+  uploadCommentImage = (imageFiles) => {
+    const docUuid = this.getSetting('docUuid');
+    const serviceUrl = context.getSetting('serviceUrl');
+    const assetsUrl = context.getSetting('assetsUrl');
+    return (
+      this.api.uploadSdocImage(docUuid, imageFiles).then((res) => {
+        const { relative_path } = res.data;
+        const fllPath = [serviceUrl + assetsUrl + relative_path[0]];
+        return fllPath;
+      })
+    );
+  };
+
   uploadLocalVideo = (videoFiles) => {
     const docUuid = this.getSetting('docUuid');
     return (

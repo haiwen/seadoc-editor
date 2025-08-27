@@ -84,7 +84,7 @@ const CommentItemReply = ({
     insertContent: updateContent,
     hiddenComment: setIsEditing,
     api: {
-      uploadLocalImage: context.uploadLocalImage,
+      uploadLocalImage: context.uploadCommentImage,
     }
   };
 
