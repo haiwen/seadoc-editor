@@ -230,6 +230,11 @@ class SeafileAPI {
     return this.req.post(url, form);
   }
 
+  getTokenByDocUuid(docUuid) {
+    const url = `/api/v2.1/seadoc/access-token-by-uuid/${docUuid}/`;
+    return this.req.get(url);
+  }
+
 }
 
 export default SeafileAPI;

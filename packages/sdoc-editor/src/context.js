@@ -61,7 +61,6 @@ class Context {
     }
   }
 
-
   getEditorConfig() {
     // When you need to execute this function, make sure to get the latest configuration items
     const { docUuid, accessToken, sdocServer } = this.getSettings();
@@ -82,12 +81,8 @@ class Context {
       });
   }
 
-  getFileContentByDocUuid(docUuid) {
-    return this.sdocServerApi.getDocContentByDocUuid(docUuid)
-      .then(res => {
-        this.settings['last_modify_user'] = res.data.last_modify_user;
-        return res;
-      });
+  getFileContentByDocUuidAndAccessToken(docUuid, access_token) {
+    return this.sdocServerApi.getFileContentByDocUuidAndAccessToken(docUuid, access_token);
   }
 
   normalizeSdocContent() {
@@ -307,6 +302,10 @@ class Context {
   updateConfigUuid(docUuid) {
     if (!this.config) return;
     this.config['docUuid'] = docUuid;
+  }
+
+  getTokenByDocUuid(docUuid) {
+    return this.api.getTokenByDocUuid(docUuid);
   }
 
 }

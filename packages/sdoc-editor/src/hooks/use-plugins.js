@@ -23,7 +23,6 @@ export const PluginsProvider = ({ showComment, plugins: propsPlugins, children, 
       resizable_width: true,
       display_type: PLUGIN_DISPLAY_TYPE.RIGHT_PANEL,
       component: FilePreviewWrapper
-
     });
     if (showComment) {
       allPlugins.push({
