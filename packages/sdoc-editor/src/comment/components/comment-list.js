@@ -163,7 +163,7 @@ const CommentList = ({
                   insertContent={addNewComment}
                   hiddenComment={hiddenComment}
                   closePanel={closeComment}
-                  api={{ uploadLocalImage: context.uploadLocalImage }}
+                  api={{ uploadLocalImage: context.uploadCommentImage }}
                 />
               )}
               {!isEmptyComment && (
@@ -192,7 +192,7 @@ const CommentList = ({
                         handleInputChange(item.id, content)
                       }
                       hiddenComment={hiddenComment}
-                      api={{ uploadLocalImage: context.uploadLocalImage }}
+                      api={{ uploadLocalImage: context.uploadCommentImage }}
                     />
                   )}
                 </>
@@ -213,7 +213,7 @@ const CommentList = ({
               insertContent={addNewComment}
               hiddenComment={hiddenComment}
               closePanel={closeComment}
-              api={{ uploadLocalImage: context.uploadLocalImage }}
+              api={{ uploadLocalImage: context.uploadCommentImage }}
             />
           )}
           {!isEmptyComment && (
@@ -242,7 +242,7 @@ const CommentList = ({
                     setInputContent(content);
                   }}
                   hiddenComment={hiddenComment}
-                  api={{ uploadLocalImage: context.uploadLocalImage }}
+                  api={{ uploadLocalImage: context.uploadCommentImage }}
                 />
               )}
             </>
