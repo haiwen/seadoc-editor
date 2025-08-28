@@ -55,8 +55,10 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
     const { doc_uuid, title, type } = element;
 
     const eventBus = EventBus.getInstance();
-    eventBus.dispatch(INTERNAL_EVENT.CLOSE_SDOC_OUTLINE);
     eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, { doc_uuid, title, type });
+    setTimeout(() => {
+      onHideInsertHoverMenu();
+    }, 0);
   }, [updateDisplayPlugin]);
 
   const selectedType = element.display_type || SDOC_LINK_TYPE.TEXT_LINK;
