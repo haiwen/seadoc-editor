@@ -56,10 +56,8 @@ const renderCallout = ({ attributes, children, element }, editor) => {
   const handleScroll = useCallback((e) => {
     if (readOnly) return;
     if (!isShowColorSelector) return;
-    if (e.currentTarget.scrollTop) {
-      const menuPosition = getMenuPosition(calloutRef.current, editor);
-      setPopoverPosition(menuPosition);
-    }
+    const menuPosition = getMenuPosition(calloutRef.current, editor);
+    setPopoverPosition(menuPosition);
   }, [editor, isShowColorSelector, readOnly]);
 
   useEffect(() => {
@@ -71,13 +69,26 @@ const renderCallout = ({ attributes, children, element }, editor) => {
   useEffect(() => {
     if (readOnly) return;
     let observerRefValue = null;
+    let resizeObserver = null;
     if (scrollRef.current) {
       scrollRef.current.addEventListener('scroll', handleScroll);
       observerRefValue = scrollRef.current;
+
+      resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (resizeObserver) {
+            handleScroll();
+          }
+        }
+      });
+      resizeObserver.observe(scrollRef.current);
     }
 
     return () => {
       observerRefValue.removeEventListener('scroll', handleScroll);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [handleScroll, readOnly, scrollRef]);
 

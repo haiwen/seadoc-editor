@@ -123,10 +123,22 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
 
   useEffect(() => {
     let observerRefValue = null;
+    let resizeObserver = null;
+
     if (isShowImageHoverMenu) {
       registerEvent([{ 'eventName': 'click', 'event': onHideImageHoverMenu }]);
       scrollRef.current && scrollRef.current.addEventListener('scroll', onScroll);
       observerRefValue = scrollRef.current;
+
+      resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (resizeObserver) {
+            onScroll();
+          }
+        }
+      });
+
+      resizeObserver.observe(scrollRef.current);
     } else {
       unregisterEvent([{ 'eventName': 'click', 'event': onHideImageHoverMenu }]);
       scrollRef.current && scrollRef.current.removeEventListener('scroll', onScroll);
@@ -135,6 +147,9 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
       unregisterEvent([{ 'eventName': 'click', 'event': onHideImageHoverMenu }]);
       if (observerRefValue) {
         observerRefValue.removeEventListener('scroll', onScroll);
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps

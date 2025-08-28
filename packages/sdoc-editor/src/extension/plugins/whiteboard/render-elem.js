@@ -66,22 +66,34 @@ const Whiteboard = ({ editor, element }) => {
   const handleScroll = useCallback((e) => {
     if (readOnly) return;
     if (!isSelected) return;
-    if (e.currentTarget.scrollTop) {
-      const menuPosition = getMenuPosition(whiteboardRef.current, editor);
-      setMenuPosition(menuPosition);
-    }
+    const menuPosition = getMenuPosition(whiteboardRef.current, editor);
+    setMenuPosition(menuPosition);
   }, [editor, isSelected, readOnly]);
 
   useEffect(() => {
     if (readOnly) return;
     let observerRefValue = null;
+    let resizeObserver = null;
     if (scrollRef.current) {
       scrollRef.current.addEventListener('scroll', handleScroll);
       observerRefValue = scrollRef.current;
+
+      resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (resizeObserver) {
+            handleScroll();
+          }
+        }
+      });
+
+      resizeObserver.observe(scrollRef.current);
     }
 
     return () => {
       observerRefValue.removeEventListener('scroll', handleScroll);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [handleScroll, readOnly, scrollRef]);
 

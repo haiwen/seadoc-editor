@@ -19,6 +19,7 @@ const propTypes = {
 class Link extends React.Component {
 
   static contextType = ScrollContext;
+  resizeObserver = null;
 
   constructor(props) {
     super(props);
@@ -38,6 +39,13 @@ class Link extends React.Component {
     const { scrollRef } = this.context;
     if (scrollRef.current) {
       scrollRef.current.addEventListener('scroll', this.onScroll);
+
+      this.resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          this.onScroll();
+        }
+      });
+      this.resizeObserver.observe(scrollRef.current);
     }
   };
 
@@ -46,6 +54,10 @@ class Link extends React.Component {
     const { scrollRef } = this.context;
     if (scrollRef.current) {
       scrollRef.current.addEventListener('scroll', this.onScroll);
+    }
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
     }
   };
 

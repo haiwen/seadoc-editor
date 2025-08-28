@@ -52,13 +52,26 @@ const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) 
   useEffect(() => {
     if (readonly) return;
     if (!sideMenuRef.current) return;
+    let resizeObserver = null;
     const scrollDom = scrollRef.current;
     handleInsertMenuStyle();
     document.addEventListener('click', handleClick);
     scrollDom.addEventListener('scroll', handleScroll);
+    resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        if (resizeObserver) {
+          handleScroll();
+        }
+      }
+    });
+
+    resizeObserver.observe(scrollDom);
     return () => {
       document.removeEventListener('click', handleClick);
       scrollDom.removeEventListener('scroll', handleScroll);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [editor, element, handleClick, handleInsertMenuStyle, handleScroll, readonly, scrollRef]);
 
