@@ -214,10 +214,11 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
       {isShowImagePlaceholder && (
         <span
           className={classNames('sdoc-image-wrapper', className)}
-          {...attributes} style={{ ...style }}
+          {...attributes}
+          style={{ ...style }}
           onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
-          contentEditable='false'
           data-src={getImageURL(data, editor)}
+          contentEditable='false'
           suppressContentEditableWarning
         >
           <img
@@ -233,10 +234,11 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
       {isCopyImageError && (
         <span
           className={classNames('sdoc-image-wrapper', className)}
-          {...attributes} style={{ ...style }}
+          {...attributes}
+          style={{ ...style }}
           onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
-          contentEditable='false'
           data-src={data.src}
+          contentEditable='false'
           suppressContentEditableWarning
         >
           <Svg
@@ -252,10 +254,11 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
           <span
             data-id={element.id}
             className={classNames('sdoc-image-wrapper', className)}
-            {...attributes} style={{ ...style }}
-            onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
-            contentEditable='false'
+            {...attributes}
+            contentEditable='true'
             suppressContentEditableWarning
+            style={{ ...style }}
+            onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
           >
             <span className='sdoc-image-inner'>
               <span className={classNames('sdoc-image-content', { 'upload-error': isUploadError })}>
@@ -367,7 +370,7 @@ export function renderImageBlock(props, editor) {
       style={{ display: 'flex', justifyContent: `${justifyContent}` }}
       {...attributes}
       onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
-      contentEditable='false'
+      contentEditable='true'
       suppressContentEditableWarning
     >
       {children}
