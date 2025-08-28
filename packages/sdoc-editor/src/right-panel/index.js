@@ -15,6 +15,8 @@ const MAX_PANEL_WIDTH = 620;
 
 const RightPanel = ({ editor }) => {
   let { plugins, displayPluginName, closePlugin } = usePlugins();
+  const [title, setTitle] = useState('');
+  const [docUuid, setDocUuid] = useState('');
   const [width, setWidth] = useState(MIN_PANEL_WIDTH);
 
   if (editor.editorType === WIKI_EDITOR) {
@@ -79,6 +81,22 @@ const RightPanel = ({ editor }) => {
     eventBus.dispatch(INTERNAL_EVENT.RESIZE_ARTICLE);
   }, [displayPluginName]);
 
+  const updateFilePreviewPlugin = useCallback(({ doc_uuid, title, type } ) => {
+    if (type && type === 'sdoc_link') {
+      setTitle(title + '.sdoc');
+    }
+    setDocUuid(doc_uuid);
+  }, []);
+
+  useEffect(() => {
+    const eventBus = EventBus.getInstance();
+    const unsubscribeTransferFileId = eventBus.subscribe(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, updateFilePreviewPlugin);
+
+    return () => {
+      unsubscribeTransferFileId();
+    };
+  }, []);
+
   if (!displayPluginName) return null;
   const plugin = plugins.find(p => p.name === displayPluginName);
   if (!plugin) return null;
@@ -92,7 +110,7 @@ const RightPanel = ({ editor }) => {
         <ResizeWidth minWidth={MIN_PANEL_WIDTH} maxWidth={MAX_PANEL_WIDTH} resizeWidth={resizeWidth} resizeWidthEnd={resizeWidthEnd} />
       )}
       <div className="sdoc-content-right-panel" id="sdoc-content-right-panel">
-        {<Component editor={editor} type="global" onClose={closePlugin} width={width} />}
+        {<Component editor={editor} type="global" onClose={closePlugin} width={width} title={title} docUuid={docUuid} />}
       </div>
     </div>
   );

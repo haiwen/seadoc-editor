@@ -25,6 +25,12 @@ class SDocServerApi {
     return axios.get(url, { headers: { Authorization: `Token ${accessToken}` } });
   }
 
+  getFileContentByDocUuidAndAccessToken(docUuid, access_token) {
+    const { server } = this;
+    const url = `${server}/api/v1/docs/${docUuid}/`;
+    return axios.get(url, { headers: { Authorization: `Token ${access_token}` } });
+  }
+
   normalizeSdocContent() {
     const { server, docUuid, accessToken } = this;
     const url = `${server}/api/v1/docs/${docUuid}/normalize-sdoc`;

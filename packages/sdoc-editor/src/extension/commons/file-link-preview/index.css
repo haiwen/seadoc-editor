@@ -1,0 +1,148 @@
+.sdoc-file-preview-drawer {
+  width: 100%;
+  height: 100%;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-wrapper {
+  /* 100vh - toolbar height*/
+  height: calc(100vh - 93px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header {
+  padding: 0 16px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #EAECEF;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header-right .file-preview-full-screen {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+  margin-right: 8px;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header-right .file-preview-full-screen:hover {
+  border-radius: 3px;
+  background-color: #EFEFEF;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header-right .file-preview-full-screen .icon-font {
+  color: #999;
+  font-size: 14px;
+}
+
+
+.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .detail-header-icon-container {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  height: 32px;
+  justify-content: center;
+  width: 32px
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .name.ellipsis {
+  color: var(--bs-body-color);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: 0 .5rem 0 6px;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .title {
+  color: #212529;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-right {
+  display: flex;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-body {
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.file-preview-panel-body .file-preview-container {
+  overflow: auto;
+}
+
+.sdoc-file-preview-drawer .file-preview-panel-body .sdoc-article-container {
+  width: 100% !important;
+  padding: 0px;
+  pointer-events: none;
+  user-select: auto;
+}
+
+.file-preview-panel-body .sdoc-article-container .article.sdoc-editor__article {
+  border: none;
+  box-shadow: none;
+  padding: 8px;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-editor__article {
+  padding: calc(100vw / 794 * 40) calc(100vw / 794 * 60) !important;
+  font-size: calc(100vw / 794 * 14.7) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-checkbox-input {
+  width: calc(100vw / 794 * 13) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-code-block-pre {
+  font-size: calc(100vw / 794 * 13.3) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-title {
+  font-size: calc(100vw / 794 * 33.7) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-subtitle {
+  font-size: calc(100vw / 794 * 20) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-1 {
+  font-size: calc(100vw / 794 * 26.7) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-2 {
+  font-size: calc(100vw / 794 * 21.3) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-3 {
+  font-size: calc(100vw / 794 * 18.7) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-4 {
+  font-size: calc(100vw / 794 * 16) !important;
+}
+
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-5,
+.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-6 {
+  font-size: calc(100vw / 794 * 14.7) !important;
+}
+
+.file-preview-panel-body .sdoc-article-container .sdoc-table-wrapper {
+  max-width: none !important;
+}

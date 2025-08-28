@@ -49,6 +49,7 @@ export const INTERNAL_EVENT = {
   IMAGE_COLUMN_TOGGLE: 'Image_column_toggle',
   CREATE_WHITEBOARD_FILE: 'create_whiteboard_file',
   GENERATE_EXDRAW_READ_ONLY_LINK: 'generate_exdraw_read_only_link',
+  TRANSFER_PREVIEW_FILE_ID: 'transfer_preview_file_id'
 };
 
 export const PAGE_EDIT_AREA_WIDTH = 672; // 672 = 794 - 2[borderLeft + borderRight] - 120[paddingLeft + paddingRight]

@@ -68,15 +68,13 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
   const onScroll = useCallback((e) => {
     if (readOnly) return;
     if (!showHoverMenu) return;
-    if (e.currentTarget.scrollTop) {
-      const { top, left } = codeBlockRef.current.getBoundingClientRect();
-      const menuTop = top - 42; // top = top distance - menu height
-      const newMenuPosition = {
-        top: menuTop,
-        left: left // left = code-block left distance
-      };
-      setMenuPosition(newMenuPosition);
-    }
+    const { top, left } = codeBlockRef.current.getBoundingClientRect();
+    const menuTop = top - 42; // top = top distance - menu height
+    const newMenuPosition = {
+      top: menuTop,
+      left: left // left = code-block left distance
+    };
+    setMenuPosition(newMenuPosition);
   }, [readOnly, showHoverMenu]);
 
   useEffect(() => {

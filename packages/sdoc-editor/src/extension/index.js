@@ -8,7 +8,8 @@ import { HeaderToolbar, ContextToolbar, SideToolbar } from './toolbar';
 
 const baseEditor = withHistory(withReact(createEditor()));
 
-const defaultEditor = Plugins?.reduce((editor, pluginItem) => {
+const defaultEditor = (Plugins || [])?.reduce((editor, pluginItem) => {
+  if (!pluginItem) return editor;
   const withPlugin = pluginItem.editorPlugin;
   if (withPlugin) {
     return withPlugin(editor);

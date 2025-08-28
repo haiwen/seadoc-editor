@@ -7,7 +7,7 @@ export const getStyleByDefaultMode = (scrollRef, editor) => {
   const containerStyle = editor.editorType !== WIKI_EDITOR ? { width: ARTICLE_DEFAULT_WIDTH } : {};
 
   // Has outline
-  if (isShowOutline && editor.editorType !== WIKI_EDITOR) {
+  if (isShowOutline && scrollRef.current && editor.editorType !== WIKI_EDITOR) {
     const rect = scrollRef.current.getBoundingClientRect();
 
     if ((rect.width - Number(ARTICLE_DEFAULT_WIDTH.slice(0, 3))) / 2 < 280) {

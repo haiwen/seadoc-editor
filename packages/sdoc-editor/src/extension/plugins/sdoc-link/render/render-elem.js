@@ -60,15 +60,30 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
 
   useEffect(() => {
     let observerRefValue = null;
+    let resizeObserver = null;
+
     if (isShowInsertHoverMenu) {
       scrollRef.current && scrollRef.current.addEventListener('scroll', onScroll);
       observerRefValue = scrollRef.current;
+
+      resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (resizeObserver) {
+            onScroll();
+          }
+        }
+      });
+
+      resizeObserver.observe(scrollRef.current);
     } else {
       scrollRef.current && scrollRef.current.removeEventListener('scroll', onScroll);
     }
     return () => {
       if (observerRefValue) {
         observerRefValue.removeEventListener('scroll', onScroll);
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -19,7 +19,7 @@ const PluginsOperations = () => {
 
   if (plugins.length === 0) return null;
 
-  return plugins.filter(plugin => !plugin.position || plugin.position === PLUGIN_BTN_POSITION.DEFAULT).map(plugin => {
+  return plugins.filter(plugin => (!plugin.position || plugin.position === PLUGIN_BTN_POSITION.DEFAULT) && plugin.icon).map(plugin => {
     const { name, icon } = plugin;
     let iconDom = '';
     if (typeof icon !== 'string') {
