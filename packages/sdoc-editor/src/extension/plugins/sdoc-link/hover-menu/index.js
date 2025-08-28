@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
 import { INTERNAL_EVENT } from '../../../../constants';
 import { usePlugins } from '../../../../hooks/use-plugins';
+import { setOutlineSetting } from '../../../../outline';
 import EventBus from '../../../../utils/event-bus';
 import { ElementPopover } from '../../../commons';
 import { SDOC_LINK_TYPE_CONFIG, SDOC_LINK_TYPE, SDOC_LINK_TYPES } from '../constants';
@@ -54,6 +55,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
     const { doc_uuid, title, type } = element;
 
     const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.CLOSE_SDOC_OUTLINE);
     eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, { doc_uuid, title, type });
   }, [updateDisplayPlugin]);
 

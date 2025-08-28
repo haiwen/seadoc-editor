@@ -45,6 +45,21 @@ const SDocOutline = ({ scrollLeft, doc, t }) => {
     updateOutlineState(outlineState);
   }, [updateOutlineState]);
 
+  useEffect(() => {
+    const handleCloseOutline = () => {
+      setOutlineSetting(false);
+      const outlineState = getOutlineSetting();
+      updateOutlineState(outlineState);
+    };
+
+    const eventBus = EventBus.getInstance();
+    const unsubscribeCloseOutline = eventBus.subscribe(INTERNAL_EVENT.CLOSE_SDOC_OUTLINE, handleCloseOutline);
+
+    return () => {
+      unsubscribeCloseOutline();
+    };
+  }, []);
+
   const toggleShow = useCallback(() => {
     updateOutlineState(!isShown);
   }, [isShown, updateOutlineState]);
