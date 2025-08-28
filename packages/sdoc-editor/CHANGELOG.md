@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.147](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.146...@seafile/sdoc-editor@2.0.147) (2025-08-28)
+
+### Bug Fixes
+
+- arrowUp after image bug ([ef20b17](https://github.com/seafileltd/sea-sdoc-editor/commit/ef20b17c930fbf7a0c9c9aeede33f603b6fcbd04))
+- close hover menu ([f0053d4](https://github.com/seafileltd/sea-sdoc-editor/commit/f0053d49ec510195bc96b025758435adb7784a64))
+- optimize code ([08ffa3a](https://github.com/seafileltd/sea-sdoc-editor/commit/08ffa3a63b50b7ec5dc6b51000bb47c2233782c6))
+- resolve hover menu postion in big screen ([e273084](https://github.com/seafileltd/sea-sdoc-editor/commit/e273084cb3eb58ede0a641cfcc0b58d2d8ce92fd))
+- **test:** resolve test bug ([1b90384](https://github.com/seafileltd/sea-sdoc-editor/commit/1b90384dab0657fd74e1d94a8d91a9bfd2eb240c))
+
+### Features
+
+- add get filecontent api ([f9492b8](https://github.com/seafileltd/sea-sdoc-editor/commit/f9492b830778774991f2037a238cee827dba112e))
+- close outline when open sdoc file preview ([1751a97](https://github.com/seafileltd/sea-sdoc-editor/commit/1751a974b26c50d6411154aa484d50dd2d4ad71a))
+- **file-preview:** add file preview for sdoc link ([0b9646a](https://github.com/seafileltd/sea-sdoc-editor/commit/0b9646ad54c59651fcaf99dd4000dbb68254572a))
+- **test:** test ([8a5f542](https://github.com/seafileltd/sea-sdoc-editor/commit/8a5f542e79c4f4a90ccac3e5adafbecb08f6bd18))
+
 ## [2.0.146](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.145...@seafile/sdoc-editor@2.0.146) (2025-08-27)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
