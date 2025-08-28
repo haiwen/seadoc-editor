@@ -7,7 +7,7 @@ module.exports = function override(config, webpackEnv) {
 
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
-  const loaders = config.module.rules[1].oneOf;
+  const loaders = config.module.rules.find(rule => rule.oneOf).oneOf;
 
   loaders.splice(loaders.length - 1, 0, {
     test: /\.(js|mjs|cjs)$/,
