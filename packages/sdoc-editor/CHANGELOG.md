@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.149](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.148...@seafile/sdoc-editor@2.0.149) (2025-08-30)
+
+### Bug Fixes
+
+- wiki page hover bug ([c593153](https://github.com/seafileltd/sea-sdoc-editor/commit/c5931530d29d5a0d32dca5d48c746c774c37f6a0))
+
 ## [2.0.148](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.147...@seafile/sdoc-editor@2.0.148) (2025-08-30)
 
 ### Bug Fixes
