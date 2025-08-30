@@ -57,7 +57,8 @@ const EditorComment = ({ editor }) => {
   useEffect(() => {
     const handleHoverContextComment = (event) => {
       const parentDom = event.target.parentElement;
-      if (parentDom?.className?.includes('sdoc_comment_')) {
+      const clazzNames = parentDom?.className || [];
+      if (clazzNames.includes('sdoc_comment_')) {
         const isHover = event.type === 'mouseover';
         const matchedAttributes = parentDom.className.split(' ').filter(cls => cls.startsWith('sdoc_comment_'));
         matchedAttributes.forEach((className) => {

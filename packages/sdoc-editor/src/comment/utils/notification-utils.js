@@ -11,7 +11,7 @@ const notify = ($title, $options) => {
   // auto clear notifications
   const timer = setTimeout(notification.close.bind(notification), 5000);
   notification.onshow = function (event) {
-    const { mediaUrl } = context.getSetting('mediaUrl');
+    const mediaUrl = context.getSetting('mediaUrl');
     let newAudioElement = document.createElement('audio');
     newAudioElement.setAttribute('src', `${mediaUrl}audio/classic.mp3`);
     newAudioElement.setAttribute('autoplay', 'autoplay');
