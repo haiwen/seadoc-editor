@@ -60,6 +60,7 @@ class SocketClient {
   };
 
   onConnected = () => {
+    clientDebug('socket is connected: %s', this.socket.connected);
     // join room
     this.socket.emit('join-room', (result) => {
       const socketManager = SocketManager.getInstance();
@@ -113,7 +114,7 @@ class SocketClient {
   };
 
   onConnectError = (e) => {
-    clientDebug('connect_error.');
+    clientDebug('connect_error. %o', e.message);
     const socketManager = SocketManager.getInstance();
     socketManager.dispatchConnectState('connect_error');
   };
