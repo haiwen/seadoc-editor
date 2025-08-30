@@ -57,7 +57,8 @@ const EditorComment = ({ editor }) => {
   useEffect(() => {
     const handleHoverContextComment = (event) => {
       const parentDom = event.target.parentElement;
-      const clazzNames = parentDom?.className || [];
+      const clazzNames = parentDom?.className;
+      if (typeof classNames !== 'string') return;
       if (clazzNames.includes('sdoc_comment_')) {
         const isHover = event.type === 'mouseover';
         const matchedAttributes = parentDom.className.split(' ').filter(cls => cls.startsWith('sdoc_comment_'));
@@ -131,11 +132,12 @@ const EditorComment = ({ editor }) => {
 
     const handleClickCommentedText = (event) => {
       const parentDom = event.target.parentElement;
+      if (typeof parentDom.className !== 'string') return;
       if (parentDom?.className.split(/\s+/).some(cls => cls.startsWith('sdoc_comment'))) {
         commentedDomRef.current = parentDom;
         const matchedAttributes = parentDom.className.split(' ').filter(cls => cls.startsWith('sdoc_comment_'));
-        const clickedCommmentIdArray = matchedAttributes.map(item => item.replace('sdoc_comment_', ''));
-        onSelectElement(clickedCommmentIdArray, true);
+        const clickedCommentIdArray = matchedAttributes.map(item => item.replace('sdoc_comment_', ''));
+        onSelectElement(clickedCommentIdArray, true);
       }
     };
 
