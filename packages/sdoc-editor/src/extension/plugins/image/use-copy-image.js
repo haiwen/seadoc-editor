@@ -15,18 +15,21 @@ const updateImageNode = async (editor, element, newUrl, isError = false) => {
 
 const useCopyImage = ({ editor, element }) => {
   const { data } = element;
-  const { is_copy_error = false, is_comment: isComment } = data;
+  const { is_copy_error = false } = data;
   const [isLoading, setIsLoading] = useState();
   const [isCopyError, setIsCopyError] = useState(is_copy_error);
 
   useEffect(() => {
     const { src: url } = data;
     if (isCopyError) return;
-    if (isComment) return;
     if (!isImageUrlIsFromCopy(url)) return;
 
-    const cacheContent = LocalStorage.getItem(RECENT_PASTE_HTML_CONTENT);
-    if (!cacheContent || JSON.stringify(cacheContent).indexOf(url) === -1) return;
+    // not md convert to sdoc
+    if (url.indexOf('/file/images/auto-upload/') < 0) {
+      const cacheContent = LocalStorage.getItem(RECENT_PASTE_HTML_CONTENT);
+      // sync content from another user's copy
+      if (!cacheContent || JSON.stringify(cacheContent).indexOf(url) === -1) return;
+    }
 
     const downloadAndUploadImages = async (url) => {
       try {

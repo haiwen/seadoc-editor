@@ -9,7 +9,7 @@ const updateImageNode = async (editor, element, newUrl) => {
   const isComment = isCommentEditor(editor);
   const url = isComment ? getImageURL({ src: newUrl }, editor) : newUrl;
   const nodePath = ReactEditor.findPath(editor, element);
-  const newData = { src: url, is_comment: isComment };
+  const newData = { src: url };
   Transforms.setNodes(editor, { data: newData }, { at: nodePath });
 };
 
