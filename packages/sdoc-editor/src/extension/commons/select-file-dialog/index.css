@@ -53,6 +53,7 @@
   align-items: center;
   justify-content: center;
   width: 28px;
+  cursor: pointer;
 }
 
 .search-container .search-icon-container .sdoc-find-replace,
@@ -61,7 +62,7 @@
   color: #666666;
 }
 
-.search-container .search-icon-container  .sdoc-find-replace:hover,
+.search-container .search-icon-container .sdoc-find-replace:hover,
 .modal-header-container .sdoc-close1:hover {
   background-color: #EFEFEF;
   border-radius: 3px;
@@ -69,11 +70,12 @@
   width: 28px;
 }
 
-.sdoc-files-search-popover{
+.sdoc-files-search-popover {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 28px;
+  cursor: pointer;
 }
 
 .sdoc-files-search-popover-container {

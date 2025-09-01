@@ -144,7 +144,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
   }, [isOpenSearch]);
 
   return (
-    <Modal isOpen={true} autoFocus={false} zIndex={1071} returnFocusAfterClose={false} className="sdoc-file-select-dialog" contentClassName="sdoc-file-select-modal">
+    <Modal isOpen={true} autoFocus={false} zIndex={1071} returnFocusAfterClose={false} className="sdoc-file-select-dialog" contentClassName="sdoc-file-select-modal" toggle={closeDialog}>
       <div className='modal-header-container'>
         <h5 className='modal-title-container'>{t(modalTitle)}</h5>
         <div className='search-container'>
