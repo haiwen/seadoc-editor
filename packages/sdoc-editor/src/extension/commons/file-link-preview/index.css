@@ -101,48 +101,6 @@
   padding: 8px;
 }
 
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-editor__article {
-  padding: calc(100vw / 794 * 40) calc(100vw / 794 * 60) !important;
-  font-size: calc(100vw / 794 * 14.7) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-checkbox-input {
-  width: calc(100vw / 794 * 13) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-code-block-pre {
-  font-size: calc(100vw / 794 * 13.3) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-title {
-  font-size: calc(100vw / 794 * 33.7) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-subtitle {
-  font-size: calc(100vw / 794 * 20) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-1 {
-  font-size: calc(100vw / 794 * 26.7) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-2 {
-  font-size: calc(100vw / 794 * 21.3) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-3 {
-  font-size: calc(100vw / 794 * 18.7) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-4 {
-  font-size: calc(100vw / 794 * 16) !important;
-}
-
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-5,
-.file-preview-panel-body .file-preview-container:fullscreen .sdoc-header-6 {
-  font-size: calc(100vw / 794 * 14.7) !important;
-}
-
 .file-preview-panel-body .sdoc-article-container .sdoc-table-wrapper {
   max-width: none !important;
 }
