@@ -1,4 +1,4 @@
-import { IMAGE, IMAGE_BLOCK, PARAGRAPH, VIDEO } from '../../constants';
+import { IMAGE, VIDEO } from '../../constants';
 
 export const saveSdocToken = (docUuid, token) => {
   const now = Date.now();
@@ -25,38 +25,36 @@ export const getSdocToken = (docUuid) => {
 };
 
 export const attachDocUuidToResources = (elements, docUuid) => {
-  return elements.map(el => {
-    if ([IMAGE_BLOCK, PARAGRAPH].includes(el.type) && el.children?.length > 1) {
-      const newChildren = el.children.map(child => {
-        if (child.type === IMAGE) {
-          return {
-            ...child,
-            data: {
-              ...child.data,
-              owner_docUuid: docUuid,
-            }
-          };
-        } else {
-          return child;
-        }
-      });
-
+  const processNode = (node) => {
+    if (node.type === IMAGE) {
       return {
-        ...el,
-        children: newChildren,
-      };
-    }
-
-    if (el.type === VIDEO) {
-      return {
-        ...el,
+        ...node,
         data: {
-          ...el.data,
+          ...node.data,
           owner_docUuid: docUuid,
-        }
+        },
       };
     }
 
-    return el;
-  });
+    if (node.type === VIDEO) {
+      return {
+        ...node,
+        data: {
+          ...node.data,
+          owner_docUuid: docUuid,
+        },
+      };
+    }
+
+    if (Array.isArray(node.children)) {
+      return {
+        ...node,
+        children: node.children.map(processNode),
+      };
+    }
+
+    return node;
+  };
+
+  return elements.map(processNode);
 };

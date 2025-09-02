@@ -120,7 +120,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='sdoc_link_preview' placement='top' fade={true}>
-                    {t('File_preview')}
+                    {t('Preview')}
                   </Tooltip>
                 )}
               </span>

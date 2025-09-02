@@ -63,7 +63,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
         </div>
         {isShowTooltip && (
           <Tooltip target='select_callout_color' placement='top' fade={true}>
-            {t('Select_background_color')}
+            {t('Background_color')}
           </Tooltip>
         )}
         <div className='callout-menu-divider'></div>
@@ -73,7 +73,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
         </div>
         {isShowTooltip && (
           <Tooltip target='select_callout_icon' placement='top' fade={true}>
-            {t('Select_icon')}
+            {t('Icon')}
           </Tooltip>
         )}
         {isShowColorSelector && (
