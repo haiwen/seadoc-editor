@@ -127,7 +127,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
           {type === 'dir' && (
             <div ref={folderRef} className='sdoc-folder'>
               <div
-                className={classnames('sdoc-folder-info sdoc-file-info', { 'active': selected, 'expanded': expandedFolder.has(indexId) })}
+                className={classnames('sdoc-folder-info sdoc-file-info', { 'expanded': expandedFolder.has(indexId) })}
                 onClick={(e) => onToggle(e, item, treeData)}
               >
                 <div className='sdoc-file-icon-container'>
@@ -149,7 +149,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
             </div>
           )}
           {['file', 'video', 'exdraw'].includes(type) && (
-            <div className={classnames('sdoc-file-info', { 'active': selected })} onClick={(e) => {
+            <div className={classnames('sdoc-file-info')} onClick={(e) => {
               onSelectFile(e, item);
             }}>
               <div className='sdoc-file-icon-container'>
@@ -158,6 +158,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
               </div>
               <span className='sdoc-file-name'>{name}</span>
               {item.fullpath && folderPath.length !== 0 && (<span className='sdoc-search-folder-name'>{folderPath}</span>)}
+              {selected && <i className="sdoc-file-checked sdocfont sdoc-check-mark"></i>}
             </div>
           )}
         </div>
