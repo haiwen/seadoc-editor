@@ -44,6 +44,14 @@
   right: 1px;
 }
 
+.sdoc-file-checked {
+  position: absolute;
+  right: 10px;
+  color: #798d99;
+  font-size: 12px;
+  font-weight: 400;
+}
+
 .sdoc-files-tree .sdoc-file-info .sdoc-file-icon {
   color: #9aa0ac;
 }
