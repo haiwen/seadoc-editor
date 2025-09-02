@@ -39,7 +39,7 @@ const WhiteboardMenu = ({ editor, readonly, toggle, eventBus }) => {
           fade={false}
         >
           <div className='sdoc-insert-whiteboard-menu-popover-container sdoc-dropdown-menu-container'>
-            <div className='sdoc-dropdown-menu-item' onClick={openSelectWhiteboardFileDialog}>{t('Select_Excalidraw_file')}</div>
+            <div className='sdoc-dropdown-menu-item' onClick={openSelectWhiteboardFileDialog}>{t('Link_Excalidraw_file')}</div>
             <div className='sdoc-dropdown-menu-item' onClick={onCreateFile}>{t('New_Excalidraw_file')}</div>
           </div>
         </UncontrolledPopover>
