@@ -136,7 +136,7 @@ export const updateImage = (editor, data) => {
 };
 
 export const getImageURL = (data, editor) => {
-  const { src: url, column_key } = data;
+  const { src: url, column_key, owner_docUuid } = data;
 
   if (column_key) {
     const column = getColumnByKey(editor.columns || [], column_key);
@@ -160,7 +160,13 @@ export const getImageURL = (data, editor) => {
   if (isImageUrlIsFromCopy(url)) return url;
 
   const serviceUrl = context.getSetting('serviceUrl');
-  const assetsUrl = context.getSetting('assetsUrl');
+  let assetsUrl = context.getSetting('assetsUrl');
+
+  if (owner_docUuid) {
+    const baseUrl = assetsUrl.split('/');
+    baseUrl[baseUrl.length - 1] = owner_docUuid;
+    assetsUrl = baseUrl.join('/');
+  }
   return urlJoin(serviceUrl, assetsUrl, url);
 };
 

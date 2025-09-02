@@ -1,3 +1,5 @@
+import { IMAGE, IMAGE_BLOCK, PARAGRAPH, VIDEO } from '../../constants';
+
 export const saveSdocToken = (docUuid, token) => {
   const now = Date.now();
   // 3 days is the valid time token set by back-end
@@ -20,4 +22,41 @@ export const getSdocToken = (docUuid) => {
   }
 
   return token;
+};
+
+export const attachDocUuidToResources = (elements, docUuid) => {
+  return elements.map(el => {
+    if ([IMAGE_BLOCK, PARAGRAPH].includes(el.type) && el.children?.length > 1) {
+      const newChildren = el.children.map(child => {
+        if (child.type === IMAGE) {
+          return {
+            ...child,
+            data: {
+              ...child.data,
+              owner_docUuid: docUuid,
+            }
+          };
+        } else {
+          return child;
+        }
+      });
+
+      return {
+        ...el,
+        children: newChildren,
+      };
+    }
+
+    if (el.type === VIDEO) {
+      return {
+        ...el,
+        data: {
+          ...el.data,
+          owner_docUuid: docUuid,
+        }
+      };
+    }
+
+    return el;
+  });
 };

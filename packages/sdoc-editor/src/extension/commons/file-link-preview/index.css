@@ -146,3 +146,27 @@
 .file-preview-panel-body .sdoc-article-container .sdoc-table-wrapper {
   max-width: none !important;
 }
+
+.zoom-out-container {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.file-preview-zoom-out-container {
+  pointer-events: auto;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.file-preview-zoom-out-container .article {
+  padding: 40px;
+  pointer-events: none;
+}

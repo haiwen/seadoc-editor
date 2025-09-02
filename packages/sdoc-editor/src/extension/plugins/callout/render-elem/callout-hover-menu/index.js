@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+import Tooltip from '../../../../../components/tooltip';
 import { ElementPopover } from '../../../../commons';
 import { setCalloutIcon } from '../../helper';
 import ColorSelector from '../callout-color-selector';
@@ -12,6 +13,11 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
   const [isShowColorSelector, setIsShowColorSelector] = useState(false);
   const [isShowIcon, setIsShowIcon] = useState(false);
   const { t } = useTranslation('sdoc-editor');
+  const [isShowTooltip, setIsShowTooltip] = useState(false);
+
+  useEffect(() => {
+    setIsShowTooltip(true);
+  }, []);
 
   const onColorSelectorToggle = useCallback((event) => {
     event.stopPropagation();
@@ -51,15 +57,25 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
   return (
     <ElementPopover>
       <div className="sdoc-callout-hover-menu" style={popoverPosition}>
-        <div className={firstItemClass} onClick={onColorSelectorToggle}>
+        <div id='select_callout_color' className={firstItemClass} onClick={onColorSelectorToggle}>
           <span className='sdocfont sdoc-callout-color mr-1'></span>
           <span className='sdocfont sdoc-drop-down'></span>
         </div>
+        {isShowTooltip && (
+          <Tooltip target='select_callout_color' placement='top' fade={true}>
+            {t('Select_background_color')}
+          </Tooltip>
+        )}
         <div className='callout-menu-divider'></div>
-        <div className={secondItemClass} onClick={onIconToggle}>
+        <div id='select_callout_icon' className={secondItemClass} onClick={onIconToggle}>
           <span className='sdocfont sdoc-callout-icon mr-1'></span>
           <span className='sdocfont sdoc-drop-down'></span>
         </div>
+        {isShowTooltip && (
+          <Tooltip target='select_callout_icon' placement='top' fade={true}>
+            {t('Select_icon')}
+          </Tooltip>
+        )}
         {isShowColorSelector && (
           <ColorSelector editor={editor} element={element} onCloseSelector={onCloseSelector} />
         )}

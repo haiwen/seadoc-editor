@@ -146,12 +146,18 @@ export const insertVideo = (editor, videoFiles, srcList, selection, position = I
 };
 
 export const getVideoURL = (data) => {
-  const { src: url } = data;
+  const { src: url, owner_docUuid } = data;
 
   if (url && url.startsWith('http')) return url;
 
   const serviceUrl = context.getSetting('serviceUrl');
-  const assetsUrl = context.getSetting('assetsUrl');
+  let assetsUrl = context.getSetting('assetsUrl');
+
+  if (owner_docUuid) {
+    const baseUrl = assetsUrl.split('/');
+    baseUrl[baseUrl.length - 1] = owner_docUuid;
+    assetsUrl = baseUrl.join('/');
+  }
   return urlJoin(serviceUrl, assetsUrl, url);
 };
 

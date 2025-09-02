@@ -41,7 +41,7 @@
   background: #f1f1f1;
 }
 
-.sdoc-link-hover-menu-container .op-group-item:last-child .op-item {
+.sdoc-link-hover-menu-container .op-group-item:not(:first-child) .op-item {
   margin-left: 8px;
 }
 

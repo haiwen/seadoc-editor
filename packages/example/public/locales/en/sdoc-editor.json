@@ -643,5 +643,11 @@
   "Select_Excalidraw_file": "Select Excalidraw file",
   "New_Excalidraw_file": "New Excalidraw file",
   "Whiteboard": "Whiteboard",
-  "Open": "Open"
+  "Open": "Open",
+  "Select_background_color": "Select background color",
+  "Select_icon": "Select icon",
+  "Select_style": "Select style",
+  "Edit_link": "Edit link",
+  "Remove_link": "Remove link",
+  "File_preview": "File preview"
 }

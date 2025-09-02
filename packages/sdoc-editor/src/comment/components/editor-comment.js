@@ -132,6 +132,7 @@ const EditorComment = ({ editor }) => {
 
     const handleClickCommentedText = (event) => {
       const parentDom = event.target.parentElement;
+      if (!parentDom) return;
       if (typeof parentDom.className !== 'string') return;
       if (parentDom?.className.split(/\s+/).some(cls => cls.startsWith('sdoc_comment'))) {
         commentedDomRef.current = parentDom;

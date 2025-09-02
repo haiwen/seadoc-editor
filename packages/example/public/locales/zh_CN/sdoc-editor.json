@@ -643,5 +643,11 @@
   "Select_Excalidraw_file": "选择 Excalidraw 文件",
   "New_Excalidraw_file": "新建 Excalidraw 文件",
   "Whiteboard": "白板",
-  "Open": "打开"
+  "Open": "打开",
+  "Select_background_color": "选择背景颜色",
+  "Select_icon": "选择图标",
+  "Select_style": "选择样式",
+  "Edit_link": "编辑链接",
+  "Remove_link": "移除链接",
+  "File_preview": "文件预览"
 }

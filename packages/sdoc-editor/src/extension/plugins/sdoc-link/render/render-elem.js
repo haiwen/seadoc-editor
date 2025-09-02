@@ -2,9 +2,12 @@ import React, { useCallback, useEffect, useState, useRef, useMemo } from 'react'
 import { Editor, Range } from '@seafile/slate';
 import { ReactEditor, useReadOnly, useSelected } from '@seafile/slate-react';
 import classnames from 'classnames';
+import { INTERNAL_EVENT } from '../../../../constants';
+import { usePlugins } from '../../../../hooks/use-plugins';
 import { useScrollContext } from '../../../../hooks/use-scroll-context';
+import EventBus from '../../../../utils/event-bus';
 import { DELETED_STYLE, ADDED_STYLE } from '../../../constants';
-import { WIKI_LINK } from '../../../constants/element-type';
+import { SDOC_LINK, WIKI_LINK } from '../../../constants/element-type';
 import { focusEditor } from '../../../core';
 import { getWikiUrl } from '../../wiki-link/helpers';
 import { SDOC_LINK_TYPE } from '../constants';
@@ -21,6 +24,7 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
   const [menuPosition, setMenuPosition] = useState({});
   const readOnly = useReadOnly();
   const isSelected = useSelected();
+  const { updateDisplayPlugin } = usePlugins();
 
   const registerEventHandle = useCallback(() => {
     document.addEventListener('click', onHideInsertHoverMenu);
@@ -100,8 +104,16 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
       }
     }
 
-    if (isShowInsertHoverMenu) {
+    if (isShowInsertHoverMenu && element.type === SDOC_LINK) {
       e.stopPropagation();
+      updateDisplayPlugin('sdoc-file-preview', true);
+      const { doc_uuid, title, type } = element;
+
+      const eventBus = EventBus.getInstance();
+      eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, { doc_uuid, title, type });
+      setTimeout(() => {
+        onHideInsertHoverMenu();
+      }, 0);
     }
 
     const path = ReactEditor.findPath(editor, element);
