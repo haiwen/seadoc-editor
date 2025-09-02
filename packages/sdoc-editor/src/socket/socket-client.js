@@ -104,7 +104,11 @@ class SocketClient {
   onDisconnected = (data) => {
     if (data === 'ping timeout') {
       clientDebug('Disconnected due to ping timeout, trying to reconnect...');
-      this.socket.connect();
+      this.socket.connect((err) => {
+        if (err) {
+          clientDebug('error, %o', err);
+        }
+      });
       return;
     }
 
