@@ -8,7 +8,7 @@ import { usePlugins } from '../../../hooks/use-plugins';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
 import ReadOnlyArticle from '../../../views/readonly-article';
 import { parcelFileTypeIcon } from '../select-file-dialog/helpers';
-import { getSdocToken, saveSdocToken, attachDocUuidToResources } from './helper';
+import { getSdocToken, saveSdocToken } from './helper';
 
 import './index.css';
 
@@ -40,10 +40,8 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
 
         const result = await context.getFileContentByDocUuidAndAccessToken(docUuid, token);
         const fileContentElements = result.data.elements;
-        const newResult = attachDocUuidToResources(fileContentElements, docUuid);
-
         setIsReloading(false);
-        setFileContent(newResult);
+        setFileContent(fileContentElements);
         setComponent(() => ReadOnlyArticle);
       } catch (error) {
         console.log(error);
@@ -78,7 +76,7 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
   return (
     <>
       <div className="sdoc-file-preview-drawer">
-        <div className="file-preview-panel-wrapper">
+        <div className="file-preview-panel-wrapper" data-docuuid={docUuid}>
           <div className="file-preview-panel-header">
             <div className="file-preview-panel-header-left">
               <div className="detail-header-icon-container">

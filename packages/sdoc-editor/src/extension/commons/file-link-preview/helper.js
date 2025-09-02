@@ -1,5 +1,3 @@
-import { IMAGE, VIDEO } from '../../constants';
-
 export const saveSdocToken = (docUuid, token) => {
   const now = Date.now();
   // 3 days is the valid time token set by back-end
@@ -22,39 +20,4 @@ export const getSdocToken = (docUuid) => {
   }
 
   return token;
-};
-
-export const attachDocUuidToResources = (elements, docUuid) => {
-  const processNode = (node) => {
-    if (node.type === IMAGE) {
-      return {
-        ...node,
-        data: {
-          ...node.data,
-          owner_docUuid: docUuid,
-        },
-      };
-    }
-
-    if (node.type === VIDEO) {
-      return {
-        ...node,
-        data: {
-          ...node.data,
-          owner_docUuid: docUuid,
-        },
-      };
-    }
-
-    if (Array.isArray(node.children)) {
-      return {
-        ...node,
-        children: node.children.map(processNode),
-      };
-    }
-
-    return node;
-  };
-
-  return elements.map(processNode);
 };

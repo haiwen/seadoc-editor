@@ -136,7 +136,7 @@ export const updateImage = (editor, data) => {
 };
 
 export const getImageURL = (data, editor) => {
-  const { src: url, column_key, owner_docUuid } = data;
+  const { src: url, column_key } = data;
 
   if (column_key) {
     const column = getColumnByKey(editor.columns || [], column_key);
@@ -162,9 +162,14 @@ export const getImageURL = (data, editor) => {
   const serviceUrl = context.getSetting('serviceUrl');
   let assetsUrl = context.getSetting('assetsUrl');
 
-  if (owner_docUuid) {
+  // In sdoc link preview
+  const firstElement = document.querySelector(`[data-id="${editor.children[0].id}"]`);
+  const filePreviewWrapper = firstElement?.closest('.file-preview-panel-wrapper');
+
+  if (filePreviewWrapper) {
+    const docUuid = filePreviewWrapper.getAttribute('data-docuuid');
     const baseUrl = assetsUrl.split('/');
-    baseUrl[baseUrl.length - 1] = owner_docUuid;
+    baseUrl[baseUrl.length - 1] = docUuid;
     assetsUrl = baseUrl.join('/');
   }
   return urlJoin(serviceUrl, assetsUrl, url);
