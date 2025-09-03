@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.157](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.156...@seafile/sdoc-editor@2.0.157) (2025-09-03)
+
+### Bug Fixes
+
+- adjust helper ([3434052](https://github.com/seafileltd/sea-sdoc-editor/commit/3434052c95aa5f68c4c27907dccb407f58df3bd1))
+- resolve image and video url ([224b577](https://github.com/seafileltd/sea-sdoc-editor/commit/224b5778176bfe383db3d762be6f6c93a98ba429))
+- resolve image and video url in preview ([3be7996](https://github.com/seafileltd/sea-sdoc-editor/commit/3be799634235dfbc5a448f43a0685dc136638897))
+- resolve sdoc link file preview ([876a0a7](https://github.com/seafileltd/sea-sdoc-editor/commit/876a0a7367c348925bbcbb75e8ac1030ace3a991))
+- resolve style ([4b41db4](https://github.com/seafileltd/sea-sdoc-editor/commit/4b41db406b82805ec3988a3f36c8ec03957250cb))
+- update translation ([27bedfc](https://github.com/seafileltd/sea-sdoc-editor/commit/27bedfcaf1b5d7e3977b79fad4a629a351c94938))
+- update translation ([30ae4c3](https://github.com/seafileltd/sea-sdoc-editor/commit/30ae4c34959fe82c26343e3a50c1b0881f2e5765))
+
 ## [2.0.156](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.155...@seafile/sdoc-editor@2.0.156) (2025-09-02)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
