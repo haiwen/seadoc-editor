@@ -86,7 +86,7 @@ const Video = ({ element, editor }) => {
               <video
                 className='sdoc-video-element'
                 ref={videoRef}
-                src={getVideoURL(data)}
+                src={getVideoURL(data, editor)}
                 controls
                 controlsList={readonly && 'nofullscreen'}
                 onClick={onClickVideo}
@@ -111,7 +111,7 @@ const Video = ({ element, editor }) => {
               title={data.src}
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
               allowFullScreen
-              src={getVideoURL(data)}
+              src={getVideoURL(data, editor)}
               onLoad={handleVideoLoad}
               style={{ width: '100%', height: '100%', border: 'none' }}
             >

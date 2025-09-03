@@ -1,4 +1,5 @@
 import React, { useRef, useMemo, useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { createEditor } from '@seafile/slate';
 import { withReact } from '@seafile/slate-react';
 import FileLoading from '../../../components/file-loading';
@@ -15,20 +16,21 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
   const [fileContent, setFileContent] = useState(null);
   const [Component, setComponent] = useState(null);
   const [isReloading, setIsReloading] = useState(true);
-  const readonlyEditor = useMemo(() => withReact(createEditor()), [docUuid]);
+  const [isShowZoomOut, setIsShowZoomOut] = useState(false);
   const { closePlugin } = usePlugins();
   const filePreviewRef = useRef();
 
+  const readonlyEditor = useMemo(() => {
+    const editor = withReact(createEditor());
+    editor.preview_docUuid = docUuid;
+    return editor;
+  }, [docUuid]);
+
   const fileTypeIcon = parcelFileTypeIcon(title);
 
-  const openFullscreen = () => {
-    if (filePreviewRef.current.requestFullscreen) { // Chrome
-      filePreviewRef.current.requestFullscreen();
-    } else if (filePreviewRef.current.webkitRequestFullscreen) { // Safari
-      filePreviewRef.current.webkitRequestFullscreen();
-    } else if (filePreviewRef.current.msRequestFullscreen) { // IE11
-      filePreviewRef.current.msRequestFullscreen();
-    }
+  const openFullscreen = (e) => {
+    e.stopPropagation();
+    setIsShowZoomOut(true);
   };
 
   useEffect(() => {
@@ -42,8 +44,9 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
         }
 
         const result = await context.getFileContentByDocUuidAndAccessToken(docUuid, token);
+        const fileContentElements = result.data.elements;
         setIsReloading(false);
-        setFileContent(result.data.elements);
+        setFileContent(fileContentElements);
         setComponent(() => ReadOnlyArticle);
       } catch (error) {
         console.log(error);
@@ -60,40 +63,75 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
 
   }, [docUuid]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsShowZoomOut(false);
+      }
+    };
+    if (isShowZoomOut) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isShowZoomOut, setIsShowZoomOut]);
+
 
   return (
-    <div className="sdoc-file-preview-drawer">
-      <div className="file-preview-panel-wrapper">
-        <div className="file-preview-panel-header">
-          <div className="file-preview-panel-header-left">
-            <div className="detail-header-icon-container">
-              <img src={fileTypeIcon} width='32px' height='32px' alt="" />
+    <>
+      <div className="sdoc-file-preview-drawer">
+        <div className="file-preview-panel-wrapper">
+          <div className="file-preview-panel-header">
+            <div className="file-preview-panel-header-left">
+              <div className="detail-header-icon-container">
+                <img src={fileTypeIcon} width='32px' height='32px' alt="" />
+              </div>
+              <span className="name ellipsis" title={title}>{title}</span>
             </div>
-            <span className="name ellipsis" title={title}>{title}</span>
+            <div className="file-preview-panel-header-right">
+              <div
+                id='file-preview_full_screen_mode'
+                role="button"
+                className='file-preview-full-screen'
+                onClick={openFullscreen}
+              >
+                <i className='sdocfont sdoc-fullscreen icon-font'/>
+              </div>
+              <div className="sdoc-icon-btn" onClick={closePlugin}>
+                <i className="sdocfont sdoc-sm-close"></i>
+              </div>
+            </div>
           </div>
-          <div className="file-preview-panel-header-right">
-            <div
-              id='file-preview_full_screen_mode'
-              role="button"
-              className='file-preview-full-screen'
-              onClick={openFullscreen}
-            >
-              <i className='sdocfont sdoc-fullscreen icon-font'/>
-            </div>
-            <div className="sdoc-icon-btn" onClick={closePlugin}>
-              <i className="sdocfont sdoc-sm-close"></i>
-            </div>
+          <div className="file-preview-panel-body">
+            {isReloading && (
+              <div className="h-100 w-100 d-flex align-items-center justify-content-center">
+                <FileLoading />
+              </div>
+            )}
+            {Component && !isReloading && (
+              <ScrollContext.Provider value={{ scrollRef: { current: null } }}>
+                <div className='file-preview-container' ref={filePreviewRef}>
+                  <Component
+                    key={docUuid}
+                    editor={readonlyEditor}
+                    slateValue={fileContent}
+                  />
+                </div>
+              </ScrollContext.Provider>
+            )}
           </div>
         </div>
-        <div className="file-preview-panel-body">
-          {isReloading && (
-            <div className="h-100 w-100 d-flex align-items-center justify-content-center">
-              <FileLoading />
-            </div>
-          )}
-          {Component && !isReloading && (
+      </div>
+      {isShowZoomOut && Component && (
+        ReactDOM.createPortal(
+          <div className='zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
             <ScrollContext.Provider value={{ scrollRef: { current: null } }}>
-              <div className='file-preview-container' ref={filePreviewRef}>
+              <div
+                className='file-preview-zoom-out-container'
+                ref={filePreviewRef}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <Component
                   key={docUuid}
                   editor={readonlyEditor}
@@ -101,10 +139,11 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
                 />
               </div>
             </ScrollContext.Provider>
-          )}
-        </div>
-      </div>
-    </div>
+          </div>,
+          document.body
+        )
+      )}
+    </>
   );
 };
 

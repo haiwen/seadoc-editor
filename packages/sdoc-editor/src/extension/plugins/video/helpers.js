@@ -145,13 +145,22 @@ export const insertVideo = (editor, videoFiles, srcList, selection, position = I
   focusEditor(editor, videoEndSelection);
 };
 
-export const getVideoURL = (data) => {
+export const getVideoURL = (data, editor) => {
   const { src: url } = data;
 
   if (url && url.startsWith('http')) return url;
 
   const serviceUrl = context.getSetting('serviceUrl');
-  const assetsUrl = context.getSetting('assetsUrl');
+  let assetsUrl = context.getSetting('assetsUrl');
+
+  // If in sdoc link preview
+  const docUuid = editor.preview_docUuid;
+
+  if (docUuid) {
+    const baseUrl = assetsUrl.split('/');
+    baseUrl[baseUrl.length - 1] = docUuid;
+    assetsUrl = baseUrl.join('/');
+  }
   return urlJoin(serviceUrl, assetsUrl, url);
 };
 

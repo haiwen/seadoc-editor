@@ -1,13 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
+import Tooltip from '../../../../components/tooltip';
 import { INTERNAL_EVENT } from '../../../../constants';
 import { usePlugins } from '../../../../hooks/use-plugins';
-import { setOutlineSetting } from '../../../../outline';
 import EventBus from '../../../../utils/event-bus';
 import { ElementPopover } from '../../../commons';
 import { SDOC_LINK_TYPE_CONFIG, SDOC_LINK_TYPE, SDOC_LINK_TYPES } from '../constants';
@@ -27,6 +27,11 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
   const { updateDisplayPlugin } = usePlugins();
   const readOnly = useReadOnly();
   const [isShowDisplayStylePopover, setIsShowDisplayStylePopover] = useState(false);
+  const [isShowTooltip, setIsShowTooltip] = useState(false);
+
+  useEffect(() => {
+    setIsShowTooltip(true);
+  }, []);
 
   const onCopy = useCallback((e) => {
     e.stopPropagation();
@@ -37,6 +42,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
   }, []);
 
   const onShowProver = useCallback((e) => {
+    e.stopPropagation();
     setIsShowDisplayStylePopover(true);
   }, []);
 
@@ -77,26 +83,46 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
           {!readOnly && (
             <>
               <span className='op-group-item'>
-                <span role="button" className='op-item' onClick={onCopy}>
+                <span id='sdoc_link_copy' role="button" className='op-item' onClick={onCopy}>
                   <i className='sdocfont sdoc-copy icon-font'></i>
                 </span>
+                {isShowTooltip && (
+                  <Tooltip target='sdoc_link_copy' placement='top' fade={true}>
+                    {t('Copy')}
+                  </Tooltip>
+                )}
                 <span
+                  id='display_sdoc_link'
                   role="button"
                   className={`op-item ${isShowDisplayStylePopover ? 'link-style-icon-active' : '' }`}
                   onClick={onShowProver}
-                  id={id}
                 >
                   <i className={classnames('icon-font mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
                   <i className='sdocfont sdoc-drop-down icon-font'></i>
                 </span>
+                {isShowTooltip && (
+                  <Tooltip target='display_sdoc_link' placement='top' fade={true}>
+                    {t('Select_style')}
+                  </Tooltip>
+                )}
               </span>
               <span className='op-group-item'>
-                <span role="button" className={'op-item'} onClick={onUnwrapFileLinkNode}>
+                <span id='delete_sdoc_link' role="button" className={'op-item'} onClick={onUnwrapFileLinkNode}>
                   <i className='sdocfont sdoc-unlink icon-font'></i>
                 </span>
-                <span role="button" className='op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
+                {isShowTooltip && (
+                  <Tooltip target='delete_sdoc_link' placement='top' fade={true}>
+                    {t('Remove_link')}
+                  </Tooltip>
+                )}
+                <span id='sdoc_link_preview' role="button" className='op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
                   <i className='sdocfont eye icon-font'></i>
                 </span>
+                {isShowTooltip && (
+                  <Tooltip target='sdoc_link_preview' placement='top' fade={true}>
+                    {t('Preview')}
+                  </Tooltip>
+                )}
               </span>
             </>
           )}

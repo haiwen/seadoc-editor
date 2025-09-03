@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
+import Tooltip from '../../../../components/tooltip';
 import { ElementPopover } from '../../../commons';
 import { TABLE_CELL } from '../../../constants';
 import { getCurrentNode } from '../../../core';
@@ -23,6 +24,11 @@ const propTypes = {
 const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode, onHideInsertHoverMenu, t }) => {
   const readOnly = useReadOnly();
   const [isShowDisplayStylePopover, setIsShowDisplayStylePopover] = useState(false);
+  const [isShowTooltip, setIsShowTooltip] = useState(false);
+
+  useEffect(() => {
+    setIsShowTooltip(true);
+  }, []);
 
   const onCopy = useCallback((e) => {
     e.stopPropagation();
@@ -61,21 +67,36 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
           </span>
           {!readOnly && (
             <span className='op-group-item'>
-              <span role="button" className='op-item' onClick={onCopy}>
+              <span id='copy_link' role="button" className='op-item' onClick={onCopy}>
                 <i className='sdocfont sdoc-copy icon-font'></i>
               </span>
+              {isShowTooltip && (
+                <Tooltip target='copy_link' placement='top' fade={true}>
+                  {t('Copy')}
+                </Tooltip>
+              )}
               <span
+                id='select_style'
                 role="button"
                 className={classnames('op-item', { 'link-style-icon-active': isShowDisplayStylePopover })}
                 onClick={onShowProver}
-                id={id}
               >
                 <i className={classnames('icon-font mr-1', FILE_LINK_TYPE_CONFIG[selectedType].icon)}></i>
                 <i className='sdocfont sdoc-drop-down icon-font'></i>
               </span>
-              <span role="button" className='op-item' onClick={onUnwrapFileLinkNode}>
+              {isShowTooltip && (
+                <Tooltip target='select_style' placement='top' fade={true}>
+                  {t('Select_style')}
+                </Tooltip>
+              )}
+              <span id='delete_link' role="button" className='op-item' onClick={onUnwrapFileLinkNode}>
                 <i className='sdocfont sdoc-unlink icon-font'></i>
               </span>
+              {isShowTooltip && (
+                <Tooltip target='delete_link' placement='top' fade={true}>
+                  {t('Remove_link')}
+                </Tooltip>
+              )}
             </span>
           )}
         </div>

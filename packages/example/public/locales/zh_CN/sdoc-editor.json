@@ -643,5 +643,10 @@
   "Link_Excalidraw_file": "链接 Excalidraw 文件",
   "New_Excalidraw_file": "新建 Excalidraw 文件",
   "Whiteboard": "白板",
-  "Open": "打开"
+  "Open": "打开",
+  "Icon": "图标",
+  "Select_style": "选择样式",
+  "Edit_link": "编辑链接",
+  "Remove_link": "移除链接",
+  "Preview": "预览"
 }
