@@ -162,12 +162,10 @@ export const getImageURL = (data, editor) => {
   const serviceUrl = context.getSetting('serviceUrl');
   let assetsUrl = context.getSetting('assetsUrl');
 
-  // In sdoc link preview
-  const firstElement = document.querySelector(`[data-id="${editor.children[0].id}"]`);
-  const filePreviewWrapper = firstElement?.closest('.file-preview-panel-wrapper');
+  // If in sdoc link preview
+  const docUuid = editor.preview_docUuid;
 
-  if (filePreviewWrapper) {
-    const docUuid = filePreviewWrapper.getAttribute('data-docuuid');
+  if (docUuid) {
     const baseUrl = assetsUrl.split('/');
     baseUrl[baseUrl.length - 1] = docUuid;
     assetsUrl = baseUrl.join('/');

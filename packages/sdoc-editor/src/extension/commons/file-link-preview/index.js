@@ -17,9 +17,14 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
   const [Component, setComponent] = useState(null);
   const [isReloading, setIsReloading] = useState(true);
   const [isShowZoomOut, setIsShowZoomOut] = useState(false);
-  const readonlyEditor = useMemo(() => withReact(createEditor()), [docUuid]);
   const { closePlugin } = usePlugins();
   const filePreviewRef = useRef();
+
+  const readonlyEditor = useMemo(() => {
+    const editor = withReact(createEditor());
+    editor.preview_docUuid = docUuid;
+    return editor;
+  }, [docUuid]);
 
   const fileTypeIcon = parcelFileTypeIcon(title);
 
@@ -76,7 +81,7 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
   return (
     <>
       <div className="sdoc-file-preview-drawer">
-        <div className="file-preview-panel-wrapper" data-docuuid={docUuid}>
+        <div className="file-preview-panel-wrapper">
           <div className="file-preview-panel-header">
             <div className="file-preview-panel-header-left">
               <div className="detail-header-icon-container">
