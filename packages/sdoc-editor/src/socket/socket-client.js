@@ -103,6 +103,8 @@ class SocketClient {
 
   onDisconnected = (data) => {
     if (data === 'ping timeout') {
+      const time = new Date().toLocaleString();
+      clientDebug('Current time is: %s', time);
       clientDebug('Disconnected due to ping timeout, trying to reconnect...');
       this.socket.connect((err) => {
         if (err) {
