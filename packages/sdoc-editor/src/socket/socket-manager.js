@@ -386,6 +386,11 @@ class SocketManager {
       this.state = STATE.DISCONNECT;
     }
 
+    if (type === 'connect' && this.state === STATE.DISCONNECT) {
+      stateDebug(`State Changed: ${this.state} -> ${STATE.IDLE}`);
+      this.state = STATE.IDLE;
+    }
+
     this.eventBus.dispatch(type, message);
   };
 

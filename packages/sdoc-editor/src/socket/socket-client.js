@@ -14,6 +14,10 @@ class SocketClient {
         'sdoc_uuid': config.docUuid,
       }
     });
+    this.setupEventHandlers();
+  }
+
+  setupEventHandlers = () => {
     this.socket.on('connect', this.onConnected);
     this.socket.on('disconnect', this.onDisconnected);
     this.socket.on('connect_error', this.onConnectError);
@@ -48,7 +52,7 @@ class SocketClient {
     this.socket.io.on('reconnect', this.onReconnect);
     this.socket.io.on('reconnect_attempt', this.onReconnectAttempt);
     this.socket.io.on('reconnect_error', this.onReconnectError);
-  }
+  };
 
   getParams = (params = {}) => {
     const { docUuid, user } = this.config;
@@ -72,7 +76,7 @@ class SocketClient {
           socketManager.onReconnect(result);
         }
 
-        socketManager.dispatchConnectState('onConnected', result);
+        socketManager.dispatchConnectState('connect', result);
         return;
       }
 
@@ -106,11 +110,9 @@ class SocketClient {
       const time = new Date().toLocaleString();
       clientDebug('Current time is: %s', time);
       clientDebug('Disconnected due to ping timeout, trying to reconnect...');
-      this.socket.connect((err) => {
-        if (err) {
-          clientDebug('error, %o', err);
-        }
-      });
+      setTimeout(() => {
+        this.safeReconnect();
+      }, 1000);
       return;
     }
 
@@ -119,10 +121,41 @@ class SocketClient {
     socketManager.dispatchConnectState('disconnect');
   };
 
-  onConnectError = (e) => {
-    clientDebug('connect_error. %o', e.message);
+  onConnectError = (error) => {
+    clientDebug('connect_error. %s', error.message);
+    clientDebug('connect_error. %s', error.type);
+    clientDebug('connect_error. %O', error.context);
+
+    if (error.message.includes('timeout')) {
+      setTimeout(() => {
+        this.safeReconnect();
+      }, 1000);
+    }
+
     const socketManager = SocketManager.getInstance();
     socketManager.dispatchConnectState('connect_error');
+  };
+
+  safeReconnect = async () => {
+    try {
+      this.socket.disconnect();
+      this.socket = null;
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const config = this.config;
+      this.socket = io(config.sdocServer, {
+        reconnection: true,
+        auth: { token: config.accessToken },
+        query: {
+          'sdoc_uuid': config.docUuid,
+        },
+      });
+      this.setupEventHandlers();
+
+    } catch (error) {
+      console.error('Reconnection failed:', error);
+    }
   };
 
   sendOperations = (operations, version, selection, callback) => {
