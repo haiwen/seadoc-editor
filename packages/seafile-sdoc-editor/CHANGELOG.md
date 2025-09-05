@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.77](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.76...@seafile/seafile-sdoc-editor@2.0.77) (2025-09-05)
+
+### Bug Fixes
+
+- fix timeout bug ([4f70d0a](https://github.com/seafileltd/sea-sdoc-editor/commit/4f70d0a8f1d1f36238a2f3ec30644a545ccf0b53))
+
 ## [2.0.76](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.75...@seafile/seafile-sdoc-editor@2.0.76) (2025-09-05)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
