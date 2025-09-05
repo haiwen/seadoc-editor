@@ -27,7 +27,7 @@ class TipMessage extends React.Component {
     const eventBus = EventBus.getInstance();
     this.unsubscribeSavingEvent = eventBus.subscribe('is-saving', this.onDocumentSaving);
     this.unsubscribeSavedEvent = eventBus.subscribe('saved', this.onDocumentSaved);
-    this.unsubscribeSavedEvent = eventBus.subscribe('connect', this.onReconnect);
+    this.unsubscribeSavedEvent = eventBus.subscribe('connect', this.onConnect);
     // offline reconnect
     this.unsubscribeDisconnectEvent = eventBus.subscribe('disconnect', this.onDisconnect);
     this.unsubscribeReconnectErrorEvent = eventBus.subscribe('reconnect_error', this.onReconnectError);
@@ -108,6 +108,11 @@ class TipMessage extends React.Component {
       toaster.closeAll();
       toaster.warning(message, { hasCloseButton: true, duration: null });
     }
+  };
+
+  onConnect = () => {
+    this.isConnectError = false;
+    toaster.closeAll();
   };
 
   onReconnect = () => {
