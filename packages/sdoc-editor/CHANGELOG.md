@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.159](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.158...@seafile/sdoc-editor@2.0.159) (2025-09-05)
+
+### Bug Fixes
+
+- fix upload many image bug ([3140995](https://github.com/seafileltd/sea-sdoc-editor/commit/3140995cea833ad5410823a2ec24af3f61c1a75e))
+
 ## [2.0.158](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.157...@seafile/sdoc-editor@2.0.158) (2025-09-04)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
