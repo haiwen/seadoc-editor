@@ -129,7 +129,7 @@ export const insertFragmentList = (editor) => {
       });
 
       if (!liEntry) {
-        const nodes = isListRoot(fragment) ? [generateDefaultText(), ...fragment] : fragment;
+        const nodes = isListRoot(fragment[0]) ? [generateDefaultText(), ...fragment] : fragment;
         return _insertFragment(nodes);
       }
 
