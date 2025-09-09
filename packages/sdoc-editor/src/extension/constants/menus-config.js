@@ -86,7 +86,7 @@ export const TEXT_STYLE_MAP = {
 export const MENUS_CONFIG_MAP = {
   [BLOCKQUOTE]: {
     id: `sdoc_${BLOCKQUOTE}`,
-    iconClass: 'sdocfont sdoc-quote-left',
+    iconClass: 'sdocfont sdoc-comment-quote',
     text: 'Quote'
   },
   [ORDERED_LIST]: {
