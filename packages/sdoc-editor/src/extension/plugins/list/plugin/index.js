@@ -38,7 +38,7 @@ const withList = (editor) => {
         const { list, listItem } = res;
         if (isSelectionAtBlockStart(editor, { match: node => node.type === LIST_ITEM })) {
           Editor.withoutNormalizing(editor, () => {
-            let moved = removeFirstListItem(editor, { list, listItem });
+            moved = removeFirstListItem(editor, { list, listItem });
             if (moved) return true;
 
             moved = removeListItem(editor, { list, listItem });
