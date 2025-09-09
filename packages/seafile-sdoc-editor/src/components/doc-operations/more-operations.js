@@ -174,6 +174,9 @@ const MoreOperations = ({ isStarred, t }) => {
             <MenuShortcutPrompt shortcuts={printShortcutTexts} />
           </div>
         </DropdownItem>
+        <DropdownItem className='sdoc-dropdown-menu-item' onClick={handleClickHistory}>
+          {t('Document_history')}
+        </DropdownItem>
         {isPro && isFreezed && (
           <DropdownItem className='sdoc-dropdown-menu-item' onClick={unFreeze}>
             {t('Unfreeze')}
@@ -184,9 +187,6 @@ const MoreOperations = ({ isStarred, t }) => {
             {t('Freeze_document')}
           </DropdownItem>
         )}
-        <DropdownItem className='sdoc-dropdown-menu-item' onClick={handleClickHistory}>
-          {t('Document_history')}
-        </DropdownItem>
         {!isMobile && (
           <DropdownItem id='sdoc-full-width-mode-wrapper' className='sdoc-dropdown-menu-item'>
             <Switch
