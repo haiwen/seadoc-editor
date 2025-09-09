@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.163](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.162...@seafile/sdoc-editor@2.0.163) (2025-09-09)
+
+### Bug Fixes
+
+- fix delete backwrad bug at list start position ([f055e23](https://github.com/seafileltd/sea-sdoc-editor/commit/f055e23cb7a81f19507a43659e718961e24f2172))
+
 ## [2.0.162](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.161...@seafile/sdoc-editor@2.0.162) (2025-09-09)
 
 ### Bug Fixes
