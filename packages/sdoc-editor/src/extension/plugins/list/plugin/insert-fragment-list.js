@@ -1,8 +1,8 @@
 import { Element, Path, Transforms, Node, Editor } from '@seafile/slate';
 import slugid from 'slugid';
-import { isEmptyNode } from '../../../../../dist/extension/plugins/paragraph/helper';
 import { LIST_ITEM, PARAGRAPH } from '../../../constants';
 import { findNode, generateDefaultText, getAboveBlockNode, getCommonNode, getNode, getNodes } from '../../../core';
+import { isEmptyNode } from '../../paragraph/helper';
 import { getListTypes } from '../queries';
 
 const isListRoot = (node) => {
