@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.162](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.161...@seafile/sdoc-editor@2.0.162) (2025-09-09)
+
+### Bug Fixes
+
+- fix paste list into sdoc bug ([2b631bb](https://github.com/seafileltd/sea-sdoc-editor/commit/2b631bb01a5f902ec092e6468425cac4839f4b0b))
+
 ## [2.0.161](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.160...@seafile/sdoc-editor@2.0.161) (2025-09-09)
 
 ### Bug Fixes
