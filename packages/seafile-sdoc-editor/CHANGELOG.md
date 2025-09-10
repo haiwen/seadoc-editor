@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.81](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.80...@seafile/seafile-sdoc-editor@2.0.81) (2025-09-10)
+
+### Bug Fixes
+
+- move menu position ([2e7cebf](https://github.com/seafileltd/sea-sdoc-editor/commit/2e7cebf01f08c3cb42c8e276525952868114ee95))
+
 ## [2.0.80](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.79...@seafile/seafile-sdoc-editor@2.0.80) (2025-09-09)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
