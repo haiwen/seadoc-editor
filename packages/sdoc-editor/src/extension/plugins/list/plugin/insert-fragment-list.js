@@ -1,7 +1,7 @@
 import { Element, Path, Transforms, Node, Editor } from '@seafile/slate';
 import slugid from 'slugid';
 import { LIST_ITEM, PARAGRAPH } from '../../../constants';
-import { findNode, generateDefaultText, getAboveBlockNode, getCommonNode, getNode, getNodes } from '../../../core';
+import { findNode, generateDefaultText, getAboveBlockNode, getCommonNode, getNode, getNodes, isSelectionAtBlockEnd, isSelectionAtBlockStart } from '../../../core';
 import { isEmptyNode } from '../../paragraph/helper';
 import { getListTypes } from '../queries';
 
@@ -137,7 +137,13 @@ export const insertFragmentList = (editor) => {
         }
         let nodes = fragment;
         if (isListRoot(fragment[0]) && !isEmptySelection) {
-          nodes = [{ text: '' }, ...fragment];
+          if (isSelectionAtBlockEnd(editor)) {
+            nodes = [generateDefaultText(), ...fragment];
+          } else if (isSelectionAtBlockStart(editor)) {
+            nodes = [...fragment, generateDefaultText()];
+          } else {
+            nodes = [generateDefaultText(), ...fragment, generateDefaultText()];
+          }
         }
         return _insertFragment(nodes);
       }
