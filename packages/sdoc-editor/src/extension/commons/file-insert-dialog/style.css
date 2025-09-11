@@ -4,7 +4,7 @@
   position: absolute;
   width: 400px;
   max-width: 400px;
-  max-height: 350px;
+  max-height: 300px;
   /* The same as hierarchy of comment drawer  */
   z-index: 103;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 4px 8px 3px rgba(0, 0, 0, .15);
