@@ -1,4 +1,4 @@
-import { Editor, Transforms, Element } from '@seafile/slate';
+import { Editor, Transforms, Element, Node } from '@seafile/slate';
 import { ELEMENT_TYPE, HEADER, PARAGRAPH, SUBTITLE, TITLE } from '../../constants';
 import { getNodeType } from '../../core';
 
@@ -61,4 +61,22 @@ export const setHeaderType = (editor, type) => {
   if (!type) return;
 
   Transforms.setNodes(editor, { type });
+};
+
+export const isNextChildIsImage = (editor, headerNode) => {
+  const selection = editor.selection;
+  const children = headerNode.children;
+  if (children.length === 1) return false;
+  const { anchor: { path, offset } } = selection;
+  const [nodeIndex] = path.slice(-1);
+  if (nodeIndex + 1 > children.length) return false;
+  const beforeText = children[nodeIndex].text ? children[nodeIndex].text : '';
+  if (beforeText.length === 0) return false;
+  if (beforeText.length !== offset) return false;
+
+  const nextNode = children[nodeIndex + 1];
+
+  if (nextNode.type === 'image' && Node.string(headerNode).length === offset) return true;
+
+  return false;
 };

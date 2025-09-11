@@ -1,11 +1,11 @@
-import { Editor, Element, Transforms, Node } from '@seafile/slate';
+import { Editor, Element, Transforms, Node, Path } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { isMac } from '../../../utils/common-utils';
 import { PARAGRAPH, HEADERS, TITLE, SUBTITLE, HEADER, MULTI_COLUMN } from '../../constants';
 import { MAC_HOTKEYS_EVENT, WIN_HOTKEYS } from '../../constants/keyboard';
 import { generateEmptyElement, getSelectedNodeByTypes, isSelectionAtBlockStart, isCursorAtBlockStart } from '../../core';
 import { isSingleListItem } from '../list/helpers';
-import { isMenuDisabled, setHeaderType } from './helpers';
+import { isMenuDisabled, isNextChildIsImage, setHeaderType } from './helpers';
 
 const isSelectionAtLineEnd = (editor, path) => {
   const { selection } = editor;
@@ -57,6 +57,16 @@ const withHeader = (editor) => {
     const isAtLineEnd = isSelectionAtLineEnd(editor, match[1]);
 
     const nextNode = Editor.next(editor, { at: match[1] });
+
+    const [headerNode, path] = match;
+    if (isNextChildIsImage(editor, headerNode)) {
+      insertBreak();
+      const nextPath = Path.next(path);
+      console.log(nextPath);
+      Transforms.setNodes(editor, { type: PARAGRAPH }, { at: nextPath });
+      return;
+    }
+
     if (isAtLineEnd && nextNode && editor.children.length === 2) {
       const [node, path] = nextNode;
       if (node && node.children[0].text === '') {
