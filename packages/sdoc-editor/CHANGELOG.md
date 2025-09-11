@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.165](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.164...@seafile/sdoc-editor@2.0.165) (2025-09-11)
+
+### Bug Fixes
+
+- copied list insert bug ([9032647](https://github.com/seafileltd/sea-sdoc-editor/commit/90326479c7a0326d71e027606757badfc399dd05))
+
+### Features
+
+- link element interaction ([c57e4a1](https://github.com/seafileltd/sea-sdoc-editor/commit/c57e4a1ed19d62ac1341b42908f9f11bf12a5d79))
+
 ## [2.0.164](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.163...@seafile/sdoc-editor@2.0.164) (2025-09-10)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
