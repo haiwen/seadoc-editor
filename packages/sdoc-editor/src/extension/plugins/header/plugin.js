@@ -62,7 +62,6 @@ const withHeader = (editor) => {
     if (isNextChildIsImage(editor, headerNode)) {
       insertBreak();
       const nextPath = Path.next(path);
-      console.log(nextPath);
       Transforms.setNodes(editor, { type: PARAGRAPH }, { at: nextPath });
       return;
     }
