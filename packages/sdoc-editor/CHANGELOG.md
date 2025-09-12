@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.167](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.166...@seafile/sdoc-editor@2.0.167) (2025-09-12)
+
+### Bug Fixes
+
+- fix header owner image bug ([dd59824](https://github.com/seafileltd/sea-sdoc-editor/commit/dd59824ba6417479f48c830993cc966c63b513f8))
+
 ## [2.0.166](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.165...@seafile/sdoc-editor@2.0.166) (2025-09-11)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
