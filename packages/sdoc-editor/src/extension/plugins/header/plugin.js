@@ -3,9 +3,9 @@ import isHotkey from 'is-hotkey';
 import { isMac } from '../../../utils/common-utils';
 import { PARAGRAPH, HEADERS, TITLE, SUBTITLE, HEADER, MULTI_COLUMN } from '../../constants';
 import { MAC_HOTKEYS_EVENT, WIN_HOTKEYS } from '../../constants/keyboard';
-import { generateEmptyElement, getSelectedNodeByTypes, isSelectionAtBlockStart, isCursorAtBlockStart } from '../../core';
+import { generateEmptyElement, getSelectedNodeByTypes, isSelectionAtBlockStart, isCursorAtBlockStart, getNodeType, generateDefaultParagraph } from '../../core';
 import { isSingleListItem } from '../list/helpers';
-import { isMenuDisabled, isNextChildIsImage, setHeaderType } from './helpers';
+import { isHasImage, isMenuDisabled, setHeaderType } from './helpers';
 
 const isSelectionAtLineEnd = (editor, path) => {
   const { selection } = editor;
@@ -18,7 +18,7 @@ const isSelectionAtLineEnd = (editor, path) => {
 };
 
 const withHeader = (editor) => {
-  const { insertBreak, insertFragment, insertText, deleteBackward } = editor;
+  const { insertBreak, insertFragment, insertText, deleteBackward, normalizeNode } = editor;
   const newEditor = editor;
 
   // Utility function to check if selection is inside multi-column node
@@ -57,14 +57,6 @@ const withHeader = (editor) => {
     const isAtLineEnd = isSelectionAtLineEnd(editor, match[1]);
 
     const nextNode = Editor.next(editor, { at: match[1] });
-
-    const [headerNode, path] = match;
-    if (isNextChildIsImage(editor, headerNode)) {
-      insertBreak();
-      const nextPath = Path.next(path);
-      Transforms.setNodes(editor, { type: PARAGRAPH }, { at: nextPath });
-      return;
-    }
 
     if (isAtLineEnd && nextNode && editor.children.length === 2) {
       const [node, path] = nextNode;
@@ -133,6 +125,38 @@ const withHeader = (editor) => {
 
     setHeaderType(newEditor, headerType);
     return true;
+  };
+
+  newEditor.normalizeNode = ([node, path]) => {
+    const type = getNodeType(node);
+
+    if (HEADERS.includes(type) && isHasImage(node)) {
+      let imagePaths = [];
+      let imageNodes = [];
+      node.children.forEach((item, index) => {
+        if (item.type === 'image') {
+          const imgPath = [...path, index];
+          imagePaths.push(imgPath);
+          imageNodes.push(item);
+        }
+      });
+
+      if (imagePaths.length > 0) {
+        Editor.withoutNormalizing(editor, () => {
+          imagePaths.reverse().forEach(path => {
+            Transforms.removeNodes(editor, { at: path });
+          });
+          const p = generateDefaultParagraph();
+          p.children = imageNodes;
+          const newPath = Path.next(path);
+          Transforms.insertNodes(editor, p, { at: newPath });
+        });
+        return;
+      }
+    }
+
+    return normalizeNode([node, path]);
+
   };
 
   return newEditor;
