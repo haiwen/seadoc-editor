@@ -242,6 +242,7 @@ export const selectImageWhenSelectPartial = (event, editor, imageNode, isImageSe
   const isMouseLeftDown = event.buttons === 1;
   if (!isMouseLeftDown) return;
   const { selection } = editor;
+  if (!selection) return;
   if (Range.isCollapsed(selection)) return;
   let imagePath = ReactEditor.findPath(editor, imageNode);
   if (imageNode.type === IMAGE_BLOCK) {

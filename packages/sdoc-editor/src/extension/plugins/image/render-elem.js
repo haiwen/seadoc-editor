@@ -36,6 +36,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const [caption, setCaption] = useState(data?.caption || '');
   const { isCopyImageLoading, isCopyImageError, setCopyImageLoading } = useCopyImage({ editor, element });
   const { isUploadLoading, isUploadError } = useUploadImage({ editor, element });
+  const [canEditable, setCanEditable] = useState(true);
 
   const registerEvent = useCallback((eventList) => {
     eventList.forEach(element => {
@@ -216,12 +217,17 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     }
   }, [element?.data]);
 
+  const onSetFocus = useCallback(() => {
+    setCanEditable(false);
+  }, []);
+
   const onSetCaption = useCallback((e) => {
     const path = ReactEditor.findPath(editor, element);
     const newData = { ...data, caption: e.target.value.trim() };
     if (path) {
       Transforms.setNodes(editor, { data: newData }, { at: path });
     }
+    setCanEditable(true);
   }, [data, editor, element]);
 
   return (
@@ -270,7 +276,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
             data-id={element.id}
             className={classNames('sdoc-image-wrapper', className)}
             {...attributes}
-            contentEditable='true'
+            contentEditable={canEditable}
             suppressContentEditableWarning
             style={{ ...style }}
             onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
@@ -313,6 +319,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                     value={caption}
                     disabled={readOnly}
                     onBlur={onSetCaption}
+                    onFocus={onSetFocus}
                     onChange={(e) => {
                       setCaption(e.target.value);
                     }}
