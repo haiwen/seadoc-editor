@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import classnames from 'classnames';
-import slugid from 'slugid';
 import toaster from '../../../../components/toast';
 import context from '../../../../context';
 import { getErrorMsg } from '../../../../utils/common-utils';
@@ -32,13 +31,38 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const expandPath = async (currentDirPath, currentDirId, treeData) => {
+    const pathParts = currentDirPath.split('/').filter(Boolean);
+    let currentLevel = treeData;
+
+    for (let i = 0; i < pathParts.length; i++) {
+      const dirName = pathParts[i];
+      const currentItem = currentLevel.find(item => item.name === dirName && item.type === 'dir');
+      if (!currentItem) break;
+      await onToggle(null, currentItem, treeData);
+      if (currentDirId === currentItem.indexId) break;
+      currentLevel = currentItem.children || [];
+    }
+  };
+
   const getTreeData = useCallback((p, indexId, treeData, ) => {
     return context.getSdocLocalFiles(p, fileType).then(res => {
       res.data.forEach((item) => {
-        item.indexId = slugid.nice();
+        item.path = `/${item.name}`;
+        item.indexId = item.id;
       });
       setHasSearchResult(false);
       setIsCurrentLibrary(true);
+
+      // Open current directory by default
+      if (!indexId && !treeData) {
+        const currentDirPath = context.getSetting('docPath').split('/').slice(0, -1).join('/');
+        if (currentDirPath) {
+          const currentDirId = context.getSetting('currentDirId');
+          expandPath(currentDirPath, currentDirId, res.data);
+        }
+      }
+
       // Open folder
       if (indexId && treeData.length > 0) {
         const newFileListData = addDataToTree(treeData, indexId, res.data, p);
@@ -71,7 +95,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
   }, [isOpenSearch, searchContent, isOpenSearch]);
 
   const onToggle = useCallback(async (e, item, treeData) => {
-    e.stopPropagation();
+    e && e.stopPropagation();
     if (expandedFolder.has(item.indexId)) {
       collapsedFolder(treeData, item.indexId);
       expandedFolder.delete(item.indexId);
@@ -95,7 +119,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
   const getSearchFiles = useCallback((searchContent, fileType) => {
     return context.getSearchFilesByFilename(searchContent, 1, 100, fileType).then(res => {
       res.data.results.forEach((item) => {
-        item.indexId = slugid.nice();
+        item.indexId = item.id;
         item.type = 'file';
         item.file_uuid = item.doc_uuid;
       });
