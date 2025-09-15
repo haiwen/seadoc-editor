@@ -68,16 +68,6 @@ const CommentItemWrapper = forwardRef(({
       author: user.username,
     };
 
-    // When updating comment status, add a new reply
-    const res = await context.insertReply(commentId, reply);
-    const { reply: returnReply } = res.data;
-    const newReply = {
-      ...reply,
-      id: returnReply.id,
-      reply: returnReply.reply,
-      user_name: returnReply.user_name,
-      avatar_url: returnReply.avatar_url,
-    };
     const elementId = getPrimaryElementId(comment.detail);
 
     if (newComment.resolved === true) {
@@ -99,11 +89,22 @@ const CommentItemWrapper = forwardRef(({
       }
     }
 
-    dispatch({ type: 'INSERT_REPLY', payload: { element_id: elementId, comment_id: commentId, reply: newReply } });
 
     // Modify comment status
     await context.updateComment(commentId, newComment);
     dispatch({ type: 'UPDATE_COMMENT_STATE', payload: { element_id: elementId, comment_id: commentId, comment: newComment } });
+
+    // When updating comment status, add a new reply
+    const res = await context.insertReply(commentId, reply);
+    const { reply: returnReply } = res.data;
+    const newReply = {
+      ...reply,
+      id: returnReply.id,
+      reply: returnReply.reply,
+      user_name: returnReply.user_name,
+      avatar_url: returnReply.avatar_url,
+    };
+    dispatch({ type: 'INSERT_REPLY', payload: { element_id: elementId, comment_id: commentId, reply: newReply } });
 
     // If the status of the comment is set to resolved, the page jumps to the position of the comment
     if (!isClickedContextComment && newComment.resolved === true) {
