@@ -12,8 +12,14 @@ import { useParticipantsContext } from '../hooks/use-participants';
 import CommentImagePreviewer from './comment-image-previewer';
 
 const CommentItemContent = ({
-  isActive, container, comment, updateComment,
-  updateCommentState, onDeleteComment, t, targetId
+  isActive,
+  container,
+  comment,
+  updateComment,
+  updateCommentState,
+  onDeleteComment,
+  targetId,
+  t,
 }) => {
   const { addParticipants, participants } = useParticipantsContext();
   const { collaborators } = useCollaborators();
