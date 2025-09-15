@@ -91,6 +91,7 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
 
   const handleScrollToArticle = useCallback( (e) => {
     e.stopPropagation();
+    if (!element) return;
     const dom = ReactEditor.toDOMNode(editor, element);
     const headerHeight = 56 + 37;
     scrollRef.current.scrollTo({ top: dom.offsetTop - headerHeight, behavior: 'smooth' });

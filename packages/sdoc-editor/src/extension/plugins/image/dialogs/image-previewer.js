@@ -25,10 +25,11 @@ class ImagePreviewer extends React.Component {
   getImageNodes = (nodes) => {
     let nodeIndex = 0;
     const list = [];
+    const { editor } = this.props;
     while (nodes && nodeIndex <= nodes.length - 1) {
       const currentNode = nodes[nodeIndex];
       if (currentNode.type === 'image') {
-        const url = getImageURL(currentNode.data);
+        const url = getImageURL(currentNode.data, editor);
         url && list.push(url);
       } else {
         list.push(...this.getImageNodes(currentNode.children));

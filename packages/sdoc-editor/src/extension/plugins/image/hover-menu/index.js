@@ -192,7 +192,8 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
               role="button"
               className='op-item'
               onClick={(e) => {
-                e.stopPropagation();setIsShowImagePreview(!isShowImagePreview);
+                e.stopPropagation();
+                setIsShowImagePreview(!isShowImagePreview);
               }}
             >
               <i className='sdocfont sdoc-fullscreen icon-font'/>
@@ -261,7 +262,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
         )}
         {isShowImagePreview && (
           <ImagePreviewer
-            imageUrl={getImageURL(data)}
+            imageUrl={getImageURL(data, editor)}
             editor={editor}
             toggleImagePreviewer={() => {
               setIsShowImagePreview(!isShowImagePreview);

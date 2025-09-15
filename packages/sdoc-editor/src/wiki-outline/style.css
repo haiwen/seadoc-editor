@@ -3,7 +3,7 @@
   padding: .5rem 1rem .5rem 0;
 }
 
-.sdoc-wiki-viewer-outline .outline-h2, 
+.sdoc-wiki-viewer-outline .outline-h2,
 .sdoc-wiki-viewer-outline .outline-h3 {
   white-space: nowrap;
   overflow: hidden;
@@ -13,7 +13,7 @@
 .sdoc-wiki-viewer-outline .outline-h2 {
   margin-left: 20px;
   line-height: 2.5;
-  color:#364149;
+  color: #364149;
   white-space: nowrap;
   cursor: pointer;
 }
@@ -25,9 +25,9 @@
 .sdoc-wiki-viewer-outline .outline-h3 {
   margin-left: 40px;
   line-height: 2.5;
-  color:#364149;
+  color: #364149;
   white-space: nowrap;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .sdoc-wiki-viewer-outline .outline-h3:hover {
