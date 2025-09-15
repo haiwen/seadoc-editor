@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.175](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.174...@seafile/sdoc-editor@2.0.175) (2025-09-15)
+
+### Bug Fixes
+
+- fix safari interactive bug ([5577033](https://github.com/seafileltd/sea-sdoc-editor/commit/55770333d5b72b37a12844400861d2850ed0a731))
+
 ## [2.0.174](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.173...@seafile/sdoc-editor@2.0.174) (2025-09-15)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
