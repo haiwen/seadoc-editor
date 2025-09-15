@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.171](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.170...@seafile/sdoc-editor@2.0.171) (2025-09-15)
+
+### Bug Fixes
+
+- fix image full screen bug ([1ac62e2](https://github.com/seafileltd/sea-sdoc-editor/commit/1ac62e2f5b2304583af8e52093dce27ca74cc2da))
+
 ## [2.0.170](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.169...@seafile/sdoc-editor@2.0.170) (2025-09-13)
 
 ### Bug Fixes
