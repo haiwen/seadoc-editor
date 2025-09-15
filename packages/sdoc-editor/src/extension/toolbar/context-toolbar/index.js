@@ -10,6 +10,12 @@ import TextStyleMenuList from '../../plugins/text-style/menu';
 
 import './index.css';
 
+function getRangeObject(selectionObject) {
+  if (selectionObject.rangeCount === 0) return null;
+  return selectionObject.getRangeAt(0);
+}
+
+
 const ContextToolbar = () => {
   const ref = useRef(null);
   const editor = useSlateStatic();
@@ -21,7 +27,8 @@ const ContextToolbar = () => {
   const setContextToolbarPosition = useCallback(() => {
     const el = ref.current;
     const domSelection = window.getSelection();
-    const domRange = domSelection.getRangeAt(0);
+    const domRange = getRangeObject(domSelection);
+    if (!domRange) return;
     const rect = domRange.getBoundingClientRect();
     const top = rect.top - 42 - 12;// top = Current top - Element height - Shaded part
     el.style.top = `${top}px`;
