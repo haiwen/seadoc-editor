@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.176](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.175...@seafile/sdoc-editor@2.0.176) (2025-09-16)
+
+### Features
+
+- open current dir by default ([c83a55a](https://github.com/seafileltd/sea-sdoc-editor/commit/c83a55a1bda5d1bf72818bb14790c427fc743a07))
+
 ## [2.0.175](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.174...@seafile/sdoc-editor@2.0.175) (2025-09-15)
 
 ### Bug Fixes
