@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly, useSelected } from '@seafile/slate-react';
 import classNames from 'classnames';
@@ -19,13 +20,15 @@ const Whiteboard = ({ editor, element }) => {
   const isSelected = useSelected();
   const readOnly = useReadOnly();
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
+  const [isShowZoomOut, setIsShowZoomOut] = useState(false);
 
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.data?.type === 'checkSdocParent') {
         const isSdocClass = whiteboardRef?.current.classList.contains('sdoc-whiteboard-element');
+        const isWhiteboardFullScreen = whiteboardRef?.current.classList.contains('sdoc-whiteboard-element-full-screen');
         whiteboardRef?.current.contentWindow.postMessage(
-          { type: 'checkSdocParentResult', isInSdoc: isSdocClass },
+          { type: 'checkSdocParentResult', isInSdoc: isSdocClass, isFullScreen: isWhiteboardFullScreen },
           '*'
         );
       }
@@ -105,15 +108,24 @@ const Whiteboard = ({ editor, element }) => {
     }
   }, [editor, isSelected, readOnly]);
 
-  const openFullscreen = () => {
-    if (whiteboardRef.current.requestFullscreen) { // Chrome
-      whiteboardRef.current.requestFullscreen();
-    } else if (whiteboardRef.current.webkitRequestFullscreen) { // Safari
-      whiteboardRef.current.webkitRequestFullscreen();
-    } else if (whiteboardRef.current.msRequestFullscreen) { // IE11
-      whiteboardRef.current.msRequestFullscreen();
-    }
+  const openFullscreen = (e) => {
+    e.stopPropagation();
+    setIsShowZoomOut(true);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsShowZoomOut(false);
+      }
+    };
+    if (isShowZoomOut) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isShowZoomOut, setIsShowZoomOut]);
 
   return (
     <>
@@ -128,7 +140,7 @@ const Whiteboard = ({ editor, element }) => {
         </iframe>
         <div className='iframe-overlay' onDoubleClick={handleDoubleClick} onClick={handleOnClick}></div>
       </div>
-      {isSelected && !readOnly &&
+      {isSelected && !readOnly && !isShowZoomOut &&
         <WhiteboardHoverMenu
           menuPosition={menuPosition}
           onOpen={handleDoubleClick}
@@ -136,6 +148,19 @@ const Whiteboard = ({ editor, element }) => {
           onDeleteWhiteboard={onDeleteWhiteboard}
         />
       }
+      {isShowZoomOut && (
+        ReactDOM.createPortal(
+          <div className='whiteboard-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
+            <iframe
+              className='sdoc-whiteboard-element-full-screen'
+              src={link}
+              ref={whiteboardRef}
+            >
+            </iframe>
+          </div>,
+          document.body
+        )
+      )}
     </>
   );
 };
