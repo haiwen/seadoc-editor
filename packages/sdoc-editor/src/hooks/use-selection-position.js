@@ -9,7 +9,8 @@ export const useCommentListPosition = (selectedElementIds, isContextComment, isC
   if (isContextComment || isClickedContextComment) {
     let rect;
     if (isContextComment) {
-      rect = commentedDom.getBoundingClientRect();
+      const commentedDomId = commentedDom.getAttribute('data-id');
+      rect = document.querySelector(`[data-id="${commentedDomId}"]`)?.getBoundingClientRect();
     }
 
     // rect is the last commented context dom
