@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.177](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.176...@seafile/sdoc-editor@2.0.177) (2025-09-18)
+
+### Bug Fixes
+
+- resolve comment box misplaced while collabroation ([35b5b19](https://github.com/seafileltd/sea-sdoc-editor/commit/35b5b190c35dfb79a7daef5015c49b52bc54ffcd))
+
+### Features
+
+- update whiteboard fullscreen ([173845f](https://github.com/seafileltd/sea-sdoc-editor/commit/173845fa32405786820e518aec166f5a78ce6f58))
+
 ## [2.0.176](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.175...@seafile/sdoc-editor@2.0.176) (2025-09-16)
 
 ### Features
