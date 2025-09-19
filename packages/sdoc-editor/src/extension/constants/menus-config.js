@@ -201,7 +201,7 @@ export const MENUS_CONFIG_MAP = {
     },
     {
       id: SUPERSCRIPT,
-      iconClass: 'sdocfont sdoc-subscripts',
+      iconClass: 'sdocfont sdoc-superscripts',
       text: 'Superscript',
       type: TEXT_STYLE_MAP.SUPERSCRIPT
     },
