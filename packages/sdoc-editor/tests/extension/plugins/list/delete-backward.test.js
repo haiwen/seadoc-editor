@@ -39,3 +39,42 @@ describe('delete at list start position', () => {
   });
 
 });
+
+describe('delete at list start position', () => {
+  it('delete at list start position', () => {
+    const input = (
+      <editor>
+        <hh1>aa</hh1>
+        <hol>
+          <hli>
+            <hp>aa</hp>
+            <hol>
+              <hli>
+                <hp><cursor /></hp>
+              </hli>
+            </hol>
+          </hli>
+        </hol>
+      </editor>
+    );
+
+    const output = (
+      <editor>
+        <hh1>aa</hh1>
+        <hol>
+          <hli>
+            <hp>aa</hp>
+          </hli>
+        </hol>
+      </editor>
+    );
+
+
+    const plugins = [ListPlugin.editorPlugin];
+    const editor = createSdocEditor(input, plugins);
+    editor.deleteBackward(editor);
+
+    expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
+  });
+
+});
