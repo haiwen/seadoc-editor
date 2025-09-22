@@ -124,7 +124,7 @@ export const deleteMerge = (editor, options = {}) => {
       editor.apply({ offset, path, text, type: 'remove_text' });
     }
 
-    if (!isSingleText && isAcrossBlocks && endRef.current && start.current) {
+    if (!isSingleText && isAcrossBlocks && endRef.current && startRef.current) {
       Transforms.mergeNodes(editor, { at: endRef.current, hanging: true, voids });
     }
 
