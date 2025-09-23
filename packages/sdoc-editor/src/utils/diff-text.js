@@ -188,7 +188,7 @@ class DiffText {
     let oldPos = newPos - diagonalPath;
     let commonCount = 0;
 
-    while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
+    while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(newString[newPos + 1] || '', oldString[oldPos + 1] || '')) {
       newPos++;
       oldPos++;
       commonCount++;
