@@ -164,6 +164,18 @@ export const ADD_POSITION_OFFSET_TYPE = [
   IMAGE_BLOCK
 ];
 
+export const INTERNAL_LINKED_TYPE = [
+  HEADER1,
+  HEADER2,
+  HEADER3,
+  HEADER4,
+  HEADER5,
+  HEADER6,
+  IMAGE_BLOCK,
+  CODE_BLOCK,
+  BLOCKQUOTE
+];
+
 export const FILE_TYPE = {
   [FILE_LINK]: 'file',
   [SDOC_LINK]: 'sdoc',

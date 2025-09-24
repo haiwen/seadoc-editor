@@ -50,6 +50,23 @@ const EditableArticle = ({
         eventBus.dispatch(INTERNAL_EVENT.CANCEL_TABLE_SELECT_RANGE);
       }
     }
+
+    // Remove linked block overlay style when operating
+    const [linkedNodeEntry] = Editor.nodes(editor, {
+      at: [],
+      match: n => n.linked_block === true,
+    });
+    if (linkedNodeEntry) {
+      const [node, path] = linkedNodeEntry;
+      const linkedDomNode = ReactEditor.toDOMNode(editor, node);
+      linkedDomNode.classList.remove('linked-block-highlight-overlay');
+
+      Transforms.unsetNodes(
+        editor,
+        ['linked_block'],
+        { at: path }
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

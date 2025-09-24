@@ -1,0 +1,75 @@
+.select-btn {
+  margin-bottom: .575rem;
+}
+
+.select-btn .link-address-btn,
+.select-btn .link-block-btn {
+  border: 1px solid rgb(0, 40, 100, 0.1);
+}
+
+.select-btn .link-address-btn {
+  margin-right: 80px;
+}
+
+.selected-linked-block-wrapper .form-control {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.selected-linked-block-wrapper .form-control.expanded .sdoc-file-icon-toggle {
+  transform: rotate(90deg);
+}
+
+.selected-linked-block-wrapper .sdoc-file-icon-toggle {
+  color: #9aa0ac;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected-linked-block-wrapper .selected-linked-block:not(img) {
+  width: 95%;
+  max-height: 60px;
+  overflow-y: auto;
+}
+
+.selected-linked-block-wrapper .selected-linked-block .linked-block-item {
+  margin-bottom: 0 !important;
+}
+
+.selected-linked-block-wrapper .linked-block-item:not(img) {
+  max-height: 60px;
+  overflow-y: auto;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.selected-linked-block-wrapper .selected-linked-block:has(img) {
+  max-height: none !important;
+}
+
+.selected-linked-block-wrapper .link-block-wrapper .linked-block-item:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.selected-linked-block-wrapper .link-block-wrapper {
+  border: 1px solid rgba(0, 40, 100, 0.12);
+  width: 100%;
+  height: fit-content;
+  padding: 0.75rem;
+  margin-top: 3px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.selected-linked-block-wrapper img {
+  width: 160px !important;
+  height: auto !important;
+}
+
+.selected-linked-block-wrapper .link-block-wrapper .dropdown-item {
+  padding: 3px 8px;
+}

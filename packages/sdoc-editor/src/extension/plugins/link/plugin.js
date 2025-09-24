@@ -4,11 +4,11 @@ import isUrl from 'is-url';
 import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
-import { ELEMENT_TYPE, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
-import { getNodeType, getSelectedElems, getSelectedNodeByType } from '../../core';
+import { ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
+import { getEditorString, getNodeType, getSelectedElems, getSelectedNodeByType } from '../../core';
 import { isImage, isSameDomain } from '../../utils';
 import { insertSdocFileLink } from '../sdoc-link/helpers';
-import { genLinkNode, isSdocFile } from './helpers';
+import { genLinkNode, insertLink, isSdocFile } from './helpers';
 
 const withLink = (editor) => {
   const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown, onCompositionStart } = editor;
@@ -36,7 +36,23 @@ const withLink = (editor) => {
             const fileUuid = res.data.files_info[text].file_uuid;
             insertSdocFileLink(editor, fileName, fileUuid);
           } else {
-            const link = genLinkNode(text, text);
+            const url = new URL(text);
+            const linkedNodeId = url.hash.replace(/^#/, '');
+
+            if (editor.selection && !Range.isCollapsed(editor.selection)) {
+              const title = getEditorString(editor, editor.selection);
+              insertLink(editor, title, text, INSERT_POSITION.CURRENT, null, linkedNodeId);
+              return;
+            }
+
+            const params = new URLSearchParams(url.search);
+            let link;
+            if (params.get('from') === 'copy-block') {
+              link = genLinkNode(text, text, linkedNodeId);
+            } else {
+              link = genLinkNode(text, text);
+            }
+
             Transforms.insertNodes(newEditor, link);
           }
         } catch (err) {

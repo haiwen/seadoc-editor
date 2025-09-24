@@ -26,12 +26,13 @@ export const checkLink = (url) => {
   return false;
 };
 
-export const genLinkNode = (url, text) => {
+export const genLinkNode = (url, text, nodeId) => {
   const linkNode = {
     id: slugid.nice(),
     type: 'link',
     href: url,
     title: text,
+    linked_id: nodeId,
     children: [{
       id: slugid.nice(),
       text: text || ''
@@ -52,10 +53,14 @@ export const getLinkType = (editor) => {
   return getNodeType(n);
 };
 
-export const insertLink = (editor, title, url, position = INSERT_POSITION.CURRENT, slateNode) => {
+export const insertLink = (editor, title, url, position = INSERT_POSITION.CURRENT, slateNode, linkedNodeId) => {
   if (position === INSERT_POSITION.CURRENT && isMenuDisabled(editor)) return;
-  if (!title || !url) return;
-  const linkNode = genLinkNode(url, title);
+  if (!title || (!url && !linkedNodeId)) return;
+
+  let linkNode = genLinkNode(url, title);
+  if (linkedNodeId) {
+    linkNode = genLinkNode(url, title, linkedNodeId);
+  }
 
   if (position === INSERT_POSITION.AFTER) {
     let path = Editor.path(editor, editor.selection);
@@ -96,14 +101,20 @@ export const insertLink = (editor, title, url, position = INSERT_POSITION.CURREN
   Transforms.collapse(editor, { edge: 'end' });
 };
 
-export const updateLink = (editor, newText, newUrl) => {
+export const updateLink = (editor, newText, newUrl, linkedNodeId) => {
 
   // Update children
   const linkAbove = getAboveNode(editor, { match: { type: LINK } });
   if (linkAbove) {
     const { href: oldUrl, title: oldText } = linkAbove[0] || {};
-    if (oldUrl !== newUrl || oldText !== newText) {
-      Transforms.setNodes(editor, { href: newUrl, title: newText }, { at: linkAbove[1] });
+    if (linkedNodeId) {
+      Transforms.setNodes(editor, { linked_id: linkedNodeId }, { at: linkAbove[1] });
+      if (oldText !== newText) {
+        Transforms.setNodes(editor, { title: newText }, { at: linkAbove[1] });
+      }
+    }
+    if (!linkedNodeId && (oldUrl !== newUrl || oldText !== newText)) {
+      Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '' }, { at: linkAbove[1] });
     }
     upsertLinkText(editor, { text: newText });
     return true;
@@ -181,4 +192,14 @@ export const isLinkToolBarActive = (editor) => {
   });
   if (nodeEntry) return true;
   return false;
+};
+
+export const isNodeInCurrentView = (domNode) => {
+  const rect = domNode.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
 };

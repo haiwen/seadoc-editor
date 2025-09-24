@@ -1,49 +1,59 @@
-import React, { Fragment, useCallback, useState, useMemo } from 'react';
+import React, { Fragment, useCallback, useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, ModalFooter, Alert, Label, ModalHeader } from 'reactstrap';
+import { Editor, Element, Transforms, Range, Path } from '@seafile/slate';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import { createProcessor } from '../../../../../slate-convert/md-to-html';
+import slateToMdString from '../../../../../slate-convert/slate-to-md';
+import { INTERNAL_LINKED_TYPE } from '../../../../constants';
 import { getEditorString } from '../../../../core';
 import { insertLink, updateLink, checkLink } from '../../helpers';
 
+import './index.css';
 
 const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, closeDialog, linkTitle, handleSubmit }) => {
   const { t } = useTranslation('sdoc-editor');
   const [linkErrorMessage, setLinkErrorMessage] = useState('');
   const [titleErrorMessage, setTitleErrorMessage] = useState('');
-  const { title: oldTitle, href: oldURL } = element || { title: linkTitle || '', href: '' };
+  const { title: oldTitle, href: oldURL, linked_id } = element || { title: linkTitle || '', href: '' };
   const initTitle = useMemo(() => oldTitle ? oldTitle : getEditorString(editor, editor.selection), [editor, oldTitle]);
   const [title, setTitle] = useState(initTitle);
-  const [url, setURL] = useState(oldURL);
+  const [url, setURL] = useState(linked_id ? '' : oldURL);
+  const [activeTab, setActiveTab] = useState(linked_id ? 'block' : 'url');
+  const [selectedBlockId, setSelectedBlockId] = useState('');
+  const [isOpenSelect, setIsOpenSelect] = useState(false);
+  const [htmlString, setHtmlString] = useState('');
 
   const submit = useCallback(() => {
     setLinkErrorMessage('');
     setTitleErrorMessage('');
 
-    if (!url) {
-      setLinkErrorMessage(t('The_link_address_is_required'));
+    if (!url && !selectedBlockId) {
+      setLinkErrorMessage(t('The_link_address_or_link_block_is_required'));
       return;
     }
     if (!title) {
       setTitleErrorMessage(t('The_link_title_is_required'));
       return;
     }
-    if (checkLink(url)) {
+    if (url && checkLink(url)) {
       setLinkErrorMessage(t('The_link_address_is_invalid'));
       return;
     }
 
     const isEdit = oldURL || oldTitle;
     if (isEdit) {
-      updateLink(editor, title, url);
+      updateLink(editor, title, url, selectedBlockId);
     } else {
-      insertLink(editor, title, url, insertPosition, slateNode);
+      insertLink(editor, title, url, insertPosition, slateNode, selectedBlockId);
     }
 
     handleSubmit && handleSubmit();
     closeDialog();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor, url, title, oldTitle, oldURL, insertPosition]);
+  }, [editor, url, title, oldTitle, oldURL, insertPosition, selectedBlockId]);
 
   const onKeyDown = useCallback((event) => {
     if (event.keyCode === 13) {
@@ -59,6 +69,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
     const value = event.target.value.trim();
     if (value === url) return;
     setURL(value);
+    setSelectedBlockId('');
 
   }, [url]);
 
@@ -76,24 +87,72 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
     );
   }, [closeDialog]);
 
+  const handleOnChangeBlock = (e) => {
+    const block = e.target.closest('.linked-block-item');
+    if (block) {
+      const clone = block.cloneNode(true);
+      const displayContainer = document.getElementById('selected-block-display');
+      displayContainer.innerHTML = '';
+      displayContainer.appendChild(clone);
+
+      const nodeId = block.dataset.id;
+      setSelectedBlockId(nodeId);
+      setURL('');
+      setIsOpenSelect(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!linked_id) return;
+    const timer = setTimeout(() => {
+      const displayContainer = document.getElementById('selected-block-display');
+      if (!displayContainer) return;
+
+      // 'data-parent-id' check for linked image block node
+      const linkedDomNode = document.querySelector(`[data-id="${linked_id}"]`) || document.querySelector(`[data-parent-id="${linked_id}"]`);
+      if (linkedDomNode) {
+        const clone = linkedDomNode.cloneNode(true);
+        displayContainer.innerHTML = '';
+        displayContainer.appendChild(clone);
+      }
+    }, 0);
+
+    return () => clearTimeout(timer);
+
+  }, []);
+
+  useEffect(() => {
+    const genHtml = async () => {
+      const list = [];
+
+      for (const [node] of Editor.nodes(editor, {
+        at: [],
+        match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+      })) {
+        if (INTERNAL_LINKED_TYPE.includes(node.type)) {
+          list.push(node);
+        }
+      }
+
+      const mdValue = list
+        .map(node => `<!--${node.id}-->\n${slateToMdString([node])}`)
+        .join('\n\n');
+      const ids = list.map(n => n.id);
+      const processor = createProcessor(ids, 'linked-block-item');
+      const file = await processor.process(mdValue);
+
+      setHtmlString(String(file));
+    };
+
+    genHtml();
+  }, [editor]);
+
+
   return (
     <Modal isOpen={true} autoFocus={false} toggle={closeDialog} className={className} zIndex={1071} returnFocusAfterClose={false}>
       <ModalHeader close={close}>{t('Insert_link')}</ModalHeader>
       <ModalBody>
         <Fragment>
-          <div className="form-group">
-            <Label for="addLink">{t('Link_address')}</Label>
-            <input
-              onKeyDown={onKeyDown}
-              autoFocus={true}
-              type="url"
-              className="form-control"
-              id="addLink"
-              value={url || ''}
-              onChange={handleUrlChange}
-            />
-            {linkErrorMessage && <Alert color="danger" className="mt-2">{t(linkErrorMessage)}</Alert>}
-          </div>
           <div className="form-group">
             <Label for="addTitle">{t('Link_title')}</Label>
             <input
@@ -106,6 +165,60 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
             />
             {titleErrorMessage && <Alert color="danger" className="mt-2">{t(titleErrorMessage)}</Alert>}
           </div>
+          <div className="select-btn">
+            <Button
+              color={activeTab === 'url' ? 'link' : 'secondary'}
+              className="link-address-btn"
+              onClick={() => setActiveTab('url')}
+            >
+              {t('Link_address')}
+            </Button>
+            <Button
+              color={activeTab === 'block' ? 'link' : 'secondary'}
+              className="link-block-btn"
+              onClick={() => setActiveTab('block')}
+            >
+              {t('Link_block')}
+            </Button>
+          </div>
+          {activeTab === 'url' && (
+            <div className="form-group">
+              <input
+                onKeyDown={onKeyDown}
+                autoFocus={true}
+                type="url"
+                className="form-control"
+                id="addLink"
+                value={url || ''}
+                onChange={handleUrlChange}
+              />
+              {linkErrorMessage && (
+                <Alert color="danger" className="mt-2">
+                  {t(linkErrorMessage)}
+                </Alert>
+              )}
+            </div>
+          )}
+          {activeTab === 'block' && (
+            <div className="form-group selected-linked-block-wrapper">
+              <div
+                className={classnames('form-control', { 'expanded': isOpenSelect })}
+                onClick={() => {
+                  setIsOpenSelect(!isOpenSelect);
+                }}
+              >
+                <span id='selected-block-display' className='selected-linked-block'></span>
+                <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+              </div>
+              {isOpenSelect && (
+                <div className='link-block-wrapper'
+                  dangerouslySetInnerHTML={{ __html: htmlString }}
+                  onClick={(e) => handleOnChangeBlock(e)}
+                >
+                </div>
+              )}
+            </div>
+          )}
         </Fragment>
       </ModalBody>
       <ModalFooter>

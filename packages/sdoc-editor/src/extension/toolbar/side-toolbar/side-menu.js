@@ -9,7 +9,7 @@ import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
 import { ElementPopover } from '../../commons';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
-import { HEADER1, HEADER2, HEADER3, INSERT_POSITION, SIDE_INSERT_MENUS_SEARCH_MAP, SIDE_TRANSFORM_MENUS_SEARCH_MAP, SIDE_OTHER_OPERATIONS_MENUS_SEARCH_MAP } from '../../constants';
+import { INSERT_POSITION, SIDE_INSERT_MENUS_SEARCH_MAP, SIDE_TRANSFORM_MENUS_SEARCH_MAP, SIDE_OTHER_OPERATIONS_MENUS_SEARCH_MAP, INTERNAL_LINKED_TYPE } from '../../constants';
 import { AIDropdownMenu } from '../../plugins/ai/ai-menu';
 import { onCopyNode, onDeleteNode, isNotSupportTransform, onSetNodeType, getTransformMenusConfig, getSearchedOperations } from './helpers';
 import InsertBelowMenu from './insert-below-menu';
@@ -52,10 +52,10 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
     onReset();
   }, [editor, onReset, slateNode]);
 
-  const onCopyHeaderLink = useCallback(() => {
+  const onCopyBlockLink = useCallback(() => {
     const serviceUrl = context.getSetting('serviceUrl');
     const sdocUuid = context.getSetting('docUuid');
-    const href = serviceUrl + `/smart-link/${sdocUuid}/#${slateNode.id}`;
+    const href = serviceUrl + `/smart-link/${sdocUuid}/?from=copy-block#${slateNode.id}`;
     copy(href);
     toaster.success(t('Copied'), { hasCloseButton: false, duration: 2 });
     onReset();
@@ -202,14 +202,14 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
             {!insertBelowMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}
 
             {/* other operations menu */}
-            {[HEADER1, HEADER2, HEADER3].includes(slateNode?.type) && (
+            {INTERNAL_LINKED_TYPE.includes(slateNode?.type) && (
               <>
                 <DropdownMenuItem
                   menuConfig={{
                     text: 'Copy_link_of_section',
                     iconClass: 'sdocfont sdoc-link'
                   }}
-                  onClick={onCopyHeaderLink}
+                  onClick={onCopyBlockLink}
                   isHidden={!otherOperatonsMenuSearchMap['COPY_LINK_OF_SECTION']}
                 />
                 {!otherOperatonsMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}

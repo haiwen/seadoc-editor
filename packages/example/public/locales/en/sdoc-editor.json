@@ -648,5 +648,7 @@
   "Select_style": "Select style",
   "Edit_link": "Edit link",
   "Remove_link": "Remove link",
-  "Preview": "Preview"
+  "Preview": "Preview",
+  "Go_to_link" : "Go to link",
+  "Link_block" : "Link block"
 }

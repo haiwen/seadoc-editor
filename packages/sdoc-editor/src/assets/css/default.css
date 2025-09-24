@@ -25,3 +25,15 @@
 .sdoc-icon-btn:hover .sdocfont {
   color: #5a5a5a;
 }
+
+.linked-block-highlight-overlay {
+  position: relative;
+}
+
+.linked-block-highlight-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(169, 201, 237, 0.3);
+  pointer-events: none;
+}
