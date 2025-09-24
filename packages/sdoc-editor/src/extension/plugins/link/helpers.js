@@ -32,7 +32,7 @@ export const genLinkNode = (url, text, nodeId) => {
     type: 'link',
     href: url,
     title: text,
-    linked_id: nodeId,
+    linked_id: nodeId || '',
     children: [{
       id: slugid.nice(),
       text: text || ''
