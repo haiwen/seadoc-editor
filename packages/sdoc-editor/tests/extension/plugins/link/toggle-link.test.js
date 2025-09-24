@@ -208,7 +208,7 @@ describe('modify link test', () => {
       <editor>
         <hp>
           <htext></htext>
-          <ha href='http://localhost:7003/simple-editor' title='测试链接' linked_id= ''>
+          <ha href='http://localhost:7003/simple-editor' title='测试链接' linked_id=''>
             测试链接
           </ha>
           <htext> </htext>
