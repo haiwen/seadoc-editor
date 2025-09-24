@@ -50,5 +50,6 @@ const createProcessor = (nodeIds = null, className = null) => {
 
 // transform rules: https://github.com/syntax-tree/mdast-util-to-hast
 
-export const processor = createProcessor();
+const processor = createProcessor();
+export default processor;
 export { createProcessor };
