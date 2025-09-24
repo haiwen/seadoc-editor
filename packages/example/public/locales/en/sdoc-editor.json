@@ -650,5 +650,6 @@
   "Remove_link": "Remove link",
   "Preview": "Preview",
   "Go_to_link" : "Go to link",
-  "Link_block" : "Link block"
+  "Link_block" : "Link block",
+  "The_link_address_or_link_block_is_required": "The link address or link block is required"
 }

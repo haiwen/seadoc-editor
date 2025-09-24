@@ -650,5 +650,6 @@
   "Remove_link": "移除链接",
   "Preview": "预览",
   "Go_to_link": "查看链接",
-  "Link_block" : "链接节点"
+  "Link_block" : "链接节点",
+  "The_link_address_or_link_block_is_required": "链接地址或链接节点是必填项。"
 }
