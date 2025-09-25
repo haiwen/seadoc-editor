@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, ModalFooter, Alert, Label, ModalHeader } from 'reactstrap';
-import { Editor, Element, Transforms, Range, Path } from '@seafile/slate';
+import { Element } from '@seafile/slate';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { createProcessor } from '../../../../../slate-convert/md-to-html';
@@ -123,16 +123,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
 
   useEffect(() => {
     const genHtml = async () => {
-      const list = [];
-
-      for (const [node] of Editor.nodes(editor, {
-        at: [],
-        match: n => Element.isElement(n) && Editor.isBlock(editor, n),
-      })) {
-        if (INTERNAL_LINKED_TYPE.includes(node.type)) {
-          list.push(node);
-        }
-      }
+      const list = editor.children.filter(node => Element.isElement(node) && INTERNAL_LINKED_TYPE.includes(node.type));
 
       const mdValue = list
         .map(node => `<!--${node.id}-->\n${slateToMdString([node])}`)
