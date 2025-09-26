@@ -23,7 +23,7 @@
 }
 
 .select-btn .link-address-btn {
-  margin-right: 80px;
+  margin-right: 40px;
 }
 
 .selected-linked-block-wrapper {
@@ -51,7 +51,6 @@
 
 .selected-linked-block-wrapper .selected-linked-block:not(img) {
   width: 95%;
-  max-height: 60px;
   overflow-y: auto;
 }
 
@@ -66,7 +65,7 @@
   padding-bottom: 3px;
 }
 
-.selected-linked-block-wrapper .selected-linked-block:has(img) {
+.selected-linked-block-wrapper .linked-block-item:has(img) {
   max-height: none !important;
 }
 

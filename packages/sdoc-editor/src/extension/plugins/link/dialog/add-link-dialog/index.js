@@ -142,6 +142,10 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
     genHtml();
   }, [editor.children]);
 
+  const headersHTML = parseHtmlString(htmlString, 'h1,h2,h3,h4,h5,h6');
+  const imagesHTML = parseHtmlString(htmlString, 'img');
+  const codeBlockHTML = parseHtmlString(htmlString, 'pre');
+  const blockquoteHTML = parseHtmlString(htmlString, 'blockquote');
 
   return (
     <Modal isOpen={true} autoFocus={false} toggle={closeDialog} className={className} zIndex={1071} returnFocusAfterClose={false}>
@@ -205,51 +209,59 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
               </div>
               {isOpenSelect && (
                 <div className='link-block-wrapper'>
-                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectHeader })}
-                    onClick={(e) => setIsOpenSelectHeader(!isOpenSelectHeader)}
-                  >
-                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
-                    <div className='title'>{t('Header')}</div>
-                  </div>
+                  {headersHTML &&
+                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectHeader })}
+                      onClick={(e) => setIsOpenSelectHeader(!isOpenSelectHeader)}
+                    >
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <div className='title'>{t('Header')}</div>
+                    </div>
+                  }
                   {isOpenSelectHeader && (
                     <div className='link-block-container'
-                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'h1,h2,h3,h4,h5,h6') }}
+                      dangerouslySetInnerHTML={{ __html: headersHTML }}
                       onClick={(e) => handleOnChangeBlock(e)}
                     />
                   )}
-                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectImageBlock })}
-                    onClick={(e) => setIsOpenSelectImageBlock(!isOpenSelectImageBlock)}
-                  >
-                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
-                    <div className='title'>{t('Image')}</div>
-                  </div>
+                  {imagesHTML &&
+                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectImageBlock })}
+                      onClick={(e) => setIsOpenSelectImageBlock(!isOpenSelectImageBlock)}
+                    >
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <div className='title'>{t('Image')}</div>
+                    </div>
+                  }
                   {isOpenSelectImageBlock && (
                     <div className='link-block-container'
-                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'img') }}
+                      dangerouslySetInnerHTML={{ __html: imagesHTML }}
                       onClick={(e) => handleOnChangeBlock(e)}
                     />
                   )}
-                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectCodeBlock })}
-                    onClick={(e) => setIsOpenSelectCodeBlock(!isOpenSelectCodeBlock)}
-                  >
-                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
-                    <div className='title'>{t('Code_block')}</div>
-                  </div>
+                  {codeBlockHTML &&
+                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectCodeBlock })}
+                      onClick={(e) => setIsOpenSelectCodeBlock(!isOpenSelectCodeBlock)}
+                    >
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <div className='title'>{t('Code_block')}</div>
+                    </div>
+                  }
                   {isOpenSelectCodeBlock && (
                     <div className='link-block-container'
-                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'pre') }}
+                      dangerouslySetInnerHTML={{ __html: codeBlockHTML }}
                       onClick={(e) => handleOnChangeBlock(e)}
                     />
                   )}
-                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectBlockquote })}
-                    onClick={(e) => setIsOpenSelectBlockquote(!isOpenSelectBlockquote)}
-                  >
-                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
-                    <div className='title'>{t('Quote')}</div>
-                  </div>
+                  {blockquoteHTML &&
+                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectBlockquote })}
+                      onClick={(e) => setIsOpenSelectBlockquote(!isOpenSelectBlockquote)}
+                    >
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <div className='title'>{t('Quote')}</div>
+                    </div>
+                  }
                   {isOpenSelectBlockquote && (
                     <div className='link-block-container'
-                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'blockquote') }}
+                      dangerouslySetInnerHTML={{ __html: blockquoteHTML }}
                       onClick={(e) => handleOnChangeBlock(e)}
                     />
                   )}

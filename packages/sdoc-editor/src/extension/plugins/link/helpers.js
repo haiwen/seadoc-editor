@@ -209,7 +209,7 @@ export const parseHtmlString = (htmlString, targetType) => {
   const doc = parser.parseFromString(htmlString, 'text/html');
   let resultHtml;
   if (targetType == 'img') {
-    resultHtml = [...doc.querySelectorAll('p:has(img)')].map(p => p.outerHTML);
+    resultHtml = [...doc.querySelectorAll('p:has(img)')].map(p => p.outerHTML).join('');
   } else {
     resultHtml = [...doc.querySelectorAll(targetType)].map(html => html.outerHTML).join('');
   }
