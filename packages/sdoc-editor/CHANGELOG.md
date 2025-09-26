@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.181](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.180...@seafile/sdoc-editor@2.0.181) (2025-09-26)
+
+### Features
+
+- add internal link ([45dc539](https://github.com/seafileltd/sea-sdoc-editor/commit/45dc5397818614be852314ab573444c2565d2e0f))
+- update code ([a55745e](https://github.com/seafileltd/sea-sdoc-editor/commit/a55745e2ac292dc2a1dcc3c7c87dc6f187366d84))
+- update frame height ([b9b057f](https://github.com/seafileltd/sea-sdoc-editor/commit/b9b057f18b679dbe3eb390565b927c80fd46efd6))
+- update image style ([87fa9d0](https://github.com/seafileltd/sea-sdoc-editor/commit/87fa9d0d4113e9b5e67060aa4dd7e90c31349e8b))
+- update link component style ([106375c](https://github.com/seafileltd/sea-sdoc-editor/commit/106375cd354ebf91a09108e0dfc26042db5b35f5))
+- update link node ([1346935](https://github.com/seafileltd/sea-sdoc-editor/commit/1346935ca5fc11525e9d8b37861d4a7e2ee24e2e))
+- update link test ([a919e36](https://github.com/seafileltd/sea-sdoc-editor/commit/a919e36d1c9ee3ee8147172cb35c892e6186d9f3))
+- update link test ([3814ceb](https://github.com/seafileltd/sea-sdoc-editor/commit/3814ceb776d6e4e262f1524a0be37ec10b892764))
+- update link test ([9e66ecb](https://github.com/seafileltd/sea-sdoc-editor/commit/9e66ecb8f73f534c4b48e2993b2faf55d5bf4f3a))
+- update link test ([65f3d21](https://github.com/seafileltd/sea-sdoc-editor/commit/65f3d211db9f1909de72238678604f1c8be1d4b0))
+- update link test ([bcb1183](https://github.com/seafileltd/sea-sdoc-editor/commit/bcb1183161c0c065c42e11908c18a3abe898fa91))
+- update link test ([4cce834](https://github.com/seafileltd/sea-sdoc-editor/commit/4cce83419d5479f4ad350b061daf331bcd5999a1))
+- update node iterate ([a9bbd36](https://github.com/seafileltd/sea-sdoc-editor/commit/a9bbd36cd1016eed935c5556a5c6aab37e7c05ee))
+
 ## [2.0.180](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.179...@seafile/sdoc-editor@2.0.180) (2025-09-23)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
