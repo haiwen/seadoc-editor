@@ -71,6 +71,7 @@
 
 .selected-linked-block-wrapper .link-block-wrapper {
   border: 1px solid rgba(0, 40, 100, 0.12);
+  max-height: 400px;
   width: 100%;
   height: fit-content;
   padding: 0.75rem;
