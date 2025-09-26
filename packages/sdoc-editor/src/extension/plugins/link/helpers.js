@@ -203,3 +203,16 @@ export const isNodeInCurrentView = (domNode) => {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 };
+
+export const parseHtmlString = (htmlString, targetType) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  let resultHtml;
+  if (targetType == 'img') {
+    resultHtml = [...doc.querySelectorAll('p:has(img)')].map(p => p.outerHTML);
+  } else {
+    resultHtml = [...doc.querySelectorAll(targetType)].map(html => html.outerHTML).join('');
+  }
+
+  return resultHtml;
+};

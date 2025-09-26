@@ -8,7 +8,7 @@ import { createProcessor } from '../../../../../slate-convert/md-to-html';
 import slateToMdString from '../../../../../slate-convert/slate-to-md';
 import { INTERNAL_LINKED_TYPE } from '../../../../constants';
 import { getEditorString } from '../../../../core';
-import { insertLink, updateLink, checkLink } from '../../helpers';
+import { insertLink, updateLink, checkLink, parseHtmlString } from '../../helpers';
 
 import './index.css';
 
@@ -23,6 +23,10 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   const [activeTab, setActiveTab] = useState(linked_id ? 'block' : 'url');
   const [selectedBlockId, setSelectedBlockId] = useState('');
   const [isOpenSelect, setIsOpenSelect] = useState(false);
+  const [isOpenSelectHeader, setIsOpenSelectHeader] = useState(false);
+  const [isOpenSelectImageBlock, setIsOpenSelectImageBlock] = useState(false);
+  const [isOpenSelectCodeBlock, setIsOpenSelectCodeBlock] = useState(false);
+  const [isOpenSelectBlockquote, setIsOpenSelectBlockquote] = useState(false);
   const [htmlString, setHtmlString] = useState('');
 
   const submit = useCallback(() => {
@@ -136,7 +140,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
     };
 
     genHtml();
-  }, [editor]);
+  }, [editor.children]);
 
 
   return (
@@ -157,20 +161,18 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
             {titleErrorMessage && <Alert color="danger" className="mt-2">{t(titleErrorMessage)}</Alert>}
           </div>
           <div className="select-btn">
-            <Button
-              color={activeTab === 'url' ? 'link' : 'secondary'}
-              className="link-address-btn"
+            <div
+              className={classnames('link-address-btn', { 'active': activeTab === 'url' })}
               onClick={() => setActiveTab('url')}
             >
               {t('Link_address')}
-            </Button>
-            <Button
-              color={activeTab === 'block' ? 'link' : 'secondary'}
-              className="link-block-btn"
+            </div>
+            <div
+              className={classnames('link-block-btn', { 'active': activeTab === 'block' })}
               onClick={() => setActiveTab('block')}
             >
               {t('Link_block')}
-            </Button>
+            </div>
           </div>
           {activeTab === 'url' && (
             <div className="form-group">
@@ -202,10 +204,55 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                 <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
               </div>
               {isOpenSelect && (
-                <div className='link-block-wrapper'
-                  dangerouslySetInnerHTML={{ __html: htmlString }}
-                  onClick={(e) => handleOnChangeBlock(e)}
-                >
+                <div className='link-block-wrapper'>
+                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectHeader })}
+                    onClick={(e) => setIsOpenSelectHeader(!isOpenSelectHeader)}
+                  >
+                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                    <div className='title'>{t('Header')}</div>
+                  </div>
+                  {isOpenSelectHeader && (
+                    <div className='link-block-container'
+                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'h1,h2,h3,h4,h5,h6') }}
+                      onClick={(e) => handleOnChangeBlock(e)}
+                    />
+                  )}
+                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectImageBlock })}
+                    onClick={(e) => setIsOpenSelectImageBlock(!isOpenSelectImageBlock)}
+                  >
+                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                    <div className='title'>{t('Image')}</div>
+                  </div>
+                  {isOpenSelectImageBlock && (
+                    <div className='link-block-container'
+                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'img') }}
+                      onClick={(e) => handleOnChangeBlock(e)}
+                    />
+                  )}
+                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectCodeBlock })}
+                    onClick={(e) => setIsOpenSelectCodeBlock(!isOpenSelectCodeBlock)}
+                  >
+                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                    <div className='title'>{t('Code_block')}</div>
+                  </div>
+                  {isOpenSelectCodeBlock && (
+                    <div className='link-block-container'
+                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'pre') }}
+                      onClick={(e) => handleOnChangeBlock(e)}
+                    />
+                  )}
+                  <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectBlockquote })}
+                    onClick={(e) => setIsOpenSelectBlockquote(!isOpenSelectBlockquote)}
+                  >
+                    <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                    <div className='title'>{t('Quote')}</div>
+                  </div>
+                  {isOpenSelectBlockquote && (
+                    <div className='link-block-container'
+                      dangerouslySetInnerHTML={{ __html: parseHtmlString(htmlString, 'blockquote') }}
+                      onClick={(e) => handleOnChangeBlock(e)}
+                    />
+                  )}
                 </div>
               )}
             </div>

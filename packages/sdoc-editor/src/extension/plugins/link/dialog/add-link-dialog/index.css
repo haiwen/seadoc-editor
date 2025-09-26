@@ -1,14 +1,33 @@
 .select-btn {
   margin-bottom: .575rem;
+  display: flex;
+  flex-direction: row;
 }
 
 .select-btn .link-address-btn,
 .select-btn .link-block-btn {
-  border: 1px solid rgb(0, 40, 100, 0.1);
+  font-size: .875rem;
+  font-weight: 600;
+  padding-bottom: 1px;
+}
+
+.select-btn .link-address-btn:hover,
+.select-btn .link-block-btn:hover {
+  cursor: pointer;
+}
+
+.select-btn .link-address-btn.active,
+.select-btn .link-block-btn.active {
+  color: #ff9800;
+  border-bottom: 1.5px solid #ff9800;
 }
 
 .select-btn .link-address-btn {
   margin-right: 80px;
+}
+
+.selected-linked-block-wrapper {
+  position: relative;
 }
 
 .selected-linked-block-wrapper .form-control {
@@ -17,6 +36,7 @@
   cursor: pointer;
 }
 
+.selected-linked-block-wrapper .select-block-wrapper.expanded .sdoc-file-icon-toggle,
 .selected-linked-block-wrapper .form-control.expanded .sdoc-file-icon-toggle {
   transform: rotate(90deg);
 }
@@ -50,24 +70,51 @@
   max-height: none !important;
 }
 
-.selected-linked-block-wrapper .link-block-wrapper .linked-block-item:hover {
-  background-color: rgb(245, 245, 245);
-}
-
 .selected-linked-block-wrapper .link-block-wrapper {
   border: 1px solid rgba(0, 40, 100, 0.12);
   width: 100%;
   height: fit-content;
   padding: 0.75rem;
   margin-top: 3px;
-  max-height: 200px;
   overflow-y: auto;
   box-sizing: border-box;
+  position: absolute;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.link-block-wrapper .select-block-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.link-block-wrapper .select-block-wrapper .title {
+  margin-left: 5px;
+  color: #666;
+  font-size: 14px;
+}
+
+.link-block-wrapper .link-block-container {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.link-block-wrapper .link-block-container .linked-block-item {
+  margin-bottom: 5px !important;
 }
 
 .selected-linked-block-wrapper img {
   width: 160px !important;
   height: auto !important;
+}
+
+.selected-linked-block-wrapper .link-block-wrapper .linked-block-item:hover {
+  background-color: rgb(245, 245, 245);
 }
 
 .selected-linked-block-wrapper .link-block-wrapper .dropdown-item {
