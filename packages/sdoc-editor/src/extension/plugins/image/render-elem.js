@@ -16,7 +16,7 @@ import ImageLoader from './image-loader';
 import useCopyImage from './use-copy-image';
 import useUploadImage from './use-upload-image';
 
-const Image = ({ element, editor, style, className, attributes, children, isSelected, t }) => {
+const Image = ({ element, editor, style, className, attributes, children, isSelected, t, parentImageBlockId }) => {
   const { data, border_type = IMAGE_BORDER_TYPE[0].type } = element;
   const { show_caption = false, column_key } = data;
   const path = ReactEditor.findPath(editor, element);
@@ -274,6 +274,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
         <>
           <span
             data-id={element.id}
+            data-parent-id={parentImageBlockId}
             className={classNames('sdoc-image-wrapper', className)}
             {...attributes}
             contentEditable={canEditable}

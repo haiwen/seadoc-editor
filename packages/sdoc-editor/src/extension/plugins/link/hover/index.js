@@ -1,16 +1,18 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { useReadOnly } from '@seafile/slate-react';
+import { Editor, Transforms } from '@seafile/slate';
+import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
-import { isWeChat } from '../helpers';
+import { isNodeInCurrentView, isWeChat } from '../helpers';
 
 import './index.css';
 
 const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) => {
   const readOnly = useReadOnly();
   const { t } = useTranslation('sdoc-editor');
+  const { linked_id } = element;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
   useEffect(() => {
@@ -27,11 +29,42 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
     }
   }, [element.href]);
 
+  const handleOnClick = useCallback((event) => {
+    event.stopPropagation();
+    if (!linked_id) return;
+
+    const [linkedNodeEntry] = Editor.nodes(editor, {
+      at: [],
+      match: n => n.id === linked_id,
+    });
+
+    if (linkedNodeEntry) {
+      const [node, path] = linkedNodeEntry;
+      const linkedDomNode = ReactEditor.toDOMNode(editor, node);
+      linkedDomNode.classList.add('linked-block-highlight-overlay');
+      Transforms.setNodes(
+        editor,
+        { linked_block: true },
+        { at: path }
+      );
+
+      // Scroll linked node to view if not in current view
+      if (!isNodeInCurrentView(linkedDomNode)) {
+        linkedDomNode.scrollIntoView();
+      }
+    }
+
+  }, [linked_id]);
+
+
   return (
     <>
       {createPortal(
         <div id="link-op-menu" className="link-op-menu" style={menuPosition}>
-          <span target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onMouseDown={onMouseDown}>{t('Open_link')}</span>
+          {linked_id ?
+            <span className="link-op-menu-link" onClick={handleOnClick}>{t('Go_to_link')}</span> :
+            <span target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onMouseDown={onMouseDown}>{t('Open_link')}</span>
+          }
           {!readOnly && (
             <div className="link-op-icons d-flex">
               <span id='edit-link' role="button" className="link-op-icon" onClick={onEditLink}>

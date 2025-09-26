@@ -91,6 +91,10 @@ const CustomRenderElement = (props) => {
     }
     case IMAGE: {
       const parentNode = getParentNode(editor.children, element.id);
+      let parentImageBlockId = '';
+      if (parentNode.type === IMAGE_BLOCK) {
+        parentImageBlockId = parentNode.id;
+      }
       const comments = editor.element_comments_map?.[parentNode.id] || [];
       const unresolvedComments = comments && comments.filter(item => !item.resolved);
       let leaf = {};
@@ -98,7 +102,7 @@ const CustomRenderElement = (props) => {
         leaf['computed_background_color'] = 'rgba(129, 237, 247, 0.5)';
       }
       const [renderImage] = ImagePlugin.renderElements;
-      return renderImage({ ...props, leaf }, editor);
+      return renderImage({ ...props, leaf, parentImageBlockId }, editor);
     }
     case IMAGE_BLOCK: {
       const [, renderImageBlock] = ImagePlugin.renderElements;

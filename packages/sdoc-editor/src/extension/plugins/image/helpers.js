@@ -163,7 +163,7 @@ export const getImageURL = (data, editor) => {
   let assetsUrl = context.getSetting('assetsUrl');
 
   // If in sdoc link preview
-  const docUuid = editor.preview_docUuid;
+  const docUuid = editor && editor.preview_docUuid;
 
   if (docUuid) {
     const baseUrl = assetsUrl.split('/');
