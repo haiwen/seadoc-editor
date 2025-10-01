@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, Input } from 'reactstrap';
-import { EventBus } from '@seafile/seafile-sdoc-editor';
 import classNames from 'classnames';
 import isHotkey from 'is-hotkey';
 import PropTypes from 'prop-types';
@@ -10,6 +9,7 @@ import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import { CollaboratorsProvider } from '../../../hooks/use-collaborators';
 import { getErrorMsg } from '../../../utils/common-utils';
+import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, FILE_TYPE } from '../../constants';
 import AllRecentFiles from './all-recent-files';
 import LocalFiles from './local-files';
