@@ -92,7 +92,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
       getTreeData(rootPath);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpenSearch, searchContent, isOpenSearch]);
+  }, [isOpenSearch, searchContent]);
 
   const onToggle = useCallback(async (e, item, treeData) => {
     e && e.stopPropagation();
