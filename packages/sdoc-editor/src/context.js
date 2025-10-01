@@ -321,6 +321,11 @@ class Context {
     return this.api.getTokenByDocUuid(docUuid);
   }
 
+  getFileMetadataInfo(fileType) {
+    const docUuid = this.getDocUuid();
+    return this.api.getFileMetadataInfo(docUuid, fileType);
+  }
+
 }
 
 const context = new Context();

@@ -1,0 +1,71 @@
+.sdoc-files-list {
+  flex: 1;
+  padding: 8px 16px;
+  width: 100%;
+  height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-wrapper {
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  font-size: .8125rem;
+  height: auto;
+  padding: 10px 0 10px 8px;
+  position: relative;
+}
+
+.file-wrapper:hover {
+  background-color: #f5f5f5;
+}
+
+.file-wrapper .file-icon {
+  height: 36px;
+  width: 36px;
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+  margin-left: .25rem;
+  overflow: hidden;
+}
+
+.item-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+
+.item-path {
+  color: #666;
+}
+
+.item-user-container {
+  display: flex;
+  color: #666;
+}
+
+.item-user-container .item-divide {
+  margin: 0 5px;
+  transform: translateY(-1px);
+}
+
+.sdoc-file-checked {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  color: #798d99;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sdoc-files-list .sdoc-file-search-no-result {
+  display: flex;
+  justify-content: center;
+}

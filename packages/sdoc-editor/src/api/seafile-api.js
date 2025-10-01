@@ -235,6 +235,10 @@ class SeafileAPI {
     return this.req.get(url);
   }
 
+  getFileMetadataInfo(docUuid, fileType) {
+    const url = '/api/v2.1/seadoc/search-metadata-records/' + docUuid + '/?search_type=' + fileType;
+    return this.req.get(url);
+  }
 }
 
 export default SeafileAPI;
