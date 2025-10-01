@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, Input } from 'reactstrap';
-import { EXTERNAL_EVENT, EventBus } from '@seafile/seafile-sdoc-editor';
+import { EventBus } from '@seafile/seafile-sdoc-editor';
 import classNames from 'classnames';
 import isHotkey from 'is-hotkey';
 import PropTypes from 'prop-types';
 import toaster from '../../../components/toast';
+import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import { CollaboratorsProvider } from '../../../hooks/use-collaborators';
 import { getErrorMsg } from '../../../utils/common-utils';
@@ -168,7 +169,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
   useEffect(() => {
     if (!repoID || !currentSelectedFile) return;
     const eventBus = EventBus.getInstance();
-    eventBus.dispatch(EXTERNAL_EVENT.FILE_METADATA_COMPONENT, (component) => {
+    eventBus.dispatch(INTERNAL_EVENT.FILE_METADATA_COMPONENT, (component) => {
       setFileMetadataComponent(() => component);
     });
   }, [repoID, currentSelectedFile, dirent]);
