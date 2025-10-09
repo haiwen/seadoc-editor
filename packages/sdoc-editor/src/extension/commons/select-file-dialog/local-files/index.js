@@ -193,7 +193,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
       );
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [treeData, currentActiveItem, expandedFolder]);
+  }, [treeData, currentActiveItem, expandedFolder, isOpenSearch, hasSearchResult]);
 
   return (
     <div className='sdoc-files-tree'>
