@@ -44,7 +44,7 @@
   right: 1px;
 }
 
-.sdoc-file-checked {
+.sdoc-files-tree .sdoc-file-checked {
   position: absolute;
   right: 10px;
   color: #798d99;
@@ -94,7 +94,6 @@
 
 .sdoc-folder-container.sdoc-folder-search-results .sdoc-file-info {
   height: 59px;
-  width: 486px;
   padding: 10px 50px;
   flex-direction: column;
   justify-content: center;

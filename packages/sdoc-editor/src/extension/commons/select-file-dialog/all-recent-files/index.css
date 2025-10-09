@@ -56,7 +56,7 @@
   transform: translateY(-1px);
 }
 
-.sdoc-file-checked {
+.sdoc-files-list .sdoc-file-checked {
   position: absolute;
   right: 10px;
   top: 30px;
