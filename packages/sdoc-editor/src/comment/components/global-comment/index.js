@@ -11,7 +11,6 @@ import { DOC_COMMENT_ELEMENT_ID } from '../../constants';
 import useCommentList from '../../hooks/comment-hooks/use-comment-list';
 import CommentItemCollapseWrapper from '../comment-item-collapse-wrapper';
 import CommentItemWrapper from '../comment-item-wrapper';
-import GlobalCommentBodyHeader from './global-comment-body-header';
 import GlobalCommentEditor from './global-comment-editor';
 import GlobalCommentHeader from './global-comment-header';
 
@@ -143,11 +142,8 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
   return (
     <div className="sdoc-comment-drawer">
       <div className="comments-panel-wrapper">
-        <GlobalCommentHeader toggle={closePlugin} activeCommentGroup={activeCommentGroup} setCurrentCommentGroup={setCurrentCommentGroup} />
+        <GlobalCommentHeader toggle={closePlugin} activeCommentGroup={activeCommentGroup} setCurrentCommentGroup={setCurrentCommentGroup} commentType={commentType} setCommentType={setCommentType} commentList={commentList} />
         <div className="comments-panel-body">
-          {!activeCommentGroup && (
-            <GlobalCommentBodyHeader commentList={commentList} commentType={commentType} setCommentType={setCommentType} />
-          )}
           <div ref={contentRef} className="comments-panel-body__content">
             <div id="global-comment-list-container" className="sdoc-comment-list-container">
               {!activeCommentGroup && Array.isArray(commentList) && commentList.map(comment => {

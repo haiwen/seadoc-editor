@@ -64,6 +64,26 @@
   display: flex;
 }
 
+.comments-panel-header-right .sdoc-comment-filter-dropdown {
+  position: absolute;
+  right: 72px;
+  top: 36px !important;
+  left: unset !important;
+  box-shadow: 0 4px 10px #eee;
+}
+
+.comments-panel-header-right .sdoc-dropdown-menu-item {
+  position: relative;
+}
+
+.comments-panel-header-right .sdoc-file-checked {
+  position: absolute;
+  left: 7px;
+  color: #798d99;
+  font-size: 12px;
+  font-weight: 400;
+}
+
 .sdoc-comment-drawer .comments-panel-header-right .sdoc-icon-btn:not(:last-child) {
   margin-right: 4px;
 }
