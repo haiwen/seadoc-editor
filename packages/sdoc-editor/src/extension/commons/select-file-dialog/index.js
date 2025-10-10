@@ -25,7 +25,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
   const [FileMetadataComponent, setFileMetadataComponent] = useState(null);
   const [isTreeView, setIsTreeView] = useState(true);
   const repoID = context.getSetting('repoID');
-  const enableMetadataManagement = context.getSetting('enableMetadataManagement');
+  const enableMetadata = context.getSetting('enableMetadata');
 
   let modalTitle;
   switch (dialogType) {
@@ -190,7 +190,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
       <div className='modal-header-container'>
         <h5 className='modal-title-container'>{t(modalTitle)}</h5>
         <div className='modal-operation-container'>
-          {enableMetadataManagement &&
+          {enableMetadata &&
             <div className='toggle-view'>
               <div className={classNames('sdocfont sdoc-tree-view', { 'active': isTreeView })}
                 onClick={() => {
