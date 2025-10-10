@@ -85,10 +85,8 @@ const GlobalCommentHeader = ({ toggle, activeCommentGroup, setCurrentCommentGrou
             <Dropdown isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
               <DropdownMenu className='sdoc-dropdown-menu sdoc-comment-filter-dropdown' container="comment-types">
                 <CommentTypeDropdownItem type={COMMENT_TYPES.ALL} setCommentType={setCommentType} commentType={commentType} />
-                <CommentTypeDropdownItem type={COMMENT_TYPES.DOC} setCommentType={setCommentType} commentType={commentType} />
                 <CommentTypeDropdownItem type={COMMENT_TYPES.RESOLVED} setCommentType={setCommentType} commentType={commentType} />
                 <CommentTypeDropdownItem type={COMMENT_TYPES.UNRESOLVED} setCommentType={setCommentType} commentType={commentType} />
-
               </DropdownMenu>
             </Dropdown>
           </div>

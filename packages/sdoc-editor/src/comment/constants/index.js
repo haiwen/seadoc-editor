@@ -1,5 +1,4 @@
 export const COMMENT_TYPES = {
-  DOC: 'Doc_comments',
   ALL: 'All_comments',
   RESOLVED: 'Resolved_comments',
   UNRESOLVED: 'Unresolved_comments',
