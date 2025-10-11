@@ -10,6 +10,8 @@ class SocketClient {
     this.socket = io(config.sdocServer, {
       reconnection: true,
       auth: { token: config.accessToken },
+      reconnectionDelay: 3000,
+      reconnectionDelayMax: 6000,
       query: {
         'sdoc_uuid': config.docUuid,
       }
@@ -110,6 +112,8 @@ class SocketClient {
       const time = new Date().toLocaleString();
       clientDebug('Current time is: %s', time);
       clientDebug('Disconnected due to ping timeout, trying to reconnect...');
+      const socketManager = SocketManager.getInstance();
+      socketManager.dispatchConnectState('disconnect');
       setTimeout(() => {
         this.safeReconnect();
       }, 1000);
@@ -141,6 +145,7 @@ class SocketClient {
       this.socket.disconnect();
       this.socket = null;
 
+      clientDebug('Entering the reconnection state...');
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       const config = this.config;
