@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.183](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.182...@seafile/sdoc-editor@2.0.183) (2025-10-11)
+
+### Bug Fixes
+
+- optimize code ([269bfe0](https://github.com/seafileltd/sea-sdoc-editor/commit/269bfe068d083295cb7ce6be2e0c9a774fc143f4))
+
+### Features
+
+- add dependences ([f44b481](https://github.com/seafileltd/sea-sdoc-editor/commit/f44b4817c4915aab8896d0460ede412ef615f0ef))
+- add file list view ([e7f0906](https://github.com/seafileltd/sea-sdoc-editor/commit/e7f0906cabb9fa7207996e238df4276ac244b6a5))
+- add toggle view setup ([b0a5b23](https://github.com/seafileltd/sea-sdoc-editor/commit/b0a5b23d4d053110e78927eaa55261843b8b25a0))
+- optimize comment header ([#100](https://github.com/seafileltd/sea-sdoc-editor/issues/100)) ([c5744d2](https://github.com/seafileltd/sea-sdoc-editor/commit/c5744d2b4a2652415f3fd80b31d74c96c8f82955))
+- update code ([cbf318e](https://github.com/seafileltd/sea-sdoc-editor/commit/cbf318ed2661e1429339bf9d538683e6aa0c9e95))
+- update code ([6af4628](https://github.com/seafileltd/sea-sdoc-editor/commit/6af4628503b478b395460a62ec55f589c55af028))
+- update file tree style ([77211de](https://github.com/seafileltd/sea-sdoc-editor/commit/77211dea826ebe8cebf20db54526914b4cfa8043))
+- update import ([d4e7127](https://github.com/seafileltd/sea-sdoc-editor/commit/d4e7127590a706e1d5265a24fc021dc3ebb86afb))
+- update import ([8b607eb](https://github.com/seafileltd/sea-sdoc-editor/commit/8b607eb7192c9451cb9211dc0b143b55bb308641))
+
 ## [2.0.182](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.181...@seafile/sdoc-editor@2.0.182) (2025-10-11)
 
 **Note:** Version bump only for package @seafile/sdoc-editor

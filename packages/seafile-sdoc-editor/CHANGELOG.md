@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.100](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.99...@seafile/seafile-sdoc-editor@2.0.100) (2025-10-11)
+
+### Features
+
+- add file list view ([e7f0906](https://github.com/seafileltd/sea-sdoc-editor/commit/e7f0906cabb9fa7207996e238df4276ac244b6a5))
+
 ## [2.0.99](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.98...@seafile/seafile-sdoc-editor@2.0.99) (2025-10-11)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
