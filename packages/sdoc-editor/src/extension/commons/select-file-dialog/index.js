@@ -118,10 +118,6 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSelectedFile]);
 
-  const toggleSearch = useCallback(() => {
-    setIsOpenSearch((prev) => !prev);
-  }, []);
-
   const handleSearchInputChange = useCallback((e) => {
     const keyword = e.target.value.toLowerCase();
     setTemSearchContent(keyword);
@@ -157,6 +153,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
       setSearchContent('');
       setIsOpenSearch(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [executeSearch, isOpenSearch]);
 
   useEffect(() => {
@@ -168,14 +165,6 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
     }
   }, [isOpenSearch]);
 
-  useEffect(() => {
-    if (!repoID || !currentSelectedFile) return;
-    const eventBus = EventBus.getInstance();
-    eventBus.dispatch(INTERNAL_EVENT.FILE_METADATA_COMPONENT, (component) => {
-      setFileMetadataComponent(() => component);
-    });
-  }, [repoID, currentSelectedFile, dirent]);
-
   const dirent = useMemo(() => {
     return {
       name: currentSelectedFile?.name,
@@ -186,14 +175,22 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
     };
   }, [currentSelectedFile]);
 
-  const OnClickTreeView = useCallback(() => {
+  useEffect(() => {
+    if (!repoID || !currentSelectedFile) return;
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.FILE_METADATA_COMPONENT, (component) => {
+      setFileMetadataComponent(() => component);
+    });
+  }, [repoID, currentSelectedFile, dirent]);
+
+  const onClickTreeView = useCallback(() => {
     setIsTreeView(true);
     setIsOpenSearch(false);
     setSearchContent('');
     setCurrentSelectedFile(null);
   }, []);
 
-  const OnClickListView = useCallback(() => {
+  const onClickListView = useCallback(() => {
     setIsTreeView(false);
     setIsOpenSearch(false);
     setSearchContent('');
@@ -207,8 +204,8 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
         <div className='modal-operation-container'>
           {enableMetadata &&
             <div className='toggle-view'>
-              <div className={classNames('sdocfont sdoc-tree-view', { 'active': isTreeView })} onClick={OnClickTreeView} />
-              <div className={classNames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })} onClick={OnClickListView} />
+              <div className={classNames('sdocfont sdoc-tree-view', { 'active': isTreeView })} onClick={onClickTreeView} />
+              <div className={classNames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })} onClick={onClickListView} />
             </div>
           }
           <div className='sdocfont sdoc-close1 sdoc-close-dialog' onClick={closeDialog}></div>
@@ -224,8 +221,8 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
                   <Input innerRef={searchRef} className='sdoc-search-input' onKeyUp={handleInputKeyDown} onChange={handleSearchInputChange} id='sdoc-search' placeholder={t('Search')} />
                 </div>
               </div>
-              {isTreeView ? <TreeView fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} toggle={closeDialog} searchContent={searchContent} isOpenSearch={isOpenSearch} /> :
-              <ListView fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} searchContent={searchContent} isOpenSearch={isOpenSearch} />
+              {isTreeView ? <TreeView fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} toggle={closeDialog} searchContent={searchContent} isOpenSearch={isOpenSearch} />
+                : <ListView fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} searchContent={searchContent} isOpenSearch={isOpenSearch} />
               }
             </div>
             <div className='sdoc-file-metadata-wrapper'>

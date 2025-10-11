@@ -12,7 +12,7 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
   const [repoName, setRepoName] = useState('');
 
   const onSelectFile = useCallback((e, file) => {
-    e.stopPropagation();
+    e && e.stopPropagation();
     setCurrentActiveItem(file);
     onSelectedFile(file);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,9 +28,17 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
       });
       setAllFileList(sortedRecords);
       setFileList(sortedRecords);
+
+      const firstFile = sortedRecords[0];
+      if (firstFile) {
+        console.log(2, firstFile);
+        const filePath = (firstFile._parent_dir === '/' ? '' : firstFile._parent_dir) + '/' + firstFile._name;
+        onSelectFile(null, { id: firstFile._id, name: firstFile._name, path: filePath });
+      }
     };
 
     getFileMetadata();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -54,6 +62,7 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
 
       setFileList(result);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpenSearch, searchContent]);
 
   return (
