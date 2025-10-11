@@ -31,7 +31,6 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
 
       const firstFile = sortedRecords[0];
       if (firstFile) {
-        console.log(2, firstFile);
         const filePath = (firstFile._parent_dir === '/' ? '' : firstFile._parent_dir) + '/' + firstFile._name;
         onSelectFile(null, { id: firstFile._id, name: firstFile._name, path: filePath });
       }
