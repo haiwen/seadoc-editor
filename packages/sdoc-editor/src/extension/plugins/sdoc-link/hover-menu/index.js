@@ -116,7 +116,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                   </Tooltip>
                 )}
                 <span id='sdoc_link_preview' role="button" className='op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
-                  <i className='sdocfont eye icon-font'></i>
+                  <i className='sdocfont sodc-eye icon-font'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='sdoc_link_preview' placement='top' fade={true}>

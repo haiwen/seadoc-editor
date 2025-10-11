@@ -8,7 +8,7 @@ import { addDataToTree, parcelFileTypeIcon } from '../helpers';
 
 import './index.css';
 
-const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpenSearch }) => {
+const TreeView = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpenSearch }) => {
   const folderRef = useRef(null);
   const [expandedFolder, setExpandedFolder] = useState(new Set([]));
   const [currentActiveItem, setCurrentActiveItem] = useState(null);
@@ -92,10 +92,12 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
       getTreeData(rootPath);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpenSearch, searchContent, isOpenSearch]);
+  }, [isOpenSearch, searchContent]);
 
   const onToggle = useCallback(async (e, item, treeData) => {
     e && e.stopPropagation();
+    if (isOpenSearch) return;
+
     if (expandedFolder.has(item.indexId)) {
       collapsedFolder(treeData, item.indexId);
       expandedFolder.delete(item.indexId);
@@ -111,8 +113,9 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
 
   const onSelectFile = useCallback((e, file) => {
     e.stopPropagation();
-    setCurrentActiveItem(file);
-    onSelectedFile(file);
+    const newFile = { ...file, path: file.path || file.fullpath };
+    setCurrentActiveItem(newFile);
+    onSelectedFile(newFile);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -135,19 +138,20 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
 
   const renderFileTree = useCallback((data) => {
     if (!Array.isArray(data) || data.length === 0) return null;
+    if (isOpenSearch && !hasSearchResult) return null;
 
     return data.map((item) => {
       if (!item) return null;
-      const { type, indexId, name } = item;
+      const { type, indexId, name, file_uuid, path, fullpath } = item;
       // Get file type icon
       const fileTypeIcon = parcelFileTypeIcon(name);
 
       const result = item.fullpath?.split('/').filter(Boolean);
       item.fullpath && result.pop();
       const folderPath = item.fullpath && result.join('/');
-      const selected = currentActiveItem?.indexId === indexId;
+      const selected = currentActiveItem?.path === (path || fullpath);
       return (
-        <div key={indexId} className={classnames('sdoc-folder-container', { 'sdoc-folder-search-results': hasSearchResult === true })}>
+        <div key={indexId || file_uuid} className={classnames('sdoc-folder-container', { 'sdoc-folder-search-results': hasSearchResult === true })}>
           {type === 'dir' && (
             <div ref={folderRef} className='sdoc-folder'>
               <div
@@ -189,7 +193,7 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
       );
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [treeData, currentActiveItem, expandedFolder]);
+  }, [treeData, currentActiveItem, expandedFolder, isOpenSearch, hasSearchResult]);
 
   return (
     <div className='sdoc-files-tree'>
@@ -201,4 +205,4 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
   );
 };
 
-export default withTranslation('sdoc-editor')(LocalFiles);
+export default withTranslation('sdoc-editor')(TreeView);
