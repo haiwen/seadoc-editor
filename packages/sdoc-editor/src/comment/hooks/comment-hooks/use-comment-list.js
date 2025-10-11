@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { COMMENT_TYPES, DOC_COMMENT_ELEMENT_ID } from '../../constants';
+import { COMMENT_TYPES } from '../../constants';
 import { useCommentContext } from './use-comment-context';
 
 const useCommentList = () => {
@@ -20,9 +20,6 @@ const useCommentList = () => {
       setCommentList(commentList);
     } else if (commentType === COMMENT_TYPES.UNRESOLVED) {
       const commentList = comment_list.filter(item => !item.resolved);
-      setCommentList(commentList);
-    } else if (commentType === COMMENT_TYPES.DOC) {
-      const commentList = comment_list.filter(comment => comment.detail.element_id === DOC_COMMENT_ELEMENT_ID);
       setCommentList(commentList);
     }
   }, [commentType, comment_list]);
