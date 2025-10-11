@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { COMMENT_TYPES, DOC_COMMENT_ELEMENT_ID } from '../../constants';
+import { COMMENT_TYPES } from '../../constants';
 import { useCommentContext } from './use-comment-context';
 
 const useCommentList = () => {
