@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useMemo } from 'react';
+import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, Input } from 'reactstrap';
 import classNames from 'classnames';
@@ -11,8 +11,8 @@ import { CollaboratorsProvider } from '../../../hooks/use-collaborators';
 import { getErrorMsg } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, FILE_TYPE } from '../../constants';
-import AllRecentFiles from './all-recent-files';
-import LocalFiles from './local-files';
+import ListView from './list-view';
+import TreeView from './tree-view';
 
 import './index.css';
 
@@ -24,6 +24,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [FileMetadataComponent, setFileMetadataComponent] = useState(null);
   const [isTreeView, setIsTreeView] = useState(true);
+  const searchRef = useRef(null);
   const repoID = context.getSetting('repoID');
   const enableMetadata = context.getSetting('enableMetadata');
 
@@ -148,7 +149,8 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
       e.preventDefault();
       e.stopPropagation();
 
-      const el = document.getElementById('sdoc-search');
+      const el = searchRef.current;
+      if (!el) return;
       el && el.blur();
       el && (el.value = '');
 
@@ -161,7 +163,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
     if (!isOpenSearch) {
       setSearchContent('');
 
-      const el = document.getElementById('sdoc-search');
+      const el = searchRef.current;
       el && (el.value = '');
     }
   }, [isOpenSearch]);
@@ -184,6 +186,19 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
     };
   }, [currentSelectedFile]);
 
+  const OnClickTreeView = useCallback(() => {
+    setIsTreeView(true);
+    setIsOpenSearch(false);
+    setSearchContent('');
+    setCurrentSelectedFile(null);
+  }, []);
+
+  const OnClickListView = useCallback(() => {
+    setIsTreeView(false);
+    setIsOpenSearch(false);
+    setSearchContent('');
+    setCurrentSelectedFile(null);
+  }, []);
 
   return (
     <Modal isOpen={true} autoFocus={true} zIndex={1071} returnFocusAfterClose={false} className="sdoc-file-select-dialog" contentClassName="sdoc-file-select-modal" toggle={closeDialog}>
@@ -192,22 +207,8 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
         <div className='modal-operation-container'>
           {enableMetadata &&
             <div className='toggle-view'>
-              <div className={classNames('sdocfont sdoc-tree-view', { 'active': isTreeView })}
-                onClick={() => {
-                  setIsTreeView(true);
-                  setIsOpenSearch(false);
-                  setSearchContent('');
-                  setCurrentSelectedFile(null);
-                }}>
-              </div>
-              <div className={classNames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })}
-                onClick={() => {
-                  setIsTreeView(false);
-                  setIsOpenSearch(false);
-                  setSearchContent('');
-                  setCurrentSelectedFile(null);
-                }}>
-              </div>
+              <div className={classNames('sdocfont sdoc-tree-view', { 'active': isTreeView })} onClick={OnClickTreeView} />
+              <div className={classNames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })} onClick={OnClickListView} />
             </div>
           }
           <div className='sdocfont sdoc-close1 sdoc-close-dialog' onClick={closeDialog}></div>
@@ -220,11 +221,11 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
               <div className='sdoc-files-search-popover-container'>
                 <div className='sdoc-search-wrapper'>
                   <div className='sdocfont sdoc-find-replace sdoc-search'></div>
-                  <Input className='sdoc-search-input' onKeyUp={handleInputKeyDown} onChange={handleSearchInputChange} id='sdoc-search' placeholder={t('Search')} />
+                  <Input innerRef={searchRef} className='sdoc-search-input' onKeyUp={handleInputKeyDown} onChange={handleSearchInputChange} id='sdoc-search' placeholder={t('Search')} />
                 </div>
               </div>
-              {isTreeView ? <LocalFiles fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} toggle={closeDialog} searchContent={searchContent} isOpenSearch={isOpenSearch} /> :
-              <AllRecentFiles fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} searchContent={searchContent} isOpenSearch={isOpenSearch} />
+              {isTreeView ? <TreeView fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} toggle={closeDialog} searchContent={searchContent} isOpenSearch={isOpenSearch} /> :
+              <ListView fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} searchContent={searchContent} isOpenSearch={isOpenSearch} />
               }
             </div>
             <div className='sdoc-file-metadata-wrapper'>

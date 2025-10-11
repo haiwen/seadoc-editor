@@ -1,11 +1,11 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import context from '../../../../context';
 import { parcelFileTypeIcon } from '../helpers';
 
 import './index.css';
 
-const AllRecentFiles = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) => {
+const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) => {
   const [currentActiveItem, setCurrentActiveItem] = useState(null);
   const [allFileList, setAllFileList] = useState([]);
   const [fileList, setFileList] = useState([]);
@@ -68,14 +68,14 @@ const AllRecentFiles = ({ onSelectedFile, fileType, t, searchContent, isOpenSear
         const filePath = (file._parent_dir === '/' ? '' : file._parent_dir) + '/' + file._name;
 
         return (
-          <div key={file._id} className='file-wrapper'
+          <div key={file._id} className='sdoc-file-wrapper'
             onClick={(e) => onSelectFile(e, { id: file._id, name: file._name, path: filePath })}
           >
             <img className='file-icon' src={fileTypeIcon} alt="" />
-            <div className="item-content">
-              <div className="item-name ellipsis" title={file._name}>{file._name}</div>
-              <div className="item-path ellipsis" title={dirPath}>{dirPath}</div>
-              <div className="item-user-container ellipsis" >
+            <div className="sdoc-item-content">
+              <div className="sdoc-item-name ellipsis" title={file._name}>{file._name}</div>
+              <div className="sdoc-item-path ellipsis" title={dirPath}>{dirPath}</div>
+              <div className="sdoc-item-user-container ellipsis" >
                 <div className='item-user'>{username}</div>
                 <div className='item-divide'>|</div>
                 <div className='item-adjust-time'>{fileAdjustTime}</div>
@@ -93,4 +93,4 @@ const AllRecentFiles = ({ onSelectedFile, fileType, t, searchContent, isOpenSear
   );
 };
 
-export default withTranslation('sdoc-editor')(AllRecentFiles);
+export default withTranslation('sdoc-editor')(ListView);

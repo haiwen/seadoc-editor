@@ -8,7 +8,7 @@ import { addDataToTree, parcelFileTypeIcon } from '../helpers';
 
 import './index.css';
 
-const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpenSearch }) => {
+const TreeView = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpenSearch }) => {
   const folderRef = useRef(null);
   const [expandedFolder, setExpandedFolder] = useState(new Set([]));
   const [currentActiveItem, setCurrentActiveItem] = useState(null);
@@ -205,4 +205,4 @@ const LocalFiles = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpen
   );
 };
 
-export default withTranslation('sdoc-editor')(LocalFiles);
+export default withTranslation('sdoc-editor')(TreeView);

@@ -8,7 +8,7 @@
   flex-direction: column;
 }
 
-.file-wrapper {
+.sdoc-file-wrapper {
   border-radius: 4px;
   cursor: pointer;
   display: flex;
@@ -18,16 +18,16 @@
   position: relative;
 }
 
-.file-wrapper:hover {
+.sdoc-file-wrapper:hover {
   background-color: #f5f5f5;
 }
 
-.file-wrapper .file-icon {
+.sdoc-file-wrapper .file-icon {
   height: 36px;
   width: 36px;
 }
 
-.item-content {
+.sdoc-item-content {
   display: flex;
   flex-direction: column;
   flex: 1 1;
@@ -35,23 +35,23 @@
   overflow: hidden;
 }
 
-.item-name {
+.sdoc-item-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
 }
 
-.item-path {
+.sdoc-item-path {
   color: #666;
 }
 
-.item-user-container {
+.sdoc-item-user-container {
   display: flex;
   color: #666;
 }
 
-.item-user-container .item-divide {
+.sdoc-item-user-container .item-divide {
   margin: 0 5px;
   transform: translateY(-1px);
 }
