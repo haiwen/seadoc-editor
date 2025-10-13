@@ -1,7 +1,32 @@
 .file-link-selected,
 .sdoc-file-link-render:hover {
-  background-color: #e5e5e5 !important;
+  background-color: rgb(153 153 153 / 15%) !important;
   padding: 3px 0;
+  border-radius: 3px;
+}
+
+.sdoc-file-link-render:hover .sdoc-file-text-link a {
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: rgb(55 53 47 / 25%);
+  padding: 3px 0;
+  border-radius: 3px;
+}
+
+.sdoc-file-link-render .sdoc-file-text-link a {
+  color: #212529;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.sdoc-file-link-render .sdoc-file-text-link.sdoc-no-file-link-icon a:hover,
+.sdoc-file-link-render .sdoc-file-text-link a:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: rgb(55 53 47 / 25%);
+  padding: 3px 0;
+  border-radius: 3px;
 }
 
 .sdoc-file-card-link {
@@ -49,9 +74,4 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.sdoc-file-card-link .sdoc-file-text-link a {
-  text-decoration: none;
-  color: #333;
 }

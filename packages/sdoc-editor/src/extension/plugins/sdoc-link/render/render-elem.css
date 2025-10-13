@@ -1,7 +1,16 @@
 .sdoc-file-link-selected,
 .sdoc-file-render:hover {
-  background-color: #e5e5e5 !important;
+  background-color: rgb(153 153 153 / 15%) !important;
   padding: 3px 0;
+  border-radius: 3px;
+}
+
+.sdoc-file-render:hover .sdoc-file-text-link a {
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: rgb(55 53 47 / 25%);
+  padding: 3px 0;
+  border-radius: 3px;
 }
 
 .sdoc-file-card-link {
@@ -40,11 +49,23 @@
   width: 28px;
 }
 
-.sdoc-file-render .sdoc-file-text-link.sdoc-no-file-link-icon a {
-  font-weight: bold;
+.sdoc-file-render .sdoc-file-text-link.sdoc-no-file-link-icon a,
+.sdoc-file-render .sdoc-file-text-link a,
+.sdoc-file-render .sdoc-file-card-link a {
+  color: #212529;
+  font-weight: 500;
   text-decoration: underline;
-  text-decoration-thickness: 2px;
-  color: #ff9800;
+  text-underline-position: under;
+}
+
+.sdoc-file-render .sdoc-file-text-link.sdoc-no-file-link-icon a:hover,
+.sdoc-file-render .sdoc-file-text-link a:hover,
+.sdoc-file-render .sdoc-file-card-link a:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: rgb(55 53 47 / 25%);
+  padding: 3px 0;
+  border-radius: 3px;
 }
 
 .sdoc-file-card-link .sdoc-file-text-link {
@@ -56,11 +77,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.sdoc-file-card-link .sdoc-file-text-link a {
-  text-decoration: none;
-  color: #333;
 }
 
 .sdoc-file-name-insert-collector {
