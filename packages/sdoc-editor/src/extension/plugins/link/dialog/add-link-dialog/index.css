@@ -19,7 +19,7 @@
 .select-btn .link-address-btn.active,
 .select-btn .link-block-btn.active {
   color: #ff9800;
-  border-bottom: 1.5px solid #ff9800;
+  border-bottom: 2px solid #ff9800;
 }
 
 .select-btn .link-address-btn {
@@ -56,6 +56,7 @@
 
 .selected-linked-block-wrapper .selected-linked-block .linked-block-item {
   margin-bottom: 0 !important;
+  cursor: pointer;
 }
 
 .selected-linked-block-wrapper .linked-block-item:not(img) {
@@ -63,10 +64,12 @@
   overflow-y: auto;
   padding-top: 3px;
   padding-bottom: 3px;
+  cursor: pointer;
 }
 
 .selected-linked-block-wrapper .linked-block-item:has(img) {
   max-height: none !important;
+  cursor: pointer;
 }
 
 .selected-linked-block-wrapper .link-block-wrapper {
@@ -74,7 +77,7 @@
   max-height: 400px;
   width: 100%;
   height: fit-content;
-  padding: 0.75rem;
+  padding: 0.75rem 0;
   margin-top: 3px;
   overflow-y: auto;
   box-sizing: border-box;
@@ -83,6 +86,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
 }
 
 .link-block-wrapper .select-block-wrapper {
@@ -91,6 +96,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin: 0 0.75rem;
 }
 
 .link-block-wrapper .select-block-wrapper .title {
@@ -106,6 +112,14 @@
 
 .link-block-wrapper .link-block-container .linked-block-item {
   margin-bottom: 5px !important;
+  cursor: pointer;
+  display: block;
+  padding-left: 0.75rem;
+}
+
+.link-block-wrapper .select-block-wrapper blockquote p,
+.link-block-wrapper .link-block-container blockquote p {
+  margin: 5px 0 !important;
 }
 
 .selected-linked-block-wrapper img {

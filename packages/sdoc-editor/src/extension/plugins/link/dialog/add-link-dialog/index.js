@@ -8,7 +8,7 @@ import { createProcessor } from '../../../../../slate-convert/md-to-html';
 import slateToMdString from '../../../../../slate-convert/slate-to-md';
 import { INTERNAL_LINKED_TYPE } from '../../../../constants';
 import { getEditorString } from '../../../../core';
-import { insertLink, updateLink, checkLink, parseHtmlString } from '../../helpers';
+import { insertLink, updateLink, checkLink, parseHtmlString, isEmptyNode } from '../../helpers';
 
 import './index.css';
 
@@ -127,7 +127,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
 
   useEffect(() => {
     const genHtml = async () => {
-      const list = editor.children.filter(node => Element.isElement(node) && INTERNAL_LINKED_TYPE.includes(node.type));
+      const list = editor.children.filter(node => Element.isElement(node) && !isEmptyNode(node) && INTERNAL_LINKED_TYPE.includes(node.type));
 
       const mdValue = list
         .map(node => `<!--${node.id}-->\n${slateToMdString([node])}`)
