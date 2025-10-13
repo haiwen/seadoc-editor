@@ -56,6 +56,7 @@
   font-weight: 500;
   text-decoration: underline;
   text-underline-position: under;
+  text-decoration-color: rgb(55 53 47 / 25%);
 }
 
 .sdoc-file-render .sdoc-file-text-link.sdoc-no-file-link-icon a:hover,
