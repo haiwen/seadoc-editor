@@ -117,6 +117,11 @@
   padding-left: 0.75rem;
 }
 
+.link-block-wrapper .select-block-wrapper blockquote,
+.link-block-wrapper .link-block-container blockquote {
+  border-left: 4px solid #ddd;
+}
+
 .link-block-wrapper .select-block-wrapper blockquote p,
 .link-block-wrapper .link-block-container blockquote p {
   margin: 5px 0 !important;
