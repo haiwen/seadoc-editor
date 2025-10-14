@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
 import context from '../../../../context';
 import { parcelFileTypeIcon } from '../helpers';
 
@@ -70,7 +71,7 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
         const fileTypeIcon = parcelFileTypeIcon(file._name);
         const dirPath = repoName + (file._parent_dir === '/' ? '' : file._parent_dir);
         const date = new Date(file._mtime);
-        const fileAdjustTime = date.toLocaleString('sv-SE');
+        const fileAdjustTime = dayjs(date).format('YYYY-MM-DD HH:mm:ss');
         const username = file.file_creator_nickname;
         const selected = currentActiveItem?.id === file._id;
         const filePath = (file._parent_dir === '/' ? '' : file._parent_dir) + '/' + file._name;
