@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, Input } from 'reactstrap';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import isHotkey from 'is-hotkey';
 import PropTypes from 'prop-types';
 import toaster from '../../../components/toast';
@@ -204,8 +204,8 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
         <div className='modal-operation-container'>
           {enableMetadata &&
             <div className='toggle-view'>
-              <div className={classNames('sdocfont sdoc-tree-view', { 'active': isTreeView })} onClick={onClickTreeView} />
-              <div className={classNames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })} onClick={onClickListView} />
+              <div className={classnames('sdocfont sdoc-tree-view', { 'active': isTreeView })} onClick={onClickTreeView} />
+              <div className={classnames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })} onClick={onClickListView} />
             </div>
           }
           <div className='sdocfont sdoc-close1 sdoc-close-dialog' onClick={closeDialog}></div>
@@ -214,7 +214,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
       <ModalBody className='p-0'>
         <div className='sdoc-file-select-container'>
           <div className='sdoc-file-select-wrapper'>
-            <div className='sdoc-file-left-panel'>
+            <div className={classnames('sdoc-file-left-panel', { 'with-right-metadata-panel': currentSelectedFile })}>
               <div className='sdoc-files-search-popover-container'>
                 <div className='sdoc-search-wrapper'>
                   <div className='sdocfont sdoc-find-replace sdoc-search'></div>
@@ -225,17 +225,17 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
                 : <ListView fileType={FILE_TYPE[dialogType]} onSelectedFile={onSelectedFile} searchContent={searchContent} isOpenSearch={isOpenSearch} />
               }
             </div>
-            <div className='sdoc-file-metadata-wrapper'>
-              {FileMetadataComponent && repoID && currentSelectedFile && (
+            {FileMetadataComponent && repoID && currentSelectedFile && (
+              <div className='sdoc-file-metadata-wrapper'>
                 <CollaboratorsProvider repoID={repoID}>
                   <FileMetadataComponent repoID={repoID} path={currentSelectedFile?.path} dirent={dirent} />
                 </CollaboratorsProvider>
-              )}
-            </div>
+              </div>
+            )}
           </div>
           <div className='sdoc-file-select-footer'>
             <Button color='secondary' className='mr-2' onClick={closeDialog}>{t('Cancel')}</Button>
-            <Button color='primary' className='highlight-bg-color' disabled={!currentSelectedFile} onClick={onSubmit}>{t('Confirm')}</Button>
+            <Button color='primary' className='highlight-bg-color' disabled={!currentSelectedFile} onClick={onSubmit}>{t('Submit')}</Button>
           </div>
         </div>
       </ModalBody>

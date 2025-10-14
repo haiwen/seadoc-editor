@@ -130,6 +130,7 @@
 
 .sdoc-file-select-container .sdoc-file-select-wrapper {
   display: flex;
+  width: 100%;
 }
 
 .sdoc-file-select-wrapper .sdoc-file-metadata-wrapper {
@@ -138,6 +139,10 @@
 
 .sdoc-file-left-panel {
   width: 100%;
+}
+
+.sdoc-file-left-panel.with-right-metadata-panel {
+  width: 398px;
 }
 
 .sdoc-file-left-panel .sdoc-files-search-popover-container {
@@ -174,6 +179,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .toggle-view .sdoc-tree-view.active,

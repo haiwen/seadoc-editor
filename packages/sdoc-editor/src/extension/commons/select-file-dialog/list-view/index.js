@@ -70,7 +70,7 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
         const fileTypeIcon = parcelFileTypeIcon(file._name);
         const dirPath = repoName + (file._parent_dir === '/' ? '' : file._parent_dir);
         const date = new Date(file._mtime);
-        const fileAdjustTime = date.toLocaleString();
+        const fileAdjustTime = date.toLocaleString('sv-SE');
         const username = file.file_creator_nickname;
         const selected = currentActiveItem?.id === file._id;
         const filePath = (file._parent_dir === '/' ? '' : file._parent_dir) + '/' + file._name;
