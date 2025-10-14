@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.184](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.183...@seafile/sdoc-editor@2.0.184) (2025-10-14)
+
+### Bug Fixes
+
+- optimize blockquote border ([6794c50](https://github.com/seafileltd/sea-sdoc-editor/commit/6794c50c69296df8ce90c16d1c02f17d4055a94d))
+- optimize external link style ([737f1b1](https://github.com/seafileltd/sea-sdoc-editor/commit/737f1b1b4367f68ac669fbdbecdd86aa95b62036))
+
 ## [2.0.183](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.182...@seafile/sdoc-editor@2.0.183) (2025-10-11)
 
 ### Bug Fixes
