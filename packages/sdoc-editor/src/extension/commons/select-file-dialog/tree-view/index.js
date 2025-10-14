@@ -122,6 +122,7 @@ const TreeView = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpenSe
   const getSearchFiles = useCallback((searchContent, fileType) => {
     return context.getSearchFilesByFilename(searchContent, 1, 100, fileType).then(res => {
       res.data.results.forEach((item) => {
+        item.name = item.fullpath.substring(item.fullpath.lastIndexOf('/') + 1);
         item.indexId = item.id;
         item.type = 'file';
         item.file_uuid = item.doc_uuid;
