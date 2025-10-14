@@ -70,7 +70,7 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
       {fileList.map(file => {
         const fileTypeIcon = parcelFileTypeIcon(file._name);
         const dirPath = repoName + (file._parent_dir === '/' ? '' : file._parent_dir);
-        const date = new Date(file._mtime);
+        const date = new Date(file._file_mtime);
         const fileAdjustTime = dayjs(date).format('YYYY-MM-DD HH:mm:ss');
         const username = file.file_creator_nickname;
         const selected = currentActiveItem?.id === file._id;
