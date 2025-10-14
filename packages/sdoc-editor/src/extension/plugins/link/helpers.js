@@ -1,4 +1,4 @@
-import { Editor, Transforms, Range, Path } from '@seafile/slate';
+import { Editor, Transforms, Range, Path, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import slugid from 'slugid';
 import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, INSERT_POSITION, LINK, LIST_ITEM, PARAGRAPH } from '../../constants';
@@ -215,4 +215,9 @@ export const parseHtmlString = (htmlString, targetType) => {
   }
 
   return resultHtml;
+};
+
+export const isEmptyNode = (node) => {
+  const text = Node.string(node);
+  return text.trim() === '';
 };
