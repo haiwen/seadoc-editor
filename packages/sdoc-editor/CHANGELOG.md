@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.187](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.186...@seafile/sdoc-editor@2.0.187) (2025-10-14)
+
+### Bug Fixes
+
+- change file mtime ([368ce92](https://github.com/seafileltd/sea-sdoc-editor/commit/368ce9295e080d52211fcb0981308f78118823d9))
+
 ## [2.0.186](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.185...@seafile/sdoc-editor@2.0.186) (2025-10-14)
 
 ### Bug Fixes
