@@ -130,6 +130,12 @@ class SocketClient {
     clientDebug('connect_error. %s', error.type);
     clientDebug('connect_error. %O', error.context);
 
+    if (error.message === 'jwt expired') {
+      const socketManager = SocketManager.getInstance();
+      socketManager.dispatchConnectState('token_expired');
+      return;
+    }
+
     if (error.message.includes('timeout')) {
       setTimeout(() => {
         this.safeReconnect();
