@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.190](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.189...@seafile/sdoc-editor@2.0.190) (2025-10-17)
+
+### Bug Fixes
+
+- cancal highlight by dom search ([211bb34](https://github.com/seafileltd/sea-sdoc-editor/commit/211bb34a899c4d7360e1aaa0851e106e6de2a088))
+
 ## [2.0.189](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.188...@seafile/sdoc-editor@2.0.189) (2025-10-17)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
