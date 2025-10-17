@@ -203,7 +203,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
         <h5 className='modal-title-container'>{t(modalTitle)}</h5>
         <div className='modal-operation-container'>
           {enableMetadata &&
-            <div className='toggle-view'>
+            <div className='sdoc-toggle-view'>
               <div className={classnames('sdocfont sdoc-tree-view', { 'active': isTreeView })} onClick={onClickTreeView} />
               <div className={classnames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })} onClick={onClickListView} />
             </div>
