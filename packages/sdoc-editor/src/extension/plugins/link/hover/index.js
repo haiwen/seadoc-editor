@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { Editor, Transforms } from '@seafile/slate';
+import { Editor } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
@@ -39,14 +39,9 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
     });
 
     if (linkedNodeEntry) {
-      const [node, path] = linkedNodeEntry;
+      const node = linkedNodeEntry[0];
       const linkedDomNode = ReactEditor.toDOMNode(editor, node);
       linkedDomNode.classList.add('linked-block-highlight-overlay');
-      Transforms.setNodes(
-        editor,
-        { linked_block: true },
-        { at: path }
-      );
 
       // Scroll linked node to view if not in current view
       if (!isNodeInCurrentView(linkedDomNode)) {
@@ -54,6 +49,7 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
       }
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linked_id]);
 
 
