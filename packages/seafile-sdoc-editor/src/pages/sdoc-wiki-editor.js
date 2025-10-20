@@ -38,11 +38,11 @@ const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collabor
   }, [docUuid]);
 
   useEffect(() => {
-    if (setEditor && validEditor && isShowRightPanel ) {
+    if (setEditor && validEditor) {
       validEditor.editorType = WIKI_EDITOR;
       setEditor(validEditor);
     }
-  }, [setEditor, validEditor, isShowRightPanel]);
+  }, [setEditor, validEditor]);
 
   useEffect(() => {
     if (isWikiReadOnly) return;

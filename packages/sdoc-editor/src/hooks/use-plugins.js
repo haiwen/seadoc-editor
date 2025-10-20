@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import CommentWrapper from '../comment';
 import CommentsOperation from '../comment/components/comment-operation';
 import { PLUGIN_DISPLAY_TYPE } from '../constants';

@@ -95,6 +95,7 @@ const RightPanel = ({ editor }) => {
     return () => {
       unsubscribeTransferFileId();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!displayPluginName) return null;
