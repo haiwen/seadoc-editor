@@ -221,6 +221,7 @@
   background-color: rgb(153 153 153 / 15%);
   padding: 3px 0;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 /* code_block */
