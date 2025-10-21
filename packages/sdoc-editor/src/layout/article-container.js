@@ -6,7 +6,7 @@ import EventBus from '../utils/event-bus';
 import { getStyleByFullWidthMode } from '../utils/full-width-mode';
 import LocalStorage from '../utils/local-storage-utils';
 
-export default function ArticleContainer({ editor, children, isShowCommentPanelInWiki }) {
+export default function ArticleContainer({ editor, children }) {
   const scrollRef = useScrollContext();
   const articleRef = useRef(null);
   const [containerStyle, setContainerStyle] = useState({});

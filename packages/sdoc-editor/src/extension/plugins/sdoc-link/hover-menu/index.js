@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
 import Tooltip from '../../../../components/tooltip';
-import { INTERNAL_EVENT } from '../../../../constants';
+import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../../constants';
 import { usePlugins } from '../../../../hooks/use-plugins';
 import EventBus from '../../../../utils/event-bus';
 import { ElementPopover } from '../../../commons';
@@ -59,16 +59,20 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
   const handleOpenLinkPreview = useCallback((pluginName) => {
     updateDisplayPlugin(pluginName, true);
     const { doc_uuid, title, type } = element;
+    let data = { doc_uuid, title, type };
+    if (editor.editorType === WIKI_EDITOR) {
+      data = element;
+    }
 
     const eventBus = EventBus.getInstance();
-    eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, { doc_uuid, title, type });
+    eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, data);
     setTimeout(() => {
       onHideInsertHoverMenu();
     }, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateDisplayPlugin]);
 
   const selectedType = element.display_type || SDOC_LINK_TYPE.TEXT_LINK;
-  const id = `sdoc-link-display-type-${element.id}`;
   const newSdocFileTypes = SDOC_LINK_TYPES.filter(sdocLinkType => isInTable(editor, element) ? sdocLinkType !== SDOC_LINK_TYPE.CARD_LINK : true);
 
   return (
@@ -116,7 +120,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                   </Tooltip>
                 )}
                 <span id='sdoc_link_preview' role="button" className='op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
-                  <i className='sdocfont sodc-eye icon-font'></i>
+                  <i className='sdocfont sdoc-eye icon-font'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='sdoc_link_preview' placement='top' fade={true}>

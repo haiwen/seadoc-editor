@@ -104,13 +104,17 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
       }
     }
 
-    if (isShowInsertHoverMenu && element.type === SDOC_LINK) {
+    if (isShowInsertHoverMenu && [SDOC_LINK, WIKI_LINK].includes(element.type)) {
       e.stopPropagation();
-      updateDisplayPlugin('sdoc-file-preview', true);
+      element.type === SDOC_LINK && updateDisplayPlugin('sdoc-file-preview', true);
       const { doc_uuid, title, type } = element;
+      let data = { doc_uuid, title, type };
+      if (element.type === WIKI_LINK) {
+        data = element;
+      }
 
       const eventBus = EventBus.getInstance();
-      eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, { doc_uuid, title, type });
+      eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, data);
       setTimeout(() => {
         onHideInsertHoverMenu();
       }, 0);
