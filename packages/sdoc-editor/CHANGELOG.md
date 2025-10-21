@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.191](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.190...@seafile/sdoc-editor@2.0.191) (2025-10-21)
+
+### Bug Fixes
+
+- cancel selecting default first one ([bdf3246](https://github.com/seafileltd/sea-sdoc-editor/commit/bdf32460182e9fbff78915d6402e94537544f857))
+
+### Features
+
+- add wiki preview ([bb6fe67](https://github.com/seafileltd/sea-sdoc-editor/commit/bb6fe67eafb787280a8b52640639a2f9fa03f6c0))
+- optimize code ([1c7e3c0](https://github.com/seafileltd/sea-sdoc-editor/commit/1c7e3c0575fd4b01c9e8b9073db348e993bb21c1))
+
 ## [2.0.190](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.189...@seafile/sdoc-editor@2.0.190) (2025-10-17)
 
 ### Bug Fixes

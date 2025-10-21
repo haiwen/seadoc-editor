@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.108](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.107...@seafile/seafile-sdoc-editor@2.0.108) (2025-10-21)
+
+### Features
+
+- add wiki preview ([bb6fe67](https://github.com/seafileltd/sea-sdoc-editor/commit/bb6fe67eafb787280a8b52640639a2f9fa03f6c0))
+
 ## [2.0.107](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.106...@seafile/seafile-sdoc-editor@2.0.107) (2025-10-17)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
