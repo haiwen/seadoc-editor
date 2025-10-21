@@ -5,6 +5,10 @@
   border-radius: 3px;
 }
 
+.sdoc-file-link-render:hover {
+  cursor: pointer;
+}
+
 .sdoc-file-link-render:hover .sdoc-file-text-link a {
   text-decoration: underline;
   text-underline-position: under;
@@ -44,7 +48,7 @@
 
 .sdoc-file-link-render .sdoc-file-link-icon {
   padding-right: 5px;
-  color: #ff9800;
+  color: #9aa0ac;
 }
 
 .sdoc-file-card-link .sdoc-file-link-icon :first-child {
