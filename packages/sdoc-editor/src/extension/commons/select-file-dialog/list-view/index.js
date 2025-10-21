@@ -29,12 +29,6 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
       });
       setAllFileList(sortedRecords);
       setFileList(sortedRecords);
-
-      const firstFile = sortedRecords[0];
-      if (firstFile) {
-        const filePath = (firstFile._parent_dir === '/' ? '' : firstFile._parent_dir) + '/' + firstFile._name;
-        onSelectFile(null, { id: firstFile._id, name: firstFile._name, path: filePath });
-      }
     };
 
     getFileMetadata();
