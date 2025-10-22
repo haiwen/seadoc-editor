@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.193](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.192...@seafile/sdoc-editor@2.0.193) (2025-10-22)
+
+### Bug Fixes
+
+- drag element bug in wiki ([0dfbe91](https://github.com/seafileltd/sea-sdoc-editor/commit/0dfbe9171a4983bce5c65610ddb48f4b75d9314e))
+
 ## [2.0.192](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.191...@seafile/sdoc-editor@2.0.192) (2025-10-22)
 
 ### Features
