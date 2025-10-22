@@ -144,6 +144,7 @@ const SideToolbar = () => {
 
   const onMouseDown = useCallback((e) => {
     e.stopPropagation();
+    if (!editor.selection) setSelection(editor, slateNode);
     const domSelection = window.getSelection();
     if (domSelection.type !== 'Range' || !editor.selection || Path.equals(editor.selection.focus.path, editor.selection.anchor.path)) {
       draggedPreviewContainer.current = null;
@@ -197,7 +198,7 @@ const SideToolbar = () => {
         draggedSourcePaths.current = null;
       }
     }
-  }, [editor]);
+  }, [editor, slateNode]);
 
   const onShowSideMenuToggle = useCallback(() => {
     setSelection(editor, slateNode);
