@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.192](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.191...@seafile/sdoc-editor@2.0.192) (2025-10-22)
+
+### Features
+
+- add video hover menu ([3c90be2](https://github.com/seafileltd/sea-sdoc-editor/commit/3c90be2de948a79f9e71f0d88cff2e52c96bb1a1))
+
 ## [2.0.191](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.190...@seafile/sdoc-editor@2.0.191) (2025-10-21)
 
 ### Bug Fixes
