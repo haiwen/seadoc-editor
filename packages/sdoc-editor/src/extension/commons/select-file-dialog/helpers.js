@@ -40,7 +40,7 @@ export const getFileTypeIcon = (fileType) => {
 
 export const parcelFileTypeIcon = (fileName) => {
   const newFileType = fileName.split('.').pop();
-  const fileExtType = Object.entries(FILEEXT_TYPE).find(([, extensions]) => extensions.includes(newFileType))?.[0];
+  const fileExtType = Object.entries(FILEEXT_TYPE).find(([, extensions]) => extensions.some(ext => ext.toLowerCase() === newFileType.toLowerCase()))?.[0];
   const fileTypeResult = fileExtType ? FILEEXT_TYPE_MAP[fileExtType] : newFileType;
   const fileTypeIcon = getFileTypeIcon(fileTypeResult);
   return fileTypeIcon;

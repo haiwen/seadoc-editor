@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
-import { Transforms } from '@seafile/slate';
+import { Range, Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
+import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { getVideoURL, formatFileSize, videoFileIcon } from './helpers';
+import HoverMenu from './hover-menu';
 
 import './index.css';
 
@@ -12,10 +14,12 @@ const Video = ({ element, editor }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [videoStates, setVideoStates] = useState({});
+  const [menuPosition, setMenuPosition] = useState({});
+  const scrollRef = useScrollContext();
   const videoName = data?.name || data?.src;
   const videoSize = data?.size;
   const isEmbeddableLink = data?.is_embeddable_link;
-  const readonly = useReadOnly();
+  const readOnly = useReadOnly();
 
   const handlePlay = () => {
     setVideoStates(prev => ({ ...prev, [element.id]: false }));
@@ -45,6 +49,25 @@ const Video = ({ element, editor }) => {
     }
   }, []);
 
+  const setPosition = useCallback((elem) => {
+    if (elem) {
+      const { top, left } = elem.getBoundingClientRect();
+      const menuTop = top - 42; // top = top distance - menu height
+      const menuLeft = left - 18; // left = left distance - (menu width / 2)
+      const newMenuPosition = {
+        top: menuTop,
+        left: menuLeft
+      };
+      setMenuPosition(newMenuPosition);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onScroll = useCallback((e) => {
+    setPosition(videoRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoElement) {
@@ -58,6 +81,37 @@ const Video = ({ element, editor }) => {
       document.removeEventListener('click', onClickOutside);
     };
   }, [onClickOutside]);
+
+  useEffect(() => {
+    let observerRefValue = null;
+    let resizeObserver = null;
+
+    if (isSelected) {
+      scrollRef.current && scrollRef.current.addEventListener('scroll', onScroll);
+      observerRefValue = scrollRef.current;
+
+      resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (resizeObserver) {
+            onScroll();
+          }
+        }
+      });
+
+      resizeObserver.observe(scrollRef.current);
+    } else {
+      scrollRef.current && scrollRef.current.removeEventListener('scroll', onScroll);
+    }
+    return () => {
+      if (observerRefValue) {
+        observerRefValue.removeEventListener('scroll', onScroll);
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSelected]);
 
   return (
     <>
@@ -88,7 +142,7 @@ const Video = ({ element, editor }) => {
                 ref={videoRef}
                 src={getVideoURL(data, editor)}
                 controls
-                controlsList={readonly && 'nofullscreen'}
+                controlsList={ readOnly ? 'nofullscreen' : undefined }
                 onClick={onClickVideo}
                 draggable={false}
                 onPlay={handlePlay}
@@ -119,6 +173,15 @@ const Video = ({ element, editor }) => {
           )}
         </div>
       </div>
+      {(isSelected && !isEmbeddableLink && (!readOnly && editor.selection && Range.isCollapsed(editor.selection)) &&
+        <HoverMenu
+          editor={editor}
+          menuPosition={menuPosition}
+          element={element}
+          videoRef={videoRef}
+          setIsSelected={setIsSelected}
+        />
+      )}
     </>
   );
 };

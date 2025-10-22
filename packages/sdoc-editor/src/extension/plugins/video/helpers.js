@@ -1,4 +1,6 @@
 import { Editor, Range, Transforms, Path, Node } from '@seafile/slate';
+import { ReactEditor } from '@seafile/slate-react';
+import copy from 'copy-to-clipboard';
 import urlJoin from 'url-join';
 import context from '../../../context';
 import { CODE_BLOCK, ELEMENT_TYPE, VIDEO, INSERT_POSITION, PARAGRAPH, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, TABLE } from '../../constants';
@@ -183,4 +185,20 @@ export const formatFileSize = (size) => {
 export const videoFileIcon = () => {
   const server = context.getSetting('serviceUrl');
   return `${server}/media/img/file/256/video.png`;
+};
+
+export const onCopyVideoNode = (editor, element) => {
+  if (editor.selection == null || Range.isExpanded(editor.selection)) return;
+
+  const p = ReactEditor.findPath(editor, element);
+  Transforms.select(editor, p);
+  const newData = editor.setFragmentData(new DataTransfer());
+  copy('copy', {
+    onCopy: (clipboardData) => {
+      newData.types.forEach((type) => {
+        const data = newData.getData(type);
+        clipboardData.setData(type, data);
+      });
+    }
+  });
 };
