@@ -60,7 +60,7 @@ const AddVideoLinkDialog = ({ editor, className, closeDialog, handleSubmit }) =>
 
   return (
     <Modal isOpen={true} autoFocus={false} toggle={closeDialog} className={className} zIndex={1071} returnFocusAfterClose={false}>
-      <ModalHeader close={close}>{t('Insert_link')}</ModalHeader>
+      <ModalHeader close={close}>{t('Add_video_link')}</ModalHeader>
       <ModalBody>
         <Fragment>
           <div className="form-group">
@@ -76,7 +76,7 @@ const AddVideoLinkDialog = ({ editor, className, closeDialog, handleSubmit }) =>
             />
             {linkErrorMessage && <Alert color="danger" className="mt-2">{t(linkErrorMessage)}</Alert>}
           </div>
-          <div style={{ textAlign: 'center', fontSize: '12px', color: '#787774' }}>{t('Support_Youtube_Tencent_Bilibili_and_more')}</div>
+          <div style={{ textAlign: 'center', fontSize: '12px', color: '#787774' }}>{t('Support_YouTube_Bilibili_and_more')}</div>
         </Fragment>
       </ModalBody>
       <ModalFooter>
