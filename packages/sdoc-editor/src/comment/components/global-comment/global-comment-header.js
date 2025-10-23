@@ -80,7 +80,7 @@ const GlobalCommentHeader = ({ toggle, activeCommentGroup, setCurrentCommentGrou
             <i className="sdocfont sdoc-filter1"></i>
             {isMounted && (
               <Tooltip target="comment-types">
-                {t('Comment_filter')}
+                {t('Filter')}
               </Tooltip>)}
             <Dropdown isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
               <DropdownMenu className='sdoc-dropdown-menu sdoc-comment-filter-dropdown' container="comment-types">
