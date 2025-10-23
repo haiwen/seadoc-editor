@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.194](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.193...@seafile/sdoc-editor@2.0.194) (2025-10-23)
+
+### Bug Fixes
+
+- optimize drag handerbar ([8083433](https://github.com/seafileltd/sea-sdoc-editor/commit/8083433ed7adc9cce53310ef21743ade2854d5d0))
+- optimize video link ([57887f1](https://github.com/seafileltd/sea-sdoc-editor/commit/57887f128fc5e7d6a55e087d108f86d8982cd8ad))
+
 ## [2.0.193](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.192...@seafile/sdoc-editor@2.0.193) (2025-10-22)
 
 ### Bug Fixes
