@@ -6,7 +6,7 @@ import { getEventClassName } from '../utils';
 
 import './comment-list.css';
 
-const CommentDeletePopover = ({ type, setIsShowDeletePopover, deleteConfirm, targetId, parentDom }) => {
+const CommentDeletePopover = ({ type, setIsShowDeletePopover, deleteConfirm, targetId, parentDom, isGlobalComment }) => {
 
   const popoverRef = useRef(null);
 
@@ -53,7 +53,7 @@ const CommentDeletePopover = ({ type, setIsShowDeletePopover, deleteConfirm, tar
       container={parentDom}
       target={targetId}
       onClick={event => event.stopPropagation()}
-      placement="left"
+      placement={isGlobalComment ? 'bottom' : 'left'}
       className='comment-delete-popover'
       isOpen={true}
     >

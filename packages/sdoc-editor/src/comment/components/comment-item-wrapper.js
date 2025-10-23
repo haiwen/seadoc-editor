@@ -304,6 +304,7 @@ const CommentItemWrapper = forwardRef(({
         <CommentDeletePopover
           type="comment"
           targetId={commentOpToolsId}
+          isGlobalComment={isGlobalComment}
           deleteConfirm={_deleteComment}
           setIsShowDeletePopover={setIsShowDeletePopover}
           parentDom={listRef.current}

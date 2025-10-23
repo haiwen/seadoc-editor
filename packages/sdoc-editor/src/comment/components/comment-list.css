@@ -82,6 +82,7 @@
 }
 
 .comment-delete-popover .comment-delete-popover-container {
+  width: 250px;
   padding: 16px;
 }
 
