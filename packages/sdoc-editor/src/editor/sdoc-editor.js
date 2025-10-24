@@ -162,6 +162,9 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
           window.document.exitFullscreen();
         }
       }
+      if (isHotkey('mod+s', e)) {
+        e.preventDefault();
+      }
     };
 
     const onFullscreenChange = () => {
@@ -222,7 +225,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
     );
   }
 
-  if (isMobile && !isEdit || showFullScreen) {
+  if ((isMobile && !isEdit) || showFullScreen) {
     return (
       <EditorContainer editor={validEditor} readonly={true} fullscreen={showFullScreen}>
         <ColorProvider>
