@@ -16,6 +16,7 @@ import './index.css';
 const Whiteboard = ({ editor, element }) => {
   const { file_path, repo_id, title, link } = element;
   const whiteboardRef = useRef();
+  const fullscreenRef = useRef();
   const scrollRef = useScrollContext();
   const isSelected = useSelected();
   const readOnly = useReadOnly();
@@ -25,22 +26,36 @@ const Whiteboard = ({ editor, element }) => {
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.data?.type === 'checkSdocParent') {
-        const isSdocClass = whiteboardRef?.current.classList.contains('sdoc-whiteboard-element');
-        const isWhiteboardFullScreen = whiteboardRef?.current.classList.contains('sdoc-whiteboard-element-full-screen');
-        whiteboardRef?.current.contentWindow.postMessage(
-          { type: 'checkSdocParentResult', isInSdoc: isSdocClass, isFullScreen: isWhiteboardFullScreen },
-          '*'
-        );
+        const isSdocClass = whiteboardRef.current?.classList.contains('sdoc-whiteboard-element');
+        const isWhiteboardFullScreen = fullscreenRef?.current?.classList.contains('sdoc-whiteboard-element-full-screen');
+        if (whiteboardRef?.current) {
+          whiteboardRef?.current.contentWindow.postMessage({
+            type: 'checkSdocParentResult',
+            isInSdoc: isSdocClass
+          }, '*');
+        }
+        if (fullscreenRef?.current) {
+          fullscreenRef?.current.contentWindow.postMessage({
+            type: 'checkSdocParentResult',
+            isFullScreen: isWhiteboardFullScreen
+          }, '*');
+        }
       }
     };
 
     const handleWindowResize = () => {
-      whiteboardRef?.current.contentWindow.postMessage(
-        { type: 'resizeWindowWidth', isResize: true },
-        '*'
-      );
+      if (whiteboardRef?.current) {
+        whiteboardRef?.current.contentWindow.postMessage(
+          { type: 'resizeWindowWidth', isResize: true },
+          '*'
+        );
+      }
+      if (fullscreenRef?.current) {
+        fullscreenRef?.current.contentWindow.postMessage(
+          { type: 'resizeWindowWidth', isResize: true },
+          '*');
+      }
     };
-
 
     const eventBus = EventBus.getInstance();
     const unsubscribeResizeArticle = eventBus.subscribe(INTERNAL_EVENT.RESIZE_ARTICLE, handleWindowResize);
@@ -68,10 +83,10 @@ const Whiteboard = ({ editor, element }) => {
 
   const handleScroll = useCallback((e) => {
     if (readOnly) return;
-    if (!isSelected) return;
+    if (!isSelected && !isShowZoomOut) return;
     const menuPosition = getMenuPosition(whiteboardRef.current, editor);
     setMenuPosition(menuPosition);
-  }, [editor, isSelected, readOnly]);
+  }, [editor, isSelected, readOnly, isShowZoomOut]);
 
   useEffect(() => {
     if (readOnly) return;
@@ -152,9 +167,10 @@ const Whiteboard = ({ editor, element }) => {
         ReactDOM.createPortal(
           <div className='whiteboard-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
             <iframe
+              title={title}
               className='sdoc-whiteboard-element-full-screen'
               src={link}
-              ref={whiteboardRef}
+              ref={fullscreenRef}
             >
             </iframe>
           </div>,
