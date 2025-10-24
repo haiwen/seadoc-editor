@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.197](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.196...@seafile/sdoc-editor@2.0.197) (2025-10-24)
+
+### Bug Fixes
+
+- fix copy image into blockquote bug ([0691f88](https://github.com/seafileltd/sea-sdoc-editor/commit/0691f88afcebff801891e3a1a7e381dd65429713))
+- fix hotkey bug ([6416ace](https://github.com/seafileltd/sea-sdoc-editor/commit/6416aceba5197f984e2373b0f3334b61e6644a3d))
+- update whiteboard hover menu position ([a4817be](https://github.com/seafileltd/sea-sdoc-editor/commit/a4817be9437dea442ec5c8ba019d9774b4a1b62f))
+
 ## [2.0.196](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.195...@seafile/sdoc-editor@2.0.196) (2025-10-23)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
