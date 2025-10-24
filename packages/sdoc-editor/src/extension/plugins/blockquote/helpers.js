@@ -1,7 +1,8 @@
-import { Editor, Transforms, Element, Node } from '@seafile/slate';
+import { Editor, Transforms, Element } from '@seafile/slate';
 import slugid from 'slugid';
 import { BLOCKQUOTE, CHECK_LIST_ITEM, IMAGE, ORDERED_LIST, PARAGRAPH, UNORDERED_LIST, CODE_BLOCK, TABLE, CALL_OUT, MULTI_COLUMN } from '../../constants';
 import { focusEditor, getNodeType, getSelectedNodeEntryByType } from '../../core';
+import { isEmptyNode } from '../paragraph/helper';
 
 export const isMenuDisabled = (editor, readonly) => {
   if (readonly) return true;
@@ -127,7 +128,7 @@ export const getFormattedElements = (data) => {
 export const getFormattedRestElements = (data) => {
   const restElements = data.slice(0);
   data.forEach((item, index) => {
-    if (Node.string(item).length === 0) {
+    if (isEmptyNode(item)) {
       restElements.splice(index, 1);
     }
 
