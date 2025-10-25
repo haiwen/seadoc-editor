@@ -3,6 +3,14 @@
   height: 100%;
 }
 
+.sdoc-file-preview-drawer a {
+  color: #212529;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: rgb(55 53 47 / 25%);
+}
+
 .sdoc-file-preview-drawer .file-preview-panel-wrapper {
   /* 100vh - toolbar height*/
   height: calc(100vh - 93px);
@@ -66,7 +74,7 @@
   text-overflow: ellipsis;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .title {
+.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .title {
   color: #212529;
   font-size: 16px;
   font-weight: 500;
