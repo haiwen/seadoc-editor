@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.198](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.197...@seafile/sdoc-editor@2.0.198) (2025-10-25)
+
+### Bug Fixes
+
+- fix paste pdf content into sdoc bug ([621a419](https://github.com/seafileltd/sea-sdoc-editor/commit/621a419fee8cdbb9db3426864bba55e6ff8b3dba))
+- make link and image uneditable in preview and presentation view ([5fca947](https://github.com/seafileltd/sea-sdoc-editor/commit/5fca947a977b3a0c7e49c58ad0ec9f3533f4353d))
+- resolve link style ([aba961e](https://github.com/seafileltd/sea-sdoc-editor/commit/aba961e583d2d75adc8a60cefc3262110c1958d0))
+
 ## [2.0.197](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.196...@seafile/sdoc-editor@2.0.197) (2025-10-24)
 
 ### Bug Fixes
