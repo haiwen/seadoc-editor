@@ -49,6 +49,20 @@
   font-size: calc(100vw / 794 * 14.7) !important;
 }
 
+.sdoc-editor-container.fullscreen a,
+.sdoc-editor-container.fullscreen .sdoc-file-link-render,
+.sdoc-editor-container.fullscreen .sdoc-file-render {
+  pointer-events: none;
+}
+
+.sdoc-editor-container.fullscreen a {
+  color: #212529;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: rgb(55 53 47 / 25%);
+}
+
 .sdoc-editor-container {
   flex: 1;
   display: flex;
