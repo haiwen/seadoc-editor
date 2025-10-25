@@ -287,7 +287,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                 <span style={imageStyle}>
                   <img
                     ref={imageRef}
-                    className={classNames({ 'image-selected': isSelected })}
+                    className={classNames({ 'image-selected': !readOnly && isSelected })}
                     onClick={onClickImage}
                     src={getImageURL(data, editor)}
                     style={getImageStyle()}
@@ -298,7 +298,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                   />
                   {(isCopyImageLoading || isUploadLoading) && <ImageLoader copyright={t('Image_is_uploading')}/>}
                   {(isUploadError) && <ImageLoader copyright={t('Image_is_upload_error')} isError={true} />}
-                  {isSelected && (
+                  {!readOnly && isSelected && (
                     <span className='image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
                   )}
                   {isResizing && (
