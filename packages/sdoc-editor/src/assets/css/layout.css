@@ -50,6 +50,7 @@
 }
 
 .sdoc-editor-container.fullscreen a,
+.sdoc-editor-container.fullscreen .sdoc-drag-cover,
 .sdoc-editor-container.fullscreen .sdoc-file-link-render,
 .sdoc-editor-container.fullscreen .sdoc-file-render {
   pointer-events: none;
