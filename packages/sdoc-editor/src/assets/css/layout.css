@@ -49,6 +49,11 @@
   font-size: calc(100vw / 794 * 14.7) !important;
 }
 
+.sdoc-editor-container.fullscreen .sdoc-file-link-render,
+.sdoc-editor-container.fullscreen .sdoc-file-render {
+  pointer-events: none;
+}
+
 .sdoc-editor-container {
   flex: 1;
   display: flex;

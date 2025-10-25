@@ -277,7 +277,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
             data-parent-id={parentImageBlockId}
             className={classNames('sdoc-image-wrapper', className)}
             {...attributes}
-            contentEditable={canEditable}
+            contentEditable={!readOnly && canEditable}
             suppressContentEditableWarning
             style={{ ...style }}
             onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
