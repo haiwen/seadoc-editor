@@ -12,7 +12,11 @@ const withQuickInsert = (editor) => {
 
   newEditor.insertText = (text) => {
     if (!editor.selection) return insertText(text);
-    const [blockNode] = getTopLevelBlockNode(editor);
+    // select multiple top block, top block entry is null
+    const topBlockEntry = getTopLevelBlockNode(editor);
+    if (!topBlockEntry) return insertText(text);
+
+    const blockNode = topBlockEntry[0];
 
     // Disable quick insert for code block and table
     if ([CODE_BLOCK, TABLE].includes(blockNode.type)) {
