@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.199](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.198...@seafile/sdoc-editor@2.0.199) (2025-10-27)
+
+### Bug Fixes
+
+- make block image unselected ([c29a1fc](https://github.com/seafileltd/sea-sdoc-editor/commit/c29a1fcf1d489e9e09eada121aaa412b15d9b563))
+
 ## [2.0.198](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.197...@seafile/sdoc-editor@2.0.198) (2025-10-25)
 
 ### Bug Fixes
