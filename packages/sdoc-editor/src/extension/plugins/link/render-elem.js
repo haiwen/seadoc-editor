@@ -1,5 +1,6 @@
 import React from 'react';
 import { Range } from '@seafile/slate';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { INTERNAL_EVENT } from '../../../constants';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
@@ -107,7 +108,7 @@ class Link extends React.Component {
 
     if (readonly) {
       return (
-        <span className={className} {...attributes}>
+        <span className={classnames(className, 'virtual-link')} {...attributes}>
           <a href={element.href} title={element.title} target='_blank' rel="noreferrer">{children}</a>
         </span>
       );
