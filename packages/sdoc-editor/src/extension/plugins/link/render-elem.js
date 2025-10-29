@@ -109,7 +109,7 @@ class Link extends React.Component {
     if (readonly) {
       return (
         <span className={classnames(className, 'virtual-link')} {...attributes}>
-          <a href={element.href} title={element.title} target='_blank' rel="noreferrer">{children}</a>
+          <a href={element.href} title={element.children[0]?.text} target='_blank' rel="noreferrer">{children}</a>
         </span>
       );
     }
@@ -117,7 +117,7 @@ class Link extends React.Component {
     return (
       <>
         <span className={className} {...attributes} onClick={this.onLinkClick}>
-          <span ref={this.setRef} className='virtual-link' title={element.title}>
+          <span ref={this.setRef} className='virtual-link' title={element.children[0]?.text}>
             <InlineBugFixer />
             {children}
             <InlineBugFixer />
