@@ -16,8 +16,8 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   const { t } = useTranslation('sdoc-editor');
   const [linkErrorMessage, setLinkErrorMessage] = useState('');
   const [titleErrorMessage, setTitleErrorMessage] = useState('');
-  const { href: oldURL, linked_id } = element || { title: linkTitle || '', href: '' };
-  const oldTitle = element.children[0].text;
+  const { href: oldURL, linked_id } = element || { href: '' };
+  const oldTitle = element?.children[0].text || linkTitle || '';
   const initTitle = useMemo(() => oldTitle ? oldTitle : getEditorString(editor, editor.selection), [editor, oldTitle]);
   const [title, setTitle] = useState(initTitle);
   const [url, setURL] = useState(linked_id ? '' : oldURL);
