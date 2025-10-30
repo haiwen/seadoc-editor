@@ -44,7 +44,7 @@ const VideoMenu = ({ editor, readonly, toggle, eventBus }) => {
           hideArrow={true}
           fade={false}
         >
-          <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container 333">
+          <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container">
             <div className="sdoc-dropdown-menu-item" onClick={openLocalVideoDialog}>{t('Upload_local_video')}</div>
             <div className="sdoc-dropdown-menu-item" onClick={addVideoLink}>{t('Add_video_link')}</div>
             <div className="sdoc-dropdown-menu-item" onClick={openSelectVideoFileDialog}>{t('Link_video_file')}</div>

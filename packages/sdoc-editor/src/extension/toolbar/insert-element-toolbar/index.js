@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation, withTranslation } from 'react-i18next';
-import { Input } from 'reactstrap';
+import { Input, UncontrolledPopover } from 'reactstrap';
 import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
-import { INTERNAL_EVENT, KeyCodes } from '../../../constants';
+import { INTERNAL_EVENT, KeyCodes, WIKI_EDITOR } from '../../../constants';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
@@ -17,6 +17,7 @@ import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
+import { insertVideo } from '../../plugins/video/helpers';
 import { onHandleOverflowScroll } from '../../utils';
 import { insertElement, getSearchedOperations } from '../side-toolbar/helpers';
 import { SELECTED_ITEM_CLASS_NAME } from './const';
@@ -54,9 +55,23 @@ const QuickInsertBlockMenu = ({
     if (insertPosition === INSERT_POSITION.CURRENT) {
       Transforms.select(editor, editor.selection.focus);
     }
-    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_VIDEO, insertPosition, slateNode });
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_VIDEO, editor });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, insertPosition]);
+
+  const addVideoLink = useCallback(() => {
+    callback && callback();
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.VIDEO_LINK, editor });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor]);
+
+  const openSelectVideoFileDialog = useCallback(() => {
+    callback && callback();
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.VIDEO, insertVideo: insertVideo });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const createTable = useCallback((size) => {
     callback && callback();
@@ -148,7 +163,25 @@ const QuickInsertBlockMenu = ({
   const dropDownItems = useMemo(() => {
     let items = {
       [IMAGE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[IMAGE]} disabled={isDisableImage} key="sdoc-insert-menu-image" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />,
-      [VIDEO]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[VIDEO]} disabled={isDisableVideo} key="sdoc-insert-menu-video" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} onClick={onInsertVideoToggle} />,
+      [VIDEO]:
+      // eslint-disable-next-line react/jsx-indent
+        <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[VIDEO]} disabled={isDisableVideo} key="sdoc-insert-menu-video" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} className="pr-2">
+          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <UncontrolledPopover
+            target='sdoc-side-menu-item-video'
+            trigger="hover"
+            className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            placement="left-start"
+            hideArrow={true}
+            fade={false}
+          >
+            <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container">
+              <div className="sdoc-dropdown-menu-item" onClick={onInsertVideoToggle}>{t('Upload_local_video')}</div>
+              <div className="sdoc-dropdown-menu-item" onClick={addVideoLink}>{t('Add_video_link')}</div>
+              {editor.editorType !== WIKI_EDITOR && <div className="sdoc-dropdown-menu-item" onClick={openSelectVideoFileDialog}>{t('Link_video_file')}</div>}
+            </div>
+          </UncontrolledPopover>
+        </DropdownMenuItem>,
       [TABLE]:
         // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[TABLE]} disabled={isDisableTable} key="sdoc-insert-menu-table" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TABLE] }} className="pr-2">
