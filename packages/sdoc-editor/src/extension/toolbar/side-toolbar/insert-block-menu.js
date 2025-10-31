@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { UncontrolledPopover } from 'reactstrap';
 import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
-import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT } from '../../../constants';
+import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
 import { ELEMENT_TYPE, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_INSERT_MENUS_SEARCH_MAP } from '../../constants';
@@ -14,6 +15,7 @@ import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
+import { insertVideo } from '../../plugins/video/helpers';
 import { insertElement, isInMultiColumnNode } from './helpers';
 
 const InsertBlockMenu = ({
@@ -36,13 +38,31 @@ const InsertBlockMenu = ({
   }, [editor, insertPosition]);
 
   const onInsertVideoToggle = useCallback(() => {
-    const eventBus = EventBus.getInstance();
-    if (insertPosition === INSERT_POSITION.CURRENT) {
+    if (insertPosition === INSERT_POSITION.AFTER) {
       Transforms.select(editor, editor.selection.focus);
     }
-    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_VIDEO, insertPosition, slateNode });
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_VIDEO, editor, insertPosition });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, insertPosition]);
+
+  const addVideoLink = useCallback(() => {
+    if (insertPosition === INSERT_POSITION.AFTER) {
+      insertElement(editor, PARAGRAPH, insertPosition);
+    }
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.VIDEO_LINK, editor, insertPosition });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insertPosition, editor]);
+
+  const openSelectVideoFileDialog = useCallback(() => {
+    if (insertPosition === INSERT_POSITION.AFTER) {
+      insertElement(editor, PARAGRAPH, insertPosition);
+    }
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.VIDEO, insertVideo: insertVideo, insertPosition, slateNode });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insertPosition, slateNode]);
 
   const createTable = useCallback((size) => {
     const newInsertPosition = slateNode.type === ELEMENT_TYPE.LIST_ITEM ? INSERT_POSITION.AFTER : insertPosition;
@@ -52,11 +72,14 @@ const InsertBlockMenu = ({
   }, [editor, insertPosition, slateNode]);
 
   const openLinkDialog = useCallback(() => {
+    if (insertPosition === INSERT_POSITION.AFTER) {
+      Transforms.select(editor, editor.selection.focus);
+    }
     const eventBus = EventBus.getInstance();
     eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.LINK, insertPosition, slateNode });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [insertPosition]);
+  }, [insertPosition, editor]);
 
   // const onInsertChart = useCallback(() => {
   //   const newInsertPosition = slateNode.type === ELEMENT_TYPE.LIST_ITEM ? INSERT_POSITION.AFTER : insertPosition;
@@ -116,7 +139,23 @@ const InsertBlockMenu = ({
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CHECK_LIST_ITEM]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.IMAGE]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />
       {editor.editorType !== DOCUMENT_PLUGIN_EDITOR && (
-        <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.VIDEO]} disabled={isInMultiColumnNode(editor, slateNode)} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} onClick={onInsertVideoToggle} />
+        <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.VIDEO]} key="sdoc-insert-menu-video" disabled={isInMultiColumnNode(editor, slateNode)} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} className="pr-2">
+          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <UncontrolledPopover
+            target='sdoc-side-menu-item-video'
+            trigger="hover"
+            className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            placement="right-start"
+            hideArrow={true}
+            fade={false}
+          >
+            <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container">
+              <div className="sdoc-dropdown-menu-item" onClick={onInsertVideoToggle}>{t('Upload_local_video')}</div>
+              <div className="sdoc-dropdown-menu-item" onClick={addVideoLink}>{t('Add_video_link')}</div>
+              {editor.editorType !== WIKI_EDITOR && <div className="sdoc-dropdown-menu-item" onClick={openSelectVideoFileDialog}>{t('Link_video_file')}</div>}
+            </div>
+          </UncontrolledPopover>
+        </DropdownMenuItem>
       )}
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.TABLE]} key="sdoc-insert-menu-table" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TABLE] }} className="pr-2">
         <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
