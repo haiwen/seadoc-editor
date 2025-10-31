@@ -4,7 +4,7 @@ import { Input, UncontrolledPopover } from 'reactstrap';
 import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
-import { INTERNAL_EVENT, KeyCodes, WIKI_EDITOR } from '../../../constants';
+import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, KeyCodes, WIKI_EDITOR } from '../../../constants';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
@@ -163,8 +163,9 @@ const QuickInsertBlockMenu = ({
   const dropDownItems = useMemo(() => {
     let items = {
       [IMAGE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[IMAGE]} disabled={isDisableImage} key="sdoc-insert-menu-image" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />,
-      [VIDEO]:
-      // eslint-disable-next-line react/jsx-indent
+      ...(editor.editorType !== DOCUMENT_PLUGIN_EDITOR && {
+        [VIDEO]:
+        // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[VIDEO]} disabled={isDisableVideo} key="sdoc-insert-menu-video" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} className="pr-2">
           <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
           <UncontrolledPopover
@@ -181,7 +182,8 @@ const QuickInsertBlockMenu = ({
               {editor.editorType !== WIKI_EDITOR && <div className="sdoc-dropdown-menu-item" onClick={openSelectVideoFileDialog}>{t('Link_video_file')}</div>}
             </div>
           </UncontrolledPopover>
-        </DropdownMenuItem>,
+        </DropdownMenuItem>
+      }),
       [TABLE]:
         // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[TABLE]} disabled={isDisableTable} key="sdoc-insert-menu-table" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TABLE] }} className="pr-2">
