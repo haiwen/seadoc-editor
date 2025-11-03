@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.201](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.200...@seafile/sdoc-editor@2.0.201) (2025-11-03)
+
+### Features
+
+- add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
+- insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+
 ## [2.0.200](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.199...@seafile/sdoc-editor@2.0.200) (2025-10-29)
 
 ### Bug Fixes
