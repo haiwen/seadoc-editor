@@ -391,7 +391,7 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     text: 'Image'
   },
   [VIDEO]: {
-    id: '',
+    id: 'sdoc-side-menu-item-video',
     iconClass: 'sdocfont sdoc-video',
     type: VIDEO,
     text: 'Video'

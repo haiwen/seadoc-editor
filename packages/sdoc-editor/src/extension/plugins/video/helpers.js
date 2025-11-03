@@ -110,7 +110,6 @@ export const insertVideo = (editor, videoFiles, srcList, selection, position = I
       p.children[index] = item;
     });
     Transforms.insertNodes(editor, p, { at: [path[0] + 1] });
-    focusEditor(editor, [path[0] + 1, 2]);
     return;
   }
 
