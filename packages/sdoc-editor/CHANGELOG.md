@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.203](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.202...@seafile/sdoc-editor@2.0.203) (2025-11-04)
+
+### Bug Fixes
+
+- update sdoc preview syle ([d9c51a3](https://github.com/seafileltd/sea-sdoc-editor/commit/d9c51a34011e2c58ec61a3e336092605536a4166))
+
 ## [2.0.202](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.200...@seafile/sdoc-editor@2.0.202) (2025-11-04)
 
 ### Bug Fixes
