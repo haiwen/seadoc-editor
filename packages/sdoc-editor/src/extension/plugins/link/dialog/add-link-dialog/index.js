@@ -124,7 +124,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
 
     return () => clearTimeout(timer);
 
-  }, []);
+  }, [linked_id]);
 
   useEffect(() => {
     const genHtml = async () => {
