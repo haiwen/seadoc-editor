@@ -76,13 +76,6 @@
 
 .sdoc-files-tree .sdoc-file-info .sdoc-file-name {
   font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sdoc-files-tree .sdoc-file-info:has(.sdoc-file-checked) .sdoc-file-name {
-  padding-right: 32px;
 }
 
 .sdoc-files-tree .sdoc-folder-children {
