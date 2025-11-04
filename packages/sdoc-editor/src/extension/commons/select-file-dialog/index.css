@@ -159,7 +159,6 @@
 
 .sdoc-toggle-view .sdoc-tree-view,
 .sdoc-toggle-view .sdoc-list-view {
-  color: #666666;
   min-width: 66px;
   width: fit-content;
   border-radius: 2px;
