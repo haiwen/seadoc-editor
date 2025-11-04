@@ -13,10 +13,6 @@ const FileView = ({ element, children, attributes }) => {
   const [isLoading, setIsLoading] = useState(true);
 
 
-  const onDoubleClick = useCallback(() => {
-    window.open(getFileUrl(element));
-  }, [element]);
-
   const handleLoad = useCallback(() => {
     setIsLoading(false);
   }, []);
@@ -35,7 +31,8 @@ const FileView = ({ element, children, attributes }) => {
             height: '100%',
             border: 'none',
             opacity: isLoading ? 0 : 1,
-            transition: 'opacity 0.3s ease-in-out'
+            transition: 'opacity 0.3s ease-in-out',
+            minHeight: '370px',
           }}
         >
         </iframe>
@@ -43,9 +40,6 @@ const FileView = ({ element, children, attributes }) => {
           <div className='iframe-skeleton'>
             <FileLoading />
           </div>
-        )}
-        {!isLoading && (
-          <div className='sdoc-file-view-mask' onDoubleClick={onDoubleClick}></div>
         )}
       </div>
       {children}

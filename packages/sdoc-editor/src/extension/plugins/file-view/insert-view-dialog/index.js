@@ -191,7 +191,7 @@ const InsertViewDialog = ({ className, editor, element = {}, slateNode, insertPo
       {!isLoading && repoOptions.length !== 0 && (
         <ModalFooter>
           <Button color="secondary" onClick={closeDialog}>{t('Cancel')}</Button>
-          <Button color="primary" disabled={false} onClick={submit}>{t('Insert_file_view')}</Button>
+          <Button color="primary" disabled={false} onClick={submit}>{t('Submit')}</Button>
         </ModalFooter>
       )}
     </Modal>
