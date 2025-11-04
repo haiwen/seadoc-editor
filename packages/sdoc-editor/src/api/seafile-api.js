@@ -239,6 +239,17 @@ class SeafileAPI {
     const url = '/api/v2.1/seadoc/search-metadata-records/' + docUuid + '/?search_type=' + fileType;
     return this.req.get(url);
   }
+
+  insertWikiView(wikiId, docUuid, data) {
+    const url = `/api/v2.1/wiki2/${wikiId}/views/`;
+    const form = new FormData();
+    form.append('file_uuid', docUuid);
+    form.append('name', data.view_name);
+    form.append('type', data.view_type);
+    form.append('link_repo_id', data.link_repo_id);
+
+    return this.req.post(url, form);
+  }
 }
 
 export default SeafileAPI;

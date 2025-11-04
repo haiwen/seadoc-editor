@@ -326,6 +326,12 @@ class Context {
     return this.api.getFileMetadataInfo(docUuid, fileType);
   }
 
+  insertWikiView(data) {
+    const wikiId = this.getSetting('wikiId');
+    const docUuid = this.getSetting('docUuid');
+    return this.api.insertWikiView(wikiId, docUuid, data);
+  }
+
 }
 
 const context = new Context();

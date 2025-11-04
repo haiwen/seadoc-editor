@@ -72,6 +72,7 @@ const SdocWikiViewerThird = () => {
                 document={document}
                 showOutline={isShowOutline}
                 showToolbar={false}
+                showComment={true}
                 docUuid={context.getSetting('docUuid')}
                 getHeaderHeight={getHeaderHeight}
               />

@@ -42,6 +42,7 @@ import {
   QUICK_INSERT,
   GROUP,
   WHITEBOARD,
+  FILE_VIEW
 } from './element-type';
 
 export {
@@ -302,5 +303,6 @@ export {
   QUICK_INSERT,
   GROUP,
   WHITEBOARD,
+  FILE_VIEW
 };
 

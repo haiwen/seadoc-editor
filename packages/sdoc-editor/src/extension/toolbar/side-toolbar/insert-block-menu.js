@@ -123,8 +123,19 @@ const InsertBlockMenu = ({
     insertMultiColumn(editor, editor.selection, newInsertPosition, type);
   }, [editor, insertPosition, slateNode]);
 
+  const insertFileView = useCallback(() => {
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.FILE_VIEW, insertPosition, slateNode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insertPosition]);
+
+  console.log(editor.editorType);
+
   return (
     <>
+      {editor.editorType === WIKI_EDITOR && (
+        <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.FILE_VIEW]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} onClick={insertFileView} />
+      )}
       {[SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH], ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER]].map((item) => {
         return (
           <DropdownMenuItem isHidden={!insertMenuSearchMap[item.type]} disabled={isNodeEmpty && item.type === PARAGRAPH} key={item.id} menuConfig={item} onClick={() => onInsert(item.type)} />

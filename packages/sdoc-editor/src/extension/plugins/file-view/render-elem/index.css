@@ -1,0 +1,47 @@
+.sdoc-file-view-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 2px;
+  border: 2px solid transparent;
+}
+
+.sdoc-file-view-container.is-selected {
+  border: 2px solid rgb(0, 123, 255);
+}
+
+.sdoc-file-view-container .sdoc-file-view-title {
+  position: absolute;
+  height: 44px;
+  line-height: 44px;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.sdoc-file-view-container .sdoc-file-view-content {
+  position: relative;
+}
+
+.sdoc-file-view-container .iframe-skeleton,
+.sdoc-file-view-container .sdoc-file-view-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.sdoc-file-view-container .iframe-skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eee;
+}
+
+.sdoc-file-view-container .sdoc-file-view-mask {
+  background: #fff;
+  opacity: 0;
+}

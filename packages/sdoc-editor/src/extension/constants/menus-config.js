@@ -32,6 +32,7 @@ import {
   PARAGRAPH,
   CALL_OUT,
   WHITEBOARD,
+  FILE_VIEW,
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -494,7 +495,13 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     iconClass: 'sdocfont sdoc-quote1',
     type: BLOCKQUOTE,
     text: 'Quote'
-  }
+  },
+  [FILE_VIEW]: {
+    id: FILE_VIEW,
+    iconClass: 'sdocfont sdoc-file-view',
+    type: FILE_VIEW,
+    text: 'File_view'
+  },
 };
 
 export const SIDE_INSERT_MENUS_SEARCH_MAP = {
@@ -516,6 +523,7 @@ export const SIDE_INSERT_MENUS_SEARCH_MAP = {
   [HEADER2]: 'Header_two',
   [HEADER3]: 'Header_three',
   [HEADER4]: 'Header_four',
+  [FILE_VIEW]: 'File_view',
 };
 
 export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
@@ -537,6 +545,7 @@ export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [HEADER2]: 'Header_two',
   [HEADER3]: 'Header_three',
   [HEADER4]: 'Header_four',
+  [FILE_VIEW]: 'File_view',
 };
 
 // Other operations menu config

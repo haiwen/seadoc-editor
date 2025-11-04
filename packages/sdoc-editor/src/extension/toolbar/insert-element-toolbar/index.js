@@ -8,7 +8,7 @@ import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, KeyCodes, WIKI_EDITOR } from '.
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
-import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT } from '../../constants';
+import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW } from '../../constants';
 import { getAboveBlockNode } from '../../core';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
@@ -87,6 +87,13 @@ const QuickInsertBlockMenu = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [insertPosition]);
 
+  const openFileViewDialog = useCallback(() => {
+    callback && callback();
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.FILE_VIEW, insertPosition, slateNode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insertPosition]);
+
   const onInsertCodeBlock = useCallback(() => {
     callback && callback();
     const newInsertPosition = slateNode.type === ELEMENT_TYPE.LIST_ITEM ? INSERT_POSITION.AFTER : insertPosition;
@@ -162,6 +169,9 @@ const QuickInsertBlockMenu = ({
 
   const dropDownItems = useMemo(() => {
     let items = {
+      ...(editor.editorType === WIKI_EDITOR && {
+        [FILE_VIEW]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} onClick={openFileViewDialog} />
+      }),
       [IMAGE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[IMAGE]} disabled={isDisableImage} key="sdoc-insert-menu-image" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />,
       ...(editor.editorType !== DOCUMENT_PLUGIN_EDITOR && {
         [VIDEO]:

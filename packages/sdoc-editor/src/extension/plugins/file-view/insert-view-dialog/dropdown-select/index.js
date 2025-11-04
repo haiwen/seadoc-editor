@@ -87,7 +87,7 @@ class DropdownSelect extends Component {
             </span>
           )}
           {!selectedOption && <span className="select-placeholder">{placeholder}</span>}
-          <i className="sdocfont sdoc-drop-down"></i>
+          <i className="sdocfont sdoc-font-down"></i>
         </div>
         {this.state.isShowSelectOptions && !isInModal && (
           <SelectOptionGroup
