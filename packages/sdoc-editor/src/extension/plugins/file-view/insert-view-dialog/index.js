@@ -90,9 +90,7 @@ const InsertViewDialog = ({ className, editor, element = {}, slateNode, insertPo
 
     const viewType = currentTypeOption.value;
     const linkedRepoId = currentRepoOption.id;
-    const wikiId = context.getSetting('wikiId');
     let data = {
-      wiki_id: wikiId,
       view_name: viewName,
       view_type: viewType,
       link_repo_id: linkedRepoId,

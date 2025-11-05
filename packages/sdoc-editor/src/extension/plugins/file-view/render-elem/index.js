@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelected } from '@seafile/slate-react';
 import classNames from 'classnames';
 import FileLoading from '../../../../components/file-loading';
@@ -11,10 +11,20 @@ const FileView = ({ element, children, attributes }) => {
 
   const isSelected = useSelected();
   const [isLoading, setIsLoading] = useState(true);
+  const [isShowMask, setIsShowMask] = useState(true);
 
+  useEffect(() => {
+    if (!isSelected) {
+      setIsShowMask(true);
+    }
+  }, [isSelected]);
 
   const handleLoad = useCallback(() => {
     setIsLoading(false);
+  }, []);
+
+  const onClick = useCallback(() => {
+    setIsShowMask(false);
   }, []);
 
   return (
@@ -40,6 +50,9 @@ const FileView = ({ element, children, attributes }) => {
           <div className='iframe-skeleton'>
             <FileLoading />
           </div>
+        )}
+        {!isLoading && isShowMask && (
+          <div className='sdoc-file-view-mask' onClick={onClick}></div>
         )}
       </div>
       {children}

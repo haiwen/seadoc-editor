@@ -7,8 +7,9 @@ import { focusEditor, generateDefaultParagraph, getNode } from '../../core';
 export const getFileUrl = (element) => {
   const serviceUrl = context.getSetting('serviceUrl');
   const { data } = element;
-  const { wiki_id, view_id } = data;
-  return `${serviceUrl}/wiki/${wiki_id}/repo-views/${view_id}/`;
+  const wikiId = context.getSetting('wikiId');
+  const { view_id } = data;
+  return `${serviceUrl}/wiki/${wikiId}/repo-views/${view_id}/`;
 };
 
 export const getWikiSettings = () => {
