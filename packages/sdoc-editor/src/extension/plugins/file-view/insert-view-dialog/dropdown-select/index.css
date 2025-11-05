@@ -81,6 +81,8 @@
 .sdoc-select.group-select .selected-option-show .selected-option-item {
   display: flex;
   align-items: center;
+  background-color: #fff;
+  border-radius: 0px;
 }
 
 .sdoc-select.group-select .selected-option-show .selected-option-item .selected-option-item-name {
