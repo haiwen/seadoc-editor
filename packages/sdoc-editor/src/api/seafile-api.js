@@ -250,6 +250,15 @@ class SeafileAPI {
 
     return this.req.post(url, form);
   }
+
+  duplicateWikiView(wikiId, docUuid, viewId) {
+    const url = `/api/v2.1/wiki2/${wikiId}/duplicate-view/`;
+    const form = new FormData();
+    form.append('file_uuid', docUuid);
+    form.append('view_id', viewId);
+
+    return this.req.post(url, form);
+  }
 }
 
 export default SeafileAPI;

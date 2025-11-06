@@ -1,11 +1,11 @@
 import { Editor, Path, Transforms } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
-import { PARAGRAPH, FILE_VIEW } from '../../constants';
-import { focusEditor, generateEmptyElement, getSelectedNodeEntryByType } from '../../core';
+import { PARAGRAPH, FILE_VIEW, ELEMENT_TYPE } from '../../constants';
+import { focusEditor, generateEmptyElement, getNodeType, getSelectedNodeEntryByType, isLastNode } from '../../core';
 import { onCopyNode } from '../../toolbar/side-toolbar/helpers';
 
 const withFileView = (editor) => {
-  const { isVoid, onHotKeyDown } = editor;
+  const { isVoid, onHotKeyDown, normalizeNode } = editor;
   const newEditor = editor;
 
   // Make video as void node
@@ -40,6 +40,21 @@ const withFileView = (editor) => {
     }
 
     return onHotKeyDown && onHotKeyDown(event);
+  };
+
+  newEditor.normalizeNode = ([node, path]) => {
+    const type = getNodeType(node);
+
+    if (type !== ELEMENT_TYPE.FILE_VIEW) {
+      return normalizeNode([node, path]);
+    }
+
+    // insert empty node，continue editor
+    const isLast = isLastNode(newEditor, node);
+    if (isLast) {
+      const p = generateEmptyElement(PARAGRAPH);
+      Transforms.insertNodes(newEditor, p, { at: [path[0] + 1] });
+    }
   };
 
   return newEditor;

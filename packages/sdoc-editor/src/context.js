@@ -332,6 +332,12 @@ class Context {
     return this.api.insertWikiView(wikiId, docUuid, data);
   }
 
+  duplicateWikiView(viewId) {
+    const wikiId = this.getSetting('wikiId');
+    const docUuid = this.getSetting('docUuid');
+    return this.api.duplicateWikiView(wikiId, docUuid, viewId);
+  }
+
 }
 
 const context = new Context();

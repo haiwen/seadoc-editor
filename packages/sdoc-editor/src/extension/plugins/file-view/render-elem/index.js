@@ -1,14 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelected } from '@seafile/slate-react';
+import { useSelected, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
 import FileLoading from '../../../../components/file-loading';
-import { getFileUrl } from '../helpers';
+import toaster from '../../../../components/toast';
+import context from '../../../../context';
+import { getErrorMsg } from '../../../../utils/common-utils';
+import LocalStorage from '../../../../utils/local-storage-utils';
+import { RECENT_COPY_CONTENT } from '../../../constants';
+import { getFileUrl, updateFileView } from '../helpers';
 
 import './index.css';
 
 const FileView = ({ element, children, attributes }) => {
   const { data } = element;
 
+  const editor = useSlateStatic();
   const isSelected = useSelected();
   const [isLoading, setIsLoading] = useState(true);
   const [isShowMask, setIsShowMask] = useState(true);
@@ -18,6 +24,25 @@ const FileView = ({ element, children, attributes }) => {
       setIsShowMask(true);
     }
   }, [isSelected]);
+
+  useEffect(() => {
+    const copyContent = LocalStorage.getItem(RECENT_COPY_CONTENT);
+    const wikiId = context.getSetting('wikiId');
+    if (wikiId !== data.wiki_id) return;
+    if (!copyContent) return;
+    const stringContent = JSON.stringify(copyContent);
+    if (stringContent.indexOf(data.wiki_id) > -1 && stringContent.indexOf(data.view_id) > -1) {
+      context.duplicateWikiView(data.view_id).then(res => {
+        const { view } = res.data;
+        const newData = { ...data, view_id: view._id, view_name: view.name };
+        updateFileView(newData, editor, element);
+      }).catch(error => {
+        const errorMessage = getErrorMsg(error);
+        toaster.danger(errorMessage);
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLoad = useCallback(() => {
     setIsLoading(false);
@@ -61,5 +86,5 @@ const FileView = ({ element, children, attributes }) => {
 };
 
 export const renderFileView = (props) => {
-  return <FileView {...props}/>;
+  return <FileView {...props} />;
 };

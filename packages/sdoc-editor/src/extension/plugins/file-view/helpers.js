@@ -1,4 +1,5 @@
 import { Editor, Path, Transforms } from '@seafile/slate';
+import { ReactEditor } from '@seafile/slate-react';
 import slugid from 'slugid';
 import context from '../../../context';
 import { FILE_VIEW, INSERT_POSITION } from '../../constants';
@@ -7,9 +8,8 @@ import { focusEditor, generateDefaultParagraph, getNode } from '../../core';
 export const getFileUrl = (element) => {
   const serviceUrl = context.getSetting('serviceUrl');
   const { data } = element;
-  const wikiId = context.getSetting('wikiId');
-  const { view_id } = data;
-  return `${serviceUrl}/wiki/${wikiId}/repo-views/${view_id}/`;
+  const { wiki_id, view_id } = data;
+  return `${serviceUrl}/wiki/${wiki_id}/repo-views/${view_id}/`;
 };
 
 export const getWikiSettings = () => {
@@ -61,4 +61,9 @@ export const insertFileView = (data, editor, position, slateNode) => {
 
   Transforms.insertNodes(editor, fileViewNode);
   return;
+};
+
+export const updateFileView = (newData, editor, element) => {
+  const nodePath = ReactEditor.findPath(editor, element);
+  Transforms.setNodes(editor, { data: newData }, { at: nodePath });
 };
