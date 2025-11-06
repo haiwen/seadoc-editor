@@ -3,7 +3,7 @@ import { Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import context from '../../../context';
 import LocalStorage from '../../../utils/local-storage-utils';
-import { RECENT_PASTE_HTML_CONTENT } from '../../constants/font';
+import { RECENT_COPY_CONTENT } from '../../constants';
 import { isImageUrlIsFromCopy, getImageURL, isCommentEditor } from './helpers';
 
 const updateImageNode = async (editor, element, newUrl, isError = false) => {
@@ -26,7 +26,7 @@ const useCopyImage = ({ editor, element }) => {
 
     // not md convert to sdoc
     if (url.indexOf('/file/images/auto-upload/') < 0) {
-      const cacheContent = LocalStorage.getItem(RECENT_PASTE_HTML_CONTENT);
+      const cacheContent = LocalStorage.getItem(RECENT_COPY_CONTENT);
       // sync content from another user's copy
       if (!cacheContent || JSON.stringify(cacheContent).indexOf(url) === -1) return;
     }

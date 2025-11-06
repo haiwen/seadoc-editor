@@ -57,8 +57,6 @@ export const DEFAULT_FONT = 'default_font';
 
 export const RECENT_USED_FONTS_KEY = 'sdoc-recent-used-fonts';
 
-export const RECENT_PASTE_HTML_CONTENT = 'sdoc-recent-paste-html-content';
-
 export const FONT = [
   // { name: '\u5fae\u8f6f\u96c5\u9ed1', fontFamilyName: { mac: 'Microsoft YaHei', windows: '\u5fae\u8f6f\u96c5\u9ed1' }, supportFontWeight: FONT_WEIGHT_100_400_700, isSystemOwn: true, usuallyFontFamilyName: SANS_SERIF }, // 微软雅黑
   // { name: '\u5b8b\u4f53', fontFamilyName: { mac: 'SimSun', windows: '\u5b8b\u4f53' }, supportFontWeight: FONT_WEIGHT_100_400_700_800, isSystemOwn: true, usuallyFontFamilyName: SERIF }, // 宋体

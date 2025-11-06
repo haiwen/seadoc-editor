@@ -111,6 +111,8 @@ export const TRANSPARENT = 'transparent';
 
 export const CLIPBOARD_FORMAT_KEY = 'x-slate-fragment';
 
+export const RECENT_COPY_CONTENT = 'sdoc-recent-copy-content';
+
 export const TABLE_DRAG_KEY = 'drag-table/json';
 
 export const CLIPBOARD_ORIGIN_SDOC_KEY = 'origin-sdoc-uuid';
