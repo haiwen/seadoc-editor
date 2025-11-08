@@ -1,7 +1,9 @@
 import { Editor, Path, Transforms } from '@seafile/slate';
+import isHotkey from 'is-hotkey';
 import { LIST_ITEM, PARAGRAPH } from '../../../constants';
 import { focusEditor, getNodeEntries, getPreviousPath, isFirstChild, isSelectionAtBlockStart } from '../../../core';
 import { deleteMerge } from '../../../core/transforms/delete-merge';
+import { getSelectCodeElem } from '../../code-block/helpers';
 import { getListItemEntry, isListNested } from '../queries';
 import { removeFirstListItem, unwrapList } from '../transforms';
 import { isAcrossListItems } from '../transforms/is-across-list-items';
@@ -13,7 +15,7 @@ import { onTabHandle } from './on-tab-handle';
 import { handleShortcut } from './shortcut';
 
 const withList = (editor) => {
-  const { insertBreak, handleTab, insertText, deleteBackward } = editor;
+  const { insertBreak, handleTab, insertText, deleteBackward, onHotKeyDown } = editor;
   const newEditor = editor;
 
   newEditor.insertBreak = () => {
@@ -126,6 +128,18 @@ const withList = (editor) => {
     const isPreventInsert = handleShortcut(newEditor, text);
     if (isPreventInsert) return;
     return insertText(text);
+  };
+
+  newEditor.onHotKeyDown = (event) => {
+    const listItemEntry = getListItemEntry(editor);
+    const codeBlockNode = getSelectCodeElem(editor);
+    if (codeBlockNode && listItemEntry ) {
+      if (isHotkey('enter', event)) {
+        event.preventDefault();
+        return true;
+      }
+    }
+    return onHotKeyDown && onHotKeyDown(event);
   };
 
   return newEditor;
