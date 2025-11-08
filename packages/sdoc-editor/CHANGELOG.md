@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.204](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.203...@seafile/sdoc-editor@2.0.204) (2025-11-08)
+
+### Features
+
+- optimize header syle in link ([b7ca1e8](https://github.com/seafileltd/sea-sdoc-editor/commit/b7ca1e801a826a4fb2ce9fb4a295f3d635a5888e))
+
 ## [2.0.203](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.202...@seafile/sdoc-editor@2.0.203) (2025-11-04)
 
 ### Bug Fixes
