@@ -346,7 +346,7 @@ const SideToolbar = () => {
     }
 
     // Dragging into a list is not supported
-    if ([TABLE, BLOCKQUOTE, CHECK_LIST_ITEM].includes(sourceNode.type) && isList(editor, targetPath)) {
+    if ([CALL_OUT, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM].includes(sourceNode.type) && isList(editor, targetPath)) {
       return;
     }
 
