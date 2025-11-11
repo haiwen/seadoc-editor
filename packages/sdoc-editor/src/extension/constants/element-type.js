@@ -51,6 +51,8 @@ export const GROUP = 'group';
 
 export const TOP_LEVEL_TYPES = [
   BLOCKQUOTE,
+  TITLE,
+  SUBTITLE,
   HEADER1,
   HEADER2,
   HEADER3,
@@ -63,6 +65,9 @@ export const TOP_LEVEL_TYPES = [
   PARAGRAPH,
   CODE_BLOCK,
   TABLE,
+  IMAGE_BLOCK,
+  VIDEO,
+  WHITEBOARD,
 ];
 
 export const INLINE_LEVEL_TYPES = [
