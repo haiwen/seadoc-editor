@@ -34,7 +34,8 @@ const HeaderToolbar = ({ editor, readonly = false, isEdit }) => {
             <ListMenu editor={editor} type={UNORDERED_LIST} readonly={readonly} ariaLabel='unordered list' />
             <ListMenu editor={editor} type={ORDERED_LIST} readonly={readonly} ariaLabel='ordered list' />
             <CheckListMenu editor={editor} readonly={readonly} />
-          </MenuGroup>)}
+          </MenuGroup>
+        )}
       </div>
     );
   }

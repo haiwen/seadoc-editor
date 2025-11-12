@@ -259,6 +259,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   }
 
   const isShowComment = typeof showComment === 'boolean' ? showComment : true;
+  const mobileLogin = context.getSetting('mobileLogin');
 
   if (isMobile && isEdit) {
     return (
@@ -268,7 +269,8 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
             <EditorContent docValue={slateValue} showOutline={false} editor={validEditor} showComment={false}>
               <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={false} />
             </EditorContent>
-            <MobileMessage />
+            {mobileLogin && <MobileMessage />}
+            {!mobileLogin && isShowHeaderToolbar && <HeaderToolbar editor={validEditor} isEdit={isEdit} />}
           </ColorProvider>
         </EditorContainer>
         <InsertElementDialog editor={validEditor} />
