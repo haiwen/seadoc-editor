@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.204...@seafile/sdoc-editor@3.0.1) (2025-11-13)
+
+### Bug Fixes
+
+- fix copy blockquote content into blockquote bug ([d1b7eb2](https://github.com/seafileltd/sea-sdoc-editor/commit/d1b7eb2f9d7440229d0294b7e083819b2dcda898))
+
+### Features
+
+- add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
+- insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+
 # [3.0.0](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.201...@seafile/sdoc-editor@3.0.0) (2025-11-03)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
@@ -11,6 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
 - insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+
 ## [2.0.204](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.203...@seafile/sdoc-editor@2.0.204) (2025-11-08)
 
 ### Features
