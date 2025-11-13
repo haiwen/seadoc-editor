@@ -7,12 +7,35 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @seafile/sdoc-editor
 
-## [2.0.201](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.200...@seafile/sdoc-editor@2.0.201) (2025-11-03)
-
 ### Features
 
 - add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
 - insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+## [2.0.204](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.203...@seafile/sdoc-editor@2.0.204) (2025-11-08)
+
+### Features
+
+- optimize header syle in link ([b7ca1e8](https://github.com/seafileltd/sea-sdoc-editor/commit/b7ca1e801a826a4fb2ce9fb4a295f3d635a5888e))
+
+## [2.0.203](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.202...@seafile/sdoc-editor@2.0.203) (2025-11-04)
+
+### Bug Fixes
+
+- update sdoc preview syle ([d9c51a3](https://github.com/seafileltd/sea-sdoc-editor/commit/d9c51a34011e2c58ec61a3e336092605536a4166))
+
+## [2.0.202](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.200...@seafile/sdoc-editor@2.0.202) (2025-11-04)
+
+### Bug Fixes
+
+- show image slection in link ([8a7dcf8](https://github.com/seafileltd/sea-sdoc-editor/commit/8a7dcf8d40482858a71c20e5d6b492063dff21dd))
+- update file link style ([930c4d2](https://github.com/seafileltd/sea-sdoc-editor/commit/930c4d2adfdefdb4d2c218c706a9093e0b4b485e))
+
+## [2.0.201](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.200...@seafile/sdoc-editor@2.0.201) (2025-11-04)
+
+### Bug Fixes
+
+- show image slection in link ([8a7dcf8](https://github.com/seafileltd/sea-sdoc-editor/commit/8a7dcf8d40482858a71c20e5d6b492063dff21dd))
+- update file link style ([930c4d2](https://github.com/seafileltd/sea-sdoc-editor/commit/930c4d2adfdefdb4d2c218c706a9093e0b4b485e))
 
 ## [2.0.200](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.199...@seafile/sdoc-editor@2.0.200) (2025-10-29)
 

@@ -1,12 +1,12 @@
 import React, { Fragment, useCallback, useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, ModalFooter, Alert, Label, ModalHeader } from 'reactstrap';
-import { Element } from '@seafile/slate';
+import { Element, Node } from '@seafile/slate';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { createProcessor } from '../../../../../slate-convert/md-to-html';
 import slateToMdString from '../../../../../slate-convert/slate-to-md';
-import { INTERNAL_LINKED_TYPE } from '../../../../constants';
+import { HEADER_TAG, HEADERS, INTERNAL_LINKED_TYPE } from '../../../../constants';
 import { getEditorString } from '../../../../core';
 import { insertLink, updateLink, checkLink, parseHtmlString, isEmptyNode } from '../../helpers';
 
@@ -23,6 +23,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   const [url, setURL] = useState(linked_id ? '' : oldURL);
   const [activeTab, setActiveTab] = useState(linked_id ? 'block' : 'url');
   const [selectedBlockId, setSelectedBlockId] = useState('');
+  const [headerList, setheaderList] = useState([]);
   const [isOpenSelect, setIsOpenSelect] = useState(false);
   const [isOpenSelectHeader, setIsOpenSelectHeader] = useState(false);
   const [isOpenSelectImageBlock, setIsOpenSelectImageBlock] = useState(false);
@@ -93,7 +94,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   }, [closeDialog]);
 
   const handleOnChangeBlock = (e) => {
-    const block = e.target.closest('.linked-block-item');
+    const block = e.target.closest('.linked-block-item') || e.currentTarget.querySelector('.linked-header-block-item');
     if (block) {
       const clone = block.cloneNode(true);
       const displayContainer = document.getElementById('selected-block-display');
@@ -124,9 +125,10 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
 
     return () => clearTimeout(timer);
 
-  }, []);
+  }, [linked_id]);
 
   useEffect(() => {
+    // Get codeblock，blockquote，image html
     const genHtml = async () => {
       const list = editor.children.filter(node => Element.isElement(node) && !isEmptyNode(node) && INTERNAL_LINKED_TYPE.includes(node.type));
 
@@ -143,7 +145,14 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
     genHtml();
   }, [editor.children]);
 
-  const headersHTML = parseHtmlString(htmlString, 'h1,h2,h3,h4,h5,h6');
+  useEffect(() => {
+    // Get header node list
+    const headerList = editor.children.filter(node => Element.isElement(node) && !isEmptyNode(node) && HEADERS.includes(node.type));
+    if (headerList.length > 0) {
+      setheaderList(headerList);
+    }
+  }, [editor.children]);
+
   const imagesHTML = parseHtmlString(htmlString, 'img');
   const codeBlockHTML = parseHtmlString(htmlString, 'pre');
   const blockquoteHTML = parseHtmlString(htmlString, 'blockquote');
@@ -210,7 +219,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
               </div>
               {isOpenSelect && (
                 <div className='link-block-wrapper'>
-                  {headersHTML &&
+                  {headerList.length > 0 &&
                     <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectHeader })}
                       onClick={(e) => setIsOpenSelectHeader(!isOpenSelectHeader)}
                     >
@@ -218,12 +227,17 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                       <div className='title'>{t('Header')}</div>
                     </div>
                   }
-                  {isOpenSelectHeader && (
-                    <div className='link-block-container'
-                      dangerouslySetInnerHTML={{ __html: headersHTML }}
-                      onClick={(e) => handleOnChangeBlock(e)}
-                    />
-                  )}
+                  {isOpenSelectHeader &&
+                    headerList.map((header, key) => {
+                      const headerContext = Node.string(header);
+                      return (
+                        <div className='link-header-block-container' key={key} onClick={(e) => handleOnChangeBlock(e)}>
+                          <div className='heading-prefix'>{HEADER_TAG[header.type]}</div>
+                          <div data-id={header.id} className='linked-header-block-item'>{headerContext}</div>
+                        </div>
+                      );
+                    })
+                  }
                   {imagesHTML &&
                     <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectImageBlock })}
                       onClick={(e) => setIsOpenSelectImageBlock(!isOpenSelectImageBlock)}

@@ -1,7 +1,7 @@
 import { Editor, Transforms, Range, Path, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import slugid from 'slugid';
-import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, INSERT_POSITION, LINK, LIST_ITEM, PARAGRAPH } from '../../constants';
+import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, IMAGE_BLOCK, INSERT_POSITION, LINK, LIST_ITEM, PARAGRAPH } from '../../constants';
 import { getNodeType, getSelectedElems, getAboveNode, getEditorString, replaceNodeChildren, generateEmptyElement } from '../../core';
 
 export const isMenuDisabled = (editor, readonly) => {
@@ -208,7 +208,7 @@ export const parseHtmlString = (htmlString, targetType) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, 'text/html');
   let resultHtml;
-  if (targetType == 'img') {
+  if (targetType === 'img') {
     resultHtml = [...doc.querySelectorAll('p:has(img)')].map(p => p.outerHTML).join('');
   } else {
     resultHtml = [...doc.querySelectorAll(targetType)].map(html => html.outerHTML).join('');
@@ -218,6 +218,7 @@ export const parseHtmlString = (htmlString, targetType) => {
 };
 
 export const isEmptyNode = (node) => {
+  if (node.type === IMAGE_BLOCK) return false;
   const text = Node.string(node);
   return text.trim() === '';
 };
