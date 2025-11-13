@@ -88,7 +88,6 @@ const withBlockquote = (editor) => {
       let elements = getFormattedElements(data.slice(0, lastIndex + 1));
       let restElements = getFormattedRestElements(data.slice(lastIndex + 1));
       const path = Editor.path(newEditor, newEditor.selection);
-
       // Insert elements of quote block
       if (restElements.length !== 0) {
         if (Range.isCollapsed(editor.selection)) {
@@ -97,17 +96,13 @@ const withBlockquote = (editor) => {
             const parentNodeEntry = Editor.parent(editor, paragraphEntry[1]);
             if (parentNodeEntry && parentNodeEntry[0].type === BLOCKQUOTE) {
               if (!Node.string(paragraphEntry[0]).length) {
-                data.forEach(node => {
-                  if (node.type === BLOCKQUOTE) {
-                    node.type = PARAGRAPH;
-                  }
-                });
-                insertFragment(data);
+                insertFragment(restElements);
                 return;
               }
             }
           }
         }
+
         // Insert text when inserting a single line paragraph
         if (restElements.length === 1 && restElements[0].type === PARAGRAPH) {
           const string = Node.string(restElements[0]);
