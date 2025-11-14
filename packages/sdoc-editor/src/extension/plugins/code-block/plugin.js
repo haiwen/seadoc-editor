@@ -150,6 +150,14 @@ const withCodeBlock = (editor) => {
       }
     }
 
+    if (isHotkey('enter', event)) {
+      event.preventDefault();
+      const selectedNode = getSelectedNodeByType(newEditor, CODE_LINE);
+      const line = generateEmptyElement(CODE_LINE);
+      Transforms.insertNodes(editor, line, { at: selectedNode[1] });
+      return;
+    }
+
     if (isHotkey('tab', event)) {
       const { selection } = newEditor;
       event.preventDefault();
