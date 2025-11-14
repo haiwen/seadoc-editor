@@ -1,6 +1,6 @@
 import { Editor, Text, Path, Span, Element, Node, Range } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
-import { CODE_LINE, LIST_ITEM, IMAGE } from '../../constants';
+import { CODE_LINE, LIST_ITEM, IMAGE, TOP_LEVEL_TYPES, UNORDERED_LIST, ORDERED_LIST } from '../../constants';
 import { match } from '../utils';
 
 // options
@@ -213,6 +213,27 @@ export const getAboveBlockNode = (editor, options) => {
 
 export const getTopLevelBlockNode = (editor) => {
   return getAboveBlockNode(editor, { match: (n, p) => Element.isElement(n) && p.length === 1 });
+};
+
+export const getNearestBlockNode = (editor) => {
+  if (!editor.selection) return null;
+  const LIST_TYPES = [UNORDERED_LIST, ORDERED_LIST];
+  const [nodeEntry] = Editor.nodes(editor, {
+    at: editor.selection,
+    match: n => Element.isElement(n) && Editor.isBlock(editor, n) && LIST_TYPES.includes(n.type),
+    mode: 'lowest'
+  });
+  if (nodeEntry) {
+    return nodeEntry;
+  }
+
+  const [nodeEntry2] = Editor.nodes(editor, {
+    at: editor.selection,
+    match: n => Element.isElement(n) && Editor.isBlock(editor, n) && TOP_LEVEL_TYPES.includes(n.type),
+    mode: 'lowest'
+  });
+
+  return nodeEntry2 || null;
 };
 
 export const getPrevNode = (editor) => {
