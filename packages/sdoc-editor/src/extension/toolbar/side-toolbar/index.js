@@ -361,10 +361,11 @@ const SideToolbar = () => {
       return;
     }
 
-    // Drag out codeblcok from list into non-list nodes
+    // Drag out codeblock from list into non-list nodes
     if (isList(editor, sourcePath) && sourceNode.type === CODE_BLOCK && !isList(editor, targetPath)) {
+      const codeblockPath = findPath(editor, sourceNode);
       const toPath = Path.next(targetPath);
-      Transforms.moveNodes(editor, { at: sourcePath, to: toPath });
+      Transforms.moveNodes(editor, { at: codeblockPath, to: toPath });
       return;
     }
 
@@ -447,14 +448,10 @@ const SideToolbar = () => {
     if (!isInMultiColumn || (isInMultiColumn && ![ORDERED_LIST, UNORDERED_LIST].includes(currentSourceNode.type))) {
       // Special situation: drag codeblock into list nodes
       if (isList(editor, targetPath) && [CODE_BLOCK].includes(sourceNode.type)) {
-        const childrenPath = findPath(editor, targetNode.children[0]);
-        const childOffset = Editor.end(editor, childrenPath).offset;
-        Transforms.splitNodes(editor, { at: { path: childrenPath, offset: childOffset }, always: true });
-
-        const newPath = [...childrenPath];
-        newPath[newPath.length - 2] += 1;
-        const toPath = newPath;
-        Transforms.moveNodes(editor, { at: sourcePath, to: toPath });
+        const childrenPath = findPath(editor, targetNode);
+        const codeblockPath = findPath(editor, sourceNode);
+        const toPath = Path.next(childrenPath);
+        Transforms.moveNodes(editor, { at: codeblockPath, to: toPath });
         return;
       }
 
