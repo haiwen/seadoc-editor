@@ -6,6 +6,7 @@ import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO } from '../../constants';
 import AIModule from '../../plugins/ai/ai-module/index.js';
+import InsertViewDialog from '../../plugins/file-view/insert-view-dialog/index.js';
 import { generateImageInfos, insertImage } from '../../plugins/image/helpers';
 import AddLinkDialog from '../../plugins/link/dialog/add-link-dialog';
 import { CustomTableSizeDialog, SplitCellSettingDialog } from '../../plugins/table/dialogs';
@@ -189,6 +190,17 @@ const InsertElementDialog = ({ editor }) => {
     }
     case ELEMENT_TYPE.VIDEO_LINK: {
       return (<AddVideoLinkDialog {...props} />);
+    }
+    case ELEMENT_TYPE.FILE_VIEW: {
+      const props = {
+        editor: validEditor,
+        element: element,
+        slateNode: slateNode,
+        insertPosition: insertPosition,
+        dialogType,
+        closeDialog,
+      };
+      return <InsertViewDialog {...props} />;
     }
     case LOCAL_IMAGE: {
       return (<input onClick={e => e.stopPropagation()} ref={uploadLocalImageInputRef} type="file" multiple={true} accept='image/*' style={{ display: 'none' }} onChange={onFileChanged} />);

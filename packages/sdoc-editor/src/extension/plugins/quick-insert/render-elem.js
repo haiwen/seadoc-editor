@@ -58,6 +58,7 @@ const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) 
     document.addEventListener('click', handleClick);
     scrollDom.addEventListener('scroll', handleScroll);
     resizeObserver = new ResizeObserver((entries) => {
+      // eslint-disable-next-line no-unused-vars
       for (let entry of entries) {
         if (resizeObserver) {
           handleScroll();

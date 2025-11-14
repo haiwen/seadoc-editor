@@ -42,6 +42,7 @@ import {
   QUICK_INSERT,
   GROUP,
   WHITEBOARD,
+  FILE_VIEW
 } from './element-type';
 
 export {
@@ -118,6 +119,8 @@ export const HEADER_TITLE_MAP = {
 export const TRANSPARENT = 'transparent';
 
 export const CLIPBOARD_FORMAT_KEY = 'x-slate-fragment';
+
+export const RECENT_COPY_CONTENT = 'sdoc-recent-copy-content';
 
 export const TABLE_DRAG_KEY = 'drag-table/json';
 
@@ -311,5 +314,6 @@ export {
   QUICK_INSERT,
   GROUP,
   WHITEBOARD,
+  FILE_VIEW
 };
 

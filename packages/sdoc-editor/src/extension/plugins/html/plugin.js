@@ -1,7 +1,6 @@
 import slugid from 'slugid';
 import LocalStorage from '../../../utils/local-storage-utils';
-import { CODE_BLOCK, CODE_LINE } from '../../constants';
-import { RECENT_PASTE_HTML_CONTENT } from '../../constants/font';
+import { CODE_BLOCK, CODE_LINE, RECENT_COPY_CONTENT } from '../../constants';
 import { getSelectedNodeByType } from '../../core';
 import { deserializeHtml } from './helper';
 
@@ -32,12 +31,12 @@ const withHtml = (editor) => {
       const htmlContent = data.getData('text/html') || '';
       if (htmlContent) {
         const content = deserializeHtml(htmlContent);
-        LocalStorage.setItem(RECENT_PASTE_HTML_CONTENT, htmlContent);
+        LocalStorage.setItem(RECENT_COPY_CONTENT, htmlContent);
         editor.insertFragment(content);
         return;
       }
 
-      LocalStorage.setItem(RECENT_PASTE_HTML_CONTENT, data);
+      LocalStorage.setItem(RECENT_COPY_CONTENT, data);
       insertData(data);
     }
   };

@@ -3,6 +3,7 @@ import CalloutPlugin from './callout';
 import CheckListPlugin from './check-list';
 import CodeBlockPlugin from './code-block';
 import FileLinkPlugin from './file-link';
+import FileViewPlugin from './file-view';
 import FontPlugin from './font';
 import GroupPlugin from './group';
 import HeaderPlugin from './header';
@@ -48,11 +49,13 @@ const Plugins = [
   QuickInsertPlugin,
   GroupPlugin,
   WhiteboardPlugin,
+  FileViewPlugin
 ];
 
 const WikiPlugins = [
   ...Plugins,
   WikiLinkPlugin,
+  FileViewPlugin,
 ];
 
 const CommentPlugins = [
@@ -96,4 +99,5 @@ export {
   WikiLinkPlugin,
   GroupPlugin,
   WhiteboardPlugin,
+  FileViewPlugin,
 };

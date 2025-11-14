@@ -1,6 +1,7 @@
 import { Editor, Range, Text } from '@seafile/slate';
-import { CLIPBOARD_FORMAT_KEY } from '../extension/constants';
+import { CLIPBOARD_FORMAT_KEY, RECENT_COPY_CONTENT } from '../extension/constants';
 import { getSlateFragmentAttribute, normalizeCopyNodes } from '../utils/document-utils';
+import LocalStorage from '../utils/local-storage-utils';
 import { decorateOperation, removeCommentMarks, replacePastedDataId } from './helpers';
 
 
@@ -66,6 +67,9 @@ const withNodeId = (editor) => {
 
       const newData = replacePastedDataId(cleaned);
       const normalizeNewData = normalizeCopyNodes(newEditor, newData);
+
+      LocalStorage.setItem(RECENT_COPY_CONTENT, normalizeNewData);
+
       newEditor.insertFragment(normalizeNewData);
       return newEditor;
     }

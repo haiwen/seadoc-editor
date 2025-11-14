@@ -8,6 +8,7 @@ import { INTERNAL_EVENT, WIKI_EDITOR_EDIT_AREA_WIDTH } from '../constants';
 import context from '../context';
 import { createDefaultEditor } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
+import { RECENT_COPY_CONTENT } from '../extension/constants';
 import { removeMarks } from '../extension/plugins/ai/ai-module/helpers';
 import { ColorProvider } from '../hooks/use-color-context';
 import { ScrollContext } from '../hooks/use-scroll-context';
@@ -17,6 +18,7 @@ import WikiOutline from '../outline/wiki-outline';
 import { withSocketIO } from '../socket';
 import { isMobile } from '../utils/common-utils';
 import EventBus from '../utils/event-bus';
+import LocalStorage from '../utils/local-storage-utils';
 import ReadOnlyArticle from '../views/readonly-article';
 import EditableArticle from './editable-article';
 
@@ -47,10 +49,11 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
     validEditor.readonly = false;
     return () => {
       validEditor.selection = null;
+      LocalStorage.removeItem(RECENT_COPY_CONTENT);
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   // useMount: init socket connection
   useEffect(() => {
     if (propsEditor) return;
