@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.1...@seafile/sdoc-editor@3.0.2) (2025-11-14)
+
+### Features
+
+- add file-view plugin ([0a3f2f2](https://github.com/seafileltd/sea-sdoc-editor/commit/0a3f2f2d9879861664d4b7334684f965c91c4eba))
+- add select module ([82a1a7c](https://github.com/seafileltd/sea-sdoc-editor/commit/82a1a7c4b0e8ff323a00321c6d16a7f87f161cd8))
+
 ## [3.0.1](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.204...@seafile/sdoc-editor@3.0.1) (2025-11-13)
 
 ### Bug Fixes
