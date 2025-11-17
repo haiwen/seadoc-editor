@@ -281,7 +281,7 @@ const SideToolbar = () => {
       return;
     }
 
-    const [, targetPath] = getNodeEntry(editor, targetElement);
+    const [targetNode, targetPath] = getNodeEntry(editor, targetElement);
     // Drag multiple list_items nodes
     if (draggedSourcePaths.current) {
       try {
@@ -346,7 +346,7 @@ const SideToolbar = () => {
     }
 
     // Dragging into a list is not supported
-    if ([CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM].includes(sourceNode.type) && isList(editor, targetPath)) {
+    if ([CALL_OUT, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM].includes(sourceNode.type) && isList(editor, targetPath)) {
       return;
     }
 
@@ -361,8 +361,16 @@ const SideToolbar = () => {
       return;
     }
 
+    // Drag out codeblock from list into non-list nodes
+    if (isList(editor, sourcePath) && sourceNode.type === CODE_BLOCK && !isList(editor, targetPath)) {
+      const codeblockPath = findPath(editor, sourceNode);
+      const toPath = Path.next(targetPath);
+      Transforms.moveNodes(editor, { at: codeblockPath, to: toPath });
+      return;
+    }
+
     // Drag list
-    if (isList(editor, sourcePath)) {
+    if (isList(editor, sourcePath) && sourceNode !== CODE_BLOCK) {
       // ordinary list items
       if (!isBlockquote(editor, [sourcePath[0]])) {
         // Drag ordinary list items to places other than list and quoteBlock
@@ -438,6 +446,15 @@ const SideToolbar = () => {
 
     // Handling drag situations including non-multi_column or non-list item dragged from multiColumn
     if (!isInMultiColumn || (isInMultiColumn && ![ORDERED_LIST, UNORDERED_LIST].includes(currentSourceNode.type))) {
+      // Special situation: drag codeblock into list nodes
+      if (isList(editor, targetPath) && [CODE_BLOCK].includes(sourceNode.type)) {
+        const childrenPath = findPath(editor, targetNode);
+        const codeblockPath = findPath(editor, sourceNode);
+        const toPath = Path.next(childrenPath);
+        Transforms.moveNodes(editor, { at: codeblockPath, to: toPath });
+        return;
+      }
+
       // Drag backward
       if (Path.isAfter(targetPath, sourcePath)) {
         let toPath = targetPath.slice(0);
@@ -447,8 +464,8 @@ const SideToolbar = () => {
           toPath = Path.next(targetPath);
         }
 
-        // Drag into list
-        if (isList(editor, targetPath)) {
+        // Drag non-codeblock into list
+        if (isList(editor, targetPath) && ![CODE_BLOCK].includes(currentSourceNode.type)) {
           toPath = Path.next(targetPath);
         }
         Transforms.moveNodes(editor, { at: sourcePath, to: toPath });

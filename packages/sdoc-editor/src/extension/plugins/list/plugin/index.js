@@ -13,7 +13,7 @@ import { onTabHandle } from './on-tab-handle';
 import { handleShortcut } from './shortcut';
 
 const withList = (editor) => {
-  const { insertBreak, handleTab, insertText, deleteBackward } = editor;
+  const { insertBreak, handleTab, insertText, deleteBackward, onHotKeyDown } = editor;
   const newEditor = editor;
 
   newEditor.insertBreak = () => {
