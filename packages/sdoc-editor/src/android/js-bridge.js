@@ -4,13 +4,14 @@ class JSBridge {
     this.eventHandlerMap = {};
   }
 
-  init = () => {
+  init = (editor) => {
     if (window.WebViewJavascriptBridge) {
       this.initWebViewJavascriptBridge();
     } else {
       document.addEventListener('WebViewJavascriptBridgeReady', this.initWebViewJavascriptBridge, false);
     }
 
+    this.editor = editor;
     this.initJSEventHandler();
   };
 
@@ -37,7 +38,7 @@ class JSBridge {
         parsedData = null;
       }
       if (!parsedData) {
-        responseCallback(JSON.stringify({ success: true }));
+        responseCallback(JSON.stringify({ success: false }));
         return;
       }
 
@@ -52,7 +53,7 @@ class JSBridge {
         responseCallback(JSON.stringify({ success: false }));
       }
 
-      const execActionSucceed = eventHandler(params);
+      const execActionSucceed = eventHandler(params, this.editor);
       if (execActionSucceed) {
         responseCallback(JSON.stringify({ success: true }));
       } else {

@@ -1,7 +1,7 @@
 import { Editor, Range, Transforms, Point, Node } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { LIST_ITEM, PARAGRAPH } from '../../constants';
-import { getSelectedNodeByType, generateDefaultText, isCursorAtBlockStart, findPath, generateDefaultParagraph, getParentNode } from '../../core';
+import { getSelectedNodeByType, generateDefaultText, isCursorAtBlockStart, findPath, generateDefaultParagraph, getParentNode, getNearestBlockNode } from '../../core';
 import { isSingleListItem } from '../list/helpers';
 
 const withParagraph = (editor) => {
