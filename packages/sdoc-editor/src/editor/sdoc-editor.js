@@ -3,9 +3,12 @@ import { Editor, Text } from '@seafile/slate';
 import deepCopy from 'deep-copy';
 import isHotkey from 'is-hotkey';
 import PropTypes from 'prop-types';
+import { dispatchContentSelectEvent } from '../android/dispatch-content-select-event';
 import { registerTitleBarEventHandler } from '../android/editor-title-bar';
 import jsBridge from '../android/js-bridge';
+import MobileMessage from '../android/mobile-message';
 import { registerOutlineEventHandler, updateOutlineValue } from '../android/outline-module';
+import { registerToolbarMenuTrigger, updateEditorHistory } from '../android/toolbar-trigger';
 import FileLoading from '../components/file-loading';
 import { INTERNAL_EVENT, PAGE_EDIT_AREA_WIDTH } from '../constants';
 import context from '../context';
@@ -94,10 +97,12 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   useEffect(() => {
     const mobileLogin = context.getSetting('mobileLogin');
     if (mobileLogin) {
-      jsBridge.init();
+      jsBridge.init(validEditor);
       registerOutlineEventHandler();
       registerTitleBarEventHandler();
+      registerToolbarMenuTrigger();
       updateOutlineValue(document.elements);
+      updateEditorHistory(validEditor);
     }
 
     return () => {
@@ -216,6 +221,9 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
     if (isMobile) {
       updateOutlineValue(value);
     }
+    if (isMobile && isEdit) {
+      dispatchContentSelectEvent(validEditor);
+    }
   };
 
   const isFreezed = context.getSetting('isFreezed');
@@ -254,6 +262,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   }
 
   const isShowComment = typeof showComment === 'boolean' ? showComment : true;
+  const mobileLogin = context.getSetting('mobileLogin');
 
   if (isMobile && isEdit) {
     return (
@@ -263,7 +272,8 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
             <EditorContent docValue={slateValue} showOutline={false} editor={validEditor} showComment={false}>
               <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={false} />
             </EditorContent>
-            {isShowHeaderToolbar && <HeaderToolbar editor={validEditor} isEdit={isEdit} />}
+            {mobileLogin && <MobileMessage />}
+            {!mobileLogin && isShowHeaderToolbar && <HeaderToolbar editor={validEditor} isEdit={isEdit} />}
           </ColorProvider>
         </EditorContainer>
         <InsertElementDialog editor={validEditor} />

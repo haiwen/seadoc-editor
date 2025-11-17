@@ -73,7 +73,6 @@
 
 .sdoc-editor-container .sdoc-editor-toolbar {
   display: flex;
-  flex: 1;
   justify-content: center;
   position: relative;
   height: 44px;
@@ -96,7 +95,7 @@
 
 .sdoc-content-wrapper {
   width: 100%;
-  height: calc(100vh - 44px);
+  flex: 1;
   display: flex;
 }
 
