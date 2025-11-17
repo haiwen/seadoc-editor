@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.2...@seafile/sdoc-editor@3.0.3) (2025-11-17)
+
+### Features
+
+- optimize code-block dragging ([cda6890](https://github.com/seafileltd/sea-sdoc-editor/commit/cda6890c7635e24149befd5753935362b30573bd))
+- optimize drap rule ([cb38619](https://github.com/seafileltd/sea-sdoc-editor/commit/cb38619f84fcadcd5af77a0075687f368a3cffc0))
+- support dragging codeblock into list ([43d4f35](https://github.com/seafileltd/sea-sdoc-editor/commit/43d4f35791932d2ba42286ef6666f2597f9fc502))
+
 ## [3.0.2](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.1...@seafile/sdoc-editor@3.0.2) (2025-11-14)
 
 ### Features
