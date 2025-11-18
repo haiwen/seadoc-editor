@@ -10,6 +10,7 @@ const CommentContextProvider = ({ children, editor }) => {
   useCommentsMount(dispatch);
 
   useEffect(() => {
+    editor.element_comments_map = {};
     if (Object.keys(commentsInfo.element_comments_map).length) {
       editor.element_comments_map = commentsInfo.element_comments_map;
       const eventBus = EventBus.getInstance();

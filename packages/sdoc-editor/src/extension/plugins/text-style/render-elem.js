@@ -2,8 +2,9 @@ import React from 'react';
 import { TEXT_STYLE_MAP } from '../../constants';
 import { generatorFontFamily } from '../font/helpers';
 import Caret from './caret';
+import { isTextCommentExist } from './helpers';
 
-const renderText = (props) => {
+const renderText = (props, editor) => {
   const { attributes, children, leaf } = props;
   let { text, ...rest } = leaf;
 
@@ -36,6 +37,9 @@ const renderText = (props) => {
     );
 
     for (const [key, value] of commentEntries ) {
+      if (!isTextCommentExist(key, editor)) {
+        delete rest[key];
+      }
       if (value === false && key.startsWith('sdoc_comment_')) {
         const newKey = `removed_${key}`;
         rest[newKey] = true;

@@ -141,6 +141,7 @@ const EditableArticle = ({
         setCursorState({ top: 0, left: 0, type: null });
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor.selection]);
 
   const onKeyDown = useCallback((event) => {

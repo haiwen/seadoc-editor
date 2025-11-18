@@ -36,22 +36,24 @@ const EditorComment = ({ editor }) => {
       const activeElementIds = [elementId];
       setActiveElementIds(activeElementIds);
       const unresolvedComments = element_comments_map[elementId].filter(item => !item.resolved);
+
+      setIsShowComments(true);
       setCommentDetail({ ...unresolvedComments });
       setIsClickedContextComment(false);
+      return;
     }
-    setIsShowComments(true);
-    if (isClickInContext) {
-      const clickedComments = [];
-      for (const comments of Object.values(editor.element_comments_map)) {
-        for (const comment of comments) {
-          if (elementId.includes(comment.detail.text_comment_id)) {
-            clickedComments.push(comment);
-          }
+
+    const clickedComments = [];
+    for (const comments of Object.values(editor.element_comments_map)) {
+      for (const comment of comments) {
+        if (elementId.includes(comment.detail.text_comment_id)) {
+          clickedComments.push(comment);
         }
       }
-      setCommentDetail({ ...clickedComments });
-      setIsClickedContextComment(true);
     }
+    setIsShowComments(true);
+    setCommentDetail({ ...clickedComments });
+    setIsClickedContextComment(true);
   }, [editor, element_comments_map, hiddenComment]);
 
   useEffect(() => {
