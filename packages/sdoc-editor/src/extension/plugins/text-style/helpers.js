@@ -56,3 +56,19 @@ export const getValue = (editor, mark) => {
     return !!match;
   }
 };
+
+export const isTextCommentExist = (commentClass, editor) => {
+  if (!commentClass) return null;
+  if (!editor.element_comments_map) return null;
+  const commentId = commentClass.split('sdoc_comment_')[1];
+  if (!commentId) return null;
+  const { element_comments_map } = editor;
+  const commentsArray = Object.values(element_comments_map);
+  const comments = commentsArray.flat();
+  const comment = comments.find(item => {
+    const id = item.detail.text_comment_id || '';
+    if (id === commentId) return true;
+    return false;
+  });
+  return comment ? true : false;
+};
