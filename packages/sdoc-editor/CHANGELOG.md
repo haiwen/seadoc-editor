@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.206...@seafile/sdoc-editor@3.0.6) (2025-11-19)
+
+### Bug Fixes
+
+- fix copy blockquote content into blockquote bug ([d1b7eb2](https://github.com/seafileltd/sea-sdoc-editor/commit/d1b7eb2f9d7440229d0294b7e083819b2dcda898))
+- fix revision comment bug ([a2905c4](https://github.com/seafileltd/sea-sdoc-editor/commit/a2905c4806e330b8c1cb6f6dc5e6eb927ab0c9d9))
+- optimize css ([d2b6a0e](https://github.com/seafileltd/sea-sdoc-editor/commit/d2b6a0e742818dcba728b4f1d6f16e709cb159fe))
+
+### Features
+
+- add file-view plugin ([0a3f2f2](https://github.com/seafileltd/sea-sdoc-editor/commit/0a3f2f2d9879861664d4b7334684f965c91c4eba))
+- add select module ([82a1a7c](https://github.com/seafileltd/sea-sdoc-editor/commit/82a1a7c4b0e8ff323a00321c6d16a7f87f161cd8))
+- add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
+- insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+- optimize code-block dragging ([cda6890](https://github.com/seafileltd/sea-sdoc-editor/commit/cda6890c7635e24149befd5753935362b30573bd))
+- optimize drap rule ([cb38619](https://github.com/seafileltd/sea-sdoc-editor/commit/cb38619f84fcadcd5af77a0075687f368a3cffc0))
+- support dragging codeblock into list ([43d4f35](https://github.com/seafileltd/sea-sdoc-editor/commit/43d4f35791932d2ba42286ef6666f2597f9fc502))
+
 ## [3.0.5](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.4...@seafile/sdoc-editor@3.0.5) (2025-11-18)
 
 ### Bug Fixes
