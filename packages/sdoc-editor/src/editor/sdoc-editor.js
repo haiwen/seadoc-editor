@@ -58,6 +58,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   // useMount: init socket connection
   useEffect(() => {
     if (propsEditor) return;
@@ -238,7 +239,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
       <EditorContainer editor={validEditor} readonly={true} fullscreen={showFullScreen}>
         <ColorProvider>
           <EditorContent docValue={slateValue} readonly={true} showOutline={false} editor={validEditor} showComment={false}>
-            <ReadOnlyArticle editor={validEditor} slateValue={slateValue} showComment={false} />
+            <ReadOnlyArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={false} />
           </EditorContent>
         </ColorProvider>
       </EditorContainer>
