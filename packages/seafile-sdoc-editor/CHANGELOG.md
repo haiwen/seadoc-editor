@@ -25,6 +25,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [3.0.0](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.118...@seafile/seafile-sdoc-editor@3.0.0) (2025-11-03)
 
+## [2.0.123](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.122...@seafile/seafile-sdoc-editor@2.0.123) (2025-11-19)
+
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
 
 ## [2.0.122](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.121...@seafile/seafile-sdoc-editor@2.0.122) (2025-11-17)

@@ -61,6 +61,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
 - insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
 
+## [2.0.206](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.205...@seafile/sdoc-editor@2.0.206) (2025-11-19)
+
+### Bug Fixes
+
+- fix mobile sync bug ([63d3b48](https://github.com/seafileltd/sea-sdoc-editor/commit/63d3b488a730e901b7358abfb84f72a6ba169588))
+
 ## [2.0.205](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.204...@seafile/sdoc-editor@2.0.205) (2025-11-17)
 
 ### Features
