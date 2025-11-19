@@ -7,10 +7,10 @@ import { renderElement, renderLeaf } from '../extension';
 import { SetNodeToDecorations } from '../highlight';
 import { ArticleContainer } from '../layout';
 
-const ReadOnlyArticle = ({ editor, slateValue, showComment = false }) => {
+const ReadOnlyArticle = ({ editor, slateValue, updateSlateValue, showComment = false }) => {
   const decorate = usePipDecorate(editor);
   return (
-    <Slate editor={editor} value={slateValue}>
+    <Slate editor={editor} value={slateValue} onChange={updateSlateValue}>
       <ArticleContainer editor={editor}>
         <Fragment>
           <SetNodeToDecorations />
