@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.206](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.205...@seafile/sdoc-editor@2.0.206) (2025-11-19)
+
+### Bug Fixes
+
+- fix mobile sync bug ([63d3b48](https://github.com/seafileltd/sea-sdoc-editor/commit/63d3b488a730e901b7358abfb84f72a6ba169588))
+
 ## [2.0.205](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.204...@seafile/sdoc-editor@2.0.205) (2025-11-17)
 
 ### Features
