@@ -31,7 +31,7 @@
   cursor: default;
 }
 
-.sdoc-select.group-select .sf3-font-down {
+.sdoc-select.group-select .sdoc-font-down {
   display: inline-block;
   color: #999;
   transform: translateY(2px);
@@ -39,7 +39,7 @@
   font-size: 14px !important;
 }
 
-.sdoc-select.group-select .sf3-font-down:hover {
+.sdoc-select.group-select .sdoc-font-down:hover {
   color: #666;
 }
 
