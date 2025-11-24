@@ -81,7 +81,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
         <div className='hover-menu-container'>
           <span className='op-group-item'>
             <span role="button" className={classnames('op-item', { 'ml-0': readOnly })}>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="link-op-menu-link">{t('Open_link')}</a>
+              <a href={url} target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onClick={(e) => e.stopPropagation()}>{t('Open_link')}</a>
             </span>
           </span>
           {!readOnly && (
