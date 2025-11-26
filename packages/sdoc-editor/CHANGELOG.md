@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.8](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.7...@seafile/sdoc-editor@3.0.8) (2025-11-26)
+
+### Bug Fixes
+
+- optimize sdoc link ([58782e3](https://github.com/seafileltd/sea-sdoc-editor/commit/58782e37b3b973c68de284af60deed549fc2b633))
+
+### Features
+
+- update image viewer ([#146](https://github.com/seafileltd/sea-sdoc-editor/issues/146)) ([f204036](https://github.com/seafileltd/sea-sdoc-editor/commit/f204036939921130ef9c07ea78174bb96517a9c7))
+
 ## [3.0.7](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.6...@seafile/sdoc-editor@3.0.7) (2025-11-20)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
