@@ -51,6 +51,10 @@ class ImagePreviewer extends React.Component {
     }));
   };
 
+  setImageIndex = (index) => {
+    this.setState({ imageIndex: index });
+  };
+
   render() {
     const { imageIndex } = this.state;
     const imageItemsLength = this.images.length;
@@ -71,6 +75,9 @@ class ImagePreviewer extends React.Component {
     );
     return (
       <Lightbox
+        imageItems={this.images}
+        currentIndex={imageIndex}
+        setImageIndex={index => this.setImageIndex(index)}
         wrapperClassName="sf-editor-image-previewer"
         imageTitle={imageTitleEl}
         mainSrc={mainSrc}
