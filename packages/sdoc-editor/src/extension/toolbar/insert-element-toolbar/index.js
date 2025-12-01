@@ -182,7 +182,7 @@ const QuickInsertBlockMenu = ({
             target='sdoc-side-menu-item-video'
             trigger="hover"
             className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
-            placement="left-start"
+            placement="right-start"
             hideArrow={true}
             fade={false}
           >
@@ -203,7 +203,7 @@ const QuickInsertBlockMenu = ({
             editor={editor}
             target='sdoc-side-menu-item-table'
             trigger='hover'
-            placement='left-start'
+            placement='right-start'
             popperClassName='sdoc-side-menu-table-size sdoc-insert-element-table-size-wrapper'
             createTable={createTable}
             callback={callback}
