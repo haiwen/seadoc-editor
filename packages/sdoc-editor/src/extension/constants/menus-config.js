@@ -127,7 +127,7 @@ export const MENUS_CONFIG_MAP = {
   },
   [WHITEBOARD]: {
     id: `sdoc_${WHITEBOARD}`,
-    iconClass: 'sdocfont sdoc-document',
+    iconClass: 'sdocfont sdoc-whiteboard',
     text: 'Whiteboard'
   },
   [TABLE]: {

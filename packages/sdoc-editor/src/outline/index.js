@@ -60,7 +60,7 @@ const SDocOutline = ({ scrollLeft, doc, t }) => {
           <>
             <div className="sdoc-outline-header">
               <h2 className="sdoc-outline-header__title">{t('Outline')}</h2>
-              <span className="sdoc-outline-header__close sdocfont sdoc-cancel" onClick={toggleShow}></span>
+              <span className="sdoc-outline-header__close sdocfont sdoc-sm-close" onClick={toggleShow}></span>
             </div>
             {list.length === 0 && (
               <p className="mt-4 text-secondary">{t('Headings_you_add_to_the_document_will_appear_here')}</p>
