@@ -32,10 +32,9 @@
 }
 
 .sdoc-color-menu .sdoc-color-icon {
-  height: 12px;
-  width: 12px;
-  transform: scale(.85);
-  line-height: 12px;
+  height: 14px;
+  width: 14px;
+  line-height: 14px;
 }
 
 .sdoc-color-menu .last-used-color {
@@ -140,7 +139,7 @@
 }
 
 .sdoc-color-menu-popover .sdoc-more-colors .sdocfont {
-  font-size: 12px;
+  font-size: 14px;
   color: #888;
 }
 

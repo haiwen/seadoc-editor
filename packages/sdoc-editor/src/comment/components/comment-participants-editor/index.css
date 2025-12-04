@@ -52,7 +52,7 @@
 
 .sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-delete .sdocfont {
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
   color: #909090;
 }
 
@@ -127,6 +127,6 @@
 }
 
 .sdoc-comments-participants-popover .sdoc-searched-collaborator .sdoc-searched-collaborator-operation .sdocfont {
-  font-size: 12px;
+  font-size: 14px;
   color: #798d99;
 }
