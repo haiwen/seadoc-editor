@@ -87,7 +87,7 @@ const WikiOutline = ({ doc = [] }) => {
         setIsShowOutlinePopover(false);
       }}
     >
-      <div className='sdoc-outline'>
+      <div className='sdoc-outline-container'>
         {wikiOutlineList.length > 0 && (
           <div className="sdoc-outline-list-container" onMouseOver={onMouseOver}>
             {wikiOutlineList.map((item, index) => <OutlineItem key={index} item={item} isDisplayHorizontalBar={true} />)}
