@@ -135,7 +135,7 @@ const ColorMenu = ({
           <div className="last-used-color"style={{ backgroundColor: lastUsedColor || 'unset' }}></div>
         </div>
         <div id={id} className="sdoc-color-toggle sdoc-menu-with-dropdown-triangle">
-          <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'caret-up' : 'drop-down'}`}></i>
+          <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'big-caret-up' : 'big-drop-down'}`}></i>
         </div>
       </button>
       {text && (
