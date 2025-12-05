@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.15](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.14...@seafile/sdoc-editor@3.0.15) (2025-12-05)
+
+### Bug Fixes
+
+- show table size popver ([#148](https://github.com/seafileltd/sea-sdoc-editor/issues/148)) ([3bd7e32](https://github.com/seafileltd/sea-sdoc-editor/commit/3bd7e32ad51685e1dd77af202917e5b964eee21d))
+
 ## [3.0.14](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.13...@seafile/sdoc-editor@3.0.14) (2025-12-05)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
