@@ -55,7 +55,7 @@ const SDocOutline = ({ scrollLeft, doc, t }) => {
 
   return (
     <div className={classNames('sdoc-outline-wrapper', { active: isShown })} style={{ left: -scrollLeft }}>
-      <div className="sdoc-outline">
+      <div className="sdoc-outline-container">
         {isShown && (
           <>
             <div className="sdoc-outline-header">
@@ -79,7 +79,7 @@ const SDocOutline = ({ scrollLeft, doc, t }) => {
         <>
           <span
             id="sdoc-outline-menu"
-            className="sdoc-outline-menu sdocfont sdoc-table-of-content-outline"
+            className="sdoc-outline-menu sdocfont sdoc-outline"
             onClick={toggleShow}
           >
           </span>

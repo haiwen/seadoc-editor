@@ -24,24 +24,24 @@
   max-height: 400px;
 }
 
-.wiki-outline-wrapper .sdoc-outline {
+.wiki-outline-wrapper .sdoc-outline-container {
   width: 59px;
 }
 
-.wiki-outline-wrapper .sdoc-outline .sdoc-outline-list-container {
+.wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container {
   flex: none;
   max-height: 400px;
   overflow-y: hidden;
 }
 
-.wiki-outline-wrapper .sdoc-outline .sdoc-outline-list-container .sdoc-outline-item .wiki-outline-context {
+.wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .wiki-outline-context {
   background-color: rgb(227, 226, 224);
   height: 2px;
   box-shadow: none;
   border-radius: 2px;
 }
 
-.wiki-outline-wrapper .sdoc-outline .sdoc-outline-list-container .sdoc-outline-item .active {
+.wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .active {
   background-color: rgb(50, 48, 44);
 }
 
@@ -80,7 +80,7 @@
   border-radius: 6px;
 }
 
-.sdoc-outline {
+.sdoc-outline-container {
   flex: 1;
   width: 220px;
   display: flex;
