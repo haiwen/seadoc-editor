@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, Fragment } from 'react';
 import { withTranslation } from 'react-i18next';
-import { context, WIKI_EDITOR, WIKI_EDITOR_EDIT_AREA_WIDTH, WikiEditor, createWikiEditor, withNodeId, withSocketIO, CollaboratorsProvider, PluginsProvider, CommentContextProvider } from '@seafile/sdoc-editor';
+import { context, WIKI_EDITOR, WIKI_EDITOR_EDIT_AREA_WIDTH, WikiEditor, createWikiEditor, withNodeId, withSocketIO, CollaboratorsProvider, PluginsProvider, CommentContextProvider, EventBus } from '@seafile/sdoc-editor';
 import PropTypes from 'prop-types';
 import ErrorBoundary from '../components/error-boundary';
+import { EXTERNAL_EVENT } from '../constants';
 
 import '../assets/css/simple-viewer.css';
 
@@ -51,6 +52,15 @@ const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collabor
       validEditor.closeConnection();
     };
   }, [isWikiReadOnly, validEditor]);
+
+  useEffect(() => {
+    const eventBus = EventBus.getInstance();
+
+    context.getCollaborators().then(res => {
+      const collaborators = res?.data.collaborators;
+      eventBus.dispatch(EXTERNAL_EVENT.TRANSFER_REALTIME_COLLABORATORS, collaborators);
+    });
+  }, []);
 
   // If you don't display comment, use Fragment to replace CommentProvider
   const WithCommentProvider = showComment ? CommentContextProvider : Fragment;
