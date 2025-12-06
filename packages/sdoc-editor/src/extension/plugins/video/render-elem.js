@@ -152,7 +152,7 @@ const Video = ({ element, editor }) => {
                   boxShadow: isSelected ? '0 0 0 2px #007bff' : 'none',
                 }}
               />
-              <div className='sdoc-video-play sdocfont sdoc-play icon-font'
+              <div className='sdoc-video-play sdocfont sdoc-play'
                 style={{ visibility: isPaused ? 'visible' : 'hidden' }}
                 contentEditable='false'
               >

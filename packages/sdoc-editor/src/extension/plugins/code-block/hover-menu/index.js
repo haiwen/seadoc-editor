@@ -46,7 +46,7 @@ const LangList = React.forwardRef(({ langsData, onSelectLang, selectedLanguageTe
           >
             {item.text}
             <span className={`li-check-mark ${selectedLanguageText === item.text ? 'li-checked' : ''}`}>
-              <i className='sdocfont sdoc-check-mark icon-font'></i>
+              <i className='sdocfont sdoc-check-mark'></i>
             </span>
           </li>
         );
@@ -185,13 +185,13 @@ const CodeBlockHoverMenu = ({ style, language, menuPosition, onChangeLanguage, o
           <div className="sdoc-code-block-hover-operation-item sdoc-code-block-hover-operation-lang">
             <div role="button" className={`op-item ${isShowlangsList ? 'active' : ''}`} onClick={onShowLangs}>
               <span>{selectedLanguageText}</span>
-              <i className='sdocfont sdoc-drop-down icon-font'></i>
+              <i className='sdocfont sdoc-drop-down'></i>
             </div>
           </div>
           <div className="sdoc-code-block-hover-operation-divider"></div>
           <div id='sdoc_code_block_auto_wrap' className="sdoc-code-block-hover-operation-item">
             <div role="button" className={`op-item ${white_space === 'normal' ? 'active' : ''}`} onClick={onAutoLineWrap}>
-              <i className='sdocfont sdoc-auto-linefeed icon-font'></i>
+              <i className='sdocfont sdoc-auto-linefeed'></i>
             </div>
             {isShowTooltip && (
               <Tooltip target='sdoc_code_block_auto_wrap' placement='top' fade={true}>
@@ -202,7 +202,7 @@ const CodeBlockHoverMenu = ({ style, language, menuPosition, onChangeLanguage, o
           <div className="sdoc-code-block-hover-operation-divider"></div>
           <div id='sdoc_code_block_copy' className="sdoc-code-block-hover-operation-item">
             <div role="button" className="op-item" onClick={onCopyCodeBlock}>
-              <i className='sdocfont sdoc-copy icon-font'></i>
+              <i className='sdocfont sdoc-copy'></i>
             </div>
             {isShowTooltip && (
               <Tooltip target='sdoc_code_block_copy' placement='top' fade={true}>
@@ -213,7 +213,7 @@ const CodeBlockHoverMenu = ({ style, language, menuPosition, onChangeLanguage, o
           <div className="sdoc-code-block-hover-operation-divider"></div>
           <div id='sdoc_code_block_delete' className="sdoc-code-block-hover-operation-item">
             <div role="button" className="op-item" onClick={onDelete}>
-              <i className='sdocfont sdoc-delete icon-font'></i>
+              <i className='sdocfont sdoc-delete'></i>
             </div>
             {isShowTooltip && (
               <Tooltip target='sdoc_code_block_delete' placement='top' fade={true}>

@@ -68,7 +68,7 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
           {!readOnly && (
             <span className='op-group-item'>
               <span id='copy_link' role="button" className='op-item' onClick={onCopy}>
-                <i className='sdocfont sdoc-copy icon-font'></i>
+                <i className='sdocfont sdoc-copy'></i>
               </span>
               {isShowTooltip && (
                 <Tooltip target='copy_link' placement='top' fade={true}>
@@ -81,8 +81,8 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                 className={classnames('op-item', { 'link-style-icon-active': isShowDisplayStylePopover })}
                 onClick={onShowProver}
               >
-                <i className={classnames('icon-font mr-1', FILE_LINK_TYPE_CONFIG[selectedType].icon)}></i>
-                <i className='sdocfont sdoc-drop-down icon-font'></i>
+                <i className={classnames('mr-1', FILE_LINK_TYPE_CONFIG[selectedType].icon)}></i>
+                <i className='sdocfont sdoc-drop-down'></i>
               </span>
               {isShowTooltip && (
                 <Tooltip target='select_style' placement='top' fade={true}>
@@ -90,7 +90,7 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                 </Tooltip>
               )}
               <span id='delete_link' role="button" className='op-item' onClick={onUnwrapFileLinkNode}>
-                <i className='sdocfont sdoc-unlink icon-font'></i>
+                <i className='sdocfont sdoc-unlink'></i>
               </span>
               {isShowTooltip && (
                 <Tooltip target='delete_link' placement='top' fade={true}>

@@ -96,7 +96,7 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
                 className='file-preview-full-screen'
                 onClick={openFullscreen}
               >
-                <i className='sdocfont sdoc-fullscreen icon-font'/>
+                <i className='sdocfont sdoc-fullscreen'/>
               </div>
               <div className="sdoc-icon-btn" onClick={closePlugin}>
                 <i className="sdocfont sdoc-sm-close"></i>

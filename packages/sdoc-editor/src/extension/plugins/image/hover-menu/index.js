@@ -135,7 +135,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                 }}
               >
                 <span className='mr-1'>{t(type === IMAGE_BLOCK ? 'Block' : 'Inline')}</span>
-                <i className='sdocfont sdoc-drop-down icon-font'/>
+                <i className='sdocfont sdoc-drop-down'/>
               </span>
             </span>)}
           {
@@ -149,8 +149,8 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                       onShowProver(e, 'alignPopover');
                     }}
                   >
-                    <i className={classnames(`sdocfont sdoc-align-${align || 'left'} icon-font mr-1`)}/>
-                    <i className='sdocfont sdoc-drop-down icon-font'/>
+                    <i className={classnames(`sdocfont sdoc-align-${align || 'left'} mr-1`)}/>
+                    <i className='sdocfont sdoc-drop-down'/>
                   </span>
                 )}
                 <span
@@ -161,8 +161,8 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                     onShowProver(e, 'borderPopover');
                   }}
                 >
-                  <i className='sdocfont sdoc-image icon-font mr-1'/>
-                  <i className='sdocfont sdoc-drop-down icon-font'/>
+                  <i className='sdocfont sdoc-image mr-1'/>
+                  <i className='sdocfont sdoc-drop-down'/>
                   {isShowTooltip && (
                     <Tooltip target='sdoc_image_border' placement='top' fade={true}>
                       {t('Image_border')}
@@ -176,7 +176,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                     className={classnames('op-item', 'ml-1', { 'active': show_caption })}
                     onClick={(event) => onSelect(event, { 'show_caption': !show_caption })}
                   >
-                    <i className='sdocfont sdoc-describe icon-font mr-1'/>
+                    <i className='sdocfont sdoc-caption mr-1'/>
                     {isShowTooltip && (
                       <Tooltip target='sdoc_image_caption' placement='top' fade={true}>
                         {t('Caption')}
@@ -196,7 +196,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                 setIsShowImagePreview(!isShowImagePreview);
               }}
             >
-              <i className='sdocfont sdoc-fullscreen icon-font'/>
+              <i className='sdocfont sdoc-fullscreen'/>
               {isShowTooltip && (
                 <Tooltip target='sdoc_image_full_screen_mode' placement='top' fade={true}>
                   {t('Full_screen_mode')}
@@ -234,7 +234,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                   onClick={(event) => onSelect(event, { align: item.type })}
                 >
                   <div className="sdoc-dropdown-item-content">
-                    <i className={classnames(item.iconClass, 'icon-font')}/>
+                    <i className={classnames(item.iconClass)}/>
                   </div>
                   {align === item.type && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>)}
                 </div>

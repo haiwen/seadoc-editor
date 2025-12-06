@@ -67,8 +67,8 @@
   box-shadow: 0 0 5px #ccc;
 }
 
-.sdoc-file-link-hover-menu-container .hover-menu-container .icon-font {
-  font-size: 12px;
+.sdoc-file-link-hover-menu-container .hover-menu-container .sdocfont {
+  font-size: 14px;
   color: #444444;
 }
 

@@ -44,7 +44,7 @@
   background: #f1f1f1;
 }
 
-.sdoc-whiteboard-hover-menu-container .hover-menu-container .icon-font {
-  font-size: 12px;
+.sdoc-whiteboard-hover-menu-container .hover-menu-container .sdocfont {
+  font-size: 14px;
   color: #444444;
 }

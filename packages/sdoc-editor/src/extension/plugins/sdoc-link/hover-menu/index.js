@@ -88,7 +88,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
             <>
               <span className='op-group-item'>
                 <span id='sdoc_link_copy' role="button" className='op-item' onClick={onCopy}>
-                  <i className='sdocfont sdoc-copy icon-font'></i>
+                  <i className='sdocfont sdoc-copy'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='sdoc_link_copy' placement='top' fade={true}>
@@ -101,8 +101,8 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                   className={`op-item ${isShowDisplayStylePopover ? 'link-style-icon-active' : '' }`}
                   onClick={onShowProver}
                 >
-                  <i className={classnames('icon-font mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
-                  <i className='sdocfont sdoc-drop-down icon-font'></i>
+                  <i className={classnames('mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
+                  <i className='sdocfont sdoc-drop-down'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='display_sdoc_link' placement='top' fade={true}>
@@ -112,7 +112,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
               </span>
               <span className='op-group-item'>
                 <span id='delete_sdoc_link' role="button" className={'op-item'} onClick={onUnwrapFileLinkNode}>
-                  <i className='sdocfont sdoc-unlink icon-font'></i>
+                  <i className='sdocfont sdoc-unlink'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='delete_sdoc_link' placement='top' fade={true}>
@@ -120,7 +120,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                   </Tooltip>
                 )}
                 <span id='sdoc_link_preview' role="button" className='op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
-                  <i className='sdocfont sdoc-eye icon-font'></i>
+                  <i className='sdocfont sdoc-eye'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='sdoc_link_preview' placement='top' fade={true}>

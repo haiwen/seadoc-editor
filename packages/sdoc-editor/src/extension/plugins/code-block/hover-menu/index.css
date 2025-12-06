@@ -40,7 +40,7 @@
   padding: 0 5px;
 }
 
-.sdoc-code-block-hover-menu-container .hover-menu-container .sdoc-code-block-hover-operation-lang .icon-font {
+.sdoc-code-block-hover-menu-container .hover-menu-container .sdoc-code-block-hover-operation-lang .sdocfont {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,7 @@
   width: fit-content;
 }
 
-.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-lang .icon-font {
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-lang .sdocfont {
   color: #999;
 }
 
@@ -75,8 +75,8 @@
   background: #f2f2f2;
 }
 
-.sdoc-code-block-hover-menu-container .icon-font {
-  font-size: 12px;
+.sdoc-code-block-hover-menu-container .sdocfont {
+  font-size: 14px;
   color: #444;
 }
 

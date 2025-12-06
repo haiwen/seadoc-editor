@@ -53,7 +53,7 @@ const VideoHoverMenu = ({ editor, menuPosition, element, videoRef, setIsSelected
             <>
               <span className='op-group-item'>
                 <span id='sdoc_video_copy' role="button" className='op-item' onClick={onCopy}>
-                  <i className='sdocfont sdoc-copy icon-font'></i>
+                  <i className='sdocfont sdoc-copy'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='sdoc_video_copy' placement='top' fade={true}>
@@ -62,7 +62,7 @@ const VideoHoverMenu = ({ editor, menuPosition, element, videoRef, setIsSelected
                 )}
                 <span
                   id='sdoc_video_delete' role="button" className='op-item' onClick={onDeleteVideo}>
-                  <i className='sdocfont sdoc-delete icon-font'/>
+                  <i className='sdocfont sdoc-delete'/>
                   {isShowTooltip &&
                     <Tooltip target='sdoc_video_delete' placement='top' fade={true}>
                       {t('Delete')}
@@ -76,7 +76,7 @@ const VideoHoverMenu = ({ editor, menuPosition, element, videoRef, setIsSelected
                   className='op-item'
                   onClick={handleFullScreen}
                 >
-                  <i className='sdocfont sdoc-fullscreen icon-font'/>
+                  <i className='sdocfont sdoc-fullscreen'/>
                   {isShowTooltip &&
                     <Tooltip target='sdoc_video_full_screen_mode' placement='top' fade={true}>
                       {t('Full_screen_mode')}

@@ -42,7 +42,7 @@ const WhiteboardHoverMenu = ({ menuPosition, onOpen, openFullscreen, onDeleteWhi
               className='op-item'
               onClick={onDeleteWhiteboard}
             >
-              <i className='sdocfont sdoc-delete icon-font'/>
+              <i className='sdocfont sdoc-delete'/>
               {showTooltip &&
                 <Tooltip target='sdoc_whiteboard_delete' placement='top' fade={true}>
                   {t('Delete')}
@@ -56,7 +56,7 @@ const WhiteboardHoverMenu = ({ menuPosition, onOpen, openFullscreen, onDeleteWhi
               className='op-item'
               onClick={openFullscreen}
             >
-              <i className='sdocfont sdoc-fullscreen icon-font'/>
+              <i className='sdocfont sdoc-fullscreen'/>
               {showTooltip &&
                 <Tooltip target='sdoc_whiteboard_full_screen_mode' placement='top' fade={true}>
                   {t('Full_screen_mode')}
