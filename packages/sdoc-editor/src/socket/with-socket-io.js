@@ -1,3 +1,4 @@
+import { Editor, Point } from '@seafile/slate';
 import deepCopy from 'deep-copy';
 import { generateCursorData } from '../cursor/helper';
 import EventBus from '../utils/event-bus';
@@ -43,7 +44,15 @@ const withSocketIO = (editor, options) => {
         const updateOperations = operations.filter(operation => operation.type !== 'set_selection');
         socketManager.onReceiveLocalOperations(updateOperations);
       }
-      socketManager.sendCursorLocation(editor.selection);
+
+      // Initially collapse the collaborator‘s selections to  start point
+      let newCursor = editor.selection;
+      const { anchor, focus } = editor.selection;
+      if (!Point.equals(anchor, focus)) {
+        const frontPoint = Editor.start(editor, { anchor: anchor, focus: focus });
+        newCursor = { anchor: frontPoint, focus: frontPoint };
+      }
+      socketManager.sendCursorLocation(newCursor);
     }
 
     // dispatch editor change event
