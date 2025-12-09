@@ -19,7 +19,7 @@
   "dependencies": {
     "@seafile/comment-editor": "1.0.1",
     "@seafile/print-js": "1.6.6",
-    "@seafile/react-image-lightbox": "^5.0.0",
+    "@seafile/react-image-lightbox": "^5.0.1",
     "@seafile/slate": "0.91.8",
     "@seafile/slate-history": "0.86.2",
     "@seafile/slate-hyperscript": "0.81.7",
