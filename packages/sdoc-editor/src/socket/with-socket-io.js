@@ -46,10 +46,10 @@ const withSocketIO = (editor, options) => {
       }
 
       // Initially collapse the collaborator‘s selections to  start point
-      let newCursor = editor.selection;
-      const { anchor, focus } = editor.selection;
+      let newCursor = newEditor.selection;
+      const { anchor, focus } = newEditor.selection;
       if (!Point.equals(anchor, focus)) {
-        const frontPoint = Editor.start(editor, { anchor: anchor, focus: focus });
+        const frontPoint = Editor.start(newEditor, { anchor: anchor, focus: focus });
         newCursor = { anchor: frontPoint, focus: frontPoint };
       }
       socketManager.sendCursorLocation(newCursor);
