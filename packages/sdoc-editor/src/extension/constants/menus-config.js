@@ -462,13 +462,7 @@ export const SIDE_INSERT_MENUS_CONFIG = {
       iconClass: 'sdocfont sdoc-header3',
       type: HEADER3,
       text: 'Header_three'
-    },
-    {
-      id: HEADER4,
-      iconClass: 'sdocfont sdoc-header4',
-      type: HEADER4,
-      text: 'Header_four'
-    },
+    }
   ],
   [MULTI_COLUMN]: [
     {

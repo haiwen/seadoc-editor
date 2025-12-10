@@ -169,6 +169,18 @@ const QuickInsertBlockMenu = ({
 
   const dropDownItems = useMemo(() => {
     let items = {
+      [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
+      ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER].reduce((acc, item) => {
+        acc[item.id] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} key={item.id} menuConfig={item} onClick={() => onInsert(item.type)} />;
+        return acc;
+      }, {},),
+      [UNORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[UNORDERED_LIST]} key="sdoc-insert-menu-unorder-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.UNORDERED_LIST] }} onClick={() => {
+        onInsertList(ELEMENT_TYPE.UNORDERED_LIST);
+      }} />,
+      [ORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[ORDERED_LIST]} key="sdoc-insert-menu-order-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.ORDERED_LIST] }} onClick={() => {
+        onInsertList(ELEMENT_TYPE.ORDERED_LIST);
+      }} />,
+      [CHECK_LIST_ITEM]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CHECK_LIST_ITEM]} key="sdoc-insert-menu-check-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />,
       ...(editor.editorType === WIKI_EDITOR && {
         [FILE_VIEW]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} onClick={openFileViewDialog} />
       }),
@@ -213,18 +225,11 @@ const QuickInsertBlockMenu = ({
       [LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[LINK]} key="sdoc-insert-menu-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.LINK] }} onClick={openLinkDialog} />,
       [CODE_BLOCK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CODE_BLOCK]} disabled={isDisableCodeBlock} key="sdoc-insert-menu-code-block" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CODE_BLOCK] }} onClick={onInsertCodeBlock} />,
       [CALL_OUT]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CALL_OUT]} disabled={isDisableCallout} key="sdoc-insert-menu-callout" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CALL_OUT] }} onClick={() => onInsertCallout(PARAGRAPH)} />,
-      [UNORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[UNORDERED_LIST]} key="sdoc-insert-menu-unorder-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.UNORDERED_LIST] }} onClick={() => {
-        onInsertList(ELEMENT_TYPE.UNORDERED_LIST);
-      }} />,
-      [ORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[ORDERED_LIST]} key="sdoc-insert-menu-order-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.ORDERED_LIST] }} onClick={() => {
-        onInsertList(ELEMENT_TYPE.ORDERED_LIST);
-      }} />,
-      [CHECK_LIST_ITEM]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CHECK_LIST_ITEM]} key="sdoc-insert-menu-check-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />,
-      [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
     };
 
     if (isMobile) {
       items = {
+        [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
         [UNORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[UNORDERED_LIST]} key="sdoc-insert-menu-unorder-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.UNORDERED_LIST] }} onClick={() => {
           onInsertList(ELEMENT_TYPE.UNORDERED_LIST);
         }} />,
@@ -232,13 +237,8 @@ const QuickInsertBlockMenu = ({
           onInsertList(ELEMENT_TYPE.ORDERED_LIST);
         }} />,
         [CHECK_LIST_ITEM]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CHECK_LIST_ITEM]} key="sdoc-insert-menu-check-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />,
-        [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
       };
     }
-
-    SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER].forEach((item) => {
-      items[item.id.toLowerCase()] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} key={item.id} menuConfig={item} onClick={() => onInsert(item.type)} />;
-    });
 
     !isMobile && SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.MULTI_COLUMN].forEach((item) => {
       items[item.id.toLowerCase()] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} disabled={isDisableMultiColumn} className="sdoc-insert-menu-multi-column" key={item.id} menuConfig={item} onClick={() => createMultiColumn(item.type)} />;
