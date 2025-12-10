@@ -159,7 +159,11 @@ export const getImageURL = (data, editor) => {
   // copy from others doc
   if (isImageUrlIsFromCopy(url)) return url;
 
-  const serviceUrl = context.getSetting('serviceUrl');
+  let isDevelopment = context.getSetting('isDevelopment');
+  let serviceUrl = context.getSetting('siteRoot');
+  if (isDevelopment) {
+    serviceUrl = context.getSetting('serviceUrl');
+  }
   let assetsUrl = context.getSetting('assetsUrl');
 
   // If in sdoc link preview

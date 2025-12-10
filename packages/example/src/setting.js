@@ -1,6 +1,7 @@
 /** (1/4) initialize config object */
 let config = {
   serviceUrl: '', // required
+  siteRoot: '', // required
   name: '**', // required, current user's name
   username: '**', // required
   password: '**', // required
@@ -19,7 +20,7 @@ let config = {
   lang: 'en',
   assetsUrl: '', // required
   isShowInternalLink: false, // required
-  isStarIconShown: false // for star/unstar sdoc
+  isStarIconShown: false, // for star/unstar sdoc,
 };
 
 /** (2/4) load local development settings ./setting.local.js (if exist) */
