@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.24](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.23...@seafile/sdoc-editor@3.0.24) (2025-12-12)
+
+### Bug Fixes
+
+- adjust menu order ([#152](https://github.com/seafileltd/sea-sdoc-editor/issues/152)) ([1e81261](https://github.com/seafileltd/sea-sdoc-editor/commit/1e8126163683ffe7dbfe64e153451e828939c43b))
+
+### Features
+
+- transfer exdraw smart link into whiteboard element ([#153](https://github.com/seafileltd/sea-sdoc-editor/issues/153)) ([09e12ab](https://github.com/seafileltd/sea-sdoc-editor/commit/09e12abc74d2b503316afe31a5fd2724705b86bb))
+
 ## [3.0.23](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.22...@seafile/sdoc-editor@3.0.23) (2025-12-10)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
