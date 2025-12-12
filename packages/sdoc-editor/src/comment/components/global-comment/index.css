@@ -88,10 +88,6 @@
   margin-right: 4px;
 }
 
-.sdoc-comment-drawer .comments-panel-header .sdoc-icon-btn .sdocfont.sdoc-sm-close {
-  font-weight: 700;
-}
-
 .sdoc-comment-drawer .comments-panel-body {
   flex: 1;
   display: flex;
