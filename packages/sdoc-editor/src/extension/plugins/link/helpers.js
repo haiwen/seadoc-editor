@@ -162,6 +162,13 @@ export const isSdocFile = (res, url) => {
   return !is_dir && file_ext === 'sdoc';
 };
 
+export const isExdrawFile = (res, url) => {
+  const { data: { files_info } } = res;
+  const fileInfo = files_info[url];
+  const { is_dir, file_ext } = fileInfo || {};
+  return !is_dir && file_ext === 'exdraw';
+};
+
 export const isWeChat = () => {
   let ua = window.navigator.userAgent.toLowerCase();
   let isWeChat = ua.match(/MicroMessenger/i) === 'micromessenger';

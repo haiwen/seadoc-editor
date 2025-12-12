@@ -8,7 +8,8 @@ import { ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } fro
 import { getEditorString, getNodeType, getSelectedElems, getSelectedNodeByType } from '../../core';
 import { isImage, isSameDomain } from '../../utils';
 import { insertSdocFileLink } from '../sdoc-link/helpers';
-import { genLinkNode, insertLink, isSdocFile } from './helpers';
+import { insertWhiteboard } from '../whiteboard/helper';
+import { genLinkNode, insertLink, isExdrawFile, isSdocFile } from './helpers';
 
 const withLink = (editor) => {
   const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown, onCompositionStart } = editor;
@@ -35,6 +36,11 @@ const withLink = (editor) => {
             const fileName = res.data.files_info[text].name;
             const fileUuid = res.data.files_info[text].file_uuid;
             insertSdocFileLink(editor, fileName, fileUuid);
+          } else if (isExdrawFile(res, text)) {
+            const fileName = res.data.files_info[text].name;
+            const fileParentPath = res.data.files_info[text].parent_path;
+            const filePath = fileParentPath + '/' + fileName;
+            insertWhiteboard(editor, fileName, filePath);
           } else {
             const url = new URL(text);
             const linkedNodeId = url.hash.replace(/^#/, '');
