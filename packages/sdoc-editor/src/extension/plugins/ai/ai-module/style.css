@@ -147,6 +147,7 @@
   margin-bottom: 0 !important;
 }
 
-.md-rendered-html ul, .md-rendered-html li {
-  padding: revert;
+.md-rendered-html ul,
+.md-rendered-html ol {
+  padding: 0 0 0 20px !important;
 }
