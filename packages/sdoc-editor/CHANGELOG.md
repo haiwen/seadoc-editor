@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.25](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.24...@seafile/sdoc-editor@3.0.25) (2025-12-15)
+
+### Features
+
+- support list type in ai ([#154](https://github.com/seafileltd/sea-sdoc-editor/issues/154)) ([f8ae937](https://github.com/seafileltd/sea-sdoc-editor/commit/f8ae93723170205a63aa0a4346c10eb769b95998))
+
 ## [3.0.24](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.23...@seafile/sdoc-editor@3.0.24) (2025-12-12)
 
 ### Bug Fixes
