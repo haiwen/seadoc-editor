@@ -90,6 +90,8 @@ class ImagePreviewer extends React.Component {
         reactModalProps={{
           shouldReturnFocusAfterClose: false,
         }}
+        zoomInTip={this.props.t('Enlarge: ⌘ + Wheel')}
+        zoomOutTip={this.props.t('Shrink: ⌘ + Wheel')}
       />
     );
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Lightbox from '@seafile/react-image-lightbox';
 import PropTypes from 'prop-types';
 
@@ -10,6 +11,7 @@ const propTypes = {
 };
 
 function CommentImagePreviewer(props) {
+  const { t } = useTranslation('sdoc-editor');
   const mainSrc = props.imageUrl;
   let imageTitle = '';
   try {
@@ -32,6 +34,8 @@ function CommentImagePreviewer(props) {
       reactModalProps={{
         shouldReturnFocusAfterClose: false,
       }}
+      zoomInTip={t('Enlarge: ⌘ + Wheel')}
+      zoomOutTip={t('Shrink: ⌘ + Wheel')}
     />
   );
 }
