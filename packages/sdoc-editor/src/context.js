@@ -42,6 +42,7 @@ class Context {
   }
 
   getSetting(key) {
+    if (!this.settings) return '';
     if (this.settings[key] === false) return this.settings[key];
     return this.settings[key] || '';
   }

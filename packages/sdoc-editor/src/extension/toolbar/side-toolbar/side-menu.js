@@ -173,7 +173,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
                 menuConfig={{
                   id: 'sdoc-side-menu-item-transform',
                   text: 'Transform_to',
-                  iconClass: 'sdocfont sdoc-table-of-content'
+                  iconClass: 'sdocfont sdoc-transform-to'
                 }}
                 className="pr-2"
               >

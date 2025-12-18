@@ -338,7 +338,7 @@ export const SIDE_TRANSFORM_MENUS_CONFIG = [
   },
   {
     id: BLOCKQUOTE,
-    iconClass: 'sdocfont sdoc-quote1',
+    iconClass: 'sdocfont sdoc-quote-left',
     type: BLOCKQUOTE,
     text: 'Quote'
   },
@@ -486,7 +486,7 @@ export const SIDE_INSERT_MENUS_CONFIG = {
   ],
   [BLOCKQUOTE]: {
     id: BLOCKQUOTE,
-    iconClass: 'sdocfont sdoc-quote1',
+    iconClass: 'sdocfont sdoc-quote-left',
     type: BLOCKQUOTE,
     text: 'Quote'
   },
