@@ -29,25 +29,7 @@
   position: relative;
 }
 
-.sdoc-file-view-container .iframe-skeleton {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-.sdoc-file-view-container .iframe-skeleton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sdoc-file-view-container .sdoc-file-view-mask {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: transparent;
+.sdoc-file-view-container .sdoc-file-view-content,
+.sdoc-file-view-container .sdoc-file-view-content .sea-metadata {
+  height: 400px;
 }

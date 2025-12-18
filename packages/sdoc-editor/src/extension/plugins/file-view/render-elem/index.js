@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { Database } from '@seafile/seatable-database';
 import { useSelected, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
-import FileLoading from '../../../../components/file-loading';
 import toaster from '../../../../components/toast';
 import context from '../../../../context';
 import { getErrorMsg } from '../../../../utils/common-utils';
 import LocalStorage from '../../../../utils/local-storage-utils';
 import { RECENT_COPY_CONTENT } from '../../../constants';
-import { getFileUrl, updateFileView } from '../helpers';
+import { updateFileView } from '../helpers';
 
 import './index.css';
 
@@ -16,14 +16,19 @@ const FileView = ({ element, children, attributes }) => {
 
   const editor = useSlateStatic();
   const isSelected = useSelected();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isShowMask, setIsShowMask] = useState(true);
+  const viewSettings = useMemo(() => {
+    const settings = context.getFileViewSetting();
+    const viewSettings = {
+      ...settings,
+      repoID: data.link_repo_id,
+      view_data: {
+        view_id: data.view_id,
+        wiki_id: data.wiki_id,
+      },
+    };
+    return viewSettings;
+  }, [data.link_repo_id, data.view_id, data.wiki_id]);
 
-  useEffect(() => {
-    if (!isSelected) {
-      setIsShowMask(true);
-    }
-  }, [isSelected]);
 
   useEffect(() => {
     const copyContent = LocalStorage.getItem(RECENT_COPY_CONTENT);
@@ -44,41 +49,11 @@ const FileView = ({ element, children, attributes }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleLoad = useCallback(() => {
-    setIsLoading(false);
-  }, []);
-
-  const onClick = useCallback(() => {
-    setIsShowMask(false);
-  }, []);
-
   return (
     <div data-id={element.id} {...attributes} className={classNames('sdoc-file-view-container', { 'is-selected': isSelected })} contentEditable='false' suppressContentEditableWarning>
       <div className='sdoc-file-view-title'>{data.view_name}</div>
       <div className='sdoc-file-view-content'>
-        <iframe
-          className='sdoc-file-view-element'
-          title={data.view_name}
-          src={getFileUrl(element)}
-          onLoad={handleLoad}
-          style={{
-            width: '100%',
-            height: '100%',
-            border: 'none',
-            opacity: isLoading ? 0 : 1,
-            transition: 'opacity 0.3s ease-in-out',
-            minHeight: '370px',
-          }}
-        >
-        </iframe>
-        {isLoading && (
-          <div className='iframe-skeleton'>
-            <FileLoading />
-          </div>
-        )}
-        {!isLoading && isShowMask && (
-          <div className='sdoc-file-view-mask' onClick={onClick}></div>
-        )}
+        <Database settings={viewSettings} />
       </div>
       {children}
     </div>

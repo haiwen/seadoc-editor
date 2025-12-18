@@ -73,6 +73,22 @@ class Context {
     return this.config;
   }
 
+  getFileViewSetting() {
+    const { isDevelopment, serviceUrl, siteRoot, mediaUrl, name, username, password, fileServerRoot, thumbnailDefaultSize, lang } = this.settings;
+    return {
+      isDevelopment,
+      serviceUrl,
+      siteRoot,
+      mediaUrl,
+      name,
+      username,
+      password,
+      fileServerRoot,
+      thumbnailDefaultSize,
+      lang,
+    };
+  }
+
   getFileContent() {
     return this.sdocServerApi.getDocContent()
       .then(res => {
