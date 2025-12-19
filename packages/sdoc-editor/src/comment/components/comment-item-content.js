@@ -125,7 +125,7 @@ const CommentItemContent = ({
             {(!comment.resolved || comment?.isContextComment) && (
               <>
                 <div id={`tooltip_${menuId}`} className="comment-operation mr-2" onClick={markAsResolved}>
-                  <i className='sdocfont sdoc-confirm'></i>
+                  <i className='sdocfont sdoc-check-mark'></i>
                 </div>
                 <Tooltip target={`tooltip_${menuId}`}>
                   {t('Resolved_tip')}
