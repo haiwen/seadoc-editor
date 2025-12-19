@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { Database } from '@seafile/seatable-database';
+import { Database } from '@seafile/seafile-database';
 import { useSelected, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
 import toaster from '../../../../components/toast';
