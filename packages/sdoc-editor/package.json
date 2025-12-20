@@ -17,9 +17,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@seafile/comment-editor": "1.0.1",
+    "@seafile/comment-editor": "^1.0.3",
     "@seafile/print-js": "1.6.6",
-    "@seafile/react-image-lightbox": "^5.0.1",
+    "@seafile/react-image-lightbox": "^5.0.2",
     "@seafile/seafile-database": "0.0.13",
     "@seafile/slate": "0.91.8",
     "@seafile/slate-history": "0.86.2",
