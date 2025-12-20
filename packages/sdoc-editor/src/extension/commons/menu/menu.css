@@ -18,6 +18,8 @@
   border: none !important;
   color: #444;
   background-color: transparent;
+  padding-block-start: unset;
+  padding-block-end: unset;
 }
 
 .menu-group .menu-group-item:disabled {

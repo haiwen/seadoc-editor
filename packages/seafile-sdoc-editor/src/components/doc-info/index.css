@@ -93,6 +93,7 @@
 }
 
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-jump-to {
+  line-height: 1;
   font-size: 14px;
   color: #999;
 }
