@@ -97,6 +97,6 @@
   color: #999;
 }
 
-.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .jump-to {
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-jump-to {
   color: #333;
 }
