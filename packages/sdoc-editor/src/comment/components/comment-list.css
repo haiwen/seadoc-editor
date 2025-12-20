@@ -174,14 +174,14 @@
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .name {
-  color: #1f1f1f;
+  color: #212529;
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .time {
-  color: #444746;
+  color: #666666;
   font-size: 12px;
   line-height: 16px;
   display: inline-flex;
@@ -221,7 +221,7 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  color: rgb(70, 77, 90);
+  color: #666666;
   overflow: hidden;
   border-radius: 2px;
 }
