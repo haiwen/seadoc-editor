@@ -108,14 +108,6 @@
   margin-right: 10px;
 }
 
-.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header .sdoc-close {
-  color: #999;
-}
-
-.sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-result-header .sdoc-close:hover {
-  color: #555;
-}
-
 .sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-statistic {
   color: #666;
 }

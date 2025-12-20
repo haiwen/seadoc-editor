@@ -48,12 +48,12 @@
   cursor: pointer;
 }
 
-.sdoc-file-select-dialog .modal-header-container .sdoc-close1 {
+.sdoc-file-select-dialog .modal-header-container .sdoc-sm-close {
   font-size: 16px;
   color: #666666;
 }
 
-.sdoc-file-select-dialog .modal-header-container .sdoc-close1:hover {
+.sdoc-file-select-dialog .modal-header-container .sdoc-sm-close:hover {
   background-color: #EFEFEF;
   border-radius: 3px;
   height: 28px;
@@ -87,7 +87,6 @@
   font-size: 14px;
 }
 
-.sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-close,
 .sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-search {
   display: flex;
   align-items: center;
@@ -95,13 +94,13 @@
   width: 20px;
 }
 
-.sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-close1,
+.sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-sm-close,
 .sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-find-replace {
   color: #666666;
   font-size: 14px;
 }
 
-.sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-close1:hover {
+.sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-sm-close:hover {
   background-color: #EFEFEF;
   border-radius: 3px;
   height: 20px;
@@ -111,11 +110,6 @@
 .sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-search {
   position: absolute;
   left: 10px;
-}
-
-.sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-close {
-  position: absolute;
-  right: 9px;
 }
 
 .sdoc-file-select-container .sdoc-file-select-wrapper {

@@ -73,7 +73,7 @@ const SidePanel = ({ currentVersion, isShowChanges, onSelectHistoryVersion, side
           {'History Versions'}
         </div>
         <div className='sdoc-side-panel-close'>
-          <i className="sdocfont sdoc-close" onClick={onClose}></i>
+          <i className="sdocfont sdoc-sm-close" onClick={onClose}></i>
         </div>
       </div>
       <div

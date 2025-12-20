@@ -208,7 +208,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
               <div className={classnames('sdocfont sdoc-list-ul sdoc-list-view', { 'active': !isTreeView })} onClick={onClickListView} />
             </div>
           }
-          <div className='sdocfont sdoc-close1 sdoc-close-dialog' onClick={closeDialog}></div>
+          <div className='sdocfont sdoc-sm-close sdoc-close-dialog' onClick={closeDialog}></div>
         </div>
       </div>
       <ModalBody className='p-0'>
