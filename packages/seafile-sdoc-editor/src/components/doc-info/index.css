@@ -61,7 +61,7 @@
   font-size: 14px;
   color: #888;
   background: #eee;
-  padding: 0 8px; 
+  padding: 0 8px;
   height: 20px;
   line-height: 20px;
   border-radius: 10px;
@@ -74,7 +74,7 @@
   font-size: 14px;
   color: #fff;
   background: #5EBA00;
-  padding: 0 8px; 
+  padding: 0 8px;
   height: 20px;
   line-height: 20px;
   border-radius: 10px;
@@ -92,11 +92,11 @@
   cursor: pointer;
 }
 
-.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-jump-to {
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-open-in-new-tab {
   font-size: 14px;
   color: #999;
 }
 
-.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-jump-to {
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-open-in-new-tab {
   color: #333;
 }
