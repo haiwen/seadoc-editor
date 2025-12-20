@@ -1,3 +1,7 @@
+.sdoc-menu-with-dropdown-icon .sdocfont.sdoc-align-left::before {
+    vertical-align: -2px;
+}
+
 .sdoc-text-align-dropdown .sdocfont.sdoc-check-mark {
     position: absolute;
     left: 8px;
