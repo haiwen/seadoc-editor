@@ -661,6 +661,6 @@
   "The_view_name_is_required": "The view name is required.",
   "The_view_type_is_required": "The view type is required.",
   "The_linked_library_is_required": "The linked library is required.",
-  "Enlarge: Ctrl + Wheel": "Enlarge: Ctrl + Wheel",
-  "Shrink: Ctrl + Wheel": "Shrink: Ctrl + Wheel"
+  "Enlarge: {Ctrl} + Wheel": "Enlarge: {Ctrl} + Wheel",
+  "Shrink: {Ctrl} + Wheel": "Shrink: {Ctrl} + Wheel"
 }
