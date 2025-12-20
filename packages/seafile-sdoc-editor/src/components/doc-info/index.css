@@ -92,11 +92,11 @@
   cursor: pointer;
 }
 
-.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-open-in-new-tab {
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-jump-to {
   font-size: 14px;
   color: #999;
 }
 
-.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-open-in-new-tab {
+.sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .jump-to {
   color: #333;
 }
