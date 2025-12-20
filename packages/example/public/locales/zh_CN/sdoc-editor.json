@@ -660,5 +660,7 @@
   "Linked_library": "关联资料库",
   "The_view_name_is_required": "视图名称是必填项。",
   "The_view_type_is_required": "视图类型是必填项。",
-  "The_linked_library_is_required": "关联的资料库是必填项。"
+  "The_linked_library_is_required": "关联的资料库是必填项。",
+  "Enlarge: {Ctrl} + Wheel": "放大: {Ctrl} + 滚轮",
+  "Shrink: {Ctrl} + Wheel": "缩小: {Ctrl} + 滚轮"
 }

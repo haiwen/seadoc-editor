@@ -1,6 +1,7 @@
 import React from 'react';
 import Lightbox from '@seafile/react-image-lightbox';
 import PropTypes from 'prop-types';
+import { isMac } from '../../../../utils/common-utils';
 import { getImageURL } from '../helpers';
 
 import '@seafile/react-image-lightbox/style.css';
@@ -59,6 +60,7 @@ class ImagePreviewer extends React.Component {
     const { imageIndex } = this.state;
     const imageItemsLength = this.images.length;
     const mainSrc = this.images[imageIndex] || '';
+    const shortcutMain = isMac() ? '⌘' : 'Ctrl';
     let imageTitle = '';
     try {
       imageTitle = mainSrc ? decodeURI(mainSrc.slice(mainSrc.lastIndexOf('/') + 1)) : '';
@@ -90,6 +92,8 @@ class ImagePreviewer extends React.Component {
         reactModalProps={{
           shouldReturnFocusAfterClose: false,
         }}
+        zoomInTip={this.props.t('Enlarge: {Ctrl} + Wheel').replace('{Ctrl}', shortcutMain)}
+        zoomOutTip={this.props.t('Shrink: {Ctrl} + Wheel').replace('{Ctrl}', shortcutMain)}
       />
     );
   }

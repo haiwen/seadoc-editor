@@ -267,6 +267,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
             toggleImagePreviewer={() => {
               setIsShowImagePreview(!isShowImagePreview);
             }}
+            t={t}
           />
         )}
       </div>
