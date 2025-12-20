@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.37](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.36...@seafile/sdoc-editor@3.0.37) (2025-12-20)
+
+### Features
+
+- optimize image ciewer ([#155](https://github.com/seafileltd/sea-sdoc-editor/issues/155)) ([3ccb6d8](https://github.com/seafileltd/sea-sdoc-editor/commit/3ccb6d8eb1e80a75cdf83ab79901586094f9c9fa))
+
 ## [3.0.36](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.35...@seafile/sdoc-editor@3.0.36) (2025-12-20)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
