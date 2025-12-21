@@ -1,14 +1,11 @@
 @font-face {
-  font-family: "sdocfont";
-  /* Project id 5078528 */
-  src: url('iconfont.eot?t=1766280555410');
-  /* IE9 */
-  src: url('iconfont.eot?t=1766280555410#iefix') format('embedded-opentype'),
-    /* IE6-IE8 */
-    url('iconfont.woff2?t=1766280555410') format('woff2'),
-    url('iconfont.woff?t=1766280555410') format('woff'),
-    url('iconfont.ttf?t=1766280555410') format('truetype'),
-    url('iconfont.svg?t=1766280555410#sdocfont') format('svg');
+  font-family: "sdocfont"; /* Project id 5078528 */
+  src: url('iconfont.eot?t=1766301472510'); /* IE9 */
+  src: url('iconfont.eot?t=1766301472510#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('iconfont.woff2?t=1766301472510') format('woff2'),
+       url('iconfont.woff?t=1766301472510') format('woff'),
+       url('iconfont.ttf?t=1766301472510') format('truetype'),
+       url('iconfont.svg?t=1766301472510#sdocfont') format('svg');
 }
 
 .sdocfont {
@@ -438,3 +435,4 @@
 .sdoc-header4:before {
   content: "\e698";
 }
+
