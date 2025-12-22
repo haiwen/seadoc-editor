@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.38](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.37...@seafile/sdoc-editor@3.0.38) (2025-12-22)
+
+### Features
+
+- add resize feature for file-view ([#158](https://github.com/seafileltd/sea-sdoc-editor/issues/158)) ([010a0f4](https://github.com/seafileltd/sea-sdoc-editor/commit/010a0f41531dfee59ef1f81a348ec7477ca7a7aa))
+
 ## [3.0.37](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.36...@seafile/sdoc-editor@3.0.37) (2025-12-20)
 
 ### Features
