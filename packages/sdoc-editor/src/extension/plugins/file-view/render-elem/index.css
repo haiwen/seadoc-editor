@@ -2,14 +2,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  border: 2px;
-  border: 2px solid #eee;
-  border-radius: 4px;
-}
-
-.sdoc-file-view-container.is-selected {
-  border: 2px solid rgb(0, 123, 255);
-  border-radius: 4px;
 }
 
 .sdoc-file-view-container .sdoc-file-view-title {
@@ -27,9 +19,30 @@
 
 .sdoc-file-view-container .sdoc-file-view-content {
   position: relative;
+  border: 2px solid #eee;
+  border-radius: 4px;
 }
 
-.sdoc-file-view-container .sdoc-file-view-content,
+.sdoc-file-view-container .sdoc-file-view-content.is-selected {
+  border: 2px solid rgb(0, 123, 255);
+  border-radius: 4px;
+}
+
+.sdoc-file-view-container .sdoc-file-view-content {
+  height: 400;
+}
+
 .sdoc-file-view-container .sdoc-file-view-content .sea-metadata {
-  height: 400px;
+  height: 396px;
+}
+
+.sdoc-file-view-container .sdoc-file-view-content .file-view-resizer {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  background-color: #007bff;
+  border: 1px solid #fff;
+  cursor: se-resize;
 }
