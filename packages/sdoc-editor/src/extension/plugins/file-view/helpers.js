@@ -67,3 +67,14 @@ export const updateFileView = (newData, editor, element) => {
   const nodePath = ReactEditor.findPath(editor, element);
   Transforms.setNodes(editor, { data: newData }, { at: nodePath });
 };
+
+export const calculateSize = (e, position) => {
+  const { clientX, clientY } = e;
+  const { left, top } = position;
+  const rightWidth = clientX - left;
+  const bottomHeight = clientY - top;
+  return {
+    width: rightWidth < 300 ? 300 : rightWidth,
+    height: bottomHeight < 200 ? 200 : bottomHeight,
+  };
+};
