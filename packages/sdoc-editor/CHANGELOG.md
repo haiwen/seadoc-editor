@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.39](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.38...@seafile/sdoc-editor@3.0.39) (2025-12-23)
+
+### Features
+
+- add resize for video ([#159](https://github.com/seafileltd/sea-sdoc-editor/issues/159)) ([eedfccf](https://github.com/seafileltd/sea-sdoc-editor/commit/eedfccf2de398daa054d4e6832ce1e5f3ff6dc5c))
+
 ## [3.0.38](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.37...@seafile/sdoc-editor@3.0.38) (2025-12-22)
 
 ### Features
