@@ -32,6 +32,36 @@
   font-weight: bold;
 }
 
+.sdoc-editor__article .list-container li {
+  position: relative;
+  padding-left: 8px !important;
+}
+
+.sdoc-editor__article .list-container .sdoc-li-control {
+  user-select: none;
+  cursor: pointer;
+}
+
+.sdoc-editor__article .list-container .sdoc-li-prefix {
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  left: -32px;
+  top: 7px;
+  cursor: pointer;
+}
+
+.sdoc-editor__article .list-container .sdoc-li-divider {
+  width: 1px;
+  height: calc(100% - 38px);
+  background-color: #ccc;
+  position: absolute;
+  left: -12px;
+  top: 28px;
+  user-select: none;
+  pointer-events: none;
+}
+
 /* check list  */
 .sdoc-editor__article .sdoc-checkbox-container {
   padding: 0px 2px;
