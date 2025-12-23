@@ -259,6 +259,15 @@ class SeafileAPI {
 
     return this.req.post(url, form);
   }
+
+  modifyView(wikiId, viewId, viewData) {
+    const url = '/api/v2.1/wiki2/' + wikiId + '/views/';
+    const data = {
+      view_id: viewId,
+      view_data: viewData,
+    };
+    return this.req.put(url, data);
+  }
 }
 
 export default SeafileAPI;

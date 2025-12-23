@@ -6,15 +6,12 @@
 
 .sdoc-file-view-container .sdoc-file-view-title {
   position: absolute;
-  height: 44px;
-  line-height: 44px;
-  top: 0px;
+  height: 48px;
+  line-height: 48px;
+  top: 2px;
   left: 0px;
   z-index: 10;
-  height: 44px;
-  line-height: 44px;
   margin-left: 16px;
-  cursor: pointer;
 }
 
 .sdoc-file-view-container .sdoc-file-view-content {

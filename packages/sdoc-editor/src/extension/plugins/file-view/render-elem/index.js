@@ -9,6 +9,7 @@ import { getErrorMsg } from '../../../../utils/common-utils';
 import LocalStorage from '../../../../utils/local-storage-utils';
 import { RECENT_COPY_CONTENT } from '../../../constants';
 import { calculateSize, updateFileView } from '../helpers';
+import Rename from '../rename';
 
 import './index.css';
 
@@ -147,9 +148,26 @@ const FileView = ({ element, children, attributes }) => {
     return null;
   }, [data]);
 
+  const onNameCancel = useCallback(() => {
+  }, []);
+
+  const onRename = useCallback((newName) => {
+
+    const newData = {
+      ...element.data,
+      view_name: newName,
+    };
+    updateFileView(newData, editor, element);
+
+    // TODO:
+    // context.modifyView(data.view_id, { view_name: newName });
+  }, [editor, element]);
+
   return (
     <div data-id={element.id} {...attributes} className="sdoc-file-view-container" contentEditable='false' suppressContentEditableWarning>
-      <div className='sdoc-file-view-title'>{data.view_name}</div>
+      <div className='sdoc-file-view-title'>
+        <Rename name={data.view_name} onRenameConfirm={onRename} onRenameCancel={onNameCancel}/>
+      </div>
       <div className={classNames('sdoc-file-view-content', { 'is-selected': isSelected })} ref={wrapperRef} style={style}>
         <Database settings={viewSettings} ref={databaseRef}/>
         {!readOnly && isSelected && (
