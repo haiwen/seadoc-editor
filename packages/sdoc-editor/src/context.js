@@ -355,6 +355,11 @@ class Context {
     return this.api.duplicateWikiView(wikiId, docUuid, viewId);
   }
 
+  modifyView(viewId, viewData) {
+    const wikiId = this.getSetting('wikiId');
+    return this.api.modifyView(wikiId, viewId, viewData);
+  }
+
 }
 
 const context = new Context();

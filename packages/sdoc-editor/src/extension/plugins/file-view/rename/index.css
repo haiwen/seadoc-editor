@@ -1,0 +1,25 @@
+.sdoc-file-view-rename {
+  max-width: 100%;
+  width: 100%;
+  white-space: nowrap;
+  word-break: break-word;
+  caret-color: var(--c-texPri);
+  min-width: 0px;
+  flex: 1 1 0%;
+  overflow: auto;
+  font-weight: 700;
+  font-size: 22px;
+  margin-inline-end: 4px;
+  scrollbar-width: none;
+  height: 48px;
+  line-height: 48px;
+}
+
+.sdoc-file-view-rename input {
+  border-width: 0;
+  padding: 0;
+}
+
+.sdoc-file-view-rename input:focus-visible {
+  outline: none;
+}
