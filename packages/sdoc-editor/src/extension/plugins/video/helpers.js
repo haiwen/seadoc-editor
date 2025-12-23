@@ -69,7 +69,7 @@ export const parseVideoLink = (url) => {
   // Bilibili url conversion
   if (url.includes('bilibili.com')) {
     const vidMatch = url.match(/\/video\/(BV[0-9A-Za-z]+)/);
-    const videoUrl = vidMatch?.[1] ? `https://player.bilibili.com/player.html?bvid=${vidMatch[1]}` : false;
+    const videoUrl = vidMatch?.[1] ? `https://player.bilibili.com/player.html?bvid=${vidMatch[1]}&autoplay=0` : false;
     return videoUrl;
   }
 
@@ -199,5 +199,13 @@ export const onCopyVideoNode = (editor, element) => {
         clipboardData.setData(type, data);
       });
     }
+  });
+};
+
+export const updateVideo = (editor, data, id) => {
+  Transforms.setNodes(editor, { data }, {
+    match: (n) => getNodeType(n) === VIDEO && n.id === id,
+    at: editor.selection,
+    voids: true
   });
 };

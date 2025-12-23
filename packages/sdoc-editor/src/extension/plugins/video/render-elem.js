@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { withTranslation } from 'react-i18next';
-import { Range, Transforms } from '@seafile/slate';
+import { useTranslation, withTranslation } from 'react-i18next';
+import { Range, Transforms, Node } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
-import { getVideoURL, formatFileSize, videoFileIcon } from './helpers';
+import { getVideoURL, formatFileSize, videoFileIcon, updateVideo } from './helpers';
 import HoverMenu from './hover-menu';
 
 import './index.css';
@@ -11,15 +11,23 @@ import './index.css';
 const Video = ({ element, editor }) => {
   const { data } = element;
   const videoRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const resizerRef = useRef(null);
+  const resizeStartXRef = useRef(0);
+  const resizeStartWidthRef = useRef(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [videoStates, setVideoStates] = useState({});
   const [menuPosition, setMenuPosition] = useState({});
+  const [isResizing, setIsResizing] = useState(false);
+  const [movingWidth, setMovingWidth] = useState(null);
   const scrollRef = useScrollContext();
+
   const videoName = data?.name || data?.src;
   const videoSize = data?.size;
   const isEmbeddableLink = data?.is_embeddable_link;
   const readOnly = useReadOnly();
+  const { t } = useTranslation('sdoc-editor');
 
   const handlePlay = () => {
     setVideoStates(prev => ({ ...prev, [element.id]: false }));
@@ -42,13 +50,6 @@ const Video = ({ element, editor }) => {
     setIsSelected(true);
   }, [editor, element]);
 
-  const onClickOutside = useCallback((e) => {
-    e.stopPropagation();
-    if (videoRef.current && !videoRef.current.contains(e.target)) {
-      setIsSelected(false);
-    }
-  }, []);
-
   const setPosition = useCallback((elem) => {
     if (elem) {
       const { top, left } = elem.getBoundingClientRect();
@@ -67,6 +68,87 @@ const Video = ({ element, editor }) => {
     setPosition(videoRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getIframePointerEvents = useCallback(() => {
+    if (readOnly) return 'auto';
+    if (isResizing) return 'none';
+    return isSelected ? 'auto' : 'none';
+  }, [isResizing, isSelected, readOnly]);
+
+  const getVideoWidthStyle = useCallback(() => {
+    const videoWidth = movingWidth || element.data.width || '100%';
+    return { width: videoWidth };
+  }, [element.data.width, movingWidth]);
+
+  const registerEvent = useCallback((eventList) => {
+    eventList.forEach(element => {
+      document.addEventListener(element.eventName, element.event);
+    });
+  }, []);
+
+  const unregisterEvent = useCallback((eventList) => {
+    eventList.forEach(element => {
+      document.removeEventListener(element.eventName, element.event);
+    });
+  }, []);
+
+  const onMouseMove = useCallback((event) => {
+    const deltaX = event.clientX - resizeStartXRef.current;
+    const nextWidth = resizeStartWidthRef.current + deltaX;
+
+    if (nextWidth < 150) return;
+
+    if (wrapperRef.current) {
+      wrapperRef.current.style.width = `${nextWidth}px`;
+    }
+    setMovingWidth(nextWidth);
+  }, []);
+
+  const onResizeEnd = useCallback((event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    unregisterEvent([
+      { eventName: 'mousemove', event: onMouseMove },
+      { eventName: 'mouseup', event: onResizeEnd },
+    ]);
+
+    const finalWidth =
+    movingWidth ||
+    wrapperRef.current?.getBoundingClientRect().width;
+
+    const newData = { ...element.data, width: finalWidth };
+    updateVideo(editor, newData, element.id);
+
+    setIsResizing(false);
+    setTimeout(() => setPosition(wrapperRef.current), 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor, element.id, movingWidth, onMouseMove, registerEvent]);
+
+  const onResizeStart = useCallback((event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setMenuPosition(null);
+    setIsResizing(true);
+
+    resizeStartXRef.current = event.clientX;
+    resizeStartWidthRef.current =
+      wrapperRef.current?.getBoundingClientRect().width ||
+      element.data.width ||
+      0;
+
+    registerEvent([
+      { eventName: 'mousemove', event: onMouseMove },
+      { eventName: 'mouseup', event: onResizeEnd },
+    ]);
+  }, [element.data.width, onMouseMove, onResizeEnd, registerEvent]);
+
+  const onClickOutside = useCallback((e) => {
+    e.stopPropagation();
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+      onResizeEnd();
+      setIsSelected(false);
+    }
+  }, [onResizeEnd]);
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -132,9 +214,14 @@ const Video = ({ element, editor }) => {
       <div
         data-id={element.id}
         className='sdoc-video-wrapper'
-        style={{ display: isLoaded ? 'block' : 'none' }}
+        style={{ display: isLoaded ? 'flex' : 'none' }}
       >
-        <div className='sdoc-video-inner' style={{ visibility: isLoaded ? 'visible' : 'hidden' }}>
+        <div
+          className='sdoc-video-inner'
+          ref={wrapperRef}
+          style={{ visibility: isLoaded ? 'visible' : 'hidden', ...getVideoWidthStyle() }}
+          onClick={onClickVideo}
+        >
           {!isEmbeddableLink && (
             <>
               <video
@@ -143,13 +230,13 @@ const Video = ({ element, editor }) => {
                 src={getVideoURL(data, editor)}
                 controls
                 controlsList={ readOnly ? 'nofullscreen' : undefined }
-                onClick={onClickVideo}
                 draggable={false}
                 onPlay={handlePlay}
                 onPause={handlePause}
                 onCanPlay={handleVideoLoad}
                 style={{
                   boxShadow: isSelected ? '0 0 0 2px #007bff' : 'none',
+                  pointerEvents: getIframePointerEvents(),
                 }}
               />
               <div className='sdoc-video-play sdocfont sdoc-play'
@@ -162,14 +249,30 @@ const Video = ({ element, editor }) => {
           {isEmbeddableLink && (
             <iframe
               className='sdoc-video-element'
+              ref={videoRef}
               title={data.src}
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
               allowFullScreen
               src={getVideoURL(data, editor)}
               onLoad={handleVideoLoad}
-              style={{ width: '100%', height: '100%', border: 'none' }}
+              style={{
+                height: '100%',
+                border: 'none',
+                boxShadow: isSelected ? '0 0 0 2px #007bff' : 'none',
+                pointerEvents: getIframePointerEvents(),
+              }}
             >
             </iframe>
+          )}
+          {!readOnly && isSelected && (
+            <span className='image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
+          )}
+          {isResizing && (
+            <span className='image-size'>
+              <span>{t('Width')}{':'}{parseInt(movingWidth || videoRef.current?.clientWidth)}</span>
+              <span>&nbsp;&nbsp;</span>
+              <span>{t('Height')}{':'}{videoRef.current.clientHeight}</span>
+            </span>
           )}
         </div>
       </div>
@@ -193,7 +296,7 @@ export function renderVideo(props, editor) {
 
   return (
     <div
-      className='sdoc-video-wrapper'
+      className='sdoc-video-outer-wrapper'
       {...attributes}
       contentEditable='true'
       suppressContentEditableWarning
