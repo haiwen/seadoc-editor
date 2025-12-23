@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.40](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.39...@seafile/sdoc-editor@3.0.40) (2025-12-23)
+
+### Features
+
+- add rename func for file view ([#160](https://github.com/seafileltd/sea-sdoc-editor/issues/160)) ([b37eacc](https://github.com/seafileltd/sea-sdoc-editor/commit/b37eacc638cb9c471a8fea1110eef48d8c00db79))
+
 ## [3.0.39](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.38...@seafile/sdoc-editor@3.0.39) (2025-12-23)
 
 ### Features
