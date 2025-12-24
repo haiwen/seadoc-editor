@@ -178,9 +178,7 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
             )}
             {element.type === WIKI_LINK && (
               <>
-                {icon && (
-                  <span>{icon}</span>
-                )}
+                {icon && (<span>{icon}</span>)}
                 {!icon && (
                   <>
                     {isDir ? <span className='sf3-font sf3-font-files2'/> : <span className='sf3-font sf3-font-file'/>}
@@ -191,13 +189,12 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
           </span>
         )}
         <span className={classnames('sdoc-file-text-link', { 'sdoc-no-file-link-icon': ![SDOC_LINK_TYPE.ICON_LINK, SDOC_LINK_TYPE.CARD_LINK].includes(element.display_type) })} style={style}>
-          <a href={url}
-            onClick={(e) => e.preventDefault()}
-            onDragStart={e => e.preventDefault()}
-            title={element.title}>{children}
+          <a href={url} onClick={(e) => e.preventDefault()} onDragStart={e => e.preventDefault()} title={element.title}>
+            {element.title}
           </a>
         </span>
       </span>
+      {children}
       {(isShowInsertHoverMenu && (!readOnly && editor.selection && Range.isCollapsed(editor.selection)) &&
         <HoverMenu
           url={url}

@@ -146,13 +146,12 @@ const FileLink = ({ editor, element, children, attributes }) => {
           </span>
         )}
         <span className='sdoc-file-text-link' style={style}>
-          <a href={getUrl(element.doc_uuid)}
-            onClick={(e) => e.preventDefault()}
-            onDragStart={e => e.preventDefault()}
-            title={element.title}>{children}
+          <a href={getUrl(element.doc_uuid)} onClick={(e) => e.preventDefault()} onDragStart={e => e.preventDefault()} title={element.title}>
+            {element.title}
           </a>
         </span>
       </span>
+      {children}
       {(isShowInsertHoverMenu &&
         <HoverMenu
           editor={editor}

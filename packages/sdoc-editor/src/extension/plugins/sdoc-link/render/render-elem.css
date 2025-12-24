@@ -27,6 +27,8 @@
   height: 50px;
   width: 420px;
   margin-bottom: -3px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 .sdoc-file-render .sdoc-file-link-icon {

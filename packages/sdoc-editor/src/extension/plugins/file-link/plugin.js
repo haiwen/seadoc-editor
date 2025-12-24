@@ -1,9 +1,8 @@
 import { Transforms, Node, Editor } from '@seafile/slate';
 import { FILE_LINK } from '../../constants';
-import { getFileLinkEntry } from './helpers';
 
 const withFileLink = (editor) => {
-  const { isInline, deleteBackward, onHotKeyDown } = editor;
+  const { isInline, isVoid, deleteBackward } = editor;
   const newEditor = editor;
 
   // Rewrite isInline
@@ -13,6 +12,16 @@ const withFileLink = (editor) => {
       return true;
     }
     return isInline(elem);
+  };
+
+  newEditor.isVoid = elem => {
+    const { type } = elem;
+
+    if (type === FILE_LINK) {
+      return true;
+    }
+
+    return isVoid(elem);
   };
 
   newEditor.deleteBackward = (unit) => {
@@ -35,26 +44,6 @@ const withFileLink = (editor) => {
     }
 
     return deleteBackward(unit);
-  };
-
-  newEditor.onHotKeyDown = (e) => {
-    const fileLinkEntry = getFileLinkEntry(editor);
-    if (fileLinkEntry) {
-      if (e.key === 'ArrowLeft') {
-        const beforePointFileLink = Editor.before(newEditor, fileLinkEntry[1]);
-        Transforms.select(newEditor, beforePointFileLink);
-        e.preventDefault();
-        return;
-      }
-      if (e.key === 'ArrowRight') {
-        const afterPointFileLink = Editor.after(newEditor, fileLinkEntry[1]);
-        Transforms.select(newEditor, afterPointFileLink);
-        e.preventDefault();
-        return;
-      }
-    }
-
-    return onHotKeyDown && onHotKeyDown(e);
   };
 
   return newEditor;
