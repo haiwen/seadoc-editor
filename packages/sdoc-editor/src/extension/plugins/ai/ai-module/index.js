@@ -254,6 +254,10 @@ export default function AIModule({ editor, element, closeModule }) {
     const value = event.target.value;
     if (value === searchValue) return;
     setSearchValue(value);
+
+    const el = event.target;
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
   }, [searchValue]);
 
   const transferHtml = async (mdString) => {
@@ -542,7 +546,7 @@ export default function AIModule({ editor, element, closeModule }) {
             <div className='sdoc-ai-content'>
               <div className='sdoc-ai-search'>
                 <AIIcon />
-                <input type="text" ref={inputRef} autoFocus placeholder={t('Ask_AI_anything')} value={inputValue} onKeyDown={onKeyDown} onChange={onSearchValueChanged}></input>
+                <textarea ref={inputRef} autoFocus placeholder={t('Ask_AI_anything')} value={inputValue} onKeyDown={onKeyDown} onChange={onSearchValueChanged} rows={1}></textarea>
                 <span className={`sdocfont sdoc-send-arrow ${!searchValue ? 'disable' : ''}`} onClick={onEnter}></span>
               </div>
             </div>
