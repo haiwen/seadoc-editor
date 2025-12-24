@@ -3,10 +3,10 @@ import { ReactEditor } from '@seafile/slate-react';
 import { FILE_LINK_INSET_INPUT_TEMP, SDOC_LINK } from '../../constants';
 import { WIKI_LINK } from '../../constants/element-type';
 import { getSelectedElems } from '../../core';
-import { getFileSearchInputEntry, getSdocLinkEntry, insertTempInput, isTriggeredByShortcut } from './helpers';
+import { getFileSearchInputEntry, insertTempInput, isTriggeredByShortcut } from './helpers';
 
 const withSdocLink = (editor) => {
-  const { isInline, deleteBackward, insertText, onCompositionStart, onHotKeyDown } = editor;
+  const { isInline, isVoid, deleteBackward, insertText, onCompositionStart } = editor;
   const newEditor = editor;
 
   // Rewrite isInline
@@ -17,6 +17,16 @@ const withSdocLink = (editor) => {
     if (isInlineElem) return true;
 
     return isInline(elem);
+  };
+
+  newEditor.isVoid = elem => {
+    const { type } = elem;
+
+    if (type === SDOC_LINK) {
+      return true;
+    }
+
+    return isVoid(elem);
   };
 
   newEditor.deleteBackward = (unit) => {
@@ -67,26 +77,6 @@ const withSdocLink = (editor) => {
       return true;
     }
     return onCompositionStart && onCompositionStart(event);
-  };
-
-  newEditor.onHotKeyDown = (e) => {
-    const sdocLinkEntry = getSdocLinkEntry(editor);
-    if (sdocLinkEntry) {
-      if (e.key === 'ArrowLeft') {
-        const beforePointSdocLink = Editor.before(newEditor, sdocLinkEntry[1]);
-        Transforms.select(newEditor, beforePointSdocLink);
-        e.preventDefault();
-        return;
-      }
-      if (e.key === 'ArrowRight') {
-        const afterPointSdocLink = Editor.after(newEditor, sdocLinkEntry[1]);
-        Transforms.select(newEditor, afterPointSdocLink);
-        e.preventDefault();
-        return;
-      }
-    }
-
-    return onHotKeyDown && onHotKeyDown(e);
   };
 
   return newEditor;
