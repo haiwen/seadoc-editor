@@ -47,6 +47,7 @@ const withSocketIO = (editor, options) => {
 
       // Initially collapse the collaborator‘s selections to  start point
       let newCursor = newEditor.selection;
+      if (!newEditor.selection) return;
       const { anchor, focus } = newEditor.selection;
       if (!Point.equals(anchor, focus)) {
         const frontPoint = Editor.start(newEditor, { anchor: anchor, focus: focus });
