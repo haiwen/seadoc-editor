@@ -16,26 +16,25 @@
 
 .sdoc-ai-content .sdoc-ai-search {
   position: relative;
-  height: 50px;
+  height: fit-content;
   line-height: 50px;
   display: flex;
   align-items: center;
 }
 
-.sdoc-ai-content .sdoc-ai-search input {
+.sdoc-ai-content .sdoc-ai-search textarea {
   border: none;
-  padding: 0 44px;
-  border-radius: 10px;
-  width: 100%;
-  outline: none;
-}
-
-.sdoc-ai-content .sdoc-ai-search input {
-  border: none;
-  padding: 0 44px;
-  border-radius: 10px;
+  padding: 10px 44px;
   width: 100%;
   pointer-events: all;
+  flex: 1;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font: inherit;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .sdoc-ai-content .sdoc-ai-search .sdoc-send-arrow {
