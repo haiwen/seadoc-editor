@@ -25,7 +25,7 @@
 
 .link-op-menu-link {
   font-size: 12px;
-  color: #212529;
+  color: #444444;
   padding: 0 5px;
   border-radius: 2px;
   line-height: 20px;
@@ -33,7 +33,7 @@
 }
 
 .link-op-menu-link:hover {
-  color: #212529;
+  color: #444444;
   text-decoration: none;
   background: #f1f1f1;
 }
