@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.45](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.44...@seafile/sdoc-editor@3.0.45) (2025-12-26)
+
+### Bug Fixes
+
+- directly show ai module when click side bar aio ([#161](https://github.com/seafileltd/sea-sdoc-editor/issues/161)) ([112810b](https://github.com/seafileltd/sea-sdoc-editor/commit/112810b9a01be57af5342bd3a5fdab53dbf82bc0))
+
 ## [3.0.44](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.43...@seafile/sdoc-editor@3.0.44) (2025-12-25)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
