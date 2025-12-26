@@ -21,7 +21,10 @@ export default function AIDropdownMenu({ slateNode }) {
   return (
     <DropdownMenuItem
       menuConfig={aiProps}
-      onClick={onAiClick}
+      onClick={(e) => {
+        e.stopPropagation();
+        onAiClick();
+      }}
     />
   );
 }
