@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.47](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.46...@seafile/sdoc-editor@3.0.47) (2025-12-26)
+
+### Bug Fixes
+
+- optimize color ([f160d65](https://github.com/seafileltd/sea-sdoc-editor/commit/f160d656a87f84fb44d8891ba192816698aa7bb1))
+
 ## [3.0.46](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.45...@seafile/sdoc-editor@3.0.46) (2025-12-26)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
