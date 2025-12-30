@@ -49,8 +49,9 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   // Fix: The editor's children are not updated when the document is updated in revision
   // In revision mode, the document is updated, but the editor's children are not updated,as onValueChange override the new document.elements. This unexpected action cause the editor to display the old content
   useEffect(() => {
+    validEditor.children = document.elements;
     setSlateValue(document.elements);
-  }, [document.elements]);
+  }, [document.elements, validEditor]);
 
   useEffect(() => {
     validEditor.readonly = false;
