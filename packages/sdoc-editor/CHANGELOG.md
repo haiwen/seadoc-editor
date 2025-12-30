@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.48](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.47...@seafile/sdoc-editor@3.0.48) (2025-12-30)
+
+### Bug Fixes
+
+- change diff view to revision update editor bug ([#167](https://github.com/seafileltd/sea-sdoc-editor/issues/167)) ([ee10131](https://github.com/seafileltd/sea-sdoc-editor/commit/ee1013125eefd57be04e9a34d16181d6fbe0a35e))
+- optimize video cursor ([#165](https://github.com/seafileltd/sea-sdoc-editor/issues/165)) ([22cb724](https://github.com/seafileltd/sea-sdoc-editor/commit/22cb7249ce17fdb72610bd8c522dc55f8dfc2926))
+- resolve list position ([#166](https://github.com/seafileltd/sea-sdoc-editor/issues/166)) ([5149d05](https://github.com/seafileltd/sea-sdoc-editor/commit/5149d05bdae10bb3df8dbba8c0adfb288487f4f3))
+- update version ([f2de7d4](https://github.com/seafileltd/sea-sdoc-editor/commit/f2de7d4eec551936cfe401add589f3fbe6e4d150))
+
 ## [3.0.47](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.46...@seafile/sdoc-editor@3.0.47) (2025-12-26)
 
 ### Bug Fixes
