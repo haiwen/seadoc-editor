@@ -44,9 +44,8 @@ const Video = ({ element, editor }) => {
   };
 
   const onClickVideo = useCallback((e) => {
+    e.preventDefault();
     e.stopPropagation();
-    const path = ReactEditor.findPath(editor, element);
-    Transforms.select(editor, path);
     setIsSelected(true);
   }, [editor, element]);
 
@@ -214,13 +213,14 @@ const Video = ({ element, editor }) => {
       <div
         data-id={element.id}
         className='sdoc-video-wrapper'
+        contentEditable={false}
         style={{ display: isLoaded ? 'flex' : 'none' }}
+        onClick={onClickVideo}
       >
         <div
           className='sdoc-video-inner'
           ref={wrapperRef}
           style={{ visibility: isLoaded ? 'visible' : 'hidden', ...getVideoWidthStyle() }}
-          onClick={onClickVideo}
         >
           {!isEmbeddableLink && (
             <>
