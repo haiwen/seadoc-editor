@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.49](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.48...@seafile/sdoc-editor@3.0.49) (2026-01-04)
+
+### Bug Fixes
+
+- resolve ai module ([#168](https://github.com/seafileltd/sea-sdoc-editor/issues/168)) ([afd7d9d](https://github.com/seafileltd/sea-sdoc-editor/commit/afd7d9de8f9ee11e61770f1603aa4eacf3410be5))
+
 ## [3.0.48](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.47...@seafile/sdoc-editor@3.0.48) (2025-12-30)
 
 ### Bug Fixes
