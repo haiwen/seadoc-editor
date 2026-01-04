@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { INTERNAL_EVENT } from '../../../constants';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
+import { isMac } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import InlineBugFixer from '../../commons/Inline-bug-fix-wrapper';
 import { ELEMENT_TYPE } from '../../constants';
@@ -79,6 +80,12 @@ class Link extends React.Component {
   };
 
   onLinkClick = (e) => {
+    const isModClick = isMac() ? e.metaKey : e.ctrlKey;
+    // mod + click
+    if (isModClick && !this.props.element.linked_id) {
+      window.open(this.props.element.href, '_blank', 'noreferrer');
+      return;
+    }
     this.setPosition(e.target);
     this.setState({ isShowLinkMenu: true });
     setTimeout(() => {
