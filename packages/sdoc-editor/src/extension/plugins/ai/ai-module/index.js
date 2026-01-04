@@ -586,7 +586,7 @@ export default function AIModule({ editor, element, closeModule }) {
               </div>
               <div className='sdoc-ai-search'>
                 <AIIcon />
-                <input placeholder={t('Ask_AI_anything')} value={inputValue} onKeyDown={onKeyDown} onChange={onSearchValueChanged}></input>
+                <textarea placeholder={t('Ask_AI_anything')} value={inputValue} onKeyDown={onKeyDown} onChange={onSearchValueChanged} rows={1}></textarea>
                 <span className={`sdocfont sdoc-send-arrow ${!searchValue ? 'disable' : ''}`} onClick={onEnter}></span>
               </div>
             </div>
