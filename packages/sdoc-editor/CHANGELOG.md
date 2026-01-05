@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.50](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.49...@seafile/sdoc-editor@3.0.50) (2026-01-05)
+
+**Note:** Version bump only for package @seafile/sdoc-editor
+
 ## [3.0.49](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.48...@seafile/sdoc-editor@3.0.49) (2026-01-04)
 
 ### Bug Fixes
