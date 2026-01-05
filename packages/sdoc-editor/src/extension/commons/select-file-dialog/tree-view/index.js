@@ -154,7 +154,7 @@ const TreeView = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpenSe
       return (
         <div key={indexId || file_uuid} className={classnames('sdoc-folder-container', { 'sdoc-folder-search-results': hasSearchResult === true })}>
           {type === 'dir' && (
-            <div ref={folderRef} className='sdoc-folder'>
+            <div ref={folderRef} className='sdoc-folder-wrapper'>
               <div
                 className={classnames('sdoc-folder-info sdoc-file-info', { 'expanded': expandedFolder.has(indexId) })}
                 onClick={(e) => onToggle(e, item, treeData)}
