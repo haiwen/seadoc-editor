@@ -1,11 +1,11 @@
 import React, { useCallback, useRef, useState, useEffect, useMemo } from 'react';
 import { withTranslation } from 'react-i18next';
+import { commentProcessor } from '@seafile/comment-editor';
 import { Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
-import processor from '../../slate-convert/md-to-html';
 import { COMMENT_URL_CLASSNAME } from '../constants';
 import { getCommentedTextsByElementId } from '../helper';
 import { useNotificationContext } from '../hooks/notification-hooks';
@@ -63,7 +63,7 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
 
   useEffect(() => {
     const initCommentContent = async () => {
-      const htmlString = await processor.process(topLevelComment.comment);
+      const htmlString = await commentProcessor.process(topLevelComment.comment);
       setCommentContent(String(htmlString));
     };
 
@@ -82,7 +82,7 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
       } else {
         mdString = '';
       }
-      const htmlString = await processor.process(mdString);
+      const htmlString = await commentProcessor.process(mdString);
       setReplyContent(String(htmlString));
     };
 

@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
-import { SeafileCommentEditor } from '@seafile/comment-editor';
+import { SeafileCommentEditor, commentProcessor } from '@seafile/comment-editor';
 import dayjs from 'dayjs';
 import Tooltip from '../../components/tooltip';
 import context from '../../context';
 import { useCollaborators } from '../../hooks/use-collaborators';
-import processor from '../../slate-convert/md-to-html';
 import { useNotificationContext } from '../hooks/notification-hooks';
 import { useParticipantsContext } from '../hooks/use-participants';
 import CommentImagePreviewer from './comment-image-previewer';
@@ -40,7 +39,7 @@ const CommentItemContent = ({
   }, [comment.comment]);
 
   const transferHtml = async (mdString) => {
-    const htmlString = await processor.process(mdString);
+    const htmlString = await commentProcessor.process(mdString);
     setEditorContent(String(htmlString));
   };
 
