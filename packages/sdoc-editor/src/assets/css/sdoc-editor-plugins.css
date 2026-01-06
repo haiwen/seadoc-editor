@@ -28,13 +28,16 @@
   padding-left: 1.2em !important;
 }
 
+.sdoc-editor__article .sdoc-li-content .list-container {
+  padding-left: 25px !important;
+}
+
 .sdoc-editor__article .list-container .sdoc-li-bold::marker {
   font-weight: bold;
 }
 
 .sdoc-editor__article .list-container li {
   position: relative;
-  padding-left: 8px !important;
 }
 
 .sdoc-editor__article .list-container .sdoc-li-control {
