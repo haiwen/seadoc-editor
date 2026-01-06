@@ -46,6 +46,7 @@ export const INTERNAL_EVENT = {
   TOGGLE_PRESENTATION_MODE: 'toggle_presentation_mode',
   CREATE_SDOC_FILE: 'create_sdoc_file',
   CREATE_WIKI_PAGE: 'create_wiki_page',
+  WIKI_PAGE_ID_CREATED: 'wiki_page_id_created',
   IMAGE_COLUMN_TOGGLE: 'Image_column_toggle',
   CREATE_WHITEBOARD_FILE: 'create_whiteboard_file',
   GENERATE_EXDRAW_READ_ONLY_LINK: 'generate_exdraw_read_only_link',

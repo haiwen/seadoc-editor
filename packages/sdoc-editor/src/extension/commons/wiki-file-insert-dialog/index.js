@@ -44,7 +44,11 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
         const { height } = fileLinkInsertRef.current.getBoundingClientRect();
         const popoverBottomY = popoverTop + height;
         const viewportHeight = window.innerHeight;
-        if (popoverBottomY > viewportHeight) {
+
+        // Prevent to hidden popover after flipping
+        const flipTop = domNodeTop - height - topGap;
+        const isFlipSafe = flipTop >= 8;
+        if (popoverBottomY > viewportHeight && isFlipSafe) {
           // 8px for the gap between the popover and the bottom of the viewport
           const counterTopGap = 8;
           popoverTop = popoverTop - height - topGap - counterTopGap;
@@ -186,12 +190,21 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
     setHiddenMoreMenu(true);
   }, []);
 
+  const createWikiLink = ({ pageId, pageName, wikiRepoId }) => {
+    insertWikiPageLink(editor, pageName, wikiRepoId, pageId);
+  };
+
   const onCreateFile = useCallback((e) => {
     e.stopPropagation();
     removeTempInput(editor, element);
     const eventBus = EventBus.getInstance();
+    const unsubscribe = eventBus.subscribe(INTERNAL_EVENT.WIKI_PAGE_ID_CREATED, (payload) => {
+      createWikiLink(payload);
+      unsubscribe();
+    });
     const createName = newFileName.trim() || t('New_page');
-    eventBus.dispatch(INTERNAL_EVENT.CREATE_WIKI_PAGE, { newFileName: createName, });
+    eventBus.dispatch(INTERNAL_EVENT.CREATE_WIKI_PAGE, { newFileName: createName });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, element, newFileName, t]);
 
   const createFileTipDefault = useMemo(() => {
