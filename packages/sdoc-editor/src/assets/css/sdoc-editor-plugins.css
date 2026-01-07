@@ -76,11 +76,12 @@
 
 .sdoc-editor__article .sdoc-checkbox-container .sdoc-checkbox-input-wrapper {
   display: flex;
-  align-items: normal;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
 }
 
 .sdoc-editor__article .sdoc-checkbox-container .sdoc-checkbox-input-wrapper .sdoc-checkbox-input {
-  vertical-align: middle;
   margin-right: 5px;
 }
 
