@@ -2,9 +2,10 @@ import { Editor, Node, Range, Transforms } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { CHECK_LIST_ITEM, PARAGRAPH } from '../../constants';
 import { focusEditor, generateDefaultText, getSelectedNodeByType, isCursorAtBlockStart, findPath, generateEmptyElement } from '../../core';
+import { isSingleListItem } from '../list/helpers';
 
 const withCheckList = (editor) => {
-  const { insertBreak, deleteBackward, onHotKeyDown } = editor;
+  const { insertBreak, deleteBackward, onHotKeyDown, insertText, insertFragment } = editor;
   const newEditor = editor;
 
   newEditor.insertBreak = () => {
@@ -58,6 +59,17 @@ const withCheckList = (editor) => {
     }
 
     deleteBackward(unit);
+  };
+
+  newEditor.insertFragment = (data) => {
+    const selectedTodo = getSelectedNodeByType(editor, CHECK_LIST_ITEM);
+    const onlyOneListItem = data.length === 1 && isSingleListItem(data[0]);
+    if (selectedTodo && onlyOneListItem) {
+      const text = Node.string(data[0]);
+      insertText(text);
+      return;
+    }
+    insertFragment(data);
   };
 
   newEditor.onHotKeyDown = (event) => {
