@@ -46,7 +46,7 @@ export const resetWebTitle = (t) => {
 export const isSeafileClient = () => {
   const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
 
-  return /Seafile (Android|iOS)\/3\.0/.test(userAgent);
+  return /Seafile (Android|iOS)\//.test(userAgent);
 };
 
 export {
