@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.52](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.51...@seafile/seafile-sdoc-editor@3.0.52) (2026-01-07)
+
+### Performance Improvements
+
+- optimize code ([a1ea331](https://github.com/seafileltd/sea-sdoc-editor/commit/a1ea33126c381644665df792fab9480a6c2917fb))
+
 ## [3.0.51](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.125...@seafile/seafile-sdoc-editor@3.0.51) (2026-01-06)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
