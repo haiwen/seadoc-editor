@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.53](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.52...@seafile/sdoc-editor@3.0.53) (2026-01-07)
+
+### Bug Fixes
+
+- add shortcut key ([#169](https://github.com/seafileltd/sea-sdoc-editor/issues/169)) ([98cdf50](https://github.com/seafileltd/sea-sdoc-editor/commit/98cdf50102949db585562b67220db2530c9a7661))
+- insert list text to check list ([#172](https://github.com/seafileltd/sea-sdoc-editor/issues/172)) ([97ed816](https://github.com/seafileltd/sea-sdoc-editor/commit/97ed81651676c6a3cb74debe0dc5d6004d5c4aaf))
+- update list css ([#171](https://github.com/seafileltd/sea-sdoc-editor/issues/171)) ([ce26c33](https://github.com/seafileltd/sea-sdoc-editor/commit/ce26c335c367684c4cf45364e5f99299a634c27d))
+
 ## [3.0.52](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.51...@seafile/sdoc-editor@3.0.52) (2026-01-07)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
