@@ -15,7 +15,7 @@ import { SetNodeToDecorations } from '../highlight';
 import useForceUpdate from '../hooks/use-force-update';
 import { useScrollContext } from '../hooks/use-scroll-context';
 import { ArticleContainer } from '../layout';
-import { isMobile } from '../utils/common-utils';
+import { isMac, isMobile } from '../utils/common-utils';
 import { getCursorPosition, getDomHeight, getDomMarginTop } from '../utils/dom-utils';
 import EventBus from '../utils/event-bus';
 import EventProxy from '../utils/event-handler';
@@ -155,7 +155,9 @@ const EditableArticle = ({
       return;
     }
 
-    if (event.key === 'ArrowLeft') {
+    const isModClick = isMac() ? event.metaKey : event.ctrlKey;
+
+    if (event.key === 'ArrowLeft' && !isModClick) {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset', reverse: true });
       if (!isSelectionAtBlockStart(editor)) return;
@@ -176,7 +178,7 @@ const EditableArticle = ({
       return;
     }
 
-    if (event.key === 'ArrowRight') {
+    if (event.key === 'ArrowRight' && !isModClick) {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset' });
       if (!isSelectionAtBlockEnd(editor)) return;
