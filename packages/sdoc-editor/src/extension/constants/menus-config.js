@@ -491,7 +491,7 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     text: 'Quote'
   },
   [FILE_VIEW]: {
-    id: FILE_VIEW,
+    id: 'sdoc-side-menu-item-file-view',
     iconClass: 'sdocfont sdoc-file-view',
     type: FILE_VIEW,
     text: 'File_view'

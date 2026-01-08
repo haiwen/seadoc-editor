@@ -4,18 +4,23 @@ import { UncontrolledPopover } from 'reactstrap';
 import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
+import toaster from '../../../components/toast';
 import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
+import context from '../../../context';
+import { getErrorMsg } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
 import { ELEMENT_TYPE, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_INSERT_MENUS_SEARCH_MAP } from '../../constants';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
 import { changeToCodeBlock } from '../../plugins/code-block/helpers';
+import { insertFileView } from '../../plugins/file-view/helpers';
 import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
 import { insertVideo } from '../../plugins/video/helpers';
+import LinkedRepoList from '../linked-repo-list';
 import { insertElement, isInMultiColumnNode } from './helpers';
 
 const InsertBlockMenu = ({
@@ -123,19 +128,26 @@ const InsertBlockMenu = ({
     insertMultiColumn(editor, editor.selection, newInsertPosition, type);
   }, [editor, insertPosition, slateNode]);
 
-  const insertFileView = useCallback(() => {
-    const eventBus = EventBus.getInstance();
-    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.FILE_VIEW, insertPosition, slateNode });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [insertPosition]);
-
-  console.log(editor.editorType);
+  const onRepoClick = useCallback((item) => {
+    const wikiId = context.getSetting('wikiId');
+    const data = {
+      wiki_id: wikiId,
+      view_name: t('View_name'),
+      view_type: 'table',
+      link_repo_id: item.repo_id,
+    };
+    context.insertWikiView(data).then(res => {
+      const { view } = res.data;
+      const viewData = { ...data, view_id: view._id };
+      insertFileView(viewData, editor, insertPosition, slateNode);
+    }).catch(error => {
+      const errorMessage = getErrorMsg(error);
+      toaster.danger(errorMessage);
+    });
+  }, [editor, insertPosition, slateNode, t]);
 
   return (
     <>
-      {editor.editorType === WIKI_EDITOR && (
-        <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.FILE_VIEW]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} onClick={insertFileView} />
-      )}
       {[SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH], ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER]].map((item) => {
         return (
           <DropdownMenuItem isHidden={!insertMenuSearchMap[item.type]} disabled={isNodeEmpty && item.type === PARAGRAPH} key={item.id} menuConfig={item} onClick={() => onInsert(item.type)} />
@@ -148,6 +160,21 @@ const InsertBlockMenu = ({
         onInsertList(ELEMENT_TYPE.ORDERED_LIST);
       }} />
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CHECK_LIST_ITEM]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />
+      {editor.editorType === WIKI_EDITOR && (
+        <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
+          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <UncontrolledPopover
+            target='sdoc-side-menu-item-file-view'
+            trigger="hover"
+            className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-menu-file-view-popover"
+            placement="right-start"
+            hideArrow={true}
+            fade={false}
+          >
+            <LinkedRepoList onRepoClick={onRepoClick} />
+          </UncontrolledPopover>
+        </DropdownMenuItem>
+      )}
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.IMAGE]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />
       {editor.editorType !== DOCUMENT_PLUGIN_EDITOR && (
         <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.VIDEO]} key="sdoc-insert-menu-video" disabled={isInMultiColumnNode(editor, slateNode)} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} className="pr-2">

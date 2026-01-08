@@ -1,0 +1,22 @@
+.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper {
+  /* position: absolute; */
+  background-color: #ffff;
+  max-height: 370px;
+  max-width: 200px;
+  padding: 8px 0px;
+  left: -8px;
+}
+
+.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-search-wrapper {
+  padding: 12px;
+}
+
+.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-search-wrapper>input {
+  font-size: 12px;
+  max-height: 30px;
+}
+
+.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-content-wrapper {
+  max-height: 300px;
+  overflow-y: auto;
+}

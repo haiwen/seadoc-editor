@@ -4,8 +4,10 @@ import { Input, UncontrolledPopover } from 'reactstrap';
 import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
+import toaster from '../../../components/toast';
 import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, KeyCodes, WIKI_EDITOR } from '../../../constants';
-import { isMobile } from '../../../utils/common-utils';
+import context from '../../../context';
+import { getErrorMsg, isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
 import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW } from '../../constants';
@@ -13,12 +15,14 @@ import { getAboveBlockNode } from '../../core';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
 import { changeToCodeBlock } from '../../plugins/code-block/helpers';
+import { insertFileView } from '../../plugins/file-view/helpers';
 import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
 import { insertVideo } from '../../plugins/video/helpers';
 import { onHandleOverflowScroll } from '../../utils';
+import LinkedRepoList from '../linked-repo-list';
 import { insertElement, getSearchedOperations } from '../side-toolbar/helpers';
 import { SELECTED_ITEM_CLASS_NAME } from './const';
 
@@ -167,6 +171,43 @@ const QuickInsertBlockMenu = ({
     insertMultiColumn(editor, editor.selection, newInsertPosition, type);
   }, [callback, editor, insertPosition, slateNode]);
 
+  const onRepoClick = useCallback((item) => {
+    callback && callback();
+    const wikiId = context.getSetting('wikiId');
+    const data = {
+      wiki_id: wikiId,
+      view_name: t('View_name'),
+      view_type: 'table',
+      link_repo_id: item.repo_id,
+    };
+    context.insertWikiView(data).then(res => {
+      const { view } = res.data;
+      const viewData = { ...data, view_id: view._id };
+      insertFileView(viewData, editor, insertPosition, slateNode);
+    }).catch(error => {
+      const errorMessage = getErrorMsg(error);
+      toaster.danger(errorMessage);
+    });
+  }, [callback, editor, insertPosition, slateNode, t]);
+
+  const fileViewMenu = useMemo(() => {
+    return (
+      <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
+        <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+        <UncontrolledPopover
+          target='sdoc-side-menu-item-file-view'
+          trigger="hover"
+          className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-menu-file-view-popover"
+          placement="right-start"
+          hideArrow={true}
+          fade={false}
+        >
+          <LinkedRepoList onRepoClick={onRepoClick} />
+        </UncontrolledPopover>
+      </DropdownMenuItem>
+    );
+  }, [onRepoClick, quickInsertMenuSearchMap]);
+
   const dropDownItems = useMemo(() => {
     let items = {
       [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
@@ -181,9 +222,7 @@ const QuickInsertBlockMenu = ({
         onInsertList(ELEMENT_TYPE.ORDERED_LIST);
       }} />,
       [CHECK_LIST_ITEM]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CHECK_LIST_ITEM]} key="sdoc-insert-menu-check-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />,
-      ...(editor.editorType === WIKI_EDITOR && {
-        [FILE_VIEW]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} onClick={openFileViewDialog} />
-      }),
+      ...(editor.editorType === WIKI_EDITOR && { [FILE_VIEW]: fileViewMenu }),
       [IMAGE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[IMAGE]} disabled={isDisableImage} key="sdoc-insert-menu-image" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />,
       ...(editor.editorType !== DOCUMENT_PLUGIN_EDITOR && {
         [VIDEO]:
