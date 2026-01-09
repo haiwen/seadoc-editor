@@ -21,17 +21,17 @@ export const isSameDomain = (currentUrl, targetUrl) => {
   return String(currentUrl).split('/')[2] === String(targetUrl).split('/')[2];
 };
 
-export const isOverflowPortByDirection = (element, direction) => {
+export const isOverflowPortByDirection = (targetDom, direction) => {
   const viewWidth = window.innerWidth || document.documentElement.clientWidth;
   const viewHeight = window.innerHeight || document.documentElement.clientHeight;
-  const { top, right, bottom, left } = element.getBoundingClientRect();
+  const { top, right, bottom, left } = targetDom.getBoundingClientRect();
 
   if (direction === 'top') {
     return top <= 0;
   }
 
   if (direction === 'bottom') {
-    return bottom >= viewHeight;
+    return bottom + 370 >= viewHeight;
   }
 
   if (direction === 'left') {

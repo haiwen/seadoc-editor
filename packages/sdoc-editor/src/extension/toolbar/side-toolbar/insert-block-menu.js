@@ -20,7 +20,7 @@ import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
 import { insertVideo } from '../../plugins/video/helpers';
-import LinkedRepoList from '../linked-repo-list';
+import LinkRepoPopover from '../linked-repo-popover';
 import { insertElement, isInMultiColumnNode } from './helpers';
 
 const InsertBlockMenu = ({
@@ -163,16 +163,7 @@ const InsertBlockMenu = ({
       {editor.editorType === WIKI_EDITOR && (
         <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
           <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
-          <UncontrolledPopover
-            target='sdoc-side-menu-item-file-view'
-            trigger="hover"
-            className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-menu-file-view-popover"
-            placement="right-start"
-            hideArrow={true}
-            fade={false}
-          >
-            <LinkedRepoList onRepoClick={onRepoClick} />
-          </UncontrolledPopover>
+          <LinkRepoPopover onRepoClick={onRepoClick} />
         </DropdownMenuItem>
       )}
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.IMAGE]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />

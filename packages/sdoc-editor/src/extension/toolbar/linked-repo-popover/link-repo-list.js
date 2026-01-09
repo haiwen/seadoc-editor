@@ -4,20 +4,36 @@ import { Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { getAccessibleRepos } from '../../plugins/file-view/helpers';
 
-import './index.css';
+import './link-repo-list.css';
+
+const useStopPropagation = () => {
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation?.();
+  };
+
+  return {
+    onClick: stopPropagation,
+    onFocus: stopPropagation,
+    onKeyDown: stopPropagation,
+    onKeyUp: stopPropagation,
+    onKeyPress: stopPropagation,
+    onMouseDown: stopPropagation,
+    onTouchStart: stopPropagation,
+  };
+};
+
 
 const LinkedRepoList = ({ onRepoClick }) => {
   const { t } = useTranslation('sdoc-editor');
-  const repoRef = useRef(null);
   const isComposingRef = useRef(null);
-
+  const repoRef = useRef(null);
   const tablesRef = useRef(getAccessibleRepos());
   const [tables, setTables] = useState(tablesRef.current || []);
 
+  const inputEvents = useStopPropagation();
 
   const onChange = useCallback((event) => {
-    event.nativeEvent.stopImmediatePropagation();
-    event.stopPropagation();
     if (isComposingRef.current) return;
     const value = event.target.value.trim().toUpperCase();
     if (value) {
@@ -46,6 +62,7 @@ const LinkedRepoList = ({ onRepoClick }) => {
           autoFocus
           onCompositionStart={onCompositionStart}
           onCompositionEnd={onCompositionEnd}
+          {...inputEvents}
         />
       </div>
       <div className='sdoc-linked-repo-list-content-wrapper'>

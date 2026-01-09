@@ -22,7 +22,7 @@ import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
 import { insertVideo } from '../../plugins/video/helpers';
 import { onHandleOverflowScroll } from '../../utils';
-import LinkedRepoList from '../linked-repo-list';
+import LinkRepoPopover from '../linked-repo-popover';
 import { insertElement, getSearchedOperations } from '../side-toolbar/helpers';
 import { SELECTED_ITEM_CLASS_NAME } from './const';
 
@@ -190,24 +190,6 @@ const QuickInsertBlockMenu = ({
     });
   }, [callback, editor, insertPosition, slateNode, t]);
 
-  const fileViewMenu = useMemo(() => {
-    return (
-      <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
-        <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
-        <UncontrolledPopover
-          target='sdoc-side-menu-item-file-view'
-          trigger="hover"
-          className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-menu-file-view-popover"
-          placement="right-start"
-          hideArrow={true}
-          fade={false}
-        >
-          <LinkedRepoList onRepoClick={onRepoClick} />
-        </UncontrolledPopover>
-      </DropdownMenuItem>
-    );
-  }, [onRepoClick, quickInsertMenuSearchMap]);
-
   const dropDownItems = useMemo(() => {
     let items = {
       [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
@@ -222,7 +204,14 @@ const QuickInsertBlockMenu = ({
         onInsertList(ELEMENT_TYPE.ORDERED_LIST);
       }} />,
       [CHECK_LIST_ITEM]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CHECK_LIST_ITEM]} key="sdoc-insert-menu-check-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />,
-      ...(editor.editorType === WIKI_EDITOR && { [FILE_VIEW]: fileViewMenu }),
+      ...(editor.editorType === WIKI_EDITOR && {
+        [FILE_VIEW]:
+        // eslint-disable-next-line react/jsx-indent
+        <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
+          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <LinkRepoPopover onRepoClick={onRepoClick} />
+        </DropdownMenuItem>
+      }),
       [IMAGE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[IMAGE]} disabled={isDisableImage} key="sdoc-insert-menu-image" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />,
       ...(editor.editorType !== DOCUMENT_PLUGIN_EDITOR && {
         [VIDEO]:
