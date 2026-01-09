@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { getAccessibleRepos } from '../../plugins/file-view/helpers';
+import { getAccessibleRepos, getWikiSettings } from '../../plugins/file-view/helpers';
 
 import './link-repo-list.css';
 
@@ -23,13 +23,23 @@ const useStopPropagation = () => {
   };
 };
 
+const useRepos = () => {
+  const wikiSettings = getWikiSettings();
+  const accessibleRepos = getAccessibleRepos();
+  const { linked_repos: linkedRepoIds } = wikiSettings;
+  const optionsMap = accessibleRepos.reduce((result, item) => {
+    result[item.repo_id] = item;
+    return result;
+  }, {});
+  return linkedRepoIds.map(id => optionsMap[id]);
+};
 
 const LinkedRepoList = ({ onRepoClick }) => {
   const { t } = useTranslation('sdoc-editor');
   const isComposingRef = useRef(null);
   const repoRef = useRef(null);
-  const tablesRef = useRef(getAccessibleRepos());
-  const [tables, setTables] = useState(tablesRef.current || []);
+  const repos = useRepos();
+  const [tables, setTables] = useState(repos || []);
 
   const inputEvents = useStopPropagation();
 
@@ -37,12 +47,12 @@ const LinkedRepoList = ({ onRepoClick }) => {
     if (isComposingRef.current) return;
     const value = event.target.value.trim().toUpperCase();
     if (value) {
-      const list = tablesRef.current.filter(item => item.repo_name.toUpperCase().includes(value));
+      const list = repos.filter(item => item.repo_name.toUpperCase().includes(value));
       setTables(list);
     } else {
-      setTables(tablesRef.current);
+      setTables(repos);
     }
-  }, []);
+  }, [repos]);
 
   const onCompositionStart = useCallback(() => {
     isComposingRef.current = true;
