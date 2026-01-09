@@ -3,29 +3,6 @@
   min-width: 12rem;
 }
 
-.sdoc-dropdown-menu .sdoc-seatable-selected-table-list-wrapper {
-  position: absolute;
-  background-color: #ffff;
-  max-height: 370px;
-  max-width: 200px;
-  padding: 8px 0px;
-  left: -8px;
-}
-
-.sdoc-dropdown-menu .sdoc-seatable-selected-table-list-wrapper .sdoc-seatable-list-search-wrapper {
-  padding: 12px;
-}
-
-.sdoc-dropdown-menu .sdoc-seatable-selected-table-list-wrapper .sdoc-seatable-list-search-wrapper>input {
-  font-size: 12px;
-  max-height: 30px;
-}
-
-.sdoc-dropdown-menu .sdoc-seatable-selected-table-list-wrapper .sdoc-seatable-list-wrapper {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
 .sdoc-dropdown-menu .sdoc-dropdown-menu-divider {
   width: 100%;
   height: 0;
