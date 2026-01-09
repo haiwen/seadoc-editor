@@ -22,7 +22,7 @@ const withSdocLink = (editor) => {
   newEditor.isVoid = elem => {
     const { type } = elem;
 
-    if (type === SDOC_LINK) {
+    if ([SDOC_LINK, WIKI_LINK].includes(type)) {
       return true;
     }
 
