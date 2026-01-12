@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { INTERNAL_EVENT } from '../../../../constants';
 import { usePlugins } from '../../../../hooks/use-plugins';
 import { useScrollContext } from '../../../../hooks/use-scroll-context';
+import { isMac } from '../../../../utils/common-utils';
 import EventBus from '../../../../utils/event-bus';
 import { DELETED_STYLE, ADDED_STYLE } from '../../../constants';
 import { SDOC_LINK, WIKI_LINK } from '../../../constants/element-type';
@@ -94,6 +95,17 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
   }, [isShowInsertHoverMenu]);
 
   const onClickFile = useCallback((e) => {
+    const isModClick = isMac() ? e.metaKey : e.ctrlKey;
+    if (isModClick) {
+      if (element.type === WIKI_LINK) {
+        window.open(getWikiUrl(element.wiki_repo_id, element.page_id, readOnly), '_blank', 'noreferrer');
+        return;
+      } else {
+        window.open(getUrl(element.doc_uuid), '_blank', 'noreferrer');
+        return;
+      }
+    }
+
     if (readOnly) {
       if (element.type === WIKI_LINK) {
         window.open(getWikiUrl(element.wiki_repo_id, element.page_id, readOnly));

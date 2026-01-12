@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useReadOnly, useSelected } from '@seafile/slate-react';
 import classnames from 'classnames';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
+import { isMac } from '../../../utils/common-utils';
 import { parcelFileTypeIcon } from '../../commons/select-file-dialog/helpers';
 import { DELETED_STYLE, ADDED_STYLE } from '../../constants';
 import { FILE_LINK_TYPE } from './constants';
@@ -89,6 +90,13 @@ const FileLink = ({ editor, element, children, attributes }) => {
   }, [isShowInsertHoverMenu]);
 
   const onClickFile = useCallback((e) => {
+    const isModClick = isMac() ? e.metaKey : e.ctrlKey;
+
+    if (isModClick && element.doc_uuid) {
+      window.open(getUrl(element.doc_uuid), '_blank', 'noreferrer');
+      return;
+    }
+
     if (readOnly) {
       window.open(getUrl(element.doc_uuid));
       return;
