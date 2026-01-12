@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.57](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.56...@seafile/sdoc-editor@3.0.57) (2026-01-12)
+
+### Bug Fixes
+
+- resolve long title css ([#174](https://github.com/seafileltd/sea-sdoc-editor/issues/174)) ([5ba431f](https://github.com/seafileltd/sea-sdoc-editor/commit/5ba431fb93c1112d99a404f0653c6e1160232e0a))
+
 ## [3.0.56](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.55...@seafile/sdoc-editor@3.0.56) (2026-01-09)
 
 ### Performance Improvements
