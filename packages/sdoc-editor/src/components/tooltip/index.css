@@ -8,22 +8,22 @@
   background-color: #303133;
 }
 
-.sdoc-tooltip.bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
+.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="bottom"] .arrow::before {
   border-bottom-color: #303133;
 }
 
-.sdoc-tooltip.bs-tooltip-auto[x-placement^="top"] {
+.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="top"] {
   margin-bottom: -2px;
 }
 
-.sdoc-tooltip.bs-tooltip-auto[x-placement^="top"] .arrow::before {
+.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="top"] .arrow::before {
   border-top-color: #303133;
 }
 
-.sdoc-tooltip.bs-tooltip-auto[x-placement^="right"] .arrow::before {
+.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="right"] .arrow::before {
   border-right-color: #303133;
 }
 
-.sdoc-tooltip.bs-tooltip-auto[x-placement^="left"] .arrow::before {
+.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="left"] .arrow::before {
   border-left-color: #303133;
 }
