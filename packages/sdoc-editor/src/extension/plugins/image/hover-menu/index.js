@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Editor, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
@@ -121,6 +121,12 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const borderPopoverStyle = useMemo(() => {
+    const isBlockChild = [TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(type);
+    if (!isBlockChild) return null;
+    return { left: '10px' };
+  }, [type]);
+
   return (
     <ElementPopover>
       <div className="sdoc-image-hover-menu-container" style={menuPosition}>
@@ -138,54 +144,53 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                 <i className='sdocfont sdoc-arrow-down'/>
               </span>
             </span>)}
-          {
-            !readonly && (
-              <span className='op-group-item'>
-                {type === IMAGE_BLOCK && (
-                  <span
-                    role="button"
-                    className={classnames('op-item', { 'active': popoverState.alignPopover })}
-                    onClick={(e) => {
-                      onShowProver(e, 'alignPopover');
-                    }}
-                  >
-                    <i className={classnames(`sdocfont sdoc-align-${align || 'left'} mr-1`)}/>
-                    <i className='sdocfont sdoc-arrow-down'/>
-                  </span>
-                )}
+          {!readonly && (
+            <span className='op-group-item'>
+              {type === IMAGE_BLOCK && (
                 <span
-                  id='sdoc_image_border'
                   role="button"
-                  className={classnames('op-item', 'ml-1', { 'active': popoverState.borderPopover })}
+                  className={classnames('op-item', { 'active': popoverState.alignPopover })}
                   onClick={(e) => {
-                    onShowProver(e, 'borderPopover');
+                    onShowProver(e, 'alignPopover');
                   }}
                 >
-                  <i className='sdocfont sdoc-image mr-1'/>
+                  <i className={classnames(`sdocfont sdoc-align-${align || 'left'} mr-1`)}/>
                   <i className='sdocfont sdoc-arrow-down'/>
+                </span>
+              )}
+              <span
+                id='sdoc_image_border'
+                role="button"
+                className={classnames('op-item', 'ml-1', { 'active': popoverState.borderPopover })}
+                onClick={(e) => {
+                  onShowProver(e, 'borderPopover');
+                }}
+              >
+                <i className='sdocfont sdoc-image mr-1'/>
+                <i className='sdocfont sdoc-arrow-down'/>
+                {isShowTooltip && (
+                  <Tooltip target='sdoc_image_border' placement='top' fade={true}>
+                    {t('Image_border')}
+                  </Tooltip>
+                )}
+              </span>
+              {type === IMAGE_BLOCK && (
+                <span
+                  id='sdoc_image_caption'
+                  role="button"
+                  className={classnames('op-item', 'ml-1', { 'active': show_caption })}
+                  onClick={(event) => onSelect(event, { 'show_caption': !show_caption })}
+                >
+                  <i className='sdocfont sdoc-caption'/>
                   {isShowTooltip && (
-                    <Tooltip target='sdoc_image_border' placement='top' fade={true}>
-                      {t('Image_border')}
+                    <Tooltip target='sdoc_image_caption' placement='top' fade={true}>
+                      {t('Caption')}
                     </Tooltip>
                   )}
                 </span>
-                {type === IMAGE_BLOCK && (
-                  <span
-                    id='sdoc_image_caption'
-                    role="button"
-                    className={classnames('op-item', 'ml-1', { 'active': show_caption })}
-                    onClick={(event) => onSelect(event, { 'show_caption': !show_caption })}
-                  >
-                    <i className='sdocfont sdoc-caption'/>
-                    {isShowTooltip && (
-                      <Tooltip target='sdoc_image_caption' placement='top' fade={true}>
-                        {t('Caption')}
-                      </Tooltip>
-                    )}
-                  </span>
-                )}
-              </span>)
-          }
+              )}
+            </span>
+          )}
           <span className='op-group-item'>
             <span
               id='sdoc_image_full_screen_mode'
@@ -243,7 +248,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
           </div>
         )}
         {popoverState.borderPopover && (
-          <div className="sdoc-image-popover border-popover sdoc-dropdown-menu">
+          <div className="sdoc-image-popover border-popover sdoc-dropdown-menu" style={borderPopoverStyle}>
             {IMAGE_BORDER_TYPE.map((item) => {
               return (
                 <div

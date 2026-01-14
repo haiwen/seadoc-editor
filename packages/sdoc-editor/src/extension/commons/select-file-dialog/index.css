@@ -92,7 +92,7 @@
   align-items: center;
   justify-content: center;
   width: 20px;
-  color: #868E96;
+  color: #868E96 !important;
 }
 
 .sdoc-files-search-popover-container .sdoc-search-wrapper .sdoc-sm-close,
