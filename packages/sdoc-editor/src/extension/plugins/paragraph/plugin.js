@@ -125,8 +125,9 @@ const withParagraph = (editor) => {
     const paragraphBlock = getSelectedNodeByType(editor, PARAGRAPH);
     const onlyOneListItem = data.length === 1 && isSingleListItem(data[0]);
     if (paragraphBlock && onlyOneListItem) {
-      const text = Node.string(data[0]);
-      editor.insertText(text);
+      const listItem = data[0].children[0];
+      const paragraphNodes = listItem.children;
+      editor.insertFragment(paragraphNodes);
       return;
     }
     insertFragment(data);
