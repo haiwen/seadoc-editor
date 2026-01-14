@@ -1,5 +1,6 @@
+import { Editor, Point, Range } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
-import { INTERNAL_EVENT } from '../constants';
+import { INTERNAL_EVENT, WIKI_EDITOR } from '../constants';
 import { ELEMENT_TYPE } from '../extension/constants';
 import { getSelectedNodeByType } from '../extension/core/queries/';
 import EventBus from '../utils/event-bus';
@@ -11,12 +12,28 @@ class EventProxy {
     this.editor = editor;
   }
 
+  isAtEditorStart() {
+    const { selection } = this.editor;
+    if (!selection || !Range.isCollapsed(selection)) return false;
+
+    const start = Editor.start(this.editor, []);
+    return Point.equals(selection.anchor, start);
+  }
+
   onKeyDown = (event) => {
     const editor = this.editor;
 
     if (editor.onHotKeyDown) {
       const isHandled = editor.onHotKeyDown(event);
       if (isHandled) return;
+    }
+
+    // Focus page title in wiki editor
+    if (this.editor.editorType === WIKI_EDITOR && (isHotkey('left', event) || isHotkey('up', event)) && this.isAtEditorStart()) {
+      event.preventDefault();
+      const eventBus = EventBus.getInstance();
+      eventBus.dispatch('wiki_editor_focus_page_title');
+      return;
     }
 
     // bold
