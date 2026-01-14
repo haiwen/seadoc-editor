@@ -26,7 +26,7 @@ const WhiteboardMenu = ({ editor, readonly, toggle, eventBus }) => {
     <>
       <DropdownMenuItem disabled={disabled} menuConfig={menuConfig} className='pr-2'>
         {!disabled && (
-          <i className='sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon'></i>
+          <i className='sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon'></i>
         )}
       </DropdownMenuItem>
       {!disabled && (

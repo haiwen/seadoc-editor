@@ -20,9 +20,9 @@
 }
 
 .sdoc-code-block-hover-menu-container .hover-menu-container .active {
-  color: #444444;
+  color: #666;
   text-decoration: none;
-  background: #f2f2f2;
+  background: #EFEFEF;
 }
 
 .sdoc-code-block-hover-menu-container .hover-menu-container .op-item {
@@ -30,7 +30,7 @@
   height: 100%;
   width: 100%;
   font-size: 12px;
-  color: #444444;
+  color: #666;
   border-radius: 2px;
   text-align: center;
   line-height: 20px;
@@ -58,8 +58,9 @@
   width: fit-content;
 }
 
-.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-lang .sdocfont {
-  color: #999;
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-lang .sdoc-arrow-down {
+  font-size: 12px;
+  color: #666;
 }
 
 .sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-divider {
@@ -70,14 +71,14 @@
 }
 
 .sdoc-code-block-hover-menu-container .hover-menu-container .op-item:hover {
-  color: #444444;
   text-decoration: none;
-  background: #f2f2f2;
+  background: #EFEFEF;
 }
 
 .sdoc-code-block-hover-menu-container .sdocfont {
+  line-height: 1;
   font-size: 14px;
-  color: #444;
+  color: #666;
 }
 
 .sdoc-langs-list-container {

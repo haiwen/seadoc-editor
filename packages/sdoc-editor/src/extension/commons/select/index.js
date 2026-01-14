@@ -107,7 +107,7 @@ class Select extends React.Component {
             </>
           }
           <span className='operation'>
-            <i className="sdocfont sdoc-drop-down arrow"></i>
+            <i className="sdocfont sdoc-arrow-down arrow"></i>
           </span>
         </span>
         {isShowSelector && (

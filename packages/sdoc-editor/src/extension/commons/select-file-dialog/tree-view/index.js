@@ -160,7 +160,7 @@ const TreeView = ({ onSelectedFile, toggle, fileType, t, searchContent, isOpenSe
                 onClick={(e) => onToggle(e, item, treeData)}
               >
                 <div className='sdoc-file-icon-container'>
-                  <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                  <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
                   <i className='sdoc-file-icon sdocfont sdoc-folder'></i>
                 </div>
                 <span className='sdoc-folder-name sdoc-file-name'>{name}</span>

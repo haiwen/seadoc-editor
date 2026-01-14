@@ -48,7 +48,7 @@ const MenuItem = ({
         {type === SDOC_LINK && (
           <span className='sdoc-link-menu-item'>
             <span>{t(text)}</span>
-            <i className="sdocfont sdoc-drop-down" />
+            <i className="sdocfont sdoc-arrow-down" />
           </span>
         )}
       </button>

@@ -96,7 +96,7 @@ class HeaderMenu extends React.Component {
   render() {
     const { t } = this.props;
     const { isShowHeaderPopover } = this.state;
-    const headerIconClass = `sdocfont sdoc-${isShowHeaderPopover ? 'caret-up' : 'drop-down'}`;
+    const headerIconClass = `sdocfont sdoc-${isShowHeaderPopover ? 'arrow-up' : 'arrow-down'}`;
     const currentType = this.getValue();
     const disabled = this.isDisabled();
     const itemList = [PARAGRAPH, 'divider', TITLE, SUBTITLE, 'divider', ...HEADERS];

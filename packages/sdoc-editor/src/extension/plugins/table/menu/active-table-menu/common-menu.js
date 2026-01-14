@@ -48,7 +48,7 @@ class CommonMenu extends Component {
             <i className={iconClass} />
           </div>
           <div className="sdoc-menu-with-dropdown-triangle">
-            <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'caret-up' : 'drop-down'}`}></i>
+            <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'arrow-up' : 'arrow-down'}`}></i>
           </div>
         </button>
         {!disabled && (

@@ -215,7 +215,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                 }}
               >
                 <span id='selected-block-display' className='selected-linked-block'></span>
-                <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
               </div>
               {isOpenSelect && (
                 <div className='link-block-wrapper'>
@@ -223,7 +223,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                     <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectHeader })}
                       onClick={(e) => setIsOpenSelectHeader(!isOpenSelectHeader)}
                     >
-                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
                       <div className='title'>{t('Header')}</div>
                     </div>
                   }
@@ -242,7 +242,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                     <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectImageBlock })}
                       onClick={(e) => setIsOpenSelectImageBlock(!isOpenSelectImageBlock)}
                     >
-                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
                       <div className='title'>{t('Image')}</div>
                     </div>
                   }
@@ -256,7 +256,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                     <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectCodeBlock })}
                       onClick={(e) => setIsOpenSelectCodeBlock(!isOpenSelectCodeBlock)}
                     >
-                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
                       <div className='title'>{t('Code_block')}</div>
                     </div>
                   }
@@ -270,7 +270,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                     <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectBlockquote })}
                       onClick={(e) => setIsOpenSelectBlockquote(!isOpenSelectBlockquote)}
                     >
-                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-right-slide'></i>
+                      <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
                       <div className='title'>{t('Quote')}</div>
                     </div>
                   }

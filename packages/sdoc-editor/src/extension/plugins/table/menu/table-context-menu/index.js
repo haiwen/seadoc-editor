@@ -192,7 +192,7 @@ class TableContextMenu extends React.Component {
             className="dropdown-item side-extendable"
           >
             <span>{t('Horizontal_align')}</span>
-            <i className='sdocfont sdoc-right-slide'></i>
+            <i className='sdocfont sdoc-arrow-right'></i>
           </button>
           {this.horizontalAlignRef.current && <HorizontalAlignPopover target={this.horizontalAlignRef} editor={editor} readonly={readonly} horizontalAlign={horizontalAlign} />}
           <button
@@ -200,7 +200,7 @@ class TableContextMenu extends React.Component {
             className="dropdown-item side-extendable"
           >
             <span>{t('Vertical_align')}</span>
-            <i className='sdocfont sdoc-right-slide'></i>
+            <i className='sdocfont sdoc-arrow-right'></i>
           </button>
           {this.verticalAlignRef.current && <VerticalAlignPopover target={this.verticalAlignRef} editor={editor} readonly={readonly} verticalAlign={verticalAlign} />}
           <button
@@ -208,7 +208,7 @@ class TableContextMenu extends React.Component {
             className="dropdown-item side-extendable"
           >
             <span>{t('Background_color')}</span>
-            <i className='sdocfont sdoc-right-slide'></i>
+            <i className='sdocfont sdoc-arrow-right'></i>
           </button>
           {this.colorSelectorRef.current && <ColorSelectorPopover target={this.colorSelectorRef} editor={editor} readonly={readonly} />}
           <div className={'seafile-divider dropdown-divider'}></div>

@@ -15,27 +15,28 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  color: #444444;
+  color: #666;
   cursor: pointer;
   border-radius: 3px;
 }
 
 .sdoc-callout-hover-menu .callout-menu-item:hover {
-  background-color: #f2f2f2;
+  background-color: #EFEFEF;
 }
 
 .sdoc-callout-hover-menu .callout-menu-item .sdocfont {
+  line-height: 1;
   font-size: 14px;
-  color: #444;
+  color: #666;
 }
 
-.sdoc-callout-hover-menu .callout-menu-item .sdoc-drop-down {
-  color: #999;
+.sdoc-callout-hover-menu .callout-menu-item .sdoc-arrow-down {
+  font-size: 12px;
 }
 
 .sdoc-callout-hover-menu .callout-menu-item.color-active,
 .sdoc-callout-hover-menu .callout-menu-item.icon-active {
-  background-color: #f2f2f2;
+  background-color: #EFEFEF;
   border-radius: 2px;
 }
 

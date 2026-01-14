@@ -102,7 +102,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                   onClick={onShowProver}
                 >
                   <i className={classnames('mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
-                  <i className='sdocfont sdoc-drop-down'></i>
+                  <i className='sdocfont sdoc-arrow-down'></i>
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='display_sdoc_link' placement='top' fade={true}>

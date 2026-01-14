@@ -1,8 +1,4 @@
 /* modify default css */
-.element-icon {
-  color: #444 !important;
-}
-
 .sdoc-icon-btn {
   height: 24px;
   width: 24px;
@@ -18,12 +14,8 @@
 }
 
 .sdoc-icon-btn .sdocfont {
-  color: #999;
+  color: #666;
   font-size: 16px;
-}
-
-.sdoc-icon-btn:hover .sdocfont {
-  color: #5a5a5a;
 }
 
 .linked-block-highlight-overlay {

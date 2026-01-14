@@ -185,7 +185,7 @@ const CodeBlockHoverMenu = ({ style, language, menuPosition, onChangeLanguage, o
           <div className="sdoc-code-block-hover-operation-item sdoc-code-block-hover-operation-lang">
             <div role="button" className={`op-item ${isShowlangsList ? 'active' : ''}`} onClick={onShowLangs}>
               <span>{selectedLanguageText}</span>
-              <i className='sdocfont sdoc-drop-down'></i>
+              <i className='sdocfont sdoc-arrow-down'></i>
             </div>
           </div>
           <div className="sdoc-code-block-hover-operation-divider"></div>

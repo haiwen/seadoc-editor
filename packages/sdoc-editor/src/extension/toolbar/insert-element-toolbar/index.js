@@ -208,7 +208,7 @@ const QuickInsertBlockMenu = ({
         [FILE_VIEW]:
         // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
-          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <LinkRepoPopover onRepoClick={onRepoClick} />
         </DropdownMenuItem>
       }),
@@ -217,7 +217,7 @@ const QuickInsertBlockMenu = ({
         [VIDEO]:
         // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[VIDEO]} disabled={isDisableVideo} key="sdoc-insert-menu-video" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} className="pr-2">
-          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <UncontrolledPopover
             target='sdoc-side-menu-item-video'
             trigger="hover"
@@ -237,7 +237,7 @@ const QuickInsertBlockMenu = ({
       [TABLE]:
         // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[TABLE]} disabled={isDisableTable} key="sdoc-insert-menu-table" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TABLE] }} className="pr-2">
-          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <TableSizePopover
             tableSizeRef={tableSizeRef}
             editor={editor}

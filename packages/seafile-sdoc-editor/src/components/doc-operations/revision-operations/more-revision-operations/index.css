@@ -16,10 +16,12 @@
 
 .sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle .sdoc-revise {
   margin-right: 10px;
+  font-size: 16px;
 }
 
-.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle .sdocfont {
-  font-size: 14px;
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle .sdoc-arrow-up,
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operations-toggle .sdoc-arrow-down {
+  font-size: 12px;
 }
 
 .sdoc-more-revision-operations-dropdown .dropdown-item {
@@ -34,9 +36,10 @@
   align-items: flex-start;
 }
 
-.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title .sdocfont {
-  font-size: 14px;
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title .sdoc-revise {
+  font-size: 16px;
   margin-right: 6px;
+  color: #666;
 }
 
 .sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title-name {

@@ -21,7 +21,7 @@
 }
 
 .sdoc-dropdown-menu .sdoc-dropdown-menu-item-title {
-  color: #666666;
+  color: #666;
   padding: 3px 12px;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .sdoc-dropdown-menu .sdoc-dropdown-menu-item:hover {
-  background-color: rgb(245, 245, 245);
+  background-color: #EFEFEF;
   cursor: pointer;
 }
 
@@ -76,8 +76,9 @@
   margin-right: 10px;
 }
 
-.sdoc-dropdown-menu .sdoc-dropdown-item-right-icon {
-  color: #999;
+.sdoc-dropdown-menu .sdoc-arrow-right {
+  color: #666;
+  font-size: 12px !important;
 }
 
 .sdoc-dropdown-menu .sdoc-dropdown-item-with-left-icon {
@@ -86,8 +87,7 @@
 }
 
 .sdoc-dropdown-menu .sdoc-check-mark {
-  color: #798d99;
-  transform: scale(1);
+  color: #666;
 }
 
 /* sub menu */

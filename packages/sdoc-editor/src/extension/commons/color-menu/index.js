@@ -135,7 +135,7 @@ const ColorMenu = ({
           <div className="last-used-color"style={{ backgroundColor: lastUsedColor || 'unset' }}></div>
         </div>
         <div id={id} className="sdoc-color-toggle sdoc-menu-with-dropdown-triangle">
-          <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'big-caret-up' : 'big-drop-down'}`}></i>
+          <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'arrow-up' : 'arrow-down'}`}></i>
         </div>
       </button>
       {text && (
@@ -203,7 +203,7 @@ const ColorMenu = ({
             <div className="sdoc-colors-divider"></div>
             <div className={classnames('sdoc-more-colors pr-2', { 'show-pick': isPickerShow })} id="sdoc-more-colors">
               <span>{t('More_color')}</span>
-              <i className="sdocfont sdoc-right-slide"></i>
+              <i className="sdocfont sdoc-arrow-right"></i>
             </div>
             <UncontrolledPopover
               target="sdoc-more-colors"

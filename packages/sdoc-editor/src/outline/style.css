@@ -111,7 +111,7 @@
 }
 
 .sdoc-outline-header__close:hover {
-  color: #555;
+  color: #666;
 }
 
 .sdoc-outline-list-container {
@@ -139,7 +139,7 @@
 .sdoc-outline-menu {
   line-height: 1;
   font-size: 14px;
-  color: #888;
+  color: #999;
   cursor: pointer;
   width: 28px;
   height: 28px;
@@ -160,5 +160,5 @@
 }
 
 .sdoc-outline-menu:not(.disabled):hover {
-  color: #333;
+  color: #666;
 }

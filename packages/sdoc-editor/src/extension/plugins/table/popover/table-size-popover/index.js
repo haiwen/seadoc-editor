@@ -213,7 +213,7 @@ const TableSizePopover = ({
           <MenuItem
             id="sdoc-table-template-review-btn"
             text="Table_template"
-            iconClassname="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"
+            iconClassname="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"
           />
         </div>
         <div className="sdoc-table-size-select">

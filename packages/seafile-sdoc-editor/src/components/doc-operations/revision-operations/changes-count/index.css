@@ -25,7 +25,7 @@
 .sdoc-revision-changes-container .sdoc-revision-changes-last:hover,
 .sdoc-revision-changes-container .sdoc-revision-changes-next:hover {
   cursor: pointer;
-  background-color: #f5f5f5;
+  background-color: #EFEFEF;
 }
 
 .sdoc-revision-changes-container .sdoc-revision-changes-last:hover .sdocfont,
