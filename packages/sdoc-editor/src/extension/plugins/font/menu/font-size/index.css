@@ -8,13 +8,14 @@
 
 .menu-group .sdoc-font-size-menu .sdoc-menu-with-dropdown-icon,
 .menu-group .sdoc-font-size-menu .sdoc-menu-with-dropdown-icon div {
-  width: 34px;
+  width: 30px;
   font-size: 14px;
 }
 
 .menu-group .sdoc-font-size-menu .sdoc-menu-with-dropdown-icon div {
   padding-left: 5px;
   color: #212529;
+  text-align: left;
 }
 
 .menu-group .sdoc-menu-with-dropdown.sdoc-font-size-menu.disabled .sdoc-menu-with-dropdown-icon div {
