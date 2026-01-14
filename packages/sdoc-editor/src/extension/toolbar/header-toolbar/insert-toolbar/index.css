@@ -5,6 +5,10 @@
   justify-content: space-between;
 }
 
+.menu-group .menu-group-item.sdoc-insert-toolbar-btn .text-truncate {
+  color: #212529;
+}
+
 .menu-group .menu-group-item.sdoc-insert-toolbar-btn.disabled {
   /* 64: 76 - 12 */
   width: 64px !important;
@@ -19,10 +23,6 @@
   font-size: 14px;
 }
 
-.sdoc-insert-menu-popover .popover {
+.sdoc-font-family-menu .sdoc-menu-with-dropdown-icon div .sdoc-insert-menu-popover .popover {
   min-width: 200px;
-}
-
-.sdoc-insert-menu-popover .sdoc-insert-menu-container {
-  padding: 8px 0;
 }

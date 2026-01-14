@@ -1,7 +1,11 @@
 .menu-group-item.sdoc-comment-menu-container {
   width: auto;
-  color: #666;
+  color: #212529;
   font-size: 14px;
+}
+
+.menu-group-item.sdoc-comment-menu-container .sdocfont {
+  color: #666;
 }
 
 .sdoc-comment-menu-item .sdoc-comments {
