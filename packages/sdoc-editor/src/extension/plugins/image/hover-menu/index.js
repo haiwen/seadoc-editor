@@ -176,7 +176,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                     className={classnames('op-item', 'ml-1', { 'active': show_caption })}
                     onClick={(event) => onSelect(event, { 'show_caption': !show_caption })}
                   >
-                    <i className='sdocfont sdoc-caption mr-1'/>
+                    <i className='sdocfont sdoc-caption'/>
                     {isShowTooltip && (
                       <Tooltip target='sdoc_image_caption' placement='top' fade={true}>
                         {t('Caption')}

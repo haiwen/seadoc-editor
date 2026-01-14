@@ -42,7 +42,7 @@ const FileLink = ({ editor, element, children, attributes }) => {
     if (elem) {
       const { top, left } = elem.getBoundingClientRect();
       const menuTop = top - 42; // top = top distance - menu height
-      const menuLeft = left - 18; // left = left distance - (menu width / 2)
+      const menuLeft = left;
       const newMenuPosition = {
         top: menuTop,
         left: menuLeft

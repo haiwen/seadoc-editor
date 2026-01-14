@@ -20,6 +20,7 @@
   background-color: transparent;
   padding-block-start: unset;
   padding-block-end: unset;
+  padding-inline: 0;
 }
 
 .menu-group .menu-group-item:hover {

@@ -32,7 +32,7 @@ const WhiteboardHoverMenu = ({ menuPosition, onOpen, openFullscreen, onDeleteWhi
               className='op-item'
               onClick={onOpen}
             >
-              <span className='mr-1'>{t('Open')}</span>
+              <span>{t('Open')}</span>
             </span>
           </span>
           <span className='op-group-item'>

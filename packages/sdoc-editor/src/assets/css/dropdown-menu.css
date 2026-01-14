@@ -1,6 +1,7 @@
 .sdoc-dropdown-menu,
 .sdoc-dropdown-menu .sdoc-dropdown-menu-container {
   min-width: 12rem;
+  padding: 8px 0;
 }
 
 .sdoc-dropdown-menu .sdoc-dropdown-menu-divider {

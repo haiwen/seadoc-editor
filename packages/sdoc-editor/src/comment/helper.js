@@ -24,7 +24,7 @@ export const getCursorPosition = () => {
   let range = getSelectionRange();
   if (range) {
     const rect = range.getBoundingClientRect();
-    const headerHeight = 93;
+    const headerHeight = 100;
     x = rect.x || 0;
     y = rect.y - headerHeight + (rect.height - 24) / 2 || 0;
   }
@@ -81,7 +81,7 @@ export const getElementCommentCountTop = (editor, element, scrollTop) => {
     minY = Math.min(minY, y);
   });
   let resultY;
-  resultY = minY - 93 + scrollTop; // 100: header height(56) + toolbar height(37)
+  resultY = minY - 100 + scrollTop; // 100: header height(56) + toolbar height(37)
   if (editor.editorType === WIKI_EDITOR) {
     // 55 is basic top title height in wiki
     resultY = commentContainerWikiTransfer(resultY, 55);

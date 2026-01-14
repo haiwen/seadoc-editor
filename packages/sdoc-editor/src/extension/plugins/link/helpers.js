@@ -178,11 +178,10 @@ export const isWeChat = () => {
 
 export const getMenuPosition = (element, editor) => {
   if (!element) return {};
-  const { top, left, width } = element.getBoundingClientRect();
+  const { top, left } = element.getBoundingClientRect();
   // top = top distance - menu height
   const menuTop = top - 42;
-  // left = left distance - (menu width / 2) + (link with / 2)
-  const menuLeft = left - (140 / 2) + (width / 2);
+  const menuLeft = left;
 
   let menuPosition = { top: menuTop, left: menuLeft };
   // topOffset: the editor container left-top distance with browser top

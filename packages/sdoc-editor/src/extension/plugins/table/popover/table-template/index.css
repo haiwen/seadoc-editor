@@ -1,3 +1,7 @@
+.sdoc-table-template-popover-wrapper {
+  min-width: 312px;
+}
+
 .sdoc-table-template-inner-popover {
   display: flex;
   flex-wrap: wrap;

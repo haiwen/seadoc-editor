@@ -13,7 +13,7 @@
 
 .sdoc-file-preview-drawer .file-preview-panel-wrapper {
   /* 100vh - toolbar height*/
-  height: calc(100vh - 93px);
+  height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   background: #fff;
