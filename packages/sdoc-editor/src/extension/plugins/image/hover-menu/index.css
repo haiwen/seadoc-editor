@@ -28,7 +28,7 @@
 .sdoc-image-hover-menu-container .hover-menu-container .op-item {
   position: relative;
   font-size: 12px;
-  color: #444444;
+  color: #666;
   padding: 0 5px;
   border-radius: 2px;
   min-width: 24px;
@@ -39,22 +39,22 @@
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .op-item:hover {
-  color: #444444;
+  color: #666;
   text-decoration: none;
-  background: #f1f1f1;
+  background: #EFEFEF;
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .active {
-  background: #f1f1f1;
+  background: #EFEFEF;
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .sdocfont {
   font-size: 14px;
-  color: #444444;
+  color: #666;
 }
 
-.sdoc-image-hover-menu-container .hover-menu-container .sdoc-drop-down {
-  color: #999 !important;
+.sdoc-image-hover-menu-container .hover-menu-container .sdoc-arrow-down {
+  font-size: 12px;
 }
 
 .sdoc-image-hover-menu-container .sdoc-image-popover {

@@ -82,7 +82,7 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                 onClick={onShowProver}
               >
                 <i className={classnames('mr-1', FILE_LINK_TYPE_CONFIG[selectedType].icon)}></i>
-                <i className='sdocfont sdoc-drop-down'></i>
+                <i className='sdocfont sdoc-arrow-down'></i>
               </span>
               {isShowTooltip && (
                 <Tooltip target='select_style' placement='top' fade={true}>

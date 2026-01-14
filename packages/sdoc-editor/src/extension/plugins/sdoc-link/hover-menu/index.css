@@ -25,7 +25,7 @@
 .sdoc-link-hover-menu-container .hover-menu-container .op-item {
   position: relative;
   font-size: 12px;
-  color: #444444;
+  color: #666;
   padding: 0 5px;
   border-radius: 2px;
   min-width: 24px;
@@ -36,9 +36,8 @@
 }
 
 .sdoc-link-hover-menu-container .hover-menu-container .op-item:hover {
-  color: #444444;
   text-decoration: none;
-  background: #f1f1f1;
+  background: #EFEFEF;
 }
 
 .sdoc-link-hover-menu-container .op-group-item:not(:first-child) .op-item {
@@ -46,7 +45,7 @@
 }
 
 .sdoc-link-hover-menu-container .hover-menu-container .link-style-icon-active {
-  background: #f1f1f1;
+  background: #EFEFEF;
 }
 
 .sdoc-link-hover-menu-container .hover-menu-container .op-tooltip:hover::after {
@@ -68,12 +67,13 @@
 }
 
 .sdoc-link-hover-menu-container .hover-menu-container .sdocfont {
+  line-height: 1;
   font-size: 14px;
-  color: #444;
+  color: #666;
 }
 
-.sdoc-link-hover-menu-container .hover-menu-container .sdoc-drop-down {
-  color: #999;
+.sdoc-link-hover-menu-container .hover-menu-container .sdoc-arrow-down {
+  font-size: 12px;
 }
 
 .sdoc-link-hover-menu-container .sdoc-file-display-style-popover {

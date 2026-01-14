@@ -23,17 +23,17 @@
 }
 
 .header-menu .header-toggle-disabled {
-  color: #BDBDBD;
+  color: #c2c2c2;
   cursor: unset;
 }
 
 .header-menu .header-toggle:not(.header-toggle-disabled):hover {
-  background: #F2F2F2;
+  background: #EFEFEF;
   border-radius: 2px;
 }
 
 .header-menu .header-toggle .sdocfont {
-  color: #999;
+  color: #666;
   width: 12px;
   height: 24px;
   margin-left: 8px;
@@ -41,12 +41,12 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
 }
 
 .header-menu .header-toggle-disabled .sdocfont {
-  color: #BDBDBD;
+  color: #c2c2c2;
   cursor: unset;
 }
 
@@ -74,12 +74,12 @@
 .header-menu .header-popover .sdoc-dropdown-menu-item {
   font-size: 14px;
   height: auto;
-  padding: 9px 16px 9px 28px;
+  padding: 9px 16px 9px 24px;
   line-height: 1;
 }
 
 .header-menu .header-popover .sdoc-dropdown-menu-item .sdoc-check-mark {
   position: absolute;
-  left: 8px;
-  color: #798d99;
+  left: 5px;
+  color: #666;
 }

@@ -19,7 +19,7 @@
 
 .sdoc-editor-page-header .doc-info .doc-icon:hover {
   margin-left: 0.5rem;
-  color: #333;
+  color: #666;
 }
 
 .sdoc-editor-page-header .doc-info .sdoc-link {
@@ -59,7 +59,7 @@
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-order {
   display: inline-block;
   font-size: 14px;
-  color: #888;
+  color: #999;
   background: #eee;
   padding: 0 8px;
   height: 20px;
@@ -99,5 +99,5 @@
 }
 
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-jump-to {
-  color: #333;
+  color: #666;
 }

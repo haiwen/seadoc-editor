@@ -33,7 +33,7 @@ const MoreRevisionOperations = ({ t }) => {
     <Dropdown isOpen={isDropdownOpen} toggle={() => toggleDropdown(isDropdownOpen)} className="sdoc-more-revision-operations-dropdown" >
       <DropdownToggle id={id} className="ml-4 sdoc-more-revision-operations-toggle" tag="div">
         <i className="sdocfont sdoc-revise" />
-        <span className={`sdocfont sdoc-${isDropdownOpen ? 'caret-up' : 'drop-down'}`}></span>
+        <span className={`sdocfont sdoc-${isDropdownOpen ? 'arrow-up' : 'arrow-down'}`}></span>
       </DropdownToggle>
       <Tooltip target={id}>
         {t('Revise')}

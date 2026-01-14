@@ -1,5 +1,10 @@
 .sdoc-text-align-dropdown .sdocfont.sdoc-check-mark {
     position: absolute;
-    left: 8px;
-    color: #798d99;
+    left: 5px;
+    color: #666;
+}
+
+.sdoc-text-align-dropdown .sdoc-dropdown-menu-item {
+    font-size: 14px;
+    padding: 4px 16px 4px 24px;
 }

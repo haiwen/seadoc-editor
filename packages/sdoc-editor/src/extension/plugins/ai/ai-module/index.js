@@ -568,7 +568,7 @@ export default function AIModule({ editor, element, closeModule }) {
                 <div>
                   <div className='op-type'>{t('Translate')}</div>
                   <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.TRANSLATE}>
-                    <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+                    <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
                     <LangSubMenu target={OPERATION_MENUS_CONFIG.TRANSLATE.id} onTranslateClick={onTranslateClick}/>
                   </DropdownMenuItem>
                 </div>
@@ -593,7 +593,7 @@ export default function AIModule({ editor, element, closeModule }) {
             {!searchValue && (
               <div className='sdoc-ai-operations sdoc-dropdown-menu'>
                 <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.ADJUSTMENT} isHidden={!isShowAdjust}>
-                  <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+                  <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
                   <AdjustSubMenu
                     target={OPERATION_MENUS_CONFIG.ADJUSTMENT.id}
                     onMoreFluentClick={onMoreFluentClick}

@@ -20,7 +20,7 @@ const TableMenu = ({ editor, readonly, eventBus }) => {
     <>
       <ElementDropdownMenuItem disabled={disabled} menuConfig={menuConfig} className="pr-2">
         {!disabled && (
-          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
         )}
       </ElementDropdownMenuItem>
       {!disabled && (

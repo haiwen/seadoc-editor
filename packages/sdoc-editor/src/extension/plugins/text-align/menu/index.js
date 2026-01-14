@@ -50,7 +50,7 @@ const TextAlignMenu = ({
 
   let curType = getCurrentType();
   const curIcon = MENUS_CONFIG_MAP[TEXT_ALIGN].filter(item => item.type === curType)[0].iconClass;
-  const caretIconClass = `sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'caret-up' : 'drop-down'}`;
+  const caretIconClass = `sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'arrow-up' : 'arrow-down'}`;
   curType = 'align_' + curType;
 
   return (

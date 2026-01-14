@@ -61,12 +61,12 @@
 }
 
 .revisions-dialog .revisions-body .sdoc-revision.operating {
-  background-color: #f5f5f5;
+  background-color: #EFEFEF;
 }
 
 .revisions-dialog .revisions-body .sdoc-revision:hover {
   cursor: pointer;
-  background-color: #f5f5f5;
+  background-color: #EFEFEF;
 }
 
 .revisions-dialog .sdoc-revision-name-header,

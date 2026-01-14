@@ -48,7 +48,7 @@ const FontSize = ({
     'btn btn-icon btn-secondary btn-active d-flex': !isRichEditor,
   });
 
-  const caretIconClass = `sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'caret-up' : 'drop-down'}`;
+  const caretIconClass = `sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'arrow-up' : 'arrow-down'}`;
   const { bottom } = fontSizeRef.current ? fontSizeRef.current.getBoundingClientRect() : { bottom: 92.5 };
 
   return (

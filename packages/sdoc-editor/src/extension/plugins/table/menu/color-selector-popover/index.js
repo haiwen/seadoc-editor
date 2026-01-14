@@ -140,7 +140,7 @@ const ColorSelectorPopover = ({ target, editor, readonly, isRichEditor = true })
         <div className="sdoc-colors-divider"></div>
         <div className={classnames('sdoc-more-colors pr-2', { 'show-pick': isPickerShow })} id="sdoc-more-colors">
           <span>{t('More_color')}</span>
-          <i className="sdocfont sdoc-right-slide"></i>
+          <i className="sdocfont sdoc-arrow-right"></i>
         </div>
         <UncontrolledPopover
           target="sdoc-more-colors"

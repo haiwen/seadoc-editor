@@ -135,7 +135,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                 }}
               >
                 <span className='mr-1'>{t(type === IMAGE_BLOCK ? 'Block' : 'Inline')}</span>
-                <i className='sdocfont sdoc-drop-down'/>
+                <i className='sdocfont sdoc-arrow-down'/>
               </span>
             </span>)}
           {
@@ -150,7 +150,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                     }}
                   >
                     <i className={classnames(`sdocfont sdoc-align-${align || 'left'} mr-1`)}/>
-                    <i className='sdocfont sdoc-drop-down'/>
+                    <i className='sdocfont sdoc-arrow-down'/>
                   </span>
                 )}
                 <span
@@ -162,7 +162,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                   }}
                 >
                   <i className='sdocfont sdoc-image mr-1'/>
-                  <i className='sdocfont sdoc-drop-down'/>
+                  <i className='sdocfont sdoc-arrow-down'/>
                   {isShowTooltip && (
                     <Tooltip target='sdoc_image_border' placement='top' fade={true}>
                       {t('Image_border')}

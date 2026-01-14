@@ -59,7 +59,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
       <div className="sdoc-callout-hover-menu" style={popoverPosition}>
         <div id='select_callout_color' className={firstItemClass} onClick={onColorSelectorToggle}>
           <span className='sdocfont sdoc-callout-color mr-1'></span>
-          <span className='sdocfont sdoc-drop-down'></span>
+          <span className='sdocfont sdoc-arrow-down'></span>
         </div>
         {isShowTooltip && (
           <Tooltip target='select_callout_color' placement='top' fade={true}>
@@ -69,7 +69,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
         <div className='callout-menu-divider'></div>
         <div id='select_callout_icon' className={secondItemClass} onClick={onIconToggle}>
           <span className='sdocfont sdoc-callout-icon mr-1'></span>
-          <span className='sdocfont sdoc-drop-down'></span>
+          <span className='sdocfont sdoc-arrow-down'></span>
         </div>
         {isShowTooltip && (
           <Tooltip target='select_callout_icon' placement='top' fade={true}>

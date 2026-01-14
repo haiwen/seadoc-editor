@@ -162,14 +162,14 @@ const InsertBlockMenu = ({
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CHECK_LIST_ITEM]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />
       {editor.editorType === WIKI_EDITOR && (
         <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
-          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <LinkRepoPopover onRepoClick={onRepoClick} />
         </DropdownMenuItem>
       )}
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.IMAGE]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.IMAGE] }} onClick={onInsertImageToggle} />
       {editor.editorType !== DOCUMENT_PLUGIN_EDITOR && (
         <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.VIDEO]} key="sdoc-insert-menu-video" disabled={isInMultiColumnNode(editor, slateNode)} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} className="pr-2">
-          <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+          <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <UncontrolledPopover
             target='sdoc-side-menu-item-video'
             trigger="hover"
@@ -187,7 +187,7 @@ const InsertBlockMenu = ({
         </DropdownMenuItem>
       )}
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.TABLE]} key="sdoc-insert-menu-table" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TABLE] }} className="pr-2">
-        <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+        <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
         <TableSizePopover
           editor={editor}
           target='sdoc-side-menu-item-table'

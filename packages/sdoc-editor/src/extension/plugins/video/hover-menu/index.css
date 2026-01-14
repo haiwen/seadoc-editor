@@ -25,7 +25,7 @@
 .video-hover-menu-container .hover-menu-container .op-item {
   position: relative;
   font-size: 12px;
-  color: #444444;
+  color: #666;
   padding: 0 5px;
   border-radius: 2px;
   min-width: 24px;
@@ -36,9 +36,8 @@
 }
 
 .video-hover-menu-container .hover-menu-container .op-item:hover {
-  color: #444444;
   text-decoration: none;
-  background: #f1f1f1;
+  background: #EFEFEF;
 }
 
 .video-hover-menu-container .op-group-item:first-child .op-item:last-child,
@@ -47,6 +46,7 @@
 }
 
 .video-hover-menu-container .hover-menu-container .sdocfont {
+  line-height: 1;
   font-size: 14px;
-  color: #444;
+  color: #666;
 }

@@ -8,7 +8,7 @@
 }
 
 .sdoc-revision-operation-toggle-container:hover {
-  background-color: #E5E5E5;
+  background-color: #EFEFEF;
   cursor: pointer;
 }
 
@@ -25,10 +25,9 @@
 
 .sdoc-revision-operation-toggle:hover {
   cursor: pointer;
-  color: #333;
+  color: #666;
 }
 
 .sdoc-revision-menu-popover .popover {
   margin-top: 0;
 }
-

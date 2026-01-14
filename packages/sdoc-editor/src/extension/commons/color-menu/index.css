@@ -28,7 +28,7 @@
 }
 
 .menu-group .sdoc-color-menu.disabled .sdoc-color-toggle .sdocfont {
-  color: #BDBDBD;
+  color: #c2c2c2;
 }
 
 .sdoc-color-menu .sdoc-color-icon {
@@ -47,20 +47,10 @@
   border: 1px solid rgba(0, 0, 0, .08);
 }
 
-.sdoc-color-menu #sdoc-highlight_color,
-.sdoc-color-menu #sdoc-font-color,
-.sdoc-color-menu #sdoc-sdoc_context_toolbar_sdoc-highlight_color,
-.sdoc-color-menu #sdoc_context_toolbar_sdoc-font-color {
-  width: 8px;
-}
-
-.sdoc-color-menu .sdoc-big-drop-down,
-.sdoc-color-menu .sdoc-big-caret-up {
-  height: 16px;
-  width: 16px;
-  line-height: 16px;
-  font-size: 16px !important;
-  transform: scale(.5);
+.sdoc-color-menu .sdoc-arrow-down,
+.sdoc-color-menu .sdoc-arrow-up {
+  padding: 0 !important;
+  margin-left: 0 !important;
 }
 
 .sdoc-color-menu-popover .popover {
@@ -158,7 +148,7 @@
 
 .sdoc-color-menu-popover .sdoc-more-colors .sdocfont {
   font-size: 14px;
-  color: #888;
+  color: #666;
 }
 
 .sdoc-color-menu-popover .sdoc-more-colors.show-pick {

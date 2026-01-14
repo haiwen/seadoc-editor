@@ -177,7 +177,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
                 }}
                 className="pr-2"
               >
-                <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+                <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
                 <TransformMenus target='sdoc-side-menu-item-transform' slateNode={slateNode} editor={editor} onSetType={onSetType} />
               </DropdownMenuItem>
             )}
@@ -196,7 +196,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
               className="pr-2 sdoc-dropdown-menu-item-relative"
               isHidden={insertBelowMenuSearchMap['searching']}
             >
-              <i className="sdocfont sdoc-right-slide sdoc-dropdown-item-right-icon"></i>
+              <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
               <InsertBelowMenu target='sdoc-side-menu-item-insert-below' slateNode={slateNode} />
             </DropdownMenuItem>
             {!insertBelowMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}

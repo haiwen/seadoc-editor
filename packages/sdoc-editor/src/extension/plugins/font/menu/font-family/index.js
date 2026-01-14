@@ -58,7 +58,7 @@ const FontFamily = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShowMenu]);
 
-  const caretIconClass = `sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'caret-up' : 'drop-down'}`;
+  const caretIconClass = `sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'arrow-up' : 'arrow-down'}`;
   const { bottom } = fontRef.current ? fontRef.current.getBoundingClientRect() : { bottom: 92.5 };
 
   const updateFont = useCallback((fontName) => {

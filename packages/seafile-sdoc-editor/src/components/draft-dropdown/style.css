@@ -6,9 +6,9 @@
 .sdoc-draft-identifier {
   display: inline-block;
   font-size: 14px;
-  color: #888;
+  color: #999;
   background: #eee;
-  padding: 0 8px; 
+  padding: 0 8px;
   height: 20px;
   line-height: 20px;
   border-radius: 10px;
@@ -39,5 +39,5 @@
 }
 
 .sdoc-draft-menu .draft-popover .draft-menu-item:hover {
-  background-color: rgb(245, 245, 245);
+  background-color: #EFEFEF;
 }
