@@ -7,9 +7,10 @@ import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
 import { getEditorString, getNodeType, getSelectedElems, getSelectedNodeByType } from '../../core';
 import { isImage, isSameDomain } from '../../utils';
+import { insertFileLink } from '../file-link/helpers';
 import { insertSdocFileLink } from '../sdoc-link/helpers';
 import { insertWhiteboard } from '../whiteboard/helper';
-import { genLinkNode, insertLink, isExdrawFile, isSdocFile } from './helpers';
+import { genLinkNode, insertLink, isCommonFile, isExdrawFile, isSdocFile } from './helpers';
 
 const withLink = (editor) => {
   const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown, onCompositionStart } = editor;
@@ -41,6 +42,10 @@ const withLink = (editor) => {
             const fileParentPath = res.data.files_info[text].parent_path;
             const filePath = fileParentPath + '/' + fileName;
             insertWhiteboard(editor, fileName, filePath);
+          } else if (isCommonFile(res, text)) {
+            const fileName = res.data.files_info[text].name;
+            const fileUuid = res.data.files_info[text].file_uuid;
+            insertFileLink(editor, fileName, fileUuid);
           } else {
             const url = new URL(text);
             const linkedNodeId = url.hash.replace(/^#/, '');

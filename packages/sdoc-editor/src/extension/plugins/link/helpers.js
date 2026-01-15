@@ -169,6 +169,13 @@ export const isExdrawFile = (res, url) => {
   return !is_dir && file_ext === 'exdraw';
 };
 
+export const isCommonFile = (res, url) => {
+  const { data: { files_info } } = res;
+  const fileInfo = files_info[url];
+  const { is_dir, file_ext } = fileInfo || {};
+  return fileInfo && !is_dir && !['sdoc', 'exdraw', 'video'].includes(file_ext);
+};
+
 export const isWeChat = () => {
   let ua = window.navigator.userAgent.toLowerCase();
   let isWeChat = ua.match(/MicroMessenger/i) === 'micromessenger';
