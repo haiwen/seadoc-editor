@@ -124,7 +124,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
   const borderPopoverStyle = useMemo(() => {
     const isBlockChild = [TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(type);
     if (!isBlockChild) return null;
-    return { left: '10px' };
+    return { left: '0px' };
   }, [type]);
 
   return (
@@ -230,7 +230,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
           </div>
         )}
         {popoverState.alignPopover && (
-          <div className="sdoc-image-popover align-popover sdoc-dropdown-menu">
+          <div className='sdoc-image-popover align-popover sdoc-dropdown-menu'>
             {MENUS_CONFIG_MAP[TEXT_ALIGN].map((item) => {
               return (
                 <div
@@ -248,7 +248,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
           </div>
         )}
         {popoverState.borderPopover && (
-          <div className="sdoc-image-popover border-popover sdoc-dropdown-menu" style={borderPopoverStyle}>
+          <div className={classnames('sdoc-image-popover border-popover sdoc-dropdown-menu', { 'sdoc-block-image': type === IMAGE_BLOCK })} style={borderPopoverStyle}>
             {IMAGE_BORDER_TYPE.map((item) => {
               return (
                 <div

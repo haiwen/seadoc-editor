@@ -71,16 +71,20 @@
 }
 
 .sdoc-image-hover-menu-container .align-popover {
-  left: 80px;
+  left: 100px;
   min-width: 6rem;
 }
 
 .sdoc-image-hover-menu-container .border-popover {
-  left: 115px;
+  left: 104px;
   flex-direction: row;
   height: 80px;
   align-items: center;
   padding: 0 8px;
+}
+
+.sdoc-image-hover-menu-container .border-popover.sdoc-block-image {
+  left: 144px;
 }
 
 .sdoc-image-hover-menu-container .border-popover .sdoc-dropdown-menu-item .sdoc-dropdown-item-content .sdoc-check-mark {

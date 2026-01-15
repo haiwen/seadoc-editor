@@ -79,7 +79,7 @@
 .sdoc-link-hover-menu-container .sdoc-file-display-style-popover {
   position: absolute;
   top: 37px;
-  right: -80px;
+  left: 125px;
   padding: 8px 0;
   background-color: #fff;
   border: 1px solid #e5e6e8;

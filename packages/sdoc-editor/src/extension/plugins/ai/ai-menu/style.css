@@ -4,6 +4,10 @@
   font-size: 14px;
 }
 
+.menu-group-item.sdoc-ask-ai-menu-container .sdoc-ask-ai-menu-item {
+  padding: 4px;
+}
+
 .sdoc-context-menu-divider {
   margin-right: 8px;
   border-left: 1px solid #e5e5e5;

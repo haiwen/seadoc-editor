@@ -4,6 +4,10 @@
   font-size: 14px;
 }
 
+.menu-group-item.sdoc-comment-menu-container .sdoc-comment-menu-item {
+  padding: 4px;
+}
+
 .menu-group-item.sdoc-comment-menu-container .sdocfont {
   color: #666;
 }
