@@ -28,7 +28,6 @@
 
 .sdoc-code-block-hover-menu-container .hover-menu-container .active {
   text-decoration: none;
-  background: #EFEFEF;
 }
 
 .sdoc-code-block-hover-menu-container .hover-menu-container .op-item {
@@ -76,13 +75,13 @@
 
 .sdoc-code-block-hover-menu-container .hover-menu-container .op-item:hover {
   text-decoration: none;
-  background: #EFEFEF;
+  background: #F5F5F5;
 }
 
 .sdoc-langs-list-container {
   position: absolute;
   top: 38px;
-  left: 0px;
+  left: 8px;
   width: 200px;
   overflow-y: hidden;
   background-color: #fff;
@@ -114,7 +113,7 @@
   overflow-y: auto;
   max-height: 280px;
   min-height: 100px;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .sdoc-langs-list-container .langs-list-ul .langs-list-li {
@@ -124,16 +123,13 @@
   line-height: 30px;
   height: 30px;
   font-size: 13px;
-  padding-left: 12px;
+  padding-left: 22px;
+  padding-right: 10px;
   display: flex;
   justify-content: space-between;
 }
 
-.sdoc-langs-list-container .langs-list-ul .langs-list-li.active {
-  background-color: #f5f5f5;
-}
-
-.sdoc-langs-list-container .langs-list-ul .langs-list-li.hover {
+.sdoc-langs-list-container .langs-list-ul .langs-list-li:hover {
   background-color: #f5f5f5;
 }
 
