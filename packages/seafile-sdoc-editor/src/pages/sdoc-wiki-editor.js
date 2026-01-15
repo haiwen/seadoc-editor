@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, Fragment } from 'react';
 import { withTranslation } from 'react-i18next';
-import { context, WIKI_EDITOR, WIKI_EDITOR_EDIT_AREA_WIDTH, WikiEditor, createWikiEditor, withNodeId, withSocketIO, CollaboratorsProvider, PluginsProvider, CommentContextProvider } from '@seafile/sdoc-editor';
+import { context, WIKI_EDITOR, WIKI_EDITOR_EDIT_AREA_WIDTH, WikiEditor, createWikiEditor, withNodeId, withSocketIO, CollaboratorsProvider, PluginsProvider, CommentContextProvider, EventBus } from '@seafile/sdoc-editor';
+import { Editor, Text, Transforms } from '@seafile/slate';
+import { ReactEditor } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import ErrorBoundary from '../components/error-boundary';
 
@@ -51,6 +53,28 @@ const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collabor
       validEditor.closeConnection();
     };
   }, [isWikiReadOnly, validEditor]);
+
+  const focusEditor = ({ key }) => {
+    if (['ArrowRight', 'ArrowDown'].includes(key)) {
+      const [nodeEntry] = Editor.nodes(validEditor, {
+        universal: true,
+        match: n => Text.isText(n)
+      });
+      const [, path] = nodeEntry;
+      ReactEditor.focus(validEditor);
+      Transforms.select(validEditor, Editor.start(validEditor, path));
+      ReactEditor.focus(validEditor);
+    }
+  };
+
+  useEffect(() => {
+    const eventBus = EventBus.getInstance();
+    const unsubscribe = eventBus.subscribe('wiki_editor_focus_internal', focusEditor);
+    return () => {
+      unsubscribe();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // If you don't display comment, use Fragment to replace CommentProvider
   const WithCommentProvider = showComment ? CommentContextProvider : Fragment;
