@@ -215,7 +215,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
                 }}
               >
                 <span id='selected-block-display' className='selected-linked-block'></span>
-                <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
+                <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-down'></i>
               </div>
               {isOpenSelect && (
                 <div className='link-block-wrapper'>
