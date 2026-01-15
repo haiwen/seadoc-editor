@@ -65,8 +65,9 @@ const withCheckList = (editor) => {
     const selectedTodo = getSelectedNodeByType(editor, CHECK_LIST_ITEM);
     const onlyOneListItem = data.length === 1 && isSingleListItem(data[0]);
     if (selectedTodo && onlyOneListItem) {
-      const text = Node.string(data[0]);
-      insertText(text);
+      const listItem = data[0].children[0];
+      const paragraphNodes = listItem.children;
+      editor.insertFragment(paragraphNodes);
       return;
     }
     insertFragment(data);
