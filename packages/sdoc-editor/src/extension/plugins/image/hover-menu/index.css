@@ -59,6 +59,7 @@
 .sdoc-image-hover-menu-container .sdoc-image-popover {
   position: absolute;
   top: 37px;
+  left: 8px;
   background-color: #fff;
   border: 1px solid #e5e6e8;
   border-radius: 2px;

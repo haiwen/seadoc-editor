@@ -124,7 +124,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
   const borderPopoverStyle = useMemo(() => {
     const isBlockChild = [TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(type);
     if (!isBlockChild) return null;
-    return { left: '0px' };
+    return { left: '8px' };
   }, [type]);
 
   return (
@@ -161,7 +161,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
               <span
                 id='sdoc_image_border'
                 role="button"
-                className={classnames('op-item', 'ml-1', { 'active': popoverState.borderPopover })}
+                className={classnames('op-item', { 'active': popoverState.borderPopover, 'ml-1': ![TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(type) })}
                 onClick={(e) => {
                   onShowProver(e, 'borderPopover');
                 }}

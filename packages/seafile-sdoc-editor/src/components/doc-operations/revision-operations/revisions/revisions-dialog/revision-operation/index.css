@@ -8,14 +8,14 @@
 }
 
 .sdoc-revision-operation-toggle-container:hover {
-  background-color: #EFEFEF;
+  background-color: #E5E5E5;
   cursor: pointer;
 }
 
 .sdoc-revision-operation-toggle {
   display: none;
   font-size: 16px;
-  color: #999;
+  color: #666;
 }
 
 .revisions-body .sdoc-revision:hover .sdoc-revision-operation-toggle,

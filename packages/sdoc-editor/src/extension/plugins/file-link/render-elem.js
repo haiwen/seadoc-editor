@@ -106,8 +106,10 @@ const FileLink = ({ editor, element, children, attributes }) => {
       e.stopPropagation();
     }
 
-    setPosition(e.currentTarget);
-    setIsShowInsertHoverMenu(true);
+    if (!isShowInsertHoverMenu) {
+      setPosition(e.currentTarget);
+      setIsShowInsertHoverMenu(true);
+    }
 
     setTimeout(() => {
       registerEventHandle();
