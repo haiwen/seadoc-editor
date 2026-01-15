@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.63](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.62...@seafile/seafile-sdoc-editor@3.0.63) (2026-01-15)
+
+### Features
+
+- toggle-cursor-between-editor-and-title ([#179](https://github.com/seafileltd/sea-sdoc-editor/issues/179)) ([4d8acaf](https://github.com/seafileltd/sea-sdoc-editor/commit/4d8acafb0bd531b1d5eb15dd6f9602baf4d045e9))
+
 ## [3.0.62](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.61...@seafile/seafile-sdoc-editor@3.0.62) (2026-01-15)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor

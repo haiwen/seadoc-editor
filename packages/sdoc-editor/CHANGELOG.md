@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.63](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.62...@seafile/sdoc-editor@3.0.63) (2026-01-15)
+
+### Bug Fixes
+
+- keep link style ([#180](https://github.com/seafileltd/sea-sdoc-editor/issues/180)) ([8bb133f](https://github.com/seafileltd/sea-sdoc-editor/commit/8bb133f32816c6a89d67b608a113c7eaa2725988))
+
+### Features
+
+- add shortcut key for sdoc link ([#177](https://github.com/seafileltd/sea-sdoc-editor/issues/177)) ([9975fe8](https://github.com/seafileltd/sea-sdoc-editor/commit/9975fe8ab14d59b23e5bac36245fd570b2d02ba7))
+- toggle-cursor-between-editor-and-title ([#179](https://github.com/seafileltd/sea-sdoc-editor/issues/179)) ([4d8acaf](https://github.com/seafileltd/sea-sdoc-editor/commit/4d8acafb0bd531b1d5eb15dd6f9602baf4d045e9))
+- transfer url to file link ([#175](https://github.com/seafileltd/sea-sdoc-editor/issues/175)) ([66ed379](https://github.com/seafileltd/sea-sdoc-editor/commit/66ed37966496ef1d2abee1775491a780d41def6a))
+
 ## [3.0.62](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.61...@seafile/sdoc-editor@3.0.62) (2026-01-15)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
