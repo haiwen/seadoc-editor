@@ -30,6 +30,7 @@ const HorizontalAlignPopover = ({ target, editor, readonly, horizontalAlign }) =
       placement="right-start"
       hideArrow={true}
       fade={false}
+      offset={[0, 0]}
     >
       <div className="sdoc-dropdown-menu sdoc-table-alignment-menu">
         <div className="sdoc-dropdown-menu-item" onMouseDown={() => setTextAlignStyle('left')}>

@@ -32,6 +32,7 @@ const VerticalAlignPopover = ({ target, editor, readonly, verticalAlign }) => {
       placement="right-start"
       hideArrow={true}
       fade={false}
+      offset={[0, 0]}
     >
       <div className="sdoc-dropdown-menu sdoc-table-alignment-menu">
         <div className="sdoc-dropdown-menu-item" onMouseDown={() => setVerticalAlignStyle('flex-start')}>

@@ -90,6 +90,7 @@ const ColorSelectorPopover = ({ target, editor, readonly, isRichEditor = true })
       className="sdoc-color-menu-popover sdoc-table-cell-bg-colors-popover"
       toggle={toggle}
       ref={popoverRef}
+      offset={[0, 0]}
     >
       <div className="sdoc-dropdown-menu sdoc-color-dropdown-menu">
         <div className="p-3 d-flex flex-column">
@@ -151,6 +152,7 @@ const ColorSelectorPopover = ({ target, editor, readonly, isRichEditor = true })
           fade={false}
           toggle={moreColorsPopoverToggle}
           ref={moreColorsPopoverRef}
+          offset={[0, 0]}
         >
           <div className="sdoc-more-colors-container" onMouseDown={onMouseDown}>
             <ChromePicker

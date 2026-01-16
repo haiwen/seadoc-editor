@@ -35,5 +35,10 @@
 }
 
 .side-extendable .sdoc-arrow-right {
+  color: #666;
+  font-size: 12px;
+}
+
+.side-extendable:hover .sdoc-arrow-right {
   color: #fff;
 }
