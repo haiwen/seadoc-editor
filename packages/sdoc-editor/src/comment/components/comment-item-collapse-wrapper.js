@@ -115,7 +115,7 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
     >
       {topLevelComment.detail.element_id_list && (
         <div className={classNames('comment-item-selected-text-container', { 'detail-context-comment': topLevelComment.detail.element_id_list?.length > 0 })} onClick={handleScrollToArticle}>
-          <i className="sdocfont sdoc-comment-quote mr-2"></i>
+          <i className="sdocfont sdoc-quote-left mr-2"></i>
           <div className="comment-item-selected-text">
             {topLevelComment.detail.element_id_list.map((elementId, index) => {
               return (<div className='context-comment-item-selected-text' key={index}>{getCommentedTextsByElementId(elementId, topLevelComment.detail.text_comment_id)}</div>);
@@ -125,7 +125,7 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
       )}
       {element && (
         <div className="comment-item-selected-text-container" onClick={handleScrollToArticle}>
-          <i className="sdocfont sdoc-comment-quote mr-2"></i>
+          <i className="sdocfont sdoc-quote-left mr-2"></i>
           <div className="comment-item-selected-text">{Node.string(element)}</div>
         </div>
       )}

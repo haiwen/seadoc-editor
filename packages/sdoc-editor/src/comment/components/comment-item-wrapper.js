@@ -245,7 +245,7 @@ const CommentItemWrapper = forwardRef(({
     <div id={`comment-item-wrapper_${newCommentId}`} className={className} onClick={onItemClick}>
       {element && (
         <div className="comment-item-selected-text-container" onClick={handleScrollToArticle}>
-          <i className="sdocfont sdoc-comment-quote mr-2"></i>
+          <i className="sdocfont sdoc-quote-left mr-2"></i>
           <div className="comment-item-selected-text">{Node.string(element)}</div>
         </div>
       )}
@@ -253,7 +253,7 @@ const CommentItemWrapper = forwardRef(({
         <div ref={listRef} className="comment-item-list" style={style}>
           {comment.detail.element_id_list && !isGlobalComment && (
             <div className="context-comment-item-selected-text-container">
-              <i className="sdocfont sdoc-comment-quote mr-2"></i>
+              <i className="sdocfont sdoc-quote-left mr-2"></i>
               <div className="context-comment-items">
                 {comment.detail.element_id_list.map((elementId, index) => {
                   return (<div className="context-comment-item-selected-text" key={index}>{getCommentedTextsByElementId(elementId, comment.detail.text_comment_id)}</div>);

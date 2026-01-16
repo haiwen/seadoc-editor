@@ -298,7 +298,7 @@
   align-items: start !important;
 }
 
-.sdoc-comment-drawer .sdoc-comment-list-container .detail-context-comment .sdoc-comment-quote {
+.sdoc-comment-drawer .sdoc-comment-list-container .detail-context-comment .sdoc-quote-left {
   padding-top: 1px;
 }
 
@@ -308,7 +308,7 @@
   display: flex;
 }
 
-.sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container .sdoc-comment-quote {
+.sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container .sdoc-quote-left {
   font-size: 12px;
   padding-top: 1px;
 }
