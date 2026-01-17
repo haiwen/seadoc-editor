@@ -16,8 +16,7 @@ const ResizeHandlers = ({ element, handleResizeColumn }) => {
     initialX: 0,
     cellWidths: [],
   });
-  const [isMouseNearBorder, setIsMouseNearBorder] = useState(column.map(() => false));
-
+  const [isMouseNearBorder, setIsMouseNearBorder] = useState((element.column || []).map(() => false));
   const handleMouseDown = (index, event) => {
     event.preventDefault();
     const cellWidths = column.map(col => col.width);
@@ -46,7 +45,7 @@ const ResizeHandlers = ({ element, handleResizeColumn }) => {
     const onMouseMove = (event) => {
       event.preventDefault();
       // Let resize handler show when mouse is close to right edge of column at range of 20 px
-      const nearBorder = column.map((col, colIndex) => {
+      const nearBorder = (column || []).map((col, colIndex) => {
         const child = childNodes[colIndex];
         if (!child) return false;
         const childRect = child.getBoundingClientRect();
@@ -114,9 +113,10 @@ const ResizeHandlers = ({ element, handleResizeColumn }) => {
   }, [handleResizeColumn, column, isDraggingResizeHandler, isMouseNearBorder]);
 
   let leftAccumulator = 0;
+  const columns = Array.isArray(column) ? column : [];
   return (
     <div className='column-resize-handler' contentEditable={false}>
-      {column.map((column, index) => {
+      {columns.map((column, index) => {
         leftAccumulator += (column.width);
         const left = leftAccumulator;
         return (

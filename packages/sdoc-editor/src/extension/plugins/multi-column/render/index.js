@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useReadOnly, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { LAST_COLUMN_MARGIN_RIGHT_WIDTH } from '../constants';
 import { getCurrentPageWidth, updateColumnWidth } from '../helper';
 import ResizeHandlers from '../resize-handlers';
 import MultiColumnRoot from './multi-column-root';
@@ -34,10 +35,10 @@ const MultiColumn = ({ className, attributes, children, element }) => {
       const newPageWidth = entries[0]?.contentRect.width;
       // Check if sdocPageWidth changes
       if (pageWidth && newPageWidth !== pageWidth) {
-        const scaleFactor = newPageWidth / pageWidth;
+        const scaleFactor = (newPageWidth + LAST_COLUMN_MARGIN_RIGHT_WIDTH) / (pageWidth + LAST_COLUMN_MARGIN_RIGHT_WIDTH);
         const updatedColumns = element.column.map(item => ({
           ...item,
-          width: Math.round(item.width * scaleFactor),
+          width: item.width * scaleFactor,
         }));
 
         const columnWidthList = updatedColumns.map(item => `${item.width}px`);

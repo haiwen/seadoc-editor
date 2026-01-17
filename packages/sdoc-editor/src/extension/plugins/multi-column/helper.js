@@ -6,7 +6,7 @@ import { getStyleByFullWidthMode } from '../../../utils/full-width-mode';
 import LocalStorage from '../../../utils/local-storage-utils';
 import { ELEMENT_TYPE, IMAGE, IMAGE_BLOCK, INSERT_POSITION, PARAGRAPH } from '../../constants';
 import { findPath, getSelectedNodeEntryByType } from '../../core';
-import { COLUMN_MIN_WIDTH } from './constants';
+import { COLUMN_MIN_WIDTH, LAST_COLUMN_MARGIN_RIGHT_WIDTH } from './constants';
 
 export const insertMultiColumn = (editor, selection, position = INSERT_POSITION.CURRENT, type) => {
   const multiColumnNode = generateEmptyMultiColumn(editor, type);
@@ -36,7 +36,7 @@ export const generateEmptyMultiColumn = (editor, MultiColumnType) => {
     default:
       break;
   }
-  const currentPageWidth = getCurrentPageWidth(editor);
+  const currentPageWidth = getCurrentPageWidth(editor) + LAST_COLUMN_MARGIN_RIGHT_WIDTH;
   const initialColumnWidth = Math.max(COLUMN_MIN_WIDTH, parseInt(currentPageWidth / multiColumnNumber));
   for (let i = 0; i < multiColumnNumber; i++) {
     const columnWidthKey = slugid.nice();

@@ -1,11 +1,11 @@
 import { Editor, Transforms } from '@seafile/slate';
-import { ELEMENT_TYPE, IMAGE, ORDERED_LIST, PARAGRAPH, UNORDERED_LIST } from '../../constants';
+import { ELEMENT_TYPE, IMAGE, MULTI_COLUMN, ORDERED_LIST, PARAGRAPH, UNORDERED_LIST } from '../../constants';
 import { getNodeType, isLastNode, generateEmptyElement, getSelectedNodeEntryByType, findPath } from '../../core';
 import { unwrapList } from '../list/transforms/unwrap-list';
 import { hasImageInColumn, updateColumnWidthOnDeletion } from './helper';
 
 const withMultiColumn = (editor) => {
-  const { normalizeNode, deleteBackward, deleteForward } = editor;
+  const { normalizeNode, deleteBackward, deleteForward, insertFragment } = editor;
   const newEditor = editor;
 
   newEditor.normalizeNode = ([node, path]) => {
@@ -128,6 +128,22 @@ const withMultiColumn = (editor) => {
     }
 
     deleteForward(unit);
+  };
+
+  newEditor.insertFragment = (data) => {
+    const { selection } = editor;
+    if (!selection) return insertFragment(data);
+    // If inserting multi-column node, extract all children nodes from every column and insert them one by one
+    if (data[0].type === MULTI_COLUMN) {
+      let childrenNodes = [];
+      data[0].children.forEach(col => {
+        childrenNodes = childrenNodes.concat(col.children);
+      });
+      insertFragment(childrenNodes);
+      return;
+    }
+
+    insertFragment(data);
   };
 
   return newEditor;

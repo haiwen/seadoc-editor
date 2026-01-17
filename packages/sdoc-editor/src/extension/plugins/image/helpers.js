@@ -6,8 +6,8 @@ import { COMMENT_EDITOR, INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import SocketManager from '../../../socket/socket-manager';
 import EventBus from '../../../utils/event-bus';
-import { CODE_BLOCK, ELEMENT_TYPE, IMAGE, IMAGE_BLOCK, INSERT_POSITION, PARAGRAPH, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, BLOCKQUOTE, CALL_OUT } from '../../constants';
-import { generateEmptyElement, getNodeType, isTextNode, getParentNode, focusEditor, getAboveBlockNode, generateDefaultParagraph } from '../../core';
+import { CODE_BLOCK, ELEMENT_TYPE, IMAGE, IMAGE_BLOCK, INSERT_POSITION, PARAGRAPH, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN } from '../../constants';
+import { generateEmptyElement, getNodeType, isTextNode, getParentNode, focusEditor, getAboveBlockNode, generateDefaultParagraph, getTopLevelBlockNode } from '../../core';
 import base64ToUnit8Array from './base64-to-unit8array';
 import ImageCache from './image-cache';
 
@@ -82,8 +82,9 @@ export const insertImage = (editor, imgInfos, selection, position = INSERT_POSIT
 
   const validSelection = selection || editor.selection;
   let path = Editor.path(editor, validSelection);
-
-  if (position === INSERT_POSITION.AFTER) {
+  // Insert image inside into multi-column node
+  const topNodeEntry = getTopLevelBlockNode(editor);
+  if (position === INSERT_POSITION.AFTER && topNodeEntry[0].type !== MULTI_COLUMN) {
     const p = generateEmptyElement(ELEMENT_TYPE.PARAGRAPH);
     imageNodes.forEach((item, index) => {
       p.children[index] = item;

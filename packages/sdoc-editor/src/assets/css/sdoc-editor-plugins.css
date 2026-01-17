@@ -96,7 +96,7 @@
 .sdoc-editor__article .sdoc-image-wrapper {
   position: relative;
   display: inline-block;
-  margin: 5px 0.15em;
+  margin: 5px 0;
   caret-color: transparent;
   max-width: 99%;
 }
@@ -136,7 +136,7 @@
 .sdoc-editor__article .sdoc-image-inner {
   position: relative;
   display: inline-block;
-  margin: 0 3px;
+  margin: 0;
 }
 
 .sdoc-editor__article .sdoc-image-content {
