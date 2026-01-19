@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.69](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.68...@seafile/sdoc-editor@3.0.69) (2026-01-19)
+
+### Bug Fixes
+
+- optimize multi column width ([#181](https://github.com/seafileltd/sea-sdoc-editor/issues/181)) ([95ab5b0](https://github.com/seafileltd/sea-sdoc-editor/commit/95ab5b07ba0ebf06e347391b864f109580213e5e))
+
 ## [3.0.68](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.67...@seafile/sdoc-editor@3.0.68) (2026-01-16)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
