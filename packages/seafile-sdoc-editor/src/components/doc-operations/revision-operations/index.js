@@ -54,6 +54,11 @@ const RevisionOperations = ({
         toaster.danger(t(error));
         return;
       }
+      if (error && error.response && error.response.status === '404') {
+        setShowTip(false);
+        setTipType('');
+        return;
+      }
       toaster.danger(t('Error'));
       setShowTip(false);
       setTipType('');
