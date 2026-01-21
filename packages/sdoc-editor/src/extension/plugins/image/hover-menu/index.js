@@ -142,6 +142,25 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
               >
                 <span className='mr-1'>{t(type === IMAGE_BLOCK ? 'Block' : 'Inline')}</span>
                 <i className='sdocfont sdoc-arrow-down'/>
+                {popoverState.displayPopover && (
+                  <div className="sdoc-image-popover sdoc-dropdown-menu">
+                    {IMAGE_DISPLAY_TYPE.map((item) => {
+                      return (
+                        <div
+                          key={item.value}
+                          className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
+                          onClick={(event) => onSelect(event, { 'display_type': item.value })}
+                        >
+                          <div className="sdoc-dropdown-item-content">
+                            <i className='sdoc-dropdown-item-content-icon'/>
+                            <span>{t(item.text)}</span>
+                          </div>
+                          {type === item.value && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>)}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </span>
             </span>)}
           {!readonly && (
@@ -156,6 +175,24 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                 >
                   <i className={classnames(`sdocfont sdoc-align-${align || 'left'} mr-1`)}/>
                   <i className='sdocfont sdoc-arrow-down'/>
+                  {popoverState.alignPopover && (
+                    <div className='sdoc-image-popover align-popover sdoc-dropdown-menu'>
+                      {MENUS_CONFIG_MAP[TEXT_ALIGN].map((item) => {
+                        return (
+                          <div
+                            key={item.id}
+                            className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
+                            onClick={(event) => onSelect(event, { align: item.type })}
+                          >
+                            <div className="sdoc-dropdown-item-content">
+                              <i className={classnames(item.iconClass)}/>
+                            </div>
+                            {align === item.type && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>)}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </span>
               )}
               <span
@@ -168,6 +205,24 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
               >
                 <i className='sdocfont sdoc-image mr-1'/>
                 <i className='sdocfont sdoc-arrow-down'/>
+                {popoverState.borderPopover && (
+                  <div className='sdoc-image-popover border-popover sdoc-dropdown-menu'>
+                    {IMAGE_BORDER_TYPE.map((item) => {
+                      return (
+                        <div
+                          key={item.type}
+                          className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
+                          onClick={(event) => onSelect(event, { border_type: item.type })}
+                        >
+                          <div className="sdoc-dropdown-item-content">
+                            <img src={item.imgUrl} draggable={false} alt=''/>
+                            {border_type === item.type && <i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
                 {isShowTooltip && (
                   <Tooltip target='sdoc_image_border' placement='top' fade={true}>
                     {t('Image_border')}
@@ -210,61 +265,6 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
             </span>
           </span>
         </div>
-        {popoverState.displayPopover && (
-          <div className="sdoc-image-popover sdoc-dropdown-menu">
-            {IMAGE_DISPLAY_TYPE.map((item) => {
-              return (
-                <div
-                  key={item.value}
-                  className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
-                  onClick={(event) => onSelect(event, { 'display_type': item.value })}
-                >
-                  <div className="sdoc-dropdown-item-content">
-                    <i className='sdoc-dropdown-item-content-icon'/>
-                    <span>{t(item.text)}</span>
-                  </div>
-                  {type === item.value && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>)}
-                </div>
-              );
-            })}
-          </div>
-        )}
-        {popoverState.alignPopover && (
-          <div className='sdoc-image-popover align-popover sdoc-dropdown-menu'>
-            {MENUS_CONFIG_MAP[TEXT_ALIGN].map((item) => {
-              return (
-                <div
-                  key={item.id}
-                  className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
-                  onClick={(event) => onSelect(event, { align: item.type })}
-                >
-                  <div className="sdoc-dropdown-item-content">
-                    <i className={classnames(item.iconClass)}/>
-                  </div>
-                  {align === item.type && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>)}
-                </div>
-              );
-            })}
-          </div>
-        )}
-        {popoverState.borderPopover && (
-          <div className={classnames('sdoc-image-popover border-popover sdoc-dropdown-menu', { 'sdoc-block-image': type === IMAGE_BLOCK })} style={borderPopoverStyle}>
-            {IMAGE_BORDER_TYPE.map((item) => {
-              return (
-                <div
-                  key={item.type}
-                  className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
-                  onClick={(event) => onSelect(event, { border_type: item.type })}
-                >
-                  <div className="sdoc-dropdown-item-content">
-                    <img src={item.imgUrl} draggable={false} alt=''/>
-                    {border_type === item.type && <i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
         {isShowImagePreview && (
           <ImagePreviewer
             imageUrl={getImageURL(data, editor)}
