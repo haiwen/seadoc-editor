@@ -103,6 +103,26 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                 >
                   <i className={classnames('mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
                   <i className='sdocfont sdoc-arrow-down'></i>
+                  {isShowDisplayStylePopover && (
+                    <div className="sdoc-file-display-style-popover sdoc-dropdown-menu">
+                      {newSdocFileTypes.map((sdocLinkType) => {
+                        return (
+                          <div
+                            key={sdocLinkType}
+                            date-type={sdocLinkType}
+                            className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
+                            onClick={(event) => onSelect(event, sdocLinkType)}
+                          >
+                            <div className="sdoc-dropdown-item-content">
+                              <i className={classnames('sdoc-dropdown-item-content-icon', SDOC_LINK_TYPE_CONFIG[sdocLinkType].icon)}></i>
+                              <span>{t(SDOC_LINK_TYPE_CONFIG[sdocLinkType].text)}</span>
+                            </div>
+                            {selectedType === sdocLinkType && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"></i>)}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </span>
                 {isShowTooltip && (
                   <Tooltip target='display_sdoc_link' placement='top' fade={true}>
@@ -131,26 +151,6 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
             </>
           )}
         </div>
-        {isShowDisplayStylePopover && (
-          <div className="sdoc-file-display-style-popover sdoc-dropdown-menu">
-            {newSdocFileTypes.map((sdocLinkType) => {
-              return (
-                <div
-                  key={sdocLinkType}
-                  date-type={sdocLinkType}
-                  className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
-                  onClick={(event) => onSelect(event, sdocLinkType)}
-                >
-                  <div className="sdoc-dropdown-item-content">
-                    <i className={classnames('sdoc-dropdown-item-content-icon', SDOC_LINK_TYPE_CONFIG[sdocLinkType].icon)}></i>
-                    <span>{t(SDOC_LINK_TYPE_CONFIG[sdocLinkType].text)}</span>
-                  </div>
-                  {selectedType === sdocLinkType && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"></i>)}
-                </div>
-              );
-            })}
-          </div>
-        )}
       </div>
     </ElementPopover>
   );

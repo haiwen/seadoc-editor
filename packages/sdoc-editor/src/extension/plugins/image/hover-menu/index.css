@@ -58,8 +58,8 @@
 
 .sdoc-image-hover-menu-container .sdoc-image-popover {
   position: absolute;
-  top: 37px;
-  left: 8px;
+  top: 32px;
+  left: 0px;
   background-color: #fff;
   border: 1px solid #e5e6e8;
   border-radius: 2px;
@@ -72,20 +72,14 @@
 }
 
 .sdoc-image-hover-menu-container .align-popover {
-  left: 100px;
   min-width: 6rem;
 }
 
 .sdoc-image-hover-menu-container .border-popover {
-  left: 104px;
   flex-direction: row;
   height: 80px;
   align-items: center;
   padding: 0 8px;
-}
-
-.sdoc-image-hover-menu-container .border-popover.sdoc-block-image {
-  left: 144px;
 }
 
 .sdoc-image-hover-menu-container .border-popover .sdoc-dropdown-menu-item .sdoc-dropdown-item-content .sdoc-check-mark {
