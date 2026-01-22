@@ -663,5 +663,7 @@
   "The_linked_library_is_required": "The linked library is required.",
   "Zoom_in": "Zoom in",
   "Zoom_out": "Zoom out",
-  "Search_page": "Search page"
+  "Search_page": "Search page",
+  "The_link_address_or_link_page_or_link_block_is_required": "The link address or link page or link block is required",
+  "Link_page": "Link page"
 }
