@@ -1,7 +1,7 @@
 import { Transforms, Node, Editor, Range, Element, Text } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import isUrl from 'is-url';
-import { INTERNAL_EVENT } from '../../../constants';
+import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
@@ -10,6 +10,7 @@ import { isImage, isSameDomain } from '../../utils';
 import { insertFileLink } from '../file-link/helpers';
 import { insertSdocFileLink } from '../sdoc-link/helpers';
 import { insertWhiteboard } from '../whiteboard/helper';
+import { insertWikiPageLink } from '../wiki-link/helpers';
 import { genLinkNode, insertLink, isCommonFile, isExdrawFile, isSdocFile } from './helpers';
 
 const withLink = (editor) => {
@@ -48,6 +49,26 @@ const withLink = (editor) => {
             insertFileLink(editor, fileName, fileUuid);
           } else {
             const url = new URL(text);
+
+            // Insert wiki page as link in wiki
+            const pathname = url.pathname;
+            if (editor.editorType === WIKI_EDITOR && pathname.startsWith('/wikis/')) {
+              const parts = pathname.split('/');
+              const wikiPageId = parts[parts.length - 2];
+
+              if (editor.selection && !Range.isCollapsed(editor.selection)) {
+                const title = getEditorString(editor, editor.selection);
+                insertLink(editor, title, text, INSERT_POSITION.CURRENT, null, '', wikiPageId);
+                return;
+              }
+
+              const wikiPageList = editor.editorType === WIKI_EDITOR && window.wiki?.config?.navConfig.pages;
+              const page = wikiPageList?.find(p => p.id === wikiPageId);
+              page && insertWikiPageLink(editor, page.name, page.wikiRepoId, page.id);
+              return;
+            }
+
+            // Insert block element as link
             const linkedNodeId = url.hash.replace(/^#/, '');
 
             if (editor.selection && !Range.isCollapsed(editor.selection)) {

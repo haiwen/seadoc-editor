@@ -5,6 +5,7 @@
 }
 
 .select-btn .link-address-btn,
+.select-btn .link-page-btn,
 .select-btn .link-block-btn {
   font-size: .875rem;
   font-weight: 600;
@@ -12,16 +13,19 @@
 }
 
 .select-btn .link-address-btn:hover,
+.select-btn .link-page-btn:hover,
 .select-btn .link-block-btn:hover {
   cursor: pointer;
 }
 
+.select-btn .link-page-btn.active,
 .select-btn .link-address-btn.active,
 .select-btn .link-block-btn.active {
   color: #ff9800;
   border-bottom: 2px solid #ff9800;
 }
 
+.select-btn .link-page-btn,
 .select-btn .link-address-btn {
   margin-right: 40px;
 }
@@ -33,6 +37,7 @@
 .selected-linked-block-wrapper .form-control {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   height: 36.39px;
 }

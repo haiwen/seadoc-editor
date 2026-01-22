@@ -662,5 +662,6 @@
   "The_view_type_is_required": "视图类型是必填项。",
   "The_linked_library_is_required": "关联的资料库是必填项。",
   "Zoom_in": "放大",
-  "Zoom_out": "缩小"
+  "Zoom_out": "缩小",
+  "Search_page": "搜索页面"
 }

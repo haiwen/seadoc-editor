@@ -4,11 +4,13 @@ import { Button, Modal, ModalBody, ModalFooter, Alert, Label, ModalHeader } from
 import { Element, Node } from '@seafile/slate';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import { WIKI_EDITOR } from '../../../../../constants';
 import { createProcessor } from '../../../../../slate-convert/md-to-html';
 import slateToMdString from '../../../../../slate-convert/slate-to-md';
 import { HEADER_TAG, HEADERS, INTERNAL_LINKED_TYPE } from '../../../../constants';
 import { getEditorString } from '../../../../core';
 import { insertLink, updateLink, checkLink, parseHtmlString, isEmptyNode } from '../../helpers';
+import LinkedPagesForm from './select-forms/linked-page';
 
 import './index.css';
 
@@ -16,13 +18,12 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   const { t } = useTranslation('sdoc-editor');
   const [linkErrorMessage, setLinkErrorMessage] = useState('');
   const [titleErrorMessage, setTitleErrorMessage] = useState('');
-  const { href: oldURL, linked_id } = element || { href: '' };
+  const { href: oldURL, linked_id, linked_wiki_page_id } = element || { href: '' };
   const oldTitle = element?.children[0].text || linkTitle || '';
   const initTitle = useMemo(() => oldTitle ? oldTitle : getEditorString(editor, editor.selection), [editor, oldTitle]);
   const [title, setTitle] = useState(initTitle);
-  const [url, setURL] = useState(linked_id ? '' : oldURL);
-  const [activeTab, setActiveTab] = useState(linked_id ? 'block' : 'url');
   const [selectedBlockId, setSelectedBlockId] = useState('');
+  const [selectedPageId, setSelectedPageId] = useState('');
   const [headerList, setheaderList] = useState([]);
   const [isOpenSelect, setIsOpenSelect] = useState(false);
   const [isOpenSelectHeader, setIsOpenSelectHeader] = useState(false);
@@ -31,14 +32,34 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   const [isOpenSelectBlockquote, setIsOpenSelectBlockquote] = useState(false);
   const [htmlString, setHtmlString] = useState('');
 
+  const initTab = useMemo(() => {
+    if (linked_id) {
+      return 'block';
+    }
+    if (linked_wiki_page_id) {
+      return 'page';
+    }
+    return 'url';
+  }, [linked_id, linked_wiki_page_id]);
+  const [url, setURL] = useState(initTab !== 'url' ? '' : oldURL);
+  const [activeTab, setActiveTab] = useState(initTab);
+
   const submit = useCallback(() => {
     setLinkErrorMessage('');
     setTitleErrorMessage('');
 
-    if (!url && !selectedBlockId) {
+    if (editor.editorType === WIKI_EDITOR) {
+      if (!url && !selectedBlockId && !selectedPageId) {
+        setLinkErrorMessage(t('The_link_address_or_link_page_or_link_block_is_required'));
+        return;
+      }
+    }
+
+    if (editor.editorType !== WIKI_EDITOR && !url && !selectedBlockId) {
       setLinkErrorMessage(t('The_link_address_or_link_block_is_required'));
       return;
     }
+
     if (!title) {
       setTitleErrorMessage(t('The_link_title_is_required'));
       return;
@@ -50,16 +71,16 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
 
     const isEdit = oldURL || oldTitle;
     if (isEdit) {
-      updateLink(editor, title, url, selectedBlockId);
+      updateLink(editor, title, url, selectedBlockId, selectedPageId);
     } else {
-      insertLink(editor, title, url, insertPosition, slateNode, selectedBlockId);
+      insertLink(editor, title, url, insertPosition, slateNode, selectedBlockId, selectedPageId);
     }
 
     handleSubmit && handleSubmit();
     closeDialog();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor, url, title, oldTitle, oldURL, insertPosition, selectedBlockId]);
+  }, [editor, url, title, oldTitle, oldURL, insertPosition, selectedBlockId, selectedPageId]);
 
   const onKeyDown = useCallback((event) => {
     if (event.keyCode === 13) {
@@ -76,7 +97,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
     if (value === url) return;
     setURL(value);
     setSelectedBlockId('');
-
+    setSelectedPageId('');
   }, [url]);
 
   const handleTitleChange = useCallback((event) => {
@@ -104,6 +125,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
       const nodeId = block.dataset.id;
       setSelectedBlockId(nodeId);
       setURL('');
+      setSelectedPageId('');
       setIsOpenSelect(false);
     }
   };
@@ -181,6 +203,14 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
             >
               {t('Link_address')}
             </div>
+            {editor.editorType === WIKI_EDITOR &&
+              <div
+                className={classnames('link-page-btn', { 'active': activeTab === 'page' })}
+                onClick={() => setActiveTab('page')}
+              >
+                {t('Link_page')}
+              </div>
+            }
             <div
               className={classnames('link-block-btn', { 'active': activeTab === 'block' })}
               onClick={() => setActiveTab('block')}
@@ -284,6 +314,9 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
               )}
             </div>
           )}
+          {editor.editorType === WIKI_EDITOR && activeTab === 'page' &&
+            <LinkedPagesForm editor={editor} element={element} setSelectedPageId={setSelectedPageId} setSelectedBlockId={setSelectedBlockId} setURL={setURL} />
+          }
         </Fragment>
       </ModalBody>
       <ModalFooter>
