@@ -22,7 +22,7 @@ describe('toggle link test', () => {
       <editor>
         <hp>
           <htext></htext>
-          <ha href='http://localhost:7003/simple-editor' title='测试链接' linked_id= ''>
+          <ha href='http://localhost:7003/simple-editor' title='测试链接' linked_id='' linked_wiki_page_id='' >
             测试链接
           </ha>
           <htext></htext>
@@ -53,7 +53,7 @@ describe('toggle link test', () => {
         <editor>
           <hp>
             <htext>aaa</htext>
-            <ha href='http://localhost:7003/simple-editor' title='测试链接' linked_id= ''>
+            <ha href='http://localhost:7003/simple-editor' title='测试链接' linked_id='' linked_wiki_page_id='' >
               测试链接
             </ha>
             <htext>b</htext>
@@ -87,7 +87,7 @@ describe('toggle link test', () => {
         <editor>
           <hp>
             <htext>aaa</htext>
-            <ha href='http://localhost:7003/simple-editor' title='bb' linked_id= ''>
+            <ha href='http://localhost:7003/simple-editor' title='bb' linked_id='' linked_wiki_page_id='' >
               bb
             </ha>
             <htext>b</htext>
@@ -127,7 +127,7 @@ describe('toggle link test', () => {
         <editor>
           <hp>
             <htext> </htext>
-            <ha href='http://localhost:7003' title='新测试链接' linked_id= ''>
+            <ha href='http://localhost:7003' title='新测试链接' linked_id='' linked_wiki_page_id='' >
               新测试链接
             </ha>
             <htext> </htext>
@@ -212,7 +212,7 @@ describe('modify link test', () => {
             测试链接
           </ha>
           <htext> </htext>
-          <ha href='http://localhost:7003/simple' title='测试' linked_id= ''>
+          <ha href='http://localhost:7003/simple' title='测试' linked_id='' linked_wiki_page_id='' >
             测试
           </ha>
           <htext></htext>
