@@ -10,6 +10,7 @@ import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../../constants';
 import { usePlugins } from '../../../../hooks/use-plugins';
 import EventBus from '../../../../utils/event-bus';
 import { ElementPopover } from '../../../commons';
+import { WIKI_LINK } from '../../../constants/element-type';
 import { SDOC_LINK_TYPE_CONFIG, SDOC_LINK_TYPE, SDOC_LINK_TYPES } from '../constants';
 import { isInTable, onCopySdocLinkNode } from '../helpers';
 
@@ -72,6 +73,15 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateDisplayPlugin]);
 
+  const handleClickOpenLink = useCallback((e) => {
+    e.stopPropagation();
+    if (element.type === WIKI_LINK && element.page_id) {
+      e.preventDefault();
+      const eventBus = EventBus.getInstance();
+      eventBus.dispatch('open_wiki_page_id_link', { page_id: element.page_id });
+    }
+  }, [element]);
+
   const selectedType = element.display_type || SDOC_LINK_TYPE.TEXT_LINK;
   const newSdocFileTypes = SDOC_LINK_TYPES.filter(sdocLinkType => isInTable(editor, element) ? sdocLinkType !== SDOC_LINK_TYPE.CARD_LINK : true);
 
@@ -81,7 +91,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
         <div className='hover-menu-container'>
           <span className='op-group-item'>
             <span role="button" className={classnames('op-item', { 'ml-0': readOnly })}>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onClick={(e) => e.stopPropagation()}>{t('Open_link')}</a>
+              <a href={url} target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onClick={handleClickOpenLink}>{t('Open_link')}</a>
             </span>
           </span>
           {!readOnly && (
