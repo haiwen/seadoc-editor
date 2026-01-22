@@ -127,7 +127,7 @@ describe('toggle link test', () => {
         <editor>
           <hp>
             <htext> </htext>
-            <ha href='http://localhost:7003' title='新测试链接' linked_id='' linked_wiki_page_id='' >
+            <ha href='http://localhost:7003' title='新测试链接' linked_id=''>
               新测试链接
             </ha>
             <htext> </htext>
