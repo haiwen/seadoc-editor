@@ -62,7 +62,7 @@ const withLink = (editor) => {
                 return;
               }
 
-              const wikiPageList = editor.editorType === WIKI_EDITOR && window.wiki?.config?.navConfig.pages;
+              const wikiPageList = context.getSetting('navConfig')?.pages;
               const page = wikiPageList?.find(p => p.id === wikiPageId);
               page && insertWikiPageLink(editor, page.name, page.wikiRepoId, page.id);
               return;

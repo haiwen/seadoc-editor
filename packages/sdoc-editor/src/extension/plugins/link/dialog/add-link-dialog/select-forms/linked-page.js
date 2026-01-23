@@ -4,6 +4,7 @@ import { Input } from 'reactstrap';
 import classNames from 'classnames';
 import isHotkey from 'is-hotkey';
 import { WIKI_EDITOR } from '../../../../../../constants';
+import context from '../../../../../../context';
 import { PageDisplay } from './selected-page-display';
 
 import './linked-page.css';
@@ -18,8 +19,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
   const [searchResult, setSearchResult] = useState([]);
   const searchRef = useRef(null);
 
-  const wikiPageList = editor.editorType === WIKI_EDITOR && window.wiki?.config?.navConfig.pages;
-  const wikiNavPages = editor.editorType === WIKI_EDITOR && window.wiki?.config?.navConfig.navigation;
+  const { pages: wikiPageList, navigation: wikiNavPages } = editor.editorType === WIKI_EDITOR && context.getSetting('navConfig');
   const { linked_wiki_page_id } = element || {};
   const [displayedWikiPage, setDisplayedWikiPage] = useState(linked_wiki_page_id || '');
 

@@ -5,6 +5,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import classNames from 'classnames';
 import throttle from 'lodash.throttle';
 import { INTERNAL_EVENT } from '../../../constants';
+import context from '../../../context';
 import { getMaximumCapacity, getLocalStorageFiles } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import LocalStorage from '../../../utils/local-storage-utils';
@@ -142,8 +143,7 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
       return;
     }
 
-    const { navConfig } = window.wiki.config;
-    const { pages } = navConfig;
+    const { pages } = context.getSetting('navConfig');
     const newFiles = [];
     pages.forEach((page) => {
       if (page.name.includes(searchText.trim())) {
