@@ -56,14 +56,15 @@ const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collabor
 
   const focusEditor = ({ key }) => {
     if (['ArrowRight', 'ArrowDown'].includes(key)) {
+      ReactEditor.focus(validEditor);
+
       const [nodeEntry] = Editor.nodes(validEditor, {
         universal: true,
         match: n => Text.isText(n)
       });
+      if (!nodeEntry) return;
       const [, path] = nodeEntry;
-      ReactEditor.focus(validEditor);
       Transforms.select(validEditor, Editor.start(validEditor, path));
-      ReactEditor.focus(validEditor);
     }
   };
 
