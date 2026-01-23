@@ -114,10 +114,10 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
     return (
       <div
         key={page.id}
-        className='wiki-link-page-item-wrapper'
+        className='sdoc-wiki-link-page-item-wrapper'
         style={{ paddingLeft: depth * 16 }}
       >
-        <div className={classNames('wiki-link-page-item', {
+        <div className={classNames('sdoc-wiki-link-page-item', {
           'is-dir': page.isDir,
         })}>
           {page.isDir &&
@@ -127,7 +127,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
             }}>
               <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-down' />
             </span>}
-          <span className='wiki-link-page-main'
+          <span className='sdoc-wiki-link-page-main'
             onClick={(e) => handleSelect(e, page.id)}
           >
             {page.icon && <span className="page-icon">{page.icon}</span>}
@@ -140,7 +140,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
           </span>
         </div>
         {page.isDir && !isCollapsed(page.id) && item.children.length > 0 && (
-          <div className="wiki-link-page-children">
+          <div className="sdoc-wiki-link-page-children">
             {item.children.map(child =>
               renderPage(child, wikiPageList, depth + 1)
             )}
@@ -165,7 +165,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
         <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-down'></i>
       </div>
       {isOpenSelect && (
-        <div className='link-block-wrapper wiki-link-page'>
+        <div className='link-block-wrapper sdoc-wiki-link-page'>
           <div className='sdoc-page-search-container'>
             <div className='sdocfont sdoc-find-replace sdoc-search'></div>
             <Input innerRef={searchRef} className='sdoc-search-input' onKeyUp={handleInputKeyDown} onChange={handleSearchInputChange} id='sdoc-search' placeholder={t('Search_page')} />

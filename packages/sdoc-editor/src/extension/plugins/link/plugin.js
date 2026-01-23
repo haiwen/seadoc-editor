@@ -52,7 +52,7 @@ const withLink = (editor) => {
 
             // Insert wiki page as link in wiki
             const pathname = url.pathname;
-            if (editor.editorType === WIKI_EDITOR && pathname.startsWith('/wikis/')) {
+            if (editor.editorType === WIKI_EDITOR && pathname.includes('/wikis/')) {
               const parts = pathname.split('/');
               const wikiPageId = parts[parts.length - 2];
 

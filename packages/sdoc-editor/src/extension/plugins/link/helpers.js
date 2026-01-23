@@ -111,7 +111,7 @@ export const updateLink = (editor, newText, newUrl, linkedNodeId, linkedPageId) 
   const linkAbove = getAboveNode(editor, { match: { type: LINK } });
   if (linkAbove) {
     const { href: oldUrl, title: oldText } = linkAbove[0] || {};
-    if (linkedNodeId || (editor.editorType === WIKI_EDITOR && linkedPageId)) {
+    if (linkedNodeId || linkedPageId) {
       // In non-wiki link
       if (editor.editorType !== WIKI_EDITOR && linkedNodeId) {
         Transforms.setNodes(editor, { linked_id: linkedNodeId }, { at: linkAbove[1] });
@@ -138,7 +138,11 @@ export const updateLink = (editor, newText, newUrl, linkedNodeId, linkedPageId) 
       }
     }
     if (!linkedNodeId && !linkedPageId && (oldUrl !== newUrl || oldText !== newText)) {
-      Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '' }, { at: linkAbove[1] });
+      if (editor.editorType === WIKI_EDITOR) {
+        Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '', linked_wiki_page_id: '' }, { at: linkAbove[1] });
+      } else {
+        Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '' }, { at: linkAbove[1] });
+      }
     }
     upsertLinkText(editor, { text: newText });
     return true;
