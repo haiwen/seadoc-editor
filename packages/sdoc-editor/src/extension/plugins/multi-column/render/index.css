@@ -23,7 +23,7 @@
   width: calc(100% - 50px);
   max-width: 100%;
   position: relative;
-  padding: 5px 5px 5px 0px;
+  padding: 5px 0px;
   box-sizing: border-box;
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -45,7 +45,7 @@
 }
 
 .sdoc-multicolumn-container .column-resize-handler .column-width-just.active,
-.sdoc-multicolumn-container .column-resize-handler .column-width-just:hover  {
+.sdoc-multicolumn-container .column-resize-handler .column-width-just:hover {
   background-color: lightgray;
   cursor: col-resize;
 }
