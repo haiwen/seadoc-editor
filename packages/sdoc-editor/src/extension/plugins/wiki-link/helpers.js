@@ -19,6 +19,10 @@ export const insertWikiPageLink = (editor, text, wikiRepoId, pageId, icon, isDir
 
   if (isCollapsed) {
     Transforms.insertNodes(editor, wikiLinkNode);
+    const point = Editor.after(editor, editor.selection);
+    if (point) {
+      Transforms.select(editor, point);
+    }
   } else {
     const selectedText = Editor.string(editor, selection); // Selected text
     if (selectedText !== text) {

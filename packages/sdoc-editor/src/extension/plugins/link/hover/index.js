@@ -5,6 +5,7 @@ import { Editor } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
+import EventBus from '../../../../utils/event-bus';
 import { isNodeInCurrentView, isWeChat } from '../helpers';
 
 import './index.css';
@@ -12,7 +13,7 @@ import './index.css';
 const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) => {
   const readOnly = useReadOnly();
   const { t } = useTranslation('sdoc-editor');
-  const { linked_id } = element;
+  const { linked_id, linked_wiki_page_id } = element;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
   useEffect(() => {
@@ -31,7 +32,13 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
 
   const handleOnClick = useCallback((event) => {
     event.stopPropagation();
-    if (!linked_id) return;
+    if (!linked_id && !linked_wiki_page_id) return;
+
+    if (linked_wiki_page_id) {
+      const eventBus = EventBus.getInstance();
+      eventBus.dispatch('open_wiki_page_id_link', { page_id: linked_wiki_page_id });
+      return;
+    }
 
     const [linkedNodeEntry] = Editor.nodes(editor, {
       at: [],
@@ -57,7 +64,7 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
     <>
       {createPortal(
         <div id="link-op-menu" className="link-op-menu" style={menuPosition}>
-          {linked_id ?
+          {linked_id || linked_wiki_page_id ?
             <span className="link-op-menu-link" onClick={handleOnClick}>{t('Go_to_link')}</span> :
             <span target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onMouseDown={onMouseDown}>{t('Open_link')}</span>
           }

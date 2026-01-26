@@ -1,6 +1,7 @@
 import { Editor, Transforms, Range, Path, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import slugid from 'slugid';
+import { WIKI_EDITOR } from '../../../constants';
 import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, IMAGE_BLOCK, INSERT_POSITION, LINK, LIST_ITEM, PARAGRAPH } from '../../constants';
 import { getNodeType, getSelectedElems, getAboveNode, getEditorString, replaceNodeChildren, generateEmptyElement } from '../../core';
 
@@ -26,13 +27,14 @@ export const checkLink = (url) => {
   return false;
 };
 
-export const genLinkNode = (url, text, nodeId) => {
+export const genLinkNode = (url, text, nodeId, pageId) => {
   const linkNode = {
     id: slugid.nice(),
     type: 'link',
-    href: url,
+    href: url || '',
     title: text,
     linked_id: nodeId || '',
+    linked_wiki_page_id: pageId || '',
     children: [{
       id: slugid.nice(),
       text: text || ''
@@ -53,13 +55,15 @@ export const getLinkType = (editor) => {
   return getNodeType(n);
 };
 
-export const insertLink = (editor, title, url, position = INSERT_POSITION.CURRENT, slateNode, linkedNodeId) => {
+export const insertLink = (editor, title, url, position = INSERT_POSITION.CURRENT, slateNode, linkedNodeId, selectedPageId) => {
   if (position === INSERT_POSITION.CURRENT && isMenuDisabled(editor)) return;
-  if (!title || (!url && !linkedNodeId)) return;
+  if (!title || (!url && !linkedNodeId && !selectedPageId)) return;
 
   let linkNode = genLinkNode(url, title);
   if (linkedNodeId) {
     linkNode = genLinkNode(url, title, linkedNodeId);
+  } else if (selectedPageId) {
+    linkNode = genLinkNode(url, title, '', selectedPageId);
   }
 
   if (position === INSERT_POSITION.AFTER) {
@@ -101,20 +105,44 @@ export const insertLink = (editor, title, url, position = INSERT_POSITION.CURREN
   Transforms.collapse(editor, { edge: 'end' });
 };
 
-export const updateLink = (editor, newText, newUrl, linkedNodeId) => {
+export const updateLink = (editor, newText, newUrl, linkedNodeId, linkedPageId) => {
 
   // Update children
   const linkAbove = getAboveNode(editor, { match: { type: LINK } });
   if (linkAbove) {
     const { href: oldUrl, title: oldText } = linkAbove[0] || {};
-    if (linkedNodeId) {
-      Transforms.setNodes(editor, { linked_id: linkedNodeId }, { at: linkAbove[1] });
+    if (linkedNodeId || linkedPageId) {
+      // In non-wiki link
+      if (editor.editorType !== WIKI_EDITOR && linkedNodeId) {
+        Transforms.setNodes(editor, { linked_id: linkedNodeId }, { at: linkAbove[1] });
+      }
+      // In wiki link
+      if (editor.editorType === WIKI_EDITOR) {
+        if (linkedNodeId) {
+          Transforms.setNodes(editor, {
+            ...(linkedNodeId && { linked_id: linkedNodeId }),
+            ...{ linked_wiki_page_id: '' }
+          }, { at: linkAbove[1] }
+          );
+        }
+        if (linkedPageId) {
+          Transforms.setNodes(editor, {
+            ...(linkedPageId && { linked_wiki_page_id: linkedPageId }),
+            ...{ linked_id: '' }
+          }, { at: linkAbove[1] }
+          );
+        }
+      }
       if (oldText !== newText) {
         Transforms.setNodes(editor, { title: newText }, { at: linkAbove[1] });
       }
     }
-    if (!linkedNodeId && (oldUrl !== newUrl || oldText !== newText)) {
-      Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '' }, { at: linkAbove[1] });
+    if (!linkedNodeId && !linkedPageId && (oldUrl !== newUrl || oldText !== newText)) {
+      if (editor.editorType === WIKI_EDITOR) {
+        Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '', linked_wiki_page_id: '' }, { at: linkAbove[1] });
+      } else {
+        Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '' }, { at: linkAbove[1] });
+      }
     }
     upsertLinkText(editor, { text: newText });
     return true;
@@ -173,7 +201,7 @@ export const isCommonFile = (res, url) => {
   const { data: { files_info } } = res;
   const fileInfo = files_info[url];
   const { is_dir, file_ext } = fileInfo || {};
-  return fileInfo && !is_dir && !['sdoc', 'exdraw', 'video'].includes(file_ext);
+  return fileInfo && !is_dir && file_ext && !['sdoc', 'exdraw', 'video'].includes(file_ext);
 };
 
 export const isWeChat = () => {

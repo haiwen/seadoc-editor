@@ -81,11 +81,23 @@ class Link extends React.Component {
 
   onLinkClick = (e) => {
     const isModClick = isMac() ? e.metaKey : e.ctrlKey;
+    const { linked_id, linked_wiki_page_id, href } = this.props.element;
     // mod + click
-    if (isModClick && !this.props.element.linked_id) {
-      window.open(this.props.element.href, '_blank', 'noreferrer');
+    if (isModClick && !linked_id && !linked_wiki_page_id) {
+      window.open(href, '_blank', 'noreferrer');
       return;
     }
+    // mod + click on linked wiki page
+    if (isModClick && linked_wiki_page_id) {
+      const { href } = window.location;
+
+      const parts = href.split('/');
+      parts[parts.length - 2] = linked_wiki_page_id;
+      const newHref = parts.join('/');
+      window.open(newHref, '_blank', 'noreferrer');
+      return;
+    }
+
     this.setPosition(e.target);
     this.setState({ isShowLinkMenu: true });
     setTimeout(() => {
