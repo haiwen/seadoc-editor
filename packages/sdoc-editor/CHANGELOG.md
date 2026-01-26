@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.72](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.71...@seafile/sdoc-editor@3.0.72) (2026-01-26)
+
+### Bug Fixes
+
+- optimize css ([#185](https://github.com/seafileltd/sea-sdoc-editor/issues/185)) ([94cc6b6](https://github.com/seafileltd/sea-sdoc-editor/commit/94cc6b6eba2fdee16df16af76333041ebf74766d))
+
+### Features
+
+- add link page ([#183](https://github.com/seafileltd/sea-sdoc-editor/issues/183)) ([86d46a0](https://github.com/seafileltd/sea-sdoc-editor/commit/86d46a08acf6a42964d3ec7277c45f10bd3e40d6))
+
 ## [3.0.71](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.70...@seafile/sdoc-editor@3.0.71) (2026-01-21)
 
 **Note:** Version bump only for package @seafile/sdoc-editor

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.72](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.71...@seafile/seafile-sdoc-editor@3.0.72) (2026-01-26)
+
+### Bug Fixes
+
+- optimize slate focus ([#184](https://github.com/seafileltd/sea-sdoc-editor/issues/184)) ([c2bc32d](https://github.com/seafileltd/sea-sdoc-editor/commit/c2bc32d3faa9533145277d4e8ed767614aeadeb4))
+
 ## [3.0.71](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.70...@seafile/seafile-sdoc-editor@3.0.71) (2026-01-21)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
