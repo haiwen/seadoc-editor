@@ -100,10 +100,10 @@ export const insertImage = (editor, imgInfos, selection, position = INSERT_POSIT
     const imageNode = imageNodes[0];
     Transforms.insertNodes(editor, imageNode, { at: validSelection });
 
-    // BLOCKQUOTE and CALL_OUT use inline images
+    // BLOCKQUOTE, CALL_OUT, MULTI_COLUMN use inline images
     let imageType = IMAGE_BLOCK;
     const [topNode,] = Editor.node(editor, [aboveNodeEntry[1][0]]);
-    if ([BLOCKQUOTE, CALL_OUT].includes(topNode?.type)) {
+    if ([BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(topNode?.type)) {
       imageType = '';
     }
 
