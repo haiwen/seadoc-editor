@@ -11,6 +11,7 @@
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  container-type: inline-size;
 }
 
 @keyframes spin {
@@ -32,12 +33,17 @@
   animation: spin 1s linear infinite;
   user-select: none;
   pointer-events: none;
-  margin-left: 15px;
 }
 
 .sdoc-image-process-container .copyright {
   margin-top: 4px;
   color: #fff;
+}
+
+@container (max-width: 140px) {
+  .sdoc-image-process-container .copyright {
+    display: none;
+  }
 }
 
 .sdoc-image-content.upload-error>span {
