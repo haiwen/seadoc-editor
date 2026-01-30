@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
+import isUrl from 'is-url';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
 import { isNodeInCurrentView, isWeChat } from '../helpers';
@@ -21,6 +22,8 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
 
   const onMouseDown = useCallback((event) => {
     event.stopPropagation();
+    if (!isUrl(element.href)) return;
+
     if (!isWeChat()) {
       window.open(element.href);
     } else {

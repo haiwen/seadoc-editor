@@ -1,8 +1,10 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import ReactDOM from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly, useSelected } from '@seafile/slate-react';
 import classNames from 'classnames';
+import isUrl from 'is-url';
 import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
@@ -20,10 +22,16 @@ const Whiteboard = ({ editor, element }) => {
   const scrollRef = useScrollContext();
   const isSelected = useSelected();
   const readOnly = useReadOnly();
+  const { t } = useTranslation('sdoc-editor');
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [isShowZoomOut, setIsShowZoomOut] = useState(false);
 
+  const isValidUrl = useMemo(() => {
+    return isUrl(link);
+  }, [link]);
+
   useEffect(() => {
+    if (!isValidUrl) return;
     const handleMessage = (event) => {
       if (event.data?.type === 'checkSdocParent') {
         const isSdocClass = whiteboardRef.current?.classList.contains('sdoc-whiteboard-element');
@@ -64,7 +72,7 @@ const Whiteboard = ({ editor, element }) => {
       window.removeEventListener('message', handleMessage);
       unsubscribeResizeArticle();
     };
-  }, []);
+  }, [isValidUrl]);
 
   const onDeleteWhiteboard = useCallback(() => {
     const path = ReactEditor.findPath(editor, element);
@@ -75,6 +83,7 @@ const Whiteboard = ({ editor, element }) => {
 
   const handleDoubleClick = (event) => {
     event.preventDefault();
+    if (!isValidUrl) return;
     const siteRoot = context.getSetting('siteRoot');
     const url = `${siteRoot}lib/${repo_id}/file${file_path}`;
     window.open(url, '_blank');
@@ -97,6 +106,7 @@ const Whiteboard = ({ editor, element }) => {
       observerRefValue = scrollRef.current;
 
       resizeObserver = new ResizeObserver((entries) => {
+        // eslint-disable-next-line no-unused-vars
         for (let entry of entries) {
           if (resizeObserver) {
             handleScroll();
@@ -146,17 +156,25 @@ const Whiteboard = ({ editor, element }) => {
     <>
       <div className={classNames('sdoc-whiteboard-container', { 'isSelected': isSelected })} onDoubleClick={handleDoubleClick} scrolling='no' >
         <div className='sdoc-whiteboard-title'>{title}</div>
-        <iframe
-          className='sdoc-whiteboard-element'
-          title={title}
-          src={link}
-          ref={whiteboardRef}
-        >
-        </iframe>
-        <div className='iframe-overlay' onDoubleClick={handleDoubleClick} onClick={handleOnClick}></div>
+        {isValidUrl && (
+          <>
+            <iframe
+              className='sdoc-whiteboard-element'
+              title={title}
+              src={link}
+              ref={whiteboardRef}
+            >
+            </iframe>
+            <div className='iframe-overlay' onDoubleClick={handleDoubleClick} onClick={handleOnClick}></div>
+          </>
+        )}
+        {!isValidUrl && (
+          <div ref={whiteboardRef} className='sdoc-whiteboard-tip'>{t('Whiteboard_link_invalid_tip')}</div>
+        )}
       </div>
       {isSelected && !readOnly && !isShowZoomOut &&
         <WhiteboardHoverMenu
+          isValidUrl={isValidUrl}
           menuPosition={menuPosition}
           onOpen={handleDoubleClick}
           openFullscreen={openFullscreen}
