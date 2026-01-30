@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useTranslation, withTranslation } from 'react-i18next';
-import { Range, Transforms, Node } from '@seafile/slate';
-import { ReactEditor, useReadOnly } from '@seafile/slate-react';
+import { Range } from '@seafile/slate';
+import { useReadOnly } from '@seafile/slate-react';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { getVideoURL, formatFileSize, videoFileIcon, updateVideo } from './helpers';
 import HoverMenu from './hover-menu';
@@ -47,7 +47,7 @@ const Video = ({ element, editor }) => {
     e.preventDefault();
     e.stopPropagation();
     setIsSelected(true);
-  }, [editor, element]);
+  }, []);
 
   const setPosition = useCallback((elem) => {
     if (elem) {
@@ -172,6 +172,7 @@ const Video = ({ element, editor }) => {
       observerRefValue = scrollRef.current;
 
       resizeObserver = new ResizeObserver((entries) => {
+        // eslint-disable-next-line no-unused-vars
         for (let entry of entries) {
           if (resizeObserver) {
             onScroll();

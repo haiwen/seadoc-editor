@@ -13,7 +13,7 @@ const propTypes = {
   onDeleteWhiteboard: PropTypes.func.isRequired,
 };
 
-const WhiteboardHoverMenu = ({ menuPosition, onOpen, openFullscreen, onDeleteWhiteboard }) => {
+const WhiteboardHoverMenu = ({ isValidUrl, menuPosition, onOpen, openFullscreen, onDeleteWhiteboard }) => {
   const { t } = useTranslation('sdoc-editor');
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -25,16 +25,18 @@ const WhiteboardHoverMenu = ({ menuPosition, onOpen, openFullscreen, onDeleteWhi
     <ElementPopover>
       <div className="sdoc-whiteboard-hover-menu-container" style={menuPosition}>
         <div className='hover-menu-container'>
-          <span className='op-group-item'>
-            <span
-              id='sdoc_whiteboard_open'
-              role="button"
-              className='op-item'
-              onClick={onOpen}
-            >
-              <span>{t('Open')}</span>
+          {isValidUrl && (
+            <span className='op-group-item'>
+              <span
+                id='sdoc_whiteboard_open'
+                role="button"
+                className='op-item'
+                onClick={onOpen}
+              >
+                <span>{t('Open')}</span>
+              </span>
             </span>
-          </span>
+          )}
           <span className='op-group-item'>
             <span
               id='sdoc_whiteboard_delete'
@@ -49,20 +51,22 @@ const WhiteboardHoverMenu = ({ menuPosition, onOpen, openFullscreen, onDeleteWhi
                 </Tooltip>}
             </span>
           </span>
-          <span className='op-group-item'>
-            <span
-              id='sdoc_whiteboard_full_screen_mode'
-              role="button"
-              className='op-item'
-              onClick={openFullscreen}
-            >
-              <i className='sdocfont sdoc-fullscreen'/>
-              {showTooltip &&
+          {isValidUrl && (
+            <span className='op-group-item'>
+              <span
+                id='sdoc_whiteboard_full_screen_mode'
+                role="button"
+                className='op-item'
+                onClick={openFullscreen}
+              >
+                <i className='sdocfont sdoc-fullscreen'/>
+                {showTooltip &&
                 <Tooltip target='sdoc_whiteboard_full_screen_mode' placement='top' fade={true}>
                   {t('Full_screen_mode')}
                 </Tooltip>}
+              </span>
             </span>
-          </span>
+          )}
         </div>
       </div>
     </ElementPopover>
