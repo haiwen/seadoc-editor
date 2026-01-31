@@ -25,7 +25,7 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
   const onMouseDown = useCallback((event) => {
     if (!isUrl(element.href)) {
       event.preventDefault();
-      toaster.danger('The_link_is_invalid');
+      toaster.danger(t('The_link_is_invalid'));
       return;
     }
 
