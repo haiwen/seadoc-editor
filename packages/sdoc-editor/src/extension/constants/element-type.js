@@ -39,6 +39,7 @@ export const QUICK_INSERT = 'quick_insert';
 export const VIDEO_LINK = 'video_link';
 export const WHITEBOARD = 'whiteboard';
 export const FILE_VIEW = 'file_view';
+export const FORMULA = 'formula';
 
 export const ASK_AI = 'ask_ai';
 

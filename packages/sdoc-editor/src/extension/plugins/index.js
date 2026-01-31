@@ -5,6 +5,7 @@ import CodeBlockPlugin from './code-block';
 import FileLinkPlugin from './file-link';
 import FileViewPlugin from './file-view';
 import FontPlugin from './font';
+import FormulaPlugin from './formula';
 import GroupPlugin from './group';
 import HeaderPlugin from './header';
 import HtmlPlugin from './html';
@@ -49,7 +50,8 @@ const Plugins = [
   QuickInsertPlugin,
   GroupPlugin,
   WhiteboardPlugin,
-  FileViewPlugin
+  FileViewPlugin,
+  FormulaPlugin
 ];
 
 const WikiPlugins = [
@@ -100,4 +102,5 @@ export {
   GroupPlugin,
   WhiteboardPlugin,
   FileViewPlugin,
+  FormulaPlugin,
 };

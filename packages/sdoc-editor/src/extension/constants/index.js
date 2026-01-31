@@ -42,7 +42,8 @@ import {
   QUICK_INSERT,
   GROUP,
   WHITEBOARD,
-  FILE_VIEW
+  FILE_VIEW,
+  FORMULA
 } from './element-type';
 
 export {
@@ -230,6 +231,7 @@ export const SUPPORTED_SIDE_OPERATION_TYPE = [
   IMAGE_BLOCK,
   VIDEO,
   WHITEBOARD,
+  FORMULA,
 ];
 
 export const MOUSE_ENTER_EVENT_DISABLED_MAP = {
@@ -270,6 +272,7 @@ export const ROOT_ELEMENT_TYPES = [
   IMAGE_BLOCK,
   VIDEO,
   WHITEBOARD,
+  FORMULA
 ];
 
 export {
@@ -314,6 +317,7 @@ export {
   QUICK_INSERT,
   GROUP,
   WHITEBOARD,
-  FILE_VIEW
+  FILE_VIEW,
+  FORMULA
 };
 

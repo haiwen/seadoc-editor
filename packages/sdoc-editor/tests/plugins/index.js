@@ -1,3 +1,4 @@
+import { FormulaPlugin } from '../../src/extension/plugins';
 import BlockquotePlugin from '../../src/extension/plugins/blockquote';
 import CalloutPlugin from '../../src/extension/plugins/callout';
 import CheckListPlugin from '../../src/extension/plugins/check-list';
@@ -39,6 +40,7 @@ const Plugins = [
   FileLinkPlugin,
   CalloutPlugin,
   QuickInsertPlugin,
+  FormulaPlugin,
 ];
 
 export default Plugins;
