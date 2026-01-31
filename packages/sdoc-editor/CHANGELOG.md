@@ -474,6 +474,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
 - insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
 
+## [2.0.209](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.208...@seafile/sdoc-editor@2.0.209) (2026-01-31)
+
+**Note:** Version bump only for package @seafile/sdoc-editor
+
 ## [2.0.208](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.207...@seafile/sdoc-editor@2.0.208) (2026-01-06)
 
 **Note:** Version bump only for package @seafile/sdoc-editor

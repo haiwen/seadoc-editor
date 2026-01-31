@@ -172,6 +172,7 @@ const Video = ({ element, editor }) => {
       observerRefValue = scrollRef.current;
 
       resizeObserver = new ResizeObserver((entries) => {
+        // eslint-disable-next-line no-unused-vars
         for (let entry of entries) {
           if (resizeObserver) {
             onScroll();
