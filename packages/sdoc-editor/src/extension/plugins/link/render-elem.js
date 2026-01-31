@@ -1,6 +1,7 @@
 import React from 'react';
 import { Range } from '@seafile/slate';
 import classnames from 'classnames';
+import isUrl from 'is-url';
 import PropTypes from 'prop-types';
 import { INTERNAL_EVENT } from '../../../constants';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
@@ -105,6 +106,14 @@ class Link extends React.Component {
     const { attributes, children, element, editor, readonly } = this.props;
     const { isShowLinkMenu, menuPosition } = this.state;
     const className = isShowLinkMenu ? 'seafile-ed-hovermenu-mouseclick' : null;
+
+    if (!isUrl(element.href)) {
+      return (
+        <span {...attributes}>
+          <span>{children}</span>
+        </span>
+      );
+    }
 
     if (readonly) {
       return (

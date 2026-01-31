@@ -651,5 +651,6 @@
   "Preview": "预览",
   "Go_to_link": "跳转链接",
   "Link_block": "链接节点",
-  "The_link_address_or_link_block_is_required": "链接地址或链接节点是必填项。"
+  "The_link_address_or_link_block_is_required": "链接地址或链接节点是必填项。",
+  "Whiteboard_link_invalid_tip": "白板链接无效,需要将其删除并重新添加。"
 }
