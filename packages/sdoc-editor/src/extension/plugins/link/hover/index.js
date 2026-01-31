@@ -21,9 +21,12 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
   }, []);
 
   const onMouseDown = useCallback((event) => {
-    event.stopPropagation();
-    if (!isUrl(element.href)) return;
+    if (!isUrl(element.href)) {
+      event.preventDefault();
+      return;
+    }
 
+    event.stopPropagation();
     if (!isWeChat()) {
       window.open(element.href);
     } else {
