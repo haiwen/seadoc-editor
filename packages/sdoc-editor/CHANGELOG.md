@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.76](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.210...@seafile/sdoc-editor@3.0.76) (2026-01-31)
+
+### Bug Fixes
+
+- add shortcut key ([#169](https://github.com/seafileltd/sea-sdoc-editor/issues/169)) ([98cdf50](https://github.com/seafileltd/sea-sdoc-editor/commit/98cdf50102949db585562b67220db2530c9a7661))
+- add wiki link ([#170](https://github.com/seafileltd/sea-sdoc-editor/issues/170)) ([2dfe1d5](https://github.com/seafileltd/sea-sdoc-editor/commit/2dfe1d583a7b0f4407cfb0c6f361e310885fa006))
+- adjust menu order ([#152](https://github.com/seafileltd/sea-sdoc-editor/issues/152)) ([1e81261](https://github.com/seafileltd/sea-sdoc-editor/commit/1e8126163683ffe7dbfe64e153451e828939c43b))
+- change diff view to revision update editor bug ([#167](https://github.com/seafileltd/sea-sdoc-editor/issues/167)) ([ee10131](https://github.com/seafileltd/sea-sdoc-editor/commit/ee1013125eefd57be04e9a34d16181d6fbe0a35e))
+- collapse all initial selections to start point ([#149](https://github.com/seafileltd/sea-sdoc-editor/issues/149)) ([fa968bf](https://github.com/seafileltd/sea-sdoc-editor/commit/fa968bfc17caa4034a28316713220d36cd6057bf))
+- directly show ai module when click side bar aio ([#161](https://github.com/seafileltd/sea-sdoc-editor/issues/161)) ([112810b](https://github.com/seafileltd/sea-sdoc-editor/commit/112810b9a01be57af5342bd3a5fdab53dbf82bc0))
+- fix copy blockquote content into blockquote bug ([d1b7eb2](https://github.com/seafileltd/sea-sdoc-editor/commit/d1b7eb2f9d7440229d0294b7e083819b2dcda898))
+- fix revision comment bug ([a2905c4](https://github.com/seafileltd/sea-sdoc-editor/commit/a2905c4806e330b8c1cb6f6dc5e6eb927ab0c9d9))
+- insert list text to check list ([#172](https://github.com/seafileltd/sea-sdoc-editor/issues/172)) ([97ed816](https://github.com/seafileltd/sea-sdoc-editor/commit/97ed81651676c6a3cb74debe0dc5d6004d5c4aaf))
+- keep link style ([#180](https://github.com/seafileltd/sea-sdoc-editor/issues/180)) ([8bb133f](https://github.com/seafileltd/sea-sdoc-editor/commit/8bb133f32816c6a89d67b608a113c7eaa2725988))
+- optimize code ([#151](https://github.com/seafileltd/sea-sdoc-editor/issues/151)) ([449ff0a](https://github.com/seafileltd/sea-sdoc-editor/commit/449ff0aae276e1fe521d033384c3e841dfc2ebfc))
+- optimize color ([f160d65](https://github.com/seafileltd/sea-sdoc-editor/commit/f160d656a87f84fb44d8891ba192816698aa7bb1))
+- optimize css ([d2b6a0e](https://github.com/seafileltd/sea-sdoc-editor/commit/d2b6a0e742818dcba728b4f1d6f16e709cb159fe))
+- optimize css ([#185](https://github.com/seafileltd/sea-sdoc-editor/issues/185)) ([94cc6b6](https://github.com/seafileltd/sea-sdoc-editor/commit/94cc6b6eba2fdee16df16af76333041ebf74766d))
+- optimize image icon ([#186](https://github.com/seafileltd/sea-sdoc-editor/issues/186)) ([95449c5](https://github.com/seafileltd/sea-sdoc-editor/commit/95449c58eee72318d9b7e674c1639f5ba920f2d7))
+- optimize multi column width ([#181](https://github.com/seafileltd/sea-sdoc-editor/issues/181)) ([95ab5b0](https://github.com/seafileltd/sea-sdoc-editor/commit/95ab5b07ba0ebf06e347391b864f109580213e5e))
+- optimize sdoc link ([58782e3](https://github.com/seafileltd/sea-sdoc-editor/commit/58782e37b3b973c68de284af60deed549fc2b633))
+- optimize style ([#163](https://github.com/seafileltd/sea-sdoc-editor/issues/163)) ([d703082](https://github.com/seafileltd/sea-sdoc-editor/commit/d703082e9d67e5ecc37b0692e50156f1ad02df4f))
+- optimize video cursor ([#165](https://github.com/seafileltd/sea-sdoc-editor/issues/165)) ([22cb724](https://github.com/seafileltd/sea-sdoc-editor/commit/22cb7249ce17fdb72610bd8c522dc55f8dfc2926))
+- resolve ai module ([#168](https://github.com/seafileltd/sea-sdoc-editor/issues/168)) ([afd7d9d](https://github.com/seafileltd/sea-sdoc-editor/commit/afd7d9de8f9ee11e61770f1603aa4eacf3410be5))
+- resolve list position ([#166](https://github.com/seafileltd/sea-sdoc-editor/issues/166)) ([5149d05](https://github.com/seafileltd/sea-sdoc-editor/commit/5149d05bdae10bb3df8dbba8c0adfb288487f4f3))
+- resolve long title css ([#174](https://github.com/seafileltd/sea-sdoc-editor/issues/174)) ([5ba431f](https://github.com/seafileltd/sea-sdoc-editor/commit/5ba431fb93c1112d99a404f0653c6e1160232e0a))
+- show table size popver ([#148](https://github.com/seafileltd/sea-sdoc-editor/issues/148)) ([3bd7e32](https://github.com/seafileltd/sea-sdoc-editor/commit/3bd7e32ad51685e1dd77af202917e5b964eee21d))
+- update color ([#164](https://github.com/seafileltd/sea-sdoc-editor/issues/164)) ([7f4c868](https://github.com/seafileltd/sea-sdoc-editor/commit/7f4c868c55ceb9db6425e5251683b9c0deb8b1d1))
+- update list css ([#171](https://github.com/seafileltd/sea-sdoc-editor/issues/171)) ([ce26c33](https://github.com/seafileltd/sea-sdoc-editor/commit/ce26c335c367684c4cf45364e5f99299a634c27d))
+- update translation ([ee726af](https://github.com/seafileltd/sea-sdoc-editor/commit/ee726afba0daff9fc8ff08dfef25d4a61e282f94))
+- update version ([f2de7d4](https://github.com/seafileltd/sea-sdoc-editor/commit/f2de7d4eec551936cfe401add589f3fbe6e4d150))
+
+### Features
+
+- add file-view plugin ([0a3f2f2](https://github.com/seafileltd/sea-sdoc-editor/commit/0a3f2f2d9879861664d4b7334684f965c91c4eba))
+- add link page ([#183](https://github.com/seafileltd/sea-sdoc-editor/issues/183)) ([86d46a0](https://github.com/seafileltd/sea-sdoc-editor/commit/86d46a08acf6a42964d3ec7277c45f10bd3e40d6))
+- add rename func for file view ([#160](https://github.com/seafileltd/sea-sdoc-editor/issues/160)) ([b37eacc](https://github.com/seafileltd/sea-sdoc-editor/commit/b37eacc638cb9c471a8fea1110eef48d8c00db79))
+- add resize feature for file-view ([#158](https://github.com/seafileltd/sea-sdoc-editor/issues/158)) ([010a0f4](https://github.com/seafileltd/sea-sdoc-editor/commit/010a0f41531dfee59ef1f81a348ec7477ca7a7aa))
+- add resize for video ([#159](https://github.com/seafileltd/sea-sdoc-editor/issues/159)) ([eedfccf](https://github.com/seafileltd/sea-sdoc-editor/commit/eedfccf2de398daa054d4e6832ce1e5f3ff6dc5c))
+- add select module ([82a1a7c](https://github.com/seafileltd/sea-sdoc-editor/commit/82a1a7c4b0e8ff323a00321c6d16a7f87f161cd8))
+- add shortcut key for sdoc link ([#177](https://github.com/seafileltd/sea-sdoc-editor/issues/177)) ([9975fe8](https://github.com/seafileltd/sea-sdoc-editor/commit/9975fe8ab14d59b23e5bac36245fd570b2d02ba7))
+- add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
+- insert file view ([#173](https://github.com/seafileltd/sea-sdoc-editor/issues/173)) ([78acbe5](https://github.com/seafileltd/sea-sdoc-editor/commit/78acbe583a7a2d567497d24386611ee0946202ad))
+- insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+- optimize code-block dragging ([cda6890](https://github.com/seafileltd/sea-sdoc-editor/commit/cda6890c7635e24149befd5753935362b30573bd))
+- optimize drap rule ([cb38619](https://github.com/seafileltd/sea-sdoc-editor/commit/cb38619f84fcadcd5af77a0075687f368a3cffc0))
+- optimize image ciewer ([#155](https://github.com/seafileltd/sea-sdoc-editor/issues/155)) ([3ccb6d8](https://github.com/seafileltd/sea-sdoc-editor/commit/3ccb6d8eb1e80a75cdf83ab79901586094f9c9fa))
+- support dragging codeblock into list ([43d4f35](https://github.com/seafileltd/sea-sdoc-editor/commit/43d4f35791932d2ba42286ef6666f2597f9fc502))
+- support list type in ai ([#154](https://github.com/seafileltd/sea-sdoc-editor/issues/154)) ([f8ae937](https://github.com/seafileltd/sea-sdoc-editor/commit/f8ae93723170205a63aa0a4346c10eb769b95998))
+- toggle-cursor-between-editor-and-title ([#179](https://github.com/seafileltd/sea-sdoc-editor/issues/179)) ([4d8acaf](https://github.com/seafileltd/sea-sdoc-editor/commit/4d8acafb0bd531b1d5eb15dd6f9602baf4d045e9))
+- transfer exdraw smart link into whiteboard element ([#153](https://github.com/seafileltd/sea-sdoc-editor/issues/153)) ([09e12ab](https://github.com/seafileltd/sea-sdoc-editor/commit/09e12abc74d2b503316afe31a5fd2724705b86bb))
+- transfer url to file link ([#175](https://github.com/seafileltd/sea-sdoc-editor/issues/175)) ([66ed379](https://github.com/seafileltd/sea-sdoc-editor/commit/66ed37966496ef1d2abee1775491a780d41def6a))
+- update image viewer ([#146](https://github.com/seafileltd/sea-sdoc-editor/issues/146)) ([f204036](https://github.com/seafileltd/sea-sdoc-editor/commit/f204036939921130ef9c07ea78174bb96517a9c7))
+
+### Performance Improvements
+
+- optimize code ([495a816](https://github.com/seafileltd/sea-sdoc-editor/commit/495a8168b192276c4dba676b34be7ee17c3dadd2))
+- optimize file-link interactive ([#162](https://github.com/seafileltd/sea-sdoc-editor/issues/162)) ([6d20eef](https://github.com/seafileltd/sea-sdoc-editor/commit/6d20eef81e53ca96d5841b9eb567ee764a23bbc1))
+- update iconfont ([96ae051](https://github.com/seafileltd/sea-sdoc-editor/commit/96ae0512b7cdb634441dcc0439eb510bc207f888))
+
 ## [3.0.75](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.209...@seafile/sdoc-editor@3.0.75) (2026-01-31)
 
 ### Bug Fixes
@@ -533,6 +593,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
 - insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+
 ## [2.0.210](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.209...@seafile/sdoc-editor@2.0.210) (2026-01-31)
 
 ### Performance Improvements
