@@ -1,8 +1,9 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import { Range } from '@seafile/slate';
 import classnames from 'classnames';
 import isUrl from 'is-url';
-import PropTypes, { element } from 'prop-types';
+import PropTypes from 'prop-types';
 import toaster from '../../../components/toast';
 import { INTERNAL_EVENT } from '../../../constants';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
@@ -17,6 +18,7 @@ const propTypes = {
   element: PropTypes.object,
   editor: PropTypes.object,
   attributes: PropTypes.object,
+  t: PropTypes.func,
 };
 
 class Link extends React.Component {
@@ -95,10 +97,11 @@ class Link extends React.Component {
   };
 
   onOpenLink = (event) => {
-    const { element } = this.props;
+    const { element, t } = this.props;
     if (!isUrl(element.href)) {
       event.preventDefault();
-      toaster.danger('The_link_is_invalid');
+
+      toaster.danger(t('The_link_is_invalid'));
       return;
     }
 
@@ -151,8 +154,10 @@ class Link extends React.Component {
 
 Link.propTypes = propTypes;
 
+const SdocLink = withTranslation('sdoc-editor')(Link);
+
 const renderLink = (props, editor, readonly) => {
-  return <Link {...props} editor={editor} readonly={readonly} />;
+  return <SdocLink {...props} editor={editor} readonly={readonly} />;
 };
 
 export default renderLink;
