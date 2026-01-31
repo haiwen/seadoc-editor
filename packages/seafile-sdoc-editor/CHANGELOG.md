@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.77](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.128...@seafile/seafile-sdoc-editor@3.0.77) (2026-01-31)
+
+### Bug Fixes
+
+- add wiki link ([#170](https://github.com/seafileltd/sea-sdoc-editor/issues/170)) ([2dfe1d5](https://github.com/seafileltd/sea-sdoc-editor/commit/2dfe1d583a7b0f4407cfb0c6f361e310885fa006))
+- optimize slate focus ([#184](https://github.com/seafileltd/sea-sdoc-editor/issues/184)) ([c2bc32d](https://github.com/seafileltd/sea-sdoc-editor/commit/c2bc32d3faa9533145277d4e8ed767614aeadeb4))
+
+### Features
+
+- toggle-cursor-between-editor-and-title ([#179](https://github.com/seafileltd/sea-sdoc-editor/issues/179)) ([4d8acaf](https://github.com/seafileltd/sea-sdoc-editor/commit/4d8acafb0bd531b1d5eb15dd6f9602baf4d045e9))
+
+### Performance Improvements
+
+- optimize code ([a1ea331](https://github.com/seafileltd/sea-sdoc-editor/commit/a1ea33126c381644665df792fab9480a6c2917fb))
+
 ## [3.0.76](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.127...@seafile/seafile-sdoc-editor@3.0.76) (2026-01-31)
 
 ### Bug Fixes
