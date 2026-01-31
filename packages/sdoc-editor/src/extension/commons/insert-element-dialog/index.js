@@ -4,9 +4,10 @@ import toaster from '../../../components/toast';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
-import { ELEMENT_TYPE, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO } from '../../constants';
+import { ELEMENT_TYPE, FORMULA, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO } from '../../constants';
 import AIModule from '../../plugins/ai/ai-module/index.js';
 import InsertViewDialog from '../../plugins/file-view/insert-view-dialog/index.js';
+import FormulaModal from '../../plugins/formula/menu/formula-modal.js';
 import { generateImageInfos, insertImage } from '../../plugins/image/helpers';
 import AddLinkDialog from '../../plugins/link/dialog/add-link-dialog';
 import { CustomTableSizeDialog, SplitCellSettingDialog } from '../../plugins/table/dialogs';
@@ -29,6 +30,7 @@ const InsertElementDialog = ({ editor }) => {
   const [handleSubmit, setHandleSubmit] = useState(() => void 0);
   const [insertWhiteboardFile, setInsertWhiteboardFile] = useState(null);
   const [data, setData] = useState({});
+  const [formula, setFormula] = useState('');
   const { t } = useTranslation('sdoc-editor');
 
   const uploadLocalImageInputRef = useRef();
@@ -68,11 +70,22 @@ const InsertElementDialog = ({ editor }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validEditor, uploadLocalImageInputRef, insertPosition, slateNode]);
 
+  const handleOpenLinkModal = useCallback(({ element: formulaElement, editor } ) => {
+    if (formulaElement && editor) {
+      const { formula } = formulaElement.data || {};
+      setFormula(formula);
+      setDialogType(FORMULA);
+      setValidEditor(editor);
+    }
+  }, []);
+
   useEffect(() => {
     const eventBus = EventBus.getInstance();
     const toggleDialogSubscribe = eventBus.subscribe(INTERNAL_EVENT.INSERT_ELEMENT, toggleDialog);
+    const unsubscribe = eventBus.subscribe(INTERNAL_EVENT.ON_OPEN_FORMULA_DIALOG, handleOpenLinkModal);
     return () => {
       toggleDialogSubscribe();
+      unsubscribe();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -103,6 +116,7 @@ const InsertElementDialog = ({ editor }) => {
     setInsertVideoCallback({ insertVideo });
     setLinkTitle(linkTitle);
     setHandleSubmit(handleSubmit);
+    setFormula('');
     // Apply for comment editor, as it has a different editor instance
     setValidEditor(paramEditor || editor);
     setData(data);
@@ -201,6 +215,15 @@ const InsertElementDialog = ({ editor }) => {
         closeDialog,
       };
       return <InsertViewDialog {...props} />;
+    }
+    case ELEMENT_TYPE.FORMULA:{
+      return (
+        <FormulaModal
+          onCloseModal={closeDialog}
+          editor={validEditor}
+          formula={formula}
+        />
+      );
     }
     case LOCAL_IMAGE: {
       return (<input onClick={e => e.stopPropagation()} ref={uploadLocalImageInputRef} type="file" multiple={true} accept='image/*' style={{ display: 'none' }} onChange={onFileChanged} />);

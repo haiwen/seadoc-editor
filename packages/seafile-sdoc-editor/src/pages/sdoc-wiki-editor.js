@@ -15,7 +15,7 @@ const propTypes = {
   scrollRef: PropTypes.object.isRequired
 };
 
-const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collaborators, showComment, isShowRightPanel, setEditor }) => {
+const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collaborators, showComment, isShowRightPanel, setEditor, mathJaxSource }) => {
 
   context.initApi();
 
@@ -93,6 +93,7 @@ const SdocWikiEditor = ({ document, docUuid, isWikiReadOnly, scrollRef, collabor
               scrollRef={scrollRef}
               showComment={showComment}
               isShowRightPanel={isShowRightPanel}
+              mathJaxSource={mathJaxSource}
             />
           </WithCommentProvider>
         </PluginsProvider>

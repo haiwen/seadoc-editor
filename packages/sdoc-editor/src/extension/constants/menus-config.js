@@ -33,6 +33,7 @@ import {
   CALL_OUT,
   WHITEBOARD,
   FILE_VIEW,
+  FORMULA
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -134,6 +135,11 @@ export const MENUS_CONFIG_MAP = {
     id: `sdoc_${TABLE}`,
     iconClass: 'sdocfont sdoc-table',
     text: 'Table'
+  },
+  [FORMULA]: {
+    id: `seafile_${FORMULA}`,
+    iconClass: 'mdfont md-formula',
+    text: 'Insert_formula'
   },
   [TEXT_STYLE]: [
     {

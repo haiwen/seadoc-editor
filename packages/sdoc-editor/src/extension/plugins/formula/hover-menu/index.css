@@ -1,0 +1,79 @@
+.sdoc-formula-hover-menu-container {
+  position: absolute;
+  height: 42px;
+  z-index: 101;
+  width: fit-content;
+  max-width: 250px;
+}
+
+.sdoc-formula-hover-menu-container .hover-menu-container {
+  height: 36px;
+  width: 100%;
+  padding: 7px 8px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+  color: #212529;
+}
+
+.sdoc-formula-hover-menu-container .sdocfont {
+  line-height: 1;
+  font-size: 14px;
+  color: #666;
+}
+
+.sdoc-formula-hover-menu-container .hover-menu-container .active {
+  text-decoration: none;
+}
+
+.sdoc-formula-hover-menu-container .hover-menu-container .op-item {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  font-size: 12px;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-item.sdoc-formula-hover-operation-lang .op-item {
+  padding: 0 5px;
+}
+
+.sdoc-formula-hover-menu-container .hover-menu-container .sdoc-formula-hover-operation-lang .sdocfont {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-item {
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  justify-content: center;
+}
+
+.sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-item.sdoc-formula-hover-operation-lang {
+  width: fit-content;
+}
+
+.sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-lang .sdoc-arrow-down {
+  font-size: 12px;
+}
+
+.sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-divider {
+  height: 20px;
+  width: 1px;
+  background-color: #e5e5e5;
+  margin: 0 8px;
+}
+
+.sdoc-formula-hover-menu-container .hover-menu-container .op-item:hover {
+  text-decoration: none;
+  background: #F5F5F5;
+}
