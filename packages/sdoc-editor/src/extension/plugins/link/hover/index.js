@@ -5,6 +5,7 @@ import { Editor } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
 import isUrl from 'is-url';
 import PropTypes from 'prop-types';
+import toaster from '../../../../components/toast';
 import Tooltip from '../../../../components/tooltip';
 import EventBus from '../../../../utils/event-bus';
 import { isNodeInCurrentView, isWeChat } from '../helpers';
@@ -24,6 +25,7 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
   const onMouseDown = useCallback((event) => {
     if (!isUrl(element.href)) {
       event.preventDefault();
+      toaster.danger('The_link_is_invalid');
       return;
     }
 

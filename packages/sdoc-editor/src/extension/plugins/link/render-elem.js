@@ -3,13 +3,14 @@ import { Range } from '@seafile/slate';
 import classnames from 'classnames';
 import isUrl from 'is-url';
 import PropTypes from 'prop-types';
+import toaster from '../../../components/toast';
 import { INTERNAL_EVENT } from '../../../constants';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
 import { isMac } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import InlineBugFixer from '../../commons/Inline-bug-fix-wrapper';
 import { ELEMENT_TYPE } from '../../constants';
-import { getMenuPosition, unWrapLinkNode } from './helpers';
+import { getMenuPosition, isWeChat, unWrapLinkNode } from './helpers';
 import LinkHover from './hover';
 
 const propTypes = {
@@ -112,6 +113,22 @@ class Link extends React.Component {
     unWrapLinkNode(editor);
   };
 
+  onOpenLink = (event) => {
+    const { element } = this.props;
+    if (!isUrl(element.href)) {
+      event.preventDefault();
+      toaster.danger('The_link_is_invalid');
+      return;
+    }
+
+    if (!isWeChat()) {
+      window.open(element.href, '_blank', 'noopener,noreferrer');
+    } else {
+      // eslint-disable-next-line no-restricted-globals
+      location.href = element.href;
+    }
+  };
+
   openDialog = () => {
     const { element } = this.props;
     this.eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.LINK, element });
@@ -126,18 +143,10 @@ class Link extends React.Component {
     const { isShowLinkMenu, menuPosition } = this.state;
     const className = isShowLinkMenu ? 'seafile-ed-hovermenu-mouseclick' : null;
 
-    if (!isUrl(element.href)) {
-      return (
-        <span {...attributes}>
-          <span>{children}</span>
-        </span>
-      );
-    }
-
     if (readonly) {
       return (
         <span className={classnames(className, 'virtual-link')} {...attributes}>
-          <a href={element.href} title={element.children[0]?.text} target='_blank' rel="noreferrer">{children}</a>
+          <a href={element.href} title={element.children[0]?.text} onClick={this.onOpenLink} target='_blank' rel="noreferrer">{children}</a>
         </span>
       );
     }
