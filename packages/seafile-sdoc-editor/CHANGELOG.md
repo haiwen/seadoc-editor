@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.78](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.77...@seafile/seafile-sdoc-editor@3.0.78) (2026-02-02)
+
+### Features
+
+- add formula ([#190](https://github.com/seafileltd/sea-sdoc-editor/issues/190)) ([596ff0b](https://github.com/seafileltd/sea-sdoc-editor/commit/596ff0b5666e39be9f80ac5eac8a8b5c385ed3b2))
+
 ## [3.0.77](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.128...@seafile/seafile-sdoc-editor@3.0.77) (2026-01-31)
 
 ### Bug Fixes
