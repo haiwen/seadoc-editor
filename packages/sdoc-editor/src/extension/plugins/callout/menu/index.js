@@ -23,6 +23,7 @@ const CalloutMenu = ({ editor, isRichEditor, className, readonly }) => {
 
   const handleDisplayAlert = useCallback((type) => {
     setTimeout(() => {
+      if (typeof type !== 'string') return;
       toaster.warning(`${t('The_current_location_does_not_support_pasting')}${t(type && type.at(0).toUpperCase() + type.slice(1))}`);
     }, 0);
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -138,7 +138,7 @@ export const MENUS_CONFIG_MAP = {
   },
   [FORMULA]: {
     id: `seafile_${FORMULA}`,
-    iconClass: 'mdfont md-formula',
+    iconClass: 'sdocfont sdoc-formula',
     text: 'Insert_formula'
   },
   [TEXT_STYLE]: [

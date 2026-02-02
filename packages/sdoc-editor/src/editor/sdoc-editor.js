@@ -10,7 +10,7 @@ import MobileMessage from '../android/mobile-message';
 import { registerOutlineEventHandler, updateOutlineValue } from '../android/outline-module';
 import { registerToolbarMenuTrigger, updateEditorHistory } from '../android/toolbar-trigger';
 import FileLoading from '../components/file-loading';
-import { INTERNAL_EVENT, PAGE_EDIT_AREA_WIDTH } from '../constants';
+import { INTERNAL_EVENT, MAXTH_JAX_SOURCE_RUL, PAGE_EDIT_AREA_WIDTH } from '../constants';
 import context from '../context';
 import { createDefaultEditor, HeaderToolbar } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
@@ -28,7 +28,7 @@ import LocalStorage from '../utils/local-storage-utils';
 import ReadOnlyArticle from '../views/readonly-article';
 import EditableArticle from './editable-article';
 
-const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, showComment, isShowHeaderToolbar = true, showOutline = true, mathJaxSource }, ref) => {
+const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, showComment, isShowHeaderToolbar = true, showOutline = true, mathJaxSource = MAXTH_JAX_SOURCE_RUL }, ref) => {
   const [showFullScreen, setShowFullScreen] = useState(false);
 
   const validEditor = useMemo(() => {

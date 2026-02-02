@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import deepCopy from 'deep-copy';
 import PropTypes from 'prop-types';
 import FileLoading from '../components/file-loading';
-import { INTERNAL_EVENT, WIKI_EDITOR_EDIT_AREA_WIDTH } from '../constants';
+import { INTERNAL_EVENT, MAXTH_JAX_SOURCE_RUL, WIKI_EDITOR_EDIT_AREA_WIDTH } from '../constants';
 import context from '../context';
 import { createDefaultEditor } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
@@ -23,7 +23,7 @@ import LocalStorage from '../utils/local-storage-utils';
 import ReadOnlyArticle from '../views/readonly-article';
 import EditableArticle from './editable-article';
 
-const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isWikiReadOnly, scrollRef, showComment, isShowRightPanel, mathJaxSource }, ref) => {
+const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isWikiReadOnly, scrollRef, showComment, mathJaxSource = MAXTH_JAX_SOURCE_RUL }, ref) => {
 
   const validEditor = useMemo(() => {
     if (propsEditor) return propsEditor;
