@@ -33,6 +33,7 @@ import {
   CALL_OUT,
   WHITEBOARD,
   FILE_VIEW,
+  FORMULA
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -134,6 +135,11 @@ export const MENUS_CONFIG_MAP = {
     id: `sdoc_${TABLE}`,
     iconClass: 'sdocfont sdoc-table',
     text: 'Table'
+  },
+  [FORMULA]: {
+    id: `seafile_${FORMULA}`,
+    iconClass: 'sdocfont sdoc-formula',
+    text: 'Formula'
   },
   [TEXT_STYLE]: [
     {
@@ -496,6 +502,12 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     type: FILE_VIEW,
     text: 'File_view'
   },
+  [FORMULA]: {
+    id: 'sdoc-side-menu-item-formula',
+    iconClass: 'sdocfont sdoc-formula',
+    type: FORMULA,
+    text: 'Formula'
+  },
 };
 
 export const SIDE_INSERT_MENUS_SEARCH_MAP = {
@@ -540,6 +552,7 @@ export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [HEADER3]: 'Header_three',
   [HEADER4]: 'Header_four',
   [FILE_VIEW]: 'File_view',
+  [FORMULA]: 'Formula',
 };
 
 // Other operations menu config

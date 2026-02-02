@@ -10,7 +10,7 @@ import MobileMessage from '../android/mobile-message';
 import { registerOutlineEventHandler, updateOutlineValue } from '../android/outline-module';
 import { registerToolbarMenuTrigger, updateEditorHistory } from '../android/toolbar-trigger';
 import FileLoading from '../components/file-loading';
-import { INTERNAL_EVENT, PAGE_EDIT_AREA_WIDTH } from '../constants';
+import { INTERNAL_EVENT, MAXTH_JAX_SOURCE_RUL, PAGE_EDIT_AREA_WIDTH } from '../constants';
 import context from '../context';
 import { createDefaultEditor, HeaderToolbar } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
@@ -18,6 +18,7 @@ import { RECENT_COPY_CONTENT } from '../extension/constants';
 import { focusEditor } from '../extension/core';
 import { removeMarks } from '../extension/plugins/ai/ai-module/helpers';
 import { ColorProvider } from '../hooks/use-color-context';
+import useMathJax from '../hooks/use-mathjax';
 import { EditorContainer, EditorContent } from '../layout';
 import withNodeId from '../node-id';
 import { withSocketIO } from '../socket';
@@ -27,7 +28,7 @@ import LocalStorage from '../utils/local-storage-utils';
 import ReadOnlyArticle from '../views/readonly-article';
 import EditableArticle from './editable-article';
 
-const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, showComment, isShowHeaderToolbar = true, showOutline = true }, ref) => {
+const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, showComment, isShowHeaderToolbar = true, showOutline = true, mathJaxSource = MAXTH_JAX_SOURCE_RUL }, ref) => {
   const [showFullScreen, setShowFullScreen] = useState(false);
 
   const validEditor = useMemo(() => {
@@ -45,6 +46,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
 
   const [slateValue, setSlateValue] = useState(document.elements);
   const [isEdit, setIsEdit] = useState(false);
+  const { isLoadingMathJax } = useMathJax(mathJaxSource);
 
   // Fix: The editor's children are not updated when the document is updated in revision
   // In revision mode, the document is updated, but the editor's children are not updated,as onValueChange override the new document.elements. This unexpected action cause the editor to display the old content
@@ -230,7 +232,7 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
 
   const isFreezed = context.getSetting('isFreezed');
 
-  if (isReloading) {
+  if (isReloading || isLoadingMathJax) {
     return (
       <div className="h-100 w-100 d-flex align-items-center justify-content-center">
         <FileLoading />

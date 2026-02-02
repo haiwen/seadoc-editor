@@ -10,7 +10,7 @@ import context from '../../../context';
 import { getErrorMsg, isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
-import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW } from '../../constants';
+import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW, FORMULA } from '../../constants';
 import { getAboveBlockNode } from '../../core';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
@@ -50,6 +50,16 @@ const QuickInsertBlockMenu = ({
       Transforms.select(editor, editor.selection.focus);
     }
     eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_IMAGE, insertPosition, slateNode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor, insertPosition]);
+
+  const onInsertFormula = useCallback(() => {
+    callback && callback();
+    const eventBus = EventBus.getInstance();
+    if (insertPosition === INSERT_POSITION.CURRENT) {
+      Transforms.select(editor, editor.selection.focus);
+    }
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: FORMULA, insertPosition, slateNode });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, insertPosition]);
 
@@ -136,6 +146,12 @@ const QuickInsertBlockMenu = ({
 
   const isDisableCallout = useMemo(() => {
     const callout = getAboveBlockNode(editor, { match: n => n.type === ELEMENT_TYPE.CALL_OUT });
+    return !!callout;
+  }, [editor]);
+
+  // Disable images in list elements
+  const isDisableFormula = useMemo(() => {
+    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.BLOCKQUOTE, ELEMENT_TYPE.CALL_OUT].includes(n.type) });
     return !!callout;
   }, [editor]);
 
@@ -253,6 +269,7 @@ const QuickInsertBlockMenu = ({
       [LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[LINK]} key="sdoc-insert-menu-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.LINK] }} onClick={openLinkDialog} />,
       [CODE_BLOCK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CODE_BLOCK]} disabled={isDisableCodeBlock} key="sdoc-insert-menu-code-block" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CODE_BLOCK] }} onClick={onInsertCodeBlock} />,
       [CALL_OUT]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CALL_OUT]} disabled={isDisableCallout} key="sdoc-insert-menu-callout" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CALL_OUT] }} onClick={() => onInsertCallout(PARAGRAPH)} />,
+      [FORMULA]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FORMULA]} disabled={isDisableFormula} key="sdoc-insert-menu-formula" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FORMULA] }} onClick={onInsertFormula} />,
     };
 
     if (isMobile) {

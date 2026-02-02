@@ -121,3 +121,6 @@ export const ARTICLE_DEFAULT_WIDTH = '794px';
 // Width in full width mode
 export const ARTICLE_FULL_WIDTH = 'calc(100% - 50px - 50px)'; // The left and right sides are 50
 export const ARTICLE_FULL_MIN_WIDTH = '400px';
+
+// formula display mathjax url
+export const MAXTH_JAX_SOURCE_RUL = '/media/js/mathjax/text-svg.js';

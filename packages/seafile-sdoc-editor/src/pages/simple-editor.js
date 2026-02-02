@@ -11,7 +11,7 @@ import { resetWebTitle, isSeafileClient } from '../utils';
 
 import '../assets/css/simple-editor.css';
 
-const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = true, t, plugins = [], collaborators }) => {
+const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = true, t, plugins = [], collaborators, mathJaxSource }) => {
   context.initApi();
 
   const editorRef = useRef(null);
@@ -125,6 +125,7 @@ const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = tru
                   isReloading={isReloading}
                   document={document}
                   showComment={showComment}
+                  mathJaxSource={mathJaxSource}
                 />
               )}
               {isSdocRevision && !isPublished && (
@@ -135,6 +136,7 @@ const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = tru
                   revisionContent={revisionContent}
                   isShowChanges={isShowChanges}
                   didMountCallback={setDiffChanges}
+                  mathJaxSource={mathJaxSource}
                 />
               )}
               {isSdocRevision && isPublished && (

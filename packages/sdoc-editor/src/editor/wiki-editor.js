@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import deepCopy from 'deep-copy';
 import PropTypes from 'prop-types';
 import FileLoading from '../components/file-loading';
-import { INTERNAL_EVENT, WIKI_EDITOR_EDIT_AREA_WIDTH } from '../constants';
+import { INTERNAL_EVENT, MAXTH_JAX_SOURCE_RUL, WIKI_EDITOR_EDIT_AREA_WIDTH } from '../constants';
 import context from '../context';
 import { createDefaultEditor } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
 import { RECENT_COPY_CONTENT } from '../extension/constants';
 import { removeMarks } from '../extension/plugins/ai/ai-module/helpers';
 import { ColorProvider } from '../hooks/use-color-context';
+import useMathJax from '../hooks/use-mathjax';
 import { ScrollContext } from '../hooks/use-scroll-context';
 import { EditorContainer } from '../layout';
 import withNodeId from '../node-id';
@@ -22,7 +23,7 @@ import LocalStorage from '../utils/local-storage-utils';
 import ReadOnlyArticle from '../views/readonly-article';
 import EditableArticle from './editable-article';
 
-const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isWikiReadOnly, scrollRef, showComment, isShowRightPanel }, ref) => {
+const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isWikiReadOnly, scrollRef, showComment, mathJaxSource = MAXTH_JAX_SOURCE_RUL }, ref) => {
 
   const validEditor = useMemo(() => {
     if (propsEditor) return propsEditor;
@@ -38,6 +39,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
   }, []);
 
   const [slateValue, setSlateValue] = useState(document.elements);
+  const { isLoadingMathJax } = useMathJax(mathJaxSource);
 
   // Fix: The editor's children are not updated when the document is updated in revision
   // In revision mode, the document is updated, but the editor's children are not updated,as onValueChange override the new document.elements. This unexpected action cause the editor to display the old content
@@ -122,7 +124,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
     setSlateValue(value);
   };
 
-  if (isReloading) {
+  if (isReloading || isLoadingMathJax) {
     return (
       <div className="h-100 w-100 d-flex align-items-center justify-content-center">
         <FileLoading />
