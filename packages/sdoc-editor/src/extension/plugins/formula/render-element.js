@@ -112,7 +112,7 @@ const Formula = ({ attributes, element, children, editor }) => {
     <div {...attributes} data-id={element.id} onDoubleClick={toggleFormulaEditor} onClick={handleClick} className={'sdoc-block-formula' + (isSelected ? ' sdoc-selected-formula' : '')} >
       <div ref={formulaBlockRef}>
         <div contentEditable={false} ref={formulaContainerRef}></div>
-        <span contentEditable={false}>{children}</span>
+        <span contentEditable='false' suppressContentEditableWarning>{children}</span>
       </div>
       {isSelected && showHoverMenu && (
         <FormulaHoverMenu
