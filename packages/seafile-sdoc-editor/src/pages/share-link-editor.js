@@ -12,7 +12,7 @@ import { resetWebTitle, isSeafileClient } from '../utils';
 
 import '../assets/css/simple-editor.css';
 
-const ShareLinkEditor = ({ showComment, t, plugins = [], collaborators }) => {
+const ShareLinkEditor = ({ showComment, t, plugins = [], collaborators, mathJaxSource }) => {
   context.initApi();
 
   const editorRef = useRef(null);
@@ -55,6 +55,7 @@ const ShareLinkEditor = ({ showComment, t, plugins = [], collaborators }) => {
                 isReloading={isReloading}
                 document={document}
                 showComment={showComment}
+                mathJaxSource={mathJaxSource}
               />
             </Content>
           </Layout>

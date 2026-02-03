@@ -144,6 +144,7 @@ const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = tru
                   revisionContent={revisionContent}
                   isShowChanges={isShowChanges}
                   didMountCallback={setDiffChanges}
+                  mathJaxSource={mathJaxSource}
                 />
               )}
             </Content>

@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../components/loading';
+import { MATH_JAX_SOURCE_RUL } from '../constants';
 import context from '../context';
+import useMathJax from '../hooks/use-mathjax';
 import { getDiff } from '../utils/diff';
 import { formatSdocContent } from '../utils/document-utils';
 import SDocViewer from './sdoc-viewer';
 
 import '../assets/css/diff-viewer.css';
 
-const PublishedRevisionDiffViewer = ({ isShowChanges, revisionContent, didMountCallback }) => {
+const PublishedRevisionDiffViewer = ({ isShowChanges, revisionContent, didMountCallback, mathJaxSource = MATH_JAX_SOURCE_RUL }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [diff, setDiff] = useState(null);
+  const { isLoadingMathJax } = useMathJax(mathJaxSource);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,7 +46,7 @@ const PublishedRevisionDiffViewer = ({ isShowChanges, revisionContent, didMountC
     }, 1);
   }, [revisionContent, didMountCallback, isShowChanges, diff]);
 
-  if (isLoading) {
+  if (isLoading || isLoadingMathJax) {
     return <Loading />;
   }
 
