@@ -10,13 +10,13 @@ const propTypes = {
 };
 
 
-const WikiViewer = ({ document, showOutline, scrollRef }) => {
+const WikiViewer = ({ document, showOutline, scrollRef, mathJaxSource }) => {
 
   context.initApi();
 
   return (
     <ErrorBoundary>
-      <SDocWikiViewer document={document} showOutline={showOutline} scrollRef={scrollRef} />
+      <SDocWikiViewer document={document} showOutline={showOutline} scrollRef={scrollRef} mathJaxSource={mathJaxSource} />
     </ErrorBoundary>
   );
 };

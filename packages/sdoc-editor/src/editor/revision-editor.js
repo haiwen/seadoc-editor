@@ -53,7 +53,7 @@ const RevisionEditor = forwardRef(({ isShowChanges, isReloading, document, revis
   }), [editorRef]);
 
   if (isShowChanges) {
-    return (<RevisionDiffViewer editor={editor} revisionContent={revisionContent} didMountCallback={didMountCallback} />);
+    return (<RevisionDiffViewer editor={editor} revisionContent={revisionContent} didMountCallback={didMountCallback} mathJaxSource={mathJaxSource} />);
   }
 
   return (<SdocEditor ref={editorRef} editor={editor} isReloading={isReloading} document={document} showComment={true} mathJaxSource={mathJaxSource} />);

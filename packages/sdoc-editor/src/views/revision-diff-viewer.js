@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../components/loading';
+import { MATH_JAX_SOURCE_RUL } from '../constants';
 import context from '../context';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
+import useMathJax from '../hooks/use-mathjax';
 import { getDiff } from '../utils/diff';
 import { formatSdocContent } from '../utils/document-utils';
 import SDocViewer from './sdoc-viewer';
 
 import '../assets/css/diff-viewer.css';
 
-
-const RevisionDiffViewer = ({ editor, revisionContent, didMountCallback }) => {
+const RevisionDiffViewer = ({ editor, revisionContent, didMountCallback, mathJaxSource = MATH_JAX_SOURCE_RUL }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [diff, setDiff] = useState(null);
+  const { isLoadingMathJax } = useMathJax(mathJaxSource);
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,7 +44,7 @@ const RevisionDiffViewer = ({ editor, revisionContent, didMountCallback }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) {
+  if (isLoading || isLoadingMathJax) {
     return <Loading />;
   }
 
