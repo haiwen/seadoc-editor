@@ -8,7 +8,7 @@ import { withSocketIO } from '../socket';
 import { RevisionDiffViewer } from '../views';
 import SdocEditor from './sdoc-editor';
 
-const RevisionEditor = forwardRef(({ isShowChanges, isReloading, document, revisionContent, didMountCallback }, ref) => {
+const RevisionEditor = forwardRef(({ isShowChanges, isReloading, document, revisionContent, didMountCallback, mathJaxSource }, ref) => {
 
   const editorRef = useRef(null);
   const editor = useMemo(() => {
@@ -56,7 +56,7 @@ const RevisionEditor = forwardRef(({ isShowChanges, isReloading, document, revis
     return (<RevisionDiffViewer editor={editor} revisionContent={revisionContent} didMountCallback={didMountCallback} />);
   }
 
-  return (<SdocEditor ref={editorRef} editor={editor} isReloading={isReloading} document={document} showComment={true} />);
+  return (<SdocEditor ref={editorRef} editor={editor} isReloading={isReloading} document={document} showComment={true} mathJaxSource={mathJaxSource} />);
 });
 
 RevisionEditor.propTypes = {
