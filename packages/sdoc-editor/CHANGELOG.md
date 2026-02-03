@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.79](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.78...@seafile/sdoc-editor@3.0.79) (2026-02-03)
+
+### Features
+
+- add source url for revision editor ([49b8a62](https://github.com/seafileltd/sea-sdoc-editor/commit/49b8a6230cfb65494093728ff1cf796f77b7bbbd))
+
 ## [3.0.78](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.77...@seafile/sdoc-editor@3.0.78) (2026-02-02)
 
 ### Features
