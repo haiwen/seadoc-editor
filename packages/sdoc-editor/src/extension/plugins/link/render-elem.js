@@ -116,10 +116,10 @@ class Link extends React.Component {
   };
 
   onOpenLink = (event) => {
+    event.preventDefault();
+
     const { element, t } = this.props;
     if (!isUrl(element.href)) {
-      event.preventDefault();
-
       toaster.danger(t('The_link_is_invalid'));
       return;
     }
