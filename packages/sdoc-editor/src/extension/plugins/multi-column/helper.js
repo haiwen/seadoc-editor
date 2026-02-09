@@ -63,6 +63,87 @@ export const generateEmptyMultiColumn = (editor, MultiColumnType) => {
   };
 };
 
+export const generateEmptyColumn = (editor, columnNum) => {
+  const currentPageWidth = getCurrentPageWidth(editor) + LAST_COLUMN_MARGIN_RIGHT_WIDTH;
+  const initialColumnWidth = Math.max(COLUMN_MIN_WIDTH, parseInt(currentPageWidth / columnNum));
+  const emptyColumn = {
+    id: slugid.nice(),
+    type: ELEMENT_TYPE.COLUMN,
+    width: initialColumnWidth,
+    children: [{
+      id: slugid.nice(),
+      type: PARAGRAPH,
+      children: [{ text: '', id: slugid.nice() }],
+    }]
+  };
+  return emptyColumn;
+};
+
+export const addLastColumnInMultiColumn = (editor, topTargetNode, targetPath) => {
+  const columnsNum = topTargetNode.children.length + 1;
+  const currentPageWidth = getCurrentPageWidth(editor) + LAST_COLUMN_MARGIN_RIGHT_WIDTH;
+  const initialColumnWidth = Math.max(COLUMN_MIN_WIDTH, parseInt(currentPageWidth / columnsNum));
+
+  const newEmptyColumn = generateEmptyColumn(editor, columnsNum);
+
+  // Insert last column
+  const middleColumn = [
+    ...topTargetNode.column,
+    { key: newEmptyColumn.id, width: initialColumnWidth }
+  ];
+
+  // Recalculate width of every left column
+  const newColumn = middleColumn.map((column, index) => ({
+    ...column,
+    left: index * initialColumnWidth,
+    width: initialColumnWidth
+  }));
+
+  Transforms.setNodes(editor,
+    {
+      column: newColumn,
+      style: { gridTemplateColumns: `repeat(${columnsNum}, ${initialColumnWidth}px)` }
+    },
+    { at: [targetPath[0]] }
+  );
+  Transforms.insertNodes(editor, newEmptyColumn, { at: [targetPath[0], targetPath[1] + 1] });
+};
+
+export const addMiddleColumnInMultiColumn = (editor, topTargetNode, targetPath) => {
+  const columnNum = topTargetNode.children.length + 1;
+  const currentPageWidth = getCurrentPageWidth(editor) + LAST_COLUMN_MARGIN_RIGHT_WIDTH;
+  const initialColumnWidth = Math.max(COLUMN_MIN_WIDTH, parseInt(currentPageWidth / columnNum));
+
+  const insertedEmptyColumn = generateEmptyColumn(editor, columnNum);
+
+  // Insert middle column
+  const insertIndex = targetPath[1];
+  const middleColumn = [
+    ...topTargetNode.column.slice(0, insertIndex),
+    { key: insertedEmptyColumn.id, width: initialColumnWidth },
+    ...topTargetNode.column.slice(insertIndex),
+  ];
+  // Recalculate width of every left column
+  const newColumn = middleColumn.map((column, index) => ({
+    ...column,
+    left: index * initialColumnWidth,
+    width: initialColumnWidth
+  }));
+
+  Transforms.setNodes(
+    editor,
+    {
+      column: newColumn,
+      style: {
+        gridTemplateColumns: `repeat(${newColumn.length}, ${initialColumnWidth}px)`,
+      },
+    },
+    { at: [targetPath[0]] }
+  );
+
+  Transforms.insertNodes(editor, insertedEmptyColumn, { at: [targetPath[0], targetPath[1]] });
+};
+
 export const updateColumnWidth = (editor, element, column, newPath) => {
   const path = findPath(editor, element, newPath);
   const gridTemplateColumns = column.map(column => `${column.width}px`).join(' ');
@@ -111,7 +192,7 @@ export const updateColumnWidthOnDeletion = (editor, selection, column, deletionD
   const targetColumnIndex = !isDragged ? (selection.anchor.path[1] + (deletionDirection === 'deleteForward' ? 1 : 0))
     : (selection[1] + (deletionDirection === 'deleteForward' ? 1 : 0));
   const remainingColumn = column.filter((_, index) => index !== targetColumnIndex);
-  const currentPageWidth = getCurrentPageWidth(editor);
+  const currentPageWidth = getCurrentPageWidth(editor) + LAST_COLUMN_MARGIN_RIGHT_WIDTH;
   const columnWidth = Math.max(COLUMN_MIN_WIDTH, parseInt(currentPageWidth / remainingColumn.length));
 
   // Recalculate width of every left column

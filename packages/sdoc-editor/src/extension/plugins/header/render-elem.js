@@ -26,7 +26,7 @@ export const renderSubtitle = (props, editor) => {
     textAlign: element.align
   };
   return (
-    <div data-id={element.id} {...attributes} className={`sdoc-header-subtitle ${attributes.className}`} style={{ ...style }}>
+    <div data-id={element.id} {...attributes} className='sdoc-header-subtitle' style={{ ...style }}>
       {children}
     </div>
   );
@@ -54,7 +54,7 @@ export const renderHeader = (props, editor) => {
       data-id={element.id}
       id={element.id} // used for click left outline item, page scroll this element
       {...attributes}
-      className={`sdoc-header-${level} ${attributes.className}`}
+      className={`sdoc-header-${level}`}
       style={{ position: isShowPlaceHolder ? 'relative' : '', ...style }}
     >
       {isShowPlaceHolder && <Placeholder title={'Header'} top={0} />}

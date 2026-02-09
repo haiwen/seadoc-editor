@@ -6,13 +6,13 @@ import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
-import { CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM, CALL_OUT, TABLE_DRAG_KEY, LIST_ITEM, MULTI_COLUMN, ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, IMAGE_BLOCK } from '../../constants';
+import { CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM, CALL_OUT, TABLE_DRAG_KEY, LIST_ITEM, MULTI_COLUMN, ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, IMAGE_BLOCK, TWO_COLUMN, VIDEO, WHITEBOARD, FILE_VIEW, FORMULA, COLUMN } from '../../constants';
 import { findPath, focusEditor } from '../../core';
 import { getCalloutEntry } from '../../plugins/callout/helper';
 import { insertImageFiles } from '../../plugins/image/helpers';
-import { updateColumnWidthOnDeletion } from '../../plugins/multi-column/helper';
+import { addLastColumnInMultiColumn, addMiddleColumnInMultiColumn, updateColumnWidthOnDeletion } from '../../plugins/multi-column/helper';
 import { DRAG_SDOC_EDITOR_ELEMENT } from './event';
-import { setSelection, getNodeEntry, isBlockquote, isList, onWrapListItem, getTopValue, createDragPreviewContainer, deleteNodesFromBack, isListItem, onWrapMultiListItem, onWrapMultiListItemToNonListTypeTarget, isInMultiColumnNode, onWrapListItemFromMultiColumn, isMultiColumn } from './helpers';
+import { setSelection, getNodeEntry, isBlockquote, isList, onWrapListItem, getTopValue, createDragPreviewContainer, deleteNodesFromBack, isListItem, onWrapMultiListItem, onWrapMultiListItemToNonListTypeTarget, isInMultiColumnNode, onWrapListItemFromMultiColumn, isMultiColumn, clearDragClass, wrapIntoMultiColumn } from './helpers';
 import SideMenu from './side-menu';
 
 import './index.css';
@@ -36,6 +36,7 @@ const SideToolbar = () => {
   const selectedNodesRef = useRef(null);
   const showSelectedNodesRef = useRef(null);
   const draggedPreviewContainer = useRef(null);
+  const activeDragElRef = useRef(null);
 
   const onReset = useCallback(() => {
     setShowSideMenu(false);
@@ -255,19 +256,19 @@ const SideToolbar = () => {
     if (!dragTypes.includes(DRAG_SDOC_EDITOR_ELEMENT)) return;
 
     const overElement = event.currentTarget;
-    if (!overElement.classList.contains('sdoc-draging')) {
-      overElement.classList.add('sdoc-draging');
+    if (!overElement.classList.contains('sdoc-dragging')) {
+      overElement.classList.add('sdoc-dragging');
     }
   }, []);
 
   const dragLeave = useCallback((event) => {
     const leaveElement = event.currentTarget;
-    leaveElement.classList.remove('sdoc-draging');
+    leaveElement.classList.remove('sdoc-dragging');
   }, []);
 
   const drop = useCallback((event) => {
     targetElement = event.currentTarget;
-    targetElement.classList.remove('sdoc-draging');
+    targetElement.classList.remove('sdoc-dragging');
     const dragTypes = event.dataTransfer.types;
     if (!dragTypes.includes(DRAG_SDOC_EDITOR_ELEMENT) && dragTypes[0] !== 'Files') return;
 
@@ -295,7 +296,7 @@ const SideToolbar = () => {
         const parentNode = Node.parent(editor, targetPath);
         const topNode = Node.get(editor, [targetPath[0]]);
 
-        // Drag into list nods within blockquote, callout or multi_column block node
+        // Drag into list nods in blockquote, callout or multi_column block node
         if ((topNode.type === CALL_OUT && parentNode.type === LIST_ITEM) || (topNode.type === MULTI_COLUMN && parentNode.type === LIST_ITEM)) {
           currentTargetPath = Path.next(targetPath.slice(0, -1));
           onWrapMultiListItem(editor, currentTargetPath, selectedNodesRef.current);
@@ -527,6 +528,189 @@ const SideToolbar = () => {
   const onMouseLeave = useCallback(() => {
     setIsEnterMoreVertical(false);
   }, []);
+
+  const handleDragover = useCallback((event) => {
+    event.preventDefault();
+
+    const [sourceNode, sourcePath] = getNodeEntry(editor, sourceElement);
+    if (!sourceNode || !sourcePath ) return;
+
+    // Not support node type in multi column
+    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FILE_VIEW, FORMULA].includes(sourceNode.type)) return;
+    // Return if source node is from multi column
+    const topNode = Node.get(editor, [sourcePath[0]]);
+    if ([MULTI_COLUMN].includes(topNode.type)) return;
+
+    // Cursor position
+    const x = event.clientX;
+    const y = event.clientY;
+
+    const editorContainer = event.currentTarget;
+    const containerRect = editorContainer.getBoundingClientRect();
+
+    // Current visible area of editor container
+    const visibleTop = Math.max(containerRect.top, 0);
+    const visibleBottom = Math.min(containerRect.bottom, window.innerHeight);
+    let target = null;
+
+    // Get target element where cursor is close to
+    for (const el of editorContainer.querySelectorAll('[data-root="true"]')) {
+      const rect = el.getBoundingClientRect();
+
+      if (rect.bottom < visibleTop) continue;
+      if (rect.top > visibleBottom) break;
+
+      if (y > rect.top && y < rect.bottom) {
+        target = { el, rect };
+        break;
+      }
+    }
+
+    if (!target?.el) return;
+
+    const prevEl = activeDragElRef.current;
+    if (prevEl && prevEl !== target.el) {
+      clearDragClass(prevEl);
+    }
+
+    if (target?.el === sourceElement) return;
+
+    const [targetNode, targetPath] = getNodeEntry(editor, target?.el);
+
+    // Not support node type in multi column
+    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FILE_VIEW, FORMULA].includes(targetNode.type)) return;
+    if (!targetNode || (targetPath.length === 0 && ![ORDERED_LIST, UNORDERED_LIST].includes(targetNode.type))) return;
+
+    // Stop if target node is multi column node with four columns
+    if (targetNode.type === MULTI_COLUMN && targetNode.children.length === 4) return;
+
+    // Add hover style for target node multi column children
+    if (targetNode.type === MULTI_COLUMN) {
+      const multiColumnEl = target.el;
+      const columnEls = multiColumnEl.querySelectorAll('.sdoc-column-container');
+      if (!columnEls.length) return;
+
+      columnEls.forEach(col =>
+        col.classList.remove(
+          'sdoc-dragging-left',
+          'sdoc-dragging',
+          'sdoc-dragging-right'
+        )
+      );
+
+      let preColRect = null;
+      columnEls.forEach((colEl, index) => {
+        const rect = colEl.getBoundingClientRect();
+        if (x < rect.left && index === 0) {
+          colEl.classList.add('sdoc-dragging-left');
+          activeDragElRef.current = colEl;
+        }
+        if (preColRect && x < rect.left && x > preColRect.right) {
+          colEl.classList.add('sdoc-dragging-left');
+          activeDragElRef.current = colEl;
+        }
+        if (x > rect.right && index === columnEls.length - 1) {
+          colEl.classList.add('sdoc-dragging-right');
+          activeDragElRef.current = colEl;
+        }
+        preColRect = rect;
+      });
+      return;
+    }
+
+    // Add hover style for target node as non-multi column children
+    const isLeftOutside = x < target?.rect.left;
+    const isRightOutside = x > target?.rect.right;
+
+    if (isLeftOutside && !target.el.classList.contains('sdoc-dragging-left')) {
+      target.el.classList.add('sdoc-dragging-left');
+      target.el.classList.remove('sdoc-dragging-right');
+      target.el.classList.remove('sdoc-dragging');
+    }
+    if (isRightOutside && !target.el.classList.contains('sdoc-dragging-right')) {
+      target.el.classList.add('sdoc-dragging-right');
+      target.el.classList.remove('sdoc-dragging-left');
+      target.el.classList.remove('sdoc-dragging');
+    }
+
+    activeDragElRef.current = target.el;
+  }, [editor]);
+
+  const clearAllDragStyles = useCallback (() => {
+    const el = activeDragElRef.current;
+    clearDragClass(el);
+    activeDragElRef.current = null;
+  }, []);
+
+  const handleDrop = useCallback (() => {
+    const targetEl = activeDragElRef.current;
+    let [targetNode, targetPath] = getNodeEntry(editor, targetEl);
+    let [sourceNode, sourcePath] = getNodeEntry(editor, sourceElement);
+    if (!targetPath || !sourcePath) return;
+
+    // When source node is list child, it is equal to drag top list node
+    const topSourceNode = Node.get(editor, [sourcePath[0]]);
+    if ([ORDERED_LIST, UNORDERED_LIST].includes(topSourceNode.type)) {
+      sourceNode = topSourceNode;
+    }
+
+    // Drop non-multi column into multi column situation
+    if (COLUMN === targetNode.type) {
+      const topTargetNode = Node.get(editor, [targetPath[0]]); // Top multi column Node
+      // Insert source node into last of multi column
+      if (targetEl.classList.contains('sdoc-dragging-right')) {
+        addLastColumnInMultiColumn(editor, topTargetNode, targetPath);
+        Transforms.moveNodes(editor, { at: [sourcePath[0]], to: [targetPath[0], targetPath[1] + 1, 0] });
+      }
+      // Insert source node into middle of multi column
+      if (targetEl.classList.contains('sdoc-dragging-left')) {
+        addMiddleColumnInMultiColumn(editor, topTargetNode, targetPath);
+        Transforms.moveNodes(editor, { at: [sourcePath[0]], to: [targetPath[0], targetPath[1], 0] });
+      }
+      return;
+    }
+
+    // Drop non-multi column into non-multi column situation
+    // When target node is list, get real list path
+    if ([ORDERED_LIST, UNORDERED_LIST].includes(targetNode.type)) {
+      targetPath = ReactEditor.findPath(editor, targetNode);
+    }
+
+    if (Path.equals([sourcePath[0]], [targetPath[0]])) return;
+    let leftNode = null;
+    let rightNode = null;
+    if (targetEl.classList.contains('sdoc-dragging-left')) {
+      leftNode = sourceNode;
+      rightNode = targetNode;
+    } else if (targetEl.classList.contains('sdoc-dragging-right')) {
+      leftNode = targetNode;
+      rightNode = sourceNode;
+    } else {
+      return;
+    }
+
+    // Form multi column first and then remove source and target node
+    wrapIntoMultiColumn(editor, leftNode, rightNode, targetPath);
+    Transforms.removeNodes(editor, { at: Path.next([targetPath[0]]) });
+    Transforms.removeNodes(editor, { at: [sourcePath[0]] });
+
+    return;
+  }, [editor]);
+
+  useEffect(() => {
+    const editorContainer = document.querySelector('.sdoc-article-container');
+    editorContainer.addEventListener('dragover', handleDragover);
+    editorContainer.addEventListener('dragend', clearAllDragStyles);
+    editorContainer.addEventListener('dragleave', clearAllDragStyles);
+    editorContainer.addEventListener('drop', handleDrop);
+
+    return () => {
+      editorContainer.removeEventListener('dragover', handleDragover);
+      editorContainer.removeEventListener('dragend', clearAllDragStyles);
+      editorContainer.removeEventListener('dragleave', clearAllDragStyles);
+      editorContainer.removeEventListener('drop', handleDrop);
+    };
+  }, [handleDragover, clearAllDragStyles, handleDrop]);
 
   return (
     <>
