@@ -272,6 +272,12 @@
 .sdoc-code-block-pre {
   background: #FAFAFA;
   border: 1px solid #f0f0f0;
+  position: relative;
+  overflow-y: hidden !important;
+}
+
+.sdoc-code-block-pre.hidden {
+  padding-bottom: 48px !important;
 }
 
 .sdoc-code-block-pre .sdoc-code-no-wrap {
@@ -280,6 +286,38 @@
 
 .sdoc-code-block-pre .sdoc-code-no-wrap .sdoc-code-line>span {
   white-space: pre;
+}
+
+.sdoc-code-block-container .sdoc-code-block-hidden-icon {
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 48%;
+  bottom: 8px;
+}
+
+.sdoc-code-block-container .sdoc-code-block-hidden-icon .icon-container {
+  width: 32px;
+  height: 20px;
+  background-color: #999;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sdoc-code-block-container .sdoc-code-block-hidden-icon .icon-container .sdocfont {
+  color: #fff;
+  font-size: 12px;
+}
+
+.sdoc-code-block-code.hide-code {
+  max-height: 580.2px;
+  display: block;
+  overflow: hidden;
 }
 
 .sdoc-code-block-code .sdoc-code-line {
