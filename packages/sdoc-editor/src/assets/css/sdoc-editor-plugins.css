@@ -45,8 +45,11 @@
   cursor: pointer;
 }
 
-.sdoc-editor__article .list-container .sdoc-li-content {
-  display: inline-grid;
+/*  only for firefox browser */
+@-moz-document url-prefix() {
+  .sdoc-editor__article .list-container .sdoc-li-content {
+    display: inline-grid;
+  }
 }
 
 .sdoc-editor__article .list-container .sdoc-li-prefix {

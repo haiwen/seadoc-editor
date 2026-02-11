@@ -25,8 +25,36 @@
   left: -60px;
 }
 
-.sdoc-editor__article .sdoc-draging {
+.sdoc-editor__article .sdoc-dragging {
   border-bottom: 2px solid rgba(35, 131, 226);
+}
+
+.sdoc-editor__article .sdoc-dragging-right,
+.sdoc-editor__article .sdoc-dragging-left {
+  position: relative;
+}
+
+.sdoc-editor__article .sdoc-dragging-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -5px;
+  width: 2px;
+  background: rgba(35, 131, 226);
+  pointer-events: none;
+}
+
+.sdoc-editor__article .sdoc-dragging-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -5px;
+  left: unset;
+  width: 2px;
+  background: rgba(35, 131, 226);
+  pointer-events: none;
 }
 
 .sdoc-editor__article .sdoc-code-block-pre {

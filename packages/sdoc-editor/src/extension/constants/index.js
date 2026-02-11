@@ -272,7 +272,8 @@ export const ROOT_ELEMENT_TYPES = [
   IMAGE_BLOCK,
   VIDEO,
   WHITEBOARD,
-  FORMULA
+  FORMULA,
+  MULTI_COLUMN
 ];
 
 export {

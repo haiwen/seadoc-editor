@@ -18,7 +18,7 @@ class CheckListItem extends React.PureComponent {
     const { id, align, checked = false } = element || {};
     const style = { textAlign: align };
     return (
-      <div data-id={id} {...attributes} className={`sdoc-checkbox-container ${attributes.className}`} style={style}>
+      <div data-id={id} {...attributes} className='sdoc-checkbox-container' style={style}>
         <div className='sdoc-checkbox-input-wrapper' >
           <input contentEditable={false} className='sdoc-checkbox-input' type="checkbox" onChange={this.onChange} checked={checked}/>
           <p className='sdoc-checkbox-content-container'>{children}</p>

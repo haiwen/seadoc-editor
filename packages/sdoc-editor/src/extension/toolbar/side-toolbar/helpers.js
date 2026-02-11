@@ -9,7 +9,7 @@ import {
   ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, CHECK_LIST_ITEM, TABLE, CODE_BLOCK, BLOCKQUOTE,
   LIST_ITEM_CORRELATION_TYPE, ADD_POSITION_OFFSET_TYPE, INSERT_POSITION, ELEMENT_TYPE, CALL_OUT,
   SIDE_TRANSFORM_MENUS_CONFIG, LIST_ITEM_SUPPORTED_TRANSFORMATION, HEADERS, VIDEO,
-  MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK, WHITEBOARD
+  MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK, WHITEBOARD, TWO_COLUMN
 } from '../../constants';
 import { generateEmptyElement, findPath, isMultiLevelList, isTopLevelListItem, getNode, focusEditor, getAboveNode, getTopLevelBlockNode } from '../../core';
 import { setBlockQuoteType } from '../../plugins/blockquote/helpers';
@@ -262,6 +262,7 @@ export const insertElement = (editor, type, insertPosition) => {
 };
 
 export const getNodeEntry = (editor, el) => {
+  if (!el) return [];
   const node = ReactEditor.toSlateNode(editor, el);
   let path = ReactEditor.findPath(editor, node);
 
@@ -483,4 +484,22 @@ export const normalizeCopyData = (editor, fragment) => {
   const newData = replacePastedDataId(parsed);
   const normalizeNewData = normalizeCopyNodes(editor, newData);
   return normalizeNewData;
+};
+
+export const clearDragClass = (el) => {
+  if (!el) return;
+  el.classList.remove(
+    'sdoc-dragging-right',
+    'sdoc-dragging-left',
+    'sdoc-dragging'
+  );
+};
+
+export const wrapIntoMultiColumn = (editor, leftNode, rightNode, targetPath) => {
+  const emptyMultiColumnNode = generateEmptyMultiColumn(editor, TWO_COLUMN);
+  Transforms.insertNodes(editor, emptyMultiColumnNode, { at: [targetPath[0]] });
+  Transforms.insertNodes(editor, leftNode, { at: [targetPath[0], 0, 0] });
+  Transforms.insertNodes(editor, rightNode, { at: [targetPath[0], 1, 0] });
+  Transforms.removeNodes(editor, { at: [targetPath[0], 0, 1] });
+  Transforms.removeNodes(editor, { at: [targetPath[0], 1, 1] });
 };

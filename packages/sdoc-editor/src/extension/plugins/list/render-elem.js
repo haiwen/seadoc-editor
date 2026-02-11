@@ -7,7 +7,7 @@ import { ORDERED_LIST } from '../../constants';
 const renderList = (props, editor) => {
   const { attributes, children, element: node } = props;
   const Tag = node.type === ORDERED_LIST ? 'ol' : 'ul';
-  return <Tag data-id={node.id} className="list-container d-flex flex-column" {...attributes}>{children}</Tag>;
+  return <Tag data-id={node.id} {...attributes} className="list-container d-flex flex-column" >{children}</Tag>;
 };
 
 const renderListItem = (props, editor) => {

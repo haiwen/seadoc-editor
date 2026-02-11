@@ -118,7 +118,7 @@ const renderCallout = ({ attributes, children, element }, editor) => {
       <div
         onClick={handleClick}
         ref={calloutRef}
-        className={`${attributes.className} sdoc-callout-container`}
+        className='sdoc-callout-container'
         style={containerStyle}
       >
         {element.callout_icon && (
