@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.83](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.82...@seafile/sdoc-editor@3.0.83) (2026-02-12)
+
+### Bug Fixes
+
+- optimize whiteboard ([#194](https://github.com/seafileltd/sea-sdoc-editor/issues/194)) ([20fdd82](https://github.com/seafileltd/sea-sdoc-editor/commit/20fdd82275ef54f99f01370f47f4eeec7a5ef8eb))
+
 ## [3.0.82](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.81...@seafile/sdoc-editor@3.0.82) (2026-02-11)
 
 ### Features
