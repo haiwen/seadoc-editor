@@ -343,21 +343,22 @@ class Context {
     return this.api.getFileMetadataInfo(docUuid, fileType);
   }
 
-  insertWikiView(data) {
+  insertFileRepo(data) {
     const wikiId = this.getSetting('wikiId');
     const docUuid = this.getSetting('docUuid');
-    return this.api.insertWikiView(wikiId, docUuid, data);
+
+    return this.api.insertFileRepo(docUuid, wikiId, data);
   }
 
-  duplicateWikiView(viewId) {
+  duplicateFileRepo(fileRepoId) {
     const wikiId = this.getSetting('wikiId');
     const docUuid = this.getSetting('docUuid');
-    return this.api.duplicateWikiView(wikiId, docUuid, viewId);
+    return this.api.duplicateWikiView(docUuid, wikiId, fileRepoId);
   }
 
-  modifyView(viewId, viewData) {
+  modifyFileRepo(viewId, fileRepoId, viewData) {
     const wikiId = this.getSetting('wikiId');
-    return this.api.modifyView(wikiId, viewId, viewData);
+    return this.api.modifyView(wikiId, fileRepoId, viewData);
   }
 
 }

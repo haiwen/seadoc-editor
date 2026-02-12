@@ -2,21 +2,23 @@
   /* position: absolute; */
   background-color: #ffff;
   max-height: 370px;
-  max-width: 200px;
+  max-width: 220px;
   padding: 8px 0px;
   left: -8px;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-search-wrapper {
+.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-tip {
   padding: 12px;
+  color: #666;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-search-wrapper>input {
-  font-size: 12px;
-  max-height: 30px;
-}
 
 .sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-content-wrapper {
   max-height: 300px;
   overflow-y: auto;
+}
+
+.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-add-toolbar {
+  padding: 12px;
+  color: #666;
 }

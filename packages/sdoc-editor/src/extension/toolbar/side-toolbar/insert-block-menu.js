@@ -132,13 +132,13 @@ const InsertBlockMenu = ({
     const wikiId = context.getSetting('wikiId');
     const data = {
       wiki_id: wikiId,
+      name: t('Files'),
       view_name: t('View_name'),
-      view_type: 'table',
-      link_repo_id: item.repo_id,
+      linked_repo_id: item.repo_id,
     };
-    context.insertWikiView(data).then(res => {
-      const { view } = res.data;
-      const viewData = { ...data, view_id: view._id };
+    context.insertFileRepo(data).then(res => {
+      const fileRepo = res.data;
+      const viewData = { wiki_id: wikiId, file_repo_id: fileRepo.id };
       insertFileView(viewData, editor, insertPosition, slateNode);
     }).catch(error => {
       const errorMessage = getErrorMsg(error);
