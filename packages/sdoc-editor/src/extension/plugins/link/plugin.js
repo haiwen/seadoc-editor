@@ -42,7 +42,8 @@ const withLink = (editor) => {
             const fileName = res.data.files_info[text].name;
             const fileParentPath = res.data.files_info[text].parent_path;
             const filePath = fileParentPath + '/' + fileName;
-            insertWhiteboard(editor, fileName, filePath);
+            const repoId = res.data.files_info[text].repo_id;
+            insertWhiteboard(editor, fileName, filePath, repoId);
           } else if (isCommonFile(res, text)) {
             const fileName = res.data.files_info[text].name;
             const fileUuid = res.data.files_info[text].file_uuid;

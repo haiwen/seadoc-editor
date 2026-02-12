@@ -58,11 +58,14 @@ export const generateWhiteboardNode = (repoID, filename = '', filePath, exdrawRe
   return whiteboardNode;
 };
 
-export const insertWhiteboard = async (editor, filename, filePath) => {
+export const insertWhiteboard = async (editor, filename, filePath, repoId) => {
   if (isInsertWhiteboardMenuDisabled(editor)) return;
   if (editor.selection == null) return;
 
-  const repoID = context.getSetting('repoID');
+  let repoID = repoId;
+  if (!repoId) {
+    repoID = context.getSetting('repoID');
+  }
 
   const eventBus = EventBus.getInstance();
   const exdrawReadOnlyLink = await new Promise((resolve) => {
