@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Database } from '@seafile/seafile-database';
+import { FileBase } from '@seafile/seafile-database';
 import { useReadOnly, useSelected, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
 import toaster from '../../../../components/toast';
@@ -9,7 +9,6 @@ import { getErrorMsg } from '../../../../utils/common-utils';
 import LocalStorage from '../../../../utils/local-storage-utils';
 import { RECENT_COPY_CONTENT } from '../../../constants';
 import { calculateSize, updateFileView } from '../helpers';
-import Rename from '../rename';
 
 import './index.css';
 
@@ -31,16 +30,16 @@ const FileView = ({ element, children, attributes }) => {
     const settings = context.getFileViewSetting();
     const viewSettings = {
       ...settings,
-      repoID: data.link_repo_id,
       view_data: {
-        view_id: data.view_id,
         wiki_id: data.wiki_id,
-        height: data.height,
+        file_repo_id: data.file_repo_id,
         width: data.width,
+        height: data.height,
+        icon: data.icon,
       },
     };
     return viewSettings;
-  }, [data.height, data.link_repo_id, data.view_id, data.width, data.wiki_id]);
+  }, [data.file_repo_id, data.height, data.icon, data.width, data.wiki_id]);
 
 
   useEffect(() => {
@@ -165,11 +164,8 @@ const FileView = ({ element, children, attributes }) => {
 
   return (
     <div data-id={element.id} {...attributes} className="sdoc-file-view-container" contentEditable='false' suppressContentEditableWarning>
-      <div className='sdoc-file-view-title'>
-        <Rename name={data.view_name} onRenameConfirm={onRename} onRenameCancel={onNameCancel}/>
-      </div>
       <div className={classNames('sdoc-file-view-content', { 'is-selected': isSelected })} ref={wrapperRef} style={style}>
-        <Database settings={viewSettings} ref={databaseRef}/>
+        <FileBase settings={viewSettings} ref={databaseRef}/>
         {!readOnly && isSelected && (
           <span className='file-view-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
         )}

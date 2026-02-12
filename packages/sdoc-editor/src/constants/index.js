@@ -52,6 +52,7 @@ export const INTERNAL_EVENT = {
   GENERATE_EXDRAW_READ_ONLY_LINK: 'generate_exdraw_read_only_link',
   TRANSFER_PREVIEW_FILE_ID: 'transfer_preview_file_id',
   FILE_METADATA_COMPONENT: 'file_metadata_component',
+  ADD_WIKI_LIBRARY_TOGGLE: 'add_wiki_library_click',
 };
 
 export const PAGE_EDIT_AREA_WIDTH = 672; // 672 = 794 - 2[borderLeft + borderRight] - 120[paddingLeft + paddingRight]
