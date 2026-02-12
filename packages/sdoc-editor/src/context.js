@@ -91,7 +91,7 @@ class Context {
   }
 
   getWikiSettings = () => {
-    if (window.wiki & window.wiki.config) {
+    if (window.wiki && window.wiki.config) {
       const { wikiSettings } = window.wiki.config;
       return wikiSettings;
     }
@@ -100,7 +100,7 @@ class Context {
   };
 
   getWikiRepos = () => {
-    if (window.wiki & window.wiki.config) {
+    if (window.wiki && window.wiki.config) {
       const { repos } = window.wiki.config;
       return repos;
     }
