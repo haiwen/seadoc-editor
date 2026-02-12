@@ -90,6 +90,25 @@ class Context {
     };
   }
 
+  getWikiSettings = () => {
+    if (window.wiki & window.wiki.config) {
+      const { wikiSettings } = window.wiki.config;
+      return wikiSettings;
+    }
+
+    return this.settings['wikiSettings'];
+  };
+
+  getWikiRepos = () => {
+    if (window.wiki & window.wiki.config) {
+      const { repos } = window.wiki.config;
+      return repos;
+    }
+
+    return this.settings['repos'];
+  };
+
+
   getFileContent() {
     return this.sdocServerApi.getDocContent()
       .then(res => {
