@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
+import classnames from 'classnames';
 import { INTERNAL_EVENT } from '../../../constants';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import EventBus from '../../../utils/event-bus';
@@ -17,6 +18,7 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
   const { white_space } = style;
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [showHoverMenu, setShowHoverMenu] = useState(false);
+  const [showAllCode, setShowAllCode] = useState(false);
 
   const onChangeLanguage = useCallback((lang) => {
     const { value: language } = lang;
@@ -107,13 +109,26 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
     EventBus.getInstance().dispatch(INTERNAL_EVENT.UPDATE_SEARCH_REPLACE_HIGHLIGHT);
   };
 
+  const isHiddenCodeBlockParts = children.length > 30;
+
+  const toggleHidden = () => {
+    setShowAllCode(!showAllCode);
+  };
+
   return (
     <div data-id={element.id} {...attributes} className={`sdoc-code-block-container ${attributes.className}`} onClick={onFocusCodeBlock} onMouseLeave={onMouseLeave}>
-      <pre onScroll={handleScroll} className={'sdoc-code-block-pre'} ref={codeBlockRef}>
-        <code className={`sdoc-code-block-code ${white_space === 'nowrap' ? 'sdoc-code-no-wrap' : ''}`}>
+      <pre onScroll={handleScroll} className={classnames('sdoc-code-block-pre', { 'hidden': isHiddenCodeBlockParts })} ref={codeBlockRef}>
+        <code className={`sdoc-code-block-code ${white_space === 'nowrap' ? 'sdoc-code-no-wrap' : ''} ${!showAllCode ? 'hide-code' : ''}`}>
           {children}
         </code>
       </pre>
+      {children.length > 30 &&
+        <span className="sdoc-code-block-hidden-icon" onClick={toggleHidden} contentEditable={false} suppressContentEditableWarning>
+          <span className='icon-container'>
+            {!showAllCode ? <i className="sdocfont sdoc-arrow-down arrow"></i> : <i className="sdocfont sdoc-arrow-up arrow"></i>}
+          </span>
+        </span>
+      }
       {showHoverMenu && (
         <CodeBlockHoverMenu
           menuPosition={menuPosition}
