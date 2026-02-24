@@ -1,6 +1,6 @@
 {
   "name": "@seafile/sdoc-editor",
-  "version": "3.0.83",
+  "version": "3.0.84",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
