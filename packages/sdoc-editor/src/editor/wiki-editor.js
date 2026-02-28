@@ -10,6 +10,7 @@ import { createDefaultEditor } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
 import { RECENT_COPY_CONTENT } from '../extension/constants';
 import { removeMarks } from '../extension/plugins/ai/ai-module/helpers';
+import LinkedRepoList from '../extension/toolbar/linked-repo-popover/link-repo-list';
 import { ColorProvider } from '../hooks/use-color-context';
 import useMathJax from '../hooks/use-mathjax';
 import { ScrollContext } from '../hooks/use-scroll-context';
@@ -52,9 +53,12 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
     validEditor.readonly = false;
     return () => {
       validEditor.selection = null;
-      LocalStorage.removeItem(RECENT_COPY_CONTENT);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    LocalStorage.removeItem(RECENT_COPY_CONTENT);
   }, []);
 
   // useMount: init socket connection
@@ -159,6 +163,9 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
                 <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={showComment} />
               </div>
               <WikiOutline doc={slateValue} />
+              <div className='sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-menu-file-view-popover'>
+                <LinkedRepoList />
+              </div>
             </ScrollContext.Provider>
           </div>
         </ColorProvider>

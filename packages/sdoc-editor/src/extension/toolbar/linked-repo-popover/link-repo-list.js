@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import iconUrl from '../../../assets/images/lib.png';
 import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
@@ -34,12 +35,15 @@ const LinkedRepoList = ({ onRepoClick }) => {
       <div className='sdoc-linked-repo-list-content-wrapper'>
         {enableRepos.map(item => {
           return (
-            <div key={item.repo_id} className="sdoc-dropdown-menu-item text-truncate d-block" onClick={() => onRepoClick(item)}>{item.repo_name}</div>
+            <div key={item.repo_id} className="sdoc-dropdown-menu-item text-truncate d-block" onClick={() => onRepoClick(item)}>
+              <img className='lib-icon' src={iconUrl} width="20" alt='' />
+              {item.repo_name}
+            </div>
           );
         })}
       </div>
       <div className='sdoc-linked-repo-list-add-toolbar' onClick={onAddLibraryClick}>
-        {t('Add library')}
+        <i className="sdocfont sdoc-append"></i>{t('Add library')}
       </div>
     </div>
   );

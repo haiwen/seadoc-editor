@@ -25,7 +25,7 @@ export const genFileViewNode = (data) => {
 
 export const insertFileView = (data, editor, position, slateNode) => {
   if (!data) return;
-  if (!data.wiki_id || !data.file_repo_id) return;
+  if (!data.wiki_id || !data.file_view_id) return;
 
   const fileViewNode = genFileViewNode(data);
 

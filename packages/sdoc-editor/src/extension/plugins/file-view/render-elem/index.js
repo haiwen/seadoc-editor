@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FileBase } from '@seafile/seafile-database';
+import { FileView } from '@seafile/seafile-database';
 import { useReadOnly, useSelected, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
 import toaster from '../../../../components/toast';
 import context from '../../../../context';
+import { useScrollContext } from '../../../../hooks/use-scroll-context';
 import { getErrorMsg } from '../../../../utils/common-utils';
 import LocalStorage from '../../../../utils/local-storage-utils';
 import { RECENT_COPY_CONTENT } from '../../../constants';
@@ -12,9 +13,10 @@ import { calculateSize, updateFileView } from '../helpers';
 
 import './index.css';
 
-const FileView = ({ element, children, attributes }) => {
+const FileViewPlugin = ({ element, children, attributes }) => {
   const { data } = element;
 
+  const scrollRef = useScrollContext();
   const editor = useSlateStatic();
   const isSelected = useSelected();
   const { readOnly } = useReadOnly();
@@ -32,14 +34,13 @@ const FileView = ({ element, children, attributes }) => {
       ...settings,
       view_data: {
         wiki_id: data.wiki_id,
-        file_repo_id: data.file_repo_id,
-        width: data.width,
+        file_view_id: data.file_view_id,
         height: data.height,
-        icon: data.icon,
+        width: data.width,
       },
     };
     return viewSettings;
-  }, [data.file_repo_id, data.height, data.icon, data.width, data.wiki_id]);
+  }, [data.file_view_id, data.height, data.width, data.wiki_id]);
 
 
   useEffect(() => {
@@ -48,10 +49,10 @@ const FileView = ({ element, children, attributes }) => {
     if (wikiId !== data.wiki_id) return;
     if (!copyContent) return;
     const stringContent = JSON.stringify(copyContent);
-    if (stringContent.indexOf(data.wiki_id) > -1 && stringContent.indexOf(data.view_id) > -1) {
-      context.duplicateWikiView(data.view_id).then(res => {
-        const { view } = res.data;
-        const newData = { ...data, view_id: view._id, view_name: view.name };
+    if (stringContent.indexOf(data.wiki_id) > -1 && stringContent.indexOf(data.file_view_id) > -1) {
+      context.duplicateFileView(data.file_view_id).then(res => {
+        const { file_view: fileView } = res.data;
+        const newData = { ...data, file_view_id: fileView.id };
         updateFileView(newData, editor, element);
       }).catch(error => {
         const errorMessage = getErrorMsg(error);
@@ -84,7 +85,7 @@ const FileView = ({ element, children, attributes }) => {
     style.width = size.width + 'px';
     style.height = size.height + 'px';
 
-    const { style: databaseStyle } = databaseRef.current;
+    const { style: databaseStyle } = databaseRef.current.getFileBaseElement();
     databaseStyle.width = (size.width - 4) + 'px';
     databaseStyle.height = (size.height - 4) + 'px';
 
@@ -147,25 +148,10 @@ const FileView = ({ element, children, attributes }) => {
     return null;
   }, [data]);
 
-  const onNameCancel = useCallback(() => {
-  }, []);
-
-  const onRename = useCallback((newName) => {
-
-    const newData = {
-      ...element.data,
-      view_name: newName,
-    };
-    updateFileView(newData, editor, element);
-
-    // TODO:
-    // context.modifyView(data.view_id, { view_name: newName });
-  }, [editor, element]);
-
   return (
     <div data-id={element.id} {...attributes} className="sdoc-file-view-container" contentEditable='false' suppressContentEditableWarning>
       <div className={classNames('sdoc-file-view-content', { 'is-selected': isSelected })} ref={wrapperRef} style={style}>
-        <FileBase settings={viewSettings} ref={databaseRef}/>
+        <FileView settings={viewSettings} ref={databaseRef} scrollRef={scrollRef}/>
         {!readOnly && isSelected && (
           <span className='file-view-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
         )}
@@ -183,5 +169,5 @@ const FileView = ({ element, children, attributes }) => {
 };
 
 export const renderFileView = (props) => {
-  return <FileView {...props} />;
+  return <FileViewPlugin {...props} />;
 };

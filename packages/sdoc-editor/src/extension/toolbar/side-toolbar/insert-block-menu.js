@@ -132,19 +132,19 @@ const InsertBlockMenu = ({
     const wikiId = context.getSetting('wikiId');
     const data = {
       wiki_id: wikiId,
-      name: t('Files'),
-      view_name: t('View_name'),
+      name: item.repo_name,
       linked_repo_id: item.repo_id,
+      type: 'table',
     };
-    context.insertFileRepo(data).then(res => {
-      const fileRepo = res.data;
-      const viewData = { wiki_id: wikiId, file_repo_id: fileRepo.id };
+    context.insertFileView(data).then(res => {
+      const fileView = res.data;
+      const viewData = { wiki_id: wikiId, file_view_id: fileView.id };
       insertFileView(viewData, editor, insertPosition, slateNode);
     }).catch(error => {
       const errorMessage = getErrorMsg(error);
       toaster.danger(errorMessage);
     });
-  }, [editor, insertPosition, slateNode, t]);
+  }, [editor, insertPosition, slateNode]);
 
   return (
     <>
