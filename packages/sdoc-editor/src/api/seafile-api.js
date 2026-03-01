@@ -240,34 +240,33 @@ class SeafileAPI {
     return this.req.get(url);
   }
 
-  insertWikiView(wikiId, docUuid, data) {
-    const url = `/api/v2.1/wiki2/${wikiId}/views/`;
+  insertFileView(docUuid, wikiId, data) {
+    const url = `/api/v2.1/wiki2/${wikiId}/file-views/`;
     const form = new FormData();
-    form.append('file_uuid', docUuid);
-    form.append('name', data.view_name);
-    form.append('type', data.view_type);
-    form.append('link_repo_id', data.link_repo_id);
+    form.append('file_uuid', docUuid); // used for valid permission
+    form.append('name', data.name);
+    form.append('linked_repo_id', data.linked_repo_id);
+    form.append('type', data.type || 'table');
 
     return this.req.post(url, form);
   }
 
-  duplicateWikiView(wikiId, docUuid, viewId) {
-    const url = `/api/v2.1/wiki2/${wikiId}/duplicate-view/`;
-    const form = new FormData();
-    form.append('file_uuid', docUuid);
-    form.append('view_id', viewId);
-
-    return this.req.post(url, form);
-  }
-
-  modifyView(wikiId, viewId, viewData) {
-    const url = '/api/v2.1/wiki2/' + wikiId + '/views/';
+  modifyFileView(wikiId, fileViewId, viewData) {
+    const url = '/api/v2.1/wiki2/' + wikiId + '/file-views/' + fileViewId + '/';
     const data = {
-      view_id: viewId,
-      view_data: viewData,
+      viewData,
     };
     return this.req.put(url, data);
   }
+
+  duplicateFileView(docUuid, wikiId, fileViewId) {
+    const url = `/api/v2.1/wiki2/${wikiId}/file-views/${fileViewId}/duplicate/`;
+    const form = new FormData();
+    form.append('file_uuid', docUuid); // used for valid permission
+
+    return this.req.post(url, form);
+  }
+
 }
 
 export default SeafileAPI;

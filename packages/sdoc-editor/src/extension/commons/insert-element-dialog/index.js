@@ -6,7 +6,6 @@ import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, FORMULA, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO } from '../../constants';
 import AIModule from '../../plugins/ai/ai-module/index.js';
-import InsertViewDialog from '../../plugins/file-view/insert-view-dialog/index.js';
 import FormulaModal from '../../plugins/formula/menu/formula-modal.js';
 import { generateImageInfos, insertImage } from '../../plugins/image/helpers';
 import AddLinkDialog from '../../plugins/link/dialog/add-link-dialog';
@@ -204,17 +203,6 @@ const InsertElementDialog = ({ editor }) => {
     }
     case ELEMENT_TYPE.VIDEO_LINK: {
       return (<AddVideoLinkDialog {...props} />);
-    }
-    case ELEMENT_TYPE.FILE_VIEW: {
-      const props = {
-        editor: validEditor,
-        element: element,
-        slateNode: slateNode,
-        insertPosition: insertPosition,
-        dialogType,
-        closeDialog,
-      };
-      return <InsertViewDialog {...props} />;
     }
     case ELEMENT_TYPE.FORMULA:{
       return (

@@ -1,86 +1,49 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Input } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { getAccessibleRepos, getWikiSettings } from '../../plugins/file-view/helpers';
+import iconUrl from '../../../assets/images/lib.png';
+import { INTERNAL_EVENT } from '../../../constants';
+import context from '../../../context';
+import EventBus from '../../../utils/event-bus';
 
 import './link-repo-list.css';
 
-const useStopPropagation = () => {
-  const stopPropagation = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation?.();
-  };
-
-  return {
-    onClick: stopPropagation,
-    onFocus: stopPropagation,
-    onKeyDown: stopPropagation,
-    onKeyUp: stopPropagation,
-    onKeyPress: stopPropagation,
-    onMouseDown: stopPropagation,
-    onTouchStart: stopPropagation,
-  };
-};
-
-const useRepos = () => {
-  const wikiSettings = getWikiSettings();
-  const accessibleRepos = getAccessibleRepos();
-  const { linked_repos: linkedRepoIds } = wikiSettings;
-  const optionsMap = accessibleRepos.reduce((result, item) => {
-    result[item.repo_id] = item;
-    return result;
-  }, {});
-  return linkedRepoIds.map(id => optionsMap[id]);
-};
-
 const LinkedRepoList = ({ onRepoClick }) => {
   const { t } = useTranslation('sdoc-editor');
-  const isComposingRef = useRef(null);
   const repoRef = useRef(null);
-  const repos = useRepos();
-  const [tables, setTables] = useState(repos || []);
-
-  const inputEvents = useStopPropagation();
-
-  const onChange = useCallback((event) => {
-    if (isComposingRef.current) return;
-    const value = event.target.value.trim().toUpperCase();
-    if (value) {
-      const list = repos.filter(item => item.repo_name.toUpperCase().includes(value));
-      setTables(list);
-    } else {
-      setTables(repos);
-    }
-  }, [repos]);
-
-  const onCompositionStart = useCallback(() => {
-    isComposingRef.current = true;
+  const enableRepos = useMemo(() => {
+    const repos = context.getWikiRepos();
+    const wikiSettings = context.getWikiSettings();
+    const { linked_repos } = wikiSettings;
+    const linkedMap = linked_repos.reduce((ret, id) => {
+      ret[id] = true;
+      return ret;
+    }, {});
+    return repos.filter(item => linkedMap[item.repo_id]);
   }, []);
 
-  const onCompositionEnd = useCallback((e) => {
-    isComposingRef.current = false;
-    onChange(e);
-  }, [onChange]);
+  const onAddLibraryClick = useCallback(() => {
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.ADD_WIKI_LIBRARY_TOGGLE);
+  }, []);
 
   return (
     <div ref={repoRef} className="sdoc-dropdown-menu-container sdoc-linked-repo-list-wrapper">
-      <div className='sdoc-linked-repo-list-search-wrapper'>
-        <Input
-          placeholder={t('Search_1')}
-          onChange={onChange}
-          autoFocus
-          onCompositionStart={onCompositionStart}
-          onCompositionEnd={onCompositionEnd}
-          {...inputEvents}
-        />
+      <div className='sdoc-linked-repo-list-tip'>
+        {t('Show_files_from_a_linked_library')}
       </div>
       <div className='sdoc-linked-repo-list-content-wrapper'>
-        {tables.map(item => {
+        {enableRepos.map(item => {
           return (
-            <div key={item.repo_id} className="sdoc-dropdown-menu-item text-truncate d-block" onClick={() => onRepoClick(item)}>{item.repo_name}</div>
+            <div key={item.repo_id} className="sdoc-dropdown-menu-item text-truncate d-block" onClick={() => onRepoClick(item)}>
+              <img className='lib-icon' src={iconUrl} width="20" alt='' />
+              {item.repo_name}
+            </div>
           );
         })}
+      </div>
+      <div className='sdoc-linked-repo-list-add-toolbar' onClick={onAddLibraryClick}>
+        <i className="sdocfont sdoc-append"></i>{t('Add library')}
       </div>
     </div>
   );

@@ -12,20 +12,6 @@ export const getFileUrl = (element) => {
   return `${serviceUrl}/wiki/${wiki_id}/repo-views/${view_id}/`;
 };
 
-export const getWikiSettings = () => {
-  const wikiId = context.getSetting('wikiId');
-  const WIKI_SETTING_INTO_KEY = `seafile_wiki_${wikiId}_settings_info`;
-  const settings = window.localStorage.getItem(WIKI_SETTING_INTO_KEY);
-  return JSON.parse(settings);
-};
-
-export const getAccessibleRepos = () => {
-  const wikiId = context.getSetting('wikiId');
-  const WIKI_REPO_INFO_KEY = `seafile_wiki_${wikiId}_repos_info`;
-  const repos = window.localStorage.getItem(WIKI_REPO_INFO_KEY);
-  return JSON.parse(repos);
-};
-
 export const genFileViewNode = (data) => {
   return {
     id: slugid.nice(),
@@ -39,7 +25,7 @@ export const genFileViewNode = (data) => {
 
 export const insertFileView = (data, editor, position, slateNode) => {
   if (!data) return;
-  if (!data.view_name || !data.view_type || !data.link_repo_id) return;
+  if (!data.wiki_id || !data.file_view_id) return;
 
   const fileViewNode = genFileViewNode(data);
 

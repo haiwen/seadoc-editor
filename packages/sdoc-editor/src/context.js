@@ -90,6 +90,27 @@ class Context {
     };
   }
 
+  getWikiSettings = () => {
+    // patch: Resolving the issue of repos wikiSettings consuming too much localstorage.
+    if (window.wiki && window.wiki.config) {
+      const { wikiSettings } = window.wiki.config;
+      return wikiSettings;
+    }
+
+    return this.settings['wikiSettings'];
+  };
+
+  getWikiRepos = () => {
+    // patch: Resolving the issue of repos wikiSettings consuming too much localstorage.
+    if (window.wiki && window.wiki.config) {
+      const { repos } = window.wiki.config;
+      return repos;
+    }
+
+    return this.settings['repos'];
+  };
+
+
   getFileContent() {
     return this.sdocServerApi.getDocContent()
       .then(res => {
@@ -343,21 +364,22 @@ class Context {
     return this.api.getFileMetadataInfo(docUuid, fileType);
   }
 
-  insertWikiView(data) {
+  insertFileView(data) {
     const wikiId = this.getSetting('wikiId');
     const docUuid = this.getSetting('docUuid');
-    return this.api.insertWikiView(wikiId, docUuid, data);
+
+    return this.api.insertFileView(docUuid, wikiId, data);
   }
 
-  duplicateWikiView(viewId) {
+  duplicateFileView(fileViewId) {
     const wikiId = this.getSetting('wikiId');
     const docUuid = this.getSetting('docUuid');
-    return this.api.duplicateWikiView(wikiId, docUuid, viewId);
+    return this.api.duplicateFileView(docUuid, wikiId, fileViewId);
   }
 
-  modifyView(viewId, viewData) {
+  modifyFileView(viewId, fileViewId, viewData) {
     const wikiId = this.getSetting('wikiId');
-    return this.api.modifyView(wikiId, viewId, viewData);
+    return this.api.modifyView(wikiId, fileViewId, viewData);
   }
 
 }

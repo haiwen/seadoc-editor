@@ -65,6 +65,10 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    LocalStorage.removeItem(RECENT_COPY_CONTENT);
+  }, []);
+
   // useMount: init socket connection
   useEffect(() => {
     if (propsEditor) return;

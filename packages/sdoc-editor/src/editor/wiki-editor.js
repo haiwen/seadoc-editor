@@ -52,9 +52,12 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
     validEditor.readonly = false;
     return () => {
       validEditor.selection = null;
-      LocalStorage.removeItem(RECENT_COPY_CONTENT);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    LocalStorage.removeItem(RECENT_COPY_CONTENT);
   }, []);
 
   // useMount: init socket connection
