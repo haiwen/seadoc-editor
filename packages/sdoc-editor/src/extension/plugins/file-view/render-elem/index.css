@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  resize: vertical;
 }
 
 .sdoc-file-view-container .sdoc-file-view-title {
@@ -18,6 +19,7 @@
   position: relative;
   border: 2px solid #eee;
   border-radius: 4px;
+  resize: vertical;
 }
 
 .sdoc-file-view-container .sdoc-file-view-content.is-selected {
@@ -26,7 +28,7 @@
 }
 
 .sdoc-file-view-container .sdoc-file-view-content {
-  height: 400;
+  height: 400px;
 }
 
 .sdoc-file-view-container .sdoc-file-view-content .sea-metadata {

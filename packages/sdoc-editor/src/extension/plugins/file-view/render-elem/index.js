@@ -36,11 +36,11 @@ const FileViewPlugin = ({ element, children, attributes }) => {
         wiki_id: data.wiki_id,
         file_view_id: data.file_view_id,
         height: data.height,
-        width: data.width,
+        // width: data.width,
       },
     };
     return viewSettings;
-  }, [data.file_view_id, data.height, data.width, data.wiki_id]);
+  }, [data.file_view_id, data.height, data.wiki_id]);
 
 
   useEffect(() => {
@@ -82,11 +82,11 @@ const FileViewPlugin = ({ element, children, attributes }) => {
     const size = calculateSize(event, { left, right, top, bottom });
 
     const { style } = wrapperElement;
-    style.width = size.width + 'px';
+    // style.width = size.width + 'px';
     style.height = size.height + 'px';
 
     const { style: databaseStyle } = databaseRef.current.getFileBaseElement();
-    databaseStyle.width = (size.width - 4) + 'px';
+    // databaseStyle.width = (size.width - 4) + 'px';
     databaseStyle.height = (size.height - 4) + 'px';
 
     setMovingSize(size);
@@ -109,7 +109,7 @@ const FileViewPlugin = ({ element, children, attributes }) => {
     const { style } = wrapperRef.current;
     const newData = {
       ...element.data,
-      width: parseFloat(style.width),
+      // width: parseFloat(style.width),
       height: parseFloat(style.height),
     };
 
@@ -138,10 +138,10 @@ const FileViewPlugin = ({ element, children, attributes }) => {
   }, [onMouseMove, onResizeEnd, registerEvent]);
 
   const style = useMemo(() => {
-    const { width, height } = data;
-    if (width && height) {
+    const { height } = data;
+    if (height) {
       return {
-        width,
+        // width,
         height,
       };
     }
@@ -157,8 +157,6 @@ const FileViewPlugin = ({ element, children, attributes }) => {
         )}
         {isResizing && movingSize && (
           <span className='image-size'>
-            <span>{t('Width')}{':'}{parseInt(movingSize.width)}</span>
-            <span>&nbsp;&nbsp;</span>
             <span>{t('Height')}{':'}{parseInt(movingSize.height)}</span>
           </span>
         )}
