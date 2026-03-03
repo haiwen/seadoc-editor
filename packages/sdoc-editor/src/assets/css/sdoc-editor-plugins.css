@@ -276,7 +276,6 @@
   background: #FAFAFA;
   border: 1px solid #f0f0f0;
   position: relative;
-  overflow-y: hidden !important;
 }
 
 .sdoc-code-block-pre.hidden {
@@ -320,7 +319,7 @@
 .sdoc-code-block-code.hide-code {
   max-height: 580.2px;
   display: block;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .sdoc-code-block-code .sdoc-code-line {
