@@ -17,7 +17,7 @@
 
 .sdoc-file-view-container .sdoc-file-view-content {
   position: relative;
-  border: 2px solid #eee;
+  border: 2px solid transparent;
   border-radius: 4px;
   resize: vertical;
 }
@@ -33,6 +33,10 @@
 
 .sdoc-file-view-container .sdoc-file-view-content .sea-metadata {
   height: 396px;
+}
+
+.sdoc-file-view-container .sdoc-file-view-content .sea-metadata .sea-metadata-table-main-container {
+  border: 1px solid #eee;
 }
 
 .sdoc-file-view-container .sdoc-file-view-content .file-view-resizer {
