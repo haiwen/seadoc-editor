@@ -9,7 +9,7 @@ import { createProcessor } from '../../../../../slate-convert/md-to-html';
 import slateToMdString from '../../../../../slate-convert/slate-to-md';
 import { HEADER_TAG, HEADERS, INTERNAL_LINKED_TYPE } from '../../../../constants';
 import { getEditorString } from '../../../../core';
-import { insertLink, updateLink, checkLink, parseHtmlString, isEmptyNode } from '../../helpers';
+import { insertLink, updateLink, checkLink, parseHtmlString, isEmptyNode, getElementHref } from '../../helpers';
 import LinkedPagesForm from './select-forms/linked-page';
 
 import './index.css';
@@ -18,8 +18,10 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   const { t } = useTranslation('sdoc-editor');
   const [linkErrorMessage, setLinkErrorMessage] = useState('');
   const [titleErrorMessage, setTitleErrorMessage] = useState('');
-  const { href: oldURL, linked_id, linked_wiki_page_id } = element || { href: '' };
+  const { linked_id, linked_wiki_page_id } = element || { href: '' };
+  const oldURL = getElementHref(element);
   const oldTitle = element?.children[0].text || linkTitle || '';
+
   const initTitle = useMemo(() => oldTitle ? oldTitle : getEditorString(editor, editor.selection), [editor, oldTitle]);
   const [title, setTitle] = useState(initTitle);
   const [selectedBlockId, setSelectedBlockId] = useState('');

@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { Range } from '@seafile/slate';
 import classnames from 'classnames';
 import isUrl from 'is-url';
-import PropTypes from 'prop-types';
+import PropTypes, { element } from 'prop-types';
 import toaster from '../../../components/toast';
 import { INTERNAL_EVENT } from '../../../constants';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
@@ -11,7 +11,7 @@ import { isMac } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import InlineBugFixer from '../../commons/Inline-bug-fix-wrapper';
 import { ELEMENT_TYPE } from '../../constants';
-import { getMenuPosition, isWeChat, unWrapLinkNode } from './helpers';
+import { getElementHref, getMenuPosition, isWeChat, unWrapLinkNode } from './helpers';
 import LinkHover from './hover';
 
 const propTypes = {
@@ -85,7 +85,8 @@ class Link extends React.Component {
 
   onLinkClick = (e) => {
     const isModClick = isMac() ? e.metaKey : e.ctrlKey;
-    const { linked_id, linked_wiki_page_id, href } = this.props.element;
+    const { linked_id, linked_wiki_page_id } = this.props.element;
+    const href = getElementHref(element);
     // mod + click
     if (isModClick && !linked_id && !linked_wiki_page_id) {
       window.open(href, '_blank', 'noreferrer');
@@ -119,16 +120,17 @@ class Link extends React.Component {
     event.preventDefault();
 
     const { element, t } = this.props;
-    if (!isUrl(element.href)) {
+    const href = getElementHref(element);
+    if (!isUrl(href)) {
       toaster.danger(t('The_link_is_invalid'));
       return;
     }
 
     if (!isWeChat()) {
-      window.open(element.href, '_blank', 'noopener,noreferrer');
+      window.open(href, '_blank', 'noopener,noreferrer');
     } else {
       // eslint-disable-next-line no-restricted-globals
-      location.href = element.href;
+      location.href = href;
     }
   };
 
@@ -149,7 +151,7 @@ class Link extends React.Component {
     if (readonly) {
       return (
         <span className={classnames(className, 'virtual-link')} {...attributes}>
-          <a href={element.href} title={element.children[0]?.text} onClick={this.onOpenLink} target='_blank' rel="noreferrer">{children}</a>
+          <a href={getElementHref(element)} title={element.children[0]?.text} onClick={this.onOpenLink} target='_blank' rel="noreferrer">{children}</a>
         </span>
       );
     }
