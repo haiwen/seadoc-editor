@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
 import Tooltip from '../../../../components/tooltip';
 import EventBus from '../../../../utils/event-bus';
-import { isNodeInCurrentView, isWeChat } from '../helpers';
+import { getElementHref, isNodeInCurrentView, isWeChat } from '../helpers';
 
 import './index.css';
 
@@ -23,7 +23,8 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
   }, []);
 
   const onMouseDown = useCallback((event) => {
-    if (!isUrl(element.href)) {
+    const href = getElementHref(element);
+    if (!isUrl(href)) {
       event.preventDefault();
       toaster.danger(t('The_link_is_invalid'));
       return;
@@ -31,12 +32,12 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
 
     event.stopPropagation();
     if (!isWeChat()) {
-      window.open(element.href);
+      window.open(href);
     } else {
       // eslint-disable-next-line no-restricted-globals
-      location.href = element.href;
+      location.href = href;
     }
-  }, [element.href]);
+  }, [element, t]);
 
   const handleOnClick = useCallback((event) => {
     event.stopPropagation();

@@ -263,3 +263,7 @@ export const isEmptyNode = (node) => {
   const text = Node.string(node);
   return text.trim() === '';
 };
+
+export const getElementHref = (element) => {
+  return element.href || element.url;
+};
