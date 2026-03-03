@@ -75,7 +75,22 @@ class Context {
   }
 
   getFileViewSetting() {
-    const { isDevelopment, serviceUrl, siteRoot, mediaUrl, name, username, password, fileServerRoot, thumbnailDefaultSize, lang } = this.settings;
+    const {
+      isDevelopment,
+      serviceUrl,
+      siteRoot,
+      mediaUrl,
+      name,
+      username,
+      password,
+      fileServerRoot,
+      thumbnailDefaultSize,
+      lang,
+      thumbnailSizeForOriginal,
+      enableSeadoc,
+      enableThumbnailServer,
+    } = this.settings;
+
     return {
       isDevelopment,
       serviceUrl,
@@ -86,6 +101,9 @@ class Context {
       password,
       fileServerRoot,
       thumbnailDefaultSize,
+      thumbnailSizeForOriginal,
+      enableSeadoc,
+      enableThumbnailServer,
       lang,
     };
   }
