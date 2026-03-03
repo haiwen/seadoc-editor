@@ -40,6 +40,11 @@ export const VIDEO_LINK = 'video_link';
 export const WHITEBOARD = 'whiteboard';
 export const FILE_VIEW = 'file_view';
 export const FORMULA = 'formula';
+export const TOGGLE_HEADER = 'toggle_header';
+export const TOGGLE_HEADER1 = 'toggle_header1';
+export const TOGGLE_HEADER2 = 'toggle_header2';
+export const TOGGLE_HEADER3 = 'toggle_header3';
+export const TOGGLE_CONTENT = 'toggle_content';
 
 export const ASK_AI = 'ask_ai';
 
@@ -70,6 +75,7 @@ export const TOP_LEVEL_TYPES = [
   IMAGE_BLOCK,
   VIDEO,
   WHITEBOARD,
+  TOGGLE_HEADER,
 ];
 
 export const INLINE_LEVEL_TYPES = [
