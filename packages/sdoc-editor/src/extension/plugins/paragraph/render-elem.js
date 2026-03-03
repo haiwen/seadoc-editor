@@ -39,11 +39,11 @@ const Paragraph = ({ isComposing, element, attributes, children, className, plac
     isShowPlaceHolder = true;
   }
 
-  // Distinguish whether paragraph node is in multi_column node
+  // Distinguish whether paragraph node is in multi_column or toggle_header node
   const aboveNodeEntry = isSelected && getTopLevelBlockNode(editor);
   if (
     !isComposing &&
-    (aboveNodeEntry && aboveNodeEntry[0].type === ELEMENT_TYPE.MULTI_COLUMN) &&
+    (aboveNodeEntry && [ELEMENT_TYPE.MULTI_COLUMN, ELEMENT_TYPE.TOGGLE_HEADER].includes(aboveNodeEntry[0].type)) &&
     isSelected &&
     isEmptyNode(element) &&
     Range.isCollapsed(editor.selection)

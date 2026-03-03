@@ -1,4 +1,4 @@
-import { Transforms, Editor, Element, Path } from '@seafile/slate';
+import { Transforms, Editor, Element, Path, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import slugid from 'slugid';
@@ -9,7 +9,8 @@ import {
   ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, CHECK_LIST_ITEM, TABLE, CODE_BLOCK, BLOCKQUOTE,
   LIST_ITEM_CORRELATION_TYPE, ADD_POSITION_OFFSET_TYPE, INSERT_POSITION, ELEMENT_TYPE, CALL_OUT,
   SIDE_TRANSFORM_MENUS_CONFIG, LIST_ITEM_SUPPORTED_TRANSFORMATION, HEADERS, VIDEO,
-  MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK, WHITEBOARD, TWO_COLUMN
+  MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK, WHITEBOARD, TWO_COLUMN,
+  TOGGLE_HEADER, TOGGLE_TITLE_TYPES, TOGGLE_CONTENT
 } from '../../constants';
 import { generateEmptyElement, findPath, isMultiLevelList, isTopLevelListItem, getNode, focusEditor, getAboveNode, getTopLevelBlockNode } from '../../core';
 import { setBlockQuoteType } from '../../plugins/blockquote/helpers';
@@ -21,6 +22,7 @@ import { generateEmptyList, generateListItem } from '../../plugins/list/model';
 import { toggleList } from '../../plugins/list/transforms';
 import { generateEmptyMultiColumn } from '../../plugins/multi-column/helper';
 import { EMPTY_SELECTED_RANGE } from '../../plugins/table/constants';
+import { getLevelFromType } from '../../plugins/toggle-header/helper';
 
 export const onSetNodeType = (editor, element, type) => {
   const { selection } = editor;
@@ -53,6 +55,57 @@ export const onSetNodeType = (editor, element, type) => {
     return;
   }
 
+  if (TOGGLE_TITLE_TYPES.includes(type)) {
+    const level = getLevelFromType(type);
+    const currentToggleEntry = Editor.above(editor, {
+      at: selection,
+      match: n => Element.isElement(n) && n.type === TOGGLE_HEADER,
+      mode: 'lowest',
+    });
+
+    // Convert existing toggle-header
+    if (currentToggleEntry) {
+      const [, togglePath] = currentToggleEntry;
+      Editor.withoutNormalizing(editor, () => {
+        Transforms.setNodes(editor, { level }, { at: togglePath });
+        Transforms.setNodes(editor, { type }, { at: [...togglePath, 0] });
+      });
+      focusEditor(editor, Editor.start(editor, [...togglePath, 0]));
+      return;
+    }
+
+    // Convert paragraph/header to toggle-header
+    const path = findPath(editor, element);
+    const [targetNode] = Editor.node(editor, path) || [];
+
+    const titleChildren = targetNode.children || [];
+    const titleNode = {
+      id: slugid.nice(),
+      type,
+      align: targetNode.align,
+      children: titleChildren,
+    };
+    const bodyNode = {
+      id: slugid.nice(),
+      type: TOGGLE_CONTENT,
+      children: [generateEmptyElement(PARAGRAPH)],
+    };
+    const toggleNode = {
+      id: slugid.nice(),
+      type: TOGGLE_HEADER,
+      level,
+      collapsed: false,
+      children: [titleNode, bodyNode],
+    };
+
+    Editor.withoutNormalizing(editor, () => {
+      Transforms.removeNodes(editor, { at: path });
+      Transforms.insertNodes(editor, toggleNode, { at: path });
+    });
+    focusEditor(editor, Editor.start(editor, [...path, 0]));
+    return;
+  }
+
   if ([PARAGRAPH, ...HEADERS].includes(type)) {
     // Transform list-item, blockquote, callout to paragraph or header
     const topNodeType = getTopLevelBlockNode(editor)[0]?.type;
@@ -80,7 +133,7 @@ export const onSetNodeType = (editor, element, type) => {
         return;
       }
     } else {
-      // List-item, blockquote, callout is top node
+      // List-item, blockquote, callout, toggle-header is top node
       if ([ORDERED_LIST, UNORDERED_LIST].includes(topNodeType)) {
         toggleList(editor, topNodeType);
         if ([...HEADERS].includes(type)) {
@@ -99,6 +152,39 @@ export const onSetNodeType = (editor, element, type) => {
 
       if ([CALL_OUT].includes(topNodeType)){
         unwrapCallout(editor);
+        return;
+      }
+
+      if ([TOGGLE_HEADER].includes(topNodeType)){
+        const currentToggleEntry = Editor.above(editor, {
+          at: selection,
+          match: n => Element.isElement(n) && n.type === TOGGLE_HEADER,
+          mode: 'lowest',
+        });
+        if (!currentToggleEntry) return;
+        const [toggleNode, togglePath] = currentToggleEntry;
+        const titleNode = toggleNode.children?.[0];
+        const bodyNode = toggleNode.children?.[1];
+        const bodyChildren = bodyNode?.type === TOGGLE_CONTENT
+          ? (bodyNode.children || [])
+          : (Array.isArray(toggleNode.collapsed_body) ? toggleNode.collapsed_body : []);
+        const hasBodyContent = bodyChildren.some((child) => {
+          if (!Element.isElement(child)) return false;
+          if (child.type !== PARAGRAPH) return true;
+          return Node.string(child) !== '';
+        });
+
+        const convertedTitleNode = {
+          ...titleNode,
+          type,
+        };
+        const unwrapNodes = hasBodyContent ? [convertedTitleNode, ...bodyChildren] : [convertedTitleNode];
+
+        Editor.withoutNormalizing(editor, () => {
+          Transforms.removeNodes(editor, { at: togglePath });
+          Transforms.insertNodes(editor, unwrapNodes, { at: togglePath });
+        });
+        focusEditor(editor, Editor.start(editor, togglePath));
         return;
       }
     }
@@ -370,6 +456,14 @@ export const onWrapMultiListItemToNonListTypeTarget = (editor, targetPath, sourc
 
 export const getTransformMenusConfig = (editor, slateNode) => {
   let newSideMenusConfig = SIDE_TRANSFORM_MENUS_CONFIG;
+  if (TOGGLE_HEADER.includes(slateNode.type)) {
+    return newSideMenusConfig = SIDE_TRANSFORM_MENUS_CONFIG.filter((item) => [...TOGGLE_TITLE_TYPES, ...HEADERS, PARAGRAPH].includes(item.type));
+  }
+
+  if (![PARAGRAPH, ...HEADERS, TOGGLE_HEADER].includes(slateNode.type)) {
+    return newSideMenusConfig = SIDE_TRANSFORM_MENUS_CONFIG.filter((item) => !TOGGLE_TITLE_TYPES.includes(item.type));
+  }
+
   if ([CALL_OUT].includes(slateNode.type)) {
     return newSideMenusConfig = SIDE_TRANSFORM_MENUS_CONFIG.filter((item) => [PARAGRAPH].includes(item.type));
   }
