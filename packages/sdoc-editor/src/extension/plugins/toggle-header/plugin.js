@@ -1,6 +1,6 @@
 import { Editor, Element, Node, Range, Transforms } from '@seafile/slate';
 import { PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
-import { generateEmptyElement } from '../../core';
+import { generateDefaultText, generateEmptyElement, isLastNode } from '../../core';
 import { getTitleTypeByLevel } from './helper';
 
 const withToggleHeader = (editor) => {
@@ -24,8 +24,10 @@ const withToggleHeader = (editor) => {
       insertBreak();
       return;
     }
-    const [selectedNode] = Editor.node(newEditor, selection, { depth: 1 });
-    if (selectedNode.type !== TOGGLE_HEADER) {
+
+    const selectedEntry = Editor.above(newEditor, { at: selection, match: n => n.type === TOGGLE_HEADER, mode: 'lowest', });
+    const selectedNode = selectedEntry ? selectedEntry[0] : null;
+    if (!selectedNode || selectedNode?.type !== TOGGLE_HEADER) {
       insertBreak();
       return;
     }
@@ -42,13 +44,15 @@ const withToggleHeader = (editor) => {
     }
 
     const [, titlePath] = titleEntry;
-    const parentEntry = Editor.parent(newEditor, titlePath);
+    const toggleEntry = Editor.above(newEditor, {
+      at: titlePath,
+      match: n => n.type === TOGGLE_HEADER,
+      mode: 'lowest',
+    });
 
-    const [toggleNode, togglePath] = parentEntry;
+    const [toggleNode, togglePath] = toggleEntry;
     const contentPath = [...togglePath, 1];
     const bodyChildren = getToggleBodyChildren(toggleNode);
-    const level = Math.min(6, Math.max(1, Number(toggleNode?.level) || 1));
-    const plainHeaderType = `header${level}`;
 
     const cursorPoint = selection.anchor;
     const titleEndPoint = Editor.end(newEditor, titlePath);
@@ -56,9 +60,16 @@ const withToggleHeader = (editor) => {
     const afterRange = { anchor: cursorPoint, focus: titleEndPoint };
     const afterFragment = isAtTitleEnd ? [] : Editor.fragment(newEditor, afterRange);
     const afterChildren = afterFragment[0]?.children || [];
+
     // Carry out enter or shift+enter operation in toggle header
     Editor.withoutNormalizing(newEditor, () => {
+      // The afterText is the text content after the cursor in the toggle header
+      let afterText = '';
       if (!isAtTitleEnd) {
+        afterText = Editor.string(newEditor, {
+          anchor: cursorPoint,
+          focus: titleEndPoint,
+        });
         Transforms.delete(newEditor, { at: afterRange });
       }
 
@@ -76,9 +87,10 @@ const withToggleHeader = (editor) => {
         Transforms.insertNodes(newEditor, content, { at: contentPath });
       }
 
-      const newParagraph = generateEmptyElement(afterChildren.length > 0 ? plainHeaderType : PARAGRAPH);
+      // Insert new paragraph node with afterText
+      const newParagraph = generateEmptyElement(PARAGRAPH);
       if (afterChildren.length > 0) {
-        newParagraph.children = afterChildren[0]?.children || [];
+        newParagraph.children = [generateDefaultText(afterText)];
       }
       const firstParagraphPath = [...contentPath, 0];
       Transforms.insertNodes(newEditor, newParagraph, { at: firstParagraphPath });
@@ -154,6 +166,14 @@ const withToggleHeader = (editor) => {
 
   newEditor.normalizeNode = ([node, path]) => {
     if (node.type === TOGGLE_HEADER) {
+
+      // code-block is the last node in the editor and needs to be followed by a p node
+      const isLast = isLastNode(newEditor, node);
+      if (isLast) {
+        const paragraph = generateEmptyElement(PARAGRAPH);
+        Transforms.insertNodes(newEditor, paragraph, { at: [path[0] + 1] });
+      }
+
       const level = Math.min(6, Math.max(1, Number(node.level) || 1));
       if (node.level !== level) {
         Transforms.setNodes(newEditor, { level }, { at: path });
