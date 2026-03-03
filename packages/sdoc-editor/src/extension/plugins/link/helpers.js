@@ -265,5 +265,5 @@ export const isEmptyNode = (node) => {
 };
 
 export const getElementHref = (element) => {
-  return element.href || element.url;
+  return element ? (element.href || element.url) : '';
 };
