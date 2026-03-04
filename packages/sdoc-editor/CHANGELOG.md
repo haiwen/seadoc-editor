@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.96](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.95...@seafile/sdoc-editor@3.0.96) (2026-03-04)
+
+### Bug Fixes
+
+- resolve hidden height ([#199](https://github.com/seafileltd/sea-sdoc-editor/issues/199)) ([27a0667](https://github.com/seafileltd/sea-sdoc-editor/commit/27a0667ab07984018e44313686d0f56fd60032ba))
+
 ## [3.0.95](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.94...@seafile/sdoc-editor@3.0.95) (2026-03-03)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
