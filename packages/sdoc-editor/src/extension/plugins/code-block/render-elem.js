@@ -10,15 +10,20 @@ import { focusEditor } from '../../core';
 import { setClipboardCodeBlockData } from './helpers';
 import CodeBlockHoverMenu from './hover-menu';
 
+// Max code-block content display height
+const HIDDEN_CODE_BLOCK_MAX_HEIGHT = 570;
+
 const CodeBlock = ({ attributes, children, element, editor }) => {
   const readOnly = useReadOnly();
   const codeBlockRef = useRef();
+  const codeContentRef = useRef();
   const scrollRef = useScrollContext();
   const { style = { white_space: 'nowrap' } } = element;
   const { white_space } = style;
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [showHoverMenu, setShowHoverMenu] = useState(false);
   const [showAllCode, setShowAllCode] = useState(false);
+  const [isCodeBlockOverflow, setIsCodeBlockOverflow] = useState(false);
 
   const onChangeLanguage = useCallback((lang) => {
     const { value: language } = lang;
@@ -109,20 +114,27 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
     EventBus.getInstance().dispatch(INTERNAL_EVENT.UPDATE_SEARCH_REPLACE_HIGHLIGHT);
   };
 
-  const isHiddenCodeBlockParts = children.length > 30;
+  const toggleHidden = useCallback(() => {
+    setShowAllCode(prev => !prev);
+  }, []);
 
-  const toggleHidden = () => {
-    setShowAllCode(!showAllCode);
-  };
+  useEffect(() => {
+    if (!codeContentRef.current) return;
+    if (codeContentRef.current.clientHeight > Number(HIDDEN_CODE_BLOCK_MAX_HEIGHT)) {
+      setIsCodeBlockOverflow(true);
+    } else {
+      setIsCodeBlockOverflow(false);
+    }
+  }, [children]);
 
   return (
     <div data-id={element.id} {...attributes} className={`sdoc-code-block-container ${attributes.className}`} onClick={onFocusCodeBlock} onMouseLeave={onMouseLeave}>
-      <pre onScroll={handleScroll} className={classnames('sdoc-code-block-pre', { 'hidden': isHiddenCodeBlockParts })} ref={codeBlockRef}>
-        <code className={`sdoc-code-block-code ${white_space === 'nowrap' ? 'sdoc-code-no-wrap' : ''} ${!showAllCode ? 'hide-code' : ''}`}>
+      <pre onScroll={handleScroll} className={classnames('sdoc-code-block-pre', { 'hidden': isCodeBlockOverflow })} ref={codeBlockRef}>
+        <code ref={codeContentRef} className={`sdoc-code-block-code ${white_space === 'nowrap' ? 'sdoc-code-no-wrap' : ''} ${!showAllCode ? 'hide-code' : ''}`}>
           {children}
         </code>
       </pre>
-      {children.length > 30 &&
+      {isCodeBlockOverflow &&
         <span className="sdoc-code-block-hidden-icon" onClick={toggleHidden} contentEditable={false} suppressContentEditableWarning>
           <span className='icon-container'>
             {!showAllCode ? <i className="sdocfont sdoc-arrow-down arrow"></i> : <i className="sdocfont sdoc-arrow-up arrow"></i>}
