@@ -275,12 +275,10 @@
 .sdoc-code-block-pre {
   background: #FAFAFA;
   border: 1px solid #f0f0f0;
-  position: relative;
 }
 
 .sdoc-editor__article .sdoc-code-block-pre {
   display: flex;
-  position: relative;
   overflow: auto;
   padding-bottom: 48px;
 }
@@ -318,6 +316,7 @@
   align-items: center;
   justify-content: center;
   bottom: 0;
+  left: 0;
 }
 
 .sdoc-code-block-container .sdoc-code-block-hidden-icon-container.hidden {
