@@ -278,8 +278,23 @@
   position: relative;
 }
 
-.sdoc-code-block-pre.hidden {
-  padding-bottom: 48px !important;
+.sdoc-editor__article .sdoc-code-block-pre {
+  display: flex;
+  position: relative;
+  overflow: auto;
+}
+
+.sdoc-editor__article .sdoc-code-block-pre::after {
+  content: '';
+  position: sticky;
+  right: -16px;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  background: inherit;
+  pointer-events: none;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 .sdoc-code-block-pre .sdoc-code-no-wrap {
@@ -319,7 +334,6 @@
 .sdoc-code-block-code.hide-code {
   max-height: 580.2px;
   display: block;
-  overflow: scroll;
 }
 
 .sdoc-code-block-code .sdoc-code-line {
