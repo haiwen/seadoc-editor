@@ -129,17 +129,19 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
 
   return (
     <div data-id={element.id} {...attributes} className={`sdoc-code-block-container ${attributes.className}`} onClick={onFocusCodeBlock} onMouseLeave={onMouseLeave}>
-      <pre onScroll={handleScroll} className={classnames('sdoc-code-block-pre', { 'hidden': isCodeBlockOverflow })} ref={codeBlockRef}>
+      <pre onScroll={handleScroll} className={classnames('sdoc-code-block-pre', { 'hidden': isCodeBlockOverflow && !showAllCode })} ref={codeBlockRef}>
         <code ref={codeContentRef} className={`sdoc-code-block-code ${white_space === 'nowrap' ? 'sdoc-code-no-wrap' : ''} ${!showAllCode ? 'hide-code' : ''}`}>
           {children}
         </code>
       </pre>
       {isCodeBlockOverflow &&
+      <div className={classnames('sdoc-code-block-hidden-icon-container', { 'hidden': !showAllCode })}>
         <span className="sdoc-code-block-hidden-icon" onClick={toggleHidden} contentEditable={false} suppressContentEditableWarning>
           <span className='icon-container'>
             {!showAllCode ? <i className="sdocfont sdoc-arrow-down arrow"></i> : <i className="sdocfont sdoc-arrow-up arrow"></i>}
           </span>
         </span>
+      </div>
       }
       {showHoverMenu && (
         <CodeBlockHoverMenu
