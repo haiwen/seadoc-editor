@@ -120,7 +120,7 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
 
   useEffect(() => {
     if (!codeContentRef.current) return;
-    if (codeContentRef.current.clientHeight > Number(HIDDEN_CODE_BLOCK_MAX_HEIGHT)) {
+    if (codeContentRef.current.offsetHeight > Number(HIDDEN_CODE_BLOCK_MAX_HEIGHT)) {
       setIsCodeBlockOverflow(true);
     } else {
       setIsCodeBlockOverflow(false);
