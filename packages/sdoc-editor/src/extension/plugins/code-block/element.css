@@ -137,19 +137,19 @@
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon-container {
-  width: 100%;
   height: 48px;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  bottom: 0;
-  left: 0;
+  bottom: 1px;
+  left: 1px;
+  right: 1px;
   border-radius: 3px;
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon-container.hidden {
-  background: linear-gradient(0deg, #F5F7fA 0, rgba(245, 247, 250, 0.8) 100%);
+  background: linear-gradient(0deg, #F5F7fA, rgba(245, 247, 250, 0.8));
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon {
