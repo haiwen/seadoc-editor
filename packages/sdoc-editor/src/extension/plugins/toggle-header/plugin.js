@@ -4,7 +4,7 @@ import { generateDefaultText, generateEmptyElement, isLastNode } from '../../cor
 import { getTitleTypeByLevel } from './helper';
 
 const withToggleHeader = (editor) => {
-  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward } = editor;
+  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment } = editor;
   const newEditor = editor;
 
   const getToggleBodyChildren = (toggleNode) => {
@@ -162,6 +162,21 @@ const withToggleHeader = (editor) => {
       return;
     }
     return deleteBackward(unit);
+  };
+
+  newEditor.insertFragment = (data) => {
+    const { selection } = editor;
+    if (!selection) return insertFragment(data);
+
+    if (data[0]?.type === TOGGLE_HEADER) {
+      let childrenNodes = [];
+      data[0].children.forEach(col => {
+        childrenNodes = childrenNodes.concat(col.children);
+      });
+      insertFragment(childrenNodes);
+      return;
+    }
+    insertFragment(data);
   };
 
   newEditor.normalizeNode = ([node, path]) => {
