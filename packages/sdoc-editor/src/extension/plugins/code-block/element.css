@@ -15,7 +15,7 @@
   content: '';
   position: sticky;
   right: -16px;
-  top: 0;
+  top: -16px;
   bottom: 0;
   width: 16px;
   background: inherit;
@@ -145,6 +145,7 @@
   justify-content: center;
   bottom: 0;
   left: 0;
+  border-radius: 3px;
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon-container.hidden {
@@ -172,4 +173,5 @@
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon .icon-container .sdocfont {
   color: #fff;
   font-size: 12px;
+  text-shadow: none;
 }
