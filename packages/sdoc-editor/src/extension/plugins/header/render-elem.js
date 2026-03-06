@@ -1,6 +1,6 @@
 import React from 'react';
 import { Node } from '@seafile/slate';
-import { SDOC_FONT_SIZE } from '../../constants';
+import { CHECK_LIST_ITEM, SDOC_FONT_SIZE } from '../../constants';
 import { isEmptyNode } from '../paragraph/helper';
 import Placeholder from './placeholder';
 

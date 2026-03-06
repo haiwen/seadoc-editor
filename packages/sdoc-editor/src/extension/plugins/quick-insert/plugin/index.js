@@ -1,6 +1,6 @@
 import { Editor, Node, Range, Transforms } from '@seafile/slate';
 import { KeyCodes } from '../../../../constants';
-import { CODE_BLOCK, TABLE, QUICK_INSERT, MULTI_COLUMN } from '../../../constants';
+import { CODE_BLOCK, TABLE, QUICK_INSERT, MULTI_COLUMN, TOGGLE_HEADER } from '../../../constants';
 import { focusEditor, getTopLevelBlockNode } from '../../../core';
 import { getBeforeText } from '../../list/helpers';
 import { genQuickInsert, getQuickInsertEntity, transformToText } from '../helper';
@@ -23,8 +23,8 @@ const withQuickInsert = (editor) => {
       return insertText(text);
     }
 
-    // Disable quick insert for non-empty nodes if not multi_column node
-    if (Node.string(blockNode) !== '' && blockNode.type !== MULTI_COLUMN) {
+    // Disable quick insert for non-empty nodes if not multi_column or toggle_header node
+    if (Node.string(blockNode) !== '' && ![MULTI_COLUMN, TOGGLE_HEADER].includes(blockNode.type)) {
       return insertText(text);
     }
 

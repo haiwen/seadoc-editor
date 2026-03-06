@@ -43,7 +43,12 @@ import {
   GROUP,
   WHITEBOARD,
   FILE_VIEW,
-  FORMULA
+  FORMULA,
+  TOGGLE_HEADER,
+  TOGGLE_HEADER1,
+  TOGGLE_HEADER2,
+  TOGGLE_HEADER3,
+  TOGGLE_CONTENT
 } from './element-type';
 
 export {
@@ -116,6 +121,12 @@ export const HEADER_TITLE_MAP = {
   [HEADER6]: 'Header_six',
   [PARAGRAPH]: 'Paragraph',
 };
+
+export const TOGGLE_TITLE_TYPES = [
+  TOGGLE_HEADER1,
+  TOGGLE_HEADER2,
+  TOGGLE_HEADER3
+];
 
 export const TRANSPARENT = 'transparent';
 
@@ -232,6 +243,7 @@ export const SUPPORTED_SIDE_OPERATION_TYPE = [
   VIDEO,
   WHITEBOARD,
   FORMULA,
+  TOGGLE_HEADER,
 ];
 
 export const MOUSE_ENTER_EVENT_DISABLED_MAP = {
@@ -273,7 +285,8 @@ export const ROOT_ELEMENT_TYPES = [
   VIDEO,
   WHITEBOARD,
   FORMULA,
-  MULTI_COLUMN
+  MULTI_COLUMN,
+  TOGGLE_HEADER
 ];
 
 export {
@@ -319,6 +332,10 @@ export {
   GROUP,
   WHITEBOARD,
   FILE_VIEW,
-  FORMULA
+  FORMULA,
+  TOGGLE_HEADER,
+  TOGGLE_HEADER1,
+  TOGGLE_HEADER2,
+  TOGGLE_HEADER3,
+  TOGGLE_CONTENT
 };
-
