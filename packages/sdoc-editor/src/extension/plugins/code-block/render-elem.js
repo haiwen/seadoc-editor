@@ -10,6 +10,8 @@ import { focusEditor } from '../../core';
 import { setClipboardCodeBlockData } from './helpers';
 import CodeBlockHoverMenu from './hover-menu';
 
+import './element.css';
+
 // Max code-block content display height
 const HIDDEN_CODE_BLOCK_MAX_HEIGHT = 570;
 
@@ -129,7 +131,7 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
 
   return (
     <div data-id={element.id} {...attributes} className={`sdoc-code-block-container ${attributes.className}`} onClick={onFocusCodeBlock} onMouseLeave={onMouseLeave}>
-      <pre onScroll={handleScroll} className={classnames('sdoc-code-block-pre', { 'hidden': isCodeBlockOverflow && !showAllCode })} ref={codeBlockRef}>
+      <pre onScroll={handleScroll} className={classnames('sdoc-code-block-pre', { 'exceeding-height': isCodeBlockOverflow, 'expanded': showAllCode })} ref={codeBlockRef}>
         <code ref={codeContentRef} className={`sdoc-code-block-code ${white_space === 'nowrap' ? 'sdoc-code-no-wrap' : ''} ${!showAllCode ? 'hide-code' : ''}`}>
           {children}
         </code>
