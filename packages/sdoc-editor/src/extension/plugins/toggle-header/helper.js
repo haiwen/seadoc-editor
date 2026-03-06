@@ -10,7 +10,7 @@ export const getLevelFromType = (eleType) => {
 };
 
 export const getLevel = (element) => {
-  const rawLevel = Number(element.level || getLevelFromType(element.type));
+  const rawLevel = Number(getLevelFromType(element.type));
   return Math.min(6, Math.max(1, rawLevel));
 };
 
@@ -24,12 +24,10 @@ export const insertToggleHeader = (editor, type, insertPosition) => {
   if (typeof editor.canInsertToggleHeader === 'function' && !editor.canInsertToggleHeader()) {
     return;
   }
-  const level = Number(getLevelFromType(type));
 
   const toggleHeader = {
     id: slugid.nice(),
     type: TOGGLE_HEADER,
-    level,
     collapsed: false,
     children: [
       { id: slugid.nice(), type: type, children: [{ text: '', id: slugid.nice() }] },

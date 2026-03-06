@@ -1,7 +1,7 @@
 import { Editor, Element, Node, Range, Transforms } from '@seafile/slate';
 import { PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
 import { generateDefaultText, generateEmptyElement, isLastNode } from '../../core';
-import { getTitleTypeByLevel } from './helper';
+import { getLevelFromType, getTitleTypeByLevel } from './helper';
 
 const withToggleHeader = (editor) => {
   const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment } = editor;
@@ -189,11 +189,9 @@ const withToggleHeader = (editor) => {
         Transforms.insertNodes(newEditor, paragraph, { at: [path[0] + 1] });
       }
 
-      const level = Math.min(6, Math.max(1, Number(node.level) || 1));
-      if (node.level !== level) {
-        Transforms.setNodes(newEditor, { level }, { at: path });
-        return;
-      }
+      const toggleHeaderType = TOGGLE_TITLE_TYPES.includes(node.children[0].type) && node.children[0].type;
+      const level = Math.min(6, Math.max(1, Number(getLevelFromType(toggleHeaderType) || 1)));
+
       // For toggle-header1-3 element
       const titleType = getTitleTypeByLevel(level);
       const titleNode = node.children?.[0];
