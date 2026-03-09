@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useTranslation, withTranslation } from 'react-i18next';
-import { Range, Transforms, Node } from '@seafile/slate';
-import { ReactEditor, useReadOnly } from '@seafile/slate-react';
+import { Range } from '@seafile/slate';
+import { useReadOnly } from '@seafile/slate-react';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { getVideoURL, formatFileSize, videoFileIcon, updateVideo } from './helpers';
 import HoverMenu from './hover-menu';
@@ -47,13 +47,13 @@ const Video = ({ element, editor }) => {
     e.preventDefault();
     e.stopPropagation();
     setIsSelected(true);
-  }, [editor, element]);
+  }, []);
 
   const setPosition = useCallback((elem) => {
     if (elem) {
       const { top, left } = elem.getBoundingClientRect();
       const menuTop = top - 42; // top = top distance - menu height
-      const menuLeft = left - 18; // left = left distance - (menu width / 2)
+      const menuLeft = left - 2; // left = left distance - (menu width / 2)
       const newMenuPosition = {
         top: menuTop,
         left: menuLeft
