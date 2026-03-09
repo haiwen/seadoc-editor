@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dropdown, DropdownItem, DropdownMenu } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../components/tooltip';
 import { INTERNAL_EVENT } from '../../../constants';
@@ -73,28 +73,25 @@ const GlobalCommentHeader = ({ toggle, activeCommentGroup, setCurrentCommentGrou
       </div>
       <div ref={panelHeaderRef} className="comments-panel-header-right">
         {!activeCommentGroup && (
-          <div id='comment-types'
-            className="sdoc-icon-btn"
-            onClick={() => setDropdownOpen(!isDropdownOpen)}
-          >
-            <i className="sdocfont sdoc-filter1"></i>
-            {isMounted && (
-              <Tooltip target="comment-types">
-                {t('Filter')}
-              </Tooltip>)}
-            <Dropdown isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
-              <DropdownMenu className='sdoc-dropdown-menu sdoc-comment-filter-dropdown' container="comment-types">
-                <CommentTypeDropdownItem type={COMMENT_TYPES.ALL} setCommentType={setCommentType} commentType={commentType} />
-                <CommentTypeDropdownItem type={COMMENT_TYPES.RESOLVED} setCommentType={setCommentType} commentType={commentType} />
-                <CommentTypeDropdownItem type={COMMENT_TYPES.UNRESOLVED} setCommentType={setCommentType} commentType={commentType} />
-              </DropdownMenu>
-            </Dropdown>
-          </div>
+          <Dropdown className='mr-1' isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
+            <DropdownToggle tag='div' className='sdoc-icon-btn' id='comment-types'>
+              <i className="sdocfont sdoc-filter1"></i>
+              {isMounted && (
+                <Tooltip target="comment-types">
+                  {t('Filter')}
+                </Tooltip>)}
+            </DropdownToggle>
+            <DropdownMenu className='sdoc-dropdown-menu sdoc-comment-filter-dropdown' container="comment-types">
+              <CommentTypeDropdownItem type={COMMENT_TYPES.ALL} setCommentType={setCommentType} commentType={commentType} />
+              <CommentTypeDropdownItem type={COMMENT_TYPES.RESOLVED} setCommentType={setCommentType} commentType={commentType} />
+              <CommentTypeDropdownItem type={COMMENT_TYPES.UNRESOLVED} setCommentType={setCommentType} commentType={commentType} />
+            </DropdownMenu>
+          </Dropdown>
         )}
         {!activeCommentGroup && (
           <div
             id='sdoc-read-all-btn'
-            className="sdoc-icon-btn"
+            className="sdoc-icon-btn mr-1"
             onClick={toggleReadAll}
           >
             <i className="sdocfont sdoc-all-read"></i>
