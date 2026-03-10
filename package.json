@@ -47,8 +47,5 @@
     "**/*.js": [
       "eslint --fix"
     ]
-  },
-  "dependencies": {
-    "@seafile/seafile-database": "0.0.36"
   }
 }
