@@ -54,7 +54,8 @@
   overflow: hidden;
 }
 
-.menu-group .menu-group-item.sdoc-menu-with-dropdown.disabled {
+.menu-group .menu-group-item.sdoc-menu-with-dropdown.disabled,
+.menu-group .menu-group-item.sdoc-menu-with-dropdown.disabled .sdocfont {
   color: #C2C2C2;
 }
 
