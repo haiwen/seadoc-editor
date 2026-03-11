@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.109](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.108...@seafile/sdoc-editor@3.0.109) (2026-03-11)
+
+### Bug Fixes
+
+- fix copy link into codeblock problem ([#204](https://github.com/seafileltd/sea-sdoc-editor/issues/204)) ([6f00893](https://github.com/seafileltd/sea-sdoc-editor/commit/6f00893ca55e122b2949dd1c0757e3e15a87e7f1))
+
 ## [3.0.108](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.107...@seafile/sdoc-editor@3.0.108) (2026-03-11)
 
 ### Bug Fixes
