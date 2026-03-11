@@ -1,11 +1,11 @@
-import { Editor, Element, Node, Range, Transforms } from '@seafile/slate';
+import { Editor, Element, Node, Path, Range, Transforms } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
-import { generateDefaultText, generateEmptyElement, isLastNode } from '../../core';
-import { getLevelFromType, getTitleTypeByLevel } from './helper';
+import { generateDefaultText, generateEmptyElement, getAboveNode, getCurrentNode, isLastNode } from '../../core';
+import { ensureToggleContentNotEmpty, getLevelFromType, getTitleTypeByLevel } from './helper';
 
 const withToggleHeader = (editor) => {
-  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment, onHotKeyDown } = editor;
+  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment } = editor;
   const newEditor = editor;
 
   const getToggleBodyChildren = (toggleNode) => {
@@ -186,13 +186,60 @@ const withToggleHeader = (editor) => {
       return true;
     }
     const [selectedNode] = Editor.node(newEditor, selection, { depth: 1 });
-    if (selectedNode.type === TOGGLE_HEADER) {
-      if (isHotkey('shift+tab', event)) {
-        event.preventDefault();
+    if (selectedNode.type === TOGGLE_HEADER && isHotkey('shift+tab', event)) {
+      event.preventDefault();
+
+      const [, currentPath] = getCurrentNode(editor);
+      const currentToggleContentEntry = getAboveNode(editor, { match: { type: TOGGLE_CONTENT } });
+      // No operation in the first toggle-header1-3
+      if (!currentToggleContentEntry) {
         return true;
       }
+
+      const [toggleContentNode, toggleContentPath] = currentToggleContentEntry;
+      const [parentNode, parentPath] = Editor.parent(editor, toggleContentPath);
+
+      // Current direct child index in toggle content's children
+      const currentIndexInToggleContent = currentPath[toggleContentPath.length];
+      const movingChildren = toggleContentNode.children.slice(currentIndexInToggleContent);
+
+      Editor.withoutNormalizing(editor, () => {
+        // Remove toggle content children node
+        for (let i = toggleContentNode.children.length - 1; i >= currentIndexInToggleContent; i--) {
+          Transforms.removeNodes(editor, { at: toggleContentPath.concat(i) });
+        }
+
+        // In the first toggle content
+        if (parentNode.type === TOGGLE_HEADER && parentPath.length === 1) {
+          let insertPath = Path.next(parentPath);
+
+          movingChildren.forEach((child) => {
+            Transforms.insertNodes(editor, child, { at: insertPath });
+            insertPath = Path.next(insertPath);
+          });
+
+          ensureToggleContentNotEmpty(editor, toggleContentPath);
+          return true;
+        }
+
+        // In the multi layer toggle content
+        if (parentNode.type === TOGGLE_HEADER && parentPath.length > 1) {
+          const parentIndexInOuterToggleContent = parentPath[parentPath.length - 1];
+          const outerToggleContentPath = Path.parent(parentPath);
+
+          let insertPath = outerToggleContentPath.concat(parentIndexInOuterToggleContent + 1);
+
+          movingChildren.forEach((child) => {
+            Transforms.insertNodes(editor, child, { at: insertPath });
+            insertPath = Path.next(insertPath);
+          });
+
+          ensureToggleContentNotEmpty(editor, toggleContentPath);
+        }
+      });
+
+      return true;
     }
-    return true;
   };
 
   newEditor.normalizeNode = ([node, path]) => {

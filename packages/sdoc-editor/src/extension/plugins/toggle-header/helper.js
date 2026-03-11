@@ -1,7 +1,7 @@
 import { Editor, Element, Node, Path, Transforms } from '@seafile/slate';
 import slugid from 'slugid';
 import { INSERT_POSITION, PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
-import { focusEditor } from '../../core';
+import { focusEditor, generateEmptyElement } from '../../core';
 
 export const getLevelFromType = (eleType) => {
   if (!eleType) return '';
@@ -82,4 +82,16 @@ export const insertToggleHeader = (editor, type, insertPosition) => {
   const point = Editor.start(editor, [...insertAt, 0, 0]);
   Transforms.select(editor, point);
   focusEditor(editor, point);
+};
+
+export const ensureToggleContentNotEmpty = (editor, path) => {
+  const node = Node.get(editor, path);
+  if (
+    node &&
+    node.type === TOGGLE_CONTENT &&
+    (!node.children || node.children.length === 0)
+  ) {
+    const paragraph = generateEmptyElement(PARAGRAPH);
+    Transforms.insertNodes(editor, paragraph, { at: path.concat(0) });
+  }
 };
