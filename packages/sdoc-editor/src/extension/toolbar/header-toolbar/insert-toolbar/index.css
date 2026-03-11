@@ -5,14 +5,12 @@
   justify-content: space-between;
 }
 
-.menu-group .menu-group-item.sdoc-insert-toolbar-btn .text-truncate {
-  color: #212529;
+.menu-group .menu-group-item.sdoc-insert-toolbar-btn.disabled .text-truncate {
+  color: #C2C2C2;
 }
 
-.menu-group .menu-group-item.sdoc-insert-toolbar-btn.disabled {
-  /* 64: 76 - 12 */
-  width: 64px !important;
-  color: #BDBDBD;
+.menu-group .menu-group-item.sdoc-insert-toolbar-btn .text-truncate {
+  color: #212529;
 }
 
 .menu-group .sdoc-insert-toolbar-btn .sdoc-menu-with-dropdown-icon {
