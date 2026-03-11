@@ -4,7 +4,7 @@ import isUrl from 'is-url';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
-import { ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
+import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
 import { getEditorString, getNodeType, getSelectedElems, getSelectedNodeByType } from '../../core';
 import { isImage, isSameDomain } from '../../utils';
 import { insertFileLink } from '../file-link/helpers';
@@ -29,6 +29,11 @@ const withLink = (editor) => {
   newEditor.insertData = async (data) => {
     // Paste link content
     const text = data.getData('text/plain');
+    const selectedElems = getSelectedElems(newEditor);
+    const isCodeContext = selectedElems.some(elem => [CODE_BLOCK, CODE_LINE].includes(elem?.type));
+    if (isCodeContext) {
+      return insertData(data);
+    }
     // Internal link, insert sdoc file link
     if (isUrl(text) && !isImage(text)) {
       if (isSameDomain(text, context.getSetting('serviceUrl'))) {
