@@ -1,5 +1,5 @@
 import { Transforms, Editor, Element, Node } from '@seafile/slate';
-import { CHECK_LIST_ITEM, PARAGRAPH, ELEMENT_TYPE, INSERT_POSITION, ORDERED_LIST, UNORDERED_LIST, HEADER, TITLE, SUBTITLE } from '../../constants';
+import { CHECK_LIST_ITEM, PARAGRAPH, ELEMENT_TYPE, INSERT_POSITION, ORDERED_LIST, UNORDERED_LIST, HEADER, TITLE, SUBTITLE, TOGGLE_TITLE_TYPES } from '../../constants';
 import { getSelectedNodeByType, generateEmptyElement, isMultiLevelList, isRangeAcrossBlocks, getNodeType, focusEditor, getCurrentNode } from '../../core';
 
 export const isMenuDisabled = (editor, readonly) => {
@@ -17,6 +17,7 @@ export const isMenuDisabled = (editor, readonly) => {
     if (Editor.isVoid(editor, element) && Editor.isBlock(editor, element)) return true;
 
     const { type } = element;
+    if (TOGGLE_TITLE_TYPES.includes(type)) return true;
     if (type === ELEMENT_TYPE.CODE_LINE) return true;
     if (type === ELEMENT_TYPE.CODE_BLOCK) return true;
     if ([ORDERED_LIST, UNORDERED_LIST].includes(type) && isMultiLevelList(element)) return true;

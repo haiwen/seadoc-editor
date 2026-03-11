@@ -1,10 +1,11 @@
 import { Editor, Path, Range, Transforms } from '@seafile/slate';
+import { ReactEditor } from '@seafile/slate-react';
 import slugid from 'slugid';
 import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
-import { CODE_BLOCK, INSERT_POSITION, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, WHITEBOARD } from '../../constants';
-import { focusEditor, generateDefaultParagraph, getNode, getNodeType, getParentNode, isTextNode } from '../../core';
+import { CODE_BLOCK, INSERT_POSITION, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, WHITEBOARD, TOGGLE_CONTENT, TOGGLE_TITLE_TYPES } from '../../constants';
+import { focusEditor, generateDefaultParagraph, getNode, getNodeType, getParentNode, getSelectedNodeEntryByType, isTextNode } from '../../core';
 
 export const isInsertWhiteboardMenuDisabled = (editor, readonly) => {
   if (readonly) return true;
@@ -20,6 +21,7 @@ export const isInsertWhiteboardMenuDisabled = (editor, readonly) => {
         type = getNodeType(parentNode);
       }
 
+      if (TOGGLE_TITLE_TYPES.includes(type)) return true;
       if (type === CODE_BLOCK) return true;
       if (type.startsWith('header')) return true;
       if (type === TITLE) return true;
@@ -79,8 +81,18 @@ export const insertWhiteboard = async (editor, filename, filePath, repoId) => {
   });
 
   const whiteboardNode = generateWhiteboardNode(repoID, filename, filePath, exdrawReadOnlyLink);
-
   let path = editor.selection?.anchor.path;
+
+  // When inserting whiteboard in the toggle content, insert current
+  const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
+  if (currentToggleContentEntry) {
+    Transforms.insertNodes(editor, whiteboardNode, { at: path.slice(0, -1) });
+    Transforms.select(editor, Editor.start(editor, path));
+    ReactEditor.focus(editor);
+    return;
+  }
+
+
   const position = 'after';
   if (position === INSERT_POSITION.AFTER) {
     Transforms.insertNodes(editor, whiteboardNode, { at: [path[0] + 1] });

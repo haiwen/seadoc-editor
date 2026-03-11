@@ -1,5 +1,5 @@
 import { Editor, Node, Path, Transforms, Range } from '@seafile/slate';
-import { CALL_OUT, PARAGRAPH, ORDERED_LIST, UNORDERED_LIST, LIST_ITEM, MULTI_COLUMN } from '../../constants/element-type';
+import { CALL_OUT, PARAGRAPH, ORDERED_LIST, UNORDERED_LIST, LIST_ITEM, MULTI_COLUMN, TOGGLE_CONTENT } from '../../constants/element-type';
 import { focusEditor, generateEmptyElement, getSelectedElems, isRangeAcrossBlocks, getTopLevelBlockNode, isTopLevelListItem, getSelectedNodeEntryByType } from '../../core';
 import { CALLOUT_ALLOWED_INSIDE_TYPES, CALLOUT_COLOR_MAP } from './constant';
 
@@ -28,9 +28,10 @@ export const isMenuDisabled = (editor, readonly) => {
     return CALLOUT_ALLOWED_INSIDE_TYPES.includes(element.type);
   });
   if (isAllSelectedElementsInAllowTypes) return false;
-  // If selection is in multi_column, able callout menu
+  // If selection is in multi_column or toggle_content, able callout menu
+  const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
   const currentMultiColumnEntry = getSelectedNodeEntryByType(editor, MULTI_COLUMN);
-  if (currentMultiColumnEntry) return false;
+  if (currentMultiColumnEntry || currentToggleContentEntry) return false;
   return true;
 };
 
@@ -50,6 +51,15 @@ export const wrapCallout = (editor) => {
   const { selection } = editor;
   if (!selection) return;
   const callout = generateCallout();
+  // Handle inserting callout into inside toggle content
+  const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
+  if (currentToggleContentEntry) {
+    Transforms.wrapNodes(editor, callout, {
+      at: editor.selection.anchor.path.slice(0, -1),
+    });
+    focusEditor(editor);
+    return;
+  }
   // Handle inserting callout into inside multi_column
   const currentMultiColumnEntry = getSelectedNodeEntryByType(editor, MULTI_COLUMN);
   if (currentMultiColumnEntry) {

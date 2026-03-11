@@ -1,10 +1,11 @@
 import { Editor, Element, Node, Range, Transforms } from '@seafile/slate';
+import isHotkey from 'is-hotkey';
 import { PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
 import { generateDefaultText, generateEmptyElement, isLastNode } from '../../core';
 import { getLevelFromType, getTitleTypeByLevel } from './helper';
 
 const withToggleHeader = (editor) => {
-  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment } = editor;
+  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment, onHotKeyDown } = editor;
   const newEditor = editor;
 
   const getToggleBodyChildren = (toggleNode) => {
@@ -177,6 +178,21 @@ const withToggleHeader = (editor) => {
       return;
     }
     insertFragment(data);
+  };
+
+  newEditor.onHotKeyDown = (event) => {
+    const { selection } = newEditor;
+    if (!selection || !Range.isCollapsed(selection)) {
+      return true;
+    }
+    const [selectedNode] = Editor.node(newEditor, selection, { depth: 1 });
+    if (selectedNode.type === TOGGLE_HEADER) {
+      if (isHotkey('shift+tab', event)) {
+        event.preventDefault();
+        return true;
+      }
+    }
+    return true;
   };
 
   newEditor.normalizeNode = ([node, path]) => {

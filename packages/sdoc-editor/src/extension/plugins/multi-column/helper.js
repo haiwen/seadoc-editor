@@ -4,7 +4,7 @@ import slugid from 'slugid';
 import { FULL_WIDTH_MODE } from '../../../constants';
 import { getStyleByFullWidthMode } from '../../../utils/full-width-mode';
 import LocalStorage from '../../../utils/local-storage-utils';
-import { ELEMENT_TYPE, IMAGE, IMAGE_BLOCK, INSERT_POSITION, PARAGRAPH } from '../../constants';
+import { ELEMENT_TYPE, IMAGE, IMAGE_BLOCK, INSERT_POSITION, PARAGRAPH, TOGGLE_CONTENT } from '../../constants';
 import { findPath, getSelectedNodeEntryByType } from '../../core';
 import { COLUMN_MIN_WIDTH, LAST_COLUMN_MARGIN_RIGHT_WIDTH } from './constants';
 
@@ -168,6 +168,15 @@ export const handleInsertMultiColumn = (editor, insertPosition, path, multiColum
       Transforms.splitNodes(editor, { at: selection });
       insertPath = [selection.anchor.path[0] + 1];
       Transforms.insertNodes(editor, multiColumnNode, { at: insertPath });
+    }
+    // When inserting multi column in the toggle content, insert after
+    const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
+    if (currentToggleContentEntry) {
+      insertPath = [path[0] + 1];
+      Transforms.insertNodes(editor, multiColumnNode, { at: insertPath });
+      Transforms.select(editor, Editor.start(editor, insertPath));
+      ReactEditor.focus(editor);
+      return;
     }
     // If there are multiple children in the editor, insert the new multi-column node at the current selection
     if (editor.children.length !== 1 && !currentMultiColumnEntry) {

@@ -6,7 +6,7 @@ import { INTERNAL_EVENT, PAGE_EDIT_AREA_WIDTH } from '../../../constants';
 import { replacePastedDataId } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import ObjectUtils from '../../../utils/object-utils';
-import { ELEMENT_TYPE, KEYBOARD, CLIPBOARD_FORMAT_KEY, INSERT_POSITION } from '../../constants';
+import { ELEMENT_TYPE, KEYBOARD, CLIPBOARD_FORMAT_KEY, INSERT_POSITION, TOGGLE_CONTENT, TOGGLE_TITLE_TYPES } from '../../constants';
 import {
   getNodeType, getParentNode, getSelectedNodeByType, isTextNode, getSelectedElems, focusEditor,
   getNode, findPath, replaceNodeChildren, replaceNode, getSelectedNodeEntryByType, getAboveBlockNode
@@ -29,6 +29,7 @@ export const isTableMenuDisabled = (editor, readonly) => {
         type = getNodeType(parentNode);
       }
 
+      if (TOGGLE_TITLE_TYPES.includes(type)) return true;
       if (type.startsWith('header')) return true;
       if (type === ELEMENT_TYPE.TITLE) return true;
       if (type === ELEMENT_TYPE.SUBTITLE) return true;
@@ -1240,7 +1241,8 @@ export const getInsertPosition = (editor) => {
   if (!Range.isCollapsed(selection)) return INSERT_POSITION.CURRENT;
 
   const aboveNodeEntry = getAboveBlockNode(editor);
-  if (!aboveNodeEntry) return INSERT_POSITION.CURRENT;
+  const parentBlockNode = Editor.parent(editor, aboveNodeEntry?.[1]);
+  if (!aboveNodeEntry || parentBlockNode?.[0].type === TOGGLE_CONTENT) return INSERT_POSITION.CURRENT;
 
   const isAtStart = Editor.isStart(editor, selection.anchor, aboveNodeEntry[1]);
   if (isAtStart) return INSERT_POSITION.BEFORE;

@@ -3,7 +3,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import urlJoin from 'url-join';
 import context from '../../../context';
-import { CODE_BLOCK, ELEMENT_TYPE, VIDEO, INSERT_POSITION, PARAGRAPH, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, TABLE } from '../../constants';
+import { CODE_BLOCK, ELEMENT_TYPE, VIDEO, INSERT_POSITION, PARAGRAPH, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, TABLE, TOGGLE_TITLE_TYPES } from '../../constants';
 import { generateEmptyElement, getNodeType, isTextNode, isLastNode, getParentNode, focusEditor, getAboveBlockNode, generateDefaultParagraph } from '../../core';
 import { ONE_GB, ONE_MB, ONE_KB } from './constants';
 
@@ -21,6 +21,7 @@ export const isInsertVideoMenuDisabled = (editor, readonly) => {
         type = getNodeType(parentNode);
       }
 
+      if (TOGGLE_TITLE_TYPES.includes(type)) return true;
       if (type === CODE_BLOCK) return true;
       if (type.startsWith('header')) return true;
       if (type === TITLE) return true;
