@@ -56,6 +56,14 @@ export const getLinkType = (editor) => {
 };
 
 export const insertLink = (editor, title, url, position = INSERT_POSITION.CURRENT, slateNode, linkedNodeId, selectedPageId) => {
+  const selectedElems = getSelectedElems(editor);
+  const isCodeContext = selectedElems.some(elem => [CODE_BLOCK, CODE_LINE].includes(elem?.type));
+  if (position === INSERT_POSITION.CURRENT && isCodeContext) {
+    if (title) {
+      Editor.insertText(editor, title);
+    }
+    return;
+  }
   if (position === INSERT_POSITION.CURRENT && isMenuDisabled(editor)) return;
   if (!title || (!url && !linkedNodeId && !selectedPageId)) return;
 
