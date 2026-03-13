@@ -1,11 +1,11 @@
 import { Editor, Element, Node, Path, Range, Transforms } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
-import { PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
+import { HEADER1, HEADER2, HEADER3, PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
 import { generateDefaultText, generateEmptyElement, getAboveNode, getCurrentNode, isLastNode } from '../../core';
 import { ensureToggleContentNotEmpty, getLevelFromType, getTitleTypeByLevel } from './helper';
 
 const withToggleHeader = (editor) => {
-  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment } = editor;
+  const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment, onHotKeyDown } = editor;
   const newEditor = editor;
 
   const getToggleBodyChildren = (toggleNode) => {
@@ -134,8 +134,7 @@ const withToggleHeader = (editor) => {
     if (titleEntry && titlePath) {
       const [titleNode] = Editor.node(newEditor, titlePath);
       const isAtTitleStart = Editor.isStart(newEditor, selection.anchor, titlePath);
-      const isEmptyTitle = Node.string(titleNode) === '';
-      if (!isAtTitleStart || !isEmptyTitle) {
+      if (!isAtTitleStart) {
         deleteBackward(unit);
         return;
       }
@@ -144,20 +143,26 @@ const withToggleHeader = (editor) => {
       const [toggleNode, togglePath] = toggleEntry;
       const contentChildren = getToggleBodyChildren(toggleNode);
 
-      const hasBodyContent = contentChildren.some((child) => {
-        if (!Element.isElement(child)) return false;
-        if (child.type !== PARAGRAPH) return true;
-        return Node.string(child) !== '';
-      });
+      const normalHeaderTypeMap = {
+        toggle_header1: HEADER1,
+        toggle_header2: HEADER2,
+        toggle_header3: HEADER3,
+      };
+
+      const normalHeaderType = normalHeaderTypeMap[titleNode.type];
+      const normalHeaderNode = {
+        ...titleNode,
+        type: normalHeaderType,
+      };
+      const nodesToInsert = [normalHeaderNode];
+
+      if (contentChildren.length > 0) {
+        nodesToInsert.push(...contentChildren);
+      }
 
       Editor.withoutNormalizing(newEditor, () => {
         Transforms.removeNodes(newEditor, { at: togglePath });
-        if (hasBodyContent) {
-          Transforms.insertNodes(newEditor, contentChildren, { at: togglePath });
-        } else {
-          const paragraph = generateEmptyElement(PARAGRAPH);
-          Transforms.insertNodes(newEditor, paragraph, { at: togglePath });
-        }
+        Transforms.insertNodes(newEditor, nodesToInsert, { at: togglePath });
         Transforms.select(newEditor, Editor.start(newEditor, togglePath));
       });
       return;
@@ -182,9 +187,7 @@ const withToggleHeader = (editor) => {
 
   newEditor.onHotKeyDown = (event) => {
     const { selection } = newEditor;
-    if (!selection || !Range.isCollapsed(selection)) {
-      return true;
-    }
+    if (!selection) return false;
     const [selectedNode] = Editor.node(newEditor, selection, { depth: 1 });
     if (selectedNode.type === TOGGLE_HEADER && isHotkey('shift+tab', event)) {
       event.preventDefault();
@@ -240,6 +243,7 @@ const withToggleHeader = (editor) => {
 
       return true;
     }
+    return onHotKeyDown && onHotKeyDown(event);
   };
 
   newEditor.normalizeNode = ([node, path]) => {
