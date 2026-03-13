@@ -456,7 +456,7 @@ export const onWrapMultiListItemToNonListTypeTarget = (editor, targetPath, sourc
 
 export const getTransformMenusConfig = (editor, slateNode) => {
   let newSideMenusConfig = SIDE_TRANSFORM_MENUS_CONFIG;
-  if (TOGGLE_HEADER.includes(slateNode.type)) {
+  if (TOGGLE_HEADER === slateNode.type) {
     return newSideMenusConfig = SIDE_TRANSFORM_MENUS_CONFIG.filter((item) => [...TOGGLE_TITLE_TYPES, ...HEADERS, PARAGRAPH].includes(item.type));
   }
 
