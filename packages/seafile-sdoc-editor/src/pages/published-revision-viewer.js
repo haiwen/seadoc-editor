@@ -9,7 +9,7 @@ import { resetWebTitle } from '../utils';
 
 import '../assets/css/simple-editor.css';
 
-const PublishedRevisionViewer = () => {
+const PublishedRevisionViewer = ({ mathJaxSource }) => {
   context.initApi();
 
   const { t } = useTranslation('sdoc-editor');
@@ -75,7 +75,7 @@ const PublishedRevisionViewer = () => {
           <DocOperations isShowChanges={isShowChanges} changes={changes} isPublished={true} handleViewChangesToggle={handleViewChangesToggle} />
         </Header>
         <Content>
-          <PublishedRevisionDiffViewer isShowChanges={isShowChanges} revisionContent={document} didMountCallback={setDiffChanges} />
+          <PublishedRevisionDiffViewer isShowChanges={isShowChanges} revisionContent={document} didMountCallback={setDiffChanges} mathJaxSource={mathJaxSource} />
         </Content>
       </Layout>
     </ErrorBoundary>
