@@ -1,8 +1,8 @@
-import { Editor, Element, Node, Path, Range, Transforms } from '@seafile/slate';
+import { Editor, Element, Path, Point, Range, Transforms } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { HEADER1, HEADER2, HEADER3, PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
 import { generateDefaultText, generateEmptyElement, getAboveNode, getCurrentNode, isLastNode } from '../../core';
-import { ensureToggleContentNotEmpty, getLevelFromType, getTitleTypeByLevel } from './helper';
+import { ensureToggleContentNotEmpty, findFirstTitleNode, getFirstTextPoint, getLevelFromType, getTitleTypeByLevel, isOnlyHasToggleContent } from './helper';
 
 const withToggleHeader = (editor) => {
   const { insertBreak, normalizeNode, insertSoftBreak, deleteBackward, insertFragment, onHotKeyDown } = editor;
@@ -56,13 +56,52 @@ const withToggleHeader = (editor) => {
     const bodyChildren = getToggleBodyChildren(toggleNode);
 
     const cursorPoint = selection.anchor;
+    // when toggle header is collapsed
+    if (toggleNode.collapsed) {
+      const titleStartPoint = Editor.start(newEditor, titlePath);
+      const titleEndPoint = Editor.end(newEditor, titlePath);
+      const isAtTitleStart = Point.equals(cursorPoint, titleStartPoint);
+      const isAtTitleEnd = Editor.isEnd(newEditor, cursorPoint, titlePath);
+
+      Editor.withoutNormalizing(newEditor, () => {
+        if (isAtTitleStart) {
+          const newParagraph = generateEmptyElement(PARAGRAPH);
+          Transforms.insertNodes(newEditor, newParagraph, { at: togglePath });
+          return;
+        }
+
+
+        let titleNode = [];
+        if (!isAtTitleEnd) {
+          const afterRange = {
+            anchor: cursorPoint,
+            focus: titleEndPoint,
+          };
+
+          const afterFragment = Editor.fragment(newEditor, afterRange);
+          titleNode = findFirstTitleNode(afterFragment);
+          Transforms.delete(newEditor, { at: afterRange });
+        }
+
+        const newParagraph = generateEmptyElement(PARAGRAPH);
+        newParagraph.children = titleNode?.children?.length ? titleNode.children : [generateDefaultText('')];
+
+        const insertPath = Path.next(togglePath);
+        Transforms.insertNodes(newEditor, newParagraph, { at: insertPath });
+        Transforms.select(newEditor, Editor.start(newEditor, insertPath));
+      });
+
+      return;
+    }
+
+
     const titleEndPoint = Editor.end(newEditor, titlePath);
     const isAtTitleEnd = Editor.isEnd(newEditor, cursorPoint, titlePath);
     const afterRange = { anchor: cursorPoint, focus: titleEndPoint };
     const afterFragment = isAtTitleEnd ? [] : Editor.fragment(newEditor, afterRange);
     const afterChildren = afterFragment[0]?.children || [];
 
-    // Carry out enter or shift+enter operation in toggle header
+    // when toggle header is listed all
     Editor.withoutNormalizing(newEditor, () => {
       // The afterText is the text content after the cursor in the toggle header
       let afterText = '';
@@ -121,6 +160,60 @@ const withToggleHeader = (editor) => {
       return;
     }
 
+    const currentBlockEntry = Editor.above(newEditor, {
+      at: selection,
+      match: n => Element.isElement(n) && Editor.isBlock(newEditor, n),
+      mode: 'lowest',
+    });
+
+    if (!currentBlockEntry) {
+      deleteBackward(unit);
+      return;
+    }
+
+    const [currentBlockNode, currentBlockPath] = currentBlockEntry;
+
+    const toggleContentEntry = Editor.above(newEditor, {
+      at: currentBlockPath,
+      match: n => Element.isElement(n) && n.type === TOGGLE_CONTENT,
+      mode: 'lowest',
+    });
+
+    // When cursor is in start point of the last toggle content
+    if (toggleContentEntry) {
+      const [toggleContentNode, toggleContentPath] = toggleContentEntry;
+
+      const childCount = toggleContentNode.children.length;
+      const currentIndex = currentBlockPath[currentBlockPath.length - 1];
+      const isLastChild = currentIndex === childCount - 1;
+
+      const hasOtherChildren = childCount > 1;
+
+      const isAtLastChildStart = Editor.isStart(newEditor, selection.anchor, currentBlockPath);
+
+      if (isLastChild && isAtLastChildStart && hasOtherChildren && !TOGGLE_TITLE_TYPES.includes(currentBlockNode.type)) {
+        const parentToggleEntry = Editor.parent(newEditor, toggleContentPath);
+        const [parentToggleNode, parentTogglePath] = parentToggleEntry;
+
+        if (parentToggleNode && parentToggleNode.type === TOGGLE_HEADER) {
+          const liftedNode = currentBlockNode;
+          const insertPath = Path.next(parentTogglePath);
+
+          Editor.withoutNormalizing(newEditor, () => {
+            Transforms.removeNodes(newEditor, { at: currentBlockPath });
+
+            ensureToggleContentNotEmpty(newEditor, toggleContentPath);
+
+            Transforms.insertNodes(newEditor, liftedNode, { at: insertPath });
+            Transforms.select(newEditor, Editor.start(newEditor, insertPath));
+          });
+
+          return;
+        }
+      }
+    }
+
+    // Other cases
     const titleEntry = Editor.above(newEditor, {
       at: selection,
       match: n => Element.isElement(n) && TOGGLE_TITLE_TYPES.includes(n.type),
@@ -171,23 +264,66 @@ const withToggleHeader = (editor) => {
   };
 
   newEditor.insertFragment = (data) => {
-    const { selection } = editor;
+    const { selection } = newEditor;
     if (!selection) return insertFragment(data);
 
-    if (data[0]?.type === TOGGLE_HEADER) {
-      let childrenNodes = [];
-      data[0].children.forEach(col => {
-        childrenNodes = childrenNodes.concat(col.children);
+    const nextFragment = [];
+
+    data.forEach((node) => {
+      if (node?.type === TOGGLE_HEADER) {
+        if (isOnlyHasToggleContent(node)) {
+          let childrenNodes = [];
+          node.children.forEach((child) => {
+            if (child?.children) {
+              childrenNodes = childrenNodes.concat(child.children);
+            }
+          });
+          nextFragment.push(...childrenNodes);
+        } else {
+          nextFragment.push(node);
+        }
+      } else {
+        nextFragment.push(node);
+      }
+    });
+
+    if (nextFragment[0]?.type === TOGGLE_HEADER) {
+      const currentBlockEntry = Editor.above(newEditor, {
+        at: selection,
+        match: n => Element.isElement(n) && Editor.isBlock(newEditor, n),
+        mode: 'lowest',
       });
-      insertFragment(childrenNodes);
+
+      if (!currentBlockEntry) {
+        insertFragment(nextFragment);
+        return;
+      }
+
+      const [currentBlockNode,] = currentBlockEntry;
+      const isBlockEmpty = Editor.isEmpty(newEditor, currentBlockNode);
+
+      Editor.withoutNormalizing(newEditor, () => {
+        if (!isBlockEmpty) {
+          Transforms.splitNodes(newEditor, {
+            at: selection,
+            match: n => Element.isElement(n) && Editor.isBlock(newEditor, n),
+            always: true,
+          });
+        }
+
+        insertFragment(nextFragment);
+      });
+
       return;
     }
-    insertFragment(data);
+
+    insertFragment(nextFragment);
   };
 
   newEditor.onHotKeyDown = (event) => {
     const { selection } = newEditor;
     if (!selection) return false;
+
     const [selectedNode] = Editor.node(newEditor, selection, { depth: 1 });
     if (selectedNode.type === TOGGLE_HEADER && isHotkey('shift+tab', event)) {
       event.preventDefault();
@@ -206,6 +342,8 @@ const withToggleHeader = (editor) => {
       const currentIndexInToggleContent = currentPath[toggleContentPath.length];
       const movingChildren = toggleContentNode.children.slice(currentIndexInToggleContent);
 
+      let targetCursorPath = [];
+      let targetOffset = editor.selection.anchor.offset;
       Editor.withoutNormalizing(editor, () => {
         // Remove toggle content children node
         for (let i = toggleContentNode.children.length - 1; i >= currentIndexInToggleContent; i--) {
@@ -215,6 +353,7 @@ const withToggleHeader = (editor) => {
         // In the first toggle content
         if (parentNode.type === TOGGLE_HEADER && parentPath.length === 1) {
           let insertPath = Path.next(parentPath);
+          targetCursorPath = insertPath;
 
           movingChildren.forEach((child) => {
             Transforms.insertNodes(editor, child, { at: insertPath });
@@ -222,6 +361,8 @@ const withToggleHeader = (editor) => {
           });
 
           ensureToggleContentNotEmpty(editor, toggleContentPath);
+          const targetPoint = getFirstTextPoint(editor, targetCursorPath, targetOffset);
+          Transforms.select(newEditor, targetPoint);
           return true;
         }
 
@@ -231,6 +372,7 @@ const withToggleHeader = (editor) => {
           const outerToggleContentPath = Path.parent(parentPath);
 
           let insertPath = outerToggleContentPath.concat(parentIndexInOuterToggleContent + 1);
+          targetCursorPath = insertPath;
 
           movingChildren.forEach((child) => {
             Transforms.insertNodes(editor, child, { at: insertPath });
@@ -238,6 +380,8 @@ const withToggleHeader = (editor) => {
           });
 
           ensureToggleContentNotEmpty(editor, toggleContentPath);
+          const targetPoint = getFirstTextPoint(editor, targetCursorPath, targetOffset);
+          Transforms.select(newEditor, targetPoint);
         }
       });
 

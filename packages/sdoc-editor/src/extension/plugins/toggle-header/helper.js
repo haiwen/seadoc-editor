@@ -1,4 +1,4 @@
-import { Editor, Element, Node, Path, Transforms } from '@seafile/slate';
+import { Editor, Element, Node, Path, Text, Transforms } from '@seafile/slate';
 import slugid from 'slugid';
 import { INSERT_POSITION, PARAGRAPH, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
 import { focusEditor, generateEmptyElement } from '../../core';
@@ -94,4 +94,52 @@ export const ensureToggleContentNotEmpty = (editor, path) => {
     const paragraph = generateEmptyElement(PARAGRAPH);
     Transforms.insertNodes(editor, paragraph, { at: path.concat(0) });
   }
+};
+
+export const isOnlyHasToggleContent = (node) => {
+  if (!node || node.type !== TOGGLE_HEADER) return false;
+
+  let hasTitle = false;
+  let hasContent = false;
+
+  node.children?.forEach((child) => {
+
+    if (TOGGLE_TITLE_TYPES.includes(child.type)) {
+      hasTitle = true;
+    }
+
+    if (child.type === TOGGLE_CONTENT) {
+      hasContent = true;
+    }
+  });
+
+  return !hasTitle && hasContent;
+};
+
+export const getFirstTextPoint = (editor, targetBlockPath, offset = 0) => {
+  for (const [node, path] of Editor.nodes(editor, {
+    at: targetBlockPath,
+    match: n => Text.isText(n),
+  })) {
+    const safeOffset = Math.min(offset, node.text.length);
+    return { path, offset: safeOffset };
+  }
+  return null;
+};
+
+export const findFirstTitleNode = (nodes) => {
+  if (!Array.isArray(nodes)) return null;
+
+  for (const node of nodes[0].children) {
+    if (Element.isElement(node) && TOGGLE_TITLE_TYPES.includes(node.type)) {
+      return node;
+    }
+
+    if (node.children) {
+      const inlineNodes = findFirstTitleNode(node.children);
+      if (inlineNodes) return inlineNodes;
+    }
+  }
+
+  return null;
 };
