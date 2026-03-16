@@ -22,6 +22,7 @@ import SearchReplacePlugin from './search-replace';
 import TablePlugin from './table';
 import TextAlignPlugin from './text-align';
 import TextPlugin from './text-style';
+import ToggleHeaderPlugin from './toggle-header';
 import VideoPlugin from './video';
 import WhiteboardPlugin from './whiteboard';
 import WikiLinkPlugin from './wiki-link';
@@ -51,7 +52,8 @@ const Plugins = [
   GroupPlugin,
   WhiteboardPlugin,
   FileViewPlugin,
-  FormulaPlugin
+  FormulaPlugin,
+  ToggleHeaderPlugin
 ];
 
 const WikiPlugins = [
@@ -103,4 +105,5 @@ export {
   WhiteboardPlugin,
   FileViewPlugin,
   FormulaPlugin,
+  ToggleHeaderPlugin,
 };

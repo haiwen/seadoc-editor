@@ -1,5 +1,5 @@
-import { Editor, Transforms, Element, Node } from '@seafile/slate';
-import { ELEMENT_TYPE, HEADER, PARAGRAPH, SUBTITLE, TITLE } from '../../constants';
+import { Editor, Transforms, Element } from '@seafile/slate';
+import { ELEMENT_TYPE, HEADER, PARAGRAPH, SUBTITLE, TITLE, TOGGLE_HEADER } from '../../constants';
 import { getNodeType } from '../../core';
 
 export const isMenuDisabled = (editor, readonly = false) => {
@@ -38,6 +38,8 @@ export const getHeaderType = (editor) => {
 
   if (!match) return PARAGRAPH;
   const [n] = match;
+
+  if (n.type === TOGGLE_HEADER) return PARAGRAPH;
 
   return getNodeType(n);
 };

@@ -10,7 +10,7 @@ import context from '../../../context';
 import { getErrorMsg, isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
-import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW, FORMULA } from '../../constants';
+import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW, FORMULA, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
 import { getAboveBlockNode } from '../../core';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
@@ -20,6 +20,7 @@ import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
+import { insertToggleHeader } from '../../plugins/toggle-header/helper';
 import { insertVideo } from '../../plugins/video/helpers';
 import { onHandleOverflowScroll } from '../../utils';
 import LinkRepoPopover from '../linked-repo-popover';
@@ -135,6 +136,12 @@ const QuickInsertBlockMenu = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, insertPosition, slateNode]);
 
+  const onInsertToggleHeader = useCallback((type) => {
+    callback && callback();
+    insertToggleHeader(editor, type, insertPosition);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor, insertPosition, slateNode]);
+
   const onInsertCallout = useCallback((type) => {
     callback && callback();
     if (insertPosition === INSERT_POSITION.CURRENT) {
@@ -147,39 +154,49 @@ const QuickInsertBlockMenu = ({
   }, [callback, editor, insertPosition]);
 
   const isDisableCallout = useMemo(() => {
-    const callout = getAboveBlockNode(editor, { match: n => n.type === ELEMENT_TYPE.CALL_OUT });
+    const callout = getAboveBlockNode(editor, { match: n => [...TOGGLE_TITLE_TYPES, ELEMENT_TYPE.CALL_OUT].includes(n.type) });
     return !!callout;
   }, [editor]);
 
   // Disable images in list elements
   const isDisableFormula = useMemo(() => {
-    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.BLOCKQUOTE, ELEMENT_TYPE.CALL_OUT].includes(n.type) });
+    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.BLOCKQUOTE, ELEMENT_TYPE.CALL_OUT, ...TOGGLE_TITLE_TYPES].includes(n.type) });
     return !!callout;
   }, [editor]);
 
   // Disable images in list elements
   const isDisableImage = useMemo(() => {
-    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM].includes(n.type) });
+    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ...TOGGLE_TITLE_TYPES].includes(n.type) });
     return !!callout;
   }, [editor]);
 
   const isDisableVideo = useMemo(() => {
-    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.MULTI_COLUMN].includes(n.type) });
+    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.MULTI_COLUMN, ...TOGGLE_TITLE_TYPES].includes(n.type) });
     return !!callout;
   }, [editor]);
 
   const isDisableTable = useMemo(() => {
-    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.MULTI_COLUMN, ELEMENT_TYPE.BLOCKQUOTE, ELEMENT_TYPE.CALL_OUT].includes(n.type) });
+    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.MULTI_COLUMN, ELEMENT_TYPE.BLOCKQUOTE, ELEMENT_TYPE.CALL_OUT, ...TOGGLE_TITLE_TYPES].includes(n.type) });
     return !!callout;
   }, [editor]);
 
   const isDisableMultiColumn = useMemo(() => {
-    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.MULTI_COLUMN, ELEMENT_TYPE.BLOCKQUOTE, ELEMENT_TYPE.CALL_OUT].includes(n.type) });
+    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.ORDERED_LIST, ELEMENT_TYPE.UNORDERED_LIST, ELEMENT_TYPE.CHECK_LIST_ITEM, ELEMENT_TYPE.MULTI_COLUMN, ELEMENT_TYPE.BLOCKQUOTE, ELEMENT_TYPE.CALL_OUT, ...TOGGLE_TITLE_TYPES].includes(n.type) });
     return !!callout;
   }, [editor]);
 
   const isDisableCodeBlock = useMemo(() => {
-    const callout = getAboveBlockNode(editor, { match: n => [ELEMENT_TYPE.MULTI_COLUMN].includes(n.type) });
+    const callout = getAboveBlockNode(editor, { match: n => [...TOGGLE_TITLE_TYPES, ELEMENT_TYPE.MULTI_COLUMN].includes(n.type) });
+    return !!callout;
+  }, [editor]);
+
+  const isDisableHeader = useMemo(() => {
+    const callout = getAboveBlockNode(editor, { match: n => TOGGLE_TITLE_TYPES.includes(n.type) });
+    return !!callout;
+  }, [editor]);
+
+  const isDisableToggleHeader = useMemo(() => {
+    const callout = getAboveBlockNode(editor, { match: n => [...TOGGLE_TITLE_TYPES, ELEMENT_TYPE.MULTI_COLUMN].includes(n.type) });
     return !!callout;
   }, [editor]);
 
@@ -212,7 +229,11 @@ const QuickInsertBlockMenu = ({
     let items = {
       [PARAGRAPH]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[PARAGRAPH]} disabled={isEmptyNode} key="sdoc-insert-menu-paragraph" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH] }} onClick={() => onInsert(ELEMENT_TYPE.PARAGRAPH)} />,
       ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER].reduce((acc, item) => {
-        acc[item.id] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} key={item.id} menuConfig={item} onClick={() => onInsert(item.type)} />;
+        acc[item.id] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} key={item.id} menuConfig={item} disabled={isDisableHeader} onClick={() => onInsert(item.type)} />;
+        return acc;
+      }, {},),
+      ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TOGGLE_HEADER].reduce((acc, item) => {
+        acc[item.id] = <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[item.type]} key={item.id} menuConfig={item} disabled={isDisableToggleHeader} onClick={() => onInsertToggleHeader(item.type)} />;
         return acc;
       }, {},),
       [UNORDERED_LIST]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[UNORDERED_LIST]} key="sdoc-insert-menu-unorder-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.UNORDERED_LIST] }} onClick={() => {
@@ -293,7 +314,7 @@ const QuickInsertBlockMenu = ({
 
     return items;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, onInsertCodeBlock, isDisableCallout, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn]);
+  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, onInsertCodeBlock, isDisableCallout, isDisableToggleHeader, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader]);
 
   const getSelectItemDom = (selectIndex) => {
     const dropDownItemWrapper = downDownWrapperRef.current;

@@ -1,7 +1,7 @@
 import { Transforms, Editor, Node } from '@seafile/slate';
 import copy from 'copy-to-clipboard';
 import slugid from 'slugid';
-import { CODE_BLOCK, CODE_LINE, INSERT_POSITION, PARAGRAPH, MULTI_COLUMN } from '../../constants';
+import { CODE_BLOCK, CODE_LINE, INSERT_POSITION, PARAGRAPH, MULTI_COLUMN, TOGGLE_CONTENT } from '../../constants';
 import { getNodeType, getSelectedNodeByType, getSelectedElems, getSelectedNodeEntryByType, focusEditor } from '../../core';
 import { getCalloutEntry } from '../callout/helper';
 import { genCodeLangs } from './prismjs';
@@ -12,6 +12,11 @@ export const isMenuDisabled = (editor, readonly) => {
   if (selection === null) return true;
 
   if (getCalloutEntry(editor)) return true;
+
+  // If selection is in multi_column or toggle_content, able callout menu
+  const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
+  const currentMultiColumnEntry = getSelectedNodeEntryByType(editor, MULTI_COLUMN);
+  if (currentMultiColumnEntry || currentToggleContentEntry) return false;
 
   const selectedElems = getSelectedElems(editor);
 
@@ -67,6 +72,13 @@ export const changeToCodeBlock = (editor, language = '', position = INSERT_POSIT
 
   // Insert current
   if (position === INSERT_POSITION.CURRENT) {
+    // Insert codeblock in toggle content
+    const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
+    if (currentToggleContentEntry) {
+      newCodeBlockNode.children[0].children[0].text = strArr.join('\n');
+      Transforms.insertNodes(editor, newCodeBlockNode, { at: path.slice(0, -1) });
+      return;
+    }
     // Insert codeblock in multi_column
     const currentMultiColumnEntry = getSelectedNodeEntryByType(editor, MULTI_COLUMN);
     if (currentMultiColumnEntry) {

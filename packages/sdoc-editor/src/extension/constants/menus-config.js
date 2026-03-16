@@ -33,7 +33,11 @@ import {
   CALL_OUT,
   WHITEBOARD,
   FILE_VIEW,
-  FORMULA
+  FORMULA,
+  TOGGLE_HEADER,
+  TOGGLE_HEADER1,
+  TOGGLE_HEADER2,
+  TOGGLE_HEADER3,
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -307,22 +311,22 @@ export const SIDE_TRANSFORM_MENUS_CONFIG = [
     text: 'Header_three'
   },
   {
-    id: HEADER4,
-    iconClass: 'sdocfont sdoc-header4',
-    type: HEADER4,
-    text: 'Header_four'
+    id: TOGGLE_HEADER1,
+    iconClass: 'sdocfont sdoc-toggle-header1',
+    type: TOGGLE_HEADER1,
+    text: 'Toggle_header_one'
   },
   {
-    id: HEADER5,
-    iconClass: 'sdocfont sdoc-header5',
-    type: HEADER5,
-    text: 'Header_five'
+    id: TOGGLE_HEADER2,
+    iconClass: 'sdocfont sdoc-toggle-header2',
+    type: TOGGLE_HEADER2,
+    text: 'Toggle_header_two'
   },
   {
-    id: HEADER6,
-    iconClass: 'sdocfont sdoc-header6',
-    type: HEADER6,
-    text: 'Header_six'
+    id: TOGGLE_HEADER3,
+    iconClass: 'sdocfont sdoc-toggle-header3',
+    type: TOGGLE_HEADER3,
+    text: 'Toggle_header_three'
   },
   {
     id: UNORDERED_LIST,
@@ -470,6 +474,26 @@ export const SIDE_INSERT_MENUS_CONFIG = {
       text: 'Header_three'
     }
   ],
+  [TOGGLE_HEADER]: [
+    {
+      id: TOGGLE_HEADER1,
+      iconClass: 'sdocfont sdoc-toggle-header1',
+      type: TOGGLE_HEADER1,
+      text: 'Toggle_header_one'
+    },
+    {
+      id: TOGGLE_HEADER2,
+      iconClass: 'sdocfont sdoc-toggle-header2',
+      type: TOGGLE_HEADER2,
+      text: 'Toggle_header_two'
+    },
+    {
+      id: TOGGLE_HEADER3,
+      iconClass: 'sdocfont sdoc-toggle-header3',
+      type: TOGGLE_HEADER3,
+      text: 'Toggle_header_three'
+    }
+  ],
   [MULTI_COLUMN]: [
     {
       id: TWO_COLUMN,
@@ -529,6 +553,9 @@ export const SIDE_INSERT_MENUS_SEARCH_MAP = {
   [HEADER2]: 'Header_two',
   [HEADER3]: 'Header_three',
   [HEADER4]: 'Header_four',
+  [TOGGLE_HEADER1]: 'Toggle_header_one',
+  [TOGGLE_HEADER2]: 'Toggle_header_two',
+  [TOGGLE_HEADER3]: 'Toggle_header_three',
   [FILE_VIEW]: 'File_view',
 };
 
@@ -553,6 +580,9 @@ export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [HEADER4]: 'Header_four',
   [FILE_VIEW]: 'File_view',
   [FORMULA]: 'Formula',
+  [TOGGLE_HEADER1]: 'Toggle_header_one',
+  [TOGGLE_HEADER2]: 'Toggle_header_two',
+  [TOGGLE_HEADER3]: 'Toggle_header_three',
 };
 
 // Other operations menu config

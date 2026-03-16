@@ -1,6 +1,6 @@
 import { Editor, Transforms, Element } from '@seafile/slate';
 import slugid from 'slugid';
-import { BLOCKQUOTE, CHECK_LIST_ITEM, IMAGE, ORDERED_LIST, PARAGRAPH, UNORDERED_LIST, CODE_BLOCK, TABLE, CALL_OUT, MULTI_COLUMN } from '../../constants';
+import { BLOCKQUOTE, CHECK_LIST_ITEM, IMAGE, ORDERED_LIST, PARAGRAPH, UNORDERED_LIST, CODE_BLOCK, TABLE, CALL_OUT, MULTI_COLUMN, TOGGLE_CONTENT } from '../../constants';
 import { focusEditor, getNodeType, getSelectedNodeEntryByType } from '../../core';
 import { isEmptyNode } from '../paragraph/helper';
 
@@ -54,9 +54,10 @@ export const setBlockQuoteType = (editor, active) => {
       id: slugid.nice(),
       type: BLOCKQUOTE,
     };
-    // Insert block quote into column node if in multi_column node
+    // Insert block quote into toggle or column node in multi_column node
     const currentMultiColumnEntry = getSelectedNodeEntryByType(editor, MULTI_COLUMN);
-    if (currentMultiColumnEntry) {
+    const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
+    if (currentMultiColumnEntry || currentToggleContentEntry) {
       Transforms.wrapNodes(editor, blockquoteNode, {
         mode: 'lowest',
         match: n => {
@@ -76,7 +77,8 @@ export const setBlockQuoteType = (editor, active) => {
     });
   } else {
     const currentMultiColumnEntry = getSelectedNodeEntryByType(editor, MULTI_COLUMN);
-    if (currentMultiColumnEntry) {
+    const currentToggleContentEntry = getSelectedNodeEntryByType(editor, TOGGLE_CONTENT);
+    if (currentMultiColumnEntry || currentToggleContentEntry) {
       const blockquoteEntry = Editor.above(editor, {
         at: editor.selection.anchor.path,
         match: (n) => n.type === BLOCKQUOTE,

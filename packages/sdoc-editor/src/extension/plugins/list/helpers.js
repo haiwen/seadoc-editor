@@ -1,5 +1,5 @@
 import { Editor, Element, Node, Range, Text } from '@seafile/slate';
-import { CHECK_LIST_ITEM, CODE_BLOCK, CODE_LINE, LIST_ITEM, ORDERED_LIST, PARAGRAPH, TABLE, UNORDERED_LIST } from '../../constants';
+import { CHECK_LIST_ITEM, CODE_BLOCK, CODE_LINE, LIST_ITEM, ORDERED_LIST, PARAGRAPH, TABLE, TOGGLE_TITLE_TYPES, UNORDERED_LIST } from '../../constants';
 import { getListTypes } from './queries';
 import { toggleList } from './transforms';
 
@@ -18,7 +18,7 @@ export const isMenuDisabled = (editor, readonly) => {
     if (Editor.isVoid(editor, element) && Editor.isBlock(editor, element)) return true;
 
     const { type } = element;
-    if ([CODE_LINE, CODE_BLOCK, TABLE, CHECK_LIST_ITEM].includes(type)) return true;
+    if ([CODE_LINE, CODE_BLOCK, TABLE, CHECK_LIST_ITEM, ...TOGGLE_TITLE_TYPES].includes(type)) return true;
     return false;
   });
 

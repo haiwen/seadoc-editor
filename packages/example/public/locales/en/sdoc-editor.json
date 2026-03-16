@@ -669,5 +669,8 @@
   "Whiteboard_link_invalid_tip": "The whiteboard link is invalid, it needs to be deleted and added again.",
   "The_link_is_invalid": "The link is invalid.",
   "Edit_formula": "Edit formula",
-  "Show_files_from_a_linked_library": "Show files from a linked library"
+  "Show_files_from_a_linked_library": "Show files from a linked library",
+  "Toggle_header_one": "Toggle header one",
+  "Toggle_header_two": "Toggle header two",
+  "Toggle_header_three": "Toggle header three"
 }

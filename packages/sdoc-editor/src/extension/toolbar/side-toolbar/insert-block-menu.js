@@ -10,7 +10,7 @@ import context from '../../../context';
 import { getErrorMsg } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
-import { ELEMENT_TYPE, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_INSERT_MENUS_SEARCH_MAP } from '../../constants';
+import { ELEMENT_TYPE, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_INSERT_MENUS_SEARCH_MAP, TOGGLE_TITLE_TYPES } from '../../constants';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
 import { changeToCodeBlock } from '../../plugins/code-block/helpers';
@@ -19,6 +19,7 @@ import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
 import TableSizePopover from '../../plugins/table/popover/table-size-popover';
+import { insertToggleHeader } from '../../plugins/toggle-header/helper';
 import { insertVideo } from '../../plugins/video/helpers';
 import LinkRepoPopover from '../linked-repo-popover';
 import { insertElement, isInMultiColumnNode } from './helpers';
@@ -111,6 +112,11 @@ const InsertBlockMenu = ({
   }, [editor, insertPosition, slateNode]);
 
   const onInsert = useCallback((type) => {
+    // Insert toggle header
+    if (TOGGLE_TITLE_TYPES.includes(type)) {
+      insertToggleHeader(editor, type, insertPosition);
+      return;
+    }
     insertElement(editor, type, insertPosition);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, insertPosition, slateNode]);
@@ -149,7 +155,7 @@ const InsertBlockMenu = ({
 
   return (
     <>
-      {[SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH], ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER]].map((item) => {
+      {[SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH], ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER], ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TOGGLE_HEADER]].map((item) => {
         return (
           <DropdownMenuItem isHidden={!insertMenuSearchMap[item.type]} disabled={isNodeEmpty && item.type === PARAGRAPH} key={item.id} menuConfig={item} onClick={() => onInsert(item.type)} />
         );

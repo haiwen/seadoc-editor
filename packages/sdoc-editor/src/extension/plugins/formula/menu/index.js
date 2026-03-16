@@ -3,9 +3,11 @@ import { INTERNAL_EVENT } from '../../../../constants';
 import EventBus from '../../../../utils/event-bus';
 import DropdownMenuItem from '../../../commons/dropdown-menu-item';
 import { ELEMENT_TYPE, MENUS_CONFIG_MAP } from '../../../constants';
+import { isInsertFormulaMenuDisabled } from '../helper';
 
 const FormulaMenu = ({ editor, readonly, toggle }) => {
   const menuConfig = MENUS_CONFIG_MAP[ELEMENT_TYPE.FORMULA];
+  const disabled = isInsertFormulaMenuDisabled(editor, readonly);
 
   const OpenFormulaModal = () => {
     toggle && toggle();
@@ -14,7 +16,7 @@ const FormulaMenu = ({ editor, readonly, toggle }) => {
   };
 
   return (
-    <DropdownMenuItem disabled={readonly} menuConfig={menuConfig} onClick={OpenFormulaModal} />
+    <DropdownMenuItem disabled={disabled} menuConfig={menuConfig} onClick={OpenFormulaModal} />
   );
 };
 

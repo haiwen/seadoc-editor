@@ -4,7 +4,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { ElementPopover } from '../../commons';
 import InlineBugFixer from '../../commons/Inline-bug-fix-wrapper';
-import { INSERT_POSITION } from '../../constants';
+import { INSERT_POSITION, TOGGLE_CONTENT } from '../../constants';
 import { getAboveBlockNode } from '../../core';
 import QuickInsertBlockMenu from '../../toolbar/insert-element-toolbar';
 import { isSelectionSameWithInsert, transformToText } from './helper';
@@ -15,7 +15,9 @@ const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) 
   const scrollRef = useScrollContext();
   const insertElmRef = useRef(null);
   const aboveBlockNode = getAboveBlockNode(editor);
-  const isEmptyNode = aboveBlockNode && Editor.isEmpty(editor, aboveBlockNode?.[0]);
+  const parentBlockNode = Editor.parent(editor, aboveBlockNode?.[1]);
+  // In toggle content's empty paragraph or empty paragraph
+  const isEmptyNode = (parentBlockNode && parentBlockNode?.[0].type === TOGGLE_CONTENT) || (aboveBlockNode && Editor.isEmpty(editor, aboveBlockNode?.[0]));
   const [isShowPopover, setIsShowPopover] = useState(isSelectionSameWithInsert(editor, element));
 
   const handleClick = useCallback((e) => {
