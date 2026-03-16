@@ -325,6 +325,12 @@ const withToggleHeader = (editor) => {
     if (!selection) return false;
 
     const [selectedNode] = Editor.node(newEditor, selection, { depth: 1 });
+
+    if (selectedNode.type === TOGGLE_HEADER && isHotkey('tab', event)) {
+      event.preventDefault();
+      return true;
+    }
+
     if (selectedNode.type === TOGGLE_HEADER && isHotkey('shift+tab', event)) {
       event.preventDefault();
 
