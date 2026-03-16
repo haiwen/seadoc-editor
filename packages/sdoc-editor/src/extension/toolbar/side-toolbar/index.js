@@ -6,7 +6,7 @@ import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
-import { CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM, CALL_OUT, TABLE_DRAG_KEY, LIST_ITEM, MULTI_COLUMN, ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, IMAGE_BLOCK, TWO_COLUMN, VIDEO, WHITEBOARD, FILE_VIEW, FORMULA, COLUMN } from '../../constants';
+import { CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM, CALL_OUT, TABLE_DRAG_KEY, LIST_ITEM, MULTI_COLUMN, ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, IMAGE_BLOCK, VIDEO, WHITEBOARD, FILE_VIEW, FORMULA, COLUMN } from '../../constants';
 import { findPath, focusEditor } from '../../core';
 import { getCalloutEntry } from '../../plugins/callout/helper';
 import { insertImageFiles } from '../../plugins/image/helpers';

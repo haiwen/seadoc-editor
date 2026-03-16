@@ -44,6 +44,8 @@ const QuickInsertBlockMenu = ({
   const [currentSelectIndex, setCurrentSelectIndex] = useState(-1); // -1 is input focus position
   const [quickInsertMenuSearchMap, setQuickInsertMenuSearchMap] = useState(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP);
 
+  const enableMetadataManagement = context.getSetting('enableMetadataManagement');
+
   const onInsertImageToggle = useCallback(() => {
     callback && callback();
     const eventBus = EventBus.getInstance();
@@ -241,7 +243,7 @@ const QuickInsertBlockMenu = ({
         onInsertList(ELEMENT_TYPE.ORDERED_LIST);
       }} />,
       [CHECK_LIST_ITEM]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CHECK_LIST_ITEM]} key="sdoc-insert-menu-check-list" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />,
-      ...(editor.editorType === WIKI_EDITOR && {
+      ...(editor.editorType === WIKI_EDITOR && enableMetadataManagement && {
         [FILE_VIEW]:
         // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
