@@ -31,6 +31,7 @@ const InsertBlockMenu = ({
 }) => {
   const editor = useSlateStatic();
   const { t } = useTranslation('sdoc-editor');
+  const enableMetadataManagement = context.getSetting('enableMetadataManagement');
 
   const onInsertImageToggle = useCallback(() => {
     const eventBus = EventBus.getInstance();
@@ -160,7 +161,7 @@ const InsertBlockMenu = ({
         onInsertList(ELEMENT_TYPE.ORDERED_LIST);
       }} />
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CHECK_LIST_ITEM]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CHECK_LIST_ITEM] }} onClick={onInsertCheckList} />
-      {editor.editorType === WIKI_EDITOR && (
+      {editor.editorType === WIKI_EDITOR && enableMetadataManagement && (
         <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.FILE_VIEW]} key="sdoc-insert-menu-file-view" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_VIEW] }} className="pr-2">
           <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <LinkRepoPopover onRepoClick={onRepoClick} />
