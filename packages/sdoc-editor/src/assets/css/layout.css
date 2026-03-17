@@ -97,6 +97,7 @@
   width: 100%;
   flex: 1;
   display: flex;
+  background: #f5f5f5;
 }
 
 .sdoc-editor-container .sdoc-editor-content {
