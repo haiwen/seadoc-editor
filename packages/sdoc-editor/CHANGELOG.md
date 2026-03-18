@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.117](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.116...@seafile/sdoc-editor@3.0.117) (2026-03-18)
+
+### Bug Fixes
+
+- fix paste list html into sdoc bug ([#207](https://github.com/seafileltd/sea-sdoc-editor/issues/207)) ([c7a7bb0](https://github.com/seafileltd/sea-sdoc-editor/commit/c7a7bb0a693e655240c4a677f708c2efa1b277fd))
+
 ## [3.0.116](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.115...@seafile/sdoc-editor@3.0.116) (2026-03-17)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
