@@ -22,7 +22,7 @@ const ChangesCount = ({ allChanges }) => {
         }
       }, 100);
     } ).then(() => {
-      if (allChanges.changes.length !== 0) {
+      if (allChanges?.changes?.length !== 0) {
         const topLevelChanges = getTopLevelChanges(allChanges.changes);
         const changes = getMergedChanges(topLevelChanges, allChanges.value);
         setChanges(changes);

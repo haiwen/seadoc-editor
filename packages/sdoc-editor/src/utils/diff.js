@@ -30,9 +30,9 @@ const generatorDiffTextElement = (textElement, diffType, style = {}) => {
   };
 };
 
-export const getTopLevelChanges = (changes) => {
+export const getTopLevelChanges = (changes = []) => {
   const topLevelChanges = [];
-  const articleEl = document.getElementById('sdoc-editor');
+  const articleEl = document.getElementById('sdoc-scroll-container');
   changes.forEach((item) => {
     let dom = document.querySelectorAll(`[data-id="${item}"]`)[0];
     if (!dom) return [];
@@ -52,7 +52,7 @@ export const getTopLevelChanges = (changes) => {
 };
 
 // Merge consecutive added areas or deleted areas
-export const getMergedChanges = (topLevelChanges, diffValue) => {
+export const getMergedChanges = (topLevelChanges, diffValue = []) => {
   const topLevelChangesValue = [];
   const changes = [];
 
@@ -194,8 +194,14 @@ const getCommonDiff = (element, oldElement, diff) => {
               if (newChildrenElement.data.src === oldChildrenElement.data.src) {
                 newChildren.push(newChildrenElement);
               } else {
-                newChildren.push(generatorDiffTextElement({ ...element, id: element.id + '_add' }, TEXT_STYLE_MAP.ADD, ADDED_STYLE));
-                newChildren.push(generatorDiffTextElement({ ...oldChildrenElement, id: element.id + '_delete' }, TEXT_STYLE_MAP.DELETE, DELETED_STYLE));
+                const imageElementId = newChildrenElement.id || oldChildrenElement.id || slugid.nice();
+                const deletedImageId = `${imageElementId}_delete`;
+                const addedImageId = `${imageElementId}_add`;
+
+                diff.changes.push(deletedImageId);
+                newChildren.push(generatorDiffElement({ ...oldChildrenElement, id: deletedImageId }, TEXT_STYLE_MAP.DELETE, DELETED_STYLE));
+
+                newChildren.push(generatorDiffElement({ ...newChildrenElement, id: addedImageId }, TEXT_STYLE_MAP.ADD, ADDED_STYLE));
               }
             } else if (newChildrenElement.type === ELEMENT_TYPE.LINK) {
               if (newChildrenElement.title !== oldChildrenElement.title) {
