@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { Input, Label } from 'reactstrap';
+import classNames from 'classnames';
 import isHotkey from 'is-hotkey';
 import PropTypes from 'prop-types';
-import { INTERNAL_EVENT } from '../../../../constants';
+import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../../constants';
 import context from '../../../../context';
 import debounce from '../../../../utils/debounce';
 import EventBus from '../../../../utils/event-bus';
-import { handleReplaceKeyword, getHighlightInfos, drawHighlights } from '../helper';
+import { handleReplaceKeyword, getHighlightInfos, drawHighlights, isNotAllowed } from '../helper';
 import ReplaceAllConfirmModal from './replace-all-confirm-modal';
 
 import './index.css';
@@ -44,6 +45,15 @@ const SearchReplacePopover = ({ editor, closePopover, readonly }) => {
   const isOwnReplacePermission = useMemo(() => {
     if (readonly) return false;
 
+    const isWiki = context.getSetting('isWiki');
+    if (isWiki) {
+      const isPublished = context.getSetting('publishUrl');
+      const isLocked = context.getSetting('isLocked');
+      if (isPublished || isLocked) return false;
+
+      const wikiPerm = context.getSetting('permission');
+      if (wikiPerm === 'rw') return true;
+    }
     const isFreezed = context.getSetting('isFreezed');
     if (isFreezed) return false;
 
@@ -166,7 +176,7 @@ const SearchReplacePopover = ({ editor, closePopover, readonly }) => {
     createPortal(
       <>
         <div
-          className='sdoc-search-replace-popover-container'
+          className={classNames('sdoc-search-replace-popover-container', { 'in-wiki': editor.editorType === WIKI_EDITOR })}
           onMouseDown={handleStartMove}
           onMouseMove={handleMouseMove}
           onMouseUp={handleFinishMove}
@@ -189,7 +199,7 @@ const SearchReplacePopover = ({ editor, closePopover, readonly }) => {
             <div className='sdoc-search-replace-popover-btn-group'>
               <button disabled={!highlightInfos.length} onClick={handleLast} className='btn btn-secondary'>{t('Prevs')}</button>
               <button disabled={!highlightInfos.length} onClick={handleNext} className='btn btn-secondary'>{t('Next')}</button>
-              <button disabled={!highlightInfos.length || !isOwnReplacePermission} onClick={handleReplace} className='btn btn-primary'>{t('Replace')}</button>
+              <button disabled={!highlightInfos.length || !isOwnReplacePermission || isNotAllowed(editor, highlightInfos[currentSelectIndex])} onClick={handleReplace} className='btn btn-primary'>{t('Replace')}</button>
               <button disabled={!highlightInfos.length || !isOwnReplacePermission} onClick={handleOpenReplaceAllModal} className='btn btn-primary'>{t('Replace_all')}</button>
             </div>
           </div>

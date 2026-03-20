@@ -7,6 +7,12 @@
   border: 1px solid #ebebeb;
 }
 
+.sdoc-search-replace-popover-container.in-wiki {
+  z-index: 1000;
+  right: 0px;
+  left: unset !important;
+}
+
 .sdoc-search-replace-popover-container .sdoc-search-replace-popover-title {
   display: flex;
   justify-content: space-between;

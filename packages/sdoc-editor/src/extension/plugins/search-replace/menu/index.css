@@ -12,3 +12,7 @@
 .sdoc-find-search-highlight-canvas {
   position: absolute;
 }
+
+.wiki-search-and-replace {
+  display: none;
+}
