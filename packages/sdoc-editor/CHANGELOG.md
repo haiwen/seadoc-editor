@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.121](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.120...@seafile/sdoc-editor@3.0.121) (2026-03-23)
+
+### Features
+
+- add search in wiki ([#210](https://github.com/seafileltd/sea-sdoc-editor/issues/210)) ([a570825](https://github.com/seafileltd/sea-sdoc-editor/commit/a57082524b1c5d92347d77e1a8c558e7690fc886))
+
 ## [3.0.120](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.119...@seafile/sdoc-editor@3.0.120) (2026-03-20)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
