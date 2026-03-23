@@ -1,6 +1,7 @@
 import { Editor, Element, Node, Text, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
-import { CODE_BLOCK, IMAGE } from '../../constants';
+import { CODE_BLOCK, FILE_LINK, IMAGE, SDOC_LINK } from '../../constants';
+import { WIKI_LINK } from '../../constants/element-type';
 import { DEFAULT_SEARCH_HIGHLIGHT_FILL_COLOR, FOCUSSED_SEARCH_HIGHLIGHT_FILL_COLOR } from './constant';
 
 // Check the node iff contains text or inline node
@@ -153,12 +154,33 @@ export const getHighlightInfos = (editor, keyword) => {
   return rangeList;
 };
 
+const isPointInLink = (editor, point) => {
+  const linkEntry = Editor.above(editor, {
+    at: point,
+    match: node => Element.isElement(node) && [FILE_LINK, WIKI_LINK, SDOC_LINK].includes(node.type),
+  });
+  return !!linkEntry;
+};
+
+export const isRangeInNotAllowedType = (editor, range) => {
+  if (!range) return true;
+  return isPointInLink(editor, range?.anchor) || isPointInLink(editor, range?.focus);
+};
+
+export const isNotAllowed = (editor, range) => {
+  const { domRange } = range[0];
+  const slateRange = ReactEditor.toSlateRange(editor, domRange, { exactMatch: true });
+  return isRangeInNotAllowedType(editor, slateRange);
+};
+
 export const handleReplaceKeyword = (editor, highlightInfos, replacedContent) => {
   if (!highlightInfos || !highlightInfos.length) return;
   // Delete from backward avoiding the range changed
   highlightInfos.reverse().forEach((highlightInfo) => {
     const { domRange } = highlightInfo[highlightInfo.length - 1];
     const slateRange = ReactEditor.toSlateRange(editor, domRange, { exactMatch: true });
+    if (isRangeInNotAllowedType(editor, slateRange)) return;
+
     Transforms.insertText(editor, replacedContent, { at: Editor.end(editor, slateRange) });
     Transforms.delete(editor, { at: slateRange });
   });

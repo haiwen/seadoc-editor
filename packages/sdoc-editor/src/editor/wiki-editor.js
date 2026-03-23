@@ -10,6 +10,7 @@ import { createDefaultEditor } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
 import { RECENT_COPY_CONTENT } from '../extension/constants';
 import { removeMarks } from '../extension/plugins/ai/ai-module/helpers';
+import SearchReplaceMenu from '../extension/plugins/search-replace/menu';
 import { ColorProvider } from '../hooks/use-color-context';
 import useMathJax from '../hooks/use-mathjax';
 import { ScrollContext } from '../hooks/use-scroll-context';
@@ -162,6 +163,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
                 <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={showComment} />
               </div>
               <WikiOutline doc={slateValue} />
+              <SearchReplaceMenu editor={validEditor} className='wiki-search-and-replace' readonly={isWikiReadOnly} />
             </ScrollContext.Provider>
           </div>
         </ColorProvider>
