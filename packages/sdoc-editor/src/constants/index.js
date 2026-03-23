@@ -53,6 +53,7 @@ export const INTERNAL_EVENT = {
   TRANSFER_PREVIEW_FILE_ID: 'transfer_preview_file_id',
   FILE_METADATA_COMPONENT: 'file_metadata_component',
   ADD_WIKI_LIBRARY_TOGGLE: 'add_wiki_library_click',
+  ON_OPEN_FORMULA_DIALOG: 'on_open_formula_dialog'
 };
 
 export const PAGE_EDIT_AREA_WIDTH = 672; // 672 = 794 - 2[borderLeft + borderRight] - 120[paddingLeft + paddingRight]
