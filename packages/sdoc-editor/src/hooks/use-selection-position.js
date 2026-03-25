@@ -1,4 +1,4 @@
-import { commentContainerWikiTransfer } from '../comment/helper';
+import { getWikiHeaderHeight } from '../comment/helper';
 import { WIKI_EDITOR } from '../constants';
 import { useScrollContext } from './use-scroll-context';
 
@@ -45,8 +45,8 @@ export const useCommentListPosition = (selectedElementIds, isContextComment, isC
     topPara = rect.bottom - headerHeight + 10 + scrollTop;
 
     if (editor.editorType === WIKI_EDITOR) {
-      // 55 is basic top title height in wiki
-      topPara = commentContainerWikiTransfer(topPara, 55);
+      const wikiHeaderHight = getWikiHeaderHeight();
+      topPara = rect.bottom - wikiHeaderHight + 10 + scrollTop;
     }
     const rightPara = editorArticleRight - rect.left - 300; // 300 is comment container's width
     return {
@@ -62,8 +62,8 @@ export const useCommentListPosition = (selectedElementIds, isContextComment, isC
   if (selectionPosition && selectionPosition.y !== 0) {
     selectionPosition.y = selectionPosition.y - headerHeight + scrollTop;
     if (editor.editorType === WIKI_EDITOR) {
-      // 47 is top nav bar height in wiki
-      selectionPosition.y = commentContainerWikiTransfer(selectionPosition.y, 47);
+      const wikiHeaderHight = getWikiHeaderHeight();
+      selectionPosition.y = selectionPosition.y - wikiHeaderHight + scrollTop;
     }
   }
 

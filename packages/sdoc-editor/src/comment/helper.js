@@ -47,25 +47,14 @@ export const getAvatarUrl = () => {
   return avatarUrl;
 };
 
-export const commentContainerWikiTransfer = (result, value) => {
-  let newResult;
-  const isWikiTitleIcon = document.querySelector('.wiki-page-icon-wrapper');
-  const isWikiTitleCover = document.getElementById('wiki-page-cover');
+export const getWikiHeaderHeight = () => {
+  const pageCover = window.document.getElementById('wiki-page-cover');
+  const pageCoverHeight = pageCover?.offsetHeight || 0;
+  const pageTitle = window.document.getElementById('wiki-page-title');
+  const pageTitleHeight = pageTitle?.offsetHeight || 0;
 
-  if (isWikiTitleIcon && !isWikiTitleCover) {
-    // 90 is icon height in wiki
-    newResult = result - value - 90;
-  } else if (!isWikiTitleIcon && isWikiTitleCover) {
-    // 203 is icon height in wiki
-    newResult = result - value - 203;
-  } else if (isWikiTitleIcon && isWikiTitleCover) {
-    // 205 is icon and cover height in wiki
-    newResult = result - value - 205;
-  } else {
-    newResult = result - value;
-  }
-
-  return newResult;
+  const topNavHeight = 44;
+  return pageCoverHeight + pageTitleHeight + topNavHeight;
 };
 
 export const getElementCommentCountTop = (editor, element, scrollTop) => {
@@ -84,7 +73,8 @@ export const getElementCommentCountTop = (editor, element, scrollTop) => {
   resultY = minY - 100 + scrollTop; // 100: header height(56) + toolbar height(37)
   if (editor.editorType === WIKI_EDITOR) {
     // 55 is basic top title height in wiki
-    resultY = commentContainerWikiTransfer(resultY, 55);
+    const headerHight = getWikiHeaderHeight();
+    resultY = minY - headerHight + scrollTop;
   }
   return resultY;
 };
