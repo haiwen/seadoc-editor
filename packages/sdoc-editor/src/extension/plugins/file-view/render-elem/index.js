@@ -35,12 +35,12 @@ const FileViewPlugin = ({ element, children, attributes }) => {
       view_data: {
         wiki_id: data.wiki_id,
         file_view_id: data.file_view_id,
-        height: data.height,
+        // height: data.height,
         // width: data.width,
       },
     };
     return viewSettings;
-  }, [data.file_view_id, data.height, data.wiki_id]);
+  }, [data.file_view_id, data.wiki_id]);
 
 
   useEffect(() => {
@@ -137,20 +137,11 @@ const FileViewPlugin = ({ element, children, attributes }) => {
     ]);
   }, [onMouseMove, onResizeEnd, registerEvent]);
 
-  const style = useMemo(() => {
-    const { height } = data;
-    if (height) {
-      return {
-        // width,
-        height,
-      };
-    }
-    return null;
-  }, [data]);
+  console.log(viewSettings);
 
   return (
     <div data-id={element.id} {...attributes} className="sdoc-file-view-container" contentEditable='false' suppressContentEditableWarning>
-      <div className={classNames('sdoc-file-view-content', { 'is-selected': isSelected })} ref={wrapperRef} style={style}>
+      <div className={classNames('sdoc-file-view-content', { 'is-selected': isSelected })} ref={wrapperRef}>
         <FileView settings={viewSettings} ref={databaseRef} scrollRef={scrollRef}/>
         {!readOnly && isSelected && (
           <span className='file-view-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>

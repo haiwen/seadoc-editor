@@ -27,13 +27,13 @@
   border-radius: 4px;
 }
 
-.sdoc-file-view-container .sdoc-file-view-content {
+/* .sdoc-file-view-container .sdoc-file-view-content {
   height: 400px;
 }
 
 .sdoc-file-view-container .sdoc-file-view-content .sea-metadata {
   height: 396px;
-}
+} */
 
 .sdoc-file-view-container .sdoc-file-view-content .sea-metadata .sea-metadata-table-main-container {
   border: 1px solid #eee;
@@ -48,4 +48,5 @@
   background-color: #007bff;
   border: 1px solid #fff;
   cursor: se-resize;
+  display: none;
 }
