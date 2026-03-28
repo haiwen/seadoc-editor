@@ -4,11 +4,12 @@ import { BLOCKQUOTE, LINK, CHECK_LIST_ITEM, HEADER1, HEADER2, HEADER3, HEADER4, 
   UNORDERED_LIST, CODE_BLOCK, CODE_LINE, IMAGE, IMAGE_BLOCK, VIDEO, ELEMENT_TYPE, SDOC_LINK, FILE_LINK, TITLE, SUBTITLE, CALL_OUT,
   SUPPORTED_SIDE_OPERATION_TYPE, MENTION, MENTION_TEMP, FILE_LINK_INSET_INPUT_TEMP, QUICK_INSERT
 } from '../constants';
-import { FILE_VIEW, FORMULA, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_HEADER1, TOGGLE_HEADER2, TOGGLE_HEADER3, WHITEBOARD, WIKI_LINK } from '../constants/element-type';
+import { EMBED_LINK, FILE_VIEW, FORMULA, TOGGLE_CONTENT, TOGGLE_HEADER, TOGGLE_HEADER1, TOGGLE_HEADER2, TOGGLE_HEADER3, WHITEBOARD, WIKI_LINK } from '../constants/element-type';
 import { getParentNode } from '../core';
 import { BlockquotePlugin, LinkPlugin, CheckListPlugin, HeaderPlugin, ListPlugin, CodeBlockPlugin, ImagePlugin, VideoPlugin, TablePlugin,
   MultiColumnPlugin, SdocLinkPlugin, ParagraphPlugin, FileLinkPlugin, CalloutPlugin, MentionPlugin, QuickInsertPlugin, WikiLinkPlugin,
-  GroupPlugin, WhiteboardPlugin, FileViewPlugin, FormulaPlugin, ToggleHeaderPlugin
+  GroupPlugin, WhiteboardPlugin, FileViewPlugin, FormulaPlugin, ToggleHeaderPlugin,
+  EmbedLinkPlugin
 } from '../plugins';
 import { setDataRoot, setMouseEnter, onDragOver, onDragLeave, onDrop } from './helper';
 
@@ -184,6 +185,10 @@ const CustomRenderElement = (props) => {
     }
     case WHITEBOARD: {
       const [renderWhiteboard] = WhiteboardPlugin.renderElements;
+      return renderWhiteboard({ ...props }, editor);
+    }
+    case EMBED_LINK: {
+      const [renderWhiteboard] = EmbedLinkPlugin.renderElements;
       return renderWhiteboard({ ...props }, editor);
     }
     case FILE_VIEW: {

@@ -1,0 +1,69 @@
+.sdoc-embed-link-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  margin: 5px 0;
+}
+
+.sdoc-embed-link-container.isSelected {
+  border: 2px solid rgb(0, 123, 255);
+}
+
+.sdoc-embed-link-title {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  margin: 5px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0%;
+  z-index: 3;
+}
+
+.sdoc-embed-link-container .iframe-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.sdoc-embed-link-container .sdoc-embed-link-element {
+  width: 100%;
+  height: 100%;
+  border: none;
+  position: relative;
+  z-index: 1;
+}
+
+.embed-link-zoom-out-container {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.embed-link-zoom-out-container .sdoc-embed-link-element-full-screen {
+  pointer-events: auto;
+  background: #fff;
+  border-radius: 12px;
+  width: 80%;
+  height: 80%;
+  overflow: auto;
+}
+
+.sdoc-embed-link-tip {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+}

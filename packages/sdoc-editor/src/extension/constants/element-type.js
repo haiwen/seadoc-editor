@@ -45,6 +45,7 @@ export const TOGGLE_HEADER1 = 'toggle_header1';
 export const TOGGLE_HEADER2 = 'toggle_header2';
 export const TOGGLE_HEADER3 = 'toggle_header3';
 export const TOGGLE_CONTENT = 'toggle_content';
+export const EMBED_LINK = 'embed_link';
 
 export const ASK_AI = 'ask_ai';
 

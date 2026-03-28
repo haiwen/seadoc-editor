@@ -672,5 +672,8 @@
   "Show_files_from_a_linked_library": "Show files from a linked library",
   "Toggle_header_one": "Toggle header one",
   "Toggle_header_two": "Toggle header two",
-  "Toggle_header_three": "Toggle header three"
+  "Toggle_header_three": "Toggle header three",
+  "Support_Figma_Seatable_link" : "Support Seatable and Figma link",
+  "Embed_link_invalid_tip": "The embed link is invalid, it needs to be deleted and added again.",
+  "Embed_link": "Embed link"
 }
