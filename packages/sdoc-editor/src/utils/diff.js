@@ -67,15 +67,31 @@ export const getMergedChanges = (topLevelChanges, diffValue = []) => {
     }
   });
 
-  topLevelChangesValue.forEach((item) => {
-    const preItem = changes[changes.length - 1];
-    const preChange = preItem?.value;
-    const curChange = item.value;
-    const isAdjacent = preItem && item.index === preItem.index + 1;
-    if (isAdjacent && curChange?.add && preChange?.add) return;
-    if (isAdjacent && curChange?.delete && preChange?.delete) return;
-    changes.push(item);
-  });
+  for (let i = topLevelChangesValue.length - 1; i >= 0; i--) {
+    const curItem = topLevelChangesValue[i];
+    if (changes.length === 0) {
+      changes.push(curItem);
+      continue;
+    }
+
+    const nextItem = changes[0];
+    const curChange = curItem?.value;
+    const nextChange = nextItem?.value;
+    const isAdjacent = nextItem && nextItem.index === curItem.index + 1;
+    if (isAdjacent && curChange?.add && nextChange?.add) {
+      changes.shift();
+      changes.unshift(curItem);
+      continue;
+    }
+    if (isAdjacent && curChange?.delete && nextChange?.delete) {
+      changes.shift();
+      changes.unshift(curItem);
+      continue;
+    }
+
+    changes.unshift(curItem);
+  }
+
   return changes.map(item => item.id);
 };
 
