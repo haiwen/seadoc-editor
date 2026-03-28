@@ -422,7 +422,7 @@ export const SIDE_INSERT_MENUS_CONFIG = {
   },
   [EMBED_LINK]: {
     id: '',
-    iconClass: 'sdocfont sdoc-link',
+    iconClass: 'sdocfont sdoc-embed-link',
     type: EMBED_LINK,
     text: 'Embed_link'
   },
