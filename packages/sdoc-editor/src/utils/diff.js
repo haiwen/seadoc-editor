@@ -32,22 +32,22 @@ const generatorDiffTextElement = (textElement, diffType, style = {}) => {
 
 export const getTopLevelChanges = (changes = []) => {
   const topLevelChanges = [];
-  const articleEl = document.getElementById('sdoc-scroll-container');
-  changes.forEach((item) => {
+  const articleEl = document.getElementById('sdoc-editor');
+  for (let i = 0; i < changes.length; i++) {
+    const item = changes[i];
     let dom = document.querySelectorAll(`[data-id="${item}"]`)[0];
-    if (!dom) return [];
-    while (dom?.dataset?.root !== 'true' || dom?.parentNode !== articleEl) {
+    if (!dom) continue;
+    while (dom?.parentNode !== articleEl) {
       if (!dom?.parentNode || dom instanceof Document) break;
       const parentNode = dom.parentNode;
       if (parentNode instanceof Document) {
         break;
-      } else {
-        dom = parentNode;
-        if (dom?.dataset?.id && !dom.classList.contains('table-cell')) break;
       }
+      dom = parentNode;
     }
+    if (!dom.dataset.id) continue;
     topLevelChanges.push(dom.dataset.id);
-  });
+  }
   return Array.from(new Set(topLevelChanges));
 };
 
@@ -56,21 +56,24 @@ export const getMergedChanges = (topLevelChanges, diffValue = []) => {
   const topLevelChangesValue = [];
   const changes = [];
 
-  diffValue.forEach((item) => {
+  diffValue.forEach((item, index) => {
     if (topLevelChanges.includes(item.id)) {
       const obj = {
         id: item.id,
-        value: item
+        value: item,
+        index,
       };
       topLevelChangesValue.push(obj);
     }
   });
 
   topLevelChangesValue.forEach((item) => {
-    const preChange = changes[changes.length - 1]?.value;
+    const preItem = changes[changes.length - 1];
+    const preChange = preItem?.value;
     const curChange = item.value;
-    if (curChange?.add && preChange?.add) return;
-    if (curChange?.delete && preChange?.delete) return;
+    const isAdjacent = preItem && item.index === preItem.index + 1;
+    if (isAdjacent && curChange?.add && preChange?.add) return;
+    if (isAdjacent && curChange?.delete && preChange?.delete) return;
     changes.push(item);
   });
   return changes.map(item => item.id);
