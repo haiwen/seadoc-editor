@@ -56,7 +56,7 @@ const AddEmbedLinkDialog = ({ editor, className, closeDialog, handleSubmit }) =>
 
   return (
     <Modal isOpen={true} autoFocus={false} toggle={closeDialog} className={className} zIndex={1071} returnFocusAfterClose={false}>
-      <ModalHeader close={close}>{t('Add_embed_link')}</ModalHeader>
+      <ModalHeader close={close}>{t('Embed_link')}</ModalHeader>
       <ModalBody>
         <Fragment>
           <div className="form-group">
