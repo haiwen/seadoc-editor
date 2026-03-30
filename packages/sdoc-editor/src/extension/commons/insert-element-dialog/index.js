@@ -6,6 +6,7 @@ import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, FORMULA, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO } from '../../constants';
 import AIModule from '../../plugins/ai/ai-module/index.js';
+import AddEmbedLinkDialog from '../../plugins/embed-link/dialog/add-embed-link-dialog/index.js';
 import FormulaModal from '../../plugins/formula/menu/formula-modal.js';
 import { generateImageInfos, insertImage } from '../../plugins/image/helpers';
 import AddLinkDialog from '../../plugins/link/dialog/add-link-dialog';
@@ -164,6 +165,9 @@ const InsertElementDialog = ({ editor }) => {
     }
     case ELEMENT_TYPE.LINK: {
       return (<AddLinkDialog {...props} />);
+    }
+    case ELEMENT_TYPE.EMBED_LINK: {
+      return (<AddEmbedLinkDialog {...props} />);
     }
     case ELEMENT_TYPE.SDOC_LINK: {
       const sdocLinkProps = {

@@ -38,6 +38,7 @@ import {
   TOGGLE_HEADER1,
   TOGGLE_HEADER2,
   TOGGLE_HEADER3,
+  EMBED_LINK,
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -419,6 +420,12 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     type: LINK,
     text: 'Link'
   },
+  [EMBED_LINK]: {
+    id: '',
+    iconClass: 'sdocfont sdoc-embed-link',
+    type: EMBED_LINK,
+    text: 'Embed_link'
+  },
   [CODE_BLOCK]: {
     id: '',
     iconClass: 'sdocfont sdoc-code-block',
@@ -583,6 +590,7 @@ export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [TOGGLE_HEADER1]: 'Toggle_header_one',
   [TOGGLE_HEADER2]: 'Toggle_header_two',
   [TOGGLE_HEADER3]: 'Toggle_header_three',
+  [EMBED_LINK]: 'Embed_link'
 };
 
 // Other operations menu config
