@@ -509,6 +509,11 @@ export const isLastNode = (editor, node) => {
   return editorChildren[editorChildrenLength - 1] === node;
 };
 
+export const isFirstNode = (editor, node) => {
+  const editorChildren = editor.children || [];
+  return editorChildren[0] === node;
+};
+
 export const isHasImg = (editor) => {
   let hasImg = false;
   for (const [node] of Editor.nodes(editor, { at: editor.selection })) {

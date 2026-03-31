@@ -298,6 +298,8 @@ const transformImageBlock = (node) => {
   };
 };
 
+const transformDivider = () => ({ type: 'thematicBreak' });
+
 const elementHandlers = {
   'paragraph': transformParagraph,
   'header1': transformHeader,
@@ -315,6 +317,7 @@ const elementHandlers = {
   'formula': transformFormula,
   'mention': transformMention,
   'image_block': transformImageBlock,
+  'divider': transformDivider,
 };
 
 export const formatSlateToMd = (children) => {
