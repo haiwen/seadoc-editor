@@ -16,10 +16,10 @@ const rules = [
   imageRule,
   linkRule,
   listRule,
+  hrRule,
   tableRule,
   paragraphRule,
   textRule,
-  hrRule
 ];
 
 export default rules;
