@@ -17,7 +17,7 @@ const renderDivider = ({ attributes, children, element }) => {
       className={`sdoc-divider-container ${isSelected ? 'is-selected' : ''}`}
     >
       {children}
-      <div className="sdoc-divider"></div>
+      <div className="sdoc-divider-element"></div>
     </div>
   );
 };
