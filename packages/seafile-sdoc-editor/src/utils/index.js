@@ -39,6 +39,12 @@ export const resetWebTitle = (t) => {
   window.document.getElementsByTagName('title')[0].innerText = `${t('Revision')} - ${originFilename}`;
 };
 
+export const decodeHtmlEntities = (str) => {
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = str;
+  return textarea.value;
+};
+
 /**
  * Check if UA includes Seafile Android/iOS 3.0
  * @returns {boolean} - If it is a Seafile client, return true; otherwise, return false
