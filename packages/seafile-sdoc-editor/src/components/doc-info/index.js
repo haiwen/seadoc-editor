@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import RevisionAvatar from '../../assets/images/revision-avatar.png';
 import freezedImg from '../../assets/images/sdoc-freezed.png';
 import { EXTERNAL_EVENT } from '../../constants';
-import { DateUtils } from '../../utils';
+import { DateUtils, decodeHtmlEntities } from '../../utils';
 import DraftDropdown from '../draft-dropdown';
 import TipMessage from '../tip-message';
 import './index.css';
@@ -70,7 +70,7 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
   }
 
   const revisionCreatedAt = context.getSetting('revisionCreatedAt');
-  const oldDocName = context.getSetting('originFilename');
+  const oldDocName = decodeHtmlEntities(context.getSetting('originFilename'));
   const revisionId = context.getSetting('revisionId');
 
   return (
