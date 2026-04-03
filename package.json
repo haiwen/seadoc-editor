@@ -44,10 +44,6 @@
     "release": "npm run build && lerna publish  --force-publish --no-private",
     "prepare": "husky"
   },
-  "overrides": {
-    "flatted": "3.4.2",
-    "@xmldom/xmldom": "0.9.9"
-  },
   "lint-staged": {
     "**/*.js": [
       "eslint --fix"
