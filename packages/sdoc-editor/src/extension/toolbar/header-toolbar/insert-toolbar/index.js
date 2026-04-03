@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
 import EventBus from '../../../../utils/event-bus';
 import CodeBlockMenu from '../../../plugins/code-block/menu';
+import DividerMenu from '../../../plugins/divider/menu';
 import FileLinkMenu from '../../../plugins/file-link/menu';
 import FormulaMenu from '../../../plugins/formula/menu';
 import ImageMenu from '../../../plugins/image/menu';
@@ -94,6 +95,8 @@ const InsertToolbar = ({
             <LinkMenu { ...props } />
             <CodeBlockMenu { ...props } />
             <FormulaMenu { ...props } />
+            <div className="sdoc-dropdown-menu-divider"></div>
+            <DividerMenu { ...props } />
             <div className="sdoc-dropdown-menu-divider"></div>
             <SdocLinkMenu { ...props } />
             <FileLinkMenu { ...props } />

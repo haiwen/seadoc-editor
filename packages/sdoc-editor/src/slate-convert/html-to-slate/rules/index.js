@@ -1,6 +1,7 @@
 import blockquoteRule from './blockquote';
 import codeBlockRule from './code-block';
 import headerRule from './header';
+import hrRule from './hr';
 import imageRule from './image';
 import linkRule from './link';
 import listRule from './list';
@@ -15,6 +16,7 @@ const rules = [
   imageRule,
   linkRule,
   listRule,
+  hrRule,
   tableRule,
   paragraphRule,
   textRule,

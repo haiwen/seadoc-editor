@@ -46,6 +46,7 @@ export const TOGGLE_HEADER2 = 'toggle_header2';
 export const TOGGLE_HEADER3 = 'toggle_header3';
 export const TOGGLE_CONTENT = 'toggle_content';
 export const EMBED_LINK = 'embed_link';
+export const DIVIDER = 'divider';
 
 export const ASK_AI = 'ask_ai';
 
@@ -77,6 +78,8 @@ export const TOP_LEVEL_TYPES = [
   VIDEO,
   WHITEBOARD,
   TOGGLE_HEADER,
+  EMBED_LINK,
+  DIVIDER
 ];
 
 export const INLINE_LEVEL_TYPES = [

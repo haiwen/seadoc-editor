@@ -14,6 +14,7 @@ import {
   CODE_LINE,
   TABLE_ROW,
   TABLE_CELL,
+  DIVIDER,
 } from '../../extension/constants/element-type';
 import { generateDefaultText } from '../../extension/core';
 import deserializeHtml from '../html-to-slate';
@@ -303,7 +304,7 @@ export const transformCodeBlock = (node) => {
 export const transformHr = (node) => {
   return {
     id: slugid.nice(),
-    type: 'hr',
+    type: DIVIDER,
     children: [
       generateDefaultText(),
     ]

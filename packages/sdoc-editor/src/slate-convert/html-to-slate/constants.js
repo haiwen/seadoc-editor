@@ -20,6 +20,7 @@ export const TABLE_CELL = 'table_cell';
 export const IMAGE = 'image';
 export const LINK = 'link';
 export const FORMULA = 'formula';
+export const DIVIDER = 'divider';
 
 export const TOP_LEVEL_TYPES = [
   BLOCKQUOTE,
@@ -35,6 +36,7 @@ export const TOP_LEVEL_TYPES = [
   PARAGRAPH,
   CODE_BLOCK,
   TABLE,
+  DIVIDER
 ];
 
 export const INLINE_LEVEL_TYPES = [

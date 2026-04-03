@@ -2,6 +2,7 @@ import BlockquotePlugin from './blockquote';
 import CalloutPlugin from './callout';
 import CheckListPlugin from './check-list';
 import CodeBlockPlugin from './code-block';
+import DividerPlugin from './divider';
 import EmbedLinkPlugin from './embed-link';
 import FileLinkPlugin from './file-link';
 import FileViewPlugin from './file-view';
@@ -55,7 +56,8 @@ const Plugins = [
   FileViewPlugin,
   FormulaPlugin,
   ToggleHeaderPlugin,
-  EmbedLinkPlugin
+  EmbedLinkPlugin,
+  DividerPlugin
 ];
 
 const WikiPlugins = [
@@ -108,5 +110,6 @@ export {
   FileViewPlugin,
   FormulaPlugin,
   ToggleHeaderPlugin,
-  EmbedLinkPlugin
+  EmbedLinkPlugin,
+  DividerPlugin
 };

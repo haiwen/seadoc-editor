@@ -39,6 +39,7 @@ import {
   TOGGLE_HEADER2,
   TOGGLE_HEADER3,
   EMBED_LINK,
+  DIVIDER,
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -283,6 +284,11 @@ export const MENUS_CONFIG_MAP = {
     iconClass: 'sdocfont sdoc-find-replace',
     text: 'Search_and_replace'
   },
+  [DIVIDER]: {
+    id: `sdoc_${DIVIDER}`,
+    iconClass: 'sdocfont sdoc-divider',
+    text: 'Divider'
+  }
 };
 
 // Side transform menu config

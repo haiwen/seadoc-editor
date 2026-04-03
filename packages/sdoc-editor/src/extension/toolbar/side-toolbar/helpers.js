@@ -11,7 +11,7 @@ import {
   SIDE_TRANSFORM_MENUS_CONFIG, LIST_ITEM_SUPPORTED_TRANSFORMATION, HEADERS, VIDEO,
   MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK, WHITEBOARD, TWO_COLUMN,
   TOGGLE_HEADER, TOGGLE_TITLE_TYPES, TOGGLE_CONTENT,
-  FILE_VIEW
+  FILE_VIEW, DIVIDER
 } from '../../constants';
 import { generateEmptyElement, findPath, isMultiLevelList, isTopLevelListItem, getNode, focusEditor, getAboveNode, getTopLevelBlockNode } from '../../core';
 import { setBlockQuoteType } from '../../plugins/blockquote/helpers';
@@ -322,6 +322,9 @@ export const getTopValue = (editor, dom, containerDom, slateNode) => {
   if (ADD_POSITION_OFFSET_TYPE.includes(slateNode.type)) {
     paddingTop = slateNode.type === CHECK_LIST_ITEM ? 5 : paddingTop;
     offsetY = (lineHeight / 2) + paddingTop - (disToolBarHeight / 2);
+  }
+  if (slateNode.type === DIVIDER) {
+    offsetY = (currentRect.height / 2) - (disToolBarHeight / 2);
   }
 
   return top + offsetY - headerHeight;
