@@ -140,3 +140,11 @@ export const insertEmbedLink = (editor, link, type) => {
     return;
   }
 };
+
+export const updateEmbedLink = (editor, data) => {
+  Transforms.setNodes(editor, { data }, {
+    match: (n) => getNodeType(n) === EMBED_LINK,
+    at: editor.selection,
+    voids: true
+  });
+};
