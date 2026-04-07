@@ -105,7 +105,8 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
   }, [isOpenSearch, searchContent]);
 
   const renderPage = (item, wikiPageList, depth = 0, isFromSearch) => {
-    const page = wikiPageList.find(p => p.id === item.id);
+    const page = wikiPageList.find(p => p?.id === item.id);
+    if (!page) return null;
 
     if (isFromSearch) {
       page.isDir = false;
