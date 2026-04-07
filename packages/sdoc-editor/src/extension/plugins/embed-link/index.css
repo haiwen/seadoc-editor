@@ -1,9 +1,8 @@
 .sdoc-embed-link-container {
   position: relative;
-  width: 100%;
-  height: 300px;
   border: 1px solid #ccc;
   margin: 5px 0;
+  width: 100%;
 }
 
 .sdoc-embed-link-container.isSelected {
@@ -38,6 +37,11 @@
   border: none;
   position: relative;
   z-index: 1;
+}
+
+.sdoc-embed-link-container.isSelected .image-resizer {
+  z-index: 1;
+  cursor: ns-resize;
 }
 
 .embed-link-zoom-out-container {
