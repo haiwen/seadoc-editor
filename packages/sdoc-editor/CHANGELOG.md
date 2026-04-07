@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.131](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.130...@seafile/sdoc-editor@3.0.131) (2026-04-07)
+
+### Features
+
+- add resizer ([#220](https://github.com/seafileltd/sea-sdoc-editor/issues/220)) ([22b0215](https://github.com/seafileltd/sea-sdoc-editor/commit/22b021573df75edab89302337b2b36d07fc7f6a8))
+
 ## [3.0.130](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.129...@seafile/sdoc-editor@3.0.130) (2026-04-03)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
