@@ -8,7 +8,7 @@ import isUrl from 'is-url';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { focusEditor } from '../../core';
 import { getMenuPosition } from '../../utils';
-import { DEFAULT_EMBED_LINK_HEIGHT, EMBED_LINK_SOURCE, MAX_EMBED_LINK_HEIGHT, MIN_EMBED_LINK_HEIGHT, MIN_EMBED_LINK_WIDTH } from './constants';
+import { DEFAULT_EMBED_LINK_HEIGHT, EMBED_LINK_SOURCE, MAX_EMBED_LINK_HEIGHT, MIN_EMBED_LINK_HEIGHT } from './constants';
 import { normalizeFigmaEmbedLink, updateEmbedLink } from './helper';
 import EmbedLinkHoverMenu from './hover-menu';
 
@@ -22,14 +22,11 @@ const EmbedLink = ({ editor, element }) => {
   const isSelected = useSelected();
   const readOnly = useReadOnly();
   const resizerRef = useRef(null);
-  const resizeStartXRef = useRef(0);
   const resizeStartYRef = useRef(0);
-  const resizeStartWidthRef = useRef(0);
   const resizeStartHeightRef = useRef(0);
   const { t } = useTranslation('sdoc-editor');
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [isShowZoomOut, setIsShowZoomOut] = useState(false);
-  const [movingWidth, setMovingWidth] = useState(null);
   const [movingHeight, setMovingHeight] = useState(null);
   const [isResizing, setIsResizing] = useState(false);
 
@@ -59,35 +56,16 @@ const EmbedLink = ({ editor, element }) => {
     return DEFAULT_EMBED_LINK_HEIGHT;
   }, [element?.data?.height, movingHeight]);
 
-  const getEmbedLinkWidth = useCallback(() => {
-    const width = movingWidth ?? element?.data?.width;
-    const parsedWidth = Number(width);
-    if (parsedWidth > 0) {
-      return Math.max(parsedWidth, MIN_EMBED_LINK_WIDTH);
-    }
-    return '100%';
-  }, [element?.data?.width, movingWidth]);
-
   const onMouseMove = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
-    const changeX = event.clientX - resizeStartXRef.current;
     const changeY = event.clientY - resizeStartYRef.current;
     let embedLinkHeight = resizeStartHeightRef.current + changeY;
-    let embedLinkWidth = resizeStartWidthRef.current + changeX;
     embedLinkHeight = Math.min(Math.max(embedLinkHeight, MIN_EMBED_LINK_HEIGHT), MAX_EMBED_LINK_HEIGHT);
-
-    embedLinkWidth = Math.max(embedLinkWidth, MIN_EMBED_LINK_WIDTH);
-    const maxWidth = embedLinkContainerRef.current?.parentElement?.getBoundingClientRect().width;
-    if (maxWidth > 0) {
-      embedLinkWidth = Math.min(embedLinkWidth, maxWidth);
-    }
 
     if (embedLinkContainerRef.current) {
       embedLinkContainerRef.current.style.height = `${embedLinkHeight}px`;
-      embedLinkContainerRef.current.style.width = `${embedLinkWidth}px`;
     }
-    setMovingWidth(embedLinkWidth);
     setMovingHeight(embedLinkHeight);
   }, []);
 
@@ -107,10 +85,9 @@ const EmbedLink = ({ editor, element }) => {
 
     const resolvedHeight = movingHeight ?? embedLinkContainerRef.current?.getBoundingClientRect().height ?? getEmbedLinkHeight();
     const finalHeight = Math.min(Math.max(Number(resolvedHeight) || DEFAULT_EMBED_LINK_HEIGHT, MIN_EMBED_LINK_HEIGHT), MAX_EMBED_LINK_HEIGHT);
-    const resolvedWidth = movingWidth ?? embedLinkContainerRef.current?.getBoundingClientRect().width ?? getEmbedLinkWidth();
-    const parsedWidth = Number(resolvedWidth);
-    const finalWidth = parsedWidth > 0 ? Math.max(parsedWidth, MIN_EMBED_LINK_WIDTH) : resolvedWidth;
-    const newData = { ...element.data, width: finalWidth, height: finalHeight };
+    const newData = { ...(element.data || {}) };
+    delete newData.width;
+    newData.height = finalHeight;
     updateEmbedLink(editor, newData);
 
     // Reset hover menu position
@@ -118,7 +95,7 @@ const EmbedLink = ({ editor, element }) => {
       setIsResizing(false);
     }, 100);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor, element.data, getEmbedLinkHeight, getEmbedLinkWidth, movingHeight, movingWidth, onMouseMove]);
+  }, [editor, element.data, getEmbedLinkHeight, movingHeight, onMouseMove]);
 
   const unregisterEvent = useCallback((eventList) => {
     eventList.forEach(element => {
@@ -130,17 +107,11 @@ const EmbedLink = ({ editor, element }) => {
     event.preventDefault();
     event.stopPropagation();
     setIsResizing(true);
-    resizeStartXRef.current = event.clientX;
     resizeStartYRef.current = event.clientY;
-    const currentWidth =
-      embedLinkContainerRef.current?.getBoundingClientRect().width ||
-      embedLinkContainerRef.current?.parentElement?.getBoundingClientRect().width ||
-      0;
     const currentHeight =
       embedLinkContainerRef.current?.getBoundingClientRect().height ||
       getEmbedLinkHeight();
 
-    resizeStartWidthRef.current = currentWidth;
     resizeStartHeightRef.current = currentHeight;
 
     registerEvent([
@@ -238,7 +209,7 @@ const EmbedLink = ({ editor, element }) => {
       <div
         ref={embedLinkContainerRef}
         className={classNames('sdoc-embed-link-container', { 'isSelected': isSelected })}
-        style={{ width: getEmbedLinkWidth(), maxWidth: '100%', height: getEmbedLinkHeight(), maxHeight: MAX_EMBED_LINK_HEIGHT }}
+        style={{ height: getEmbedLinkHeight(), maxHeight: MAX_EMBED_LINK_HEIGHT }}
         onDoubleClick={handleDoubleClick}
         scrolling='no'
       >
