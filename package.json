@@ -48,5 +48,8 @@
     "**/*.js": [
       "eslint --fix"
     ]
+  },
+  "dependencies": {
+    "@seafile/seafile-sdoc-editor": "3.0.136"
   }
 }
