@@ -18,7 +18,6 @@ const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) 
   const parentBlockNode = Editor.parent(editor, aboveBlockNode?.[1]);
   // In toggle content's empty paragraph or empty paragraph
   const isEmptyNode = (parentBlockNode && parentBlockNode?.[0].type === TOGGLE_CONTENT) || (aboveBlockNode && aboveBlockNode[0].children[1].type === QUICK_INSERT);
-  console.log(0, aboveBlockNode);
   const [isShowPopover, setIsShowPopover] = useState(isSelectionSameWithInsert(editor, element));
 
   const handleClick = useCallback((e) => {
@@ -86,8 +85,6 @@ const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) 
   const handleClosePopover = useCallback(() => {
     setIsShowPopover(false);
   }, []);
-
-  console.log(1, isEmptyNode);
 
   return (
     <span ref={insertElmRef} >
