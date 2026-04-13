@@ -27,7 +27,7 @@
 .sdoc-code-block-code {
   display: block;
   height: 100%;
-  word-break: break-all;
+  word-break: normal;
 }
 
 .sdoc-code-block-code.sdoc-code-no-wrap {
