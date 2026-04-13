@@ -51,15 +51,11 @@
 }
 
 .selected-linked-block-wrapper .sdoc-file-icon-toggle {
-  color: #999;
+  color: #666;
   font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.selected-linked-block-wrapper .sdoc-file-icon-toggle:hover {
-  color: #666;
 }
 
 .selected-linked-block-wrapper .selected-linked-block:not(img) {

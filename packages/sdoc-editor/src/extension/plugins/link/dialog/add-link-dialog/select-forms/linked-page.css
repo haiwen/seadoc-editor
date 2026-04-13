@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: flex-start;
   border-radius: 3px;
-  margin-left: 20px;
+  margin-left: 22px;
   cursor: pointer;
 }
 
@@ -54,8 +54,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-left: 22px; */
   margin-right: 6px;
+  color: #666;
 }
 
 .sdoc-wiki-link-page-main {
@@ -96,6 +96,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 6px;
+  color: #666;
 }
 
 .selected-wiki-linked-page .page-name {

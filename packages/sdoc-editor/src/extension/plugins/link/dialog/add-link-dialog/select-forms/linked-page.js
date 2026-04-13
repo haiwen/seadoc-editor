@@ -65,6 +65,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
 
       setSearchContent('');
       setIsOpenSearch(false);
+      setTemSearchContent('');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [executeSearch, isOpenSearch]);
@@ -95,6 +96,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
 
     setIsOpenSearch(false);
     setSearchContent('');
+    setTemSearchContent('');
   };
 
   useEffect(() => {
@@ -116,7 +118,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
       <div
         key={page.id}
         className='sdoc-wiki-link-page-item-wrapper'
-        style={{ paddingLeft: depth * 16 }}
+        style={{ paddingLeft: depth === 0 ? 0 : 22 }}
       >
         <div className={classNames('sdoc-wiki-link-page-item', {
           'is-dir': page.isDir,
@@ -134,7 +136,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
             {page.icon && <span className="page-icon">{page.icon}</span>}
             {!page.icon && (
               <>
-                {page.isDir ? <span className='page-icon sf3-font sf3-font-files2'/> : <span className='page-icon sf3-font sf3-font-file'/>}
+                {page.isDir ? <span className='page-icon sdocfont sdoc-wiki-files'/> : <span className='page-icon sdocfont sdoc-wiki-file'/>}
               </>
             )}
             <span className="page-name">{page.name}</span>
@@ -170,9 +172,11 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
           <div className='sdoc-page-search-container'>
             <div className='sdocfont sdoc-find-replace sdoc-search'></div>
             <Input innerRef={searchRef} className='sdoc-search-input' onKeyUp={handleInputKeyDown} onChange={handleSearchInputChange} id='sdoc-search' placeholder={t('Search_page')} />
-            <div className='sdoc-search-close-icon' onClick={handleOnClickClose}>
-              <i className='sdocfont sdoc-sm-close'></i>
-            </div>
+            {temSearchContent.length > 0 && (
+              <div className='sdoc-search-close-icon' onClick={handleOnClickClose}>
+                <i className='sdocfont sdoc-sm-close'></i>
+              </div>
+            )}
           </div>
           {!isOpenSearch && wikiNavPages && wikiNavPages.length > 0 && wikiNavPages.map((item) => {
             return renderPage(item, wikiPageList, 0);
