@@ -1,8 +1,10 @@
-import { CHECK_LIST_ITEM, ELEMENT_TYPE, ORDERED_LIST, PARAGRAPH, REDO, UNDO, UNORDERED_LIST } from '../extension/constants';
+import { INTERNAL_EVENT } from '@seafile/comment-editor/dist/basic-sdk';
+import { CHECK_LIST_ITEM, ELEMENT_TYPE, LOCAL_IMAGE, ORDERED_LIST, PARAGRAPH, REDO, UNDO, UNORDERED_LIST } from '../extension/constants';
 import { getNearestBlockNode } from '../extension/core';
 import { setCheckListItemType } from '../extension/plugins/check-list/helpers';
 import { setHeaderType } from '../extension/plugins/header/helpers';
 import { setListType } from '../extension/plugins/list/helpers';
+import EventBus from '../utils/event-bus';
 import { ACTION_TYPES } from './constants';
 import jsBridge from './js-bridge';
 
@@ -54,6 +56,12 @@ const onToolbarTrigger = (data, editor) => {
       newType = PARAGRAPH;
     }
     setCheckListItemType(editor, newType);
+    return;
+  }
+
+  if (type === LOCAL_IMAGE) {
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_IMAGE, editor });
     return;
   }
 };
