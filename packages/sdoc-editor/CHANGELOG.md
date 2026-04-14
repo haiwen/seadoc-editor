@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.139](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.138...@seafile/sdoc-editor@3.0.139) (2026-04-14)
+
+### Features
+
+- support mobile upload image ([6a0ecee](https://github.com/seafileltd/sea-sdoc-editor/commit/6a0ecee9dfb712bf1d25db374143a72f7cf0805e))
+
 ## [3.0.138](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.137...@seafile/sdoc-editor@3.0.138) (2026-04-14)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
