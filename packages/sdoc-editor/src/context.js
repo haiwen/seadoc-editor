@@ -26,6 +26,10 @@ class Context {
     }
   };
 
+  initSSRSettings = (settings) => {
+    this.settings = settings;
+  };
+
   initApi() {
     this.initSettings(); // lazy init context class
     const server = this.getSetting('serviceUrl');
