@@ -19,14 +19,15 @@ const FileViewPlugin = ({ element, children, attributes }) => {
   const scrollRef = useScrollContext();
   const editor = useSlateStatic();
   const isSelected = useSelected();
-  const { readOnly } = useReadOnly();
+  const readOnly = useReadOnly();
 
   const wrapperRef = useRef(null);
   const resizerRef = useRef(null);
-  const databaseRef = useRef(null);
   const [isResizing, setIsResizing] = useState(false);
   const [movingSize, setMovingSize] = useState(null);
   const { t } = useTranslation('sdoc-editor');
+
+  const databaseRef = useRef(null);
 
   const viewSettings = useMemo(() => {
     const settings = context.getFileViewSetting();
@@ -137,12 +138,10 @@ const FileViewPlugin = ({ element, children, attributes }) => {
     ]);
   }, [onMouseMove, onResizeEnd, registerEvent]);
 
-  console.log(viewSettings);
-
   return (
     <div data-id={element.id} {...attributes} className="sdoc-file-view-container" contentEditable='false' suppressContentEditableWarning>
       <div className={classNames('sdoc-file-view-content', { 'is-selected': isSelected })} ref={wrapperRef}>
-        <FileView settings={viewSettings} ref={databaseRef} scrollRef={scrollRef}/>
+        <FileView readOnly={readOnly} settings={viewSettings} ref={databaseRef} scrollRef={scrollRef}/>
         {!readOnly && isSelected && (
           <span className='file-view-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
         )}
