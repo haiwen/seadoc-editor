@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.140](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.138...@seafile/sdoc-editor@3.0.140) (2026-04-15)
+
+### Features
+
+- add wiki ssr viewer ([b6e7be6](https://github.com/seafileltd/sea-sdoc-editor/commit/b6e7be6de3a6db5f0fc72b3a8185b7f224b2bbc4))
+
 ## [3.0.139](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.138...@seafile/sdoc-editor@3.0.139) (2026-04-14)
 
 ### Features
