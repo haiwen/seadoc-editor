@@ -10,7 +10,7 @@ export const PageDisplay = ({ pageId, wikiPageList }) => {
       {page.icon && <span className="page-icon">{page.icon}</span>}
       {!page.icon && (
         <>
-          {page.isDir ? <span className='page-icon sf3-font sf3-font-files2'/> : <span className='page-icon sf3-font sf3-font-file'/>}
+          {page.isDir ? <span className='page-icon sdocfont sdoc-wiki-files'/> : <span className='page-icon sdocfont sdoc-wiki-file'/>}
         </>
       )}
       <span className="page-name">{page.name}</span>
