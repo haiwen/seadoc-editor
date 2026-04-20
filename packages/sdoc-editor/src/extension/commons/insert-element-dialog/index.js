@@ -104,6 +104,7 @@ const InsertElementDialog = ({ editor }) => {
     handleSubmit,
     data,
   }) => {
+    console.log('android test: xiaoqiang test');
     setInsertPosition(insertPosition);
     setSlateNode(slateNode);
     setElement(element);
@@ -122,6 +123,7 @@ const InsertElementDialog = ({ editor }) => {
     setData(data);
     if (type === LOCAL_IMAGE) {
       setTimeout(() => {
+        console.log('android test: xiaoqiang test 2');
         uploadLocalImageInputRef.current && uploadLocalImageInputRef.current.click();
       }, 0);
     }

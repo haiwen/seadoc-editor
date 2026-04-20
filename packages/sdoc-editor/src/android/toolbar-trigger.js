@@ -30,22 +30,22 @@ const onToolbarTrigger = (data, editor) => {
       newType = PARAGRAPH;
     }
     setHeaderType(editor, newType);
-    return;
+    return true;
   }
 
   if (type === UNDO) {
     editor.undo();
-    return;
+    return true;
   }
 
   if (type === REDO) {
     editor.redo();
-    return;
+    return true;
   }
 
   if (type === UNORDERED_LIST || type === ORDERED_LIST) {
     setListType(editor, type);
-    return;
+    return true;
   }
 
   if (type === CHECK_LIST_ITEM) {
@@ -56,13 +56,13 @@ const onToolbarTrigger = (data, editor) => {
       newType = PARAGRAPH;
     }
     setCheckListItemType(editor, newType);
-    return;
+    return true;
   }
 
   if (type === LOCAL_IMAGE) {
     const eventBus = EventBus.getInstance();
     eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_IMAGE, editor });
-    return;
+    return true;
   }
 };
 
