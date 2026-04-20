@@ -1,10 +1,9 @@
-import { INTERNAL_EVENT } from '../constants';
 import { CHECK_LIST_ITEM, ELEMENT_TYPE, LOCAL_IMAGE, ORDERED_LIST, PARAGRAPH, REDO, UNDO, UNORDERED_LIST } from '../extension/constants';
 import { getNearestBlockNode } from '../extension/core';
 import { setCheckListItemType } from '../extension/plugins/check-list/helpers';
 import { setHeaderType } from '../extension/plugins/header/helpers';
+import { insertImage } from '../extension/plugins/image/helpers';
 import { setListType } from '../extension/plugins/list/helpers';
-import EventBus from '../utils/event-bus';
 import { ACTION_TYPES } from './constants';
 import jsBridge from './js-bridge';
 
@@ -21,7 +20,7 @@ const headerTypes = [
 ];
 
 const onToolbarTrigger = (data, editor) => {
-  const { type } = data || {};
+  const { type, images } = data || {};
   if (headerTypes.includes(type)) {
     const nodeEntry = getNearestBlockNode(editor);
     if (!nodeEntry) return;
@@ -60,8 +59,10 @@ const onToolbarTrigger = (data, editor) => {
   }
 
   if (type === LOCAL_IMAGE) {
-    const eventBus = EventBus.getInstance();
-    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type, editor });
+    if (!images || !Array.isArray(images) || images.length === 0) {
+      return true;
+    }
+    insertImage(editor, images, editor.selection);
     return true;
   }
 
