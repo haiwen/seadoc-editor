@@ -31,6 +31,7 @@ const InsertElementDialog = ({ editor }) => {
   const [insertWhiteboardFile, setInsertWhiteboardFile] = useState(null);
   const [data, setData] = useState({});
   const [formula, setFormula] = useState('');
+  const [localInputTriggerToken, setLocalInputTriggerToken] = useState(0);
   const { t } = useTranslation('sdoc-editor');
 
   const uploadLocalImageInputRef = useRef();
@@ -90,6 +91,24 @@ const InsertElementDialog = ({ editor }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const triggerLocalInput = (inputRef, type) => {
+      const inputNode = inputRef.current;
+      if (!inputNode) {
+        console.error(`[InsertElementDialog] ${type} input ref is empty.`);
+        return;
+      }
+      inputNode.click();
+    };
+
+    if (dialogType === LOCAL_IMAGE) {
+      requestAnimationFrame(() => triggerLocalInput(uploadLocalImageInputRef, LOCAL_IMAGE));
+    }
+    if (dialogType === LOCAL_VIDEO) {
+      requestAnimationFrame(() => triggerLocalInput(uploadLocalVideoInputRef, LOCAL_VIDEO));
+    }
+  }, [dialogType, localInputTriggerToken]);
+
   const toggleDialog = useCallback(({
     type,
     element,
@@ -104,7 +123,6 @@ const InsertElementDialog = ({ editor }) => {
     handleSubmit,
     data,
   }) => {
-    console.log('android test: xiaoqiang test');
     setInsertPosition(insertPosition);
     setSlateNode(slateNode);
     setElement(element);
@@ -121,16 +139,8 @@ const InsertElementDialog = ({ editor }) => {
     // Apply for comment editor, as it has a different editor instance
     setValidEditor(paramEditor || editor);
     setData(data);
-    if (type === LOCAL_IMAGE) {
-      setTimeout(() => {
-        console.log('android test: xiaoqiang test 2');
-        uploadLocalImageInputRef.current && uploadLocalImageInputRef.current.click();
-      }, 0);
-    }
-    if (type === LOCAL_VIDEO) {
-      setTimeout(() => {
-        uploadLocalVideoInputRef.current && uploadLocalVideoInputRef.current.click();
-      }, 0);
+    if (type === LOCAL_IMAGE || type === LOCAL_VIDEO) {
+      setLocalInputTriggerToken(token => token + 1);
     }
   }, [editor]);
 

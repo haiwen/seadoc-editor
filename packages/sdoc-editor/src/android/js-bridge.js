@@ -44,6 +44,12 @@ class JSBridge {
 
       const { action, data } = parsedData;
       const eventHandler = this.eventHandlerMap[action];
+      if (typeof eventHandler !== 'function') {
+        console.error(`No event handler registered for action: ${action}`);
+        responseCallback(JSON.stringify({ success: false }));
+        return;
+      }
+
       let params = null;
       try {
         params = JSON.parse(data);
@@ -51,9 +57,17 @@ class JSBridge {
         console.error('Param \'data\' is not an object, place check android program to modify item');
         console.error(data);
         responseCallback(JSON.stringify({ success: false }));
+        return;
       }
 
-      const execActionSucceed = eventHandler(params, this.editor);
+      let execActionSucceed = false;
+      try {
+        execActionSucceed = eventHandler(params, this.editor);
+      } catch (err) {
+        console.error(`Failed to execute action handler: ${action}`);
+        console.error(err);
+        execActionSucceed = false;
+      }
       if (execActionSucceed) {
         responseCallback(JSON.stringify({ success: true }));
       } else {
