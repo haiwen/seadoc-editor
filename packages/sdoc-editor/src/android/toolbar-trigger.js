@@ -21,7 +21,7 @@ const headerTypes = [
 ];
 
 const onToolbarTrigger = (data, editor) => {
-  const { type } = data;
+  const { type } = data || {};
   if (headerTypes.includes(type)) {
     const nodeEntry = getNearestBlockNode(editor);
     if (!nodeEntry) return;
@@ -61,9 +61,11 @@ const onToolbarTrigger = (data, editor) => {
 
   if (type === LOCAL_IMAGE) {
     const eventBus = EventBus.getInstance();
-    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: LOCAL_IMAGE, editor });
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type, editor });
     return true;
   }
+
+  return false;
 };
 
 export const updateEditorHistory = (editor) => {
