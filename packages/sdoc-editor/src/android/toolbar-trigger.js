@@ -1,4 +1,4 @@
-import { INTERNAL_EVENT } from '@seafile/comment-editor/dist/basic-sdk';
+import { INTERNAL_EVENT } from '../constants';
 import { CHECK_LIST_ITEM, ELEMENT_TYPE, LOCAL_IMAGE, ORDERED_LIST, PARAGRAPH, REDO, UNDO, UNORDERED_LIST } from '../extension/constants';
 import { getNearestBlockNode } from '../extension/core';
 import { setCheckListItemType } from '../extension/plugins/check-list/helpers';
