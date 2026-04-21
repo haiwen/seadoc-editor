@@ -190,20 +190,22 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   }, []);
 
   const onImageLoaded = useCallback(() => {
-    if (isImageUrlIsFromCopy(data.src) && !isCommentEditor(editor)) {
+    const src = data?.src || '';
+    if (isImageUrlIsFromCopy(src) && !isCommentEditor(editor)) {
       setCopyImageLoading(true);
     }
-  }, [data.src, editor, setCopyImageLoading]);
+  }, [data?.src, editor, setCopyImageLoading]);
 
   const onImageLoadError = useCallback(() => {
+    const src = data?.src || '';
     // Check is due to the image is pasted from the clipboard in base64
-    if (data.src.startsWith('data:image/jpeg;base64')) {
+    if (src.startsWith('data:image/jpeg;base64')) {
       return handleBase64Image(editor, path, data);
     }
 
     setIsShowImagePlaceholder(true);
     // External network images do not reload after failure to load
-    if (!data.src.startsWith('http')) {
+    if (!src.startsWith('http')) {
       const eventBus = EventBus.getInstance();
       eventBus.subscribe(INTERNAL_EVENT.RELOAD_IMAGE, reloadImage);
     }

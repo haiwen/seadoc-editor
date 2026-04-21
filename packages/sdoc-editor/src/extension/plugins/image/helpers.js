@@ -71,17 +71,26 @@ export const generateImageNode = (src, file_uuid) => {
 };
 
 export const insertImage = (editor, imgInfos, selection, position = INSERT_POSITION.CURRENT) => {
-  if (!imgInfos) return;
+  if (!imgInfos || !Array.isArray(imgInfos)) return;
+  const validImgInfos = imgInfos.filter((item) => item && typeof item.src === 'string' && item.src.length > 0);
+  if (validImgInfos.length === 0) return;
+
+  let validSelection = selection || editor.selection;
+  if (!validSelection) {
+    const endPoint = Editor.end(editor, []);
+    validSelection = { anchor: endPoint, focus: endPoint };
+    Transforms.select(editor, validSelection);
+  }
+
   if (position !== INSERT_POSITION.AFTER) {
     if (isInsertImageMenuDisabled(editor)) return;
   }
 
-  const imageNodes = imgInfos.map(({ src, file_uuid }) => {
+  const imageNodes = validImgInfos.map(({ src, file_uuid }) => {
     const imgSrc = src;
     return generateImageNode(imgSrc, file_uuid);
   });
 
-  const validSelection = selection || editor.selection;
   let path = Editor.path(editor, validSelection);
   // Insert image inside into multi-column node
   const topNodeEntry = getTopLevelBlockNode(editor);
