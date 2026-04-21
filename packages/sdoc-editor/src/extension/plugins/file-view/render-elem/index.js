@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FileView } from '@seafile/seafile-database';
+import { FileView } from '@seafile/sdoc-file-view';
 import { useReadOnly, useSelected, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
 import toaster from '../../../../components/toast';

@@ -51,7 +51,7 @@
   width: 100%;
 }
 
-.wiki-editor-container .sdoc-editor-container .article :first-child {
+.wiki-editor-container .sdoc-editor-container .article> :first-child {
   margin-top: 0;
 }
 
