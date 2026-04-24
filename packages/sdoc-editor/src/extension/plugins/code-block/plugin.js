@@ -4,9 +4,25 @@ import isHotkey from 'is-hotkey';
 import slugid from 'slugid';
 import { CODE_BLOCK, PARAGRAPH, CODE_LINE, BLOCKQUOTE } from '../../constants';
 import { getNodeType, isLastNode, getSelectedNodeByType, generateEmptyElement, isSelectionAtBlockStart, getSelectedElems,
-  isCursorAtBlockStart,
 } from '../../core';
 import { deleteBackwardByLength } from './helpers';
+
+const insertBreakCodeLine = (editor) => {
+  if (!editor.selection) return false;
+
+  const selectedNode = getSelectedNodeByType(editor, CODE_LINE);
+  if (!selectedNode) return false;
+
+  if (Range.isExpanded(editor.selection)) {
+    Transforms.delete(editor);
+  }
+
+  Transforms.splitNodes(editor, {
+    always: true,
+    match: n => getNodeType(n) === CODE_LINE,
+  });
+  return true;
+};
 
 const withCodeBlock = (editor) => {
   const { normalizeNode, insertFragment, insertText, insertBreak, insertData, deleteBackward } = editor;
@@ -152,9 +168,7 @@ const withCodeBlock = (editor) => {
 
     if (isHotkey('enter', event)) {
       event.preventDefault();
-      const selectedNode = getSelectedNodeByType(newEditor, CODE_LINE);
-      const line = generateEmptyElement(CODE_LINE);
-      Transforms.insertNodes(editor, line, { at: selectedNode[1] });
+      insertBreakCodeLine(newEditor);
       return;
     }
 
@@ -193,10 +207,7 @@ const withCodeBlock = (editor) => {
   };
 
   newEditor.insertBreak = () => {
-    const selectedNode = getSelectedNodeByType(newEditor, CODE_LINE);
-    if (selectedNode != null && isCursorAtBlockStart(newEditor)) {
-      const line = generateEmptyElement(CODE_LINE);
-      Transforms.insertNodes(editor, line, { at: selectedNode[1] });
+    if (insertBreakCodeLine(newEditor)) {
       return;
     }
     insertBreak();
