@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.153](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.152...@seafile/seafile-sdoc-editor@3.0.153) (2026-04-28)
+
+### Features
+
+- add export operation ([#231](https://github.com/seafileltd/sea-sdoc-editor/issues/231)) ([d5c119b](https://github.com/seafileltd/sea-sdoc-editor/commit/d5c119b148559cd829aa5aef4a7f633eff3b39c1))
+
 ## [3.0.152](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.151...@seafile/seafile-sdoc-editor@3.0.152) (2026-04-27)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
