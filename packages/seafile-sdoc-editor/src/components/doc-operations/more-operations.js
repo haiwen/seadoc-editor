@@ -141,6 +141,22 @@ const MoreOperations = ({ isStarred, t }) => {
     eventBus.dispatch(EXTERNAL_EVENT.INTERNAL_LINK_CLICK);
   }, [isSdocRevision]);
 
+  const handleExportMarkdown = useCallback(() => {
+    const serviceUrl = context.getSetting('serviceUrl');
+    const repoID = context.getSetting('repoID');
+    const selectedFilePath = context.getSetting('docPath');
+    const exportUrl = `${serviceUrl}/repo/sdoc_export_to_markdown/${repoID}/?file_path=${selectedFilePath}`;
+    window.location.href = exportUrl;
+  }, []);
+
+  const handleExportDocx = useCallback(() => {
+    const serviceUrl = context.getSetting('serviceUrl');
+    const repoID = context.getSetting('repoID');
+    const selectedFilePath = context.getSetting('docPath');
+    const exportToDocxUrl = serviceUrl + '/repo/sdoc_export_to_docx/' + repoID + '/?file_path=' + selectedFilePath;
+    window.location.href = exportToDocxUrl;
+  }, []);
+
   return (
     <Dropdown
       className={`sdoc-operator-folder ${mobileLogin ? 'mobile-login' : ''}`}
@@ -197,6 +213,12 @@ const MoreOperations = ({ isStarred, t }) => {
             />
           </DropdownItem>
         )}
+        <DropdownItem className='sdoc-dropdown-menu-item' onClick={handleExportMarkdown}>
+          {t('Export_as_markdown')}
+        </DropdownItem>
+        <DropdownItem className='sdoc-dropdown-menu-item' onClick={handleExportDocx}>
+          {t('Export_as_docx')}
+        </DropdownItem>
         {parentFolderURL && (
           <>
             <div className='sdoc-operator-folder-divider'></div>
