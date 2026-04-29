@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.155](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.154...@seafile/sdoc-editor@3.0.155) (2026-04-29)
+
+### Bug Fixes
+
+- fix table diff bug ([#232](https://github.com/seafileltd/sea-sdoc-editor/issues/232)) ([bfa39f6](https://github.com/seafileltd/sea-sdoc-editor/commit/bfa39f6affea41ebd9e9d97acff0383eae16538d))
+
 ## [3.0.154](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@3.0.153...@seafile/sdoc-editor@3.0.154) (2026-04-29)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
