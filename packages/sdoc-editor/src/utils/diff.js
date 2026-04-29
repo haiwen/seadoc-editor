@@ -39,6 +39,9 @@ export const getTopLevelChanges = (changes = []) => {
     if (!dom) continue;
     while (dom?.parentNode !== articleEl) {
       if (!dom?.parentNode || dom instanceof Document) break;
+      if (dom.classList?.contains('sdoc-table-container')) {
+        break;
+      }
       const parentNode = dom.parentNode;
       if (parentNode instanceof Document) {
         break;
