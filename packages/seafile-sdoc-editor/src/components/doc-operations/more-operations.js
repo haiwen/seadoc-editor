@@ -213,6 +213,7 @@ const MoreOperations = ({ isStarred, t }) => {
             />
           </DropdownItem>
         )}
+        <div className='sdoc-operator-folder-divider'></div>
         <DropdownItem className='sdoc-dropdown-menu-item' onClick={handleExportMarkdown}>
           {t('Export_as_markdown')}
         </DropdownItem>
