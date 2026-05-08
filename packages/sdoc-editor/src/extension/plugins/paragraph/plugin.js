@@ -1,4 +1,4 @@
-import { Editor, Range, Transforms, Point, Node } from '@seafile/slate';
+import { Editor, Range, Transforms, Point } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { LIST_ITEM, PARAGRAPH } from '../../constants';
 import { getSelectedNodeByType, generateDefaultText, isCursorAtBlockStart, findPath, generateDefaultParagraph, getParentNode, getNearestBlockNode } from '../../core';
@@ -10,15 +10,26 @@ const withParagraph = (editor) => {
 
   newEditor.handleTab = (event) => {
     const { selection } = newEditor;
-    if (!selection) return;
-    if (!Range.isCollapsed(selection)) return;
+    if (!selection) {
+      handleTab && handleTab(event);
+      return;
+    }
+    if (!Range.isCollapsed(selection)) {
+      handleTab && handleTab(event);
+      return;
+    }
 
-    const selectedNode = Editor.node(newEditor, selection, { depth: 1 });
-    if (selectedNode?.[0]?.type === PARAGRAPH) {
+    const [selectedParagraphEntry] = Editor.nodes(newEditor, {
+      at: selection,
+      match: n => n.type === PARAGRAPH,
+      mode: 'lowest'
+    });
+
+    if (selectedParagraphEntry) {
       event.preventDefault();
-      const path = Editor.path(newEditor, selection);
+      const [, path] = selectedParagraphEntry;
       const point = Editor.point(newEditor, selection);
-      const isStart = Editor.isStart(newEditor, point, [path[0]]);
+      const isStart = Editor.isStart(newEditor, point, path);
 
       if (isStart) {
         let indent;
@@ -28,27 +39,31 @@ const withParagraph = (editor) => {
         if (isHotkey('tab', event)) {
           indent = true;
         }
-        Transforms.setNodes(newEditor, { indent: indent }, { at: [path[0]] });
+        Transforms.setNodes(newEditor, { indent: indent }, { at: path });
       } else {
         if (isHotkey('tab', event)) insertText('  ');
       }
       return;
     }
-    return handleTab(event);
+    return handleTab && handleTab(event);
   };
 
   newEditor.deleteBackward = (unit) => {
     const { selection } = newEditor;
     if (!selection) return;
 
-    const [selectedNode = {}] = Editor.node(newEditor, selection, { depth: 1 });
-    const { type, indent } = selectedNode;
-    if (Range.isCollapsed(selection) && type === PARAGRAPH && indent) {
-      const path = Editor.path(newEditor, selection);
+    const [selectedParagraphEntry] = Editor.nodes(newEditor, {
+      at: selection,
+      match: n => n.type === PARAGRAPH,
+      mode: 'lowest'
+    });
+    const [selectedNode = {}, path = []] = selectedParagraphEntry || [];
+    const { indent } = selectedNode;
+    if (Range.isCollapsed(selection) && indent && path.length) {
       const point = Editor.point(newEditor, selection);
-      const isStart = Editor.isStart(newEditor, point, [path[0]]);
+      const isStart = Editor.isStart(newEditor, point, path);
       if (isStart) {
-        Transforms.setNodes(newEditor, { indent: false }, { at: [path[0]] });
+        Transforms.setNodes(newEditor, { indent: false }, { at: path });
         return;
       }
     }
