@@ -74,6 +74,12 @@ const withCallout = (editor) => {
       const eventBus = EventBus.getInstance();
       eventBus.dispatch(INTERNAL_EVENT.CLOSE_CALLOUT_COLOR_PICKER);
 
+      if (isHotkey('tab', event) || isHotkey('shift+tab', event)) {
+        event.preventDefault();
+        newEditor.handleTab && newEditor.handleTab(event);
+        return true;
+      }
+
       if (isHotkey('mod+enter', event)) {
         insertElement(newEditor, PARAGRAPH, INSERT_POSITION.AFTER);
         return true;
