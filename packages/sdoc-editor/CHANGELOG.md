@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.162](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.161...@seafile/sdoc-editor@3.0.162) (2026-05-09)
+
+### Bug Fixes
+
+- fix tab in blockquoute bug ([#237](https://github.com/haiwen/seadoc-editor/issues/237)) ([5825d45](https://github.com/haiwen/seadoc-editor/commit/5825d45d53d55cba75eabc5d4f0b8acee46b8bbe))
+
 ## [3.0.161](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.160...@seafile/sdoc-editor@3.0.161) (2026-05-09)
 
 ### Bug Fixes
