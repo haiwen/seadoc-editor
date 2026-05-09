@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.161](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.160...@seafile/sdoc-editor@3.0.161) (2026-05-09)
+
+### Bug Fixes
+
+- fix tab in callout bug ([#234](https://github.com/haiwen/seadoc-editor/issues/234)) ([3ea1db8](https://github.com/haiwen/seadoc-editor/commit/3ea1db8f248f8303c902431ef36d66a5405736c8))
+
 ## [3.0.160](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.159...@seafile/sdoc-editor@3.0.160) (2026-05-08)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
