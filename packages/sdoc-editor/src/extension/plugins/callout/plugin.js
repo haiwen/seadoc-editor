@@ -2,7 +2,7 @@ import { Editor, Transforms } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { INTERNAL_EVENT } from '../../../constants';
 import EventBus from '../../../utils/event-bus';
-import { PARAGRAPH, INSERT_POSITION, CODE_BLOCK, CALL_OUT } from '../../constants';
+import { PARAGRAPH, INSERT_POSITION, CODE_BLOCK, CALL_OUT, LIST_ITEM } from '../../constants';
 import { isSelectionAtBlockStart } from '../../core';
 import { insertElement } from '../../toolbar/side-toolbar/helpers';
 import { CALLOUT_ALLOWED_INSIDE_TYPES } from './constant';
@@ -75,7 +75,17 @@ const withCallout = (editor) => {
       eventBus.dispatch(INTERNAL_EVENT.CLOSE_CALLOUT_COLOR_PICKER);
 
       if (isHotkey('tab', event) || isHotkey('shift+tab', event)) {
-        event.preventDefault();
+        const listItemEntry = Editor.above(newEditor, {
+          at: newEditor.selection,
+          match: n => n.type === LIST_ITEM,
+          mode: 'lowest',
+        });
+
+        if (!listItemEntry) {
+          event.preventDefault();
+          return true;
+        }
+
         newEditor.handleTab && newEditor.handleTab(event);
         return true;
       }

@@ -1,6 +1,6 @@
 import { Editor, Range, Transforms, Point } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
-import { LIST_ITEM, PARAGRAPH } from '../../constants';
+import { BLOCKQUOTE, LIST_ITEM, PARAGRAPH } from '../../constants';
 import { getSelectedNodeByType, generateDefaultText, isCursorAtBlockStart, findPath, generateDefaultParagraph, getParentNode, getNearestBlockNode } from '../../core';
 import { isSingleListItem } from '../list/helpers';
 
@@ -17,6 +17,16 @@ const withParagraph = (editor) => {
     if (!Range.isCollapsed(selection)) {
       handleTab && handleTab(event);
       return;
+    }
+
+    const excludedParent = Editor.above(newEditor, {
+      at: selection,
+      match: n => [LIST_ITEM, BLOCKQUOTE].includes(n.type),
+      mode: 'lowest'
+    });
+
+    if (excludedParent) {
+      return handleTab && handleTab(event);
     }
 
     const [selectedParagraphEntry] = Editor.nodes(newEditor, {

@@ -13,6 +13,7 @@ export const UNORDERED_LIST = 'unordered_list';
 export const LIST_ITEM = 'list_item';
 export const LIST_LIC = 'list_lic'; // placeholder
 export const CHECK_LIST_ITEM = 'check_list_item';
+export const CALL_OUT = 'callout';
 export const PARAGRAPH = 'paragraph';
 export const LINK = 'link';
 export const HTML = 'html';
@@ -33,6 +34,7 @@ export const voidChildren = [{ text: '' }];
 export const ELEMENTS = {
   ha: { type: LINK },
   hblockquote: { type: BLOCKQUOTE },
+  hcallout: { type: CALL_OUT },
   hcodeblock: { type: CODE_BLOCK },
   hcodeline: { type: CODE_LINE },
   hdefault: { type: PARAGRAPH },

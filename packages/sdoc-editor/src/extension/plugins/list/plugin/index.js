@@ -109,13 +109,13 @@ const withList = (editor) => {
 
   newEditor.handleTab = (event) => {
     if (!newEditor.selection) {
-      handleTab && handleTab();
+      handleTab && handleTab(event);
       return;
     }
 
     if (onTabHandle(newEditor, event)) return;
 
-    handleTab && handleTab();
+    handleTab && handleTab(event);
   };
 
   newEditor.insertFragment = insertFragmentList(newEditor);
