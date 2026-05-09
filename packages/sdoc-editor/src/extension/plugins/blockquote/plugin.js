@@ -1,11 +1,31 @@
 import { Editor, Element, Transforms, Node, Path, Range } from '@seafile/slate';
-import { BLOCKQUOTE, PARAGRAPH, CODE_BLOCK, TABLE, HEADER1, HEADER2, HEADER3, HEADER4, HEADER5, HEADER6, TITLE, SUBTITLE } from '../../constants';
+import isHotkey from 'is-hotkey';
+import { BLOCKQUOTE, PARAGRAPH, CODE_BLOCK, TABLE, HEADER1, HEADER2, HEADER3, HEADER4, HEADER5, HEADER6, TITLE, SUBTITLE, LIST_ITEM } from '../../constants';
 import { generateDefaultText, getSelectedNodeByType, getSelectedNodeEntryByType, isSelectionAtBlockStart, isContainsVoidElement, isMiddlePoint } from '../../core';
 import { getFormattedElements, getFormattedRestElements } from './helpers';
 
 const withBlockquote = (editor) => {
-  const { insertBreak, deleteBackward, insertFragment } = editor;
+  const { insertBreak, deleteBackward, insertFragment, handleTab } = editor;
   const newEditor = editor;
+
+  newEditor.handleTab = (event) => {
+    const quoteBlockEntry = getSelectedNodeEntryByType(newEditor, BLOCKQUOTE);
+    if (!quoteBlockEntry) {
+      return handleTab && handleTab(event);
+    }
+
+    const listItemEntry = getSelectedNodeEntryByType(newEditor, LIST_ITEM);
+    if (listItemEntry) {
+      return handleTab && handleTab(event);
+    }
+
+    if (isHotkey('tab', event) || isHotkey('shift+tab', event)) {
+      event.preventDefault();
+      return true;
+    }
+
+    return handleTab && handleTab(event);
+  };
 
   newEditor.insertBreak = () => {
     const { selection } = editor;
