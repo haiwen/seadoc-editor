@@ -679,5 +679,6 @@
   "Add_embed_link": "Add embed link",
   "Divider": "Divider",
   "Export_as_markdown": "Export as Markdown",
-  "Export_as_docx": "Export as docx"
+  "Export_as_docx": "Export as docx",
+  "Close": "Close"
 }

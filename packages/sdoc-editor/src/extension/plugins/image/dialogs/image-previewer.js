@@ -92,6 +92,7 @@ class ImagePreviewer extends React.Component {
         }}
         zoomInTip={this.props.t('Zoom_in')}
         zoomOutTip={this.props.t('Zoom_out')}
+        closeTip={this.props.t('Close')}
       />
     );
   }

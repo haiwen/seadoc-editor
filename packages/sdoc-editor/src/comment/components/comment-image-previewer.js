@@ -36,6 +36,7 @@ function CommentImagePreviewer(props) {
       }}
       zoomInTip={t('Zoom_in')}
       zoomOutTip={t('Zoom_out')}
+      closeTip={t('Close')}
     />
   );
 }
