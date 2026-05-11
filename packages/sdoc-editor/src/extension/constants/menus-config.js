@@ -414,12 +414,6 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     type: VIDEO,
     text: 'Video'
   },
-  [FILE_LINK]: {
-    id: 'sdoc-side-menu-item-file-wiki',
-    iconClass: 'sdocfont sdoc-wiki-file',
-    type: FILE_LINK,
-    text: 'Link_file'
-  },
   [TABLE]: {
     id: 'sdoc-side-menu-item-table',
     iconClass: 'sdocfont sdoc-table',
@@ -581,7 +575,6 @@ export const SIDE_INSERT_MENUS_SEARCH_MAP = {
 export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [IMAGE]: 'Image',
   [VIDEO]: 'Video',
-  [FILE_LINK]: 'Link_file',
   [TABLE]: 'Table',
   [COLUMN]: 'Column',
   [TWO_COLUMN]: 'Two_column',
