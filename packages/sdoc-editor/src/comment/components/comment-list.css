@@ -28,6 +28,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #212529;
+  text-wrap: auto;
 }
 
 .sdoc-comment-list-container .comment-item-list {
