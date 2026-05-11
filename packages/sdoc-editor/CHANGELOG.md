@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.164](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.163...@seafile/sdoc-editor@3.0.164) (2026-05-11)
+
+### Reverts
+
+- Revert "feat: add insert file link in quick insert menu (#238)" (#239) ([f524eb1](https://github.com/haiwen/seadoc-editor/commit/f524eb1422b444db4e46bc479f1617d53bf84f71)), closes [#238](https://github.com/haiwen/seadoc-editor/issues/238) [#239](https://github.com/haiwen/seadoc-editor/issues/239)
+
 ## [3.0.163](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.162...@seafile/sdoc-editor@3.0.163) (2026-05-11)
 
 ### Features
