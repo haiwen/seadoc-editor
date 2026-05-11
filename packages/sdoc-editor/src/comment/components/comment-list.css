@@ -26,7 +26,6 @@
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   color: #212529;
   text-wrap: auto;
 }
