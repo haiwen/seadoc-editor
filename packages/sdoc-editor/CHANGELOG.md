@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.166](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.165...@seafile/sdoc-editor@3.0.166) (2026-05-11)
+
+### Bug Fixes
+
+- fix image preview close toaster bug ([#240](https://github.com/haiwen/seadoc-editor/issues/240)) ([c499f7b](https://github.com/haiwen/seadoc-editor/commit/c499f7b1ac520907b83145badc10a1abb8d61eff))
+
 ## [3.0.165](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.164...@seafile/sdoc-editor@3.0.165) (2026-05-11)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
