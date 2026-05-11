@@ -10,12 +10,13 @@ import context from '../../../context';
 import { getErrorMsg, isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
-import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW, FORMULA, TOGGLE_HEADER, TOGGLE_TITLE_TYPES } from '../../constants';
+import { ELEMENT_TYPE, IMAGE, VIDEO, INSERT_POSITION, LINK, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SIDE_INSERT_MENUS_CONFIG, SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, TABLE, CODE_BLOCK, CALL_OUT, UNORDERED_LIST, ORDERED_LIST, CHECK_LIST_ITEM, QUICK_INSERT, FILE_VIEW, FORMULA, TOGGLE_HEADER, TOGGLE_TITLE_TYPES, FILE_LINK } from '../../constants';
 import { EMBED_LINK } from '../../constants/element-type';
 import { getAboveBlockNode } from '../../core';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
 import { changeToCodeBlock } from '../../plugins/code-block/helpers';
+import { insertFileLink } from '../../plugins/file-link/helpers';
 import { insertFileView } from '../../plugins/file-view/helpers';
 import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
@@ -116,6 +117,13 @@ const QuickInsertBlockMenu = ({
     callback && callback();
     const eventBus = EventBus.getInstance();
     eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.FILE_VIEW, insertPosition, slateNode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insertPosition]);
+
+  const openFileLinkDialog = useCallback(() => {
+    callback && callback();
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.FILE_LINK, insertPosition, slateNode, insertFileLinkCallback: insertFileLink });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [insertPosition]);
 
@@ -281,6 +289,7 @@ const QuickInsertBlockMenu = ({
           </UncontrolledPopover>
         </DropdownMenuItem>
       }),
+      [FILE_LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FILE_LINK]} key="sdoc-insert-menu-file-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE_LINK] }} onClick={openFileLinkDialog} />,
       [TABLE]:
         // eslint-disable-next-line react/jsx-indent
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[TABLE]} disabled={isDisableTable} key="sdoc-insert-menu-table" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TABLE] }} className="pr-2">
@@ -323,7 +332,7 @@ const QuickInsertBlockMenu = ({
 
     return items;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, addEmbedLinkDialog, onInsertCodeBlock, isDisableCallout, isDisableToggleHeader, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader]);
+  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, addEmbedLinkDialog, onInsertCodeBlock, isDisableCallout, isDisableToggleHeader, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader, openFileLinkDialog]);
 
   const getSelectItemDom = (selectIndex) => {
     const dropDownItemWrapper = downDownWrapperRef.current;
