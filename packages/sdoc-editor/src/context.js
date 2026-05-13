@@ -404,6 +404,12 @@ class Context {
     return this.api.modifyView(wikiId, fileViewId, viewData);
   }
 
+  listLinkedRepoDir(repoID, nodePath) {
+    const wikiId = this.getSetting('wikiId');
+    const docUuid = this.getSetting('docUuid');
+    return this.api.listLinkedRepoDir(docUuid, wikiId, repoID, nodePath);
+  }
+
 }
 
 const context = new Context();

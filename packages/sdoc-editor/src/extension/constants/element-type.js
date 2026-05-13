@@ -47,6 +47,7 @@ export const TOGGLE_HEADER3 = 'toggle_header3';
 export const TOGGLE_CONTENT = 'toggle_content';
 export const EMBED_LINK = 'embed_link';
 export const DIVIDER = 'divider';
+export const FILE = 'file';
 
 export const ASK_AI = 'ask_ai';
 

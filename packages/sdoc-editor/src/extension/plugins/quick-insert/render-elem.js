@@ -16,8 +16,12 @@ const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) 
   const insertElmRef = useRef(null);
   const aboveBlockNode = getAboveBlockNode(editor);
   const parentBlockNode = Editor.parent(editor, aboveBlockNode?.[1]);
+  const blockChildren = aboveBlockNode?.[0]?.children || [];
+  const isQuickInsertOnlyBlock = blockChildren.length > 0 && blockChildren.every((child) => {
+    return child?.type === QUICK_INSERT || child?.text === '';
+  });
   // In toggle content's empty paragraph or empty paragraph
-  const isEmptyNode = (parentBlockNode && parentBlockNode?.[0].type === TOGGLE_CONTENT) || (aboveBlockNode && aboveBlockNode[0].children[1].type === QUICK_INSERT);
+  const isEmptyNode = (parentBlockNode && parentBlockNode?.[0].type === TOGGLE_CONTENT) || isQuickInsertOnlyBlock;
   const [isShowPopover, setIsShowPopover] = useState(isSelectionSameWithInsert(editor, element));
 
   const handleClick = useCallback((e) => {
