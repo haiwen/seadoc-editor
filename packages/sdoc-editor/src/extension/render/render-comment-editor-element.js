@@ -6,7 +6,7 @@ import { LinkPlugin, ListPlugin, ImagePlugin, VideoPlugin, ParagraphPlugin, Ment
 const RenderCommentEditorCustomRenderElement = (props) => {
   const editor = useSlateStatic();
   const readonly = useReadOnly();
-  const { element, commentType } = props;
+  const { element } = props;
 
   switch (element.type) {
     case PARAGRAPH: {
@@ -16,7 +16,7 @@ const RenderCommentEditorCustomRenderElement = (props) => {
         const [renderParagraph] = ParagraphPlugin.renderElements;
         return renderParagraph(_props);
       }
-      const placeholder = commentType === 'comment' ? 'Enter_comment_shift_enter_for_new_line_Enter_to_send' : 'Enter_reply_shift_Enter_for_new_line_Enter_to_send';
+      const placeholder = 'shift_enter_for_new_line_Enter_to_send';
       const [renderParagraph] = ParagraphPlugin.renderElements;
       return renderParagraph({ ..._props, placeholder });
     }
