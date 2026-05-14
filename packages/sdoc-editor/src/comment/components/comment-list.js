@@ -182,7 +182,7 @@ const CommentList = ({
                     <SeafileCommentEditor
                       type="reply"
                       settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
-                      placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
+                      placeholder={'shift_enter_for_new_line_Enter_to_send'}
                       addParticipants={addParticipants}
                       participants={participants}
                       collaborators={collaborators}
@@ -232,7 +232,7 @@ const CommentList = ({
                 <SeafileCommentEditor
                   type="reply"
                   settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
-                  placeholder={'Enter_reply_shift_Enter_for_new_line_Enter_to_send'}
+                  placeholder={'shift_enter_for_new_line_Enter_to_send'}
                   addParticipants={addParticipants}
                   participants={participants}
                   collaborators={collaborators}

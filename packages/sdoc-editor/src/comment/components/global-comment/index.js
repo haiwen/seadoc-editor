@@ -126,7 +126,7 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
     }
   }, [commentList, deleteUnseenNotifications]);
 
-  const commentEditorPlaceholder = !activeCommentGroup ? t('Enter_comment_shift_enter_for_new_line_Enter_to_send') : t('Enter_reply_shift_Enter_for_new_line_Enter_to_send');
+  const commentEditorPlaceholder = t('shift_enter_for_new_line_Enter_to_send');
 
   useEffect(() => {
     if (!contentRef.current) return;
