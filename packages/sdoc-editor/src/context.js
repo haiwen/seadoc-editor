@@ -132,6 +132,27 @@ class Context {
     return this.settings['repos'];
   };
 
+  getLinkedRepos = () => {
+    const repos = this.getWikiRepos() || [];
+    const wikiSettings = this.getWikiSettings() || {};
+    const linkedRepos = wikiSettings.linked_repos || [];
+
+    if (!Array.isArray(repos) || !Array.isArray(linkedRepos) || linkedRepos.length === 0) {
+      return [];
+    }
+
+    const linkedMap = linkedRepos.reduce((ret, id) => {
+      ret[id] = true;
+      return ret;
+    }, {});
+
+    return repos.filter(item => linkedMap[item.repo_id]);
+  };
+
+  hasLinkedRepos = () => {
+    return this.getLinkedRepos().length > 0;
+  };
+
 
   getFileContent() {
     return this.sdocServerApi.getDocContent()

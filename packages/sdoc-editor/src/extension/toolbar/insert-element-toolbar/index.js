@@ -47,6 +47,7 @@ const QuickInsertBlockMenu = ({
   const [quickInsertMenuSearchMap, setQuickInsertMenuSearchMap] = useState(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP);
 
   const enableMetadataManagement = context.getSetting('enableMetadataManagement');
+  const hasLinkedRepos = context.hasLinkedRepos();
 
   const onInsertImageToggle = useCallback(() => {
     callback && callback();
@@ -309,7 +310,9 @@ const QuickInsertBlockMenu = ({
           />
         </DropdownMenuItem>,
       [LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[LINK]} key="sdoc-insert-menu-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.LINK] }} onClick={openLinkDialog} />,
-      [ELEMENT_TYPE.FILE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[ELEMENT_TYPE.FILE]} key="sdoc-insert-menu-file-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE] }} onClick={openSelectFileDialog} />,
+      ...(editor.editorType === WIKI_EDITOR && hasLinkedRepos && {
+        [ELEMENT_TYPE.FILE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[ELEMENT_TYPE.FILE]} key="sdoc-insert-menu-file-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE] }} onClick={openSelectFileDialog} />,
+      }),
       [EMBED_LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[EMBED_LINK]} key="sdoc-insert-menu-embed-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.EMBED_LINK] }} onClick={addEmbedLinkDialog} />,
       [CODE_BLOCK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CODE_BLOCK]} disabled={isDisableCodeBlock} key="sdoc-insert-menu-code-block" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CODE_BLOCK] }} onClick={onInsertCodeBlock} />,
       [CALL_OUT]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CALL_OUT]} disabled={isDisableCallout} key="sdoc-insert-menu-callout" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CALL_OUT] }} onClick={() => onInsertCallout(PARAGRAPH)} />,
@@ -335,7 +338,7 @@ const QuickInsertBlockMenu = ({
 
     return items;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, openSelectFileDialog, addEmbedLinkDialog, onInsertCodeBlock, isDisableCallout, isDisableToggleHeader, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader]);
+  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, openSelectFileDialog, addEmbedLinkDialog, onInsertCodeBlock, isDisableCallout, isDisableToggleHeader, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader, hasLinkedRepos]);
 
   const getSelectItemDom = (selectIndex) => {
     const dropDownItemWrapper = downDownWrapperRef.current;

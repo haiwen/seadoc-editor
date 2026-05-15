@@ -15,17 +15,10 @@ const SelectLibFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallba
   const [currentSelectedFile, setCurrentSelectedFile] = useState(null);
 
   const enableRepos = useMemo(() => {
-    const repos = context.getWikiRepos();
-    const wikiSettings = context.getWikiSettings();
-    const { linked_repos } = wikiSettings;
-    const linkedMap = linked_repos.reduce((ret, id) => {
-      ret[id] = true;
-      return ret;
-    }, {});
-    return repos.filter(item => linkedMap[item.repo_id]);
+    return context.getLinkedRepos();
   }, []);
 
-  const [currentRepoId, setCurrentRepoId] = useState(enableRepos[0].repo_id);
+  const [currentRepoId, setCurrentRepoId] = useState(enableRepos[0]?.repo_id || '');
 
   const onSelectedFile = useCallback((fileInfo) => {
     setCurrentSelectedFile(fileInfo);
@@ -103,12 +96,13 @@ const SelectLibFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallba
             })}
           </div>
           <div className='sdoc-file-select__main-panel col-12 col-md-9'>
-            {/* <div>ddd</div> */}
-            <TreeView
-              repoID={currentRepoId}
-              onSelectedFile={onSelectedFile}
-              toggle={closeDialog}
-            />
+            {currentRepoId && (
+              <TreeView
+                repoID={currentRepoId}
+                onSelectedFile={onSelectedFile}
+                toggle={closeDialog}
+              />
+            )}
             <div className='sdoc-file-select-footer'>
               <Button color='secondary' className='mr-2' onClick={closeDialog}>{t('Cancel')}</Button>
               <Button color='primary' className='highlight-bg-color' disabled={!currentSelectedFile} onClick={onSubmit}>{t('Submit')}</Button>
