@@ -272,6 +272,11 @@ class SeafileAPI {
     return this.req.get(url, { params: { p: dirPath, file_uuid: docUuid } });
   }
 
+  getLinkedRepoFileId(docUuid, wikiId, linkedRepoId, p) {
+    const url = `/api/v2.1/wiki2/${wikiId}/linked-repos/${linkedRepoId}/file-uuid/`;
+    return this.req.get(url, { params: { p: p, file_uuid: docUuid } });
+  }
+
 }
 
 export default SeafileAPI;

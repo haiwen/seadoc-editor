@@ -6,7 +6,6 @@ import iconUrl from '../../../assets/images/lib.png';
 import toaster from '../../../components/toast';
 import context from '../../../context';
 import { getErrorMsg } from '../../../utils/common-utils';
-import { FILE_TYPE } from '../../constants';
 import TreeView from './tree-view';
 
 import './index.css';
@@ -51,7 +50,7 @@ const SelectLibFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallba
 
     // File has no id
     if (!file_uuid || file_uuid === '') {
-      context.getSdocLocalFileId(currentSelectedFile.path).then(res => {
+      context.getLinkedRepoFileId(currentRepoId, currentSelectedFile.path).then(res => {
         if (res.status === 200) {
           fileInfo = { ...currentSelectedFile, file_uuid: res.data.file_uuid };
         }
@@ -67,8 +66,7 @@ const SelectLibFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallba
 
     insertFile(fileInfo);
     closeDialog();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSelectedFile]);
+  }, [closeDialog, currentRepoId, currentSelectedFile, insertFile]);
 
   return (
     <Modal isOpen={true} autoFocus={true} zIndex={1071} returnFocusAfterClose={false} className="sdoc-file-select-dialog" contentClassName="sdoc-file-select-modal" toggle={closeDialog}>

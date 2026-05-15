@@ -410,6 +410,12 @@ class Context {
     return this.api.listLinkedRepoDir(docUuid, wikiId, repoID, nodePath);
   }
 
+  getLinkedRepoFileId(repoID, nodePath) {
+    const wikiId = this.getSetting('wikiId');
+    const docUuid = this.getSetting('docUuid');
+    return this.api.getLinkedRepoFileId(docUuid, wikiId, repoID, nodePath);
+  }
+
 }
 
 const context = new Context();

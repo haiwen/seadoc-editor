@@ -10,68 +10,86 @@ import './index.css';
 
 const TreeView = ({ repoID, onSelectedFile, toggle, t }) => {
   const folderRef = useRef(null);
+  const repoCacheRef = useRef({});
   const [expandedFolder, setExpandedFolder] = useState(new Set([]));
   const [currentActiveItem, setCurrentActiveItem] = useState(null);
   const [treeData, setTreeData] = useState([]);
 
-  const getTreeData = useCallback((repoID, nodePath, nodeId, treeData) => {
+  const updateRepoCache = useCallback((repoID, nextTreeData, nextExpandedFolder = new Set([])) => {
+    repoCacheRef.current[repoID] = {
+      treeData: nextTreeData,
+      expandedFolder: Array.from(nextExpandedFolder),
+    };
+  }, []);
+
+  const getTreeData = useCallback((repoID, nodePath, nodeId, currentTreeData = []) => {
     return context.listLinkedRepoDir(repoID, nodePath).then(res => {
       const { dirent_list } = res.data;
       const newData = dirent_list.map((item) => {
-        item.path = nodePath === '/' ? `/${item.name}` : nodePath + `${item.name}`;
+        item.path = nodePath === '/' ? `/${item.name}` : `${nodePath}/${item.name}`;
         item.indexId = item.path;
         return item;
       });
 
+      let nextTreeData = newData;
+
       // Open folder
-      if (nodeId && treeData.length > 0) {
-        const newFileListData = addDataToTree(treeData, nodeId, newData, nodePath);
-        setTreeData([...newFileListData]);
-        return;
+      if (nodeId && currentTreeData.length > 0) {
+        const newFileListData = addDataToTree(currentTreeData, nodeId, newData, nodePath);
+        nextTreeData = [...newFileListData];
       }
 
-      setTreeData(newData);
+      setTreeData(nextTreeData);
+      return nextTreeData;
     }).catch(error => {
       toggle();
       const errorMessage = getErrorMsg(error);
       toaster.danger(errorMessage);
+      return null;
     });
   }, [toggle]);
 
   useEffect(() => {
-    const rootPath = '/';
-    getTreeData(repoID, rootPath);
-  }, [getTreeData, repoID]);
+    setCurrentActiveItem(null);
+    onSelectedFile(null);
 
-  const collapsedFolder = useCallback((data, indexId) => {
-    for (let i = 0; i < data.length; i ++) {
-      if (data[i].indexId === indexId) {
-        data[i].children = null;
-        break;
-      }
-
-      if (data[i]?.children) {
-        collapsedFolder(data[i].children, indexId);
-      }
+    const cachedRepoData = repoCacheRef.current[repoID];
+    if (cachedRepoData?.treeData) {
+      setTreeData(cachedRepoData.treeData);
+      setExpandedFolder(new Set(cachedRepoData.expandedFolder));
+      return;
     }
-    setTreeData([...data]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    const rootPath = '/';
+    setTreeData([]);
+    setExpandedFolder(new Set([]));
+
+    getTreeData(repoID, rootPath).then(nextTreeData => {
+      if (!nextTreeData) return;
+      updateRepoCache(repoID, nextTreeData, new Set([]));
+    });
+  }, [getTreeData, onSelectedFile, repoID, updateRepoCache]);
 
   const onToggle = useCallback(async (e, item) => {
     e && e.stopPropagation();
+    const nextExpandedFolder = new Set(Array.from(expandedFolder));
+    let nextTreeData = treeData;
 
     if (expandedFolder.has(item.indexId)) {
-      collapsedFolder(treeData, item.indexId);
-      expandedFolder.delete(item.indexId);
+      nextExpandedFolder.delete(item.indexId);
     } else {
-      await getTreeData(repoID, item.path, item.indexId, treeData);
-      expandedFolder.add(item.indexId);
+      const hasLoadedChildren = Object.prototype.hasOwnProperty.call(item, 'children');
+      if (!hasLoadedChildren) {
+        nextTreeData = await getTreeData(repoID, item.path, item.indexId, treeData) || treeData;
+      }
+      nextExpandedFolder.add(item.indexId);
     }
+
     onSelectedFile(null);
     setCurrentActiveItem(item);
-    setExpandedFolder(new Set(Array.from(expandedFolder)));
-  }, [collapsedFolder, expandedFolder, getTreeData, onSelectedFile, repoID, treeData]);
+    setExpandedFolder(nextExpandedFolder);
+    updateRepoCache(repoID, nextTreeData, nextExpandedFolder);
+  }, [expandedFolder, getTreeData, onSelectedFile, repoID, treeData, updateRepoCache]);
 
   const onSelectFile = useCallback((e, file) => {
     e.stopPropagation();
@@ -87,6 +105,8 @@ const TreeView = ({ repoID, onSelectedFile, toggle, t }) => {
     return data.map((item) => {
       if (!item) return null;
       const { type, indexId, name, file_uuid, path, fullpath } = item;
+      const isExpanded = expandedFolder.has(indexId);
+      const hasLoadedChildren = Object.prototype.hasOwnProperty.call(item, 'children');
       // Get file type icon
       const fileTypeIcon = parcelFileTypeIcon(name);
 
@@ -99,7 +119,7 @@ const TreeView = ({ repoID, onSelectedFile, toggle, t }) => {
           {type === 'dir' && (
             <div ref={folderRef} className='sdoc-folder-wrapper'>
               <div
-                className={classnames('sdoc-folder-info sdoc-file-info', { 'expanded': expandedFolder.has(indexId) })}
+                className={classnames('sdoc-folder-info sdoc-file-info', { 'expanded': isExpanded })}
                 onClick={(e) => onToggle(e, item)}
               >
                 <div className='sdoc-file-icon-container'>
@@ -108,16 +128,18 @@ const TreeView = ({ repoID, onSelectedFile, toggle, t }) => {
                 </div>
                 <span className='sdoc-folder-name sdoc-file-name'>{name}</span>
               </div>
-              <div className='sdoc-folder-children'>
-                {item.children?.length === 0 && (
-                  <div className='sdoc-folder-children-empty'>
-                    {`(${t('Empty')})`}
-                  </div>
-                )}
-                {item.children?.length > 0 && (
-                  renderFileTree(item.children)
-                )}
-              </div>
+              {isExpanded && hasLoadedChildren && (
+                <div className='sdoc-folder-children'>
+                  {item.children?.length === 0 && (
+                    <div className='sdoc-folder-children-empty'>
+                      {`(${t('Empty')})`}
+                    </div>
+                  )}
+                  {item.children?.length > 0 && (
+                    renderFileTree(item.children)
+                  )}
+                </div>
+              )}
             </div>
           )}
           {['file', 'video', 'exdraw'].includes(type) && (
