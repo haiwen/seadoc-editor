@@ -12,14 +12,7 @@ const LinkedRepoList = ({ onRepoClick }) => {
   const { t } = useTranslation('sdoc-editor');
   const repoRef = useRef(null);
   const enableRepos = useMemo(() => {
-    const repos = context.getWikiRepos();
-    const wikiSettings = context.getWikiSettings();
-    const { linked_repos } = wikiSettings;
-    const linkedMap = linked_repos.reduce((ret, id) => {
-      ret[id] = true;
-      return ret;
-    }, {});
-    return repos.filter(item => linkedMap[item.repo_id]);
+    return context.getLinkedRepos();
   }, []);
 
   const onAddLibraryClick = useCallback(() => {

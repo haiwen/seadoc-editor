@@ -16,6 +16,7 @@ import AddVideoLinkDialog from '../../plugins/video/dialog/add-video-link-dialog
 import { insertVideo } from '../../plugins/video/helpers';
 import FileLinkInsertDialog from '../file-insert-dialog/index.js';
 import SelectFileDialog from '../select-file-dialog/index.js';
+import SelectLibFileDialog from '../select-lib-file-dialog/index.js';
 import WikiFileLinkInsertDialog from '../wiki-file-insert-dialog/index.js';
 
 const InsertElementDialog = ({ editor }) => {
@@ -198,6 +199,15 @@ const InsertElementDialog = ({ editor }) => {
         closeDialog,
       };
       return (<SelectFileDialog {...fileLinkProps} />);
+    }
+    case ELEMENT_TYPE.FILE: {
+      const fileLinkProps = {
+        editor: validEditor,
+        dialogType,
+        insertLinkCallback,
+        closeDialog,
+      };
+      return (<SelectLibFileDialog {...fileLinkProps} />);
     }
     case ELEMENT_TYPE.WHITEBOARD: {
       const whiteboardProps = {

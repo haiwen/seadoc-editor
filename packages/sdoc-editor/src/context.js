@@ -132,6 +132,27 @@ class Context {
     return this.settings['repos'];
   };
 
+  getLinkedRepos = () => {
+    const repos = this.getWikiRepos() || [];
+    const wikiSettings = this.getWikiSettings() || {};
+    const linkedRepos = wikiSettings.linked_repos || [];
+
+    if (!Array.isArray(repos) || !Array.isArray(linkedRepos) || linkedRepos.length === 0) {
+      return [];
+    }
+
+    const linkedMap = linkedRepos.reduce((ret, id) => {
+      ret[id] = true;
+      return ret;
+    }, {});
+
+    return repos.filter(item => linkedMap[item.repo_id]);
+  };
+
+  hasLinkedRepos = () => {
+    return this.getLinkedRepos().length > 0;
+  };
+
 
   getFileContent() {
     return this.sdocServerApi.getDocContent()
@@ -402,6 +423,18 @@ class Context {
   modifyFileView(viewId, fileViewId, viewData) {
     const wikiId = this.getSetting('wikiId');
     return this.api.modifyView(wikiId, fileViewId, viewData);
+  }
+
+  listLinkedRepoDir(repoID, nodePath) {
+    const wikiId = this.getSetting('wikiId');
+    const docUuid = this.getSetting('docUuid');
+    return this.api.listLinkedRepoDir(docUuid, wikiId, repoID, nodePath);
+  }
+
+  getLinkedRepoFileId(repoID, nodePath) {
+    const wikiId = this.getSetting('wikiId');
+    const docUuid = this.getSetting('docUuid');
+    return this.api.getLinkedRepoFileId(docUuid, wikiId, repoID, nodePath);
   }
 
 }
