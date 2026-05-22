@@ -24,7 +24,13 @@ export const useNotificationsMount = (dispatch) => {
   }, [collaborators, t]);
 
   const request = useCallback(async (notification) => {
-    popupBrowserCommentNotification(notification);
+    if (notification) {
+      const { to_users } = notification;
+      const currentUserInfo = context.getUserInfo();
+      if (Array.isArray(to_users) && to_users.length > 0 && to_users.includes(currentUserInfo.username)) {
+        popupBrowserCommentNotification(notification);
+      }
+    }
     const eventBus = EventBus.getInstance();
 
     dispatch({ type: DOC_NOTIFICATION_REDUCER_TYPE.FETCHING });
