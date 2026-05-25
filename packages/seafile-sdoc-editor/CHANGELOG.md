@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.172](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.171...@seafile/seafile-sdoc-editor@3.0.172) (2026-05-25)
+
+### Bug Fixes
+
+- fix print in english env bug ([4042eaf](https://github.com/seafileltd/sea-sdoc-editor/commit/4042eafd058376d1a27b0ec37e0964d539d3880a))
+
 ## [3.0.171](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.170...@seafile/seafile-sdoc-editor@3.0.171) (2026-05-25)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
