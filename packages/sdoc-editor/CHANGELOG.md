@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.171](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.170...@seafile/sdoc-editor@3.0.171) (2026-05-25)
+
+### Bug Fixes
+
+- fix copy pycharm code bug ([#247](https://github.com/haiwen/seadoc-editor/issues/247)) ([3a925a4](https://github.com/haiwen/seadoc-editor/commit/3a925a4ecfe66d4aed3929e3749f9658b0cdca6b))
+
 ## [3.0.170](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.168...@seafile/sdoc-editor@3.0.170) (2026-05-22)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
