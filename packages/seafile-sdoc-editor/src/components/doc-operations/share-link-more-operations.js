@@ -37,7 +37,7 @@ const ShareLinkMoreOperations = ({ t }) => {
       type: 'html',
       scanStyles: true,
       targetStyles: ['*'],
-      style: '@page { size: auto A4 landscape;margin:20px auto; padding: 0;} .d-print-none{display:none !important;} .article {border: none !important; box-shadow: none !important; } html, body {margin: 0; padding: 0}',
+      style: '@page { size: auto A4 landscape;margin:20px auto; padding: 0;} .d-print-none{display:none !important;} .article {border: none !important; box-shadow: none !important; } html, body {margin: 0; padding: 0} body { font-family: Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "SimSun", sans-serif; } #sdoc-editor-print-wrapper { font-family: inherit; }',
       css: cssUrls,
     });
   }

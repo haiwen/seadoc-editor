@@ -60,7 +60,11 @@ const MoreOperations = ({ isStarred, t }) => {
         min-width: 673px !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+        font-family: Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'SimSun', sans-serif;
         height: auto;
+      }
+      #sdoc-editor-print-wrapper {
+        font-family: inherit;
       }
       .d-print-none {
         display:none !important;
