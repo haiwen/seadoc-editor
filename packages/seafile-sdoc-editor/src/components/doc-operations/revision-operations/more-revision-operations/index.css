@@ -29,6 +29,19 @@
   height: 80px;
 }
 
+.sdoc-more-revision-operations-dropdown .dropdown-item.en,
+.sdoc-more-revision-operations-dropdown .dropdown-item.cs,
+.sdoc-more-revision-operations-dropdown .dropdown-item.es-ar,
+.sdoc-more-revision-operations-dropdown .dropdown-item.es-mx {
+  height: 100px;
+}
+
+.sdoc-more-revision-operations-dropdown .dropdown-item.de,
+.sdoc-more-revision-operations-dropdown .dropdown-item.fr,
+.sdoc-more-revision-operations-dropdown .dropdown-item.ru {
+  height: 120px;
+}
+
 .sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation {
   width: 373px;
   display: flex;

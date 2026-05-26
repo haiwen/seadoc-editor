@@ -11,6 +11,8 @@ const MoreRevisionOperations = ({ t }) => {
   const id = 'sdoc_revisions';
   const eventBus = EventBus.getInstance();
 
+  const lang = context.getSetting('lang');
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = useCallback((isDropdownOpen) => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -39,7 +41,7 @@ const MoreRevisionOperations = ({ t }) => {
         {t('Revise')}
       </Tooltip>
       <DropdownMenu className="sdoc-dropdown-menu" end>
-        <DropdownItem className="sdoc-dropdown-menu-item" onClick={startRevise}>
+        <DropdownItem className={`sdoc-dropdown-menu-item ${lang}`} onClick={startRevise}>
           <div className="sdoc-more-revision-operation">
             <div className="sdoc-more-revision-operation-title">
               <i className="sdocfont sdoc-revise" />
