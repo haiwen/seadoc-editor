@@ -48,8 +48,5 @@
     "**/*.js": [
       "eslint --fix"
     ]
-  },
-  "dependencies": {
-    "@seafile/sdoc-file-view": "0.0.54"
   }
 }
