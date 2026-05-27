@@ -50,6 +50,6 @@
     ]
   },
   "dependencies": {
-    "@seafile/sdoc-file-view": "0.0.54"
+    "@seafile/sdoc-file-view": "0.0.61"
   }
 }
