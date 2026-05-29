@@ -2,28 +2,22 @@
   pointer-events: none;
 }
 
-.sdoc-tooltip .tooltip-inner {
-  font-weight: lighter;
-  text-align: start;
-  background-color: #303133;
+.sdoc-tooltip .tooltip {
+  max-width: 242px;
+  opacity: 1;
 }
 
-.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="bottom"] .arrow::before {
-  border-bottom-color: #303133;
+.sdoc-tooltip .tooltip-inner {
+  font-size: 14px;
+  text-align: start;
+  background-color: var(--bs-body-color);
+  color: var(--bs-body-bg);
+  border-radius: 4px;
+  padding: 4px 8px;
+  line-height: 20px;
+  font-weight: normal;
 }
 
 .sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="top"] {
   margin-bottom: -2px;
-}
-
-.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="top"] .arrow::before {
-  border-top-color: #303133;
-}
-
-.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="right"] .arrow::before {
-  border-right-color: #303133;
-}
-
-.sdoc-tooltip.bs-tooltip-auto[data-popper-placement^="left"] .arrow::before {
-  border-left-color: #303133;
 }
