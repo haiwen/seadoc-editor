@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { withTranslation } from 'react-i18next';
-import { EventBus, context } from '@seafile/sdoc-editor';
+import { EventBus, Tooltip, context } from '@seafile/sdoc-editor';
 import PropTypes from 'prop-types';
 import RevisionAvatar from '../../assets/images/revision-avatar.png';
 import freezedImg from '../../assets/images/sdoc-freezed.png';
@@ -40,20 +40,24 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
     <>
       {isDraft && <DraftDropdown />}
       {(isStarIconShown && !mobileLogin) && (
-        <button className={`doc-icon sdocfont ${isStarred ? 'sdoc-starred' : 'sdoc-unstarred'} border-0 p-0 bg-transparent`}
-          title={isStarred ? t('Starred') : t('Unstarred')}
-          aria-label={isStarred ? t('Unstar') : t('Star')}
-          onClick={toggleStar}>
-        </button>
+        <>
+          <button id="sdoc-starred-btn" className={`doc-icon sdocfont ${isStarred ? 'sdoc-starred' : 'sdoc-unstarred'} border-0 p-0 bg-transparent`}
+            aria-label={isStarred ? t('Unstar') : t('Star')}
+            onClick={toggleStar}>
+          </button>
+          <Tooltip target="sdoc-starred-btn">{isStarred ? t('Starred') : t('Unstarred')}</Tooltip>
+        </>
       )}
       {(isShowInternalLink && !mobileLogin) && (
-        <span className='doc-icon'>
-          <span className='internal-link sdocfont sdoc-link' title={t('Internal_link')} onClick={onInternalLinkClick}></span>
+        <span id="sdoc-internal-link" className='doc-icon'>
+          <span className='internal-link sdocfont sdoc-link' onClick={onInternalLinkClick}></span>
+          <Tooltip target="sdoc-internal-link">{t('Internal_link')}</Tooltip>
         </span>
       )}
       {isFreezed && (
-        <span className="doc-icon">
-          <img src={freezedImg} alt={t('Document_frozen')} title={t('Document_frozen')} width='16px'/>
+        <span id="sdoc-doc-frozen" className="doc-icon">
+          <img src={freezedImg} alt={t('Document_frozen')} width='16px'/>
+          <Tooltip target="sdoc-doc-frozen">{t('Document_frozen')}</Tooltip>
         </span>
       )}
       <TipMessage isEditMode={isEditMode} />
@@ -81,15 +85,17 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
           <div className="doc-name">{oldDocName}</div>
           <div className="sdoc-revision-order">{t('Revision') + ' ' + revisionId}</div>
           {isShowInternalLink && (
-            <span className='doc-icon'>
-              <span className='internal-link sdocfont sdoc-link' title={t('Internal_link')} onClick={onInternalLinkClick}></span>
+            <span id="doc-internal-link" className='doc-icon'>
+              <span className='internal-link sdocfont sdoc-link' onClick={onInternalLinkClick}></span>
+              <Tooltip target="doc-internal-link">{t('Internal_link')}</Tooltip>
             </span>
           )}
           {isPublished && (
             <>
               <div className="sdoc-revision-published-tip">{t('Published')}</div>
-              <div className="sdoc-revision-source-doc" title={t('Jump_to_original_doc')} onClick={jumpToSourceDoc}>
+              <div id="sdoc-revision-source-doc" className="sdoc-revision-source-doc" onClick={jumpToSourceDoc}>
                 <i className="sdocfont sdoc-jump-to"></i>
+                <Tooltip target="sdoc-revision-source-doc">{t('Jump_to_original_doc')}</Tooltip>
               </div>
             </>
           )}

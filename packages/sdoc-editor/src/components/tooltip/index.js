@@ -15,12 +15,14 @@ const Tooltip = ({ target, children, className, modifiers = [], placement = 'bot
     },
   }];
   const props = {
-    popperClassName: classnames('sdoc-tooltip', className),
-    modifiers: newModifiers,
-    placement,
     target,
-    fade,
+    placement,
+    popperClassName: classnames('sdoc-tooltip', className),
     delay,
+    hideArrow: true,
+    autoHide: false,
+    fade,
+    modifiers: newModifiers,
   };
 
   return (
