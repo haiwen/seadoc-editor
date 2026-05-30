@@ -27,7 +27,7 @@ const TableMenu = ({ editor, readonly, eventBus }) => {
         <TableSizePopover
           editor={editor}
           target={menuConfig.id}
-          trigger="hover"
+          trigger="click"
           placement="right-start"
           createTable={createTable}
         />

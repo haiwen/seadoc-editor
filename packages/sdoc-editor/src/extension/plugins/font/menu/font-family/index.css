@@ -33,8 +33,10 @@
 
 /* sdoc-font-family-menu-popover */
 .sdoc-font-family-menu-popover .sdoc-dropdown-menu-title-name {
-  padding: 8px 10px;
-  color: gray;
+  height: 24px;
+  line-height: 24px;
+  padding-left: 8px;
+  color: #666;
   cursor: default;
   font-size: 14px;
 }

@@ -90,7 +90,7 @@ const ColorSelectorPopover = ({ target, editor, readonly, isRichEditor = true })
       className="sdoc-color-menu-popover sdoc-table-cell-bg-colors-popover"
       toggle={toggle}
       ref={popoverRef}
-      offset={[0, 0]}
+      offset={[0, 8]}
     >
       <div className="sdoc-dropdown-menu sdoc-color-dropdown-menu">
         <div className="p-3 d-flex flex-column">
