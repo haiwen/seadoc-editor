@@ -10,7 +10,8 @@ import './index.css';
 
 const TableSizePopover = ({
   editor, target, trigger = 'legacy', placement = 'bottom-start',
-  popperClassName, createTable, tableSizeRef, handleClosePopover, callback
+  popperClassName, createTable, tableSizeRef, handleClosePopover, callback,
+  offset = [0, 8],
 }) => {
   const minSize = [5, 10];
   const maxSize = [10, 10];
@@ -207,6 +208,7 @@ const TableSizePopover = ({
       fade={false}
       ref={ref}
       popperClassName={popperClassName}
+      offset={offset}
     >
       <div className="sdoc-selected-table-size-container w-100 h-100 d-flex flex-column">
         <div className='sdoc-selected-table-tools-container'>

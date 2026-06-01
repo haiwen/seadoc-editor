@@ -30,6 +30,6 @@
 .sdoc-side-menu-insert-below-popover .popover {
   background-color: #fff;
   min-width: 150px;
-  border-radius: 2px;
+  border-radius: 8px;
   cursor: pointer;
 }

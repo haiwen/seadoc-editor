@@ -179,12 +179,12 @@ const InsertBlockMenu = ({
           <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <UncontrolledPopover
             target='sdoc-side-menu-item-video'
-            trigger="click"
+            trigger="hover"
             className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
             placement="right-start"
             hideArrow={true}
             fade={false}
-            offset={[0, -2]}
+            offset={[0, 6]}
           >
             <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container">
               <div className="sdoc-dropdown-menu-item" onClick={onInsertVideoToggle}>{t('Upload_local_video')}</div>
@@ -201,6 +201,7 @@ const InsertBlockMenu = ({
           target='sdoc-side-menu-item-table'
           trigger='hover'
           placement='right-start'
+          offset={[0, 6]}
           popperClassName='sdoc-side-menu-table-size sdoc-insert-element-table-size-wrapper'
           createTable={createTable}
         />
