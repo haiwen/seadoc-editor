@@ -11,7 +11,7 @@ const InsertBelowMenu = ({ target, slateNode }) => {
       boundariesElement='viewport'
       target={target}
       className="sdoc-side-menu-insert-below-popover sdoc-sub-dropdown-menu sdoc-dropdown-menu"
-      trigger='click'
+      trigger='hover'
       placement='right-start'
       hideArrow={true}
       fade={false}

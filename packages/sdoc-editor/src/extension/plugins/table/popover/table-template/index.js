@@ -106,6 +106,7 @@ const TableTemplate = ({ editor, targetId, templateRef, handleClosePopover, call
       innerClassName='sdoc-table-template-inner-popover'
       popperClassName="sdoc-table-template-popover-wrapper"
       ref={ref}
+      offset={[0, 0]}
     >
       {tableTemplatePreviewList.map((alternateColor, index) =>
         <SampleTable

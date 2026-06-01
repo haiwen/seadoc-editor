@@ -1,6 +1,7 @@
 .sdoc-context-menu .sdoc-table-context-menu {
   display: block;
   font-size: 0.875rem;
+  max-width: 480px !important;
 }
 
 .sdoc-table-context-menu .insert-number {

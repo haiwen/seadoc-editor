@@ -42,16 +42,17 @@
 }
 
 .sdoc-operator-folder .sdoc-dropdown-menu {
-  padding: 8px 0;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .sdoc-operator-folder .sdoc-dropdown-menu .sdoc-dropdown-menu-item {
-  padding: 4px 16px;
+  padding: 4px 12px;
 }
 
 .sdoc-operator-folder .sdoc-dropdown-menu .sdoc-operator-folder-divider {
   margin: 8px 0;
-  border-top: 1px solid #e6e9ed;
+  border-top: 1px solid #eee;
   height: 1px;
   width: 100%;
 }
