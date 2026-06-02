@@ -24,46 +24,56 @@
   font-size: 12px;
 }
 
+.sdoc-more-revision-operations-dropdown .sdoc-revisions-dropdown-container {
+  max-width: 330px;
+}
+
 .sdoc-more-revision-operations-dropdown .dropdown-item {
-  padding: 12px;
-  height: 80px;
+  padding: 8px 12px;
+  height: 77px;
 }
 
 .sdoc-more-revision-operations-dropdown .dropdown-item.en,
 .sdoc-more-revision-operations-dropdown .dropdown-item.cs,
 .sdoc-more-revision-operations-dropdown .dropdown-item.es-ar,
 .sdoc-more-revision-operations-dropdown .dropdown-item.es-mx {
-  height: 100px;
+  height: 77px;
 }
 
 .sdoc-more-revision-operations-dropdown .dropdown-item.de,
 .sdoc-more-revision-operations-dropdown .dropdown-item.fr,
 .sdoc-more-revision-operations-dropdown .dropdown-item.ru {
-  height: 120px;
+  height: 95px;
+}
+
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-container {
+  margin-left: 38px;
 }
 
 .sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation {
   width: 373px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
 }
 
-.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title .sdoc-revise {
-  font-size: 16px;
-  margin-right: 6px;
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation .sdoc-revise {
+  position: absolute;
+  left: 12px;
+  font-size: 14px;
   color: #666;
+  height: 21px;
+  line-height: 21px;
 }
 
-.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title-name {
+.sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-title {
   color: #212529;
   font-size: 14px;
+  margin-bottom: 4px;
 }
 
 .sdoc-more-revision-operations-dropdown .sdoc-more-revision-operation-describe {
-  padding-left: 20px;
-  color: #999;
-  font-size: 13px;
+  color: #666;
+  font-size: 12px;
   width: 100%;
   white-space: break-spaces;
 }
