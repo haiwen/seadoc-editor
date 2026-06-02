@@ -3,7 +3,7 @@
   min-width: 100px;
   min-height: 100px;
   max-width: 222px;
-  border-radius: 2px;
+  border-radius: 8px;
 }
 
 .sdoc-selected-table-size-popover .sdoc-selected-table-size-tip {
@@ -48,7 +48,7 @@
 .sdoc-selected-table-size-container .sdoc-selected-table-tools-container {
   padding: 10px 0;
   margin-bottom: 10px;
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #eee;
 }
 
 .sdoc-selected-table-size-popover .sdoc-selected-table-size-custom {

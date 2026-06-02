@@ -16,6 +16,7 @@ const TransformMenus = ({ editor, slateNode, target, onSetType }) => {
       placement='right-start'
       hideArrow={true}
       fade={false}
+      offset={[0, 6]}
     >
       <div className="sdoc-dropdown-menu-container">
         {getTransformMenusConfig(editor, slateNode).map((item) => {

@@ -62,7 +62,7 @@
   left: 0px;
   background-color: #fff;
   border: 1px solid #e5e6e8;
-  border-radius: 2px;
+  border-radius: 8px;
   box-shadow: 0 0 10px #ccc;
   display: flex;
   flex-direction: column;
@@ -71,8 +71,22 @@
   white-space: nowrap;
 }
 
+.sdoc-image-hover-menu-container .sdoc-image-popover .sdoc-dropdown-menu-container .sdoc-dropdown-menu-item {
+  padding: 4px 12px 4px 38px;
+}
+
+.sdoc-image-hover-menu-container .sdoc-image-popover .sdoc-dropdown-menu-container .sdoc-check-mark {
+  position: absolute;
+  left: 12px;
+  color: #666;
+}
+
 .sdoc-image-hover-menu-container .align-popover {
-  min-width: 6rem;
+  min-width: 80px;
+}
+
+.sdoc-image-hover-menu-container .align-popover .sdoc-dropdown-menu-container {
+  min-width: 80px;
 }
 
 .sdoc-image-hover-menu-container .border-popover {

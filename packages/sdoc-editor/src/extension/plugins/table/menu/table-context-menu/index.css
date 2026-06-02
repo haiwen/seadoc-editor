@@ -1,6 +1,7 @@
 .sdoc-context-menu .sdoc-table-context-menu {
   display: block;
   font-size: 0.875rem;
+  max-width: 480px !important;
 }
 
 .sdoc-table-context-menu .insert-number {
@@ -17,12 +18,6 @@
   transition: none;
 }
 
-.sdoc-table-context-menu .dropdown-item:hover .insert-number-input {
-  background-color: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-}
-
 .sdoc-table-context-menu .dropdown-item:disabled .insert-number-input {
   color: #adb5bd;
 }
@@ -37,8 +32,4 @@
 .side-extendable .sdoc-arrow-right {
   color: #666;
   font-size: 12px;
-}
-
-.side-extendable:hover .sdoc-arrow-right {
-  color: #fff;
 }

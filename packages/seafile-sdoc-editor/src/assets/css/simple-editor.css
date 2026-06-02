@@ -1,12 +1,35 @@
 /* reset common css */
-.sdoc-editor-page-wrapper .dropdown-item,
+.sdoc-context-menu .dropdown-menu {
+  max-height: 600px;
+  max-width: 240px;
+  min-width: 200px;
+  width: fit-content;
+  border-radius: 8px;
+  overflow: visible;
+  padding: 8px;
+}
+
+.sdoc-context-menu .dropdown-item {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+  cursor: pointer;
+  color: #212529;
+  font-size: .875rem;
+  border-radius: 4px;
+  padding: 0 12px;
+}
+
 .sdoc-context-menu .dropdown-item:not(:disabled) {
   color: #212529;
 }
 
-.sdoc-context-menu .dropdown-item:hover {
-  color: #fff;
+.sdoc-context-menu .dropdown-item.disabled,
+.sdoc-context-menu .dropdown-item:disabled {
+  color: #adb5bd;
 }
+
 
 html {
   scrollbar-width: none;

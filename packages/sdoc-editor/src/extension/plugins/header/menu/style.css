@@ -54,12 +54,12 @@
   position: absolute;
   top: 42px;
   left: 8px;
-  padding: 8px 0;
   width: 180px;
   background-color: #fff;
   border: 1px solid #e5e6e8;
   border-radius: 2px;
   box-shadow: 0 0 10px #ccc;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -74,12 +74,12 @@
 .header-menu .header-popover .sdoc-dropdown-menu-item {
   font-size: 14px;
   height: auto;
-  padding: 9px 16px 9px 24px;
+  padding: 9px 12px 9px 38px;
   line-height: 1;
 }
 
 .header-menu .header-popover .sdoc-dropdown-menu-item .sdoc-check-mark {
   position: absolute;
-  left: 5px;
+  left: 12px;
   color: #666;
 }

@@ -15,6 +15,7 @@ const InsertBelowMenu = ({ target, slateNode }) => {
       placement='right-start'
       hideArrow={true}
       fade={false}
+      offset={[0, 6]}
     >
       <div className="sdoc-dropdown-menu-container">
         <InsertBlockMenu insertPosition={INSERT_POSITION.AFTER} slateNode={slateNode} />

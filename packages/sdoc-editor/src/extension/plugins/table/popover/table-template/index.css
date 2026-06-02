@@ -2,6 +2,12 @@
   min-width: 312px;
 }
 
+.sdoc-table-template-popover .popover {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 .sdoc-table-template-inner-popover {
   display: flex;
   flex-wrap: wrap;

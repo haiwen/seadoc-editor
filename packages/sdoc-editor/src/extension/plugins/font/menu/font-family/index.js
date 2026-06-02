@@ -107,7 +107,7 @@ const FontFamily = ({
           fade={false}
           ref={popoverRef}
         >
-          <div className="sdoc-font-size-menu-container" style={{ maxHeight: window.innerHeight - bottom - 100 }}>
+          <div className="sdoc-dropdown-menu-container sdoc-font-size-menu-container" style={{ maxHeight: window.innerHeight - bottom - 100 }}>
             {Array.isArray(recentUsedFonts) && recentUsedFonts.length > 0 && (
               <>
                 <div className="sdoc-dropdown-menu-title-name">{t('Recently_used')}</div>

@@ -284,6 +284,7 @@ const QuickInsertBlockMenu = ({
             placement="right-start"
             hideArrow={true}
             fade={false}
+            offset={[0, 6]}
           >
             <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container">
               <div className="sdoc-dropdown-menu-item" onClick={onInsertVideoToggle}>{t('Upload_local_video')}</div>
@@ -303,6 +304,7 @@ const QuickInsertBlockMenu = ({
             target='sdoc-side-menu-item-table'
             trigger='hover'
             placement='right-start'
+            offset={[0, 6]}
             popperClassName='sdoc-side-menu-table-size sdoc-insert-element-table-size-wrapper'
             createTable={createTable}
             callback={callback}
@@ -456,7 +458,7 @@ const QuickInsertBlockMenu = ({
   }, [onChange]);
 
   return (
-    <div className='sdoc-insert-element-toolbar'>
+    <div className='sdoc-dropdown-menu-container sdoc-insert-element-toolbar'>
       <div className='sdoc-side-menu-search-wrapper'>
         <Input
           innerRef={inputWrapperRef}
