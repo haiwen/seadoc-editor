@@ -40,15 +40,15 @@ const MoreRevisionOperations = ({ t }) => {
       <Tooltip target={id}>
         {t('Revise')}
       </Tooltip>
-      <DropdownMenu className="sdoc-dropdown-menu" end>
+      <DropdownMenu className="sdoc-dropdown-menu sdoc-revisions-dropdown-container" end>
         <DropdownItem className={`sdoc-dropdown-menu-item ${lang}`} onClick={startRevise}>
           <div className="sdoc-more-revision-operation">
-            <div className="sdoc-more-revision-operation-title">
-              <i className="sdocfont sdoc-revise" />
-              <span className="sdoc-more-revision-operation-title-name">{t('Revise')}</span>
-            </div>
-            <div className="sdoc-more-revision-operation-describe">
-              {t('Start_revise_tip')}
+            <i className="sdocfont sdoc-revise" />
+            <div className='sdoc-more-revision-operation-container'>
+              <div className="sdoc-more-revision-operation-title">{t('Revise')}</div>
+              <div className="sdoc-more-revision-operation-describe">
+                {t('Start_revise_tip')}
+              </div>
             </div>
           </div>
         </DropdownItem>
