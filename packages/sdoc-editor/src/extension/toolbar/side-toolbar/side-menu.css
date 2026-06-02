@@ -33,3 +33,7 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+.sdoc-side-menu-insert-below-popover .sdoc-dropdown-menu-container {
+  overflow: auto;
+}
