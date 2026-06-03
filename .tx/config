@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[o:haiwen:p:seahub:r:sdoc-editor]
+file_filter   = packages/example/public/locales/<lang>/sdoc-editor.json
+source_file   = packages/example/public/locales/en/sdoc-editor.json
+type          = KEYVALUEJSON
+minimum_perc  = 0
+resource_name = sdoc-editor
