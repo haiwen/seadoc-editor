@@ -6,15 +6,15 @@
 }
 
 .sdoc-file-link-hover-menu-container .hover-menu-container {
-  height: 36px;
-  padding: 7px 8px;
+  height: 40px;
+  padding: 8px;
   background-color: #fff;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  border: 1px solid #e8e8e8;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
 }
 
 .sdoc-file-link-hover-menu-container .hover-menu-container>span:not(:last-of-type) {

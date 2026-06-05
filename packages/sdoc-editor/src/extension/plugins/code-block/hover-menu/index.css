@@ -9,7 +9,7 @@
 .sdoc-code-block-hover-menu-container .hover-menu-container {
   height: 40px;
   width: 100%;
-  padding: 8px 8px;
+  padding: 8px;
   display: flex;
   justify-content: space-around;
   align-items: center;

@@ -70,7 +70,7 @@
 
 .comments-panel-header-right .sdoc-file-checked {
   position: absolute;
-  left: 7px;
+  left: 12px;
   color: #798d99;
   font-size: 12px;
   font-weight: 400;
@@ -309,7 +309,11 @@
 }
 
 .comments-panel-body__header .sdoc-comment-filter-dropdown.sdoc-dropdown-menu {
-  border: 1px solid #dee3eb;
+  border: 1px solid #eee;
+}
+
+.sdoc-comment-drawer .sdoc-comment-filter-dropdown .sdoc-dropdown-menu-item {
+  padding: 0 12px 0 38px;
 }
 
 /* global detail */
