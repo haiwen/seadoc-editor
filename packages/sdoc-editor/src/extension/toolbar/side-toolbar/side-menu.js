@@ -154,11 +154,13 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
         </div>
         {isNodeEmpty && (
           <div id="sdoc-side-menu-insert-wrapper" className='sdoc-side-menu-insert-wrapper'>
-            <InsertBlockMenu isNodeEmpty={isNodeEmpty} slateNode={slateNode} insertMenuSearchMap={insertMenuSearchMap} />
+            <div className='sdoc-side-menu-inner-container'>
+              <InsertBlockMenu isNodeEmpty={isNodeEmpty} slateNode={slateNode} insertMenuSearchMap={insertMenuSearchMap} />
+            </div>
           </div>
         )}
         {!isNodeEmpty && (
-          <>
+          <div id="sdoc-side-menu-insert-wrapper" className='sdoc-side-menu-insert-wrapper'>
             {/* transform menu */}
             {transformMenuSearchMap['searching'] && isDisplayCategoryTitle(transformMenuSearchMap, insertBelowMenuSearchMap) && (
               <DropdownMenuItem menuConfig={{ text: 'Transform_to' }} className="pr-2 sdoc-dropdown-menu-item-title"></DropdownMenuItem>
@@ -243,7 +245,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
             {transformMenuSearchMap['searching'] && Object.keys({ ...transformMenuSearchMap, ...insertBelowMenuSearchMap, ...otherOperatonsMenuSearchMap }).length === 1 && (
               <div className='sdoc-dropdown-menu-item-no-results'>{t('No_results')}</div>
             )}
-          </>
+          </div>
         )}
       </div>
     </ElementPopover>

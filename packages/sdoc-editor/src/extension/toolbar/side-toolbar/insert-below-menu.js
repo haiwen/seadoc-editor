@@ -10,14 +10,15 @@ const InsertBelowMenu = ({ target, slateNode }) => {
     <UncontrolledPopover
       boundariesElement='viewport'
       target={target}
-      className="sdoc-side-menu-insert-below-popover sdoc-sub-dropdown-menu sdoc-dropdown-menu"
+      className="sdoc-side-menu-insert-below-popover sdoc-sub-dropdown-menu"
+      popperClassName='sdoc-popover-box-shadow'
       trigger='hover'
       placement='right-start'
       hideArrow={true}
       fade={false}
       offset={[0, 6]}
     >
-      <div className="sdoc-dropdown-menu-container">
+      <div className="sdoc-dropdown-menu">
         <InsertBlockMenu insertPosition={INSERT_POSITION.AFTER} slateNode={slateNode} />
       </div>
     </UncontrolledPopover>

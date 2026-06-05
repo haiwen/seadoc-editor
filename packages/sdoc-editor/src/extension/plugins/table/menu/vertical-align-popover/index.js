@@ -30,24 +30,23 @@ const VerticalAlignPopover = ({ target, editor, readonly, verticalAlign }) => {
       target={target.current}
       trigger="hover"
       placement="right-start"
+      popperClassName='sdoc-popover-box-shadow'
       hideArrow={true}
       fade={false}
       offset={[0, 8]}
     >
       <div className="sdoc-dropdown-menu sdoc-table-alignment-menu">
-        <div className='sdoc-dropdown-menu-container'>
-          <div className="sdoc-dropdown-menu-item" onMouseDown={() => setVerticalAlignStyle('flex-start')}>
-            <i className={classNames('sdocfont sdoc-check-mark', { active: !verticalAlign || verticalAlign === 'flex-start' })}></i>
-            <span className='active'>{t('Top_align')}</span>
-          </div>
-          <div className="sdoc-dropdown-menu-item" onMouseDown={() => setVerticalAlignStyle('center')}>
-            <i className={classNames('sdocfont sdoc-check-mark', { active: verticalAlign === 'center' })}></i>
-            <span>{t('Center_align')}</span>
-          </div>
-          <div className="sdoc-dropdown-menu-item" onMouseDown={() => setVerticalAlignStyle('flex-end')}>
-            <i className={classNames('sdocfont sdoc-check-mark', { active: verticalAlign === 'flex-end' })}></i>
-            <span>{t('Bottom_align')}</span>
-          </div>
+        <div className="sdoc-dropdown-menu-item" onMouseDown={() => setVerticalAlignStyle('flex-start')}>
+          <i className={classNames('sdocfont sdoc-check-mark', { active: !verticalAlign || verticalAlign === 'flex-start' })}></i>
+          <span className='active'>{t('Top_align')}</span>
+        </div>
+        <div className="sdoc-dropdown-menu-item" onMouseDown={() => setVerticalAlignStyle('center')}>
+          <i className={classNames('sdocfont sdoc-check-mark', { active: verticalAlign === 'center' })}></i>
+          <span>{t('Center_align')}</span>
+        </div>
+        <div className="sdoc-dropdown-menu-item" onMouseDown={() => setVerticalAlignStyle('flex-end')}>
+          <i className={classNames('sdocfont sdoc-check-mark', { active: verticalAlign === 'flex-end' })}></i>
+          <span>{t('Bottom_align')}</span>
         </div>
       </div>
     </UncontrolledPopover>

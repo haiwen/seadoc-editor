@@ -28,24 +28,23 @@ const HorizontalAlignPopover = ({ target, editor, readonly, horizontalAlign }) =
       target={target.current}
       trigger="hover"
       placement="right-start"
+      popperClassName='sdoc-popover-box-shadow'
       hideArrow={true}
       fade={false}
       offset={[0, 8]}
     >
       <div className="sdoc-dropdown-menu sdoc-table-alignment-menu">
-        <div className='sdoc-dropdown-menu-container'>
-          <div className="sdoc-dropdown-menu-item" onMouseDown={() => setTextAlignStyle('left')}>
-            <i className={classNames('sdocfont sdoc-check-mark', { active: !horizontalAlign || horizontalAlign === 'left' })}></i>
-            <span className='active'>{t('Left')}</span>
-          </div>
-          <div className="sdoc-dropdown-menu-item" onMouseDown={() => setTextAlignStyle('center')}>
-            <i className={classNames('sdocfont sdoc-check-mark', { active: horizontalAlign === 'center' })}></i>
-            <span>{t('Center')}</span>
-          </div>
-          <div className="sdoc-dropdown-menu-item" onMouseDown={() => setTextAlignStyle('right')}>
-            <i className={classNames('sdocfont sdoc-check-mark', { active: horizontalAlign === 'right' })}></i>
-            <span>{t('Right')}</span>
-          </div>
+        <div className="sdoc-dropdown-menu-item" onMouseDown={() => setTextAlignStyle('left')}>
+          <i className={classNames('sdocfont sdoc-check-mark', { active: !horizontalAlign || horizontalAlign === 'left' })}></i>
+          <span className='active'>{t('Left')}</span>
+        </div>
+        <div className="sdoc-dropdown-menu-item" onMouseDown={() => setTextAlignStyle('center')}>
+          <i className={classNames('sdocfont sdoc-check-mark', { active: horizontalAlign === 'center' })}></i>
+          <span>{t('Center')}</span>
+        </div>
+        <div className="sdoc-dropdown-menu-item" onMouseDown={() => setTextAlignStyle('right')}>
+          <i className={classNames('sdocfont sdoc-check-mark', { active: horizontalAlign === 'right' })}></i>
+          <span>{t('Right')}</span>
         </div>
       </div>
     </UncontrolledPopover >

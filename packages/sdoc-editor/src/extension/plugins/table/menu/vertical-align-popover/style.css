@@ -4,11 +4,7 @@
 }
 
 .sdoc-table-alignment-menu {
-    min-width: 80px !important;
-}
-
-.sdoc-table-alignment-menu .sdoc-dropdown-menu-container {
-    min-width: 80px !important;
+    min-width: 96px !important;
 }
 
 .sdoc-table-alignment-menu .sdoc-dropdown-menu-item {

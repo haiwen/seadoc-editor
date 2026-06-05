@@ -31,13 +31,15 @@ const LangSubMenu = ({ target, onTranslateClick }) => {
     <UncontrolledPopover
       boundariesElement='viewport'
       target={target}
-      className="ai-lang-sub-menu sdoc-sub-dropdown-menu sdoc-dropdown-menu"
+      className="ai-lang-sub-menu sdoc-sub-dropdown-menu"
+      popperClassName='sdoc-popover-box-shadow'
       trigger='hover'
       placement='right-start'
       hideArrow={true}
       fade={false}
+      offset={[0, 8]}
     >
-      <div className="sdoc-dropdown-menu-container">
+      <div className="sdoc-dropdown-menu">
         <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.ZH_CN} onClick={onZhcnClick} />
         <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.EN} onClick={onEnClick} />
         <DropdownMenuItem menuConfig={LANG_MENU_CONFIG.FR} onClick={onFrClick} />
