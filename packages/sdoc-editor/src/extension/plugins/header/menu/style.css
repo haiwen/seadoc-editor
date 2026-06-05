@@ -74,6 +74,7 @@
   height: auto;
   padding: 9px 12px 9px 38px;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .header-menu .header-popover .sdoc-dropdown-menu-item .sdoc-check-mark {
