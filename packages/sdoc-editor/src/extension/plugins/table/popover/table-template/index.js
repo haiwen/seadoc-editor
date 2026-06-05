@@ -104,9 +104,9 @@ const TableTemplate = ({ editor, targetId, templateRef, handleClosePopover, call
       fade={false}
       className='sdoc-sub-dropdown-menu sdoc-table-template-popover'
       innerClassName='sdoc-table-template-inner-popover'
-      popperClassName="sdoc-table-template-popover-wrapper"
+      popperClassName="sdoc-table-template-popover-wrapper sdoc-popover-box-shadow"
       ref={ref}
-      offset={[0, 0]}
+      offset={[0, 8]}
     >
       {tableTemplatePreviewList.map((alternateColor, index) =>
         <SampleTable

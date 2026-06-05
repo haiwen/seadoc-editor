@@ -99,7 +99,8 @@ const FontFamily = ({
       {!disabled && (
         <UncontrolledPopover
           target={fontSizeButtonId}
-          className="sdoc-menu-popover sdoc-dropdown-menu sdoc-font-size-menu-popover sdoc-font-family-menu-popover"
+          className="sdoc-font-size-menu-popover sdoc-font-family-menu-popover"
+          popperClassName="sdoc-popover-box-shadow"
           trigger="legacy"
           placement="bottom-start"
           hideArrow={true}
@@ -107,26 +108,23 @@ const FontFamily = ({
           fade={false}
           ref={popoverRef}
         >
-          <div className="sdoc-dropdown-menu-container sdoc-font-size-menu-container" style={{ maxHeight: window.innerHeight - bottom - 100 }}>
+          <div className="sdoc-dropdown-menu sdoc-font-size-menu-container" style={{ maxHeight: window.innerHeight - bottom - 100 }}>
             {Array.isArray(recentUsedFonts) && recentUsedFonts.length > 0 && (
               <>
                 <div className="sdoc-dropdown-menu-title-name">{t('Recently_used')}</div>
+                <div className="sdoc-dropdown-menu-divider my-1"></div>
                 {recentUsedFonts.map((item, index) => {
                   const fontObject = FONT.find(font => font.name === item);
                   return (
                     <FontItem key={`${index}-recently-used`} fontObject={fontObject} selectedFont={selectedFont} setFont={updateFont} />
                   );
                 })}
-                <div className="sdoc-dropdown-menu-divider"></div>
+                <div className="h-3"></div>
               </>
             )}
             <div className="sdoc-dropdown-menu-title-name">{t('All_fonts')}</div>
+            <div className="sdoc-dropdown-menu-divider my-1"></div>
             {fontList.map((item, index) => {
-              if (item.type === 'divide') {
-                return (
-                  <div className="sdoc-dropdown-menu-divider"></div>
-                );
-              }
               return (
                 <FontItem key={`${index}-all-font`} fontObject={item} selectedFont={selectedFont} setFont={updateFont} />
               );

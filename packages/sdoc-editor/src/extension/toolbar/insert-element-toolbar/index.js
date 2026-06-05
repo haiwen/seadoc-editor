@@ -280,7 +280,8 @@ const QuickInsertBlockMenu = ({
           <UncontrolledPopover
             target='sdoc-side-menu-item-video'
             trigger="hover"
-            className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            className="sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            popperClassName="sdoc-popover-box-shadow"
             placement="right-start"
             hideArrow={true}
             fade={false}
@@ -458,7 +459,7 @@ const QuickInsertBlockMenu = ({
   }, [onChange]);
 
   return (
-    <div className='sdoc-dropdown-menu-container sdoc-insert-element-toolbar'>
+    <div className='sdoc-insert-element-toolbar'>
       <div className='sdoc-side-menu-search-wrapper'>
         <Input
           innerRef={inputWrapperRef}

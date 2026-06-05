@@ -53,12 +53,10 @@
 .header-menu .header-popover {
   position: absolute;
   top: 42px;
-  left: 8px;
-  width: 180px;
+  left: -1px;
   background-color: #fff;
-  border: 1px solid #e5e6e8;
-  border-radius: 2px;
-  box-shadow: 0 0 10px #ccc;
+  border: 1px solid #eee;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   display: flex;
   flex-direction: column;

@@ -109,33 +109,31 @@ class HeaderMenu extends React.Component {
         </div>
         {isShowHeaderPopover && (
           <div ref={this.setMenuRef} className={classnames('header-popover sdoc-dropdown-menu', { 'sdoc-dropdown-menu-mobile': isMobile })}>
-            <div className='sdoc-dropdown-menu-container'>
-              {itemList.map((item, index) => {
-                if (item === 'divider') {
-                  return (<div key={index} className='sdoc-dropdown-menu-divider'></div>);
-                }
-                const id = `${item}-${index}`;
-                const isSelected = currentType === item;
-                return (
-                  <Fragment key={index}>
-                    <div
-                      id={id}
-                      className={classnames('sdoc-dropdown-menu-item', { 'position-relative': isSelected })}
-                      onClick={this.onMouseDown(item)}
-                    >
-                      {isSelected && (<i className="sdocfont sdoc-check-mark"></i>)}
-                      <span style={{ fontSize: `${SDOC_FONT_SIZE[item]}pt` }}>{t(HEADER_TITLE_MAP[item])}</span>
-                    </div>
-                    <Tooltip
-                      target={id}
-                      placement="right"
-                    >
-                      {this.getToolTip(item)}
-                    </Tooltip>
-                  </Fragment>
-                );
-              })}
-            </div>
+            {itemList.map((item, index) => {
+              if (item === 'divider') {
+                return (<div key={index} className='sdoc-dropdown-menu-divider'></div>);
+              }
+              const id = `${item}-${index}`;
+              const isSelected = currentType === item;
+              return (
+                <Fragment key={index}>
+                  <div
+                    id={id}
+                    className={classnames('sdoc-dropdown-menu-item', { 'position-relative': isSelected })}
+                    onClick={this.onMouseDown(item)}
+                  >
+                    {isSelected && (<i className="sdocfont sdoc-check-mark"></i>)}
+                    <span style={{ fontSize: `${SDOC_FONT_SIZE[item]}pt` }}>{t(HEADER_TITLE_MAP[item])}</span>
+                  </div>
+                  <Tooltip
+                    target={id}
+                    placement="right"
+                  >
+                    {this.getToolTip(item)}
+                  </Tooltip>
+                </Fragment>
+              );
+            })}
           </div>
         )}
       </div>

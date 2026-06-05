@@ -201,16 +201,16 @@ const TableSizePopover = ({
   return (
     <UncontrolledPopover
       target={target}
-      className="sdoc-selected-table-size-popover sdoc-sub-dropdown-menu sdoc-dropdown-menu"
+      className="sdoc-selected-table-size-popover sdoc-sub-dropdown-menu"
       trigger={trigger}
       placement={placement}
       hideArrow={true}
       fade={false}
       ref={ref}
-      popperClassName={popperClassName}
+      popperClassName={`${popperClassName} sdoc-popover-box-shadow`}
       offset={offset}
     >
-      <div className="sdoc-selected-table-size-container w-100 h-100 d-flex flex-column">
+      <div className="sdoc-dropdown-menu sdoc-selected-table-size-container w-100 h-100 d-flex flex-column">
         <div className='sdoc-selected-table-tools-container'>
           <MenuItem
             id="sdoc-table-template-review-btn"

@@ -36,7 +36,7 @@ const ColorMenu = ({
   ariaLabel,
   iconClass,
   id,
-  popoverClassName,
+  popperClassName,
   disabled,
   t,
   setColor,
@@ -146,7 +146,8 @@ const ColorMenu = ({
       {!disabled && (
         <UncontrolledPopover
           target={id}
-          className={classnames('sdoc-color-menu-popover', popoverClassName)}
+          className={classnames('sdoc-color-menu-popover', popperClassName)}
+          popperClassName="sdoc-popover-box-shadow"
           trigger="legacy"
           placement="bottom-start"
           hideArrow={true}
@@ -155,7 +156,7 @@ const ColorMenu = ({
           ref={popoverRef}
         >
           <div className="sdoc-dropdown-menu sdoc-color-dropdown-menu">
-            <div className="p-3 d-flex flex-column">
+            <div className="py-3 d-flex flex-column">
               <div className="sdoc-color-no-color-container">
                 <div className="sdoc-color-no-color-content" onClick={() => onSetColor(defaultColor)}>
                   {defaultColorTip || t('No_color')}
@@ -215,6 +216,7 @@ const ColorMenu = ({
               fade={false}
               toggle={moreColorsPopoverToggle}
               ref={moreColorsPopoverRef}
+              offset={[0, 0]}
             >
               <div className="sdoc-more-colors-container" onClick={onClick}>
                 <ChromePicker
@@ -234,7 +236,7 @@ const ColorMenu = ({
 ColorMenu.propTypes = {
   disabled: PropTypes.bool,
   isRichEditor: PropTypes.bool,
-  popoverClassName: PropTypes.string,
+  popperClassName: PropTypes.string,
   text: PropTypes.string,
   id: PropTypes.string,
   iconClass: PropTypes.string,

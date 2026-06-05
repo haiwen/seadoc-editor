@@ -79,15 +79,17 @@ const InsertToolbar = ({
       {!disabled && (
         <UncontrolledPopover
           target={insertToolbarId}
-          className='sdoc-menu-popover sdoc-dropdown-menu sdoc-insert-menu-popover'
+          className='sdoc-insert-menu-popover'
+          popperClassName="sdoc-popover-box-shadow"
           trigger='legacy'
           placement='bottom-start'
           hideArrow={true}
           toggle={toggle}
           fade={false}
           ref={popoverRef}
+          offset={[-9, 8]}
         >
-          <div className='sdoc-insert-menu-container sdoc-dropdown-menu-container' style={{ maxHeight: window.innerHeight - bottom - 100 }}>
+          <div className='sdoc-insert-menu-container sdoc-dropdown-menu' style={{ maxHeight: window.innerHeight - bottom - 100 }}>
             <ImageMenu { ...props } />
             <TableMenu { ...props } />
             <VideoMenu { ...props } />

@@ -1,14 +1,10 @@
-.sdoc-dropdown-menu,
-.sdoc-dropdown-menu .sdoc-dropdown-menu-container {
+.sdoc-dropdown-menu {
   width: fit-content;
   min-width: 200px;
-  max-width: 240px;
+  max-width: 480px;
   max-height: 600px;
-  overflow: visible;
-}
-
-.sdoc-dropdown-menu .sdoc-dropdown-menu-container {
   padding: 8px;
+  overflow: visible;
 }
 
 .sdoc-dropdown-menu .sdoc-dropdown-menu-divider {
@@ -80,6 +76,7 @@
   align-items: center;
   flex: 1;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .sdoc-dropdown-menu .sdoc-dropdown-item-content .sdoc-dropdown-item-content-icon {
@@ -89,7 +86,8 @@
 .sdoc-dropdown-menu .sdoc-arrow-right {
   color: #666;
   font-size: 12px !important;
-  line-height: 12px !important;
+  height: 21px;
+  line-height: 21px !important;
 }
 
 .sdoc-dropdown-menu .sdoc-dropdown-item-with-left-icon {

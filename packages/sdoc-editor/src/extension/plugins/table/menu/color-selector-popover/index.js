@@ -93,7 +93,7 @@ const ColorSelectorPopover = ({ target, editor, readonly, isRichEditor = true })
       offset={[0, 8]}
     >
       <div className="sdoc-dropdown-menu sdoc-color-dropdown-menu">
-        <div className="p-3 d-flex flex-column">
+        <div className="py-3 d-flex flex-column">
           <div className="sdoc-color-no-color-container">
             <div className="sdoc-color-no-color-content" onMouseDown={() => onSetColor()}>
               {t('No_color')}
