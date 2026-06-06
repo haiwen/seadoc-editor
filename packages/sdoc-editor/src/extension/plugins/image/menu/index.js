@@ -44,12 +44,13 @@ const ImageMenu = ({ editor, readonly, eventBus, isRichEditor, className }) => {
         <UncontrolledPopover
           target={menuConfig.id}
           trigger="hover"
-          className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-image-menu-popover"
+          className="sdoc-sub-dropdown-menu sdoc-insert-image-menu-popover"
+          popperClassName="sdoc-popover-box-shadow"
           placement="right-start"
           hideArrow={true}
           fade={false}
         >
-          <div className="sdoc-insert-image-menu-popover-container sdoc-dropdown-menu-container">
+          <div className="sdoc-insert-image-menu-popover-container sdoc-dropdown-menu">
             <div className="sdoc-dropdown-menu-item" onClick={openInsertLocalImage}>{t('Upload_local_image')}</div>
           </div>
         </UncontrolledPopover>

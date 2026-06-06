@@ -280,13 +280,14 @@ const QuickInsertBlockMenu = ({
           <UncontrolledPopover
             target='sdoc-side-menu-item-video'
             trigger="hover"
-            className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            className="sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            popperClassName="sdoc-popover-box-shadow"
             placement="right-start"
             hideArrow={true}
             fade={false}
             offset={[0, 6]}
           >
-            <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container">
+            <div className="sdoc-insert-video-menu-popover-container">
               <div className="sdoc-dropdown-menu-item" onClick={onInsertVideoToggle}>{t('Upload_local_video')}</div>
               <div className="sdoc-dropdown-menu-item" onClick={addVideoLink}>{t('Add_video_link')}</div>
               {editor.editorType !== WIKI_EDITOR && <div className="sdoc-dropdown-menu-item" onClick={openSelectVideoFileDialog}>{t('Link_video_file')}</div>}
@@ -458,7 +459,7 @@ const QuickInsertBlockMenu = ({
   }, [onChange]);
 
   return (
-    <div className='sdoc-dropdown-menu-container sdoc-insert-element-toolbar'>
+    <div className='sdoc-insert-element-toolbar'>
       <div className='sdoc-side-menu-search-wrapper'>
         <Input
           innerRef={inputWrapperRef}
@@ -469,12 +470,14 @@ const QuickInsertBlockMenu = ({
         />
       </div>
       <div className='sdoc-insert-element-content-wrapper' ref={downDownWrapperRef}>
-        {Object.keys(dropDownItems).map((key) => {
-          return dropDownItems[key];
-        })}
-        {Object.keys(quickInsertMenuSearchMap).length === 0 && (
-          <div className='sdoc-dropdown-menu-item-no-results'>{t('No_results')}</div>
-        )}
+        <div className='sdoc-side-menu-inner-container'>
+          {Object.keys(dropDownItems).map((key) => {
+            return dropDownItems[key];
+          })}
+          {Object.keys(quickInsertMenuSearchMap).length === 0 && (
+            <div className='sdoc-dropdown-menu-item-no-results'>{t('No_results')}</div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -11,13 +11,15 @@ const AdjustSubMenu = ({ target, onMoreFluentClick, onMoreDetailsClick, onMoreCo
     <UncontrolledPopover
       boundariesElement='viewport'
       target={target}
-      className="ai-adjust-sub-menu sdoc-sub-dropdown-menu sdoc-dropdown-menu"
+      className="ai-adjust-sub-menu sdoc-sub-dropdown-menu"
+      popperClassName='sdoc-popover-box-shadow'
       trigger='hover'
       placement='right-start'
       hideArrow={true}
       fade={false}
+      offset={[0, 8]}
     >
-      <div className="sdoc-dropdown-menu-container">
+      <div className="sdoc-dropdown-menu">
         <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.MORE_FLUENT} onClick={onMoreFluentClick} />
         <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.MORE_DETAILS} onClick={onMoreDetailsClick} />
         <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.MORE_CONCISE} onClick={onMoreConciseClick} />

@@ -7,16 +7,16 @@
 }
 
 .sdoc-formula-hover-menu-container .hover-menu-container {
-  height: 36px;
+  height: 40px;
   width: 100%;
-  padding: 7px 8px;
+  padding: 8px;
   background-color: #fff;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  border: 1px solid #e8e8e8;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.10);
   color: #212529;
 }
 

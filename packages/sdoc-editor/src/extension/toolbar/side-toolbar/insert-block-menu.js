@@ -180,13 +180,14 @@ const InsertBlockMenu = ({
           <UncontrolledPopover
             target='sdoc-side-menu-item-video'
             trigger="hover"
-            className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            className="sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            popperClassName="sdoc-popover-box-shadow"
             placement="right-start"
             hideArrow={true}
             fade={false}
             offset={[0, 6]}
           >
-            <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu-container">
+            <div className="sdoc-insert-video-menu-popover-container sdoc-dropdown-menu">
               <div className="sdoc-dropdown-menu-item" onClick={onInsertVideoToggle}>{t('Upload_local_video')}</div>
               <div className="sdoc-dropdown-menu-item" onClick={addVideoLink}>{t('Add_video_link')}</div>
               {editor.editorType !== WIKI_EDITOR && <div className="sdoc-dropdown-menu-item" onClick={openSelectVideoFileDialog}>{t('Link_video_file')}</div>}

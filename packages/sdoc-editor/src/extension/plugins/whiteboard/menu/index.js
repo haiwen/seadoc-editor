@@ -33,12 +33,13 @@ const WhiteboardMenu = ({ editor, readonly, toggle, eventBus }) => {
         <UncontrolledPopover
           target={menuConfig.id}
           trigger='hover'
-          className='sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-whiteboard-menu-popover'
+          className='sdoc-sub-dropdown-menu sdoc-insert-whiteboard-menu-popover'
+          popperClassName="sdoc-popover-box-shadow"
           placement='right-start'
           hideArrow={true}
           fade={false}
         >
-          <div className='sdoc-insert-whiteboard-menu-popover-container sdoc-dropdown-menu-container'>
+          <div className='sdoc-insert-whiteboard-menu-popover-container sdoc-dropdown-menu'>
             <div className='sdoc-dropdown-menu-item' onClick={openSelectWhiteboardFileDialog}>{t('Link_Excalidraw_file')}</div>
             <div className='sdoc-dropdown-menu-item' onClick={onCreateFile}>{t('New_Excalidraw_file')}</div>
           </div>

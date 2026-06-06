@@ -144,20 +144,18 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                 <i className='sdocfont sdoc-arrow-down'/>
                 {popoverState.displayPopover && (
                   <div className="sdoc-image-popover sdoc-dropdown-menu">
-                    <div className='sdoc-dropdown-menu-container'>
-                      {IMAGE_DISPLAY_TYPE.map((item) => {
-                        return (
-                          <div
-                            key={item.value}
-                            className={classnames('sdoc-dropdown-menu-item', { 'position-relative': type === item.value })}
-                            onClick={(event) => onSelect(event, { 'display_type': item.value })}
-                          >
-                            <span>{t(item.text)}</span>
-                            {type === item.value && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>)}
-                          </div>
-                        );
-                      })}
-                    </div>
+                    {IMAGE_DISPLAY_TYPE.map((item) => {
+                      return (
+                        <div
+                          key={item.value}
+                          className={classnames('sdoc-dropdown-menu-item', { 'position-relative': type === item.value })}
+                          onClick={(event) => onSelect(event, { 'display_type': item.value })}
+                        >
+                          <span>{t(item.text)}</span>
+                          {type === item.value && (<i className="sdocfont sdoc-check-mark sdoc-dropdown-item-right-icon"/>)}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </span>
@@ -176,20 +174,18 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                   <i className='sdocfont sdoc-arrow-down'/>
                   {popoverState.alignPopover && (
                     <div className='sdoc-image-popover align-popover sdoc-dropdown-menu'>
-                      <div className='sdoc-dropdown-menu-container'>
-                        {MENUS_CONFIG_MAP[TEXT_ALIGN].map((item) => {
-                          return (
-                            <div
-                              key={item.id}
-                              className={classnames('sdoc-dropdown-menu-item', { 'position-relative': align === item.type })}
-                              onClick={(event) => onSelect(event, { align: item.type })}
-                            >
-                              <i className={classnames(item.iconClass)}/>
-                              {align === item.type && (<i className="sdocfont sdoc-check-mark"/>)}
-                            </div>
-                          );
-                        })}
-                      </div>
+                      {MENUS_CONFIG_MAP[TEXT_ALIGN].map((item) => {
+                        return (
+                          <div
+                            key={item.id}
+                            className={classnames('sdoc-dropdown-menu-item', { 'position-relative': align === item.type })}
+                            onClick={(event) => onSelect(event, { align: item.type })}
+                          >
+                            <i className={classnames(item.iconClass)}/>
+                            {align === item.type && (<i className="sdocfont sdoc-check-mark"/>)}
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </span>

@@ -58,10 +58,10 @@
 .sdoc-ai-module-container .sdoc-ai-operations {
   width: 200px;
   margin-top: 8px;
-  padding: 8px 0;
-  border: 1px solid #e5e6e8;
-  border-radius: 2px;
-  box-shadow: 0 0 10px #ccc;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   pointer-events: all;
   overflow: hidden;
@@ -109,15 +109,6 @@
 
 .sdoc-ai-module-container .sdoc-ai-result .sdoc-ai-statistic {
   color: #666;
-}
-
-.ai-lang-sub-menu .popover,
-.ai-adjust-sub-menu .popover {
-  padding: 8px 0;
-  border: 1px solid #e5e6e8;
-  border-radius: 2px;
-  box-shadow: 0 0 10px #ccc;
-  background-color: #fff;
 }
 
 .md-rendered-html table {

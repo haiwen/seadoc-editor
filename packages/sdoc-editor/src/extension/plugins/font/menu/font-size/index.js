@@ -69,7 +69,8 @@ const FontSize = ({
       {!disabled && (
         <UncontrolledPopover
           target={fontSizeButtonId}
-          className="sdoc-menu-popover sdoc-dropdown-menu sdoc-font-size-menu-popover"
+          className="sdoc-font-size-menu-popover"
+          popperClassName="sdoc-popover-box-shadow"
           trigger="legacy"
           placement="bottom-start"
           hideArrow={true}
@@ -77,7 +78,7 @@ const FontSize = ({
           fade={false}
           ref={popoverRef}
         >
-          <div className="sdoc-dropdown-menu-container sdoc-font-size-menu-container" style={{ maxHeight: window.innerHeight - bottom - 100 }}>
+          <div className="sdoc-dropdown-menu sdoc-font-size-menu-container" style={{ maxHeight: window.innerHeight - bottom - 100 }}>
             {FONT_SIZE.map((item, index) => {
               const isSelected = selectedFontSize + '' === item.name;
               return (

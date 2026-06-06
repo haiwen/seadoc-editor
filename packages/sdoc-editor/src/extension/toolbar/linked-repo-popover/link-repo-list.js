@@ -21,7 +21,7 @@ const LinkedRepoList = ({ onRepoClick }) => {
   }, []);
 
   return (
-    <div ref={repoRef} className="sdoc-dropdown-menu-container sdoc-linked-repo-list-wrapper">
+    <div ref={repoRef} className="sdoc-dropdown-menu sdoc-linked-repo-list-wrapper">
       <div className='sdoc-linked-repo-list-tip'>
         {t('Show_files_from_a_linked_library')}
       </div>

@@ -17,7 +17,8 @@ export default function LinkRepoPopover({ onRepoClick }) {
     <UncontrolledPopover
       target='sdoc-side-menu-item-file-view'
       trigger="hover"
-      className="sdoc-menu-popover sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-menu-file-view-popover"
+      className="sdoc-sub-dropdown-menu sdoc-insert-menu-file-view-popover"
+      popperClassName="sdoc-popover-box-shadow"
       placement={placement}
       hideArrow={true}
       fade={false}

@@ -1,20 +1,29 @@
-.sdoc-selected-table-size-popover .popover {
-  background-color: #fff;
-  min-width: 100px;
-  min-height: 100px;
-  max-width: 222px;
-  border-radius: 8px;
+.sdoc-selected-table-size-container .sdoc-selected-table-tools-container {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
 }
 
-.sdoc-selected-table-size-popover .sdoc-selected-table-size-tip {
-  text-align: center;
-  height: 35px;
+.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  min-height: 32px;
+}
+
+.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom:hover {
+  cursor: pointer;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom .sdocfont {
   font-size: 14px;
-  padding: 5px 10px 10px;
 }
 
 .sdoc-selected-table-size-popover .sdoc-table-size-select {
-  padding: 0 10px;
+  padding: 0 12px;
 }
 
 .sdoc-selected-table-size-popover .sdoc-table-size-row {
@@ -41,29 +50,9 @@
   background-color: #ffa94d;
 }
 
-.sdoc-selected-table-size-popover .sdoc-table-size-select {
-  margin-top: 5px;
-}
-
-.sdoc-selected-table-size-container .sdoc-selected-table-tools-container {
-  padding: 10px 0;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-  min-height: 32px;
-}
-
-.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom:hover {
-  cursor: pointer;
-  background: #f5f5f5;
-}
-
-.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom .sdocfont {
+.sdoc-selected-table-size-popover .sdoc-selected-table-size-tip {
+  text-align: center;
+  height: 35px;
   font-size: 14px;
+  padding: 8px 12px 8px;
 }

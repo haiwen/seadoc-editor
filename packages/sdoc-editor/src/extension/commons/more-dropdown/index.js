@@ -25,7 +25,8 @@ const MoreDropdown = ({
       </button>
       <UncontrolledPopover
         target={buttonId}
-        className="sdoc-menu-popover sdoc-dropdown-menu"
+        className="sdoc-dropdown-menu"
+        popperClassName="sdoc-popover-box-shadow"
         trigger="legacy"
         placement="bottom-end"
         hideArrow={true}

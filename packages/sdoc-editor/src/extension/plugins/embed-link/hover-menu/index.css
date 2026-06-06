@@ -6,14 +6,15 @@
 }
 
 .sdoc-embed-link-hover-menu-container .hover-menu-container {
-  height: 36px;
+  height: 40px;
+  padding: 8px;
   background-color: #fff;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  border: 1px solid #e8e8e8;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.10);
 }
 
 .sdoc-embed-link-hover-menu-container .hover-menu-container>span {
@@ -23,6 +24,10 @@
 .sdoc-embed-link-hover-menu-container .hover-menu-container>span:not(:last-of-type) {
   padding: 0 8px;
   border-right: 1px solid #e5e5e5;
+}
+
+.sdoc-embed-link-hover-menu-container .hover-menu-container>span:first-of-type {
+  padding-left: 0;
 }
 
 .sdoc-embed-link-hover-menu-container .hover-menu-container .op-item {

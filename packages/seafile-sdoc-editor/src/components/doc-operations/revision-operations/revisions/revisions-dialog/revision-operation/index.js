@@ -33,7 +33,7 @@ const RevisionOperation = ({ isActive, isOperating, revision, updateOperatingRev
       <i className="sdocfont sdoc-more sdoc-revision-operation-toggle" id={targetId}></i>
       <UncontrolledPopover
         target={targetId}
-        className="sdoc-menu-popover sdoc-dropdown-menu sdoc-revision-menu-popover"
+        className="sdoc-dropdown-menu sdoc-revision-menu-popover"
         trigger="legacy"
         placement="bottom-start"
         hideArrow={true}

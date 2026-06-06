@@ -31,9 +31,9 @@
 
 .sdoc-font-size-menu-popover .sdoc-font-size-menu-container {
   height: fit-content;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
-  min-width: 80px;
+  min-width: 96px;
 }
 
 .sdoc-font-size-menu-popover .sdoc-dropdown-menu-item {

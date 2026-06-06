@@ -69,7 +69,8 @@ const TextAlignMenu = ({
       {!disabled && (
         <UncontrolledPopover
           target={buttonId}
-          className="sdoc-menu-popover sdoc-dropdown-menu sdoc-text-align-dropdown"
+          className="sdoc-text-align-dropdown"
+          popperClassName="sdoc-popover-box-shadow"
           trigger="legacy"
           placement="bottom-start"
           hideArrow={true}
@@ -77,7 +78,7 @@ const TextAlignMenu = ({
           fade={false}
           ref={popoverRef}
         >
-          <div className="sdoc-dropdown-menu-container pt-2 pb-2" >
+          <div className="sdoc-dropdown-menu pt-2 pb-2" >
             {MENUS_CONFIG_MAP[TEXT_ALIGN].map((item, index) => {
               const isSelected = curType === item.id;
               return (

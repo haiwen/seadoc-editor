@@ -7,16 +7,16 @@
 }
 
 .sdoc-code-block-hover-menu-container .hover-menu-container {
-  height: 36px;
+  height: 40px;
   width: 100%;
-  padding: 7px 8px;
-  background-color: #fff;
+  padding: 8px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  border: 1px solid #e8e8e8;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.10);
   color: #212529;
 }
 
@@ -35,25 +35,26 @@
   height: 100%;
   width: 100%;
   font-size: 12px;
-  border-radius: 2px;
+  border-radius: 4px;
   text-align: center;
-  line-height: 20px;
+  line-height: 24px;
 }
 
 .sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-item.sdoc-code-block-hover-operation-lang .op-item {
-  padding: 0 5px;
+  padding-left: 8px;
 }
 
 .sdoc-code-block-hover-menu-container .hover-menu-container .sdoc-code-block-hover-operation-lang .sdocfont {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 8px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 .sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-item {
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   text-align: center;
   justify-content: center;
 }
@@ -80,22 +81,35 @@
 
 .sdoc-langs-list-container {
   position: absolute;
-  top: 38px;
-  left: 8px;
+  top: 40px;
+  left: 0px;
   width: 200px;
   overflow-y: hidden;
   background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 5px #ccc;
-  border: 1px solid #dedede;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px 0 #eee;
 }
 
 .sdoc-langs-list-container .sdoc-search-langs {
-  padding: 10px 10px 0;
+  padding: 8px 16px;
 }
 
 .sdoc-langs-list-container .sdoc-search-langs input {
-  max-height: 30px;
+  max-height: 32px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.sdoc-langs-list-container .sdoc-search-langs input:focus {
+  border: 1px solid #3E84F7;
+  box-shadow: none;
+}
+
+
+.sdoc-langs-list-container .sdoc-search-langs input::placeholder {
+  color: #868e96;
   font-size: 14px;
 }
 
@@ -113,29 +127,30 @@
   overflow-y: auto;
   max-height: 280px;
   min-height: 100px;
-  padding: 10px 0;
+  padding: 0px 8px 8px;
+  margin-bottom: 0;
 }
 
 .sdoc-langs-list-container .langs-list-ul .langs-list-li {
   position: relative;
   white-space: nowrap;
   cursor: pointer;
-  line-height: 30px;
-  height: 30px;
-  font-size: 13px;
-  padding-left: 22px;
-  padding-right: 10px;
+  line-height: 32px;
+  height: 32px;
+  font-size: 14px;
+  padding-left: 12px;
+  padding-right: 12px;
   display: flex;
   justify-content: space-between;
 }
 
 .sdoc-langs-list-container .langs-list-ul .langs-list-li:hover {
-  background-color: #f5f5f5;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
 }
 
 .sdoc-langs-list-container .langs-list-ul .langs-list-li .li-check-mark {
   opacity: 0;
-  padding: 0 10px;
 }
 
 .sdoc-langs-list-container .langs-list-ul .langs-list-li .li-checked {

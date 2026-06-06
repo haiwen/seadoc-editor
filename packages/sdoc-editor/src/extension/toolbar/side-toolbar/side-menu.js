@@ -143,110 +143,110 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
   return (
     <ElementPopover className='sdoc-side-menu-popover' style={menuStyle}>
       <div className='sdoc-side-menu sdoc-dropdown-menu' ref={sideMenuRef}>
-        <div className='sdoc-dropdown-menu-container'>
-          <div className='sdoc-side-menu-search-wrapper'>
-            <Input
-              autoFocus
-              placeholder={t('Search_1')}
-              onChange={onChange}
-              onCompositionStart={onCompositionStart}
-              onCompositionEnd={onCompositionEnd}
-            />
-          </div>
-          {isNodeEmpty && (
-            <div id="sdoc-side-menu-insert-wrapper" className='sdoc-side-menu-insert-wrapper'>
+        <div className='sdoc-side-menu-search-wrapper'>
+          <Input
+            autoFocus
+            placeholder={t('Search_1')}
+            onChange={onChange}
+            onCompositionStart={onCompositionStart}
+            onCompositionEnd={onCompositionEnd}
+          />
+        </div>
+        {isNodeEmpty && (
+          <div id="sdoc-side-menu-insert-wrapper" className='sdoc-side-menu-insert-wrapper'>
+            <div className='sdoc-side-menu-inner-container'>
               <InsertBlockMenu isNodeEmpty={isNodeEmpty} slateNode={slateNode} insertMenuSearchMap={insertMenuSearchMap} />
             </div>
-          )}
-          {!isNodeEmpty && (
-            <>
-              {/* transform menu */}
-              {transformMenuSearchMap['searching'] && isDisplayCategoryTitle(transformMenuSearchMap, insertBelowMenuSearchMap) && (
-                <DropdownMenuItem menuConfig={{ text: 'Transform_to' }} className="pr-2 sdoc-dropdown-menu-item-title"></DropdownMenuItem>
-              )}
-              {transformMenuSearchMap['searching'] && getTransformMenusConfig(editor, slateNode).map((item) => {
-                return (
-                  <DropdownMenuItem isHidden={!transformMenuSearchMap[item.type]} key={item.id} menuConfig={item} onClick={() => onSetType(item.type)} />
-                );
-              })}
-              {!transformMenuSearchMap['searching'] && !isNotSupportTransform(slateNode) && (
-                <DropdownMenuItem
-                  menuConfig={{
-                    id: 'sdoc-side-menu-item-transform',
-                    text: 'Transform_to',
-                    iconClass: 'sdocfont sdoc-transform-to'
-                  }}
-                  className="pr-2"
-                >
-                  <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
-                  <TransformMenus target='sdoc-side-menu-item-transform' slateNode={slateNode} editor={editor} onSetType={onSetType} />
-                </DropdownMenuItem>
-              )}
-
-              {/* insert below menu */}
-              {insertBelowMenuSearchMap['searching'] && isDisplayCategoryTitle(insertBelowMenuSearchMap, transformMenuSearchMap) && (
-                <DropdownMenuItem menuConfig={{ text: 'Insert_below' }} className="pr-2 sdoc-dropdown-menu-item-title"></DropdownMenuItem>
-              )}
-              {insertBelowMenuSearchMap['searching'] && <InsertBlockMenu insertPosition={INSERT_POSITION.AFTER} slateNode={slateNode} insertMenuSearchMap={insertBelowMenuSearchMap} />}
+          </div>
+        )}
+        {!isNodeEmpty && (
+          <div id="sdoc-side-menu-insert-wrapper" className='sdoc-side-menu-insert-wrapper'>
+            {/* transform menu */}
+            {transformMenuSearchMap['searching'] && isDisplayCategoryTitle(transformMenuSearchMap, insertBelowMenuSearchMap) && (
+              <DropdownMenuItem menuConfig={{ text: 'Transform_to' }} className="pr-2 sdoc-dropdown-menu-item-title"></DropdownMenuItem>
+            )}
+            {transformMenuSearchMap['searching'] && getTransformMenusConfig(editor, slateNode).map((item) => {
+              return (
+                <DropdownMenuItem isHidden={!transformMenuSearchMap[item.type]} key={item.id} menuConfig={item} onClick={() => onSetType(item.type)} />
+              );
+            })}
+            {!transformMenuSearchMap['searching'] && !isNotSupportTransform(slateNode) && (
               <DropdownMenuItem
                 menuConfig={{
-                  id: 'sdoc-side-menu-item-insert-below',
-                  text: 'Insert_below',
-                  iconClass: 'sdocfont sdoc-insert'
+                  id: 'sdoc-side-menu-item-transform',
+                  text: 'Transform_to',
+                  iconClass: 'sdocfont sdoc-transform-to'
                 }}
-                className="pr-2 sdoc-dropdown-menu-item-relative"
-                isHidden={insertBelowMenuSearchMap['searching']}
+                className="pr-2"
               >
                 <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
-                <InsertBelowMenu target='sdoc-side-menu-item-insert-below' slateNode={slateNode} />
+                <TransformMenus target='sdoc-side-menu-item-transform' slateNode={slateNode} editor={editor} onSetType={onSetType} />
               </DropdownMenuItem>
-              {!insertBelowMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}
+            )}
 
-              {/* other operations menu */}
-              {INTERNAL_LINKED_TYPE.includes(slateNode?.type) && (
-                <>
-                  <DropdownMenuItem
-                    menuConfig={{
-                      text: 'Copy_link_of_section',
-                      iconClass: 'sdocfont sdoc-link'
-                    }}
-                    onClick={onCopyBlockLink}
-                    isHidden={!otherOperatonsMenuSearchMap['COPY_LINK_OF_SECTION']}
-                  />
-                  {!otherOperatonsMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}
-                </>
-              )}
-              {enableSeafileAI && <AIDropdownMenu slateNode={slateNode} />}
-              <DropdownMenuItem
-                menuConfig={{
-                  text: 'Copy',
-                  iconClass: 'sdocfont sdoc-copy'
-                }}
-                onClick={onCopy}
-                isHidden={!otherOperatonsMenuSearchMap['COPY']}
-              />
-              <DropdownMenuItem
-                menuConfig={{
-                  text: 'Cut',
-                  iconClass: 'sdocfont sdoc-cut'
-                }}
-                onClick={onCut}
-                isHidden={!otherOperatonsMenuSearchMap['CUT']}
-              />
-              <DropdownMenuItem
-                menuConfig={{
-                  text: 'Delete',
-                  iconClass: 'sdocfont sdoc-delete'
-                }}
-                onClick={onDelete}
-                isHidden={!otherOperatonsMenuSearchMap['DELETE']}
-              />
-              {transformMenuSearchMap['searching'] && Object.keys({ ...transformMenuSearchMap, ...insertBelowMenuSearchMap, ...otherOperatonsMenuSearchMap }).length === 1 && (
-                <div className='sdoc-dropdown-menu-item-no-results'>{t('No_results')}</div>
-              )}
-            </>
-          )}
-        </div>
+            {/* insert below menu */}
+            {insertBelowMenuSearchMap['searching'] && isDisplayCategoryTitle(insertBelowMenuSearchMap, transformMenuSearchMap) && (
+              <DropdownMenuItem menuConfig={{ text: 'Insert_below' }} className="pr-2 sdoc-dropdown-menu-item-title"></DropdownMenuItem>
+            )}
+            {insertBelowMenuSearchMap['searching'] && <InsertBlockMenu insertPosition={INSERT_POSITION.AFTER} slateNode={slateNode} insertMenuSearchMap={insertBelowMenuSearchMap} />}
+            <DropdownMenuItem
+              menuConfig={{
+                id: 'sdoc-side-menu-item-insert-below',
+                text: 'Insert_below',
+                iconClass: 'sdocfont sdoc-insert'
+              }}
+              className="pr-2 sdoc-dropdown-menu-item-relative"
+              isHidden={insertBelowMenuSearchMap['searching']}
+            >
+              <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
+              <InsertBelowMenu target='sdoc-side-menu-item-insert-below' slateNode={slateNode} />
+            </DropdownMenuItem>
+            {!insertBelowMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}
+
+            {/* other operations menu */}
+            {INTERNAL_LINKED_TYPE.includes(slateNode?.type) && (
+              <>
+                <DropdownMenuItem
+                  menuConfig={{
+                    text: 'Copy_link_of_section',
+                    iconClass: 'sdocfont sdoc-link'
+                  }}
+                  onClick={onCopyBlockLink}
+                  isHidden={!otherOperatonsMenuSearchMap['COPY_LINK_OF_SECTION']}
+                />
+                {!otherOperatonsMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}
+              </>
+            )}
+            {enableSeafileAI && <AIDropdownMenu slateNode={slateNode} />}
+            <DropdownMenuItem
+              menuConfig={{
+                text: 'Copy',
+                iconClass: 'sdocfont sdoc-copy'
+              }}
+              onClick={onCopy}
+              isHidden={!otherOperatonsMenuSearchMap['COPY']}
+            />
+            <DropdownMenuItem
+              menuConfig={{
+                text: 'Cut',
+                iconClass: 'sdocfont sdoc-cut'
+              }}
+              onClick={onCut}
+              isHidden={!otherOperatonsMenuSearchMap['CUT']}
+            />
+            <DropdownMenuItem
+              menuConfig={{
+                text: 'Delete',
+                iconClass: 'sdocfont sdoc-delete'
+              }}
+              onClick={onDelete}
+              isHidden={!otherOperatonsMenuSearchMap['DELETE']}
+            />
+            {transformMenuSearchMap['searching'] && Object.keys({ ...transformMenuSearchMap, ...insertBelowMenuSearchMap, ...otherOperatonsMenuSearchMap }).length === 1 && (
+              <div className='sdoc-dropdown-menu-item-no-results'>{t('No_results')}</div>
+            )}
+          </div>
+        )}
       </div>
     </ElementPopover>
   );

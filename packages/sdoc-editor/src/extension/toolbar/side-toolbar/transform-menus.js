@@ -11,14 +11,15 @@ const TransformMenus = ({ editor, slateNode, target, onSetType }) => {
     <UncontrolledPopover
       boundariesElement='viewport'
       target={target}
-      className="sdoc-side-operation-translate-popover sdoc-sub-dropdown-menu sdoc-dropdown-menu"
+      className="sdoc-side-operation-translate-popover sdoc-sub-dropdown-menu"
+      popperClassName='sdoc-popover-box-shadow'
       trigger='hover'
       placement='right-start'
       hideArrow={true}
       fade={false}
       offset={[0, 6]}
     >
-      <div className="sdoc-dropdown-menu-container">
+      <div className="sdoc-dropdown-menu">
         {getTransformMenusConfig(editor, slateNode).map((item) => {
           return (
             <DropdownMenuItem key={item.id} menuConfig={item} onClick={() => onSetType(item.type)} />

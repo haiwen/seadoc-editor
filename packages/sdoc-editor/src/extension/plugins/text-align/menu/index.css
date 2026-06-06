@@ -1,5 +1,5 @@
-.sdoc-text-align-dropdown .sdoc-dropdown-menu-container {
-    min-width: 80px !important;
+.sdoc-text-align-dropdown .sdoc-dropdown-menu {
+    min-width: 96px !important;
 }
 
 .sdoc-text-align-dropdown .sdocfont.sdoc-check-mark {
@@ -11,4 +11,5 @@
 .sdoc-text-align-dropdown .sdoc-dropdown-menu-item {
     font-size: 14px;
     padding: 4px 12px 4px 38px;
+    position: relative;
 }
