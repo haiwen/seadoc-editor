@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.190](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.184...@seafile/sdoc-editor@3.0.190) (2026-06-06)
+
+### Features
+
+- support seatable.io embed link ([#255](https://github.com/haiwen/seadoc-editor/issues/255)) ([3da82e8](https://github.com/haiwen/seadoc-editor/commit/3da82e8d9984d3f932d5a054396e4e1222618e08))
+
 ## [3.0.189](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.188...@seafile/sdoc-editor@3.0.189) (2026-06-06)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
