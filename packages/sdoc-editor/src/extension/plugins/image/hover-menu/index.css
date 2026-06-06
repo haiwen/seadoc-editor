@@ -16,13 +16,18 @@
   box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
 }
 
-.sdoc-image-hover-menu-container .hover-menu-container>span {
-  padding: 0 8px;
+.sdoc-image-hover-menu-container .hover-menu-container .op-group-item:first-child {
+  padding-right: 8px;
 }
 
-.sdoc-image-hover-menu-container .hover-menu-container>span:not(:last-of-type) {
+.sdoc-image-hover-menu-container .hover-menu-container .op-group-item:nth-child(2) {
   padding: 0 8px;
   border-right: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
+}
+
+.sdoc-image-hover-menu-container .hover-menu-container .op-group-item:last-child {
+  padding-left: 8px;
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .op-item {

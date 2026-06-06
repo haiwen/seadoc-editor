@@ -26,6 +26,10 @@
   border-right: 1px solid #e5e5e5;
 }
 
+.sdoc-embed-link-hover-menu-container .hover-menu-container>span:first-of-type {
+  padding-left: 0;
+}
+
 .sdoc-embed-link-hover-menu-container .hover-menu-container .op-item {
   position: relative;
   font-size: 12px;
