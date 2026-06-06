@@ -50,7 +50,7 @@ export const getEmbedLinkType = (text) => {
     const path = url.pathname.toLowerCase();
     // SeaTable
     const isSeaTable =
-      /(^|\.)seatable\.cn$/.test(host) &&
+      /(^|\.)seatable\.(cn|io)$/.test(host) &&
       /^\/workspace\/\d+\/dtable\/.+/.test(path);
 
     if (isSeaTable) return EMBED_LINK_SOURCE.SEATABLE;
