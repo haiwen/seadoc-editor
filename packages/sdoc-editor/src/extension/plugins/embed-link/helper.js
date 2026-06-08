@@ -49,9 +49,11 @@ export const getEmbedLinkType = (text) => {
     const host = url.hostname.toLowerCase();
     const path = url.pathname.toLowerCase();
     // SeaTable
-    const isSeaTable =
-      /(^|\.)seatable\.(cn|io)$/.test(host) &&
-      /^\/workspace\/\d+\/dtable\/.+/.test(path);
+    const isSeaTableHost = /(^|\.)seatable\.(cn|io)$/.test(host);
+    const isSeaTablePath =
+      /^\/workspace\/\d+\/dtable\/.+/.test(path) ||
+      /^\/dtable\/external-links\/[a-z0-9]+\/?$/.test(path);
+    const isSeaTable = isSeaTableHost && isSeaTablePath;
 
     if (isSeaTable) return EMBED_LINK_SOURCE.SEATABLE;
 
