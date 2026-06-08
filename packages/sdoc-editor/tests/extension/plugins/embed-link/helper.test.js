@@ -11,6 +11,10 @@ describe('embed-link helper', () => {
       expect(getEmbedLinkType('https://cloud.seatable.io/workspace/12/dtable/abc')).toBe(EMBED_LINK_SOURCE.SEATABLE);
     });
 
+    it('recognizes seatable external links', () => {
+      expect(getEmbedLinkType('https://dev.seatable.cn/dtable/external-links/c1dd1a14d584484088cf/')).toBe(EMBED_LINK_SOURCE.SEATABLE);
+    });
+
     it('rejects unsupported seatable paths', () => {
       expect(getEmbedLinkType('https://cloud.seatable.io/dtable/abc')).toBeNull();
     });
