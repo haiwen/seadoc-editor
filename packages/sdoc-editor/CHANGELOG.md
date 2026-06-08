@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.192](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.191...@seafile/sdoc-editor@3.0.192) (2026-06-08)
+
+### Bug Fixes
+
+- fix wiki sdoc preview bug ([00c3c87](https://github.com/haiwen/seadoc-editor/commit/00c3c87ed03566924be13f5340be17e709be4842))
+
 ## [3.0.191](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.190...@seafile/sdoc-editor@3.0.191) (2026-06-08)
 
 ### Performance Improvements
