@@ -27,6 +27,8 @@ const useMathJax = (mathJaxSource) => {
       script.onload = () => {
         setIsLoading(false);
       };
+    } else {
+      setIsLoading(false);
     }
 
     return () => {
