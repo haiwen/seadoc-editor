@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.191](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.190...@seafile/sdoc-editor@3.0.191) (2026-06-08)
+
+### Performance Improvements
+
+- optimize embed link ([#257](https://github.com/haiwen/seadoc-editor/issues/257)) ([b33ac5c](https://github.com/haiwen/seadoc-editor/commit/b33ac5c2f8428d3bb772e9e803bbda2b0ee6d06c))
+
 ## [3.0.190](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.184...@seafile/sdoc-editor@3.0.190) (2026-06-06)
 
 ### Features
