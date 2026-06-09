@@ -20,7 +20,7 @@ const Tooltip = ({ target, children, className, modifiers = [], placement = 'bot
     popperClassName: classnames('sdoc-tooltip', className),
     delay,
     hideArrow: true,
-    autoHide: false,
+    autohide: false,
     fade,
     modifiers: newModifiers,
   };

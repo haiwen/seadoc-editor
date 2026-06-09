@@ -58,6 +58,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
   }, []);
 
   const handleOpenLinkPreview = useCallback((pluginName) => {
+    console.log('dfasdfa');
     updateDisplayPlugin(pluginName, true);
     const { doc_uuid, title, type } = element;
     let data = { doc_uuid, title, type };

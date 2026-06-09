@@ -127,7 +127,6 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
 
       const eventBus = EventBus.getInstance();
       eventBus.dispatch(INTERNAL_EVENT.TRANSFER_PREVIEW_FILE_ID, data);
-      console.log('dfasdfa');
       setTimeout(() => {
         onHideInsertHoverMenu();
       }, 0);
