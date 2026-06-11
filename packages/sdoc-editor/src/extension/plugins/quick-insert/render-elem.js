@@ -6,7 +6,7 @@ import { ElementPopover } from '../../commons';
 import InlineBugFixer from '../../commons/Inline-bug-fix-wrapper';
 import { INSERT_POSITION, QUICK_INSERT, TOGGLE_CONTENT } from '../../constants';
 import { getAboveBlockNode } from '../../core';
-import QuickInsertBlockMenu from '../../toolbar/insert-element-toolbar';
+import QuickInsertBlockMenu from '../../toolbar/quick-insert-toolbar';
 import { isSelectionSameWithInsert, transformToText } from './helper';
 
 const RenderQuickInsert = ({ attributes, children, element }, editor, readonly) => {

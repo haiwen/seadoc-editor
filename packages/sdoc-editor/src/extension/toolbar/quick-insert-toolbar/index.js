@@ -459,7 +459,7 @@ const QuickInsertBlockMenu = ({
   }, [onChange]);
 
   return (
-    <div className='sdoc-insert-element-toolbar'>
+    <div className='sdoc-quick-insert-toolbar'>
       <div className='sdoc-side-menu-search-wrapper'>
         <Input
           innerRef={inputWrapperRef}
