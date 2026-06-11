@@ -25,12 +25,15 @@ const LinkedRepoList = ({ onRepoClick }) => {
       <div className='sdoc-linked-repo-list-tip'>
         {t('Show_files_from_a_linked_library')}
       </div>
+      <div className='sdoc-linked-repo-list-divider'></div>
       <div className='sdoc-linked-repo-list-content-wrapper'>
         {enableRepos.map(item => {
           return (
-            <div key={item.repo_id} className="sdoc-dropdown-menu-item text-truncate d-block" onClick={() => onRepoClick(item)}>
+            <div key={item.repo_id} className="sdoc-dropdown-menu-item" onClick={() => onRepoClick(item)}>
               <img className='lib-icon' src={iconUrl} width="20" alt='' />
-              {item.repo_name}
+              <div className='item-text'>
+                {item.repo_name}
+              </div>
             </div>
           );
         })}

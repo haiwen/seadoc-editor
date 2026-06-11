@@ -563,6 +563,7 @@ export const SIDE_INSERT_MENUS_SEARCH_MAP = {
   [THREE_COLUMN]: 'Three_column',
   [FOUR_COLUMN]: 'Four_column',
   [LINK]: 'Link',
+  [FILE]: 'File',
   [CODE_BLOCK]: 'Code_block',
   [CALL_OUT]: 'Callout',
   [UNORDERED_LIST]: 'Unordered_list',

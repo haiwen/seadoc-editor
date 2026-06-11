@@ -14,6 +14,7 @@ import { ELEMENT_TYPE, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO, PARAGRAPH, SID
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
 import { changeToCodeBlock } from '../../plugins/code-block/helpers';
+import { insertFileLink } from '../../plugins/file-link/helpers';
 import { insertFileView } from '../../plugins/file-view/helpers';
 import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
@@ -33,6 +34,7 @@ const InsertBlockMenu = ({
   const editor = useSlateStatic();
   const { t } = useTranslation('sdoc-editor');
   const enableMetadataManagement = context.getSetting('enableMetadataManagement');
+  const hasLinkedRepos = context.hasLinkedRepos();
 
   const onInsertImageToggle = useCallback(() => {
     const eventBus = EventBus.getInstance();
@@ -153,6 +155,15 @@ const InsertBlockMenu = ({
     });
   }, [editor, insertPosition, slateNode]);
 
+  const openSelectFileDialog = useCallback(() => {
+    if (insertPosition === INSERT_POSITION.AFTER) {
+      insertElement(editor, PARAGRAPH, insertPosition);
+    }
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.FILE, insertFileLinkCallback: insertFileLink });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor, insertPosition]);
+
   return (
     <>
       {[SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.PARAGRAPH], ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.HEADER], ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.TOGGLE_HEADER]].map((item) => {
@@ -208,6 +219,9 @@ const InsertBlockMenu = ({
         />
       </DropdownMenuItem>
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.LINK]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.LINK] }} onClick={openLinkDialog} />
+      {editor.editorType === WIKI_EDITOR && hasLinkedRepos && (
+        <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.FILE]} key="sdoc-insert-menu-file-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE] }} onClick={openSelectFileDialog} />
+      )}
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CODE_BLOCK]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CODE_BLOCK] }} onClick={onInsertCodeBlock} />
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CALL_OUT]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CALL_OUT] }} onClick={() => onInsertCallout(PARAGRAPH)} />
       {SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.MULTI_COLUMN].map((item) => {
