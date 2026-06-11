@@ -2,52 +2,60 @@
   max-width: 300px;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper {
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper {
   /* position: absolute; */
-  background-color: #ffff;
-  max-height: 370px;
-  padding: 0px !important;
-  width: 298px;
-  padding: 0px;
   left: -8px;
+  background-color: #fff;
+  max-height: 370px;
+  max-width: 298px;
+  border-radius: 8px;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-tip {
-  margin-top: 8px;
-  min-height: 32px;
-  padding: 3px 12px;
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-tip {
+  height: 24px;
+  line-height: 24px;
+  padding-left: 8px;
   color: #666;
+  font-size: 14px;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-content-wrapper {
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-divider {
+  border-top: 1px solid #eee;
+  margin: 4px 0;
+}
+
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-content-wrapper {
   max-height: 300px;
   overflow-y: auto;
   padding-bottom: 8px;
   border-bottom: 1px solid #e9ecef;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-dropdown-menu-item {
-  min-height: 32px;
-  padding: 3px 12px;
-  display: flex;
-  align-items: center;
-}
-
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-dropdown-menu-item .lib-icon {
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-dropdown-menu-item .lib-icon {
   margin-right: 10px;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-add-toolbar {
-  min-height: 32px;
-  padding: 3px 12px;
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-dropdown-menu-item .item-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-add-toolbar .sdocfont {
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-add-toolbar {
+  min-height: 32px;
+  padding: 3px 12px;
+  margin-top: 8px;
+}
+
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-add-toolbar .sdocfont {
   color: #666;
   margin-right: 10px;
 }
 
-.sdoc-dropdown-menu .sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-add-toolbar:hover {
-  background: #f5f5f5;
+.sdoc-dropdown-menu.sdoc-linked-repo-list-wrapper .sdoc-linked-repo-list-add-toolbar:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
   cursor: pointer;
 }
