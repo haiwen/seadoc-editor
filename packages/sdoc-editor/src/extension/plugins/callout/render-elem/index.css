@@ -50,3 +50,7 @@
   font-size: 16px;
 }
 
+.sdoc-editor__article .callout-content .list-container {
+  margin: 0;
+  padding-left: 2.2em !important;
+}
