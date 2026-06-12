@@ -216,6 +216,7 @@ export const FILEEXT_TYPE = {
   MARKDOWN: ['markdown', 'md'],
   EXCALIDRAW: ['exdraw'],
   DOCUMENT: ['doc', 'docx', 'docxf', 'oform', 'ppt', 'pptx', 'odt', 'fodt', 'odp', 'fodp', 'odg'],
+  IMAGE: ['gif', 'jpeg', 'jpg', 'png', 'heic', 'ico', 'bmp', 'tif', 'tiff', 'psd', 'psb', 'webp', 'jfif', 'avif'],
 };
 
 export const FILEEXT_TYPE_MAP = {
@@ -224,7 +225,8 @@ export const FILEEXT_TYPE_MAP = {
   SPREADSHEET: 'excel',
   MARKDOWN: 'md',
   EXCALIDRAW: 'draw',
-  DOCUMENT: 'word'
+  DOCUMENT: 'word',
+  IMAGE: 'pic'
 };
 
 export const SUPPORTED_SIDE_OPERATION_TYPE = [
