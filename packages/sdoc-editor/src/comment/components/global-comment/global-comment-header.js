@@ -101,8 +101,12 @@ const GlobalCommentHeader = ({ toggle, activeCommentGroup, setCurrentCommentGrou
               </Tooltip>)}
           </div>
         )}
-        <div className="sdoc-icon-btn" onClick={toggle}>
+        <div id="sdoc-comment-close" className="sdoc-icon-btn" onClick={toggle}>
           <i className="sdocfont sdoc-sm-close"></i>
+          {isMounted && (
+            <Tooltip target="sdoc-comment-close">
+              {t('Close')}
+            </Tooltip>)}
         </div>
       </div>
     </div>

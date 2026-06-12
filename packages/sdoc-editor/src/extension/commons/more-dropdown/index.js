@@ -1,7 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { UncontrolledPopover } from 'reactstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import Tooltip from '../../../components/tooltip';
 
 const MoreDropdown = ({
   isRichEditor = true,
@@ -17,11 +19,15 @@ const MoreDropdown = ({
     'btn btn-icon btn-secondary btn-active': !isRichEditor,
   });
   const buttonId = 'sdoc-more-text-operations';
+  const { t } = useTranslation('sdoc-editor');
 
   return (
     <>
       <button className={validClassName} type="button" aria-label='more' id={buttonId}>
         <i className="sdocfont sdoc-more"></i>
+        <Tooltip target={buttonId}>
+          {t('More_operation')}
+        </Tooltip>
       </button>
       <UncontrolledPopover
         target={buttonId}

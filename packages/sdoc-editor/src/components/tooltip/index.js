@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const Tooltip = ({ target, children, className, modifiers = [], placement = 'bottom', fade = false, delay = 0 }) => {
+const Tooltip = ({ target, children, className, modifiers = [], placement = 'bottom', fade = false, delay = 0, offset = null }) => {
 
   const hasBoundary = modifiers.find(item => item.name === 'preventOverflow');
   const newModifiers = hasBoundary ? modifiers : [...modifiers, {
@@ -23,6 +23,7 @@ const Tooltip = ({ target, children, className, modifiers = [], placement = 'bot
     autohide: false,
     fade,
     modifiers: newModifiers,
+    ...(offset && { offset }),
   };
 
   return (

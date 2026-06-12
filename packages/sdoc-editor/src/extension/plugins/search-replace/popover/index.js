@@ -5,6 +5,7 @@ import { Input, Label } from 'reactstrap';
 import classNames from 'classnames';
 import isHotkey from 'is-hotkey';
 import PropTypes from 'prop-types';
+import Tooltip from '../../../../components/tooltip';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../../constants';
 import context from '../../../../context';
 import debounce from '../../../../utils/debounce';
@@ -186,7 +187,10 @@ const SearchReplacePopover = ({ editor, closePopover, readonly }) => {
         >
           <div className='sdoc-search-replace-popover-title'>
             <span className='sdoc-search-replace-title-text'>{t('Search_and_replace')}</span>
-            <i onClick={closePopover} className='sdocfont sdoc-sm-close sdoc-search-replace-title-close'></i>
+            <i id="sdoc-search-replace-title-close" onClick={closePopover} className='sdocfont sdoc-sm-close sdoc-search-replace-title-close'></i>
+            <Tooltip target="sdoc-search-replace-title-close" offset={[-6, 0]}>
+              {t('Close')}
+            </Tooltip>
           </div>
           <div className='sdoc-search-replace-popover-body'>
             <Label for='sdoc-search-replace-search-ipt'>{t('Search')}</Label>
