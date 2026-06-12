@@ -2,7 +2,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody } from 'reactstrap';
 import PropTypes from 'prop-types';
-import iconUrl from '../../../assets/images/lib.png';
 import toaster from '../../../components/toast';
 import context from '../../../context';
 import { getErrorMsg } from '../../../utils/common-utils';
@@ -89,7 +88,6 @@ const SelectLibFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallba
                     }
                   }}
                 >
-                  <img className='lib-icon' src={iconUrl} width="20" alt='' />
                   <span className='sdoc-file-select__repo-name'>{repo.repo_name}</span>
                 </div>
               );

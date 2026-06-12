@@ -121,12 +121,6 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const borderPopoverStyle = useMemo(() => {
-    const isBlockChild = [TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(type);
-    if (!isBlockChild) return null;
-    return { left: '8px' };
-  }, [type]);
-
   return (
     <ElementPopover>
       <div className="sdoc-image-hover-menu-container" style={menuPosition}>
@@ -164,6 +158,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
             <span className='op-group-item'>
               {type === IMAGE_BLOCK && (
                 <span
+                  id="sdoc_image_alignment"
                   role="button"
                   className={classnames('op-item', { 'active': popoverState.alignPopover })}
                   onClick={(e) => {
@@ -187,6 +182,11 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                         );
                       })}
                     </div>
+                  )}
+                  {isShowTooltip && (
+                    <Tooltip target='sdoc_image_alignment' placement='top' fade={true}>
+                      {t('Alignment')}
+                    </Tooltip>
                   )}
                 </span>
               )}
