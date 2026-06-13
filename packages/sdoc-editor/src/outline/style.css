@@ -108,10 +108,16 @@
 .sdoc-outline-header__close {
   cursor: pointer;
   font-size: 14px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: #666;
 }
 
 .sdoc-outline-header__close:hover {
-  color: #666;
+  background-color: #EFEFEF;
+  border-radius: 2px;
 }
 
 .sdoc-outline-list-container {
