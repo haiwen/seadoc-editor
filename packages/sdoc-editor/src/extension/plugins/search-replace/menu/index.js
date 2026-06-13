@@ -61,6 +61,7 @@ const SearchReplaceMenu = ({ isRichEditor, className, editor, readonly }) => {
         ariaLabel='search'
         disabled={false}
         isActive={isOpenPopover}
+        isShowPopover={isOpenPopover}
         onMouseDown={onMouseDown}
         {...menuConfig}
       />

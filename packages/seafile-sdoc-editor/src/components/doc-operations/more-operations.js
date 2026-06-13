@@ -170,9 +170,11 @@ const MoreOperations = ({ isStarred, t }) => {
       <DropdownToggle id={id} className="op-item" tag="span">
         <i className='sdocfont sdoc-more'></i>
       </DropdownToggle>
-      <Tooltip target={id}>
-        {t('More_operation')}
-      </Tooltip>
+      {!isDropdownOpen && (
+        <Tooltip target={id}>
+          {t('More_operation')}
+        </Tooltip>
+      )}
       <DropdownMenu className="sdoc-dropdown-menu" end>
         {mobileLogin && (
           <>

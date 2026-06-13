@@ -37,9 +37,11 @@ const MoreRevisionOperations = ({ t }) => {
         <i className="sdocfont sdoc-revise" />
         <span className={`sdocfont sdoc-${isDropdownOpen ? 'arrow-up' : 'arrow-down'}`}></span>
       </DropdownToggle>
-      <Tooltip target={id}>
-        {t('Revise')}
-      </Tooltip>
+      {!isDropdownOpen && (
+        <Tooltip target={id}>
+          {t('Revise')}
+        </Tooltip>
+      )}
       <DropdownMenu className="sdoc-dropdown-menu sdoc-revisions-dropdown-container" end>
         <DropdownItem className={`sdoc-dropdown-menu-item ${lang}`} onClick={startRevise}>
           <div className="sdoc-more-revision-operation">

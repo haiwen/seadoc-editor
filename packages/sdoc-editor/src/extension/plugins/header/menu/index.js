@@ -38,6 +38,10 @@ class HeaderMenu extends React.Component {
     const menu = this.menu;
     const clickIsInMenu = menu && menu.contains(e.target) && menu !== e.target;
     if (clickIsInMenu) return;
+
+    // in menu toggle
+    if (this.menuToggle && this.menuToggle.contains(e.target)) return;
+
     this.setState({ isShowHeaderPopover: false }, () => {
       this.unregisterEventHandler();
     });
@@ -89,6 +93,10 @@ class HeaderMenu extends React.Component {
     this.menu = ref;
   };
 
+  setMenuToggle = (ref) => {
+    this.menuToggle = ref;
+  };
+
   getToolTip = (type) => {
     return isMac() ? MAC_HOTKEYS[type] : WIN_HOTKEYS[type];
   };
@@ -103,7 +111,7 @@ class HeaderMenu extends React.Component {
 
     return (
       <div className='header-menu'>
-        <div className={classnames('header-toggle', { 'header-toggle-disabled': disabled })} onClick={disabled ? () => {} : this.onToggleClick}>
+        <div ref={this.setMenuToggle} className={classnames('header-toggle', { 'header-toggle-disabled': disabled })} onClick={disabled ? () => {} : this.onToggleClick}>
           <span className='active'>{t(HEADER_TITLE_MAP[currentType])}</span>
           <span className={headerIconClass}></span>
         </div>

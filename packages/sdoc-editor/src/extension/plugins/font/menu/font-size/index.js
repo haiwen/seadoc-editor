@@ -63,9 +63,11 @@ const FontSize = ({
           </div>
         )}
       </button>
-      <Tooltip target={fontSizeButtonId}>
-        {t('Font_size')}
-      </Tooltip>
+      {!isShowMenu && (
+        <Tooltip target={fontSizeButtonId}>
+          {t('Font_size')}
+        </Tooltip>
+      )}
       {!disabled && (
         <UncontrolledPopover
           target={fontSizeButtonId}

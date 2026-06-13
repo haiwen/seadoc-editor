@@ -67,9 +67,11 @@ const ShareLinkMoreOperations = ({ t }) => {
       <DropdownToggle id={id} className="op-item" tag="span">
         <i className='sdocfont sdoc-more'></i>
       </DropdownToggle>
-      <Tooltip target={id}>
-        {t('More_operation')}
-      </Tooltip>
+      {!isDropdownOpen && (
+        <Tooltip target={id}>
+          {t('More_operation')}
+        </Tooltip>
+      )}
       <DropdownMenu className="sdoc-dropdown-menu" end>
         <DropdownItem className='sdoc-dropdown-menu-item' onClick={handlePrint}>
           <div className='sdoc-dropdown-print-container'>

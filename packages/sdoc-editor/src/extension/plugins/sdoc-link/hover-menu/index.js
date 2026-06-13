@@ -44,8 +44,8 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
 
   const onShowProver = useCallback((e) => {
     e.stopPropagation();
-    setIsShowDisplayStylePopover(true);
-  }, []);
+    setIsShowDisplayStylePopover(!isShowDisplayStylePopover);
+  }, [isShowDisplayStylePopover]);
 
   const onSelect = useCallback((event, value) => {
     event.stopPropagation();
@@ -121,7 +121,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                           <div
                             key={sdocLinkType}
                             date-type={sdocLinkType}
-                            className="sdoc-dropdown-menu-item sdoc-dropdown-item-with-left-icon pr-2"
+                            className="sdoc-dropdown-menu-item"
                             onClick={(event) => onSelect(event, sdocLinkType)}
                           >
                             <div className="sdoc-dropdown-item-content">
@@ -135,7 +135,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                     </div>
                   )}
                 </span>
-                {isShowTooltip && (
+                {isShowTooltip && !isShowDisplayStylePopover && (
                   <Tooltip target='display_sdoc_link' placement='top' fade={true}>
                     {t('Select_style')}
                   </Tooltip>

@@ -65,7 +65,9 @@ const TextAlignMenu = ({
           </div>
         )}
       </button>
-      <Tooltip target={buttonId} >{ t('Alignment_type')}</Tooltip>
+      {!isShowMenu && (
+        <Tooltip target={buttonId} >{ t('Alignment_type')}</Tooltip>
+      )}
       {!disabled && (
         <UncontrolledPopover
           target={buttonId}

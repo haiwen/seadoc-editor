@@ -9,7 +9,8 @@ class CollaboratorsOperation extends React.PureComponent {
     super(props);
     const userInfo = context.getUserInfo();
     this.state = {
-      collaborators: [userInfo]
+      collaborators: [userInfo],
+      isPopoverOpen: false,
     };
     this.currentUser = userInfo;
   }
@@ -83,8 +84,12 @@ class CollaboratorsOperation extends React.PureComponent {
     this.setState({ collaborators: newCollaborators });
   };
 
+  togglePopover = () => {
+    this.setState(({ isPopoverOpen }) => ({ isPopoverOpen: !isPopoverOpen }));
+  };
+
   render() {
-    const { collaborators } = this.state;
+    const { collaborators, isPopoverOpen } = this.state;
     const { t } = this.props;
 
     return (
@@ -93,10 +98,17 @@ class CollaboratorsOperation extends React.PureComponent {
           <i className='sdocfont sdoc-user mr-1'></i>
           {collaborators.length}
         </span>
-        <Tooltip target='collaborators'>
-          {t('Online_members')}
-        </Tooltip>
-        <CollaboratorsPopover collaborators={collaborators} onEditUserName={this.onRename}/>
+        {!isPopoverOpen && (
+          <Tooltip target='collaborators'>
+            {t('Online_members')}
+          </Tooltip>
+        )}
+        <CollaboratorsPopover
+          collaborators={collaborators}
+          isOpen={isPopoverOpen}
+          onEditUserName={this.onRename}
+          toggle={this.togglePopover}
+        />
       </>
     );
   }

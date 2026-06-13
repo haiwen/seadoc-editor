@@ -76,7 +76,7 @@ const GlobalCommentHeader = ({ toggle, activeCommentGroup, setCurrentCommentGrou
           <Dropdown className='mr-1' isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
             <DropdownToggle tag='div' className='sdoc-icon-btn' id='comment-types'>
               <i className="sdocfont sdoc-filter1"></i>
-              {isMounted && (
+              {isMounted && !isDropdownOpen && (
                 <Tooltip target="comment-types">
                   {t('Filter')}
                 </Tooltip>)}
