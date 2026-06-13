@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import { UncontrolledPopover, PopoverBody, PopoverHeader } from 'reactstrap';
+import { Popover, PopoverBody, PopoverHeader } from 'reactstrap';
 import { context } from '@seafile/sdoc-editor';
 import PropTypes from 'prop-types';
 import Rename from './rename';
@@ -8,8 +8,11 @@ import Rename from './rename';
 import './collaborators-popover.css';
 
 const propTypes = {
+  collaborators: PropTypes.array,
+  isOpen: PropTypes.bool,
   onEditUserName: PropTypes.func,
   t: PropTypes.func,
+  toggle: PropTypes.func,
 };
 
 class CollaboratorsPopover extends React.PureComponent {
@@ -36,11 +39,14 @@ class CollaboratorsPopover extends React.PureComponent {
 
   render() {
     const { t, collaborators } = this.props;
+    const { isOpen, toggle } = this.props;
     const { isRenaming } = this.state;
     const canEdit = context.getSetting('canEdit');
     return (
-      <UncontrolledPopover
+      <Popover
         target="collaborators"
+        isOpen={isOpen}
+        toggle={toggle}
         placement="bottom-end"
         popperClassName='collaborators-popover'
         trigger="legacy"
@@ -77,7 +83,7 @@ class CollaboratorsPopover extends React.PureComponent {
             })}
           </div>
         </PopoverBody>
-      </UncontrolledPopover>
+      </Popover>
     );
   }
 }
