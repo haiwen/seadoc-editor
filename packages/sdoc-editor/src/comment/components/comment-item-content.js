@@ -126,9 +126,11 @@ const CommentItemContent = ({
                 <div id={`tooltip_${menuId}`} className="comment-operation mr-2" onClick={markAsResolved}>
                   <i className='sdocfont sdoc-check-mark'></i>
                 </div>
-                <Tooltip target={`tooltip_${menuId}`}>
-                  {t('Resolved_tip')}
-                </Tooltip>
+                {!isDropdownOpen && (
+                  <Tooltip target={`tooltip_${menuId}`}>
+                    {t('Resolved_tip')}
+                  </Tooltip>
+                )}
               </>
             )}
             <Dropdown id={targetId} isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>

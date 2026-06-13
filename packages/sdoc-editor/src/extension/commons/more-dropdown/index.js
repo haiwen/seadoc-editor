@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UncontrolledPopover } from 'reactstrap';
 import classnames from 'classnames';
@@ -11,6 +11,7 @@ const MoreDropdown = ({
   disabled,
   children
 }) => {
+  const popoverRef = useRef(null);
   const validClassName = classnames(className, 'sdoc-more-text-button', {
     'disabled': disabled,
     'rich-icon-btn': isRichEditor,
@@ -21,13 +22,24 @@ const MoreDropdown = ({
   const buttonId = 'sdoc-more-text-operations';
   const { t } = useTranslation('sdoc-editor');
 
+  const [isShowMenu, setIsShowMenu] = useState(false);
+
+  const toggle = useCallback((event) => {
+    popoverRef.current.toggle();
+    setIsShowMenu(!isShowMenu);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShowMenu]);
+
   return (
     <>
       <button className={validClassName} type="button" aria-label='more' id={buttonId}>
         <i className="sdocfont sdoc-more"></i>
-        <Tooltip target={buttonId}>
-          {t('More_operation')}
-        </Tooltip>
+        {!isShowMenu && (
+          <Tooltip target={buttonId}>
+            {t('More_operation')}
+          </Tooltip>
+        )}
       </button>
       <UncontrolledPopover
         target={buttonId}
@@ -36,7 +48,9 @@ const MoreDropdown = ({
         trigger="legacy"
         placement="bottom-end"
         hideArrow={true}
+        toggle={toggle}
         fade={false}
+        ref={popoverRef}
       >
         <div className="menu-group">
           {children}

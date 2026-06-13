@@ -61,7 +61,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
           <span className='sdocfont sdoc-callout-color mr-1'></span>
           <span className='sdocfont sdoc-arrow-down'></span>
         </div>
-        {isShowTooltip && (
+        {isShowTooltip && !isShowColorSelector && (
           <Tooltip target='select_callout_color' placement='top' fade={true}>
             {t('Background_color')}
           </Tooltip>
@@ -71,7 +71,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
           <span className='sdocfont sdoc-callout-icon mr-1'></span>
           <span className='sdocfont sdoc-arrow-down'></span>
         </div>
-        {isShowTooltip && (
+        {isShowTooltip && !isShowIcon && (
           <Tooltip target='select_callout_icon' placement='top' fade={true}>
             {t('Icon')}
           </Tooltip>

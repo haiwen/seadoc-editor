@@ -183,7 +183,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                       })}
                     </div>
                   )}
-                  {isShowTooltip && (
+                  {isShowTooltip && !popoverState.alignPopover && (
                     <Tooltip target='sdoc_image_alignment' placement='top' fade={true}>
                       {t('Alignment')}
                     </Tooltip>
@@ -218,7 +218,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                     })}
                   </div>
                 )}
-                {isShowTooltip && (
+                {isShowTooltip && !popoverState.borderPopover && (
                   <Tooltip target='sdoc_image_border' placement='top' fade={true}>
                     {t('Image_border')}
                   </Tooltip>

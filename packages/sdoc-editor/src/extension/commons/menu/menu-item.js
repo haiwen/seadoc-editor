@@ -15,7 +15,8 @@ const MenuItem = ({
   iconClass,
   id,
   text,
-  ariaLabel
+  ariaLabel,
+  isShowPopover = false,
 }) => {
   const { t } = useTranslation('sdoc-editor');
 
@@ -52,9 +53,11 @@ const MenuItem = ({
           </span>
         )}
       </button>
-      <Tooltip target={id}>
-        {t(text)}
-      </Tooltip>
+      {!isShowPopover && (
+        <Tooltip target={id}>
+          {t(text)}
+        </Tooltip>
+      )}
     </>
   );
 

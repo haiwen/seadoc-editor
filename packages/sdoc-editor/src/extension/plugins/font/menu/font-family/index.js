@@ -93,9 +93,11 @@ const FontFamily = ({
           </div>
         )}
       </button>
-      <Tooltip target={fontSizeButtonId}>
-        {t('Font')}
-      </Tooltip>
+      {!isShowMenu && (
+        <Tooltip target={fontSizeButtonId}>
+          {t('Font')}
+        </Tooltip>
+      )}
       {!disabled && (
         <UncontrolledPopover
           target={fontSizeButtonId}

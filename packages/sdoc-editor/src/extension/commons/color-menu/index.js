@@ -138,7 +138,7 @@ const ColorMenu = ({
           <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'arrow-up' : 'arrow-down'}`}></i>
         </div>
       </button>
-      {text && (
+      {text && !isShowMenu && (
         <Tooltip target={buttonId}>
           {t(text)}
         </Tooltip>
