@@ -319,6 +319,13 @@ export const getTopValue = (editor, dom, containerDom, slateNode) => {
   let paddingTop = parseFloat(window.getComputedStyle(dom).getPropertyValue('padding-top'));
   const lineHeight = parseFloat(window.getComputedStyle(dom).getPropertyValue('line-height'));
   const disToolBarHeight = 21;// side toolbar icon line-height is 21
+  if (slateNode.type === TOGGLE_HEADER) {
+    const rowDom = dom.querySelector('.sdoc-toggle-header-row');
+    if (rowDom) {
+      const rowRect = rowDom.getBoundingClientRect();
+      offsetY = (rowRect.top - currentRect.top) + (rowRect.height / 2) - (disToolBarHeight / 2) - 2;
+    }
+  }
   if (ADD_POSITION_OFFSET_TYPE.includes(slateNode.type)) {
     paddingTop = slateNode.type === CHECK_LIST_ITEM ? 5 : paddingTop;
     offsetY = (lineHeight / 2) + paddingTop - (disToolBarHeight / 2);
