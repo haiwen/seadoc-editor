@@ -1,6 +1,6 @@
-import { Editor, Transforms, Element } from '@seafile/slate';
-import { ELEMENT_TYPE, HEADER, PARAGRAPH, SUBTITLE, TITLE, TOGGLE_HEADER } from '../../constants';
-import { getNodeType } from '../../core';
+import { Editor, Transforms, Element, Node, Path } from '@seafile/slate';
+import { ELEMENT_TYPE, HEADER, HEADERS, PARAGRAPH, SUBTITLE, TITLE, TOGGLE_HEADER } from '../../constants';
+import { findPath, getNodeType } from '../../core';
 
 export const isMenuDisabled = (editor, readonly = false) => {
   if (readonly) return true;
@@ -63,6 +63,49 @@ export const setHeaderType = (editor, type) => {
   if (!type) return;
 
   Transforms.setNodes(editor, { type });
+};
+
+export const getHeaderLevel = (type) => {
+  if (!HEADERS.includes(type)) return null;
+  return Number(type.replace(HEADER, ''));
+};
+
+const getSectionEndIndex = (siblings, startIndex, level) => {
+  let endIndex = siblings.length;
+
+  for (let index = startIndex + 1; index < siblings.length; index++) {
+    const siblingLevel = getHeaderLevel(siblings[index]?.type);
+    if (siblingLevel !== null && siblingLevel <= level) {
+      endIndex = index;
+      break;
+    }
+  }
+
+  return endIndex;
+};
+
+export const isElementHiddenByCollapsedHeader = (editor, element) => {
+  const path = findPath(editor, element);
+  if (!path || path.length !== 1) return false;
+
+  const currentIndex = path[path.length - 1];
+  const parentPath = Path.parent(path);
+  const siblings = parentPath.length === 0 ? editor.children : Node.get(editor, parentPath).children;
+
+  for (let index = currentIndex - 1; index >= 0; index--) {
+    const sibling = siblings[index];
+    if (!Element.isElement(sibling) || !sibling.collapsed) continue;
+
+    const siblingLevel = getHeaderLevel(sibling.type);
+    if (siblingLevel === null) continue;
+
+    const endIndex = getSectionEndIndex(siblings, index, siblingLevel);
+    if (currentIndex < endIndex) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 export const isHasImage = (node) => {
