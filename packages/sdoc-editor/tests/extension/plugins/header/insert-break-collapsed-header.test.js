@@ -3,7 +3,7 @@ import HeaderPlugin from '../../../../src/extension/plugins/header';
 import { jsx, createSdocEditor, formatChildren } from '../../../core';
 
 describe('collapsed header insert break', () => {
-  it('does nothing when pressing enter at collapsed header start', () => {
+  it('inserts a new header before collapsed header when pressing enter at start', () => {
     const input = (
       <editor>
         <hh1 collapsed><cursor />hello</hh1>
@@ -12,13 +12,22 @@ describe('collapsed header insert break', () => {
       </editor>
     );
 
+    const output = (
+      <editor>
+        <hh1><htext></htext></hh1>
+        <hh1 collapsed>hello</hh1>
+        <hp>hidden body</hp>
+        <hh1>next</hh1>
+      </editor>
+    );
+
     const editor = createSdocEditor(input, [HeaderPlugin.editorPlugin]);
     editor.insertBreak();
 
-    expect(formatChildren(editor.children)).toEqual(formatChildren(input.children));
+    expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
   });
 
-  it('splits collapsed header into two headers when pressing enter in the middle', () => {
+  it('keeps collapsed header and inserts new header after hidden content when pressing enter in the middle', () => {
     const input = (
       <editor>
         <hh1 collapsed>he<cursor />llo</hh1>
@@ -29,9 +38,9 @@ describe('collapsed header insert break', () => {
 
     const output = (
       <editor>
-        <hh1>he</hh1>
-        <hh1>llo</hh1>
+        <hh1 collapsed>he</hh1>
         <hp>hidden body</hp>
+        <hh1>llo</hh1>
         <hh1>next</hh1>
       </editor>
     );
@@ -41,8 +50,8 @@ describe('collapsed header insert break', () => {
 
     expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
     expect(editor.selection).toEqual({
-      anchor: { path: [1, 0], offset: 0 },
-      focus: { path: [1, 0], offset: 0 },
+      anchor: { path: [2, 0], offset: 0 },
+      focus: { path: [2, 0], offset: 0 },
     });
   });
 

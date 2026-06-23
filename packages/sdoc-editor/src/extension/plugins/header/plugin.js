@@ -64,6 +64,8 @@ const withHeader = (editor) => {
       const isAtHeaderEnd = Point.equals(cursorPoint, endPoint);
 
       if (isAtHeaderStart) {
+        const newNode = generateEmptyElement(currentNode.type);
+        Transforms.insertNodes(newEditor, newNode, { at: path });
         return;
       }
 
@@ -79,19 +81,18 @@ const withHeader = (editor) => {
       }
 
       Editor.withoutNormalizing(newEditor, () => {
-        const beforeRange = { anchor: startPoint, focus: cursorPoint };
+        const sectionEndIndex = getCollapsedHeaderSectionEndIndex(newEditor, currentNode, path);
         const afterRange = { anchor: cursorPoint, focus: endPoint };
-        const beforeText = Editor.string(newEditor, beforeRange);
         const afterText = Editor.string(newEditor, afterRange);
 
-        Transforms.unsetNodes(newEditor, 'collapsed', { at: path });
         Transforms.delete(newEditor, { at: afterRange });
 
         const newNode = generateEmptyElement(currentNode.type);
         newNode.children[0].text = afterText;
 
-        Transforms.insertNodes(newEditor, newNode, { at: Path.next(path) });
-        Transforms.select(newEditor, Editor.start(newEditor, Path.next(path)));
+        const insertPath = sectionEndIndex === null ? Path.next(path) : [sectionEndIndex];
+        Transforms.insertNodes(newEditor, newNode, { at: insertPath });
+        Transforms.select(newEditor, Editor.start(newEditor, insertPath));
       });
       return;
     }
