@@ -1,6 +1,6 @@
-import { Editor, Transforms, Element } from '@seafile/slate';
-import { ELEMENT_TYPE, HEADER, PARAGRAPH, SUBTITLE, TITLE, TOGGLE_HEADER } from '../../constants';
-import { getNodeType } from '../../core';
+import { Editor, Transforms, Element, Node, Path } from '@seafile/slate';
+import { ELEMENT_TYPE, HEADER, HEADERS, PARAGRAPH, SUBTITLE, TITLE, TOGGLE_HEADER } from '../../constants';
+import { findPath, getNodeType } from '../../core';
 
 export const isMenuDisabled = (editor, readonly = false) => {
   if (readonly) return true;
@@ -63,6 +63,105 @@ export const setHeaderType = (editor, type) => {
   if (!type) return;
 
   Transforms.setNodes(editor, { type });
+};
+
+export const getHeaderLevel = (type) => {
+  if (!HEADERS.includes(type)) return null;
+  return Number(type.replace(HEADER, ''));
+};
+
+const getSectionEndIndex = (siblings, startIndex, level) => {
+  let endIndex = siblings.length;
+
+  for (let index = startIndex + 1; index < siblings.length; index++) {
+    const siblingLevel = getHeaderLevel(siblings[index]?.type);
+    if (siblingLevel !== null && siblingLevel <= level) {
+      endIndex = index;
+      break;
+    }
+  }
+
+  return endIndex;
+};
+
+export const getCollapsedHeaderSectionEndIndex = (editor, element, defaultPath) => {
+  const path = findPath(editor, element, defaultPath);
+  if (!path || path.length !== 1) return null;
+
+  const currentIndex = path[path.length - 1];
+  const parentPath = Path.parent(path);
+  const siblings = parentPath.length === 0 ? editor.children : Node.get(editor, parentPath).children;
+  const level = getHeaderLevel(element.type);
+
+  if (level === null) return null;
+
+  return getSectionEndIndex(siblings, currentIndex, level);
+};
+
+export const isElementHiddenByCollapsedHeader = (editor, element, defaultPath) => {
+  const path = findPath(editor, element, defaultPath);
+  if (!path || path.length !== 1) return false;
+
+  const currentIndex = path[path.length - 1];
+  const parentPath = Path.parent(path);
+  const siblings = parentPath.length === 0 ? editor.children : Node.get(editor, parentPath).children;
+
+  for (let index = currentIndex - 1; index >= 0; index--) {
+    const sibling = siblings[index];
+    if (!Element.isElement(sibling) || !sibling.collapsed) continue;
+
+    const siblingLevel = getHeaderLevel(sibling.type);
+    if (siblingLevel === null) continue;
+
+    const endIndex = getSectionEndIndex(siblings, index, siblingLevel);
+    if (currentIndex < endIndex) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+export const getSkippedHiddenHeaderMovePoint = (editor, point, reverse = false) => {
+  const topLevelBlockEntry = Editor.above(editor, {
+    at: point,
+    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    mode: 'highest',
+  });
+
+  if (!topLevelBlockEntry) return null;
+
+  const [topLevelBlock, topLevelPath] = topLevelBlockEntry;
+  if (topLevelPath.length !== 1) return null;
+
+  const step = reverse ? -1 : 1;
+  const isCurrentHidden = isElementHiddenByCollapsedHeader(editor, topLevelBlock, topLevelPath);
+  const isAtBoundary = reverse
+    ? Editor.isStart(editor, point, topLevelPath)
+    : Editor.isEnd(editor, point, topLevelPath);
+
+  let startIndex = topLevelPath[0] + step;
+  let skippedHiddenBlock = isCurrentHidden;
+
+  if (!isCurrentHidden) {
+    if (!isAtBoundary) return null;
+  }
+
+  for (let index = startIndex; index >= 0 && index < editor.children.length; index += step) {
+    const sibling = editor.children[index];
+    if (!Element.isElement(sibling)) continue;
+
+    if (isElementHiddenByCollapsedHeader(editor, sibling, [index])) {
+      skippedHiddenBlock = true;
+      continue;
+    }
+
+    if (!skippedHiddenBlock) return null;
+
+    return reverse ? Editor.end(editor, [index]) : Editor.start(editor, [index]);
+  }
+
+  return null;
 };
 
 export const isHasImage = (node) => {

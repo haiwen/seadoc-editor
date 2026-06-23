@@ -1,3 +1,4 @@
+import React from 'react';
 import { useReadOnly, useSlateStatic } from '@seafile/slate-react';
 import { DIFF_VIEWER } from '../../constants';
 import { BLOCKQUOTE, LINK, CHECK_LIST_ITEM, HEADER1, HEADER2, HEADER3, HEADER4, HEADER5, HEADER6, LIST_ITEM, ORDERED_LIST, PARAGRAPH,
@@ -10,6 +11,7 @@ import { BlockquotePlugin, LinkPlugin, CheckListPlugin, HeaderPlugin, ListPlugin
   MultiColumnPlugin, SdocLinkPlugin, ParagraphPlugin, FileLinkPlugin, CalloutPlugin, MentionPlugin, QuickInsertPlugin, WikiLinkPlugin,
   GroupPlugin, WhiteboardPlugin, FileViewPlugin, FormulaPlugin, ToggleHeaderPlugin, EmbedLinkPlugin, DividerPlugin
 } from '../plugins';
+import { isElementHiddenByCollapsedHeader } from '../plugins/header/helpers';
 import { setDataRoot, setMouseEnter, onDragOver, onDragLeave, onDrop } from './helper';
 
 const CustomRenderElement = (props) => {
@@ -27,6 +29,14 @@ const CustomRenderElement = (props) => {
 
   // Sets the data-root attribute to true for certain elements
   setDataRoot(element, attributes);
+
+  if (isElementHiddenByCollapsedHeader(editor, element)) {
+    return (
+      <div data-id={element.id} {...attributes} style={{ display: 'none' }}>
+        {props.children}
+      </div>
+    );
+  }
 
   switch (element.type) {
     case PARAGRAPH: {

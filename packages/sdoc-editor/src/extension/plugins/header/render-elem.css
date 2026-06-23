@@ -1,0 +1,49 @@
+.sdoc-header-row {
+  position: relative;
+}
+
+.sdoc-header-collapse-prefix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sdoc-header-collapse-prefix:hover {
+  background-color: rgba(42, 28, 0, .07);
+  border-radius: 2px;
+}
+
+.sdoc-header-collapse-prefix-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sdoc-header-collapse-prefix .sdocfont {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  scale: calc(0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #212529;
+  opacity: 0.5;
+}
+
+.sdoc-header-collapse-prefix-collapsed {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.sdoc-header-content {
+  min-width: 0;
+}

@@ -1,8 +1,11 @@
 import React from 'react';
-import { Node } from '@seafile/slate';
+import { Editor, Element, Node, Transforms } from '@seafile/slate';
+import { ReactEditor } from '@seafile/slate-react';
+import classnames from 'classnames';
 import { SDOC_FONT_SIZE } from '../../constants';
 import { isEmptyNode } from '../paragraph/helper';
 import Placeholder from './placeholder';
+import './render-elem.css';
 
 export const renderTitle = (props, editor) => {
   const { element, attributes, children } = props;
@@ -36,6 +39,14 @@ export const renderHeader = (props, editor) => {
   const { element, attributes, children, isComposing } = props;
   const { type } = element;
   const level = type.split('header')[1];
+  const collapsed = !!element.collapsed;
+  const currentPath = ReactEditor.findPath(editor, element);
+  const activeHeaderEntry = editor.selection ? Editor.above(editor, {
+    at: editor.selection,
+    match: (node, path) => Element.isElement(node) && node.id === element.id && path.length === currentPath.length,
+    mode: 'lowest',
+  }) : null;
+  const isActiveHeader = !!activeHeaderEntry;
 
   const style = {
     textAlign: element.align,
@@ -49,6 +60,13 @@ export const renderHeader = (props, editor) => {
     isShowPlaceHolder = true;
   }
 
+  const onToggleCollapsed = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    Transforms.setNodes(editor, { collapsed: !collapsed }, { at: currentPath });
+  };
+
   return (
     <div
       data-id={element.id}
@@ -57,8 +75,22 @@ export const renderHeader = (props, editor) => {
       className={`sdoc-header-${level}`}
       style={{ position: isShowPlaceHolder ? 'relative' : '', ...style }}
     >
-      {isShowPlaceHolder && <Placeholder title={'Header'} top={0} />}
-      {children}
+      <div className='sdoc-header-row'>
+        <span
+          className={classnames('sdoc-header-collapse-prefix', {
+            'sdoc-header-collapse-prefix-visible': isActiveHeader,
+            'sdoc-header-collapse-prefix-collapsed': collapsed,
+          })}
+          contentEditable={false}
+          onMouseDown={onToggleCollapsed}
+        >
+          <span className={classnames('sdocfont', collapsed ? 'sdoc-big-caret-up' : 'sdoc-big-drop-down')}></span>
+        </span>
+        <div className='sdoc-header-content'>
+          {isShowPlaceHolder && <Placeholder title={'Header'} top={0} />}
+          {children}
+        </div>
+      </div>
     </div>
   );
 };
