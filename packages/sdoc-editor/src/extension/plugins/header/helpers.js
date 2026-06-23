@@ -84,8 +84,22 @@ const getSectionEndIndex = (siblings, startIndex, level) => {
   return endIndex;
 };
 
-export const isElementHiddenByCollapsedHeader = (editor, element) => {
-  const path = findPath(editor, element);
+export const getCollapsedHeaderSectionEndIndex = (editor, element, defaultPath) => {
+  const path = findPath(editor, element, defaultPath);
+  if (!path || path.length !== 1) return null;
+
+  const currentIndex = path[path.length - 1];
+  const parentPath = Path.parent(path);
+  const siblings = parentPath.length === 0 ? editor.children : Node.get(editor, parentPath).children;
+  const level = getHeaderLevel(element.type);
+
+  if (level === null) return null;
+
+  return getSectionEndIndex(siblings, currentIndex, level);
+};
+
+export const isElementHiddenByCollapsedHeader = (editor, element, defaultPath) => {
+  const path = findPath(editor, element, defaultPath);
   if (!path || path.length !== 1) return false;
 
   const currentIndex = path[path.length - 1];
@@ -106,6 +120,48 @@ export const isElementHiddenByCollapsedHeader = (editor, element) => {
   }
 
   return false;
+};
+
+export const getSkippedHiddenHeaderMovePoint = (editor, point, reverse = false) => {
+  const topLevelBlockEntry = Editor.above(editor, {
+    at: point,
+    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    mode: 'highest',
+  });
+
+  if (!topLevelBlockEntry) return null;
+
+  const [topLevelBlock, topLevelPath] = topLevelBlockEntry;
+  if (topLevelPath.length !== 1) return null;
+
+  const step = reverse ? -1 : 1;
+  const isCurrentHidden = isElementHiddenByCollapsedHeader(editor, topLevelBlock, topLevelPath);
+  const isAtBoundary = reverse
+    ? Editor.isStart(editor, point, topLevelPath)
+    : Editor.isEnd(editor, point, topLevelPath);
+
+  let startIndex = topLevelPath[0] + step;
+  let skippedHiddenBlock = isCurrentHidden;
+
+  if (!isCurrentHidden) {
+    if (!isAtBoundary) return null;
+  }
+
+  for (let index = startIndex; index >= 0 && index < editor.children.length; index += step) {
+    const sibling = editor.children[index];
+    if (!Element.isElement(sibling)) continue;
+
+    if (isElementHiddenByCollapsedHeader(editor, sibling, [index])) {
+      skippedHiddenBlock = true;
+      continue;
+    }
+
+    if (!skippedHiddenBlock) return null;
+
+    return reverse ? Editor.end(editor, [index]) : Editor.start(editor, [index]);
+  }
+
+  return null;
 };
 
 export const isHasImage = (node) => {

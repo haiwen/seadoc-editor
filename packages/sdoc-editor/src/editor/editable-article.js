@@ -10,6 +10,7 @@ import { usePipDecorate } from '../decorates';
 import { renderLeaf, renderElement, ContextToolbar, SideToolbar } from '../extension';
 import { IMAGE, IMAGE_BLOCK, CODE_LINE } from '../extension/constants';
 import { getAboveBlockNode, getNextNode, getPrevNode, isSelectionAtBlockEnd, isSelectionAtBlockStart, getCurrentNode, isCurrentLineEmpty, isCurrentLineHasText } from '../extension/core';
+import { getSkippedHiddenHeaderMovePoint } from '../extension/plugins/header/helpers';
 import { isPreventResetTableSelectedRange } from '../extension/plugins/table/helpers';
 import { SetNodeToDecorations } from '../highlight';
 import useForceUpdate from '../hooks/use-force-update';
@@ -160,6 +161,10 @@ const EditableArticle = ({
     if (event.key === 'ArrowLeft' && !isModClick) {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset', reverse: true });
+      const hiddenMovePoint = editor.selection ? getSkippedHiddenHeaderMovePoint(editor, editor.selection.focus, true) : null;
+      if (hiddenMovePoint) {
+        Transforms.select(editor, hiddenMovePoint);
+      }
       if (!isSelectionAtBlockStart(editor)) return;
     }
 
@@ -181,6 +186,10 @@ const EditableArticle = ({
     if (event.key === 'ArrowRight' && !isModClick) {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset' });
+      const hiddenMovePoint = editor.selection ? getSkippedHiddenHeaderMovePoint(editor, editor.selection.focus) : null;
+      if (hiddenMovePoint) {
+        Transforms.select(editor, hiddenMovePoint);
+      }
       if (!isSelectionAtBlockEnd(editor)) return;
     }
 

@@ -1,11 +1,11 @@
-import { Editor, Element, Transforms, Node, Path } from '@seafile/slate';
+import { Editor, Element, Transforms, Node, Path, Point } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { isMac } from '../../../utils/common-utils';
 import { PARAGRAPH, HEADERS, TITLE, SUBTITLE, HEADER, MULTI_COLUMN } from '../../constants';
 import { MAC_HOTKEYS_EVENT, WIN_HOTKEYS } from '../../constants/keyboard';
 import { generateEmptyElement, getSelectedNodeByTypes, isSelectionAtBlockStart, isCursorAtBlockStart, getNodeType, generateDefaultParagraph } from '../../core';
 import { isSingleListItem } from '../list/helpers';
-import { isHasImage, isMenuDisabled, setHeaderType } from './helpers';
+import { getCollapsedHeaderSectionEndIndex, isHasImage, isMenuDisabled, setHeaderType } from './helpers';
 
 const isSelectionAtLineEnd = (editor, path) => {
   const { selection } = editor;
@@ -30,6 +30,12 @@ const withHeader = (editor) => {
 
   // Rewrite insertBreak - insert paragraph when carriage return at the end of header
   newEditor.insertBreak = () => {
+    const { selection } = newEditor;
+    if (!selection) {
+      insertBreak();
+      return;
+    }
+
     const [match] = Editor.nodes(newEditor, {
       match: n => {
         if (!Element.isElement(n)) return false;
@@ -47,16 +53,58 @@ const withHeader = (editor) => {
       return;
     }
 
+    const [currentNode, path] = match;
+    const isCollapsedHeader = !!currentNode.collapsed;
+    const startPoint = Editor.start(newEditor, path);
+    const endPoint = Editor.end(newEditor, path);
+
+    if (isCollapsedHeader) {
+      const cursorPoint = selection.anchor;
+      const isAtHeaderStart = Point.equals(cursorPoint, startPoint);
+      const isAtHeaderEnd = Point.equals(cursorPoint, endPoint);
+
+      if (isAtHeaderStart) {
+        return;
+      }
+
+      if (isAtHeaderEnd) {
+        Editor.withoutNormalizing(newEditor, () => {
+          const sectionEndIndex = getCollapsedHeaderSectionEndIndex(newEditor, currentNode, path);
+          const insertPath = sectionEndIndex === null ? Path.next(path) : [sectionEndIndex];
+          const newNode = generateEmptyElement(currentNode.type);
+          Transforms.insertNodes(newEditor, newNode, { at: insertPath });
+          Transforms.select(newEditor, Editor.start(newEditor, insertPath));
+        });
+        return;
+      }
+
+      Editor.withoutNormalizing(newEditor, () => {
+        const beforeRange = { anchor: startPoint, focus: cursorPoint };
+        const afterRange = { anchor: cursorPoint, focus: endPoint };
+        const beforeText = Editor.string(newEditor, beforeRange);
+        const afterText = Editor.string(newEditor, afterRange);
+
+        Transforms.unsetNodes(newEditor, 'collapsed', { at: path });
+        Transforms.delete(newEditor, { at: afterRange });
+
+        const newNode = generateEmptyElement(currentNode.type);
+        newNode.children[0].text = afterText;
+
+        Transforms.insertNodes(newEditor, newNode, { at: Path.next(path) });
+        Transforms.select(newEditor, Editor.start(newEditor, Path.next(path)));
+      });
+      return;
+    }
+
     if (isCursorAtBlockStart(newEditor)) {
-      const [currentNode, path] = match;
       const newNode = generateEmptyElement(currentNode.type);
       Transforms.insertNodes(editor, newNode, { at: path });
       return;
     }
 
-    const isAtLineEnd = isSelectionAtLineEnd(editor, match[1]);
+    const isAtLineEnd = isSelectionAtLineEnd(editor, path);
 
-    const nextNode = Editor.next(editor, { at: match[1] });
+    const nextNode = Editor.next(editor, { at: path });
 
     if (isAtLineEnd && nextNode && editor.children.length === 2) {
       const [node, path] = nextNode;
