@@ -60,7 +60,7 @@
 }
 
 .selected-linked-block-wrapper .selected-linked-block:not(img) {
-  width: 100%;
+  width: 95%;
   overflow-y: auto;
   max-height: 36px;
 }
