@@ -48,7 +48,7 @@ class CollaboratorsPopover extends React.PureComponent {
         isOpen={isOpen}
         toggle={toggle}
         placement="bottom-end"
-        popperClassName='collaborators-popover'
+        popperClassName='collaborators-popover sdoc-popover-box-shadow '
         trigger="legacy"
         hideArrow={true}
         fade={false}
