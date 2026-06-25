@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Editable, Slate } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import CommentWrapper from '../comment';
@@ -9,6 +9,18 @@ import { ArticleContainer } from '../layout';
 
 const ReadOnlyArticle = ({ editor, slateValue, updateSlateValue, showComment = false }) => {
   const decorate = usePipDecorate(editor);
+  const [, setVersion] = useState(0);
+
+  useEffect(() => {
+    editor.onHeaderCollapseStateChange = () => {
+      setVersion(value => value + 1);
+    };
+
+    return () => {
+      editor.onHeaderCollapseStateChange = null;
+    };
+  }, [editor]);
+
   return (
     <Slate editor={editor} value={slateValue} onChange={updateSlateValue}>
       <ArticleContainer editor={editor}>

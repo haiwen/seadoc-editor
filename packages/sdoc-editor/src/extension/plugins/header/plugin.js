@@ -5,7 +5,7 @@ import { PARAGRAPH, HEADERS, TITLE, SUBTITLE, HEADER, MULTI_COLUMN } from '../..
 import { MAC_HOTKEYS_EVENT, WIN_HOTKEYS } from '../../constants/keyboard';
 import { generateEmptyElement, getSelectedNodeByTypes, isSelectionAtBlockStart, isCursorAtBlockStart, getNodeType, generateDefaultParagraph } from '../../core';
 import { isSingleListItem } from '../list/helpers';
-import { getCollapsedHeaderSectionEndIndex, isHasImage, isMenuDisabled, setHeaderType } from './helpers';
+import { getCollapsedHeaderInsertPath, isHasImage, isHeaderCollapsed, isMenuDisabled, setHeaderCollapsed, setHeaderType } from './helpers';
 
 const isSelectionAtLineEnd = (editor, path) => {
   const { selection } = editor;
@@ -54,7 +54,7 @@ const withHeader = (editor) => {
     }
 
     const [currentNode, path] = match;
-    const isCollapsedHeader = !!currentNode.collapsed;
+    const isCollapsedHeader = isHeaderCollapsed(newEditor, currentNode, path);
     const startPoint = Editor.start(newEditor, path);
     const endPoint = Editor.end(newEditor, path);
 
@@ -71,8 +71,7 @@ const withHeader = (editor) => {
 
       if (isAtHeaderEnd) {
         Editor.withoutNormalizing(newEditor, () => {
-          const sectionEndIndex = getCollapsedHeaderSectionEndIndex(newEditor, currentNode, path);
-          const insertPath = sectionEndIndex === null ? Path.next(path) : [sectionEndIndex];
+          const insertPath = getCollapsedHeaderInsertPath(newEditor, currentNode, path);
           const newNode = generateEmptyElement(currentNode.type);
           Transforms.insertNodes(newEditor, newNode, { at: insertPath });
           Transforms.select(newEditor, Editor.start(newEditor, insertPath));
@@ -81,16 +80,16 @@ const withHeader = (editor) => {
       }
 
       Editor.withoutNormalizing(newEditor, () => {
-        const sectionEndIndex = getCollapsedHeaderSectionEndIndex(newEditor, currentNode, path);
+        const insertPath = getCollapsedHeaderInsertPath(newEditor, currentNode, path);
         const afterRange = { anchor: cursorPoint, focus: endPoint };
         const afterText = Editor.string(newEditor, afterRange);
 
         Transforms.delete(newEditor, { at: afterRange });
+        setHeaderCollapsed(newEditor, currentNode, true, path);
 
         const newNode = generateEmptyElement(currentNode.type);
         newNode.children[0].text = afterText;
 
-        const insertPath = sectionEndIndex === null ? Path.next(path) : [sectionEndIndex];
         Transforms.insertNodes(newEditor, newNode, { at: insertPath });
         Transforms.select(newEditor, Editor.start(newEditor, insertPath));
       });
