@@ -1,21 +1,42 @@
 import { Editor, Transforms, Element, Node, Path } from '@seafile/slate';
+import context from '../../../context';
+import LocalStorage from '../../../utils/local-storage-utils';
 import { ELEMENT_TYPE, HEADER, HEADERS, PARAGRAPH, SUBTITLE, TITLE, TOGGLE_HEADER } from '../../constants';
 import { findPath, getNodeType } from '../../core';
 
-const getCollapsedHeaderState = (editor) => {
-  if (!editor.localCollapsedHeaderState) {
-    editor.localCollapsedHeaderState = new Map();
-  }
+const HEADER_COLLAPSE_STORAGE_PREFIX = 'sdoc-header-collapsed:';
 
-  return editor.localCollapsedHeaderState;
+const getHeaderStorageDocKey = () => {
+  return context.getSetting('docUuid') || context.getSetting('wikiId') || window.location.pathname || 'default';
 };
 
-const getCollapsedHeaderNodeState = (editor) => {
-  if (!editor.localCollapsedHeaderNodeState) {
-    editor.localCollapsedHeaderNodeState = new WeakMap();
-  }
+const getHeaderStorageKey = () => {
+  return `${HEADER_COLLAPSE_STORAGE_PREFIX}${getHeaderStorageDocKey()}`;
+};
 
-  return editor.localCollapsedHeaderNodeState;
+const clearAllHeaderCollapsedState = () => {
+  Object.keys(window.localStorage).forEach((key) => {
+    if (key.startsWith(HEADER_COLLAPSE_STORAGE_PREFIX)) {
+      LocalStorage.removeItem(key);
+    }
+  });
+};
+
+const getCollapsedHeaderState = () => {
+  return LocalStorage.getItem(getHeaderStorageKey(), {});
+};
+
+const persistCollapsedHeaderState = (collapsedHeaderState) => {
+  try {
+    LocalStorage.setItem(getHeaderStorageKey(), collapsedHeaderState);
+  } catch (error) {
+    clearAllHeaderCollapsedState();
+    try {
+      LocalStorage.setItem(getHeaderStorageKey(), collapsedHeaderState);
+    } catch {
+      // Ignore storage failures after cleanup.
+    }
+  }
 };
 
 const getHeaderId = (editor, element, defaultPath) => {
@@ -24,27 +45,18 @@ const getHeaderId = (editor, element, defaultPath) => {
   const path = defaultPath || findPath(editor, element);
   if (!path) return null;
 
-  return Node.get(editor, path)?.id || null;
+  return Node.get(editor, path)?.id || `path:${path.join('.')}`;
 };
 
 export const isHeaderCollapsed = (editor, element, defaultPath) => {
   const headerId = getHeaderId(editor, element, defaultPath);
-  if (headerId) {
-    const collapsedHeaderState = getCollapsedHeaderState(editor);
-    if (collapsedHeaderState.has(headerId)) {
-      return collapsedHeaderState.get(headerId);
-    }
-
+  if (!headerId) {
     return !!element?.collapsed;
   }
 
-  const path = defaultPath || findPath(editor, element);
-  const targetNode = path ? Node.get(editor, path) : element;
-  if (!targetNode) return false;
-
-  const collapsedHeaderNodeState = getCollapsedHeaderNodeState(editor);
-  if (collapsedHeaderNodeState.has(targetNode)) {
-    return collapsedHeaderNodeState.get(targetNode);
+  const collapsedHeaderState = getCollapsedHeaderState();
+  if (Object.prototype.hasOwnProperty.call(collapsedHeaderState, headerId)) {
+    return !!collapsedHeaderState[headerId];
   }
 
   return !!element?.collapsed;
@@ -52,19 +64,11 @@ export const isHeaderCollapsed = (editor, element, defaultPath) => {
 
 export const setHeaderCollapsed = (editor, element, collapsed, defaultPath) => {
   const headerId = getHeaderId(editor, element, defaultPath);
-  if (headerId) {
-    const collapsedHeaderState = getCollapsedHeaderState(editor);
-    collapsedHeaderState.set(headerId, collapsed);
-    editor.onHeaderCollapseStateChange?.();
-    return;
-  }
+  if (!headerId) return;
 
-  const path = defaultPath || findPath(editor, element);
-  const targetNode = path ? Node.get(editor, path) : element;
-  if (!targetNode) return;
-
-  const collapsedHeaderNodeState = getCollapsedHeaderNodeState(editor);
-  collapsedHeaderNodeState.set(targetNode, collapsed);
+  const collapsedHeaderState = getCollapsedHeaderState();
+  collapsedHeaderState[headerId] = collapsed;
+  persistCollapsedHeaderState(collapsedHeaderState);
 
   editor.onHeaderCollapseStateChange?.();
 };
@@ -74,8 +78,8 @@ export const toggleHeaderCollapsed = (editor, element, defaultPath) => {
 };
 
 export const clearHeaderCollapsedState = (editor) => {
-  editor.localCollapsedHeaderState = new Map();
-  editor.localCollapsedHeaderNodeState = new WeakMap();
+  LocalStorage.removeItem(getHeaderStorageKey());
+  editor?.onHeaderCollapseStateChange?.();
 };
 
 export const isMenuDisabled = (editor, readonly = false) => {

@@ -10,7 +10,6 @@ import { createDefaultEditor } from '../extension';
 import InsertElementDialog from '../extension/commons/insert-element-dialog';
 import { RECENT_COPY_CONTENT } from '../extension/constants';
 import { removeMarks } from '../extension/plugins/ai/ai-module/helpers';
-import { clearHeaderCollapsedState } from '../extension/plugins/header/helpers';
 import SearchReplaceMenu from '../extension/plugins/search-replace/menu';
 import { ColorProvider } from '../hooks/use-color-context';
 import useMathJax from '../hooks/use-mathjax';
@@ -46,7 +45,6 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
   // Fix: The editor's children are not updated when the document is updated in revision
   // In revision mode, the document is updated, but the editor's children are not updated,as onValueChange override the new document.elements. This unexpected action cause the editor to display the old content
   useEffect(() => {
-    clearHeaderCollapsedState(validEditor);
     validEditor.children = document.elements;
     setSlateValue(document.elements);
   }, [document.elements, validEditor]);
@@ -54,7 +52,6 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
   useEffect(() => {
     validEditor.readonly = false;
     return () => {
-      clearHeaderCollapsedState(validEditor);
       validEditor.selection = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -106,7 +103,6 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
 
     setSlateValue: (document) => {
       // Force update of editor's child elements
-      clearHeaderCollapsedState(validEditor);
       validEditor.children = document.elements;
       setSlateValue([...document.elements]);
     },
