@@ -2,6 +2,15 @@
   position: relative;
 }
 
+.sdoc-header-row::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 20px;
+  height: 100%;
+}
+
 .sdoc-header-collapse-prefix {
   display: inline-flex;
   align-items: center;
@@ -19,11 +28,18 @@
 }
 
 .sdoc-header-collapse-prefix:hover {
+  opacity: 1;
+  pointer-events: auto;
   background-color: rgba(0, 0, 0, .04);
   border-radius: 2px;
 }
 
 .sdoc-header-collapse-prefix-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sdoc-header-row:hover .sdoc-header-collapse-prefix {
   opacity: 1;
   pointer-events: auto;
 }

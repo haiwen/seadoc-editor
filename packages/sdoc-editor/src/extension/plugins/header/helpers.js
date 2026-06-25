@@ -2,6 +2,82 @@ import { Editor, Transforms, Element, Node, Path } from '@seafile/slate';
 import { ELEMENT_TYPE, HEADER, HEADERS, PARAGRAPH, SUBTITLE, TITLE, TOGGLE_HEADER } from '../../constants';
 import { findPath, getNodeType } from '../../core';
 
+const getCollapsedHeaderState = (editor) => {
+  if (!editor.localCollapsedHeaderState) {
+    editor.localCollapsedHeaderState = new Map();
+  }
+
+  return editor.localCollapsedHeaderState;
+};
+
+const getCollapsedHeaderNodeState = (editor) => {
+  if (!editor.localCollapsedHeaderNodeState) {
+    editor.localCollapsedHeaderNodeState = new WeakMap();
+  }
+
+  return editor.localCollapsedHeaderNodeState;
+};
+
+const getHeaderId = (editor, element, defaultPath) => {
+  if (element?.id) return element.id;
+
+  const path = defaultPath || findPath(editor, element);
+  if (!path) return null;
+
+  return Node.get(editor, path)?.id || null;
+};
+
+export const isHeaderCollapsed = (editor, element, defaultPath) => {
+  const headerId = getHeaderId(editor, element, defaultPath);
+  if (headerId) {
+    const collapsedHeaderState = getCollapsedHeaderState(editor);
+    if (collapsedHeaderState.has(headerId)) {
+      return collapsedHeaderState.get(headerId);
+    }
+
+    return !!element?.collapsed;
+  }
+
+  const path = defaultPath || findPath(editor, element);
+  const targetNode = path ? Node.get(editor, path) : element;
+  if (!targetNode) return false;
+
+  const collapsedHeaderNodeState = getCollapsedHeaderNodeState(editor);
+  if (collapsedHeaderNodeState.has(targetNode)) {
+    return collapsedHeaderNodeState.get(targetNode);
+  }
+
+  return !!element?.collapsed;
+};
+
+export const setHeaderCollapsed = (editor, element, collapsed, defaultPath) => {
+  const headerId = getHeaderId(editor, element, defaultPath);
+  if (headerId) {
+    const collapsedHeaderState = getCollapsedHeaderState(editor);
+    collapsedHeaderState.set(headerId, collapsed);
+    editor.onHeaderCollapseStateChange?.();
+    return;
+  }
+
+  const path = defaultPath || findPath(editor, element);
+  const targetNode = path ? Node.get(editor, path) : element;
+  if (!targetNode) return;
+
+  const collapsedHeaderNodeState = getCollapsedHeaderNodeState(editor);
+  collapsedHeaderNodeState.set(targetNode, collapsed);
+
+  editor.onHeaderCollapseStateChange?.();
+};
+
+export const toggleHeaderCollapsed = (editor, element, defaultPath) => {
+  setHeaderCollapsed(editor, element, !isHeaderCollapsed(editor, element, defaultPath), defaultPath);
+};
+
+export const clearHeaderCollapsedState = (editor) => {
+  editor.localCollapsedHeaderState = new Map();
+  editor.localCollapsedHeaderNodeState = new WeakMap();
+};
+
 export const isMenuDisabled = (editor, readonly = false) => {
   if (readonly) return true;
   if (!editor.selection) return true;
@@ -98,6 +174,16 @@ export const getCollapsedHeaderSectionEndIndex = (editor, element, defaultPath) 
   return getSectionEndIndex(siblings, currentIndex, level);
 };
 
+export const getCollapsedHeaderInsertPath = (editor, element, defaultPath) => {
+  const endIndex = getCollapsedHeaderSectionEndIndex(editor, element, defaultPath);
+  if (endIndex === null) {
+    const path = findPath(editor, element, defaultPath);
+    return path ? Path.next(path) : null;
+  }
+
+  return [endIndex];
+};
+
 export const isElementHiddenByCollapsedHeader = (editor, element, defaultPath) => {
   const path = findPath(editor, element, defaultPath);
   if (!path || path.length !== 1) return false;
@@ -108,7 +194,7 @@ export const isElementHiddenByCollapsedHeader = (editor, element, defaultPath) =
 
   for (let index = currentIndex - 1; index >= 0; index--) {
     const sibling = siblings[index];
-    if (!Element.isElement(sibling) || !sibling.collapsed) continue;
+    if (!Element.isElement(sibling) || !isHeaderCollapsed(editor, sibling, [index])) continue;
 
     const siblingLevel = getHeaderLevel(sibling.type);
     if (siblingLevel === null) continue;

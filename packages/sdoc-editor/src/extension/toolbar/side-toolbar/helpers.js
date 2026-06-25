@@ -95,7 +95,6 @@ export const onSetNodeType = (editor, element, type) => {
       id: slugid.nice(),
       type: TOGGLE_HEADER,
       level,
-      collapsed: false,
       children: [titleNode, bodyNode],
     };
 

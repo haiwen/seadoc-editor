@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import HeaderPlugin from '../../../../src/extension/plugins/header';
+import { isHeaderCollapsed, setHeaderCollapsed } from '../../../../src/extension/plugins/header/helpers';
 import { jsx, createSdocEditor, formatChildren } from '../../../core';
 
 describe('collapsed header insert break', () => {
@@ -22,9 +23,11 @@ describe('collapsed header insert break', () => {
     );
 
     const editor = createSdocEditor(input, [HeaderPlugin.editorPlugin]);
+    setHeaderCollapsed(editor, editor.children[0], true, [0]);
     editor.insertBreak();
 
     expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
+    expect(isHeaderCollapsed(editor, editor.children[1], [1])).toBe(true);
   });
 
   it('keeps collapsed header and inserts new header after hidden content when pressing enter in the middle', () => {
@@ -46,9 +49,11 @@ describe('collapsed header insert break', () => {
     );
 
     const editor = createSdocEditor(input, [HeaderPlugin.editorPlugin]);
+    setHeaderCollapsed(editor, editor.children[0], true, [0]);
     editor.insertBreak();
 
     expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
+    expect(isHeaderCollapsed(editor, editor.children[0], [0])).toBe(true);
     expect(editor.selection).toEqual({
       anchor: { path: [2, 0], offset: 0 },
       focus: { path: [2, 0], offset: 0 },
@@ -74,9 +79,11 @@ describe('collapsed header insert break', () => {
     );
 
     const editor = createSdocEditor(input, [HeaderPlugin.editorPlugin]);
+    setHeaderCollapsed(editor, editor.children[0], true, [0]);
     editor.insertBreak();
 
     expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
+    expect(isHeaderCollapsed(editor, editor.children[0], [0])).toBe(true);
     expect(editor.selection).toEqual({
       anchor: { path: [2, 0], offset: 0 },
       focus: { path: [2, 0], offset: 0 },

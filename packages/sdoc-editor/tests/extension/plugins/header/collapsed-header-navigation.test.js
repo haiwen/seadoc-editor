@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { Editor, Transforms } from '@seafile/slate';
 import HeaderPlugin from '../../../../src/extension/plugins/header';
-import { getSkippedHiddenHeaderMovePoint } from '../../../../src/extension/plugins/header/helpers';
+import { getSkippedHiddenHeaderMovePoint, isElementHiddenByCollapsedHeader, setHeaderCollapsed } from '../../../../src/extension/plugins/header/helpers';
 import { jsx, createSdocEditor } from '../../../core';
 
 describe('collapsed header navigation', () => {
@@ -15,6 +15,8 @@ describe('collapsed header navigation', () => {
     );
 
     const editor = createSdocEditor(input, [HeaderPlugin.editorPlugin]);
+    setHeaderCollapsed(editor, editor.children[0], true, [0]);
+    expect(isElementHiddenByCollapsedHeader(editor, editor.children[1], [1])).toBe(true);
 
     Transforms.move(editor, { unit: 'offset' });
     const hiddenMovePoint = getSkippedHiddenHeaderMovePoint(editor, editor.selection.focus);
@@ -32,6 +34,8 @@ describe('collapsed header navigation', () => {
     );
 
     const editor = createSdocEditor(input, [HeaderPlugin.editorPlugin]);
+    setHeaderCollapsed(editor, editor.children[0], true, [0]);
+    expect(isElementHiddenByCollapsedHeader(editor, editor.children[1], [1])).toBe(true);
 
     Transforms.move(editor, { unit: 'offset', reverse: true });
     const hiddenMovePoint = getSkippedHiddenHeaderMovePoint(editor, editor.selection.focus, true);
@@ -65,6 +69,8 @@ describe('collapsed header navigation', () => {
     );
 
     const editor = createSdocEditor(input, [HeaderPlugin.editorPlugin]);
+    setHeaderCollapsed(editor, editor.children[0], true, [0]);
+    expect(isElementHiddenByCollapsedHeader(editor, editor.children[1], [1])).toBe(true);
 
     expect(getSkippedHiddenHeaderMovePoint(editor, Editor.end(editor, [0]))).toEqual(Editor.start(editor, [2]));
   });

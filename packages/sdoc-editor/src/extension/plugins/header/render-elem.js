@@ -4,6 +4,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import classnames from 'classnames';
 import { SDOC_FONT_SIZE } from '../../constants';
 import { isEmptyNode } from '../paragraph/helper';
+import { isHeaderCollapsed, toggleHeaderCollapsed } from './helpers';
 import Placeholder from './placeholder';
 import './render-elem.css';
 
@@ -39,15 +40,8 @@ export const renderHeader = (props, editor) => {
   const { element, attributes, children, isComposing } = props;
   const { type } = element;
   const level = type.split('header')[1];
-  const collapsed = !!element.collapsed;
   const currentPath = ReactEditor.findPath(editor, element);
-  const activeHeaderEntry = editor.selection ? Editor.above(editor, {
-    at: editor.selection,
-    match: (node, path) => Element.isElement(node) && node.id === element.id && path.length === currentPath.length,
-    mode: 'lowest',
-  }) : null;
-  const isActiveHeader = !!activeHeaderEntry;
-
+  const collapsed = isHeaderCollapsed(editor, element, currentPath);
   const style = {
     textAlign: element.align,
     fontSize: `${SDOC_FONT_SIZE[element.type]}pt`,
@@ -64,7 +58,13 @@ export const renderHeader = (props, editor) => {
     event.preventDefault();
     event.stopPropagation();
 
-    Transforms.setNodes(editor, { collapsed: !collapsed }, { at: currentPath });
+    toggleHeaderCollapsed(editor, element, currentPath);
+
+    if (collapsed) {
+      const endPoint = Editor.end(editor, currentPath);
+      Transforms.select(editor, endPoint);
+      ReactEditor.focus(editor);
+    }
   };
 
   return (
@@ -78,7 +78,7 @@ export const renderHeader = (props, editor) => {
       <div className='sdoc-header-row'>
         <span
           className={classnames('sdoc-header-collapse-prefix', {
-            'sdoc-header-collapse-prefix-visible': isActiveHeader,
+            'sdoc-header-collapse-prefix-visible': collapsed,
             'sdoc-header-collapse-prefix-collapsed': collapsed,
           })}
           contentEditable={false}
