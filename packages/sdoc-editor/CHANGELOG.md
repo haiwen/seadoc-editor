@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.205](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.204...@seafile/sdoc-editor@3.0.205) (2026-06-25)
+
+### Performance Improvements
+
+- intergrate localstorage ([1ce0552](https://github.com/haiwen/seadoc-editor/commit/1ce0552c4ca696de8933931ff63d0523b282eea8))
+- optimize header plugin interactive ([#265](https://github.com/haiwen/seadoc-editor/issues/265)) ([f2bef66](https://github.com/haiwen/seadoc-editor/commit/f2bef6676d00964baf556ffe4e71e60f3f0f1c77))
+
 ## [3.0.204](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.203...@seafile/sdoc-editor@3.0.204) (2026-06-24)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
