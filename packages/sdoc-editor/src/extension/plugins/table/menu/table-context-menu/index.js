@@ -123,7 +123,7 @@ class TableContextMenu extends React.Component {
     const isMergedCell = this.isMergedCell();
     const tableCellNode = getSelectedNodeByType(editor, ELEMENT_TYPE.TABLE_CELL);
     const horizontalAlign = tableCellNode?.style?.[TABLE_CELL_STYLE.TEXT_ALIGN];
-    const verticalAlign = tableCellNode?.style?.[KebabToCamel(TABLE_CELL_STYLE.ALIGN_ITEMS)];
+    const verticalAlign = tableCellNode?.style?.[TABLE_CELL_STYLE.ALIGN_ITEMS];
     // Check if the table width is fit to screen
     // Use queueMicrotask to resolve the issue that the table cell combined or split, the table width is not updated immediately
     queueMicrotask(() => {
