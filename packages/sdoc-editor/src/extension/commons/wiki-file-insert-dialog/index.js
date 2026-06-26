@@ -11,6 +11,7 @@ import EventBus from '../../../utils/event-bus';
 import LocalStorage from '../../../utils/local-storage-utils';
 import { insertTextWhenRemoveFileNameCollector, removeTempInput } from '../../plugins/sdoc-link/helpers';
 import { insertWikiPageLink } from '../../plugins/wiki-link/helpers';
+import CreatePageDialog from './create-page-dialog';
 
 import './style.css';
 
@@ -24,6 +25,7 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
   const [newFileName, setNewFileName] = useState('');
   const [header, setHeader] = useState(t('Link_to_page'));
   const [hiddenMoreMenu, setHiddenMoreMenu] = useState(false);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   const deleteInputAndInsertText = useCallback((...args) =>
     insertTextWhenRemoveFileNameCollector(editor, element, ...args)
@@ -61,6 +63,8 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
   }, [editor]);
 
   const onClick = useCallback((e) => {
+    if (isCreateDialogOpen) return;
+
     const isClickInside = historyFileWrapperRef.current?.contains?.(e.target);
     if (isClickInside) return;
 
@@ -70,7 +74,7 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
 
     deleteInputAndInsertText();
     closeDialog();
-  }, [closeDialog, deleteInputAndInsertText]);
+  }, [closeDialog, deleteInputAndInsertText, isCreateDialogOpen]);
 
   const onScroll = throttle(() => {
     getPosition();
@@ -97,6 +101,8 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
   }, []);
 
   const onKeydown = useCallback((e) => {
+    if (isCreateDialogOpen) return;
+
     const { key } = e;
     switch (key) {
       case 'Escape':
@@ -116,7 +122,7 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
       default:
         break;
     }
-  }, [closeDialog, deleteInputAndInsertText]);
+  }, [closeDialog, deleteInputAndInsertText, isCreateDialogOpen]);
 
   useEffect(() => {
     const sdocScrollContainer = document.getElementById('sdoc-scroll-container');
@@ -190,22 +196,14 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
     setHiddenMoreMenu(true);
   }, []);
 
-  const createWikiLink = ({ pageId, pageName, wikiRepoId }) => {
-    insertWikiPageLink(editor, pageName, wikiRepoId, pageId);
-  };
+  const closeCreateDialog = useCallback(() => {
+    setIsCreateDialogOpen(false);
+  }, []);
 
-  const onCreateFile = useCallback((e) => {
+  const onOpenCreateDialog = useCallback((e) => {
     e.stopPropagation();
-    removeTempInput(editor, element);
-    const eventBus = EventBus.getInstance();
-    const unsubscribe = eventBus.subscribe(INTERNAL_EVENT.WIKI_PAGE_ID_CREATED, (payload) => {
-      createWikiLink(payload);
-      unsubscribe();
-    });
-    const createName = newFileName.trim() || t('New_page');
-    eventBus.dispatch(INTERNAL_EVENT.CREATE_WIKI_PAGE, { newFileName: createName });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor, element, newFileName, t]);
+    setIsCreateDialogOpen(true);
+  }, []);
 
   const createFileTipDefault = useMemo(() => {
     return 'New_page';
@@ -249,12 +247,19 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
         })}
         {!hiddenMoreMenu && <div className='sdoc-history-files-item' onClick={onShowMoreWiki}>...{t('More')}</div>}
       </div>
-      <div className='sdoc-history-files-add' onClick={onCreateFile}>
+      <div className='sdoc-history-files-add' onClick={onOpenCreateDialog}>
         <i className='sdocfont sdoc-append'/>
         <span className='new-file-name'>
           {newFileName ? t('Create_file_name_sdoc', { file_name_sdoc: createFileName }) : t(createFileTipDefault)}
         </span>
       </div>
+      <CreatePageDialog
+        isOpen={isCreateDialogOpen}
+        initialTitle={newFileName.trim()}
+        editor={editor}
+        element={element}
+        onClose={closeCreateDialog}
+      />
     </div>
   );
 };

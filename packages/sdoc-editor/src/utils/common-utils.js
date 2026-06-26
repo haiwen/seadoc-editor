@@ -1,3 +1,5 @@
+import context from '../context';
+
 export const isEnglish = (str) => {
   const pattern = new RegExp('[A-Za-z]+');
   if (pattern.test(str)){
@@ -26,7 +28,7 @@ export const getMaximumCapacity = (files) => {
 };
 
 export const getLocalStorageFiles = (files) => {
-  const wikiRepoId = window.wiki.config.wikiId;
+  const wikiRepoId = context.getSetting('wikiId');
   const newFiles = [];
   files.forEach((item) => {
     if (item?.wikiRepoId === wikiRepoId) {
