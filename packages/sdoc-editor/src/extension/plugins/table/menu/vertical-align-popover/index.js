@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UncontrolledPopover } from 'reactstrap';
 import classNames from 'classnames';
-import KebabToCamel from '../../../../../utils/Kebab-to-camel';
 import { focusEditor } from '../../../../core';
 import { TABLE_CELL_STYLE } from '../../constants';
 import { setCellStyle } from '../../helpers';
@@ -14,8 +13,7 @@ const VerticalAlignPopover = ({ target, editor, readonly, verticalAlign }) => {
 
   const setVerticalAlignStyle = useCallback((position) => {
     if (readonly) return;
-    const alignItems = KebabToCamel(TABLE_CELL_STYLE.ALIGN_ITEMS);
-    setCellStyle(editor, { [alignItems]: position });
+    setCellStyle(editor, { [TABLE_CELL_STYLE.ALIGN_ITEMS]: position });
     const focusPoint = editor.selection.focus;
     // prevent select all text in the editor
     focusEditor(editor, focusPoint);

@@ -75,6 +75,11 @@ const TableCell = ({ attributes, element, children }) => {
     style = { ...element.style, ...style };
   }
 
+  if (ObjectUtils.hasProperty(style, TABLE_CELL_STYLE.ALIGN_ITEMS)) {
+    style.alignItems = style[TABLE_CELL_STYLE.ALIGN_ITEMS];
+    delete style[TABLE_CELL_STYLE.ALIGN_ITEMS];
+  }
+
   const onMouseMove = (mouseDownEvent) => {
     eventBus.dispatch(INTERNAL_EVENT.TABLE_CELL_MOUSE_ENTER, { mouseDownEvent, cell: element, rowIndex, cellIndex, tableId });
   };
@@ -154,7 +159,7 @@ const TableCell = ({ attributes, element, children }) => {
   return (
     <div
       {...attributes}
-      style={{ ...element.style, ...style }}
+      style={{ ...style }}
       className={classnames('table-cell', attributes.className, highlightClass, {
         [CELL_SELECTED]: isSelected,
         'cell-light-height-left-border': isSelectedFirstCell,
@@ -210,6 +215,10 @@ function renderTableCell(props) {
       style['backgroundColor'] = element.style[TABLE_CELL_STYLE.BACKGROUND_COLOR];
     }
 
+    if (ObjectUtils.hasProperty(element.style, TABLE_CELL_STYLE.ALIGN_ITEMS)) {
+      style.alignItems = element.style[TABLE_CELL_STYLE.ALIGN_ITEMS];
+    }
+
     if (element.is_combined) {
       style.display = 'none';
     }
@@ -229,7 +238,7 @@ function renderTableCell(props) {
     return (
       <div
         {...attributes}
-        style={{ ...element.style, ...style }}
+        style={{ ...style }}
         className={classnames('table-cell', highlightClass, attributes.className)}
         data-id={element.id}
       >

@@ -21,7 +21,7 @@ class Table {
             ],
             style: {
               text_align: 'left',
-              alignItems: 'center',
+              align_items: 'center',
               background_color: ''
             },
             // inherit from table,when insert new cell
