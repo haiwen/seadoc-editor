@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.209](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.208...@seafile/sdoc-editor@3.0.209) (2026-06-27)
+
+### Performance Improvements
+
+- optimize interactive ([273ec75](https://github.com/haiwen/seadoc-editor/commit/273ec750460c7ea38eb146726d0232c8b413a3a3))
+
 ## [3.0.208](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.207...@seafile/sdoc-editor@3.0.208) (2026-06-26)
 
 ### Performance Improvements
