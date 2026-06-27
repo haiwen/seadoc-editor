@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Button, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { createWikiPageAndInsertLink, validateWikiPageTitle } from './helpers';
@@ -7,12 +7,22 @@ const CreatePageDialog = ({ isOpen, initialTitle, editor, element, onClose }) =>
   const { t } = useTranslation('sdoc-editor');
   const [title, setTitle] = useState('');
   const [error, setError] = useState('');
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return;
     setTitle(initialTitle || '');
     setError('');
   }, [initialTitle, isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    queueMicrotask(() => {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    });
+  }, [isOpen]);
 
   const onChange = useCallback((event) => {
     setTitle(event.target.value);
@@ -50,6 +60,7 @@ const CreatePageDialog = ({ isOpen, initialTitle, editor, element, onClose }) =>
         <div className="form-group mb-0">
           <Label for="createWikiPageTitle">{t('Page_name')}</Label>
           <Input
+            innerRef={inputRef}
             id="createWikiPageTitle"
             type="text"
             value={title}
