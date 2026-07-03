@@ -3,6 +3,7 @@ import { Editor, Range } from '@seafile/slate';
 import { ReactEditor, useReadOnly, useSelected } from '@seafile/slate-react';
 import classnames from 'classnames';
 import { INTERNAL_EVENT } from '../../../../constants';
+import context from '../../../../context';
 import { usePlugins } from '../../../../hooks/use-plugins';
 import { useScrollContext } from '../../../../hooks/use-scroll-context';
 import { isMac } from '../../../../utils/common-utils';
@@ -72,6 +73,7 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
       observerRefValue = scrollRef.current;
 
       resizeObserver = new ResizeObserver((entries) => {
+        // eslint-disable-next-line no-unused-vars
         for (let entry of entries) {
           if (resizeObserver) {
             onScroll();
@@ -174,6 +176,16 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
       : getUrl(element.doc_uuid);
   }, [element.doc_uuid, element.page_id, element.type, element.wiki_repo_id, readOnly]);
 
+  const displayTitle = useMemo(() => {
+    if (element.type !== WIKI_LINK) {
+      return element.title;
+    }
+
+    const pages = context.getSetting('navConfig')?.pages || [];
+    const currentPage = pages.find(page => page?.id === element.page_id);
+    return currentPage?.name || element.title;
+  }, [element.page_id, element.title, element.type]);
+
   return (
     <span
       {...attributes}
@@ -202,8 +214,8 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
           </span>
         )}
         <span className={classnames('sdoc-file-text-link', { 'sdoc-no-file-link-icon': ![SDOC_LINK_TYPE.ICON_LINK, SDOC_LINK_TYPE.CARD_LINK].includes(element.display_type) })} style={style}>
-          <a href={url} onClick={(e) => e.preventDefault()} onDragStart={e => e.preventDefault()} title={element.title}>
-            {element.title}
+          <a href={url} onClick={(e) => e.preventDefault()} onDragStart={e => e.preventDefault()} title={displayTitle}>
+            {displayTitle}
           </a>
         </span>
       </span>
