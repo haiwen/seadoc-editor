@@ -133,13 +133,20 @@ const withMultiColumn = (editor) => {
   newEditor.insertFragment = (data) => {
     const { selection } = editor;
     if (!selection) return insertFragment(data);
-    // If inserting multi-column node, extract all children nodes from every column and insert them one by one
-    if (data[0].type === MULTI_COLUMN) {
-      let childrenNodes = [];
-      data[0].children.forEach(col => {
-        childrenNodes = childrenNodes.concat(col.children);
+
+    // Keep copied multi-column nodes intact unless we're already inside a multi-column,
+    // where nesting another multi-column is still unsupported.
+    const currentMultiColumnEntry = getSelectedNodeEntryByType(editor, ELEMENT_TYPE.MULTI_COLUMN);
+    if (currentMultiColumnEntry) {
+      const fragment = data.flatMap(node => {
+        if (node.type !== MULTI_COLUMN) {
+          return [node];
+        }
+
+        return node.children.flatMap(column => column.children);
       });
-      insertFragment(childrenNodes);
+
+      insertFragment(fragment);
       return;
     }
 
