@@ -363,6 +363,10 @@ export function renderImage(props, editor) {
   // decorate diff-viewer
   const { element, leaf } = props;
   let style = { ...props.style };
+  const diffImageClassName = classNames(props.className, {
+    'sdoc-diff-image-added': !!element.add,
+    'sdoc-diff-image-deleted': !!element.delete,
+  });
 
   if (leaf && leaf.computed_background_color) {
     style['backgroundColor'] = leaf.computed_background_color;
@@ -375,7 +379,7 @@ export function renderImage(props, editor) {
     }
   }
 
-  return <SdocImage {...props} style={style} editor={editor} isSelected={isSelected} />;
+  return <SdocImage {...props} style={style} className={diffImageClassName} editor={editor} isSelected={isSelected} />;
 }
 
 export function renderImageBlock(props, editor) {

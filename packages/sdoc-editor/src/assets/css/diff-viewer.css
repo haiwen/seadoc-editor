@@ -3,3 +3,20 @@
   margin: 0 -5px;
   overflow: hidden;
 }
+
+.sdoc-editor__article .sdoc-image-wrapper.sdoc-diff-image-deleted img {
+  opacity: 0.55;
+  filter: grayscale(100%);
+}
+
+.sdoc-editor__article .sdoc-image-wrapper.sdoc-diff-image-deleted .sdoc-image-content > span:first-child::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 2px solid rgb(165, 32, 21);
+  transform: rotate(-8deg);
+  transform-origin: center;
+  pointer-events: none;
+}
