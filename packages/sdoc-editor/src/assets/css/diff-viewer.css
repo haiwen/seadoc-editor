@@ -16,7 +16,5 @@
   left: 0;
   width: 100%;
   border-top: 2px solid rgb(165, 32, 21);
-  transform: rotate(-8deg);
-  transform-origin: center;
   pointer-events: none;
 }
