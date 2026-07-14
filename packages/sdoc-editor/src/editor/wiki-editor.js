@@ -155,7 +155,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
               <div className='sdoc-editor-content readonly'>
                 <ReadOnlyArticle editor={validEditor} slateValue={slateValue} showComment={false} />
               </div>
-              {(!isMobile && isWikiReadOnly) && <WikiOutline doc={slateValue} />}
+              {(!isMobile && isWikiReadOnly) && <WikiOutline doc={slateValue} editor={validEditor} />}
             </ScrollContext.Provider>
           </div>
         </ColorProvider>
@@ -172,7 +172,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
               <div className={classNames('sdoc-editor-content', { 'readonly': isWikiReadOnly })}>
                 <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={showComment} />
               </div>
-              <WikiOutline doc={slateValue} />
+              <WikiOutline doc={slateValue} editor={validEditor} />
               <SearchReplaceMenu editor={validEditor} className='wiki-search-and-replace' readonly={isWikiReadOnly} />
             </ScrollContext.Provider>
           </div>

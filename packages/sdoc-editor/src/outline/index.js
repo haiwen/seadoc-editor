@@ -12,6 +12,7 @@ import './style.css';
 
 const propTypes = {
   doc: PropTypes.array.isRequired,
+  editor: PropTypes.object,
 };
 
 export const getOutlineSetting = () => {
@@ -28,7 +29,7 @@ export const setOutlineSetting = (isShown) => {
   localStorage.setItem(SDOC_STORAGE, JSON.stringify(config));
 };
 
-const SDocOutline = ({ scrollLeft, doc, t }) => {
+const SDocOutline = ({ scrollLeft, doc, editor, t }) => {
 
   const [isShown, setIsShown] = useState(false);
   const isSdocRevision = context.getSetting('isSdocRevision');
@@ -50,7 +51,12 @@ const SDocOutline = ({ scrollLeft, doc, t }) => {
   }, [isShown, updateOutlineState]);
 
   const list = useMemo(() => {
-    return doc?.filter(item => ['header1', 'header2', 'header3'].includes(item.type));
+    return doc?.reduce((headerList, item, index) => {
+      if (['header1', 'header2', 'header3'].includes(item.type)) {
+        headerList.push({ item, path: [index] });
+      }
+      return headerList;
+    }, []);
   }, [doc]);
 
   return (
@@ -70,8 +76,8 @@ const SDocOutline = ({ scrollLeft, doc, t }) => {
             )}
             {list.length > 0 && (
               <div className="sdoc-outline-list-container">
-                {list.map((item, index) => (
-                  <OutlineItem key={index} item={item} isSdocRevision={isSdocRevision} />
+                {list.map(({ item, path }, index) => (
+                  <OutlineItem key={index} item={item} itemPath={path} editor={editor} isSdocRevision={isSdocRevision} />
                 ))}
               </div>
             )}

@@ -55,7 +55,7 @@ const EditorContent = ({
         <div ref={scrollRef} className="sdoc-scroll-container" onScroll={onWrapperScroll} id="sdoc-scroll-container">
           <ScrollContext.Provider value={{ scrollRef }}>
             <div className={className} style={getContentStyleByFullModeStyle()}>
-              {showOutline && <SDocOutline scrollLeft={scrollLeft} doc={docValue} />}
+              {showOutline && <SDocOutline scrollLeft={scrollLeft} doc={docValue} editor={editor} />}
               {children}
             </div>
           </ScrollContext.Provider>
