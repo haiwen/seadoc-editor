@@ -40,6 +40,10 @@
   position: relative;
 }
 
+.sdoc-editor__article .list-container .sdoc-li-content {
+  display: block;
+}
+
 .sdoc-editor__article .list-container .sdoc-li-control {
   user-select: none;
   cursor: pointer;

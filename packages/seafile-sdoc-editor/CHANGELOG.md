@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.214](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.207...@seafile/seafile-sdoc-editor@3.0.214) (2026-07-14)
+
+### Bug Fixes
+
+- fix toggle outline bug when header is hidden ([#277](https://github.com/seafileltd/sea-sdoc-editor/issues/277)) ([30f9219](https://github.com/seafileltd/sea-sdoc-editor/commit/30f9219bee3a05372d3f35b2136830a1fee614dc))
+
 ## [3.0.213](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@3.0.207...@seafile/seafile-sdoc-editor@3.0.213) (2026-07-14)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
