@@ -49,9 +49,9 @@ const renderListItem = (props, editor) => {
           <span className='sdoc-li-divider'></span>
         </span>
       )}
-      <span className='sdoc-li-content'>
+      <div className='sdoc-li-content'>
         {newChildren}
-      </span>
+      </div>
     </li>
   );
 };
