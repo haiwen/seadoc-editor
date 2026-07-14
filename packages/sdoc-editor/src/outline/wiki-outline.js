@@ -9,9 +9,10 @@ import './style.css';
 
 const propTypes = {
   doc: PropTypes.array.isRequired,
+  editor: PropTypes.object,
 };
 
-const WikiOutline = ({ doc = [] }) => {
+const WikiOutline = ({ doc = [], editor }) => {
   const scrollRef = useScrollContext();
   const wikiOutlineRef = useRef(null);
   const [wikiOutlineList, setWikiOutlineList] = useState([]);
@@ -24,7 +25,12 @@ const WikiOutline = ({ doc = [] }) => {
   }, [isShowOutlinePopover]);
 
   const updateWikiOutlineList = useCallback(() => {
-    const list = doc.filter(item => ['header1', 'header2', 'header3'].includes(item.type));
+    const list = doc.reduce((headerList, item, index) => {
+      if (['header1', 'header2', 'header3'].includes(item.type)) {
+        headerList.push({ item, path: [index] });
+      }
+      return headerList;
+    }, []);
 
     if (list.length === 0) {
       setWikiOutlineList([]);
@@ -34,7 +40,7 @@ const WikiOutline = ({ doc = [] }) => {
     // The slateValue value in the document cannot be operated, so copy it for operation
     const newList = JSON.parse(JSON.stringify(list));
 
-    const index = list.findIndex((item) => {
+    const index = list.findIndex(({ item }) => {
       const { id } = item;
       const el = document.getElementById(id);
       if (el) {
@@ -52,7 +58,7 @@ const WikiOutline = ({ doc = [] }) => {
     }
     // There is no title in the visible area
     if (index === -1) {
-      const lastItemId = list[list.length - 1].id;
+      const lastItemId = list[list.length - 1].item.id;
       const lastItemEl = document.getElementById(lastItemId);
       if (lastItemEl) {
         const { top } = lastItemEl.getBoundingClientRect();
@@ -90,14 +96,14 @@ const WikiOutline = ({ doc = [] }) => {
       <div className='sdoc-outline-container'>
         {wikiOutlineList.length > 0 && (
           <div className="sdoc-outline-list-container" onMouseOver={onMouseOver}>
-            {wikiOutlineList.map((item, index) => <OutlineItem key={index} item={item} isDisplayHorizontalBar={true} />)}
+            {wikiOutlineList.map(({ item, path }, index) => <OutlineItem key={index} item={item} itemPath={path} editor={editor} isDisplayHorizontalBar={true} />)}
           </div>
         )}
       </div>
       {isShowOutlinePopover && (
         <div className='wiki-outline-popover' ref={wikiOutlineRef}>
           <div className="sdoc-outline-list-container">
-            {wikiOutlineList.map((item, index) => <OutlineItem key={index} item={item} />)}
+            {wikiOutlineList.map(({ item, path }, index) => <OutlineItem key={index} item={item} itemPath={path} editor={editor} />)}
           </div>
         </div>
       )}

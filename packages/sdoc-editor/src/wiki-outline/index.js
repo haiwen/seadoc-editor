@@ -8,9 +8,9 @@ import './style.css';
 
 const getHeaderList = (children) => {
   const headerList = [];
-  children.forEach((node) => {
+  children.forEach((node, index) => {
     if (node.type === 'header2' || node.type === 'header3') {
-      headerList.push(node);
+      headerList.push({ node, path: [index] });
     }
   });
   return headerList;
@@ -32,8 +32,9 @@ const Outline = ({ editor }) => {
     const styles = getComputedStyle(scrollRef?.current);
     const paddingTop = parseInt(styles.paddingTop);
     for (let i = 0; i < headerList.length; i++) {
-      const headerItem = headerList[i];
+      const { node: headerItem } = headerList[i];
       const dom = document.getElementById(headerItem.id);
+      if (!dom) continue;
       const { offsetTop, offsetHeight } = dom;
       const styles = getComputedStyle(dom);
       const marginTop = parseInt(styles.marginTop);
@@ -61,8 +62,8 @@ const Outline = ({ editor }) => {
       {headerList.length === 0 && (
         <div className="empty-container">{t('No_out_line')}</div>
       )}
-      {headerList.length > 0 && headerList.map((node, index) => {
-        return <OutlineItem key={index} node={node} activeId={activeId} />;
+      {headerList.length > 0 && headerList.map(({ node, path }, index) => {
+        return <OutlineItem key={index} node={node} itemPath={path} editor={editor} activeId={activeId} />;
       })}
     </div>
   );

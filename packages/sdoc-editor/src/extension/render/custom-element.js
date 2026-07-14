@@ -32,7 +32,7 @@ const CustomRenderElement = (props) => {
 
   if (isElementHiddenByCollapsedHeader(editor, element)) {
     return (
-      <div data-id={element.id} {...attributes} style={{ display: 'none' }}>
+      <div data-id={element.id} id={element.id} {...attributes} style={{ display: 'none' }}>
         {props.children}
       </div>
     );

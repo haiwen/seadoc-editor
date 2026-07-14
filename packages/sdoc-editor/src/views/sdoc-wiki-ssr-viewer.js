@@ -46,7 +46,7 @@ const SDocWikiSSRViewer = ({
             <div className={classNames('sdoc-editor-content readonly')}>
               <ReadOnlyArticle editor={validEditor} slateValue={slateValue} showComment={false} />
             </div>
-            <WikiOutline doc={slateValue} />
+            <WikiOutline doc={slateValue} editor={validEditor} />
           </ScrollContext.Provider>
         </div>
       </ColorProvider>

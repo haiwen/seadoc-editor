@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { HEADER_OUTLINE_WIDTH_MAPPING } from '../constants';
 import { ADDED_STYLE, DELETED_STYLE } from '../extension/constants';
+import { expandCollapsedHeaderAncestors } from '../extension/plugins/header/helpers';
 
 class OutlineItem extends React.PureComponent {
 
@@ -13,9 +14,27 @@ class OutlineItem extends React.PureComponent {
   }
 
   onItemClick = () => {
-    const { item } = this.props;
+    const { item, editor, itemPath } = this.props;
     const { id } = item;
-    document.getElementById(id).scrollIntoView();
+
+    const scrollToTarget = () => {
+      const target = document.getElementById(id);
+      if (!target) return;
+      target.scrollIntoView();
+    };
+
+    const isExpanded = editor ? expandCollapsedHeaderAncestors(editor, item, itemPath) : false;
+    if (!isExpanded) {
+      scrollToTarget();
+      return;
+    }
+
+    if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(scrollToTarget);
+      return;
+    }
+
+    setTimeout(scrollToTarget, 0);
   };
 
   onMouseOver = () => {

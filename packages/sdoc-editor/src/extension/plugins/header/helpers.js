@@ -164,6 +164,31 @@ const getSectionEndIndex = (siblings, startIndex, level) => {
   return endIndex;
 };
 
+const getCollapsedHeaderAncestorEntries = (editor, element, defaultPath) => {
+  const path = findPath(editor, element, defaultPath);
+  if (!path || path.length !== 1) return [];
+
+  const currentIndex = path[path.length - 1];
+  const parentPath = Path.parent(path);
+  const siblings = parentPath.length === 0 ? editor.children : Node.get(editor, parentPath).children;
+  const ancestorEntries = [];
+
+  for (let index = currentIndex - 1; index >= 0; index--) {
+    const sibling = siblings[index];
+    if (!Element.isElement(sibling) || !isHeaderCollapsed(editor, sibling, [index])) continue;
+
+    const siblingLevel = getHeaderLevel(sibling.type);
+    if (siblingLevel === null) continue;
+
+    const endIndex = getSectionEndIndex(siblings, index, siblingLevel);
+    if (currentIndex < endIndex) {
+      ancestorEntries.unshift([sibling, [index]]);
+    }
+  }
+
+  return ancestorEntries;
+};
+
 export const getCollapsedHeaderSectionEndIndex = (editor, element, defaultPath) => {
   const path = findPath(editor, element, defaultPath);
   if (!path || path.length !== 1) return null;
@@ -189,27 +214,29 @@ export const getCollapsedHeaderInsertPath = (editor, element, defaultPath) => {
 };
 
 export const isElementHiddenByCollapsedHeader = (editor, element, defaultPath) => {
-  const path = findPath(editor, element, defaultPath);
-  if (!path || path.length !== 1) return false;
+  return getCollapsedHeaderAncestorEntries(editor, element, defaultPath).length > 0;
+};
 
-  const currentIndex = path[path.length - 1];
-  const parentPath = Path.parent(path);
-  const siblings = parentPath.length === 0 ? editor.children : Node.get(editor, parentPath).children;
+export const expandCollapsedHeaderAncestors = (editor, element, defaultPath) => {
+  const ancestorEntries = getCollapsedHeaderAncestorEntries(editor, element, defaultPath);
+  if (ancestorEntries.length === 0) return false;
 
-  for (let index = currentIndex - 1; index >= 0; index--) {
-    const sibling = siblings[index];
-    if (!Element.isElement(sibling) || !isHeaderCollapsed(editor, sibling, [index])) continue;
+  const collapsedHeaderState = getCollapsedHeaderState();
+  let isUpdated = false;
 
-    const siblingLevel = getHeaderLevel(sibling.type);
-    if (siblingLevel === null) continue;
+  ancestorEntries.forEach(([header, path]) => {
+    const headerId = getHeaderId(editor, header, path);
+    if (!headerId || !collapsedHeaderState[headerId]) return;
 
-    const endIndex = getSectionEndIndex(siblings, index, siblingLevel);
-    if (currentIndex < endIndex) {
-      return true;
-    }
-  }
+    collapsedHeaderState[headerId] = false;
+    isUpdated = true;
+  });
 
-  return false;
+  if (!isUpdated) return false;
+
+  persistCollapsedHeaderState(collapsedHeaderState);
+  editor.onHeaderCollapseStateChange?.();
+  return true;
 };
 
 export const getSkippedHiddenHeaderMovePoint = (editor, point, reverse = false) => {

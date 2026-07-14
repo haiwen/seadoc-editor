@@ -12,7 +12,9 @@ export const updateOutlineValue = (value) => {
 
 export const scrollToOutline = (item) => {
   const { id } = item;
-  document.getElementById(id).scrollIntoView();
+  const target = document.getElementById(id);
+  if (!target) return false;
+  target.scrollIntoView();
   return true;
 };
 
