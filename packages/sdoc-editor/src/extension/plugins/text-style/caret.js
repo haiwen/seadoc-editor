@@ -16,7 +16,7 @@ const caretStyleBase = {
   position: 'absolute',
   // pointerEvents: 'none',
   userSelect: 'none',
-  height: '1.2em',
+  height: '1.5em',
   width: 2,
   background: 'palevioletred'
 };
