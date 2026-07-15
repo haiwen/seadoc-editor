@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.216](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.207...@seafile/sdoc-editor@3.0.216) (2026-07-15)
+
+### Bug Fixes
+
+- fix toggle outline bug when header is hidden ([#277](https://github.com/haiwen/seadoc-editor/issues/277)) ([30f9219](https://github.com/haiwen/seadoc-editor/commit/30f9219bee3a05372d3f35b2136830a1fee614dc))
+
+### Performance Improvements
+
+- optimize caret style ([c0d8ab8](https://github.com/haiwen/seadoc-editor/commit/c0d8ab8f8bf7a6a2073839bc1906fb5aa7b567ca))
+
 ## [3.0.215](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.214...@seafile/sdoc-editor@3.0.215) (2026-07-15)
 
 ### Performance Improvements
