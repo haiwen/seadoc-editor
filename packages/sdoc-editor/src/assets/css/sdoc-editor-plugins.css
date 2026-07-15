@@ -21,6 +21,15 @@
   line-height: 1.125;
 }
 
+.sdoc-editor__article .sdoc-header-title .caret-item,
+.sdoc-editor__article .sdoc-header-subtitle .caret-item,
+.sdoc-editor__article .sdoc-header-1 .caret-item,
+.sdoc-editor__article .sdoc-header-4 .caret-item,
+.sdoc-editor__article .sdoc-header-5 .caret-item,
+.sdoc-editor__article .sdoc-header-6 .caret-item {
+  font-size: 1.2em !important;
+}
+
 /* list  */
 .sdoc-editor__article .list-container {
   margin: 0;
