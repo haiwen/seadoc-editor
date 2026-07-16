@@ -74,4 +74,66 @@ describe('deserialize link', () => {
     ];
     expect(formatChildren(ret)).toEqual(exp);
   });
+
+  it('linked image to slate node', () => {
+    const html = '<a href="https://dev.seafile.com"><img src="image.jpg" /></a>';
+
+    const ret = deserializeHtml(html);
+    const exp = [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'image',
+            data: {
+              src: 'image.jpg',
+              href: 'https://dev.seafile.com',
+            },
+            children: [{ text: '' }]
+          }
+        ]
+      }
+    ];
+    expect(formatChildren(ret)).toEqual(exp);
+  });
+
+  it('drops an unsafe linked image URL', () => {
+    const ret = deserializeHtml('<a href="javascript:alert(1)"><img src="image.jpg" /></a>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'image',
+            data: { src: 'image.jpg' },
+            children: [{ text: '' }]
+          }
+        ]
+      }
+    ]);
+  });
+
+  it('preserves both image and text in a mixed image link', () => {
+    const ret = deserializeHtml('<a href="https://dev.seafile.com"><img src="image.jpg" />Caption</a>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'image',
+            data: { src: 'image.jpg', href: 'https://dev.seafile.com' },
+            children: [{ text: '' }]
+          },
+          {
+            type: 'link',
+            href: 'https://dev.seafile.com',
+            title: null,
+            children: [{ text: 'Caption' }]
+          }
+        ]
+      }
+    ]);
+  });
 });

@@ -17,6 +17,7 @@ import {
   DIVIDER,
 } from '../../extension/constants/element-type';
 import { generateDefaultText } from '../../extension/core';
+import { normalizeWebUrl } from '../../extension/plugins/image/link-helpers';
 import deserializeHtml from '../html-to-slate';
 
 const INLINE_KEY_MAP = {
@@ -30,6 +31,27 @@ const applyMarkForInlineItem = (result, item, textNode = {}) => {
 
   if (type === LINK) {
     const child = children.length === 0 ? { type: 'text', value: '' } : children[0];
+
+    if (child.type === IMAGE) {
+      const href = normalizeWebUrl(item.url);
+      const image = {
+        id: slugid.nice(),
+        type: IMAGE,
+        data: {
+          src: child.url,
+          ...(child.title && { title: child.title }),
+          ...(child.alt && { alt: child.alt }),
+          ...(href && { href }),
+        },
+        children: [generateDefaultText()]
+      };
+      result.push([
+        generateDefaultText(),
+        image,
+        generateDefaultText(),
+      ]);
+      return result;
+    }
 
     // Mention node
     if (item.title?.startsWith?.('__sdoc_mention__username')) {
@@ -386,4 +408,3 @@ export const formatMdToSlate = (children) => {
     return handler(child);
   }).flat();
 };
-

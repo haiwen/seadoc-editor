@@ -11,6 +11,8 @@ import { generateEmptyElement, getNodeType, isTextNode, getParentNode, focusEdit
 import base64ToUnit8Array from './base64-to-unit8array';
 import ImageCache from './image-cache';
 
+export { getImageWikiPageUrl } from './link-helpers';
+
 // TODO: seatable_column
 export const getDigitalSignImgUrl = (partUrl) => {
   const server = context.getSetting('serviceUrl');
@@ -245,6 +247,26 @@ export const getSingleImageFromFragment = (data) => {
   const images = children.filter((item) => item?.type === IMAGE);
   if (images.length !== 1) return null;
   return images[0];
+};
+
+export const removeImageWikiPageLinks = (nodes = []) => {
+  return nodes.map((node) => {
+    if (node?.type === IMAGE) {
+      const isWikiPageLink = Boolean(node.data?.linked_wiki_id || node.data?.linked_wiki_page_id);
+      if (!isWikiPageLink) return node;
+
+      const {
+        href,
+        linked_wiki_id,
+        linked_wiki_page_id,
+        ...data
+      } = node.data || {};
+      return { ...node, data };
+    }
+
+    if (!Array.isArray(node?.children)) return node;
+    return { ...node, children: removeImageWikiPageLinks(node.children) };
+  });
 };
 
 export const insertImageFiles = (files, editor, targetPath) => {
