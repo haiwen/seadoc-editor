@@ -110,7 +110,16 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
 
     if (readOnly) {
       if (element.type === WIKI_LINK) {
-        window.open(getWikiUrl(element.wiki_repo_id, element.page_id, readOnly));
+        const currentWikiId = context.getSetting('wikiId');
+        const isCurrentWikiLink = currentWikiId && String(currentWikiId) === String(element.wiki_repo_id);
+
+        if (isCurrentWikiLink && element.page_id) {
+          const eventBus = EventBus.getInstance();
+          eventBus.dispatch('open_wiki_page_id_link', { page_id: element.page_id });
+          return;
+        }
+
+        window.open(getWikiUrl(element.wiki_repo_id, element.page_id, readOnly), '_blank', 'noreferrer');
         return;
       } else {
         window.open(getUrl(element.doc_uuid));
