@@ -8,11 +8,11 @@
 }
 
 .sdoc-tooltip .tooltip-inner {
-  font-size: 14px;
+  font-size: 12px;
   text-align: start;
   background-color: var(--bs-body-color);
   color: var(--bs-body-bg);
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 4px 8px;
   line-height: 20px;
   font-weight: normal;
