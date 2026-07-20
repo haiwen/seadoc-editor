@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.218](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.216...@seafile/sdoc-editor@3.0.218) (2026-07-20)
+
+### Performance Improvements
+
+- optimize tooltip style ([#283](https://github.com/haiwen/seadoc-editor/issues/283)) ([f041915](https://github.com/haiwen/seadoc-editor/commit/f0419150b6fdf81ede23b1abc79c3685ce0ab45b))
+
 ## [3.0.217](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.216...@seafile/sdoc-editor@3.0.217) (2026-07-18)
 
 ### Performance Improvements
