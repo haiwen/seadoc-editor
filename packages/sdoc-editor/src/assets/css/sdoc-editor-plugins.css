@@ -27,7 +27,7 @@
 .sdoc-editor__article .sdoc-header-4 .caret-item,
 .sdoc-editor__article .sdoc-header-5 .caret-item,
 .sdoc-editor__article .sdoc-header-6 .caret-item {
-  font-size: 1.2em !important;
+  height: 1.2em !important;
 }
 
 /* list  */
