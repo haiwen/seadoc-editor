@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.219](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.218...@seafile/sdoc-editor@3.0.219) (2026-07-21)
+
+### Performance Improvements
+
+- optimize caret style ([2b18e03](https://github.com/haiwen/seadoc-editor/commit/2b18e03ebe92da5f0f7918fee51b8bbafe2cccab))
+
 ## [3.0.218](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.216...@seafile/sdoc-editor@3.0.218) (2026-07-20)
 
 ### Performance Improvements
