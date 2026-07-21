@@ -25,7 +25,7 @@
     "@seafile/slate-history": "0.86.2",
     "@seafile/slate-hyperscript": "0.81.7",
     "@seafile/slate-react": "0.92.8",
-    "axios": "^1.15.0",
+    "axios": "^1.18.1",
     "classnames": "2.3.2",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "1.10.7",
