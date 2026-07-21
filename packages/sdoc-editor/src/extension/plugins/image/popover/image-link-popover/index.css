@@ -1,0 +1,135 @@
+.sdoc-image-hover-menu-container .sdoc-image-link-popover {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  z-index: 102;
+  width: 360px;
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
+  padding: 12px;
+  color: #212529;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  cursor: default;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  white-space: normal;
+}
+
+.sdoc-image-link-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.sdoc-image-link-input-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.sdoc-image-link-input-wrapper label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+  color: #666;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.sdoc-image-link-input-row .sdoc-image-link-input,
+.sdoc-image-link-input-row .sdoc-image-link-submit {
+  box-sizing: border-box;
+  height: 36px;
+  min-height: 36px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.sdoc-image-link-input-row .sdoc-image-link-submit {
+  display: inline-flex;
+  padding-right: 14px;
+  padding-left: 14px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+}
+
+.sdoc-image-link-results {
+  max-height: 280px;
+  padding-top: 8px;
+  margin: 10px -4px -4px;
+  overflow-y: auto;
+  border-top: 1px solid #eee;
+}
+
+.sdoc-image-link-results-title {
+  padding: 4px 8px;
+  color: #868e96;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.sdoc-image-link-result {
+  display: flex;
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 8px;
+  color: #212529;
+  font: inherit;
+  font-weight: 400;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sdoc-image-link-result:hover,
+.sdoc-image-link-result.is-active {
+  background: #f5f5f5;
+}
+
+.sdoc-image-link-result:focus-visible {
+  background: #f5f5f5;
+  outline: 2px solid #1991eb;
+  outline-offset: -2px;
+}
+
+.sdoc-image-link-result-icon {
+  display: inline-flex;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.sdoc-image-link-result-content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.sdoc-image-link-result-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: inherit;
+}
+
+.sdoc-image-link-no-results {
+  padding: 8px;
+  color: #868e96;
+  font-size: 13px;
+}

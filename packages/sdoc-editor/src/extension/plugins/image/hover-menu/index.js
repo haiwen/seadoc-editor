@@ -1,28 +1,32 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Editor, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
+import { WIKI_EDITOR } from '../../../../constants';
 import { ElementPopover } from '../../../commons';
 import { MENUS_CONFIG_MAP, TEXT_ALIGN, PARAGRAPH, IMAGE_BLOCK, TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN } from '../../../constants';
 import { generateEmptyElement } from '../../../core';
 import { IMAGE_DISPLAY_TYPE, IMAGE_BORDER_TYPE } from '../constants';
 import ImagePreviewer from '../dialogs/image-previewer';
 import { getImageURL } from '../helpers';
+import { getImageWikiPageUrl, normalizeWebUrl } from '../link-helpers';
+import ImageLinkPopover from '../popover/image-link-popover';
 
 import './index.css';
 
 const propTypes = {
   editor: PropTypes.object.isRequired,
+  menuRef: PropTypes.object,
   menuPosition: PropTypes.object.isRequired,
   element: PropTypes.object.isRequired,
   imageCaptionInputRef: PropTypes.object,
   onHideImageHoverMenu: PropTypes.func,
 };
 
-const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageCaptionInputRef, onHideImageHoverMenu, t, readonly }) => {
+const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntry, imageCaptionInputRef, onHideImageHoverMenu, t, readonly }) => {
   const { data, border_type = IMAGE_BORDER_TYPE[0].type } = element;
   const { align = 'left', type } = parentNodeEntry[0];
   const { show_caption = false } = data;
@@ -32,24 +36,58 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
     borderPopover: false,
   });
   const [isShowImagePreview, setIsShowImagePreview] = useState(false);
+  const [isShowImageLinkPopover, setIsShowImageLinkPopover] = useState(false);
   const [isShowTooltip, setIsShowTooltip] = useState(false);
+  const isWiki = editor.editorType === WIKI_EDITOR;
+  const currentHref = data.href;
 
   useEffect(() => {
     setIsShowTooltip(true);
   }, []);
 
+  const updateImageLink = useCallback((href) => {
+    const path = ReactEditor.findPath(editor, element);
+    const { href: oldHref, linked_wiki_id, linked_wiki_page_id, ...newData } = data;
+    const normalizedHref = normalizeWebUrl(href);
+    Transforms.setNodes(editor, { data: { ...newData, href: normalizedHref } }, { at: path });
+    setIsShowImageLinkPopover(false);
+    onHideImageHoverMenu();
+  }, [data, editor, element, onHideImageHoverMenu]);
+
+  const updateImagePageLink = useCallback((pageId, wikiId) => {
+    const path = ReactEditor.findPath(editor, element);
+    const { href, linked_wiki_id, linked_wiki_page_id, ...newData } = data;
+    Transforms.setNodes(editor, {
+      data: {
+        ...newData,
+        href: getImageWikiPageUrl(wikiId, pageId),
+        linked_wiki_id: wikiId,
+        linked_wiki_page_id: pageId,
+      }
+    }, { at: path });
+    setIsShowImageLinkPopover(false);
+    onHideImageHoverMenu();
+  }, [data, editor, element, onHideImageHoverMenu]);
+
+  const removeImageLink = useCallback(() => {
+    const path = ReactEditor.findPath(editor, element);
+    const { href, linked_wiki_id, linked_wiki_page_id, ...newData } = data;
+    Transforms.setNodes(editor, { data: newData }, { at: path });
+    setIsShowImageLinkPopover(false);
+    onHideImageHoverMenu();
+  }, [data, editor, element, onHideImageHoverMenu]);
+
   const onShowProver = useCallback((event, showProverKey) => {
     event.stopPropagation();
-    const newPopoverState = popoverState;
-    for (let key in newPopoverState) {
-      if (key === showProverKey) {
-        newPopoverState[key] = !newPopoverState[key];
-      } else {
-        newPopoverState[key] = false;
+    setIsShowImageLinkPopover(false);
+    setPopoverState((prevState) => {
+      const nextState = {};
+      for (let key in prevState) {
+        nextState[key] = key === showProverKey ? !prevState[key] : false;
       }
-    }
-    setPopoverState({ ...newPopoverState });
-  }, [popoverState]);
+      return nextState;
+    });
+  }, []);
 
   const onSelect = useCallback((event, props) => {
     event.stopPropagation();
@@ -123,7 +161,7 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
 
   return (
     <ElementPopover>
-      <div className="sdoc-image-hover-menu-container" style={menuPosition}>
+      <div className="sdoc-image-hover-menu-container" ref={menuRef} style={menuPosition}>
         <div className='hover-menu-container'>
           {![TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(type) && !readonly && (
             <span className='op-group-item'>
@@ -239,6 +277,34 @@ const ImageHoverMenu = ({ editor, menuPosition, element, parentNodeEntry, imageC
                   )}
                 </span>
               )}
+              <span
+                id='sdoc_image_link'
+                role='button'
+                className={classnames('op-item', 'ml-1', { 'active': currentHref || isShowImageLinkPopover })}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setPopoverState({ displayPopover: false, alignPopover: false, borderPopover: false });
+                  setIsShowImageLinkPopover(!isShowImageLinkPopover);
+                }}
+              >
+                <i className='sdocfont sdoc-link'/>
+                {isShowTooltip && !isShowImageLinkPopover && (
+                  <Tooltip target='sdoc_image_link' placement='top' fade={true}>
+                    {t(currentHref ? 'Edit_link' : 'Insert_link')}
+                  </Tooltip>
+                )}
+                {isShowImageLinkPopover && (
+                  <ImageLinkPopover
+                    editor={editor}
+                    href={currentHref}
+                    linkedPageId={isWiki ? data.linked_wiki_page_id : ''}
+                    linkedWikiId={isWiki ? data.linked_wiki_id : ''}
+                    onRemove={removeImageLink}
+                    onSelectPage={updateImagePageLink}
+                    onSubmit={updateImageLink}
+                  />
+                )}
+              </span>
             </span>
           )}
           <span className='op-group-item'>

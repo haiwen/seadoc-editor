@@ -4,15 +4,19 @@ import { Transforms, Editor } from '@seafile/slate';
 import { ReactEditor, useSelected, useReadOnly } from '@seafile/slate-react';
 import classNames from 'classnames';
 import imagePlaceholder from '../../../assets/images/image-placeholder.png';
-import { INTERNAL_EVENT } from '../../../constants';
+import Tooltip from '../../../components/tooltip';
+import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
+import context from '../../../context';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import EventBus from '../../../utils/event-bus';
 import { ADDED_STYLE, DELETED_STYLE, IMAGE_BLOCK } from '../../constants';
 import { IMAGE_BORDER_TYPE } from './constants';
 import Svg from './copy-image-error-svg';
+import ImagePreviewer from './dialogs/image-previewer';
 import { getImageURL, handleBase64Image, isCommentEditor, isImageUrlIsFromCopy, selectImageWhenSelectPartial, updateImage } from './helpers';
 import ImageHoverMenu from './hover-menu';
 import ImageLoader from './image-loader';
+import { isCurrentServerUrl, normalizeWebUrl } from './link-helpers';
 import useCopyImage from './use-copy-image';
 import useUploadImage from './use-upload-image';
 
@@ -24,6 +28,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const imageStyle = { border: IMAGE_BORDER_TYPE.find((item) => item.type === border_type).value };
   const readOnly = useReadOnly();
   const imageRef = useRef(null);
+  const imageHoverMenuRef = useRef(null);
   const urlRef = useRef(element?.data);
   const resizerRef = useRef(null);
   const imageCaptionInputRef = useRef(null);
@@ -32,6 +37,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const [isResizing, setIsResizing] = useState(false);
   const [isShowImagePlaceholder, setIsShowImagePlaceholder] = useState(false);
   const [isShowImageHoverMenu, setIsShowImageHoverMenu] = useState(false);
+  const [isShowReadOnlyImagePreview, setIsShowReadOnlyImagePreview] = useState(false);
   const [menuPosition, setMenuPosition] = useState({});
   const [caption, setCaption] = useState(data?.caption || '');
   const { isCopyImageLoading, isCopyImageError, setCopyImageLoading } = useCopyImage({ editor, element });
@@ -118,7 +124,8 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     if (isResizing) return;
     const imagePreviewer = document.getElementsByClassName('sf-editor-image-previewer');
     const isCaptionInput = e.target.id === 'sdoc-image-caption-input';
-    if (e.target === imageRef.current || imagePreviewer[0]?.contains(e.target) || isCaptionInput) return;
+    const isHoverMenu = imageHoverMenuRef.current?.contains(e.target);
+    if (e.target === imageRef.current || imagePreviewer[0]?.contains(e.target) || isCaptionInput || isHoverMenu) return;
     setIsShowImageHoverMenu(false);
   }, [isResizing]);
 
@@ -127,25 +134,23 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     let resizeObserver = null;
 
     if (isShowImageHoverMenu) {
-      registerEvent([{ 'eventName': 'click', 'event': onHideImageHoverMenu }]);
+      registerEvent([{ 'eventName': 'mousedown', 'event': onHideImageHoverMenu }]);
       scrollRef.current && scrollRef.current.addEventListener('scroll', onScroll);
       observerRefValue = scrollRef.current;
 
-      resizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          if (resizeObserver) {
-            onScroll();
-          }
+      resizeObserver = new ResizeObserver(() => {
+        if (resizeObserver) {
+          onScroll();
         }
       });
 
       resizeObserver.observe(scrollRef.current);
     } else {
-      unregisterEvent([{ 'eventName': 'click', 'event': onHideImageHoverMenu }]);
+      unregisterEvent([{ 'eventName': 'mousedown', 'event': onHideImageHoverMenu }]);
       scrollRef.current && scrollRef.current.removeEventListener('scroll', onScroll);
     }
     return () => {
-      unregisterEvent([{ 'eventName': 'click', 'event': onHideImageHoverMenu }]);
+      unregisterEvent([{ 'eventName': 'mousedown', 'event': onHideImageHoverMenu }]);
       if (observerRefValue) {
         observerRefValue.removeEventListener('scroll', onScroll);
       }
@@ -180,10 +185,39 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     }
   }, []);
 
-  const onClickImage = useCallback((e) => {
+  const imageHref = normalizeWebUrl(data.href);
+
+  const onClickImage = useCallback(() => {
+    if (readOnly) return;
     setPosition();
     setIsShowImageHoverMenu(true);
-  }, [setPosition]);
+  }, [readOnly, setPosition]);
+
+  const isWikiPageLink = Boolean(imageHref && data.linked_wiki_id && data.linked_wiki_page_id);
+  const currentWikiId = context.getSetting('wikiId');
+  const linkedWikiPage = isWikiPageLink && data.linked_wiki_id === currentWikiId
+    ? (context.getSetting('navConfig')?.pages || []).find(page => page.id === data.linked_wiki_page_id)
+    : null;
+  const imageLinkName = linkedWikiPage?.name || imageHref.replace(/^https?:\/\/(?:www\.)?/i, '');
+  const isInternalLink = !isWikiPageLink && isCurrentServerUrl(imageHref);
+  const readOnlyFullscreenTargetId = `sdoc_image_readonly_fullscreen_${element.id}`;
+  const isCurrentWikiPageLink = isWikiPageLink
+    && editor.editorType === WIKI_EDITOR
+    && data.linked_wiki_id === currentWikiId
+    && isCurrentServerUrl(imageHref);
+
+  const onOpenLinkedWikiPage = useCallback((event) => {
+    if (!isCurrentWikiPageLink) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch('open_wiki_page_id_link', { page_id: data.linked_wiki_page_id });
+  }, [data.linked_wiki_page_id, isCurrentWikiPageLink]);
+
+  const onLinkedWikiPageKeyDown = useCallback((event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    onOpenLinkedWikiPage(event);
+  }, [onOpenLinkedWikiPage]);
 
   const reloadImage = useCallback(() => {
     setIsShowImagePlaceholder(false);
@@ -231,6 +265,24 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     }
     setCanEditable(true);
   }, [data, editor, element]);
+
+  const image = (
+    <img
+      ref={imageRef}
+      className={classNames({ 'image-selected': !readOnly && isSelected })}
+      onClick={onClickImage}
+      src={getImageURL(data, editor)}
+      style={getImageStyle()}
+      draggable={false}
+      onLoad={onImageLoaded}
+      onError={onImageLoadError}
+      alt=''
+    />
+  );
+
+  const preventImageLinkNavigation = useCallback((event) => {
+    if (!readOnly) event.preventDefault();
+  }, [readOnly]);
 
   return (
     <>
@@ -286,18 +338,52 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
           >
             <span className='sdoc-image-inner'>
               <span className={classNames('sdoc-image-content', { 'upload-error': isUploadError })}>
-                <span style={imageStyle}>
-                  <img
-                    ref={imageRef}
-                    className={classNames({ 'image-selected': !readOnly && isSelected })}
-                    onClick={onClickImage}
-                    src={getImageURL(data, editor)}
-                    style={getImageStyle()}
-                    draggable={false}
-                    onLoad={onImageLoaded}
-                    onError={onImageLoadError}
-                    alt=''
-                  />
+                <span className='sdoc-image-visual' style={imageStyle}>
+                  {isWikiPageLink ? (
+                    <a
+                      className='sdoc-image-page-link'
+                      href={imageHref}
+                      onClick={readOnly ? onOpenLinkedWikiPage : preventImageLinkNavigation}
+                      onKeyDown={readOnly ? onLinkedWikiPageKeyDown : undefined}
+                    >
+                      {image}
+                    </a>
+                  ) : isInternalLink ? (
+                    <a href={imageHref} onClick={preventImageLinkNavigation}>{image}</a>
+                  ) : imageHref ? (
+                    <a href={imageHref} target='_blank' rel='noopener noreferrer' onClick={preventImageLinkNavigation}>{image}</a>
+                  ) : image}
+                  {readOnly && imageHref && (
+                    <span className='sdoc-image-readonly-link-indicator'>
+                      <i className='sdocfont sdoc-link-file'/>
+                      <span className='sdoc-image-readonly-link-name'>{imageLinkName}</span>
+                    </span>
+                  )}
+                  {readOnly && (
+                    <span className='sdoc-image-hover-menu-container sdoc-image-readonly-fullscreen-container'>
+                      <span className='hover-menu-container'>
+                        <span className='op-group-item'>
+                          <span
+                            aria-label={t('Full_screen_mode')}
+                            className='op-item'
+                            id={readOnlyFullscreenTargetId}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              setIsShowReadOnlyImagePreview(true);
+                            }}
+                            role='button'
+                            tabIndex={0}
+                          >
+                            <i className='sdocfont sdoc-fullscreen'/>
+                            <Tooltip target={readOnlyFullscreenTargetId} placement='top' fade={true}>
+                              {t('Full_screen_mode')}
+                            </Tooltip>
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  )}
                   {(isCopyImageLoading || isUploadLoading) && <ImageLoader copyright={t('Image_is_uploading')}/>}
                   {(isUploadError) && <ImageLoader copyright={t('Image_is_upload_error')} isError={true} />}
                   {!readOnly && isSelected && (
@@ -335,9 +421,10 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
             </span>
             {children}
           </span>
-          {(isShowImageHoverMenu &&
+          {(!readOnly && isShowImageHoverMenu &&
             <ImageHoverMenu
               editor={editor}
+              menuRef={imageHoverMenuRef}
               menuPosition={menuPosition}
               element={element}
               parentNodeEntry={nodeEntry}
@@ -346,6 +433,14 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
               onHideImageHoverMenu={() => {
                 setIsShowImageHoverMenu(false);
               }}
+            />
+          )}
+          {isShowReadOnlyImagePreview && (
+            <ImagePreviewer
+              imageUrl={getImageURL(data, editor)}
+              editor={editor}
+              toggleImagePreviewer={() => setIsShowReadOnlyImagePreview(false)}
+              t={t}
             />
           )}
         </>

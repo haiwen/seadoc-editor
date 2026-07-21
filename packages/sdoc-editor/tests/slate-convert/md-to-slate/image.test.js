@@ -28,4 +28,29 @@ describe('image test', () => {
 
     expect(formatChildren(nodes)).toEqual(expectResult);
   });
+
+  it('paragraph > linked image', () => {
+    const mdString = '[![alt text](image.jpg "nihadoe")](https://example.com)';
+    const nodes = mdStringToSlate(mdString);
+
+    expect(formatChildren(nodes)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          { text: '' },
+          {
+            type: 'image',
+            data: {
+              src: 'image.jpg',
+              alt: 'alt text',
+              title: 'nihadoe',
+              href: 'https://example.com',
+            },
+            children: [{ text: '' }]
+          },
+          { text: '' },
+        ]
+      },
+    ]);
+  });
 });

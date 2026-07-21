@@ -1,5 +1,12 @@
 import { Node } from '@seafile/slate';
+import { normalizeWebUrl } from '../../extension/plugins/image/link-helpers';
 import isLastCharPunctuation from '../../utils/is-punctuation-mark';
+
+const escapeHtmlAttribute = (value) => String(value)
+  .replace(/&/g, '&amp;')
+  .replace(/"/g, '&quot;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;');
 
 const generateDefaultText = (value) => {
   return {
@@ -54,8 +61,14 @@ const transformInlineChildren = (result, item) => {
     if (data.height || data.width) {
       image = {
         type: 'html',
-        value: `<img src="${data.src}" alt="${data.alt}" title="${data.title}" width="${data.width}" height="${data.height}" />`
+        value: `<img src="${escapeHtmlAttribute(data.src)}" alt="${escapeHtmlAttribute(data.alt)}" title="${escapeHtmlAttribute(data.title)}" width="${escapeHtmlAttribute(data.width)}" height="${escapeHtmlAttribute(data.height)}" />`
       };
+    }
+    const imageLinkUrl = normalizeWebUrl(data.href);
+    if (imageLinkUrl) {
+      image = image.type === 'html'
+        ? { type: 'html', value: `<a href="${escapeHtmlAttribute(imageLinkUrl)}">${image.value}</a>` }
+        : { type: 'link', url: imageLinkUrl, title: null, children: [image] };
     }
     result.push(image);
     return result;

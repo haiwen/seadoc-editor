@@ -1,13 +1,13 @@
 import { Transforms, Path, Editor, Range } from '@seafile/slate';
 import toaster from '../../../components/toast';
-import { INTERNAL_EVENT } from '../../../constants';
+import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import context from '../../../context';
 import { getErrorMsg } from '../../../utils/common-utils';
 import { getSlateFragmentAttribute } from '../../../utils/document-utils';
 import EventBus from '../../../utils/event-bus';
 import { INSERT_POSITION, CLIPBOARD_FORMAT_KEY, CLIPBOARD_ORIGIN_SDOC_KEY, IMAGE, IMAGE_BLOCK, PARAGRAPH, ELEMENT_TYPE, MULTI_COLUMN, CALL_OUT, BLOCKQUOTE } from '../../constants';
 import { focusEditor, generateEmptyElement, getLastChildPath, getSelectedNodeEntryByType, isFirstChild, isSelectionAtBlockStart, isEmptyArticle, getNode } from '../../core';
-import { insertImage, hasSdocImages, getImageData, queryCopyMoveProgressView, resetCursor, isInsertImageMenuDisabled, getSingleImageFromFragment, removeImageBlockNode, generateImageInfos } from './helpers';
+import { insertImage, hasSdocImages, getImageData, queryCopyMoveProgressView, resetCursor, isInsertImageMenuDisabled, getSingleImageFromFragment, removeImageBlockNode, generateImageInfos, removeImageWikiPageLinks } from './helpers';
 
 const withImage = (editor) => {
   const { isInline, isVoid, insertData, deleteBackward, insertFragment, insertBreak } = editor;
@@ -72,7 +72,8 @@ const withImage = (editor) => {
   };
 
   newEditor.insertFragment = (data) => {
-    const singleImage = getSingleImageFromFragment(data);
+    const fragment = editor.editorType === WIKI_EDITOR ? data : removeImageWikiPageLinks(data);
+    const singleImage = getSingleImageFromFragment(fragment);
     if (singleImage && isInsertImageMenuDisabled(editor)) {
       const path = Editor.path(editor, editor.selection);
       const nextPath = Path.next([path[0]]);
@@ -88,7 +89,7 @@ const withImage = (editor) => {
     if (singleImage) {
       resetCursor(newEditor);
     }
-    return insertFragment(data);
+    return insertFragment(fragment);
   };
 
   newEditor.imageOnKeyDown = (e) => {
