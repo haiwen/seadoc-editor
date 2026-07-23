@@ -153,20 +153,6 @@ const withTable = (editor) => {
       return deleteFragment(unit);
     }
 
-    const restoreCurrentSelection = () => {
-      if (editor.selection) {
-        Transforms.select(editor, editor.selection);
-      }
-    };
-
-    const deleteOtherModule = (range, path) => {
-      if (Range.isCollapsed(range) && Editor.hasPath(editor, path)) {
-        Transforms.removeNodes(editor, { at: path });
-        return;
-      }
-      Transforms.delete(editor, { at: range });
-    };
-
     const match = (n) => n.type === TABLE;
     if (Range.isRange(selection) && isRangeAcrossBlocks(editor, { at: selection, match })) {
       const anchorEntry = getAboveBlockNode(editor, { at: selection.anchor, match });
@@ -181,10 +167,9 @@ const withTable = (editor) => {
             deleteTableSelectCells(editor, { start: anchor.path, end: endPoint.path, columnLength });
 
             // delete other module
-            const nextBlockPath = Path.next(anchorEntry[1]);
-            const newAnchor = getStartPoint(editor, nextBlockPath);
-            deleteOtherModule({ ...selection, anchor: newAnchor }, nextBlockPath);
-            restoreCurrentSelection();
+            const newAnchor = getStartPoint(editor, Path.next(anchorEntry[1]));
+            Transforms.delete(editor, { at: { ...selection, anchor: newAnchor } });
+            focusEditor(editor, newAnchor.path);
             return;
           }
         } else {
@@ -194,10 +179,9 @@ const withTable = (editor) => {
             deleteTableSelectCells(editor, { start: startPoint.path, end: anchor.path, columnLength });
 
             // delete other module
-            const prevBlockPath = Path.previous(anchorEntry[1]);
-            const newAnchor = getEndPoint(editor, prevBlockPath);
-            deleteOtherModule({ ...selection, anchor: newAnchor }, prevBlockPath);
-            restoreCurrentSelection();
+            const newAnchor = getEndPoint(editor, Path.previous(anchorEntry[1]));
+            Transforms.delete(editor, { at: { ...selection, anchor: newAnchor } });
+            focusEditor(editor, newAnchor.path);
             return;
           }
         }
@@ -215,8 +199,15 @@ const withTable = (editor) => {
               // delete other module
               const prevBlockPath = Path.previous(focusEntry[1]);
               const newFocus = getEndPoint(editor, prevBlockPath);
-              deleteOtherModule({ ...selection, focus: newFocus }, prevBlockPath);
-              restoreCurrentSelection();
+              const range = { ...selection, focus: newFocus };
+              if (Range.isCollapsed(range) && Editor.hasPath(editor, prevBlockPath)) {
+                Transforms.removeNodes(editor, { at: prevBlockPath });
+              } else {
+                Transforms.delete(editor, { at: range });
+              }
+              if (editor.selection) {
+                Transforms.select(editor, editor.selection);
+              }
               return;
             }
           } else {
@@ -225,10 +216,9 @@ const withTable = (editor) => {
               deleteTableSelectCells(editor, { start: focus.path, end: endPoint.path, columnLength });
 
               // delete other module
-              const nextBlockPath = Path.next(focusEntry[1]);
-              const newFocus = getStartPoint(editor, nextBlockPath);
-              deleteOtherModule({ ...selection, focus: newFocus }, nextBlockPath);
-              restoreCurrentSelection();
+              const newFocus = getStartPoint(editor, Path.next(focusEntry[1]));
+              Transforms.delete(editor, { at: { ...selection, focus: newFocus } });
+              focusEditor(editor, focus.path);
               return;
             }
           }
