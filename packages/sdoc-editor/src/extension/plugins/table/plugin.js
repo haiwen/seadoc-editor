@@ -153,6 +153,15 @@ const withTable = (editor) => {
       return deleteFragment(unit);
     }
 
+    const collapseSelection = (point) => {
+      if (point && Editor.hasPath(editor, point.path)) {
+        Transforms.select(editor, {
+          anchor: point,
+          focus: point,
+        });
+      }
+    };
+
     const match = (n) => n.type === TABLE;
     if (Range.isRange(selection) && isRangeAcrossBlocks(editor, { at: selection, match })) {
       const anchorEntry = getAboveBlockNode(editor, { at: selection.anchor, match });
@@ -187,8 +196,8 @@ const withTable = (editor) => {
         }
       } else {
         const focusEntry = getAboveBlockNode(editor, { at: selection.focus, match });
-        const columnLength = focusEntry[0].columns.length;
         if (focusEntry) {
+          const columnLength = focusEntry[0].columns.length;
           const { focus } = selection;
           const isForward = Range.isForward(selection);
           if (isForward) {
@@ -197,9 +206,20 @@ const withTable = (editor) => {
               deleteTableSelectCells(editor, { start: startPoint.path, end: focus.path, columnLength });
 
               // delete other module
-              const newFocus = getEndPoint(editor, Path.previous(focusEntry[1]));
-              Transforms.delete(editor, { at: { ...selection, focus: newFocus } });
-              focusEditor(editor, focus.path);
+              const prevBlockPath = Path.previous(focusEntry[1]);
+              const newFocus = getEndPoint(editor, prevBlockPath);
+              const range = { ...selection, focus: newFocus };
+              let targetFocus = { path: focus.path, offset: 0 };
+              if (Range.isCollapsed(range) && Editor.hasPath(editor, prevBlockPath)) {
+                Transforms.removeNodes(editor, { at: prevBlockPath });
+                targetFocus = {
+                  path: prevBlockPath.concat(focus.path.slice(focusEntry[1].length)),
+                  offset: 0,
+                };
+              } else {
+                Transforms.delete(editor, { at: range });
+              }
+              collapseSelection(targetFocus);
               return;
             }
           } else {
