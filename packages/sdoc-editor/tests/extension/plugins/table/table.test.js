@@ -126,7 +126,68 @@ describe('table operations tests', () => {
 
     expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
     expect(Range.isRange(editor.selection)).toBe(true);
+    expect(Range.isCollapsed(editor.selection)).toBe(true);
     expect(Editor.hasPath(editor, editor.selection.anchor.path)).toBe(true);
     expect(Editor.hasPath(editor, editor.selection.focus.path)).toBe(true);
+    expect(editor.selection.anchor).toEqual({ path: [0, 0, 0, 0], offset: 0 });
+    expect(editor.selection.focus).toEqual({ path: [0, 0, 0, 0], offset: 0 });
+  });
+
+  it('delete selection from paragraph text to the first table cell collapses selection in table cell', () => {
+    const input = (
+      <editor>
+        <hp><htext>xy</htext></hp>
+        <htable
+          ui={{ 'alternate_highlight': false }}
+          style={{ 'gridAutoRows': 'minmax(42}px, auto)', 'gridTemplateColumns': 'repeat(2, 100px)' }}
+          columns={[{ width: 100 }, { width: 100 }]}
+        >
+          <htrow>
+            <htcell><htext>A</htext></htcell>
+            <htcell><htext>B</htext></htcell>
+          </htrow>
+          <htrow>
+            <htcell><htext>C</htext></htcell>
+            <htcell><htext>D</htext></htcell>
+          </htrow>
+        </htable>
+      </editor>
+    );
+
+    const output = (
+      <editor>
+        <hp><htext>x</htext></hp>
+        <htable
+          ui={{ 'alternate_highlight': false }}
+          style={{ 'gridAutoRows': 'minmax(42}px, auto)', 'gridTemplateColumns': 'repeat(2, 100px)' }}
+          columns={[{ width: 100 }, { width: 100 }]}
+        >
+          <htrow style={{ 'min_height': 42 }}>
+            <htcell><htext><cursor /></htext></htcell>
+            <htcell><htext>B</htext></htcell>
+          </htrow>
+          <htrow style={{ 'min_height': 42 }}>
+            <htcell><htext>C</htext></htcell>
+            <htcell><htext>D</htext></htcell>
+          </htrow>
+        </htable>
+        <hp><htext></htext></hp>
+      </editor>
+    );
+
+    const plugins = [TablePlugin.editorPlugin];
+    const editor = createSdocEditor(input, plugins);
+    Transforms.select(editor, {
+      anchor: { path: [0, 0], offset: 1 },
+      focus: { path: [1, 0, 0, 0], offset: 1 },
+    });
+
+    editor.deleteFragment();
+
+    expect(formatChildren(editor.children)).toEqual(formatChildren(output.children));
+    expect(Range.isRange(editor.selection)).toBe(true);
+    expect(Range.isCollapsed(editor.selection)).toBe(true);
+    expect(editor.selection.anchor).toEqual({ path: [1, 0, 0, 0], offset: 0 });
+    expect(editor.selection.focus).toEqual({ path: [1, 0, 0, 0], offset: 0 });
   });
 });

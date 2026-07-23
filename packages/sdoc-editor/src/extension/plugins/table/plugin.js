@@ -153,6 +153,15 @@ const withTable = (editor) => {
       return deleteFragment(unit);
     }
 
+    const collapseSelection = (point) => {
+      if (point && Editor.hasPath(editor, point.path)) {
+        Transforms.select(editor, {
+          anchor: point,
+          focus: point,
+        });
+      }
+    };
+
     const match = (n) => n.type === TABLE;
     if (Range.isRange(selection) && isRangeAcrossBlocks(editor, { at: selection, match })) {
       const anchorEntry = getAboveBlockNode(editor, { at: selection.anchor, match });
@@ -200,14 +209,17 @@ const withTable = (editor) => {
               const prevBlockPath = Path.previous(focusEntry[1]);
               const newFocus = getEndPoint(editor, prevBlockPath);
               const range = { ...selection, focus: newFocus };
+              let targetFocus = { path: focus.path, offset: 0 };
               if (Range.isCollapsed(range) && Editor.hasPath(editor, prevBlockPath)) {
                 Transforms.removeNodes(editor, { at: prevBlockPath });
+                targetFocus = {
+                  path: prevBlockPath.concat(focus.path.slice(focusEntry[1].length)),
+                  offset: 0,
+                };
               } else {
                 Transforms.delete(editor, { at: range });
               }
-              if (editor.selection) {
-                Transforms.select(editor, editor.selection);
-              }
+              collapseSelection(targetFocus);
               return;
             }
           } else {
