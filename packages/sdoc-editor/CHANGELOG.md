@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.221](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.220...@seafile/sdoc-editor@3.0.221) (2026-07-23)
+
+### Bug Fixes
+
+- fix delete before table bug ([#286](https://github.com/haiwen/seadoc-editor/issues/286)) ([b531006](https://github.com/haiwen/seadoc-editor/commit/b531006efccf24b602ddd28828466e7a008a4f38))
+
 ## [3.0.220](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.219...@seafile/sdoc-editor@3.0.220) (2026-07-21)
 
 ### Features
