@@ -78,7 +78,7 @@ const getMatchedTextInfos = (editor, node, keyword) => {
   return matchedTextNodeEntires;
 };
 
-const generateRangeWhenWrapLine = (editor, path, index, count, domRange, baseHeight) => {
+export const generateRangeWhenWrapLine = (editor, path, index, count, domRange, baseHeight) => {
   let i = 0;
   let j = 1;
   let isOverrideForwardRange = true;
@@ -90,7 +90,8 @@ const generateRangeWhenWrapLine = (editor, path, index, count, domRange, baseHei
     };
     const subRange = ReactEditor.toDOMRange(editor, subSplitRange);
     const subRangeHeight = Math.round(subRange.getBoundingClientRect().height);
-    if (subRangeHeight === baseHeight) {
+    const isSingleCharacterRange = j === i + 1;
+    if (subRangeHeight === baseHeight || isSingleCharacterRange) {
       isOverrideForwardRange && subHighlightInfos.pop();
       if (!isOverrideForwardRange) isOverrideForwardRange = true;
       subHighlightInfos.push({
@@ -305,7 +306,7 @@ export const drawHighlights = (editor, ranges, selectIndex, isMoveIntoView = fal
 
       } else {
         splitRangeIndex = j;
-        canvasIndex = Math.ceil((y - top) / 5000 - 1);
+        canvasIndex = Math.floor((y - top) / 5000);
       }
 
     }
