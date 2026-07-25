@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.222](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.221...@seafile/sdoc-editor@3.0.222) (2026-07-25)
+
+### Bug Fixes
+
+- **search:** handle highlight canvas boundaries ([#287](https://github.com/haiwen/seadoc-editor/issues/287)) ([fa68ede](https://github.com/haiwen/seadoc-editor/commit/fa68edecc1f97df7c48445fe345e67c79e304640))
+
 ## [3.0.221](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.220...@seafile/sdoc-editor@3.0.221) (2026-07-23)
 
 ### Bug Fixes
