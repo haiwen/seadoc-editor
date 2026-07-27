@@ -48,5 +48,8 @@
     "**/*.js": [
       "eslint --fix"
     ]
+  },
+  "dependencies": {
+    "react-router": "^7.18.0"
   }
 }
