@@ -149,7 +149,7 @@ const MoreOperations = ({ isStarred, t }) => {
     const serviceUrl = context.getSetting('serviceUrl');
     const repoID = context.getSetting('repoID');
     const selectedFilePath = context.getSetting('docPath');
-    const exportUrl = `${serviceUrl}/repo/sdoc_export_to_markdown/${repoID}/?file_path=${selectedFilePath}`;
+    const exportUrl = `${serviceUrl}/repo/sdoc_export_to_markdown/${repoID}/?file_path=${encodeURIComponent(selectedFilePath)}`;
     window.location.href = exportUrl;
   }, []);
 
@@ -157,7 +157,7 @@ const MoreOperations = ({ isStarred, t }) => {
     const serviceUrl = context.getSetting('serviceUrl');
     const repoID = context.getSetting('repoID');
     const selectedFilePath = context.getSetting('docPath');
-    const exportToDocxUrl = serviceUrl + '/repo/sdoc_export_to_docx/' + repoID + '/?file_path=' + selectedFilePath;
+    const exportToDocxUrl = `${serviceUrl}/repo/sdoc_export_to_docx/${repoID}/?file_path=${encodeURIComponent(selectedFilePath)}`;
     window.location.href = exportToDocxUrl;
   }, []);
 
