@@ -6,7 +6,7 @@ import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
-import { CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM, CALL_OUT, TABLE_DRAG_KEY, LIST_ITEM, MULTI_COLUMN, ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, IMAGE_BLOCK, VIDEO, WHITEBOARD, FILE_VIEW, FORMULA, COLUMN } from '../../constants';
+import { CODE_BLOCK, TABLE, BLOCKQUOTE, CHECK_LIST_ITEM, CALL_OUT, TABLE_DRAG_KEY, LIST_ITEM, MULTI_COLUMN, ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, IMAGE_BLOCK, VIDEO, WHITEBOARD, FORMULA, COLUMN } from '../../constants';
 import { findPath, focusEditor } from '../../core';
 import { getCalloutEntry } from '../../plugins/callout/helper';
 import { insertImageFiles } from '../../plugins/image/helpers';
@@ -536,7 +536,7 @@ const SideToolbar = () => {
     if (!sourceNode || !sourcePath ) return;
 
     // Not support node type in multi column
-    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FILE_VIEW, FORMULA].includes(sourceNode.type)) return;
+    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FORMULA].includes(sourceNode.type)) return;
     // Return if source node is from multi column
     const topNode = Node.get(editor, [sourcePath[0]]);
     if ([MULTI_COLUMN].includes(topNode.type)) return;
@@ -578,7 +578,7 @@ const SideToolbar = () => {
     const [targetNode, targetPath] = getNodeEntry(editor, target?.el);
 
     // Not support node type in multi column
-    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FILE_VIEW, FORMULA].includes(targetNode.type)) return;
+    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FORMULA].includes(targetNode.type)) return;
     if (!targetNode || (targetPath.length === 0 && ![ORDERED_LIST, UNORDERED_LIST].includes(targetNode.type))) return;
 
     // Stop if target node is multi column node with four columns

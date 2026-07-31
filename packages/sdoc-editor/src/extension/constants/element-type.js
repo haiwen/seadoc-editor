@@ -38,7 +38,6 @@ export const FILE_LINK_INSET_INPUT_TEMP = 'file_link_insert_input_temp';
 export const QUICK_INSERT = 'quick_insert';
 export const VIDEO_LINK = 'video_link';
 export const WHITEBOARD = 'whiteboard';
-export const FILE_VIEW = 'file_view';
 export const FORMULA = 'formula';
 export const TOGGLE_HEADER = 'toggle_header';
 export const TOGGLE_HEADER1 = 'toggle_header1';
