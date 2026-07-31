@@ -32,7 +32,6 @@ import {
   PARAGRAPH,
   CALL_OUT,
   WHITEBOARD,
-  FILE_VIEW,
   FORMULA,
   TOGGLE_HEADER,
   TOGGLE_HEADER1,
@@ -540,12 +539,6 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     type: BLOCKQUOTE,
     text: 'Quote'
   },
-  [FILE_VIEW]: {
-    id: 'sdoc-side-menu-item-file-view',
-    iconClass: 'sdocfont sdoc-file-view',
-    type: FILE_VIEW,
-    text: 'File_view'
-  },
   [FORMULA]: {
     id: 'sdoc-side-menu-item-formula',
     iconClass: 'sdocfont sdoc-formula',
@@ -577,7 +570,6 @@ export const SIDE_INSERT_MENUS_SEARCH_MAP = {
   [TOGGLE_HEADER1]: 'Toggle_header_one',
   [TOGGLE_HEADER2]: 'Toggle_header_two',
   [TOGGLE_HEADER3]: 'Toggle_header_three',
-  [FILE_VIEW]: 'File_view',
 };
 
 export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
@@ -600,7 +592,6 @@ export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [HEADER2]: 'Header_two',
   [HEADER3]: 'Header_three',
   [HEADER4]: 'Header_four',
-  [FILE_VIEW]: 'File_view',
   [FORMULA]: 'Formula',
   [TOGGLE_HEADER1]: 'Toggle_header_one',
   [TOGGLE_HEADER2]: 'Toggle_header_two',

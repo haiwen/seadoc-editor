@@ -78,40 +78,6 @@ class Context {
     return this.config;
   }
 
-  getFileViewSetting() {
-    const {
-      isDevelopment,
-      serviceUrl,
-      siteRoot,
-      mediaUrl,
-      name,
-      username,
-      password,
-      fileServerRoot,
-      thumbnailDefaultSize,
-      lang,
-      thumbnailSizeForOriginal,
-      enableSeadoc,
-      enableThumbnailServer,
-    } = this.settings;
-
-    return {
-      isDevelopment,
-      serviceUrl,
-      siteRoot,
-      mediaUrl,
-      name,
-      username,
-      password,
-      fileServerRoot,
-      thumbnailDefaultSize,
-      thumbnailSizeForOriginal,
-      enableSeadoc,
-      enableThumbnailServer,
-      lang,
-    };
-  }
-
   getWikiSettings = () => {
     // patch: Resolving the issue of repos wikiSettings consuming too much localstorage.
     if (window.wiki && window.wiki.config) {
@@ -405,24 +371,6 @@ class Context {
   getFileMetadataInfo(fileType) {
     const docUuid = this.getDocUuid();
     return this.api.getFileMetadataInfo(docUuid, fileType);
-  }
-
-  insertFileView(data) {
-    const wikiId = this.getSetting('wikiId');
-    const docUuid = this.getSetting('docUuid');
-
-    return this.api.insertFileView(docUuid, wikiId, data);
-  }
-
-  duplicateFileView(fileViewId) {
-    const wikiId = this.getSetting('wikiId');
-    const docUuid = this.getSetting('docUuid');
-    return this.api.duplicateFileView(docUuid, wikiId, fileViewId);
-  }
-
-  modifyFileView(viewId, fileViewId, viewData) {
-    const wikiId = this.getSetting('wikiId');
-    return this.api.modifyView(wikiId, fileViewId, viewData);
   }
 
   listLinkedRepoDir(repoID, nodePath) {

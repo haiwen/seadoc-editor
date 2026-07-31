@@ -5,7 +5,6 @@ import CodeBlockPlugin from './code-block';
 import DividerPlugin from './divider';
 import EmbedLinkPlugin from './embed-link';
 import FileLinkPlugin from './file-link';
-import FileViewPlugin from './file-view';
 import FontPlugin from './font';
 import FormulaPlugin from './formula';
 import GroupPlugin from './group';
@@ -53,7 +52,6 @@ const Plugins = [
   QuickInsertPlugin,
   GroupPlugin,
   WhiteboardPlugin,
-  FileViewPlugin,
   FormulaPlugin,
   ToggleHeaderPlugin,
   EmbedLinkPlugin,
@@ -63,7 +61,6 @@ const Plugins = [
 const WikiPlugins = [
   ...Plugins,
   WikiLinkPlugin,
-  FileViewPlugin,
 ];
 
 const CommentPlugins = [
@@ -107,7 +104,6 @@ export {
   WikiLinkPlugin,
   GroupPlugin,
   WhiteboardPlugin,
-  FileViewPlugin,
   FormulaPlugin,
   ToggleHeaderPlugin,
   EmbedLinkPlugin,

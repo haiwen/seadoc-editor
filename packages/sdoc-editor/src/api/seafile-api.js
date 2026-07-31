@@ -240,33 +240,6 @@ class SeafileAPI {
     return this.req.get(url);
   }
 
-  insertFileView(docUuid, wikiId, data) {
-    const url = `/api/v2.1/wiki2/${wikiId}/file-views/`;
-    const form = new FormData();
-    form.append('file_uuid', docUuid); // used for valid permission
-    form.append('name', data.name);
-    form.append('linked_repo_id', data.linked_repo_id);
-    form.append('type', data.type || 'table');
-
-    return this.req.post(url, form);
-  }
-
-  modifyFileView(wikiId, fileViewId, viewData) {
-    const url = '/api/v2.1/wiki2/' + wikiId + '/file-views/' + fileViewId + '/';
-    const data = {
-      viewData,
-    };
-    return this.req.put(url, data);
-  }
-
-  duplicateFileView(docUuid, wikiId, fileViewId) {
-    const url = `/api/v2.1/wiki2/${wikiId}/file-views/${fileViewId}/duplicate/`;
-    const form = new FormData();
-    form.append('file_uuid', docUuid); // used for valid permission
-
-    return this.req.post(url, form);
-  }
-
   listLinkedRepoDir(docUuid, wikiId, linkedRepoId, dirPath) {
     const url = `/api/v2.1/wiki2/${wikiId}/linked-repos/${linkedRepoId}/dir/`;
     return this.req.get(url, { params: { p: dirPath, file_uuid: docUuid } });

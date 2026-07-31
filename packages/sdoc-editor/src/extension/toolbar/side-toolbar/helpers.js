@@ -11,7 +11,7 @@ import {
   SIDE_TRANSFORM_MENUS_CONFIG, LIST_ITEM_SUPPORTED_TRANSFORMATION, HEADERS, VIDEO,
   MULTI_COLUMN, MULTI_COLUMN_TYPE, IMAGE_BLOCK, WHITEBOARD, TWO_COLUMN,
   TOGGLE_HEADER, TOGGLE_TITLE_TYPES, TOGGLE_CONTENT,
-  FILE_VIEW, DIVIDER
+  DIVIDER
 } from '../../constants';
 import { generateEmptyElement, findPath, isMultiLevelList, isTopLevelListItem, getNode, focusEditor, getAboveNode, getTopLevelBlockNode } from '../../core';
 import { setBlockQuoteType } from '../../plugins/blockquote/helpers';
@@ -337,7 +337,7 @@ export const getTopValue = (editor, dom, containerDom, slateNode) => {
 };
 
 export const isNotSupportTransform = (node) => {
-  if (node.type && [CODE_BLOCK, TABLE, VIDEO, WHITEBOARD, FILE_VIEW].includes(node.type)) {
+  if (node.type && [CODE_BLOCK, TABLE, VIDEO, WHITEBOARD].includes(node.type)) {
     return true;
   }
   return false;
