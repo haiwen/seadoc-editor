@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.225](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.224...%40seafile%2Fsdoc-editor%403.0.225) (2026-08-04)
+
+### Bug Fixes
+
+- preserve links pasted into table cells ([#296](https://github.com/haiwen/seadoc-editor/issues/296)) ([27751f5](https://github.com/haiwen/seadoc-editor/commit/27751f5e26c1dc21659a61335b26c2e6e72a6e6d))
+
 ## [3.0.224](https://github.com/haiwen/seadoc-editor/compare/@seafile/sdoc-editor@3.0.223...@seafile/sdoc-editor@3.0.224) (2026-07-31)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
