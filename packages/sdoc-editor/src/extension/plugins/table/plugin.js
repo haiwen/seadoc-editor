@@ -1,17 +1,37 @@
 import { Editor, Transforms, Path, Element, Range } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import isHotkey from 'is-hotkey';
+import isUrl from 'is-url';
 import { INTERNAL_EVENT } from '../../../constants';
+import { removeCommentMarks, replacePastedDataId } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import ObjectUtils from '../../../utils/object-utils';
 import { ELEMENT_TYPE, KEYBOARD, PARAGRAPH, CLIPBOARD_FORMAT_KEY, CHECK_LIST_ITEM, ORDERED_LIST, UNORDERED_LIST, TABLE_ROW, TABLE, TABLE_CELL } from '../../constants';
 import { getNodeType, getParentNode, getSelectedNodeByType, isLastNode, generateEmptyElement, focusEditor, getAboveBlockNode, isRangeAcrossBlocks, getStartPoint, getEndPoint, isStartPoint, isEndPoint, getTopLevelBlockNode } from '../../core';
+import { isImage } from '../../utils';
 import { TABLE_MAX_ROWS, EMPTY_SELECTED_RANGE, TABLE_ELEMENT, TABLE_ELEMENT_POSITION, TABLE_CELL_MIN_WIDTH, TABLE_ROW_MIN_HEIGHT } from './constants';
 import { getSelectedInfo, insertTableElement, removeTable, insertMultipleRowsAndColumns, setTableFragmentData,
   deleteTableRangeData, focusCell, deleteHandler, isTableLocation, isLastTableCell,
   deleteTableSelectCells,
   isAllInTable,
   isInTableSameCell } from './helpers';
+
+const INLINE_LINK_TYPES = [ELEMENT_TYPE.LINK, ELEMENT_TYPE.SDOC_LINK, ELEMENT_TYPE.FILE_LINK];
+
+const getInlineLinkNodes = (nodes) => {
+  if (!Array.isArray(nodes) || nodes.length !== 1 || nodes[0].type !== PARAGRAPH) return null;
+
+  const { children } = nodes[0];
+  if (!Array.isArray(children)) return null;
+
+  const linkNodes = children.filter((node) => INLINE_LINK_TYPES.includes(node.type));
+  const hasOnlyOneLink = linkNodes.length === 1;
+  const hasOnlyEmptyTextAndLink = children.every((node) => {
+    return INLINE_LINK_TYPES.includes(node.type) || (Object.prototype.hasOwnProperty.call(node, 'text') && node.text === '');
+  });
+
+  return hasOnlyOneLink && hasOnlyEmptyTextAndLink ? linkNodes : null;
+};
 
 const withTable = (editor) => {
   const { insertBreak, deleteBackward, deleteForward, insertData, selectAll, normalizeNode, handleTab, getFragment,
@@ -363,11 +383,23 @@ const withTable = (editor) => {
         insertMultipleRowsAndColumns(newEditor, tableElement.children, tableElement.columns);
         return;
       }
+
+      const linkNodes = getInlineLinkNodes(parsedData);
+      if (linkNodes && isInTableSameCell(newEditor)) {
+        const cleanedLinkNodes = removeCommentMarks(linkNodes);
+        return Transforms.insertNodes(newEditor, replacePastedDataId(cleanedLinkNodes));
+      }
     }
 
     const text = data.getData('text/plain');
     if (!text) return;
-    Editor.insertText(newEditor, text);
+
+    // Keep URL paste behavior consistent with normal text while preserving multi-cell paste behavior.
+    if (isUrl(text) && !isImage(text) && isInTableSameCell(newEditor)) {
+      return insertData(data);
+    }
+
+    return Editor.insertText(newEditor, text);
   };
 
   newEditor.insertFragment = (data) => {
