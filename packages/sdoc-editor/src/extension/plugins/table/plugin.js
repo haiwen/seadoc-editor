@@ -1,17 +1,38 @@
 import { Editor, Transforms, Path, Element, Range } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import isHotkey from 'is-hotkey';
+import isUrl from 'is-url';
 import { INTERNAL_EVENT } from '../../../constants';
+import { replacePastedDataId } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import ObjectUtils from '../../../utils/object-utils';
 import { ELEMENT_TYPE, KEYBOARD, PARAGRAPH, CLIPBOARD_FORMAT_KEY, CHECK_LIST_ITEM, ORDERED_LIST, UNORDERED_LIST, TABLE_ROW, TABLE, TABLE_CELL } from '../../constants';
 import { getNodeType, getParentNode, getSelectedNodeByType, isLastNode, generateEmptyElement, focusEditor, getAboveBlockNode, isRangeAcrossBlocks, getStartPoint, getEndPoint, isStartPoint, isEndPoint, getTopLevelBlockNode } from '../../core';
+import { isImage } from '../../utils';
 import { TABLE_MAX_ROWS, EMPTY_SELECTED_RANGE, TABLE_ELEMENT, TABLE_ELEMENT_POSITION, TABLE_CELL_MIN_WIDTH, TABLE_ROW_MIN_HEIGHT } from './constants';
 import { getSelectedInfo, insertTableElement, removeTable, insertMultipleRowsAndColumns, setTableFragmentData,
   deleteTableRangeData, focusCell, deleteHandler, isTableLocation, isLastTableCell,
   deleteTableSelectCells,
   isAllInTable,
   isInTableSameCell } from './helpers';
+
+const INLINE_LINK_TYPES = [ELEMENT_TYPE.LINK, ELEMENT_TYPE.SDOC_LINK, ELEMENT_TYPE.FILE_LINK];
+
+const getInlineLinkNodes = (nodes) => {
+  const linkNodes = [];
+  const hasOnlyInlineLinkContent = (children) => {
+    return Array.isArray(children) && children.every((node) => {
+      if (Object.prototype.hasOwnProperty.call(node, 'text')) return node.text === '';
+      if (INLINE_LINK_TYPES.includes(node.type)) {
+        linkNodes.push(node);
+        return true;
+      }
+      return node.type === ELEMENT_TYPE.PARAGRAPH && hasOnlyInlineLinkContent(node.children);
+    });
+  };
+
+  return hasOnlyInlineLinkContent(nodes) && linkNodes.length ? linkNodes : null;
+};
 
 const withTable = (editor) => {
   const { insertBreak, deleteBackward, deleteForward, insertData, selectAll, normalizeNode, handleTab, getFragment,
@@ -363,11 +384,22 @@ const withTable = (editor) => {
         insertMultipleRowsAndColumns(newEditor, tableElement.children, tableElement.columns);
         return;
       }
+
+      const linkNodes = getInlineLinkNodes(parsedData);
+      if (linkNodes && isInTableSameCell(newEditor)) {
+        return Transforms.insertNodes(newEditor, replacePastedDataId(linkNodes));
+      }
     }
 
     const text = data.getData('text/plain');
     if (!text) return;
-    Editor.insertText(newEditor, text);
+
+    // Keep URL paste behavior consistent with normal text while preserving multi-cell paste behavior.
+    if (isUrl(text) && !isImage(text) && isInTableSameCell(newEditor)) {
+      return insertData(data);
+    }
+
+    return Editor.insertText(newEditor, text);
   };
 
   newEditor.insertFragment = (data) => {
