@@ -9,7 +9,7 @@
   filter: grayscale(100%);
 }
 
-.sdoc-editor__article .sdoc-image-wrapper.sdoc-diff-image-deleted .sdoc-image-content > span:first-child::after {
+.sdoc-editor__article .sdoc-image-wrapper.sdoc-diff-image-deleted .sdoc-image-content>span:first-child::after {
   content: '';
   position: absolute;
   top: 50%;
