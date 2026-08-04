@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
 import { WIKI_EDITOR } from '../../../../constants';
 import { ElementPopover } from '../../../commons';
-import { MENUS_CONFIG_MAP, TEXT_ALIGN, PARAGRAPH, IMAGE_BLOCK, TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN } from '../../../constants';
+import { MENUS_CONFIG_MAP, TEXT_ALIGN, PARAGRAPH, IMAGE_BLOCK, TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN, LIST_ITEM } from '../../../constants';
 import { generateEmptyElement } from '../../../core';
 import { IMAGE_DISPLAY_TYPE, IMAGE_BORDER_TYPE } from '../constants';
 import ImagePreviewer from '../dialogs/image-previewer';
@@ -40,6 +40,11 @@ const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntr
   const [isShowTooltip, setIsShowTooltip] = useState(false);
   const isWiki = editor.editorType === WIKI_EDITOR;
   const currentHref = data.href;
+  const imagePath = ReactEditor.findPath(editor, element);
+  const isInListItem = !!Editor.above(editor, {
+    at: imagePath,
+    match: node => node.type === LIST_ITEM,
+  });
 
   useEffect(() => {
     setIsShowTooltip(true);
@@ -167,14 +172,15 @@ const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntr
             <span className='op-group-item'>
               <span
                 role="button"
-                className={classnames('op-item', { 'active': popoverState.displayPopover })}
-                onClick={(e) => {
+                aria-disabled={isInListItem}
+                className={classnames('op-item', { 'active': popoverState.displayPopover, 'disabled': isInListItem })}
+                onClick={isInListItem ? undefined : (e) => {
                   onShowProver(e, 'displayPopover');
                 }}
               >
                 <span className='mr-1'>{t(type === IMAGE_BLOCK ? 'Block' : 'Inline')}</span>
                 <i className='sdocfont sdoc-arrow-down'/>
-                {popoverState.displayPopover && (
+                {!isInListItem && popoverState.displayPopover && (
                   <div className="sdoc-image-popover sdoc-dropdown-menu">
                     {IMAGE_DISPLAY_TYPE.map((item) => {
                       return (

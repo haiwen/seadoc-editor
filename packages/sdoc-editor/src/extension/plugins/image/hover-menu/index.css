@@ -48,6 +48,19 @@
   background: #EFEFEF;
 }
 
+.sdoc-image-hover-menu-container .hover-menu-container .op-item.disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.sdoc-image-hover-menu-container .hover-menu-container .op-item.disabled:hover {
+  background: transparent;
+}
+
+.sdoc-image-hover-menu-container .hover-menu-container .op-item.disabled .sdocfont {
+  color: #999;
+}
+
 .sdoc-image-hover-menu-container .hover-menu-container .active {
   background: #EFEFEF;
 }
