@@ -10,7 +10,7 @@ import { focusEditor, generateEmptyElement, getLastChildPath, getSelectedNodeEnt
 import { insertImage, hasSdocImages, getImageData, queryCopyMoveProgressView, resetCursor, isInsertImageMenuDisabled, getSingleImageFromFragment, removeImageBlockNode, generateImageInfos, removeImageWikiPageLinks } from './helpers';
 
 const withImage = (editor) => {
-  const { isInline, isVoid, insertData, deleteBackward, insertFragment, insertBreak } = editor;
+  const { isInline, isVoid, insertData, deleteBackward, insertFragment, insertBreak, normalizeNode } = editor;
   const newEditor = editor;
 
   // rewrite isInline
@@ -33,6 +33,19 @@ const withImage = (editor) => {
     }
 
     return isVoid(elem);
+  };
+
+  newEditor.normalizeNode = ([node, path]) => {
+    const imageCount = node.type === IMAGE_BLOCK
+      ? node.children.filter(child => child.type === IMAGE).length
+      : 0;
+
+    if (imageCount >= 2) {
+      Transforms.setNodes(editor, { type: PARAGRAPH }, { at: path });
+      return;
+    }
+
+    return normalizeNode([node, path]);
   };
 
   newEditor.insertData = (data) => {
