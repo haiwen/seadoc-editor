@@ -3,7 +3,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import isHotkey from 'is-hotkey';
 import isUrl from 'is-url';
 import { INTERNAL_EVENT } from '../../../constants';
-import { replacePastedDataId } from '../../../node-id/helpers';
+import { removeCommentMarks, replacePastedDataId } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import ObjectUtils from '../../../utils/object-utils';
 import { ELEMENT_TYPE, KEYBOARD, PARAGRAPH, CLIPBOARD_FORMAT_KEY, CHECK_LIST_ITEM, ORDERED_LIST, UNORDERED_LIST, TABLE_ROW, TABLE, TABLE_CELL } from '../../constants';
@@ -19,19 +19,18 @@ import { getSelectedInfo, insertTableElement, removeTable, insertMultipleRowsAnd
 const INLINE_LINK_TYPES = [ELEMENT_TYPE.LINK, ELEMENT_TYPE.SDOC_LINK, ELEMENT_TYPE.FILE_LINK];
 
 const getInlineLinkNodes = (nodes) => {
-  const linkNodes = [];
-  const hasOnlyInlineLinkContent = (children) => {
-    return Array.isArray(children) && children.every((node) => {
-      if (Object.prototype.hasOwnProperty.call(node, 'text')) return node.text === '';
-      if (INLINE_LINK_TYPES.includes(node.type)) {
-        linkNodes.push(node);
-        return true;
-      }
-      return node.type === ELEMENT_TYPE.PARAGRAPH && hasOnlyInlineLinkContent(node.children);
-    });
-  };
+  if (!Array.isArray(nodes) || nodes.length !== 1 || nodes[0].type !== PARAGRAPH) return null;
 
-  return hasOnlyInlineLinkContent(nodes) && linkNodes.length ? linkNodes : null;
+  const { children } = nodes[0];
+  if (!Array.isArray(children)) return null;
+
+  const linkNodes = children.filter((node) => INLINE_LINK_TYPES.includes(node.type));
+  const hasOnlyOneLink = linkNodes.length === 1;
+  const hasOnlyEmptyTextAndLink = children.every((node) => {
+    return INLINE_LINK_TYPES.includes(node.type) || (Object.prototype.hasOwnProperty.call(node, 'text') && node.text === '');
+  });
+
+  return hasOnlyOneLink && hasOnlyEmptyTextAndLink ? linkNodes : null;
 };
 
 const withTable = (editor) => {
@@ -387,7 +386,8 @@ const withTable = (editor) => {
 
       const linkNodes = getInlineLinkNodes(parsedData);
       if (linkNodes && isInTableSameCell(newEditor)) {
-        return Transforms.insertNodes(newEditor, replacePastedDataId(linkNodes));
+        const cleanedLinkNodes = removeCommentMarks(linkNodes);
+        return Transforms.insertNodes(newEditor, replacePastedDataId(cleanedLinkNodes));
       }
     }
 

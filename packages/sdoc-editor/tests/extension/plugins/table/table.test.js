@@ -123,7 +123,12 @@ describe('table operations tests', () => {
       id: 'source-link-id',
       type,
       ...attributes,
-      children: [{ id: 'source-link-text-id', text: attributes.title }],
+      children: [{
+        id: 'source-link-text-id',
+        text: attributes.title,
+        sdoc_comment_test: true,
+        removed_test: true,
+      }],
     };
     const fragment = window.btoa(encodeURIComponent(JSON.stringify([{
       id: 'source-paragraph-id',
@@ -149,7 +154,43 @@ describe('table operations tests', () => {
     const [linkNode, linkPath] = Array.from(Node.descendants(editor)).find(([node]) => node.type === type);
     expect(linkNode).toMatchObject({ type, ...attributes, children: [{ text: attributes.title }] });
     expect(linkNode.id).not.toBe(sourceNode.id);
+    expect(linkNode.children[0]).not.toHaveProperty('sdoc_comment_test');
+    expect(linkNode.children[0]).not.toHaveProperty('removed_test');
     expect(Editor.parent(editor, linkPath)[0].type).toBe('table_cell');
+  });
+
+  it('does not flatten links copied from multiple paragraphs into a table cell', async () => {
+    const input = (
+      <editor>
+        <htable>
+          <htrow>
+            <htcell><htext><cursor /></htext></htcell>
+          </htrow>
+        </htable>
+      </editor>
+    );
+    const sourceParagraphs = [
+      {
+        type: 'paragraph',
+        children: [{ type: 'link', href: 'https://example.com/one', children: [{ text: 'First link' }] }],
+      },
+      {
+        type: 'paragraph',
+        children: [{ type: 'link', href: 'https://example.com/two', children: [{ text: 'Second link' }] }],
+      },
+    ];
+    const fragment = window.btoa(encodeURIComponent(JSON.stringify(sourceParagraphs)));
+    const clipboardData = {
+      getData: (dataType) => dataType === 'application/x-slate-fragment' ? fragment : 'First link\nSecond link',
+      types: ['application/x-slate-fragment', 'text/plain'],
+    };
+    const editor = createSdocEditor(input, [LinkPlugin.editorPlugin, TablePlugin.editorPlugin]);
+
+    await editor.insertData(clipboardData);
+
+    const pastedLinks = Array.from(Node.descendants(editor)).filter(([node]) => node.type === 'link');
+    expect(pastedLinks).toHaveLength(0);
+    expect(Node.string(editor.children[0].children[0].children[0])).toBe('First link\nSecond link');
   });
 
   it('delete selection from empty paragraph to the first table cell keeps a valid selection', () => {
