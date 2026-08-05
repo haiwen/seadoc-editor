@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.227](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.226...%40seafile%2Fsdoc-editor%403.0.227) (2026-08-05)
+
+### Bug Fixes
+
+- scope deleted image styles to diff views ([#298](https://github.com/haiwen/seadoc-editor/issues/298)) ([09283fe](https://github.com/haiwen/seadoc-editor/commit/09283fe6f6ecd202895333f91c955dc1b5f6ff27))
+
 ## [3.0.226](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.225...%40seafile%2Fsdoc-editor%403.0.226) (2026-08-05)
 
 ### Bug Fixes
