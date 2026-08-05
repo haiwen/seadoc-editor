@@ -112,7 +112,7 @@
 .sdoc-editor__article .sdoc-image-wrapper {
   position: relative;
   display: inline-block;
-  margin: 5px 0;
+  margin: 5px 0.15em;
   caret-color: transparent;
   max-width: 99%;
 }

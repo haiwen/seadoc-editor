@@ -458,17 +458,19 @@ export function renderImage(props, editor) {
   // decorate diff-viewer
   const { element, leaf } = props;
   let style = { ...props.style };
+  const isAdded = !!element.add;
+  const isDeleted = !isAdded && !!element.delete;
   const diffImageClassName = classNames(props.className, {
-    'sdoc-diff-image-added': !!element.add,
-    'sdoc-diff-image-deleted': !!element.delete,
+    'sdoc-diff-image-added': isAdded,
+    'sdoc-diff-image-deleted': isDeleted,
   });
 
   if (leaf && leaf.computed_background_color) {
     style['backgroundColor'] = leaf.computed_background_color;
   }
 
-  if (element.add || element.delete) {
-    style = Object.assign({}, style, element.add ? ADDED_STYLE : DELETED_STYLE);
+  if (isAdded || isDeleted) {
+    style = Object.assign({}, style, isAdded ? ADDED_STYLE : DELETED_STYLE);
     if (style.computed_background_color) {
       style['backgroundColor'] = style.computed_background_color;
     }
