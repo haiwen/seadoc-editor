@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.226](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.225...%40seafile%2Fsdoc-editor%403.0.226) (2026-08-05)
+
+### Bug Fixes
+
+- disable image display switch in list items ([#297](https://github.com/haiwen/seadoc-editor/issues/297)) ([497d39c](https://github.com/haiwen/seadoc-editor/commit/497d39cfd198246c3b412e41b3c51cf84b2c4627))
+
 ## [3.0.225](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.224...%40seafile%2Fsdoc-editor%403.0.225) (2026-08-04)
 
 ### Bug Fixes
