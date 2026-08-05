@@ -57,6 +57,7 @@ const PublishedRevisionDiffViewer = ({ isShowChanges, revisionContent, didMountC
       showToolbar={true}
       showOutline={true}
       showComment={false}
+      isDiffView={isShowChanges}
     />
   );
 

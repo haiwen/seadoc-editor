@@ -56,6 +56,7 @@ const RevisionDiffViewer = ({ editor, revisionContent, didMountCallback, mathJax
         showToolbar={true}
         showOutline={true}
         showComment={true}
+        isDiffView={true}
       />
       <InsertElementDialog editor={editor} />
     </>

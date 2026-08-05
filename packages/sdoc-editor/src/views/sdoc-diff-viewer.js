@@ -33,6 +33,7 @@ const DiffViewer = ({ currentContent, lastContent, didMountCallback, mathJaxSour
       showOutline={false}
       showComment={false}
       editor={editor}
+      isDiffView={true}
     />
   );
 

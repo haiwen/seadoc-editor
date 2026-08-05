@@ -4,12 +4,12 @@
   overflow: hidden;
 }
 
-.sdoc-editor__article .sdoc-image-wrapper.sdoc-diff-image-deleted img {
+#sdoc-editor[data-diff-view='true'] .sdoc-image-wrapper.sdoc-diff-image-deleted img {
   opacity: 0.55;
   filter: grayscale(100%);
 }
 
-.sdoc-editor__article .sdoc-image-wrapper.sdoc-diff-image-deleted .sdoc-image-content>span:first-child::after {
+#sdoc-editor[data-diff-view='true'] .sdoc-image-wrapper.sdoc-diff-image-deleted .sdoc-image-content>span:first-child::after {
   content: '';
   position: absolute;
   top: 50%;

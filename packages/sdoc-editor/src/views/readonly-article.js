@@ -7,7 +7,7 @@ import { renderElement, renderLeaf } from '../extension';
 import { SetNodeToDecorations } from '../highlight';
 import { ArticleContainer } from '../layout';
 
-const ReadOnlyArticle = ({ editor, slateValue, updateSlateValue, showComment = false }) => {
+const ReadOnlyArticle = ({ editor, slateValue, updateSlateValue, showComment = false, isDiffView = false }) => {
   const decorate = usePipDecorate(editor);
   const [, setVersion] = useState(0);
 
@@ -28,6 +28,7 @@ const ReadOnlyArticle = ({ editor, slateValue, updateSlateValue, showComment = f
           <SetNodeToDecorations />
           <Editable
             id='sdoc-editor'
+            data-diff-view={isDiffView ? 'true' : undefined}
             readOnly={true}
             placeholder=''
             renderElement={renderElement}
@@ -46,6 +47,7 @@ ReadOnlyArticle.propTypes = {
   editor: PropTypes.object,
   slateValue: PropTypes.array,
   updateSlateValue: PropTypes.func,
+  isDiffView: PropTypes.bool,
 };
 
 export default ReadOnlyArticle;
