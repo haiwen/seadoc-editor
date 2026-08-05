@@ -18,7 +18,7 @@ import ReadOnlyArticle from './readonly-article';
 import '../assets/css/sdoc-viewer.css';
 
 
-const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false, showComment = false, plugins = [], enableMathJax = false, mathJaxSource = MATH_JAX_SOURCE_RUL }) => {
+const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false, showComment = false, plugins = [], enableMathJax = false, mathJaxSource = MATH_JAX_SOURCE_RUL, isDiffView = false }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { isLoadingMathJax } = enableMathJax ? useMathJax(mathJaxSource) : { isLoadingMathJax: false };
 
@@ -53,7 +53,7 @@ const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false
           <ColorProvider>
             {showToolbar && <HeaderToolbar editor={validEditor} readonly={true} />}
             <EditorContent docValue={slateValue} readonly={true} showOutline={showOutline} editor={validEditor} showComment={showComment}>
-              <ReadOnlyArticle editor={validEditor} slateValue={slateValue} />
+              <ReadOnlyArticle editor={validEditor} slateValue={slateValue} isDiffView={isDiffView} />
             </EditorContent>
           </ColorProvider>
         </EditorContainer>
@@ -69,6 +69,7 @@ SDocViewer.propTypes = {
   document: PropTypes.object,
   editor: PropTypes.object,
   plugins: PropTypes.array,
+  isDiffView: PropTypes.bool,
 };
 
 export default SDocViewer;
