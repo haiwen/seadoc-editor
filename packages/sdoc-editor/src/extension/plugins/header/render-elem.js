@@ -77,7 +77,7 @@ export const renderHeader = (props, editor) => {
     >
       <div className='sdoc-header-row'>
         <span
-          className={classnames('sdoc-header-collapse-prefix', {
+          className={classnames('sdoc-header-collapse-prefix d-print-none', {
             'sdoc-header-collapse-prefix-visible': collapsed,
             'sdoc-header-collapse-prefix-collapsed': collapsed,
           })}

@@ -44,7 +44,7 @@ const renderListItem = (props, editor) => {
   return (
     <li data-id={element.id} {...attributes} className={classnames(className, { 'sdoc-li-bold': isBold })}>
       {element.children.length > 1 && (
-        <span className='sdoc-li-control' contentEditable='false'>
+        <span className='sdoc-li-control d-print-none' contentEditable='false'>
           <span className={classnames('sdoc-li-prefix', 'sdocfont', (!collapsed ? 'sdoc-arrow-down' : 'sdoc-next-page'))} onMouseDown={togglePrefix}></span>
           <span className='sdoc-li-divider'></span>
         </span>
