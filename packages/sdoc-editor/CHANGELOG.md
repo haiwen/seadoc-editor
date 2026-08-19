@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.232](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.231...%40seafile%2Fsdoc-editor%403.0.232) (2026-08-19)
+
+### Bug Fixes
+
+- remove file insertion menu logic ([#301](https://github.com/haiwen/seadoc-editor/issues/301)) ([59d0641](https://github.com/haiwen/seadoc-editor/commit/59d06413b2561ec8edd20e17d49ba9da8b5ae941))
+
 ## [3.0.231](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.230...%40seafile%2Fsdoc-editor%403.0.231) (2026-08-17)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
