@@ -5,7 +5,6 @@ import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
 import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, KeyCodes, WIKI_EDITOR } from '../../../constants';
-import context from '../../../context';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import DropdownMenuItem from '../../commons/dropdown-menu-item';
@@ -15,7 +14,6 @@ import { getAboveBlockNode } from '../../core';
 import { wrapCallout } from '../../plugins/callout/helper';
 import { setCheckListItemType } from '../../plugins/check-list/helpers';
 import { changeToCodeBlock } from '../../plugins/code-block/helpers';
-import { insertFileLink } from '../../plugins/file-link/helpers';
 import { toggleList } from '../../plugins/list/transforms';
 import { insertMultiColumn } from '../../plugins/multi-column/helper';
 import { insertTable } from '../../plugins/table/helpers';
@@ -42,8 +40,6 @@ const QuickInsertBlockMenu = ({
   const { t } = useTranslation('sdoc-editor');
   const [currentSelectIndex, setCurrentSelectIndex] = useState(-1); // -1 is input focus position
   const [quickInsertMenuSearchMap, setQuickInsertMenuSearchMap] = useState(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP);
-
-  const hasLinkedRepos = context.hasLinkedRepos();
 
   const onInsertImageToggle = useCallback(() => {
     callback && callback();
@@ -102,16 +98,6 @@ const QuickInsertBlockMenu = ({
     eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.LINK, insertPosition, slateNode });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [insertPosition]);
-
-  const openSelectFileDialog = useCallback(() => {
-    callback && callback();
-    if (insertPosition === INSERT_POSITION.AFTER) {
-      insertElement(editor, PARAGRAPH, insertPosition);
-    }
-    const eventBus = EventBus.getInstance();
-    eventBus.dispatch(INTERNAL_EVENT.INSERT_ELEMENT, { type: ELEMENT_TYPE.FILE, insertFileLinkCallback: insertFileLink });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor, insertPosition]);
 
   const addEmbedLinkDialog = useCallback(() => {
     callback && callback();
@@ -264,9 +250,6 @@ const QuickInsertBlockMenu = ({
           />
         </DropdownMenuItem>,
       [LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[LINK]} key="sdoc-insert-menu-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.LINK] }} onClick={openLinkDialog} />,
-      ...(editor.editorType === WIKI_EDITOR && hasLinkedRepos && {
-        [ELEMENT_TYPE.FILE]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[ELEMENT_TYPE.FILE]} key="sdoc-insert-menu-file-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FILE] }} onClick={openSelectFileDialog} />,
-      }),
       [EMBED_LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[EMBED_LINK]} key="sdoc-insert-menu-embed-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.EMBED_LINK] }} onClick={addEmbedLinkDialog} />,
       [CODE_BLOCK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CODE_BLOCK]} disabled={isDisableCodeBlock} key="sdoc-insert-menu-code-block" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CODE_BLOCK] }} onClick={onInsertCodeBlock} />,
       [CALL_OUT]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CALL_OUT]} disabled={isDisableCallout} key="sdoc-insert-menu-callout" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CALL_OUT] }} onClick={() => onInsertCallout(PARAGRAPH)} />,
@@ -292,7 +275,7 @@ const QuickInsertBlockMenu = ({
 
     return items;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, openSelectFileDialog, addEmbedLinkDialog, onInsertCodeBlock, isDisableCallout, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader, hasLinkedRepos]);
+  }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, addEmbedLinkDialog, onInsertCodeBlock, isDisableCallout, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader]);
 
   const getSelectItemDom = (selectIndex) => {
     const dropDownItemWrapper = downDownWrapperRef.current;
