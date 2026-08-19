@@ -39,7 +39,6 @@ import {
   TOGGLE_HEADER3,
   EMBED_LINK,
   DIVIDER,
-  FILE,
 } from './element-type';
 
 export const UNDO = 'undo';
@@ -426,12 +425,6 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     type: LINK,
     text: 'Link'
   },
-  [FILE]: {
-    id: 'sdoc-side-menu-item-file-link',
-    iconClass: 'sdocfont sdoc-link-file',
-    type: FILE,
-    text: 'File'
-  },
   [EMBED_LINK]: {
     id: '',
     iconClass: 'sdocfont sdoc-embed-link',
@@ -556,7 +549,6 @@ export const SIDE_INSERT_MENUS_SEARCH_MAP = {
   [THREE_COLUMN]: 'Three_column',
   [FOUR_COLUMN]: 'Four_column',
   [LINK]: 'Link',
-  [FILE]: 'File',
   [CODE_BLOCK]: 'Code_block',
   [CALL_OUT]: 'Callout',
   [UNORDERED_LIST]: 'Unordered_list',
@@ -581,7 +573,6 @@ export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [THREE_COLUMN]: 'Three_column',
   [FOUR_COLUMN]: 'Four_column',
   [LINK]: 'Link',
-  [FILE]: 'File',
   [CODE_BLOCK]: 'Code_block',
   [CALL_OUT]: 'Callout',
   [UNORDERED_LIST]: 'Unordered_list',
