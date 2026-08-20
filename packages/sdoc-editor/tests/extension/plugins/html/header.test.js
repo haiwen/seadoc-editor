@@ -53,4 +53,15 @@ describe('deserialize header', () => {
     ];
     expect(formatChildren(ret)).toEqual(exp);
   });
+
+  it('empty header to slate node', () => {
+    const ret = deserializeHtml('<h1 class="adv_keyword_title"></h1>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'header1',
+        children: [{ text: '' }]
+      }
+    ]);
+  });
 });

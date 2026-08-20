@@ -37,4 +37,22 @@ describe('deserialize p', () => {
     expect(formatChildren(ret)).toEqual(exp);
   });
 
+  it.each([
+    '<p></p>',
+    '<p><br></p>',
+  ])('empty p to slate node: %s', (html) => {
+    const ret = deserializeHtml(html);
+    const exp = [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            text: ''
+          }
+        ]
+      }
+    ];
+    expect(formatChildren(ret)).toEqual(exp);
+  });
+
 });

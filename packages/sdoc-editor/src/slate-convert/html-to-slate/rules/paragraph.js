@@ -4,7 +4,8 @@ import { PARAGRAPH } from '../constants';
 const paragraphRule = (element, parseChild) => {
   const { nodeName, childNodes } = element;
   if (nodeName === 'P' && element.parentElement.nodeName !== 'LI') {
-    if (childNodes.length === 0) {
+    const children = parseChild(childNodes);
+    if (children.length === 0) {
       return {
         id: slugid.nice(),
         type: PARAGRAPH,
@@ -19,7 +20,7 @@ const paragraphRule = (element, parseChild) => {
     return {
       id: slugid.nice(),
       type: PARAGRAPH,
-      children: parseChild(childNodes)
+      children
     };
   }
   return;

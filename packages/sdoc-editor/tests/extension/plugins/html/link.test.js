@@ -136,4 +136,32 @@ describe('deserialize link', () => {
       }
     ]);
   });
+
+  it('discards an empty link control', () => {
+    const ret = deserializeHtml('<div>before<a role="button"><svg></svg></a>after</div>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          { text: 'before' },
+          { text: 'after' }
+        ]
+      }
+    ]);
+  });
+
+  it('discards an empty linked image without a source', () => {
+    const ret = deserializeHtml('<div>before<a role="button"><img /></a>after</div>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          { text: 'before' },
+          { text: 'after' }
+        ]
+      }
+    ]);
+  });
 });

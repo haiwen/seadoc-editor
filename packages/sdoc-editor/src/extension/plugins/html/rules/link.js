@@ -8,12 +8,15 @@ const linkRule = (element, parseChild) => {
   if (nodeName === 'A') {
     const image = getOnlyImageChild(element);
     if (image) {
+      const src = image.getAttribute('src');
+      if (!src || !src.trim()) return null;
+
       const href = normalizeWebUrl(element.getAttribute('href'));
       return {
         id: slugid.nice(),
         type: IMAGE,
         data: {
-          src: image.getAttribute('src'),
+          src,
           ...(href && { href }),
         },
         children: [{ text: '', id: slugid.nice() }]
@@ -36,6 +39,7 @@ const linkRule = (element, parseChild) => {
         return child;
       });
     }
+    if (!content) return null;
     return {
       id: slugid.nice(),
       type: LINK,
