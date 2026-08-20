@@ -294,4 +294,56 @@ describe('deserialize list', () => {
       }
     ]);
   });
+
+  it('discards a WeChat code line-index list followed by pre', () => {
+    const html = [
+      '<p>before</p>',
+      '<ul class="code-snippet__line-index code-snippet__js"><li></li><li></li></ul>',
+      '\n',
+      '<pre><code>code</code></pre>',
+      '<p>after</p>'
+    ].join('');
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'paragraph',
+        children: [{ text: 'before' }]
+      },
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          {
+            type: 'code_line',
+            children: [{ text: 'code' }]
+          }
+        ]
+      },
+      {
+        type: 'paragraph',
+        children: [{ text: 'after' }]
+      }
+    ]);
+  });
+
+  it('keeps a WeChat code line-index list without an adjacent pre', () => {
+    const html = '<ul class="code-snippet__line-index code-snippet__js"><li></li></ul>';
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'unordered_list',
+        children: [
+          {
+            type: 'list_item',
+            children: [
+              {
+                type: 'paragraph',
+                children: [{ text: '' }]
+              }
+            ]
+          }
+        ]
+      }
+    ]);
+  });
 });

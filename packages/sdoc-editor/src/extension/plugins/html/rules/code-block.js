@@ -9,7 +9,7 @@ const normalizeCodeText = (text = '') => {
 };
 
 const isFormattingWhitespace = (text = '') => {
-  return text !== '' && text.trim() === '';
+  return text !== '' && !text.includes('\u00a0') && text.trim() === '';
 };
 
 const appendTextToLines = (lines, text = '') => {

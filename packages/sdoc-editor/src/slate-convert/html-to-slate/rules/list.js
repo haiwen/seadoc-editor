@@ -60,6 +60,16 @@ const normalizeListItemChildren = (nodes = []) => {
 
 const listRule = (element, parseChild) => {
   const { nodeName, childNodes } = element;
+  // Discard the line-index list paired with an adjacent code block to avoid generating extra list items.
+  if (
+    nodeName === 'UL'
+    && element.classList.contains('code-snippet__line-index')
+    && element.classList.contains('code-snippet__js')
+    && element.nextElementSibling?.nodeName === 'PRE'
+  ) {
+    return null;
+  }
+
   if (nodeName === 'UL') {
     const validChildNodes = Array.from(childNodes).filter(item => item.nodeName === 'LI');
     return {

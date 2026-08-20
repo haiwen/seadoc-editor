@@ -209,4 +209,21 @@ describe('deserialize code-block', () => {
     ];
     expect(formatChildren(ret)).toEqual(exp);
   });
+
+  it('preserves non-breaking spaces between inline code spans', () => {
+    const html = '<pre><code><span>first</span>&nbsp;<span>second</span>-third</code></pre>';
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          {
+            type: 'code_line',
+            children: [{ text: 'first second-third' }]
+          }
+        ]
+      }
+    ]);
+  });
 });
