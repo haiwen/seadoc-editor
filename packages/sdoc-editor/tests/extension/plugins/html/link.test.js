@@ -151,6 +151,38 @@ describe('deserialize link', () => {
     ]);
   });
 
+  it('discards a link control containing only formatting whitespace', () => {
+    const ret = deserializeHtml('<div>before<a role="button">\n  <svg></svg>\n</a>after</div>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          { text: 'before' },
+          { text: 'after' }
+        ]
+      }
+    ]);
+  });
+
+  it('uses the href when link text contains only formatting whitespace', () => {
+    const ret = deserializeHtml('<a href="https://dev.seafile.com">\n  <svg></svg>\n</a>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'link',
+            href: 'https://dev.seafile.com',
+            title: null,
+            children: [{ text: 'https://dev.seafile.com' }]
+          }
+        ]
+      }
+    ]);
+  });
+
   it('discards an empty linked image without a source', () => {
     const ret = deserializeHtml('<div>before<a role="button"><img /></a>after</div>');
 

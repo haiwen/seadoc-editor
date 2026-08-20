@@ -4,8 +4,12 @@ import { getOnlyImageChild, normalizeWebUrl } from '../../image/link-helpers';
 
 const linkRule = (element, parseChild) => {
   const { nodeName } = element;
-  const content = element.textContent || element.getAttribute('title') || element.getAttribute('href');
   if (nodeName === 'A') {
+    const content = [
+      element.textContent,
+      element.getAttribute('title'),
+      element.getAttribute('href'),
+    ].find(value => value?.trim());
     const image = getOnlyImageChild(element);
     if (image) {
       const src = image.getAttribute('src');
