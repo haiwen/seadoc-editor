@@ -2,7 +2,7 @@ import slugid from 'slugid';
 import LocalStorage from '../../../utils/local-storage-utils';
 import { CODE_BLOCK, CODE_LINE, RECENT_COPY_CONTENT } from '../../constants';
 import { getSelectedNodeByType } from '../../core';
-import { deserializeHtml } from './helper';
+import { deserializeHtml, normalizePastedHtml } from './helper';
 
 const withHtml = (editor) => {
   const { insertData } = editor;
@@ -30,7 +30,8 @@ const withHtml = (editor) => {
 
       const htmlContent = data.getData('text/html') || '';
       if (htmlContent) {
-        const content = deserializeHtml(htmlContent);
+        const normalizedHtmlContent = normalizePastedHtml(htmlContent);
+        const content = deserializeHtml(normalizedHtmlContent);
         LocalStorage.setItem(RECENT_COPY_CONTENT, htmlContent);
         editor.insertFragment(content);
         return;

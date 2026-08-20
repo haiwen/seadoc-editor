@@ -2,6 +2,7 @@ import slugid from 'slugid';
 import typeOf from 'type-of';
 import { INLINE_LEVEL_TYPES, LIST_ITEM, PARAGRAPH, TOP_LEVEL_TYPES, UNORDERED_LIST } from '../../constants';
 import rules from './rules';
+import { normalizeWechatPastedFragment } from './wechat-paste-normalizer';
 
 const cruftNewline = element => {
   return !(element.nodeName === '#text' && element.nodeValue === '\n');
@@ -125,6 +126,12 @@ const parseHtml = (html) => {
   const parsed = new DOMParser().parseFromString(html, 'text/html');
   const { body } = parsed;
   return body;
+};
+
+export const normalizePastedHtml = (html) => {
+  const fragment = parseHtml(html);
+  normalizeWechatPastedFragment(fragment);
+  return fragment.innerHTML;
 };
 
 export const deserializeHtml = (html) => {
