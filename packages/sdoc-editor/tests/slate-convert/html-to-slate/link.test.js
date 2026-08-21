@@ -137,7 +137,28 @@ describe('deserialize link', () => {
     ]);
   });
 
-  it('discards an empty link control', () => {
+  it('keeps a downgraded image as empty text in a mixed link', () => {
+    const ret = deserializeHtml('<a href="https://dev.seafile.com"><img />Caption</a>');
+
+    expect(formatChildren(ret)).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          { text: '' },
+          {
+            type: 'link',
+            href: 'https://dev.seafile.com',
+            title: null,
+            children: [{ text: 'Caption' }]
+          }
+        ]
+      }
+    ]);
+    expect(ret[0].children[0].id).toEqual(expect.any(String));
+    expect(ret[0].children[0].id).not.toBe('');
+  });
+
+  it('degrades an empty link control to empty text', () => {
     const ret = deserializeHtml('<div>before<a role="button"><svg></svg></a>after</div>');
 
     expect(formatChildren(ret)).toEqual([
@@ -145,13 +166,16 @@ describe('deserialize link', () => {
         type: 'paragraph',
         children: [
           { text: 'before' },
+          { text: '' },
           { text: 'after' }
         ]
       }
     ]);
+    expect(ret[0].children[1].id).toEqual(expect.any(String));
+    expect(ret[0].children[1].id).not.toBe('');
   });
 
-  it('discards a link control containing only formatting whitespace', () => {
+  it('degrades a link control containing only formatting whitespace', () => {
     const ret = deserializeHtml('<div>before<a role="button">\n  <svg></svg>\n</a>after</div>');
 
     expect(formatChildren(ret)).toEqual([
@@ -159,10 +183,13 @@ describe('deserialize link', () => {
         type: 'paragraph',
         children: [
           { text: 'before' },
+          { text: '' },
           { text: 'after' }
         ]
       }
     ]);
+    expect(ret[0].children[1].id).toEqual(expect.any(String));
+    expect(ret[0].children[1].id).not.toBe('');
   });
 
   it('uses the href when link text contains only formatting whitespace', () => {
@@ -183,7 +210,7 @@ describe('deserialize link', () => {
     ]);
   });
 
-  it('discards an empty linked image without a source', () => {
+  it('degrades an empty linked image without a source', () => {
     const ret = deserializeHtml('<div>before<a role="button"><img /></a>after</div>');
 
     expect(formatChildren(ret)).toEqual([
@@ -191,9 +218,12 @@ describe('deserialize link', () => {
         type: 'paragraph',
         children: [
           { text: 'before' },
+          { text: '' },
           { text: 'after' }
         ]
       }
     ]);
+    expect(ret[0].children[1].id).toEqual(expect.any(String));
+    expect(ret[0].children[1].id).not.toBe('');
   });
 });

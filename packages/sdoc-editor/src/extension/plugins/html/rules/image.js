@@ -6,7 +6,7 @@ const imageRule = (element, parseChild) => {
 
   if (nodeName === 'IMG') {
     const src = element.getAttribute('src');
-    if (!src || !src.trim()) return null;
+    if (!src || !src.trim()) return { id: slugid.nice(), text: '' };
 
     return {
       id: slugid.nice(),

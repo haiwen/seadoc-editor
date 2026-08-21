@@ -13,7 +13,7 @@ const linkRule = (element, parseChild) => {
     const image = getOnlyImageChild(element);
     if (image) {
       const src = image.getAttribute('src');
-      if (!src || !src.trim()) return null;
+      if (!src || !src.trim()) return { id: slugid.nice(), text: '' };
 
       const href = normalizeWebUrl(element.getAttribute('href'));
       return {
@@ -32,6 +32,7 @@ const linkRule = (element, parseChild) => {
         if (!href) return child;
         if (child.type === IMAGE) return { ...child, data: { ...child.data, href } };
         if (typeof child.text === 'string') {
+          if (!child.text) return child;
           return {
             id: slugid.nice(),
             type: LINK,
@@ -43,7 +44,7 @@ const linkRule = (element, parseChild) => {
         return child;
       });
     }
-    if (!content) return null;
+    if (!content) return { id: slugid.nice(), text: '' };
     return {
       id: slugid.nice(),
       type: LINK,

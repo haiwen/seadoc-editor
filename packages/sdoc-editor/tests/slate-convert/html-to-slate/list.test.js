@@ -273,4 +273,25 @@ describe('deserialize list', () => {
     ];
     expect(formatChildren(ret)).toEqual(exp);
   });
+
+  it('keeps a paragraph in a list item valid when an image is downgraded', () => {
+    const html = '<ul><li><p><img /></p></li></ul>';
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'unordered_list',
+        children: [
+          {
+            type: 'list_item',
+            children: [
+              {
+                type: 'paragraph',
+                children: [{ text: '' }]
+              }
+            ]
+          }
+        ]
+      }
+    ]);
+  });
 });
