@@ -166,6 +166,8 @@ export const getImageURL = (data, editor) => {
     }
   }
 
+  if (url === null) return '';
+
   // upload image | drag drop image | cut image
   if (isImageUrlIsFromUpload(url)) return url;
 

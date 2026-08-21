@@ -3,7 +3,7 @@ import { WIKI_EDITOR } from '../../../../src/constants';
 import context from '../../../../src/context';
 import { IMAGE_BLOCK, PARAGRAPH } from '../../../../src/extension/constants';
 import ImagePlugin from '../../../../src/extension/plugins/image';
-import { getImageWikiPageUrl } from '../../../../src/extension/plugins/image/helpers';
+import { getImageURL, getImageWikiPageUrl } from '../../../../src/extension/plugins/image/helpers';
 
 const createEditor = (editorType = '') => {
   const insertFragment = jest.fn();
@@ -54,6 +54,10 @@ describe('image clipboard links', () => {
 
     expect(editor.children[0].type).toBe(PARAGRAPH);
     expect(editor.children[0].children.filter(child => child.type === 'image')).toHaveLength(2);
+  });
+
+  it('returns an empty URL for an image whose src is null', () => {
+    expect(getImageURL({ src: null }, {})).toBe('');
   });
 
   it('keeps the target wiki and page when pasted into another wiki', () => {

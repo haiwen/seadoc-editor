@@ -104,4 +104,15 @@ describe('deserialize blockquote', () => {
 
     expect(formatChildren(ret)).toEqual(exp);
   });
+
+  it('keeps a blockquote valid when an image is downgraded', () => {
+    const html = '<blockquote><img /></blockquote>';
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'blockquote',
+        children: [{ text: '' }]
+      }
+    ]);
+  });
 });

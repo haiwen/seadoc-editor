@@ -4,16 +4,23 @@ import { IMAGE, LINK } from '../constants';
 
 const linkRule = (element, parseChild) => {
   const { nodeName } = element;
-  const content = element.textContent || element.getAttribute('title') || element.getAttribute('href');
   if (nodeName === 'A') {
+    const content = [
+      element.textContent,
+      element.getAttribute('title'),
+      element.getAttribute('href'),
+    ].find(value => value?.trim());
     const image = getOnlyImageChild(element);
     if (image) {
+      const src = image.getAttribute('src');
+      if (!src || !src.trim()) return { id: slugid.nice(), text: '' };
+
       const href = normalizeWebUrl(element.getAttribute('href'));
       return {
         id: slugid.nice(),
         type: IMAGE,
         data: {
-          src: image.getAttribute('src'),
+          src,
           ...(href && { href }),
         },
         children: [{ text: '', id: slugid.nice() }]
@@ -25,6 +32,7 @@ const linkRule = (element, parseChild) => {
         if (!href) return child;
         if (child.type === IMAGE) return { ...child, data: { ...child.data, href } };
         if (typeof child.text === 'string') {
+          if (!child.text) return child;
           return {
             id: slugid.nice(),
             type: LINK,
@@ -36,6 +44,7 @@ const linkRule = (element, parseChild) => {
         return child;
       });
     }
+    if (!content) return { id: slugid.nice(), text: '' };
     return {
       id: slugid.nice(),
       type: LINK,
