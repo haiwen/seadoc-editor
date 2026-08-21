@@ -12,7 +12,7 @@ import { insertFileLink } from '../file-link/helpers';
 import { insertSdocFileLink } from '../sdoc-link/helpers';
 import { insertWhiteboard } from '../whiteboard/helper';
 import { insertWikiPageLink } from '../wiki-link/helpers';
-import { genLinkNode, insertLink, isCommonFile, isExdrawFile, isSdocFile } from './helpers';
+import { genLinkNode, getLinkFileInfo, insertLink, isCommonFile, isExdrawFile, isSdocFile } from './helpers';
 
 const withLink = (editor) => {
   const { normalizeNode, isInline, insertData, insertFragment, onHotKeyDown, onCompositionStart } = editor;
@@ -40,19 +40,22 @@ const withLink = (editor) => {
       if (isSameDomain(text, context.getSetting('serviceUrl'))) {
         try {
           const res = await context.getLinkFilesInfo([text]);
-          if (isSdocFile(res, text)) {
-            const fileName = res.data.files_info[text].name;
-            const fileUuid = res.data.files_info[text].file_uuid;
+          const fileInfo = getLinkFileInfo(res, text);
+          if (fileInfo && isSdocFile(fileInfo)) {
+            const fileName = fileInfo.name;
+            const fileUuid = fileInfo.file_uuid;
             insertSdocFileLink(editor, fileName, fileUuid);
-          } else if (isExdrawFile(res, text)) {
-            const fileName = res.data.files_info[text].name;
-            const fileParentPath = res.data.files_info[text].parent_path;
+          } else if (fileInfo && isExdrawFile(fileInfo)) {
+            const fileName = fileInfo.name;
+            const fileParentPath = fileInfo.parent_path;
             const filePath = fileParentPath + '/' + fileName;
-            const repoId = res.data.files_info[text].repo_id;
+            const repoId = fileInfo.repo_id;
+
+            console.log('insertWhiteboard', fileName, filePath, repoId);
             insertWhiteboard(editor, fileName, filePath, repoId);
-          } else if (isCommonFile(res, text)) {
-            const fileName = res.data.files_info[text].name;
-            const fileUuid = res.data.files_info[text].file_uuid;
+          } else if (fileInfo && isCommonFile(fileInfo)) {
+            const fileName = fileInfo.name;
+            const fileUuid = fileInfo.file_uuid;
             insertFileLink(editor, fileName, fileUuid);
           } else {
             const url = new URL(text);

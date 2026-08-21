@@ -191,23 +191,31 @@ export const unWrapLinkNode = (editor) => {
   });
 };
 
-export const isSdocFile = (res, url) => {
-  const { data: { files_info } } = res;
-  const fileInfo = files_info[url];
+export const decodeLinkUrl = (url) => {
+  try {
+    return decodeURIComponent(url);
+  } catch (e) {
+    return url;
+  }
+};
+
+export const getLinkFileInfo = (res, url) => {
+  const filesInfo = res?.data?.files_info || {};
+  const decodedUrl = decodeLinkUrl(url);
+  return filesInfo[decodedUrl] || filesInfo[url];
+};
+
+export const isSdocFile = (fileInfo) => {
   const { is_dir, file_ext } = fileInfo || {};
   return !is_dir && file_ext === 'sdoc';
 };
 
-export const isExdrawFile = (res, url) => {
-  const { data: { files_info } } = res;
-  const fileInfo = files_info[url];
+export const isExdrawFile = (fileInfo) => {
   const { is_dir, file_ext } = fileInfo || {};
   return !is_dir && file_ext === 'exdraw';
 };
 
-export const isCommonFile = (res, url) => {
-  const { data: { files_info } } = res;
-  const fileInfo = files_info[url];
+export const isCommonFile = (fileInfo) => {
   const { is_dir, file_ext } = fileInfo || {};
   return fileInfo && !is_dir && file_ext && !['sdoc', 'exdraw', 'video'].includes(file_ext);
 };
