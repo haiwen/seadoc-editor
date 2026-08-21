@@ -1,12 +1,15 @@
 /** @jsx jsx */
 import { withReact } from '@seafile/slate-react';
+import context from '../../../../src/context';
 import { LinkPlugin } from '../../../../src/extension/plugins';
 import {
   insertLink,
   updateLink,
   unWrapLinkNode,
 } from '../../../../src/extension/plugins/link/helpers';
+import * as sdocLinkHelpers from '../../../../src/extension/plugins/sdoc-link/helpers';
 import { jsx, createSdocEditor, formatChildren } from '../../../core';
+
 
 describe('toggle link test', () => {
   describe('insert link menu when not selected', () => {
@@ -226,5 +229,46 @@ describe('modify link test', () => {
     expect(formatChildren(editor.children)).toEqual(
       formatChildren(output.children)
     );
+  });
+});
+
+describe('paste encoded internal file link', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('looks up file info with the decoded URL', async () => {
+    const encodedUrl = 'https://example.com/f/repo/?p=%E4%B8%AD%E6%96%87';
+    const decodedUrl = decodeURIComponent(encodedUrl);
+    const insertSdocFileLink = jest.spyOn(sdocLinkHelpers, 'insertSdocFileLink').mockImplementation(() => {});
+    const getLinkFilesInfo = jest.spyOn(context, 'getLinkFilesInfo').mockResolvedValue({
+      data: {
+        files_info: {
+          [decodedUrl]: {
+            file_ext: 'sdoc',
+            file_uuid: 'sdoc-uuid',
+            is_dir: false,
+            name: '中文.sdoc',
+          },
+        },
+      },
+    });
+    context.initSSRSettings({ serviceUrl: 'https://example.com' });
+
+    const input = (
+      <editor>
+        <hp><cursor /></hp>
+        <hp><htext></htext></hp>
+      </editor>
+    );
+    const editor = createSdocEditor(input, [withReact, LinkPlugin.editorPlugin]);
+
+    await editor.insertData({
+      getData: (type) => type === 'text/plain' ? encodedUrl : '',
+      types: ['text/plain'],
+    });
+
+    expect(getLinkFilesInfo).toHaveBeenCalledWith([encodedUrl]);
+    expect(insertSdocFileLink).toHaveBeenCalledWith(editor, '中文.sdoc', 'sdoc-uuid');
   });
 });
