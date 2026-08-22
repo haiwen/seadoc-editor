@@ -226,4 +226,24 @@ describe('deserialize code-block', () => {
       }
     ]);
   });
+
+  it('converts direct WeChat code children into separate lines', () => {
+    const html = [
+      '<pre class="code-snippet__js">',
+      '<code><span>first line</span></code>',
+      '<code><span>second line</span></code>',
+      '</pre>'
+    ].join('');
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          { type: 'code_line', children: [{ text: 'first line' }] },
+          { type: 'code_line', children: [{ text: 'second line' }] }
+        ]
+      }
+    ]);
+  });
 });
