@@ -58,15 +58,45 @@ const normalizeListItemChildren = (nodes = []) => {
   return nextChildren;
 };
 
+const isWechatCodeLineIndex = (element) => {
+  if (
+    element.nodeName !== 'UL'
+    || !element.classList.contains('code-snippet__line-index')
+    || !element.classList.contains('code-snippet__js')
+  ) {
+    return false;
+  }
+
+  const snippet = element.parentElement;
+  const codeBlock = element.nextElementSibling;
+
+  // Match a complete WeChat code snippet when the clipboard preserves its outer <section> wrapper.
+  const isCompleteWechatSnippet = snippet?.nodeName === 'SECTION'
+    && snippet.classList.contains('code-snippet__fix')
+    && snippet.classList.contains('code-snippet__js');
+
+  // Match a standalone WeChat code snippet when the clipboard omits the outer wrapper.
+  const lineItems = Array.from(element.children);
+  const isStandaloneWechatSnippet = snippet?.nodeName === 'BODY'
+    && lineItems.length > 0
+    && lineItems.every(item => (
+      item.nodeName === 'LI'
+      && item.children.length === 0
+      && item.textContent.trim() === ''
+    ));
+
+  return (
+    (isCompleteWechatSnippet || isStandaloneWechatSnippet)
+    && codeBlock?.nodeName === 'PRE'
+    && codeBlock.classList.contains('code-snippet__js')
+    && codeBlock.parentElement === snippet
+  );
+};
+
 const listRule = (element, parseChild) => {
   const { nodeName, childNodes } = element;
-  // Discard the line-index list paired with an adjacent code block to avoid generating extra list items.
-  if (
-    nodeName === 'UL'
-    && element.classList.contains('code-snippet__line-index')
-    && element.classList.contains('code-snippet__js')
-    && element.nextElementSibling?.nodeName === 'PRE'
-  ) {
+  // Discard the line-index list from a recognized WeChat code snippet to avoid generating extra list items.
+  if (isWechatCodeLineIndex(element)) {
     return null;
   }
 
