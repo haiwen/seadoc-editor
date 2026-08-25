@@ -128,14 +128,7 @@ const parseHtml = (html) => {
   return body;
 };
 
-export const normalizePastedHtml = (html) => {
-  const fragment = parseHtml(html);
-  normalizeWechatPastedFragment(fragment);
-  return fragment.innerHTML;
-};
-
-export const deserializeHtml = (html) => {
-  const fragment = parseHtml(html);
+const deserializeFragment = (fragment) => {
   const children = Array.from(fragment.childNodes);
   let nodes = [];
   nodes = deserializeElements(children, true);
@@ -152,4 +145,15 @@ export const deserializeHtml = (html) => {
   }
 
   return nodes;
+};
+
+export const deserializeHtml = (html) => {
+  return deserializeFragment(parseHtml(html));
+};
+
+export const deserializePastedHtml = (html) => {
+  const fragment = parseHtml(html);
+  // Normalize WeChat-specific DOM before applying the generic HTML-to-Slate rules.
+  normalizeWechatPastedFragment(fragment);
+  return deserializeFragment(fragment);
 };

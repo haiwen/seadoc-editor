@@ -9,7 +9,7 @@ const normalizeCodeText = (text = '') => {
 };
 
 const isFormattingWhitespace = (text = '') => {
-  return text !== '' && text.trim() === '';
+  return text !== '' && !text.includes('\u00a0') && text.trim() === '';
 };
 
 const appendTextToLines = (lines, text = '') => {
@@ -94,17 +94,28 @@ const buildCodeLines = (element) => {
   });
 };
 
+const buildWechatMultiLineCodeLines = (element) => {
+  const codeChildren = Array.from(element.children);
+  const isWechatMultiLineCodeBlock = element.classList.contains('code-snippet__js')
+    && codeChildren.length > 1
+    && codeChildren.every(child => child.nodeName === 'CODE');
+
+  return isWechatMultiLineCodeBlock ? codeChildren.flatMap(buildCodeLines) : null;
+};
+
 const codeBlockRule = (element, parseChild) => {
   const { nodeName, childNodes } = element;
   if (nodeName === 'PRE') {
     const codeChild = element.querySelector('code');
+    // Process WeChat multi-line code blocks based on their multiple direct <code> children.
+    const wechatMultiLineCodeLines = buildWechatMultiLineCodeLines(element);
     let lang = codeChild?.getAttribute('lang');
     lang = genCodeLangs().find(item => item.value === lang) || 'plaintext';
     return {
       id: slugid.nice(),
       language: lang,
       type: CODE_BLOCK,
-      children: buildCodeLines(codeChild || element)
+      children: wechatMultiLineCodeLines ?? buildCodeLines(codeChild || element)
     };
   }
 

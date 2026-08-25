@@ -209,4 +209,41 @@ describe('deserialize code-block', () => {
     ];
     expect(formatChildren(ret)).toEqual(exp);
   });
+
+  it('preserves non-breaking spaces between inline code spans', () => {
+    const html = '<pre><code><span>first</span>&nbsp;<span>second</span>-third</code></pre>';
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          {
+            type: 'code_line',
+            children: [{ text: 'first second-third' }]
+          }
+        ]
+      }
+    ]);
+  });
+
+  it('converts direct WeChat code children into separate lines', () => {
+    const html = [
+      '<pre class="code-snippet__js">',
+      '<code><span>first line</span></code>',
+      '<code><span>second line</span></code>',
+      '</pre>'
+    ].join('');
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          { type: 'code_line', children: [{ text: 'first line' }] },
+          { type: 'code_line', children: [{ text: 'second line' }] }
+        ]
+      }
+    ]);
+  });
 });

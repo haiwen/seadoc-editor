@@ -294,4 +294,151 @@ describe('deserialize list', () => {
       }
     ]);
   });
+
+  it('discards a line-index list in a complete WeChat code snippet', () => {
+    const html = [
+      '<p>before</p>',
+      '<section class="code-snippet__fix code-snippet__js">',
+      '<ul class="code-snippet__line-index code-snippet__js"><li></li><li></li></ul>',
+      '\n',
+      '<pre class="code-snippet__js"><code>code</code></pre>',
+      '</section>',
+      '<p>after</p>'
+    ].join('');
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'paragraph',
+        children: [{ text: 'before' }]
+      },
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          {
+            type: 'code_line',
+            children: [{ text: 'code' }]
+          }
+        ]
+      },
+      {
+        type: 'paragraph',
+        children: [{ text: 'after' }]
+      }
+    ]);
+  });
+
+  it('discards an empty standalone WeChat code line-index list', () => {
+    const html = [
+      '<ul class="code-snippet__line-index code-snippet__js">',
+      '<li></li>',
+      '<li>\n  </li>',
+      '</ul>',
+      '<pre class="code-snippet__js" data-lang="js">',
+      '<code><span class="code-snippet_outer">code</span></code>',
+      '</pre>'
+    ].join('');
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          {
+            type: 'code_line',
+            children: [{ text: 'code' }]
+          }
+        ]
+      }
+    ]);
+  });
+
+  it('keeps a matching list followed by pre outside a complete WeChat code snippet', () => {
+    const html = [
+      '<ul class="code-snippet__line-index code-snippet__js">',
+      '<li>user content</li>',
+      '</ul>',
+      '<pre class="code-snippet__js"><code>code</code></pre>'
+    ].join('');
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'unordered_list',
+        children: [
+          {
+            type: 'list_item',
+            children: [
+              {
+                type: 'paragraph',
+                children: [{ text: 'user content' }]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        type: 'code_block',
+        language: 'plaintext',
+        children: [
+          {
+            type: 'code_line',
+            children: [{ text: 'code' }]
+          }
+        ]
+      }
+    ]);
+  });
+
+  it.each([
+    [
+      'inside an ordinary div',
+      [
+        '<div>',
+        '<ul class="code-snippet__line-index code-snippet__js"><li></li></ul>',
+        '<pre class="code-snippet__js"><code>code</code></pre>',
+        '</div>'
+      ].join('')
+    ],
+    [
+      'when pre lacks the WeChat class',
+      [
+        '<section class="code-snippet__fix code-snippet__js">',
+        '<ul class="code-snippet__line-index code-snippet__js"><li></li></ul>',
+        '<pre><code>code</code></pre>',
+        '</section>'
+      ].join('')
+    ],
+    [
+      'when a standalone line item contains an element',
+      [
+        '<ul class="code-snippet__line-index code-snippet__js"><li><span></span></li></ul>',
+        '<pre class="code-snippet__js"><code>code</code></pre>'
+      ].join('')
+    ]
+  ])('keeps a matching line-index list %s', (name, html) => {
+    const nodes = formatChildren(deserializeHtml(html));
+
+    expect(nodes.map(node => node.type)).toEqual(['unordered_list', 'code_block']);
+  });
+
+  it('keeps a WeChat code line-index list without an adjacent pre', () => {
+    const html = '<ul class="code-snippet__line-index code-snippet__js"><li></li></ul>';
+
+    expect(formatChildren(deserializeHtml(html))).toEqual([
+      {
+        type: 'unordered_list',
+        children: [
+          {
+            type: 'list_item',
+            children: [
+              {
+                type: 'paragraph',
+                children: [{ text: '' }]
+              }
+            ]
+          }
+        ]
+      }
+    ]);
+  });
 });

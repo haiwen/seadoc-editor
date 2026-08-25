@@ -1,11 +1,10 @@
-import { deserializeHtml, normalizePastedHtml } from '../../../../src/extension/plugins/html/helper';
+import { deserializeHtml, deserializePastedHtml } from '../../../../src/extension/plugins/html/helper';
+import { normalizeWechatPastedFragment } from '../../../../src/extension/plugins/html/wechat-paste-normalizer';
 import { formatChildren } from '../../../core/utils';
 
 const createCommentHtml = (content) => (
   `<ul><li class="js_comment_item discuss_item" data-content-id="comment-1"><div>${content}</div></li></ul>`
 );
-
-const deserializePastedHtml = html => deserializeHtml(normalizePastedHtml(html));
 
 describe('deserialize WeChat comment replies', () => {
   it('separates replies in the same paragraph with newlines', () => {
@@ -15,12 +14,13 @@ describe('deserialize WeChat comment replies', () => {
       '<div class="discuss_media js_reply_item" data-content-id="comment-1" data-reply-id="2"><span>Second reply</span></div>',
     ].join(''));
 
-    const normalizedHtml = normalizePastedHtml(html);
-    const normalizedAgain = normalizePastedHtml(normalizedHtml);
-    const normalizedDocument = new DOMParser().parseFromString(normalizedAgain, 'text/html');
+    const normalizedDocument = new DOMParser().parseFromString(html, 'text/html');
+    const fragment = normalizedDocument.body;
+    normalizeWechatPastedFragment(fragment);
+    normalizeWechatPastedFragment(fragment);
 
-    expect(normalizedDocument.querySelectorAll('[data-sdoc-wechat-reply-break="true"]')).toHaveLength(2);
-    expect(formatChildren(deserializeHtml(normalizedAgain))).toEqual([
+    expect(fragment.querySelectorAll('[data-sdoc-wechat-reply-break="true"]')).toHaveLength(2);
+    expect(formatChildren(deserializeHtml(fragment.innerHTML))).toEqual([
       {
         type: 'unordered_list',
         children: [
