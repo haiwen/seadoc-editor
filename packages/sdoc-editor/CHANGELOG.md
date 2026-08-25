@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.235](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.234...%40seafile%2Fsdoc-editor%403.0.235) (2026-08-25)
+
+### Bug Fixes
+
+- normalize WeChat code snippets on paste ([#303](https://github.com/haiwen/seadoc-editor/issues/303)) ([8ae0fe6](https://github.com/haiwen/seadoc-editor/commit/8ae0fe6015b719cd692c136354a6e373a5afaa84))
+
 ## [3.0.234](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.233...%40seafile%2Fsdoc-editor%403.0.234) (2026-08-21)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
