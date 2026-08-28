@@ -4,7 +4,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import context from '../../../context';
 import LocalStorage from '../../../utils/local-storage-utils';
 import { RECENT_COPY_CONTENT } from '../../constants';
-import { isImageUrlIsFromCopy, getImageURL, isCommentEditor } from './helpers';
+import { isImageUrlIsFromCopy, getImageURL, isCommentEditor, isWechatImageUrl } from './helpers';
 
 const updateImageNode = async (editor, element, newUrl, isError = false) => {
   const url = isCommentEditor(editor) ? getImageURL({ src: newUrl }, editor) : newUrl;
@@ -23,6 +23,7 @@ const useCopyImage = ({ editor, element }) => {
     const { src: url } = data;
     if (isCopyError) return;
     if (!isImageUrlIsFromCopy(url)) return;
+    if (isWechatImageUrl(url)) return;
 
     // not md convert to sdoc
     if (url.indexOf('/file/images/auto-upload/') < 0) {
