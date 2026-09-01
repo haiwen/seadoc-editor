@@ -16,8 +16,11 @@
 
 .wiki-outline-wrapper {
   position: fixed;
+  top: 100px;
   right: 0;
+  bottom: auto;
   left: unset;
+  height: auto;
   margin: 0;
   pointer-events: unset !important;
   flex: none;
