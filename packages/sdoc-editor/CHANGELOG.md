@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.237](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.236...%40seafile%2Fsdoc-editor%403.0.237) (2026-09-01)
+
+### Bug Fixes
+
+- make wiki outline height content driven ([#306](https://github.com/haiwen/seadoc-editor/issues/306)) ([714c87e](https://github.com/haiwen/seadoc-editor/commit/714c87e3cc02a733aeeab0a58642ae65af577c0a))
+
 ## [3.0.236](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.235...%40seafile%2Fsdoc-editor%403.0.236) (2026-09-01)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
