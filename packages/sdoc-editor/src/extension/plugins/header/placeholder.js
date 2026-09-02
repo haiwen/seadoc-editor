@@ -5,7 +5,7 @@ const Placeholder = (props) => {
   const { title, top = 5 } = props;
   const { t } = useTranslation('sdoc-editor');
   return (
-    <span contentEditable="false" suppressContentEditableWarning style={{
+    <span className='d-print-none' contentEditable="false" suppressContentEditableWarning style={{
       position: 'absolute',
       top: `${top}px`,
       color: 'rgba(191,191,191,1)',
