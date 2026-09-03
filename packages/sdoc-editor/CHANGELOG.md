@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.238](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.237...%40seafile%2Fsdoc-editor%403.0.238) (2026-09-03)
+
+### Bug Fixes
+
+- hide placeholders when printing ([#307](https://github.com/haiwen/seadoc-editor/issues/307)) ([77e2d9d](https://github.com/haiwen/seadoc-editor/commit/77e2d9d02f884f69934392de9bd8db6d0015fc51))
+
 ## [3.0.237](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.236...%40seafile%2Fsdoc-editor%403.0.237) (2026-09-01)
 
 ### Bug Fixes
