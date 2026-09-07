@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import { Range } from '@seafile/slate';
+import { Node, Range } from '@seafile/slate';
 import classnames from 'classnames';
 import isUrl from 'is-url';
 import PropTypes, { element } from 'prop-types';
@@ -148,11 +148,12 @@ class Link extends React.Component {
     const { attributes, children, element, editor, readonly } = this.props;
     const { isShowLinkMenu, menuPosition } = this.state;
     const className = isShowLinkMenu ? 'seafile-ed-hovermenu-mouseclick' : null;
+    const linkText = Node.string(element);
 
     if (readonly) {
       return (
         <span className={classnames(className, 'virtual-link')} {...attributes}>
-          <a href={getElementHref(element)} title={element.children[0]?.text} onClick={this.onOpenLink} target='_blank' rel="noreferrer">{children}</a>
+          <a href={getElementHref(element)} title={linkText} onClick={this.onOpenLink} target='_blank' rel="noreferrer">{children}</a>
         </span>
       );
     }
@@ -160,7 +161,7 @@ class Link extends React.Component {
     return (
       <>
         <span className={className} {...attributes} onClick={this.onLinkClick}>
-          <span ref={this.setRef} className='virtual-link' title={element.children[0]?.text}>
+          <span ref={this.setRef} className='virtual-link' title={linkText}>
             <InlineBugFixer />
             {children}
             <InlineBugFixer />

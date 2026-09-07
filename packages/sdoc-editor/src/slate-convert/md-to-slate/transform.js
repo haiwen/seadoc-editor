@@ -25,6 +25,27 @@ const INLINE_KEY_MAP = {
   emphasis: 'italic',
 };
 
+const transformLinkTextNodes = (nodes, marks = {}) => {
+  if (!Array.isArray(nodes)) return null;
+
+  const textNodes = [];
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i];
+    if (node.type === 'text') {
+      textNodes.push({ id: slugid.nice(), text: node.value || '', ...marks });
+      continue;
+    }
+
+    const mark = INLINE_KEY_MAP[node.type];
+    if (!mark) return null;
+
+    const children = transformLinkTextNodes(node.children, { ...marks, [mark]: true });
+    if (!children) return null;
+    textNodes.push(...children);
+  }
+  return textNodes;
+};
+
 // <strong><em>aa<em>bb<em></strong>
 const applyMarkForInlineItem = (result, item, textNode = {}) => {
   const { type, children, value } = item;
@@ -66,7 +87,8 @@ const applyMarkForInlineItem = (result, item, textNode = {}) => {
       return result;
     }
 
-    const linkChildren = [{ id: slugid.nice(), text: child.value || '' }];
+    const textNodes = transformLinkTextNodes(children);
+    const linkChildren = textNodes?.length ? textNodes : [{ id: slugid.nice(), text: child.value || '' }];
     const link = {
       id: slugid.nice(),
       type: LINK,
