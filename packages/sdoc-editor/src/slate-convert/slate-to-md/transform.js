@@ -78,9 +78,9 @@ const transformInlineChildren = (result, item) => {
   if (item.type && item.type === 'link') {
     const link = {
       type: 'link',
-      url: item.href,
+      url: item.href || item.url,
       title: item.title || null,
-      children: [transformTextNode(item.children[0])],
+      children: item.children.map(transformTextNode),
     };
     result.push(link);
     return result;

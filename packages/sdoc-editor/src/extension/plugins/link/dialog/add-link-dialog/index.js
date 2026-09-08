@@ -20,7 +20,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   const [titleErrorMessage, setTitleErrorMessage] = useState('');
   const { linked_id, linked_wiki_page_id } = element || { href: '' };
   const oldURL = getElementHref(element);
-  const oldTitle = element?.children[0].text || linkTitle || '';
+  const oldTitle = (element && Node.string(element)) || linkTitle || '';
 
   const initTitle = useMemo(() => oldTitle ? oldTitle : getEditorString(editor, editor.selection), [editor, oldTitle]);
   const [title, setTitle] = useState(initTitle);
