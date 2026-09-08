@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.239](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.238...%40seafile%2Fsdoc-editor%403.0.239) (2026-09-08)
+
+### Bug Fixes
+
+- show active state for code block auto wrap ([#310](https://github.com/haiwen/seadoc-editor/issues/310)) ([84e8da2](https://github.com/haiwen/seadoc-editor/commit/84e8da2ae5a30cb3167024a4e7402ef4537a80b7))
+- support special superlink's display ([#309](https://github.com/haiwen/seadoc-editor/issues/309)) ([6793837](https://github.com/haiwen/seadoc-editor/commit/679383783badc8df3a50d7153fa1226f894d4e4b))
+
 ## [3.0.238](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.237...%40seafile%2Fsdoc-editor%403.0.238) (2026-09-03)
 
 ### Bug Fixes
