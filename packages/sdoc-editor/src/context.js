@@ -140,6 +140,10 @@ class Context {
     return this.sdocServerApi.saveDocContent(content);
   }
 
+  importRemoteImages(docUuid, imageUrls) {
+    return this.api.importRemoteImages(docUuid, imageUrls).then(res => res.data.images || []);
+  }
+
   /**
    * @private Get DocUuid
    */
