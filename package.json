@@ -29,7 +29,7 @@
     "husky": "9.1.6",
     "i18next": "^25.2.1",
     "i18next-browser-languagedetector": "^8.1.0",
-    "lerna": "10.0.0",
+    "lerna": "10.0.1",
     "lint-staged": "^15.2.10",
     "prettier": "3.3.3",
     "react": "18.3.1",
@@ -48,5 +48,15 @@
     "**/*.js": [
       "eslint --fix"
     ]
+  },
+  "overrides": {
+    "js-yaml": "4.3.2",
+    "lerna": {
+      "pacote": "21.5.1"
+    },
+    "nx": {
+      "smol-toml": "1.8.0"
+    },
+    "@xmldom/xmldom": "0.9.12"
   }
 }
