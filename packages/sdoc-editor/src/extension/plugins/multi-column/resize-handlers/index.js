@@ -115,7 +115,7 @@ const ResizeHandlers = ({ element, handleResizeColumn }) => {
   let leftAccumulator = 0;
   const columns = Array.isArray(column) ? column : [];
   return (
-    <div className='column-resize-handler' contentEditable={false}>
+    <div className='column-resize-handler d-print-none' contentEditable={false}>
       {columns.map((column, index) => {
         leftAccumulator += (column.width);
         const left = leftAccumulator;

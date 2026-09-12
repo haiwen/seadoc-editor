@@ -540,7 +540,7 @@ export default function AIModule({ editor, element, closeModule }) {
 
   return (
     <ElementPopover>
-      <div className='sdoc-ai-module-container' ref={aiRef}>
+      <div className='sdoc-ai-module-container d-print-none' ref={aiRef}>
         {!searchResult && (
           <Fragment>
             <div className='sdoc-ai-content'>

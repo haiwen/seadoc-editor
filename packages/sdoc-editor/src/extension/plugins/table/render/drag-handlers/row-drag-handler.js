@@ -6,7 +6,7 @@ const RowDragHandler = ({ top }) => {
 
   return (
     <div
-      className='table-row-height-just position-absolute resizing'
+      className='table-row-height-just position-absolute resizing d-print-none'
       contentEditable={false}
       style={{ top }}
     >

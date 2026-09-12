@@ -128,7 +128,7 @@ const CommentList = ({
     <div
       ref={commentPopover}
       id="sdoc-comment-list-container"
-      className={classNames('sdoc-comment-list-container sdoc-comment-list-container-popover', 'sdoc-context-comment-list-container')}
+      className={classNames('sdoc-comment-list-container sdoc-comment-list-container-popover d-print-none', 'sdoc-context-comment-list-container')}
       style={{ top: position.y, ...(isContextComment || isClickedContextComment ? { right: position.right } : {}), width: '300px', transform: `translateY(${translateY}px)` }}
     >
       {Object.values(commentDetail).length !== 0 && isCommentPanelVisible && Object.values(commentDetail).map((item, index) => {
