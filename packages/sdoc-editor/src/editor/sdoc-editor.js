@@ -171,6 +171,15 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
   }, [handleEditToggle]);
 
   useEffect(() => {
+    const handlePrintKeyDown = (event) => {
+      if (!isHotkey('mod+p', event)) return;
+
+      event.preventDefault();
+      const eventBus = EventBus.getInstance();
+      eventBus.dispatch(INTERNAL_EVENT.ON_PRINT);
+      event.stopPropagation();
+    };
+
     const handleExit = (e) => {
       if (isHotkey('esc', e)) {
         e.preventDefault();
@@ -189,9 +198,11 @@ const SdocEditor = forwardRef(({ editor: propsEditor, document, isReloading, sho
       }
     };
 
+    window.addEventListener('keydown', handlePrintKeyDown, true);
     window.addEventListener('keydown', handleExit);
     window.document.addEventListener('fullscreenchange', onFullscreenChange);
     return () => {
+      window.removeEventListener('keydown', handlePrintKeyDown, true);
       window.removeEventListener('keydown', handleExit);
       window.document.removeEventListener('fullscreenchange', onFullscreenChange);
     };
