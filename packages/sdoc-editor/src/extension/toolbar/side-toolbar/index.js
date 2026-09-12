@@ -717,7 +717,7 @@ const SideToolbar = () => {
       {!isMobile && (
         <div
           onAnimationEnd={() => setIsMoving(false)}
-          className={classnames('sdoc-side-toolbar-container', { 'fade-out': isMoving })}
+          className={classnames('sdoc-side-toolbar-container d-print-none', { 'fade-out': isMoving })}
           style={sidePosition}
         >
           {slateNode && (

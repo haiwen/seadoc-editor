@@ -141,7 +141,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
   }, []);
 
   return (
-    <ElementPopover className='sdoc-side-menu-popover' style={menuStyle}>
+    <ElementPopover className='sdoc-side-menu-popover d-print-none' style={menuStyle}>
       <div className='sdoc-side-menu sdoc-dropdown-menu' ref={sideMenuRef}>
         <div className='sdoc-side-menu-search-wrapper'>
           <Input

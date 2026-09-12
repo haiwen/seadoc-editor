@@ -63,7 +63,7 @@ const RowsHeader = ({ table, selectRange, tableSize, handleDragStart, handleDrag
       </div>
       {addIconPosition && (
         <div
-          className={classnames('position-fixed sdoc-table-add-element-icon-content', { 'background-color-tip-blue': isHoverInAddIcon })}
+          className={classnames('position-fixed sdoc-table-add-element-icon-content d-print-none', { 'background-color-tip-blue': isHoverInAddIcon })}
           style={addIconPosition}
           onMouseEnter={() => onMouseEnter(addIconPosition)}
           onMouseLeave={onMouseLeave}
@@ -74,7 +74,7 @@ const RowsHeader = ({ table, selectRange, tableSize, handleDragStart, handleDrag
       )}
       {addIconPosition && isHoverInAddIcon && (
         <div
-          className="position-fixed sdoc-table-add-element-tip background-color-tip-blue"
+          className="position-fixed sdoc-table-add-element-tip background-color-tip-blue d-print-none"
           style={{
             left: addIconPosition?.left + 11,
             top: addIconPosition?.top + 6,
