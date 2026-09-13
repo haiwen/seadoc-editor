@@ -47,7 +47,7 @@ const VideoHoverMenu = ({ editor, menuPosition, element, videoRef, setIsSelected
 
   return (
     <ElementPopover>
-      <div className="video-hover-menu-container" style={menuPosition}>
+      <div className="video-hover-menu-container d-print-none" style={menuPosition}>
         <div className='hover-menu-container'>
           {!readOnly && (
             <>

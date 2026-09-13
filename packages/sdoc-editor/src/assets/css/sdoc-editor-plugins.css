@@ -349,3 +349,9 @@
   border-radius: 3px;
   cursor: pointer;
 }
+
+/* temporary selection */
+.sdoc-editor__article .sdoc-temporary-selection {
+  padding: 3px 0;
+  background-color: #a9c9ed;
+}

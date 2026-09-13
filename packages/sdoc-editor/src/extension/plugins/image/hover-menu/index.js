@@ -166,7 +166,7 @@ const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntr
 
   return (
     <ElementPopover>
-      <div className="sdoc-image-hover-menu-container" ref={menuRef} style={menuPosition}>
+      <div className="sdoc-image-hover-menu-container d-print-none" ref={menuRef} style={menuPosition}>
         <div className='hover-menu-container'>
           {![TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN].includes(type) && !readonly && (
             <span className='op-group-item'>
@@ -181,7 +181,7 @@ const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntr
                 <span className='mr-1'>{t(type === IMAGE_BLOCK ? 'Block' : 'Inline')}</span>
                 <i className='sdocfont sdoc-arrow-down'/>
                 {!isInListItem && popoverState.displayPopover && (
-                  <div className="sdoc-image-popover sdoc-dropdown-menu">
+                  <div className="sdoc-image-popover sdoc-dropdown-menu d-print-none">
                     {IMAGE_DISPLAY_TYPE.map((item) => {
                       return (
                         <div
@@ -212,7 +212,7 @@ const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntr
                   <i className={classnames(`sdocfont sdoc-align-${align || 'left'} mr-1`)}/>
                   <i className='sdocfont sdoc-arrow-down'/>
                   {popoverState.alignPopover && (
-                    <div className='sdoc-image-popover align-popover sdoc-dropdown-menu'>
+                    <div className='sdoc-image-popover align-popover sdoc-dropdown-menu d-print-none'>
                       {MENUS_CONFIG_MAP[TEXT_ALIGN].map((item) => {
                         return (
                           <div
@@ -245,7 +245,7 @@ const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntr
                 <i className='sdocfont sdoc-image mr-1'/>
                 <i className='sdocfont sdoc-arrow-down'/>
                 {popoverState.borderPopover && (
-                  <div className='sdoc-image-popover border-popover sdoc-dropdown-menu'>
+                  <div className='sdoc-image-popover border-popover sdoc-dropdown-menu d-print-none'>
                     {IMAGE_BORDER_TYPE.map((item) => {
                       return (
                         <div

@@ -17,7 +17,7 @@ const Tooltip = ({ target, children, className, modifiers = [], placement = 'bot
   const props = {
     target,
     placement,
-    popperClassName: classnames('sdoc-tooltip', className),
+    popperClassName: classnames('sdoc-tooltip', 'd-print-none', className),
     delay,
     hideArrow: true,
     autohide: false,

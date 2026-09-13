@@ -128,7 +128,7 @@ const renderCallout = ({ attributes, children, element }, editor) => {
         )}
         <div className='callout-content'>
           {children}
-          {isShowPlaceholder() && <div contentEditable={false} className='sdoc-callout-placeholder'>{t('Please_enter')}...</div>}
+          {isShowPlaceholder() && <div contentEditable={false} className='sdoc-callout-placeholder d-print-none'>{t('Please_enter')}...</div>}
         </div>
         {isShowColorSelector && (
           <CalloutHoverMenu

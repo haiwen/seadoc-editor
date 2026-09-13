@@ -56,7 +56,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
 
   return (
     <ElementPopover>
-      <div className="sdoc-callout-hover-menu" style={popoverPosition}>
+      <div className="sdoc-callout-hover-menu d-print-none" style={popoverPosition}>
         <div id='select_callout_color' className={firstItemClass} onClick={onColorSelectorToggle}>
           <span className='sdocfont sdoc-callout-color mr-1'></span>
           <span className='sdocfont sdoc-arrow-down'></span>

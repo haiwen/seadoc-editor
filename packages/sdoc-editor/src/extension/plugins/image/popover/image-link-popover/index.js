@@ -43,7 +43,7 @@ const ImageLinkPopover = ({ editor, href = '', linkedPageId = '', linkedWikiId =
 
   return (
     <div
-      className='sdoc-image-link-popover sdoc-popover-box-shadow'
+      className='sdoc-image-link-popover sdoc-popover-box-shadow d-print-none'
       onClick={(event) => event.stopPropagation()}
       onMouseDown={(event) => event.stopPropagation()}
     >

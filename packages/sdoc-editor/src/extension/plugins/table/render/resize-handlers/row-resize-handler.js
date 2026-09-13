@@ -68,7 +68,7 @@ const RowResizeHandler = ({ rowIndex, initRowBottom = 0, table, hideResizeHandle
 
   return (
     <div
-      className='table-row-height-just position-absolute resizing'
+      className='table-row-height-just position-absolute resizing d-print-none'
       contentEditable={false}
       style={style}
     >

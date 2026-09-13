@@ -76,7 +76,7 @@ const ColumnResizeHandler = ({ column, left: initLeft, table, cellIndex, rowBott
 
   return (
     <div
-      className='table-cell-width-just resizing position-fixed'
+      className='table-cell-width-just resizing position-fixed d-print-none'
       contentEditable={false}
       style={style}
       ref={resizeHandler}

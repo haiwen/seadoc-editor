@@ -63,7 +63,7 @@ const ColumnsHeader = ({ table, selectRange, tableSize, handleDragStart, handleD
       </div>
       {addIconPosition && (
         <div
-          className={classnames('position-fixed sdoc-table-add-element-icon-content', { 'background-color-tip-blue': isHoverInAddIcon })}
+          className={classnames('position-fixed sdoc-table-add-element-icon-content d-print-none', { 'background-color-tip-blue': isHoverInAddIcon })}
           contentEditable={false}
           style={addIconPosition}
           onMouseEnter={() => onMouseEnter(addIconPosition)}
@@ -75,7 +75,7 @@ const ColumnsHeader = ({ table, selectRange, tableSize, handleDragStart, handleD
       )}
       {addIconPosition && isHoverInAddIcon && (
         <div
-          className="position-fixed sdoc-table-add-element-tip background-color-tip-blue"
+          className="position-fixed sdoc-table-add-element-tip background-color-tip-blue d-print-none"
           style={{
             left: addIconPosition?.left + 5,
             top: addIconPosition?.top + 12,

@@ -26,8 +26,7 @@ const renderText = (props, editor) => {
 
   // Add temporary marks for selection in AI or context comment
   if ((leaf.sdoc_ai || leaf.comment) && leaf.text.trim()) {
-    style['padding'] = '3px 0';
-    style['backgroundColor'] = '#a9c9ed';
+    rest['sdoc-temporary-selection'] = true;
   }
 
   // Background color overlap for multi comments

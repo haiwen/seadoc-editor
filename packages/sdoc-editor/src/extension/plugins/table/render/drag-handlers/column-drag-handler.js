@@ -6,7 +6,7 @@ const ColumnDragHandler = ({ left }) => {
 
   return (
     <div
-      className='table-cell-width-just position-absolute resizing'
+      className='table-cell-width-just position-absolute resizing d-print-none'
       contentEditable={false}
       style={{ left }}
     >
