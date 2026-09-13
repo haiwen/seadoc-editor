@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.240](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.239...%40seafile%2Fsdoc-editor%403.0.240) (2026-09-13)
+
+### Bug Fixes
+
+- print hide editor elements ([#312](https://github.com/haiwen/seadoc-editor/issues/312)) ([b2d75f2](https://github.com/haiwen/seadoc-editor/commit/b2d75f297445c86a31b9e9bc91d413e5e346f815))
+
 ## [3.0.239](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.238...%40seafile%2Fsdoc-editor%403.0.239) (2026-09-08)
 
 ### Bug Fixes
