@@ -85,6 +85,10 @@
   pointer-events: none;
 }
 
+.sdoc-editor__article .list-container .sdoc-image-wrapper {
+  vertical-align: top;
+}
+
 /* check list  */
 .sdoc-editor__article .sdoc-checkbox-container {
   padding: 0px 2px;
