@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Editor, Range } from '@seafile/slate';
 import { useFocused, useSlateStatic, useReadOnly } from '@seafile/slate-react';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
+import { hideToolbarTooltips } from '../../../utils/dom-utils';
 import { MenuGroup } from '../../commons';
 import { CODE_BLOCK } from '../../constants';
 import { getSelectedNodeByType } from '../../core';
@@ -39,9 +40,11 @@ const ContextToolbar = () => {
     }
     if (editor.topOffset && top < editor.topOffset) {
       // context menu is in top unseen position
+      hideToolbarTooltips(el);
       el.style.display = 'none';
     } else if (rect.top > window.innerHeight) {
       // context menu is in bottom unseen position
+      hideToolbarTooltips(el);
       el.style.display = 'none';
     } else {
       // context menu is in current screen
@@ -77,6 +80,7 @@ const ContextToolbar = () => {
       getSelectedNodeByType(editor, CODE_BLOCK)
     ) {
       scrollRef.current && scrollRef.current.removeEventListener('scroll', onScroll);
+      hideToolbarTooltips(el);
       el.removeAttribute('style');
       return;
     }
@@ -105,6 +109,7 @@ const ContextToolbar = () => {
     const isMouseLeftDown = e.buttons === 1;
     if (isMouseLeftDown) {
       const el = ref.current;
+      hideToolbarTooltips(el);
       el.removeAttribute('style');
     }
   }, []);
