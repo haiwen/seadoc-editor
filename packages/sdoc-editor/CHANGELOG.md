@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.242](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.241...%40seafile%2Fsdoc-editor%403.0.242) (2026-09-17)
+
+### Bug Fixes
+
+- dismiss context toolbar tooltips before hiding ([#313](https://github.com/haiwen/seadoc-editor/issues/313)) ([5518075](https://github.com/haiwen/seadoc-editor/commit/55180751faa77735ee13f23979c619aa17664fc4))
+
 ## [3.0.241](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.239...%40seafile%2Fsdoc-editor%403.0.241) (2026-09-13)
 
 ### Bug Fixes
