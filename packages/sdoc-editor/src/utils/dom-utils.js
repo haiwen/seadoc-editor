@@ -44,3 +44,12 @@ export const getCursorPosition = (isScrollUp = true) => {
   }
   return { x: x, y: y };
 };
+
+export const hideToolbarTooltips = (toolbar) => {
+  if (toolbar.style.display !== 'block') return;
+
+  // CSS hiding can skip mouseout; let Reactstrap close tips and cancel pending shows.
+  toolbar.querySelectorAll('button').forEach(button => {
+    button.dispatchEvent(new MouseEvent('mouseout'));
+  });
+};

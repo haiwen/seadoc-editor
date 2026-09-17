@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { INTERNAL_EVENT } from '../../../constants';
+import { hideToolbarTooltips } from '../../../utils/dom-utils';
 import EventBus from '../../../utils/event-bus';
 import MenuItem from './menu-item';
 
@@ -12,6 +13,7 @@ const CommentContextMenu = ({ isRichEditor }) => {
     // Make context toolbar disappear
     const contextToolBarDom = document.querySelector('.sdoc-context-toolbar');
     if (contextToolBarDom) {
+      hideToolbarTooltips(contextToolBarDom);
       contextToolBarDom.style.display = 'none';
     }
 
