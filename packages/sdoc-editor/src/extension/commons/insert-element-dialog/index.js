@@ -11,7 +11,7 @@ import FormulaModal from '../../plugins/formula/menu/formula-modal.js';
 import { generateImageInfos, insertImage } from '../../plugins/image/helpers';
 import AddLinkDialog from '../../plugins/link/dialog/add-link-dialog';
 import { CustomTableSizeDialog, SplitCellSettingDialog } from '../../plugins/table/dialogs';
-import { formatSeadocVideoSizeLimit, getSeadocVideoSizeLimit } from '../../plugins/video/constants/index.js';
+import { formatSeadocVideoSizeLimit, SEADOC_VIDEO_SIZE_LIMIT } from '../../plugins/video/constants/index.js';
 import AddVideoLinkDialog from '../../plugins/video/dialog/add-video-link-dialog/index.js';
 import { insertVideo } from '../../plugins/video/helpers';
 import FileLinkInsertDialog from '../file-insert-dialog/index.js';
@@ -47,18 +47,18 @@ const InsertElementDialog = ({ editor }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validEditor, uploadLocalImageInputRef, insertPosition, slateNode]);
 
-  const handleDisplayAlert = useCallback((sizeLimit) => {
+  const handleDisplayAlert = useCallback(() => {
     setTimeout(() => {
-      toaster.warning(t('The_video_file_exceeds_the_size_limit', { size: formatSeadocVideoSizeLimit(sizeLimit) }), { duration: 3 });
+      toaster.warning(t('The_video_file_exceeds_the_size_limit', { size: formatSeadocVideoSizeLimit() }), { duration: 3 });
     }, 0);
   }, [t]);
 
   const onVideoFileChanged = useCallback((event) => {
     const files = event.target.files;
-    const videoSizeLimit = getSeadocVideoSizeLimit(context.getSetting('seadocVideoSizeLimit'));
-    // Show warning for 3s and no further insertion if the video file exceeds the configured limit.
+    const videoSizeLimit = SEADOC_VIDEO_SIZE_LIMIT;
+    // Show warning for 3s and no further insertion if the video file exceeds the default limit.
     if (files[0].size > videoSizeLimit) {
-      handleDisplayAlert(videoSizeLimit);
+      handleDisplayAlert();
       event.target.value = null;
       return;
     }

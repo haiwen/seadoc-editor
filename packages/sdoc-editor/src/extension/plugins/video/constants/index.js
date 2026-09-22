@@ -1,13 +1,8 @@
-export const SEADOC_VIDEO_SIZE_LIMIT = 5 * 1024 * 1024;
+export const SEADOC_VIDEO_SIZE_LIMIT = 100 * 1024 * 1024;
 
-export const getSeadocVideoSizeLimit = (sizeLimit) => {
-  const parsedSizeLimit = Number(sizeLimit);
-  return Number.isFinite(parsedSizeLimit) && parsedSizeLimit > 0 ? parsedSizeLimit : SEADOC_VIDEO_SIZE_LIMIT;
-};
-
-export const formatSeadocVideoSizeLimit = (sizeLimit) => {
+export const formatSeadocVideoSizeLimit = (sizeLimit = SEADOC_VIDEO_SIZE_LIMIT) => {
   const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-  let formattedSize = getSeadocVideoSizeLimit(sizeLimit);
+  let formattedSize = sizeLimit;
   let unitIndex = 0;
 
   while (formattedSize >= 1024 && unitIndex < units.length - 1) {
