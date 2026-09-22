@@ -575,7 +575,7 @@
   "Full_width_mode": "Ganze Breite nutzen",
   "Video": "Video",
   "Upload_local_video": "Lokales Video hochladen",
-  "The_current_version_does_not_support_>5MB_video_file": "Die aktuelle Version unterstützt keine Videodateien größer als 5MB.",
+  "The_video_file_exceeds_the_size_limit": "Videodateien dürfen nicht größer als {{size}} sein.",
   "Token_expired_Please_refresh_the_page": "Der Token ist abgelaufen. Laden Sie die Seite neu.",
   "Link_to_page": "Mit Seite verlinken",
   "No_page_results": "Keine Seitenergebnisse",
