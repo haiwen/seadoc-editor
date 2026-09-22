@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.245](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.244...%40seafile%2Fsdoc-editor%403.0.245) (2026-09-22)
+
+### Bug Fixes
+
+- **video:** use fixed 100 MB upload limit ([2e7443c](https://github.com/haiwen/seadoc-editor/commit/2e7443c053c0696ab504155e994ab15db52ec566))
+
 ## [3.0.244](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.243...%40seafile%2Fsdoc-editor%403.0.244) (2026-09-22)
 
 ### Bug Fixes
