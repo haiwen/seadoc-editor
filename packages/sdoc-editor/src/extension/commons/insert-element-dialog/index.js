@@ -11,7 +11,7 @@ import FormulaModal from '../../plugins/formula/menu/formula-modal.js';
 import { generateImageInfos, insertImage } from '../../plugins/image/helpers';
 import AddLinkDialog from '../../plugins/link/dialog/add-link-dialog';
 import { CustomTableSizeDialog, SplitCellSettingDialog } from '../../plugins/table/dialogs';
-import { VIDEO_MAX_SIZE_5MB } from '../../plugins/video/constants/index.js';
+import { getSeadocVideoSizeLimit } from '../../plugins/video/constants/index.js';
 import AddVideoLinkDialog from '../../plugins/video/dialog/add-video-link-dialog/index.js';
 import { insertVideo } from '../../plugins/video/helpers';
 import FileLinkInsertDialog from '../file-insert-dialog/index.js';
@@ -56,8 +56,8 @@ const InsertElementDialog = ({ editor }) => {
 
   const onVideoFileChanged = useCallback((event) => {
     const files = event.target.files;
-    // Show warning for 3s and no further insertion if video file is more than 5MB
-    if (files[0].size > VIDEO_MAX_SIZE_5MB) {
+    // Show warning for 3s and no further insertion if the video file exceeds the configured limit.
+    if (files[0].size > getSeadocVideoSizeLimit(context.getSetting('seadocVideoSizeLimit'))) {
       handleDisplayAlert();
       event.target.value = null;
       return;
