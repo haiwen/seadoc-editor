@@ -575,7 +575,7 @@
   "Full_width_mode": "Plná šířka režim",
   "Video": "Video",
   "Upload_local_video": "Nahrát lokální video",
-  "The_current_version_does_not_support_>5MB_video_file": "Aktuální verze nepodporuje video soubory větší než 5MB",
+  "The_video_file_exceeds_the_size_limit": "Video soubor nesmí být větší než {{size}}",
   "Token_expired_Please_refresh_the_page": "Token vypršel. Prosím, obnovte stránku.",
   "Link_to_page": "Odkaz na stránku",
   "No_page_results": "Žádné výsledky stránky",

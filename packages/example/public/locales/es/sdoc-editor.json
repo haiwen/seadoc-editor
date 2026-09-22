@@ -575,7 +575,7 @@
   "Full_width_mode": "Modo de ancho completo",
   "Video": "Video",
   "Upload_local_video": "Subir video local",
-  "The_current_version_does_not_support_>5MB_video_file": "La versión actual no admite archivos de video de más de 5 MB",
+  "The_video_file_exceeds_the_size_limit": "El archivo de video no puede superar {{size}}",
   "Token_expired_Please_refresh_the_page": "El token ha expirado. Por favor, actualice la página",
   "Link_to_page": "Enlace a página",
   "No_page_results": "No hay resultados de página",

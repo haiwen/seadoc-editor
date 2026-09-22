@@ -11,7 +11,7 @@ import FormulaModal from '../../plugins/formula/menu/formula-modal.js';
 import { generateImageInfos, insertImage } from '../../plugins/image/helpers';
 import AddLinkDialog from '../../plugins/link/dialog/add-link-dialog';
 import { CustomTableSizeDialog, SplitCellSettingDialog } from '../../plugins/table/dialogs';
-import { getSeadocVideoSizeLimit } from '../../plugins/video/constants/index.js';
+import { formatSeadocVideoSizeLimit, getSeadocVideoSizeLimit } from '../../plugins/video/constants/index.js';
 import AddVideoLinkDialog from '../../plugins/video/dialog/add-video-link-dialog/index.js';
 import { insertVideo } from '../../plugins/video/helpers';
 import FileLinkInsertDialog from '../file-insert-dialog/index.js';
@@ -47,18 +47,18 @@ const InsertElementDialog = ({ editor }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validEditor, uploadLocalImageInputRef, insertPosition, slateNode]);
 
-  const handleDisplayAlert = useCallback(() => {
+  const handleDisplayAlert = useCallback((sizeLimit) => {
     setTimeout(() => {
-      toaster.warning(`${t('The_current_version_does_not_support_>5MB_video_file')}`, { duration: 3 });
+      toaster.warning(t('The_video_file_exceeds_the_size_limit', { size: formatSeadocVideoSizeLimit(sizeLimit) }), { duration: 3 });
     }, 0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [t]);
 
   const onVideoFileChanged = useCallback((event) => {
     const files = event.target.files;
+    const videoSizeLimit = getSeadocVideoSizeLimit(context.getSetting('seadocVideoSizeLimit'));
     // Show warning for 3s and no further insertion if the video file exceeds the configured limit.
-    if (files[0].size > getSeadocVideoSizeLimit(context.getSetting('seadocVideoSizeLimit'))) {
-      handleDisplayAlert();
+    if (files[0].size > videoSizeLimit) {
+      handleDisplayAlert(videoSizeLimit);
       event.target.value = null;
       return;
     }

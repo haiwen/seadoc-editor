@@ -1,4 +1,4 @@
-import { getSeadocVideoSizeLimit, SEADOC_VIDEO_SIZE_LIMIT } from '../../../../../src/extension/plugins/video/constants';
+import { formatSeadocVideoSizeLimit, getSeadocVideoSizeLimit, SEADOC_VIDEO_SIZE_LIMIT } from '../../../../../src/extension/plugins/video/constants';
 
 describe('getSeadocVideoSizeLimit', () => {
   it('returns the default limit when no setting is provided', () => {
@@ -16,5 +16,14 @@ describe('getSeadocVideoSizeLimit', () => {
     expect(getSeadocVideoSizeLimit(0)).toBe(SEADOC_VIDEO_SIZE_LIMIT);
     expect(getSeadocVideoSizeLimit(-1)).toBe(SEADOC_VIDEO_SIZE_LIMIT);
     expect(getSeadocVideoSizeLimit('invalid')).toBe(SEADOC_VIDEO_SIZE_LIMIT);
+  });
+});
+
+
+describe('formatSeadocVideoSizeLimit', () => {
+  it('formats the configured limit with a readable binary unit', () => {
+    expect(formatSeadocVideoSizeLimit()).toBe('5 MB');
+    expect(formatSeadocVideoSizeLimit(10 * 1024 * 1024)).toBe('10 MB');
+    expect(formatSeadocVideoSizeLimit(150 * 1024 * 1024 * 1024)).toBe('150 GB');
   });
 });
