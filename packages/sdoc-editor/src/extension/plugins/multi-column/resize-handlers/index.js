@@ -39,8 +39,8 @@ const ResizeHandlers = ({ element, handleResizeColumn }) => {
     const path = ReactEditor.findPath(editor, element);
     const [node] = Editor.node(editor, path);
     const domNode = ReactEditor.toDOMNode(editor, node);
-    if (!domNode.querySelectorAll('.column')) return;
-    const childNodes = Array.from(domNode.querySelectorAll('.column'));
+    if (!domNode.querySelectorAll('.sdoc-column')) return;
+    const childNodes = Array.from(domNode.querySelectorAll('.sdoc-column'));
 
     const onMouseMove = (event) => {
       event.preventDefault();

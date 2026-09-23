@@ -89,7 +89,7 @@ const SideToolbar = () => {
       if (isShowSideMenu) return;
       let dom = e.target;
       while (dom?.dataset?.root !== 'true') {
-        if (dom.className === 'column') {
+        if (dom.classList?.contains('sdoc-column')) {
           return;
         }
         if (!dom.parentNode) return;
