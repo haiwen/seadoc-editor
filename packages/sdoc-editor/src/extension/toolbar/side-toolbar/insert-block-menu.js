@@ -180,6 +180,7 @@ const InsertBlockMenu = ({
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.LINK]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.LINK] }} onClick={openLinkDialog} />
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CODE_BLOCK]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CODE_BLOCK] }} onClick={onInsertCodeBlock} />
       <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.CALL_OUT]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CALL_OUT] }} onClick={() => onInsertCallout(PARAGRAPH)} />
+      <DropdownMenuItem isHidden={!insertMenuSearchMap[ELEMENT_TYPE.DIVIDER]} menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.DIVIDER] }} onClick={() => onInsert(ELEMENT_TYPE.DIVIDER)} />
       {SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.MULTI_COLUMN].map((item) => {
         return (
           <DropdownMenuItem isHidden={!insertMenuSearchMap[item.type]} key={item.id} menuConfig={item} onClick={() => createMultiColumn(item.type)} />

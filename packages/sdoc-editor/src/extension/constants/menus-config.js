@@ -442,6 +442,12 @@ export const SIDE_INSERT_MENUS_CONFIG = {
     iconClass: 'sdocfont sdoc-callout',
     text: 'Callout'
   },
+  [DIVIDER]: {
+    id: 'sdoc-side-menu-item-divider',
+    iconClass: 'sdocfont sdoc-divider',
+    type: DIVIDER,
+    text: 'Divider'
+  },
   [ORDERED_LIST]: {
     id: '',
     iconClass: 'sdocfont sdoc-list-ol',
@@ -551,6 +557,7 @@ export const SIDE_INSERT_MENUS_SEARCH_MAP = {
   [LINK]: 'Link',
   [CODE_BLOCK]: 'Code_block',
   [CALL_OUT]: 'Callout',
+  [DIVIDER]: 'Divider',
   [UNORDERED_LIST]: 'Unordered_list',
   [ORDERED_LIST]: 'Ordered_list',
   [CHECK_LIST_ITEM]: 'Check_list',
@@ -575,6 +582,7 @@ export const SIDE_QUICK_INSERT_MENUS_SEARCH_MAP = {
   [LINK]: 'Link',
   [CODE_BLOCK]: 'Code_block',
   [CALL_OUT]: 'Callout',
+  [DIVIDER]: 'Divider',
   [UNORDERED_LIST]: 'Unordered_list',
   [ORDERED_LIST]: 'Ordered_list',
   [CHECK_LIST_ITEM]: 'Check_list',
