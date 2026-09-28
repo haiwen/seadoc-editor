@@ -253,6 +253,7 @@ const QuickInsertBlockMenu = ({
       [EMBED_LINK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[EMBED_LINK]} key="sdoc-insert-menu-embed-link" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.EMBED_LINK] }} onClick={addEmbedLinkDialog} />,
       [CODE_BLOCK]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CODE_BLOCK]} disabled={isDisableCodeBlock} key="sdoc-insert-menu-code-block" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CODE_BLOCK] }} onClick={onInsertCodeBlock} />,
       [CALL_OUT]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[CALL_OUT]} disabled={isDisableCallout} key="sdoc-insert-menu-callout" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.CALL_OUT] }} onClick={() => onInsertCallout(PARAGRAPH)} />,
+      [ELEMENT_TYPE.DIVIDER]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[ELEMENT_TYPE.DIVIDER]} key="sdoc-insert-menu-divider" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.DIVIDER] }} onClick={() => onInsert(ELEMENT_TYPE.DIVIDER)} />,
       [FORMULA]: <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[FORMULA]} disabled={isDisableFormula} key="sdoc-insert-menu-formula" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.FORMULA] }} onClick={onInsertFormula} />,
     };
 

@@ -17,6 +17,8 @@ import SideMenu from './side-menu';
 
 import './index.css';
 
+const HORIZONTAL_DROP_ZONE_WIDTH = 48;
+
 let sourceElement = null;
 let targetElement = null;
 const SideToolbar = () => {
@@ -584,10 +586,12 @@ const SideToolbar = () => {
     // Stop if target node is multi column node with four columns
     if (targetNode.type === MULTI_COLUMN && targetNode.children.length === 4) return;
 
-    // Add hover style for target node multi column children
+    // Add hover style for target node multi column children.
+    // Only use a fixed-width zone around each column boundary so the drop
+    // direction is predictable instead of depending on an arbitrary x value.
     if (targetNode.type === MULTI_COLUMN) {
       const multiColumnEl = target.el;
-      const columnEls = multiColumnEl.querySelectorAll('.sdoc-column-container');
+      const columnEls = Array.from(multiColumnEl.querySelectorAll('.sdoc-column-container'));
       if (!columnEls.length) return;
 
       columnEls.forEach(col =>
@@ -598,42 +602,59 @@ const SideToolbar = () => {
         )
       );
 
-      let preColRect = null;
+      let activeColumn = null;
+      let activeDirection = null;
+      let previousRect = null;
+
       columnEls.forEach((colEl, index) => {
         const rect = colEl.getBoundingClientRect();
-        if (x < rect.left && index === 0) {
-          colEl.classList.add('sdoc-dragging-left');
-          activeDragElRef.current = colEl;
+        const leftZoneStart = index === 0
+          ? rect.left - HORIZONTAL_DROP_ZONE_WIDTH
+          : Math.max(previousRect.right, rect.left - HORIZONTAL_DROP_ZONE_WIDTH);
+
+        if (x >= leftZoneStart && x < rect.left) {
+          activeColumn = colEl;
+          activeDirection = 'left';
         }
-        if (preColRect && x < rect.left && x > preColRect.right) {
-          colEl.classList.add('sdoc-dragging-left');
-          activeDragElRef.current = colEl;
+
+        if (index === columnEls.length - 1
+          && x > rect.right
+          && x <= rect.right + HORIZONTAL_DROP_ZONE_WIDTH) {
+          activeColumn = colEl;
+          activeDirection = 'right';
         }
-        if (x > rect.right && index === columnEls.length - 1) {
-          colEl.classList.add('sdoc-dragging-right');
-          activeDragElRef.current = colEl;
-        }
-        preColRect = rect;
+
+        previousRect = rect;
       });
+
+      if (activeColumn) {
+        activeColumn.classList.add(`sdoc-dragging-${activeDirection}`);
+        activeDragElRef.current = activeColumn;
+      } else {
+        activeDragElRef.current = null;
+      }
       return;
     }
 
-    // Add hover style for target node as non-multi column children
-    const isLeftOutside = x < target?.rect.left;
-    const isRightOutside = x > target?.rect.right;
+    // Add hover style for target node as non-multi column children.
+    // The drop zones are placed immediately outside the left and right edges
+    // of the target block, keeping the center area available for normal drag.
+    const isLeftDropZone = x >= target.rect.left - HORIZONTAL_DROP_ZONE_WIDTH && x < target.rect.left;
+    const isRightDropZone = x > target.rect.right && x <= target.rect.right + HORIZONTAL_DROP_ZONE_WIDTH;
 
-    if (isLeftOutside && !target.el.classList.contains('sdoc-dragging-left')) {
+    if (isLeftDropZone) {
       target.el.classList.add('sdoc-dragging-left');
       target.el.classList.remove('sdoc-dragging-right');
       target.el.classList.remove('sdoc-dragging');
-    }
-    if (isRightOutside && !target.el.classList.contains('sdoc-dragging-right')) {
+      activeDragElRef.current = target.el;
+    } else if (isRightDropZone) {
       target.el.classList.add('sdoc-dragging-right');
       target.el.classList.remove('sdoc-dragging-left');
       target.el.classList.remove('sdoc-dragging');
+      activeDragElRef.current = target.el;
+    } else {
+      activeDragElRef.current = null;
     }
-
-    activeDragElRef.current = target.el;
   }, [editor]);
 
   const clearAllDragStyles = useCallback (() => {
