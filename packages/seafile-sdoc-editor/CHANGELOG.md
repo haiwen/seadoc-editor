@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.246](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.242...%40seafile%2Fseafile-sdoc-editor%403.0.246) (2026-09-28)
+
+### Features
+
+- configure Seadoc video upload limit ([#314](https://github.com/seafileltd/sea-sdoc-editor/issues/314)) ([07858e5](https://github.com/seafileltd/sea-sdoc-editor/commit/07858e5067ada7977d61dbc9333c491f03b5a464))
+
 ## [3.0.245](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.244...%40seafile%2Fseafile-sdoc-editor%403.0.245) (2026-09-22)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
