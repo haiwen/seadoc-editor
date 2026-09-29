@@ -26,6 +26,7 @@ const SideToolbar = () => {
   const editor = useSlateStatic();
   const scrollRef = useScrollContext();
   const menuRef = useRef(null);
+  const sideToolbarContainerRef = useRef(null);
   const [slateNode, setSlateNode] = useState(null);
   const [sidePosition, setSidePosition] = useState({});
   const [isNodeEmpty, setNodeEmpty] = useState(false);
@@ -750,7 +751,7 @@ const SideToolbar = () => {
   }, [clearAllDragStyles, handleDrop]);
 
   useEffect(() => {
-    const editorContainer = document.querySelector('.sdoc-article-container');
+    const editorContainer = sideToolbarContainerRef.current?.closest('.sdoc-article-container');
     if (!editorContainer) return undefined;
 
     // Use capture phase because block-level drag handlers stop propagation.
@@ -772,6 +773,7 @@ const SideToolbar = () => {
       {!isMobile && (
         <div
           onAnimationEnd={() => setIsMoving(false)}
+          ref={sideToolbarContainerRef}
           className={classnames('sdoc-side-toolbar-container d-print-none', { 'fade-out': isMoving })}
           style={sidePosition}
         >
