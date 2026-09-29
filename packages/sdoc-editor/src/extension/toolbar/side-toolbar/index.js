@@ -534,8 +534,19 @@ const SideToolbar = () => {
   const handleDragover = useCallback((event) => {
     event.preventDefault();
 
+    const dragTypes = event.dataTransfer.types;
+    if (!dragTypes.includes(DRAG_SDOC_EDITOR_ELEMENT)) {
+      clearDragClass(activeDragElRef.current);
+      activeDragElRef.current = null;
+      return;
+    }
+
     const [sourceNode, sourcePath] = getNodeEntry(editor, sourceElement);
-    if (!sourceNode || !sourcePath ) return;
+    if (!sourceNode || !sourcePath ) {
+      clearDragClass(activeDragElRef.current);
+      activeDragElRef.current = null;
+      return;
+    }
 
     // Not support node type in multi column
     if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FORMULA].includes(sourceNode.type)) return;
@@ -665,9 +676,13 @@ const SideToolbar = () => {
 
   const handleDrop = useCallback (() => {
     const targetEl = activeDragElRef.current;
+    const hasSideDropClass = targetEl?.classList.contains('sdoc-dragging-left')
+      || targetEl?.classList.contains('sdoc-dragging-right');
+    if (!hasSideDropClass) return false;
+
     let [targetNode, targetPath] = getNodeEntry(editor, targetEl);
     let [sourceNode, sourcePath] = getNodeEntry(editor, sourceElement);
-    if (!targetPath || !sourcePath) return;
+    if (!targetNode || !targetPath || !sourceNode || !sourcePath) return false;
 
     // When source node is list child, it is equal to drag top list node
     const topSourceNode = Node.get(editor, [sourcePath[0]]);
@@ -688,7 +703,7 @@ const SideToolbar = () => {
         addMiddleColumnInMultiColumn(editor, topTargetNode, targetPath);
         Transforms.moveNodes(editor, { at: [sourcePath[0]], to: [targetPath[0], targetPath[1], 0] });
       }
-      return;
+      return true;
     }
 
     // Drop non-multi column into non-multi column situation
@@ -697,7 +712,7 @@ const SideToolbar = () => {
       targetPath = ReactEditor.findPath(editor, targetNode);
     }
 
-    if (Path.equals([sourcePath[0]], [targetPath[0]])) return;
+    if (Path.equals([sourcePath[0]], [targetPath[0]])) return true;
     let leftNode = null;
     let rightNode = null;
     if (targetEl.classList.contains('sdoc-dragging-left')) {
@@ -707,7 +722,7 @@ const SideToolbar = () => {
       leftNode = targetNode;
       rightNode = sourceNode;
     } else {
-      return;
+      return true;
     }
 
     // Form multi column first and then remove source and target node
@@ -715,23 +730,42 @@ const SideToolbar = () => {
     Transforms.removeNodes(editor, { at: Path.next([targetPath[0]]) });
     Transforms.removeNodes(editor, { at: [sourcePath[0]] });
 
-    return;
+    return true;
   }, [editor]);
+
+  const handleDropCapture = useCallback((event) => {
+    const dragTypes = event.dataTransfer?.types;
+    if (!dragTypes?.includes(DRAG_SDOC_EDITOR_ELEMENT) || !activeDragElRef.current) return;
+
+    const handled = handleDrop();
+    if (!handled) return;
+
+    // Block-level onDrop handlers stop propagation. Capture the event on the
+    // article container so side drops are handled before those handlers run.
+    event.preventDefault();
+    event.stopPropagation();
+    clearAllDragStyles();
+    sourceElement = null;
+    targetElement = null;
+  }, [clearAllDragStyles, handleDrop]);
 
   useEffect(() => {
     const editorContainer = document.querySelector('.sdoc-article-container');
-    editorContainer.addEventListener('dragover', handleDragover);
-    editorContainer.addEventListener('dragend', clearAllDragStyles);
-    editorContainer.addEventListener('dragleave', clearAllDragStyles);
-    editorContainer.addEventListener('drop', handleDrop);
+    if (!editorContainer) return undefined;
+
+    // Use capture phase because block-level drag handlers stop propagation.
+    editorContainer.addEventListener('dragover', handleDragover, true);
+    editorContainer.addEventListener('dragend', clearAllDragStyles, true);
+    editorContainer.addEventListener('dragleave', clearAllDragStyles, true);
+    editorContainer.addEventListener('drop', handleDropCapture, true);
 
     return () => {
-      editorContainer.removeEventListener('dragover', handleDragover);
-      editorContainer.removeEventListener('dragend', clearAllDragStyles);
-      editorContainer.removeEventListener('dragleave', clearAllDragStyles);
-      editorContainer.removeEventListener('drop', handleDrop);
+      editorContainer.removeEventListener('dragover', handleDragover, true);
+      editorContainer.removeEventListener('dragend', clearAllDragStyles, true);
+      editorContainer.removeEventListener('dragleave', clearAllDragStyles, true);
+      editorContainer.removeEventListener('drop', handleDropCapture, true);
     };
-  }, [handleDragover, clearAllDragStyles, handleDrop]);
+  }, [handleDragover, clearAllDragStyles, handleDropCapture]);
 
   return (
     <>
