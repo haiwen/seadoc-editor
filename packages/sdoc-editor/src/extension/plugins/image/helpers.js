@@ -72,6 +72,11 @@ export const generateImageNode = (src, file_uuid) => {
   return { ...element, data };
 };
 
+export const normalizeRemoteImageUrl = (url) => {
+  if (typeof url === 'string' && url.startsWith('//')) return `https:${url}`;
+  return url;
+};
+
 export const insertImage = (editor, imgInfos, selection, position = INSERT_POSITION.CURRENT) => {
   if (!imgInfos || !Array.isArray(imgInfos)) return;
   const validImgInfos = imgInfos.filter((item) => item && typeof item.src === 'string' && item.src.length > 0);
@@ -311,6 +316,21 @@ export const isImageUrlIsFromCopy = (url) => {
   if (url && url.startsWith('http')) return true;
   if (url && url.startsWith('attachment')) return true; // from yuque
   return false;
+};
+
+export const isWechatImageUrl = (url) => {
+  if (typeof url !== 'string' || !url || url.length > 4096) return false;
+  try {
+    const parsedUrl = new URL(url);
+    const allowedHosts = ['mmbiz.qpic.cn', 'wx.qlogo.cn', 'res.wx.qq.com'];
+    return parsedUrl.protocol === 'https:'
+      && !parsedUrl.username
+      && !parsedUrl.password
+      && (!parsedUrl.port || parsedUrl.port === '443')
+      && allowedHosts.includes(parsedUrl.hostname.toLowerCase());
+  } catch (error) {
+    return false;
+  }
 };
 
 export const isImageUrlIsFromUpload = (url) => {

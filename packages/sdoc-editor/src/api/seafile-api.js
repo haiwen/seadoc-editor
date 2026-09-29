@@ -39,6 +39,11 @@ class SeafileAPI {
     return this.req.post(url, form);
   }
 
+  importRemoteImages(docUuid, imageUrls) {
+    const url = '/api/v2.1/seadoc/import-images/' + docUuid + '/';
+    return this.req.post(url, { image_urls: imageUrls });
+  }
+
   getSdocDownloadImageUrl(docUuid, imageName) {
     const url = '/api/v2.1/seadoc/download-image/' + docUuid + '/' + encodeURIComponent(imageName);
     return this.req.get(url);

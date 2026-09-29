@@ -1,4 +1,4 @@
-import { deserializeHtml } from '../../../../src/extension/plugins/html/helper';
+import { deserializeHtml, deserializePastedHtml } from '../../../../src/extension/plugins/html/helper';
 import { formatChildren } from '../../../core/utils';
 
 
@@ -95,6 +95,26 @@ describe('deserialize link', () => {
       }
     ];
     expect(formatChildren(ret)).toEqual(exp);
+  });
+
+  it('uses data-src for a linked WeChat image during paste', () => {
+    const html = '<a href="https://mp.weixin.qq.com/article"><img data-src="https://mmbiz.qpic.cn/original.jpg?wx_fmt=jpeg" src="https://mmbiz.qpic.cn/lazy.jpg?wx_lazy=1" /></a>';
+
+    expect(formatChildren(deserializePastedHtml(html))).toEqual([
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'image',
+            data: {
+              src: 'https://mmbiz.qpic.cn/original.jpg?wx_fmt=jpeg',
+              href: 'https://mp.weixin.qq.com/article',
+            },
+            children: [{ text: '' }]
+          }
+        ]
+      }
+    ]);
   });
 
   it('drops an unsafe linked image URL', () => {

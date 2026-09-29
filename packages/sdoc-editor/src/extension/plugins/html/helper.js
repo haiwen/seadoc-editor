@@ -2,7 +2,7 @@ import slugid from 'slugid';
 import typeOf from 'type-of';
 import { INLINE_LEVEL_TYPES, LIST_ITEM, PARAGRAPH, TOP_LEVEL_TYPES, UNORDERED_LIST } from '../../constants';
 import rules from './rules';
-import { normalizeWechatPastedFragment } from './wechat-paste-normalizer';
+import { addWechatInlineImageFileUuids, normalizeWechatPastedFragment, removeWechatInlineDataImages } from './wechat-paste-normalizer';
 
 const cruftNewline = element => {
   return !(element.nodeName === '#text' && element.nodeValue === '\n');
@@ -151,9 +151,18 @@ export const deserializeHtml = (html) => {
   return deserializeFragment(parseHtml(html));
 };
 
+export const normalizePastedHtmlForCache = (html) => {
+  const fragment = parseHtml(html);
+  removeWechatInlineDataImages(fragment);
+  normalizeWechatPastedFragment(fragment);
+  return fragment.innerHTML;
+};
+
 export const deserializePastedHtml = (html) => {
   const fragment = parseHtml(html);
   // Normalize WeChat-specific DOM before applying the generic HTML-to-Slate rules.
-  normalizeWechatPastedFragment(fragment);
-  return deserializeFragment(fragment);
+  const fileUuids = normalizeWechatPastedFragment(fragment);
+  const nodes = deserializeFragment(fragment);
+  addWechatInlineImageFileUuids(nodes, fileUuids);
+  return nodes;
 };
