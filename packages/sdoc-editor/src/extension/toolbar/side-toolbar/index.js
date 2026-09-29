@@ -19,13 +19,27 @@ import './index.css';
 
 const HORIZONTAL_DROP_ZONE_WIDTH = 48;
 
-let sourceElement = null;
-let targetElement = null;
+const getSafeNodeEntry = (editor, element) => {
+  try {
+    return getNodeEntry(editor, element);
+  } catch (error) {
+    return [];
+  }
+};
+
 const SideToolbar = () => {
 
   const editor = useSlateStatic();
   const scrollRef = useScrollContext();
   const menuRef = useRef(null);
+  const sideToolbarContainerRef = useRef(null);
+  const sourceElementRef = useRef(null);
+
+  const isEventInCurrentEditor = useCallback((event) => {
+    const editorContainer = sideToolbarContainerRef.current?.closest('.sdoc-article-container');
+    const eventTarget = event.target || event.currentTarget;
+    return Boolean(editorContainer && eventTarget && editorContainer.contains(eventTarget));
+  }, []);
   const [slateNode, setSlateNode] = useState(null);
   const [sidePosition, setSidePosition] = useState({});
   const [isNodeEmpty, setNodeEmpty] = useState(false);
@@ -212,6 +226,7 @@ const SideToolbar = () => {
 
   const dragStart = useCallback((event) => {
     event.stopPropagation();
+    sourceElementRef.current = null;
     // Create the preview container when dragging more than one listNodes
     const noDrag = Path.equals(editor.selection.focus.path, editor.selection.anchor.path);
     if (showSelectedNodesRef.current && showSelectedNodesRef.current.length > 1 && !noDrag ) {
@@ -240,20 +255,22 @@ const SideToolbar = () => {
       return;
     }
 
-    sourceElement = ReactEditor.toDOMNode(editor, slateNode);
+    sourceElementRef.current = ReactEditor.toDOMNode(editor, slateNode);
     const path = ReactEditor.findPath(editor, slateNode);
 
     // Dragging the first element within the blockquote drags the entire blockquote by default.
     if (isBlockquote(editor, [path[0]]) && path.slice(1).every((p) => p === 0)) {
       const nodeEntry = Editor.node(editor, [path[0]]);
-      sourceElement = ReactEditor.toDOMNode(editor, nodeEntry[0]);
+      sourceElementRef.current = ReactEditor.toDOMNode(editor, nodeEntry[0]);
     }
 
-    event.dataTransfer.setDragImage(sourceElement, 0, 0);
+    event.dataTransfer.setDragImage(sourceElementRef.current, 0, 0);
     event.dataTransfer.setData(DRAG_SDOC_EDITOR_ELEMENT, true);
   }, [editor, slateNode]);
 
   const dragOver = useCallback((event) => {
+    if (!isEventInCurrentEditor(event)) return;
+
     const dragTypes = event.dataTransfer.types;
     if (!dragTypes.includes(DRAG_SDOC_EDITOR_ELEMENT)) return;
 
@@ -261,15 +278,18 @@ const SideToolbar = () => {
     if (!overElement.classList.contains('sdoc-dragging')) {
       overElement.classList.add('sdoc-dragging');
     }
-  }, []);
+  }, [isEventInCurrentEditor]);
 
   const dragLeave = useCallback((event) => {
+    if (!isEventInCurrentEditor(event)) return;
+
     const leaveElement = event.currentTarget;
     leaveElement.classList.remove('sdoc-dragging');
-  }, []);
+  }, [isEventInCurrentEditor]);
 
   const drop = useCallback((event) => {
-    targetElement = event.currentTarget;
+    if (!isEventInCurrentEditor(event)) return;
+    const targetElement = event.currentTarget;
     targetElement.classList.remove('sdoc-dragging');
     const dragTypes = event.dataTransfer.types;
     if (!dragTypes.includes(DRAG_SDOC_EDITOR_ELEMENT) && dragTypes[0] !== 'Files') return;
@@ -279,12 +299,14 @@ const SideToolbar = () => {
 
     // Drag local image files to sdoc
     if (event.dataTransfer.files.length > 0) {
-      const [, targetPath] = getNodeEntry(editor, targetElement);
+      const [, targetPath] = getSafeNodeEntry(editor, targetElement);
       insertImageFiles(event.dataTransfer.files, editor, targetPath);
       return;
     }
 
-    const [targetNode, targetPath] = getNodeEntry(editor, targetElement);
+    const [targetNode, targetPath] = getSafeNodeEntry(editor, targetElement);
+    if (!targetNode || !targetPath) return;
+
     // Drag multiple list_items nodes
     if (draggedSourcePaths.current) {
       try {
@@ -342,7 +364,9 @@ const SideToolbar = () => {
       }
     }
 
-    const [sourceNode, sourcePath] = getNodeEntry(editor, sourceElement);
+    const [sourceNode, sourcePath] = getSafeNodeEntry(editor, sourceElementRef.current);
+    if (!sourceNode || !sourcePath) return;
+
     // Dragging into a quoteBlock is not supported
     if ([CODE_BLOCK, TABLE, BLOCKQUOTE].includes(sourceNode.type) && isBlockquote(editor, [targetPath[0]]) && targetPath.length > 1) {
       return;
@@ -507,9 +531,8 @@ const SideToolbar = () => {
     }
 
     // reset
-    sourceElement = null;
-    targetElement = null;
-  }, [editor]);
+    sourceElementRef.current = null;
+  }, [editor, isEventInCurrentEditor]);
 
   useEffect(() => {
     const eventBus = EventBus.getInstance();
@@ -531,17 +554,37 @@ const SideToolbar = () => {
     setIsEnterMoreVertical(false);
   }, []);
 
+  const clearAllDragStyles = useCallback(() => {
+    clearDragClass(activeDragElRef.current);
+    activeDragElRef.current = null;
+  }, []);
+
   const handleDragover = useCallback((event) => {
     event.preventDefault();
 
-    const [sourceNode, sourcePath] = getNodeEntry(editor, sourceElement);
-    if (!sourceNode || !sourcePath ) return;
+    const dragTypes = event.dataTransfer?.types;
+    if (!dragTypes?.includes(DRAG_SDOC_EDITOR_ELEMENT)) {
+      clearAllDragStyles();
+      return;
+    }
+
+    const [sourceNode, sourcePath] = getSafeNodeEntry(editor, sourceElementRef.current);
+    if (!sourceNode || !sourcePath) {
+      clearAllDragStyles();
+      return;
+    }
 
     // Not support node type in multi column
-    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FORMULA].includes(sourceNode.type)) return;
+    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FORMULA].includes(sourceNode.type)) {
+      clearAllDragStyles();
+      return;
+    }
     // Return if source node is from multi column
     const topNode = Node.get(editor, [sourcePath[0]]);
-    if ([MULTI_COLUMN].includes(topNode.type)) return;
+    if ([MULTI_COLUMN].includes(topNode.type)) {
+      clearAllDragStyles();
+      return;
+    }
 
     // Cursor position
     const x = event.clientX;
@@ -568,23 +611,38 @@ const SideToolbar = () => {
       }
     }
 
-    if (!target?.el) return;
+    if (!target?.el) {
+      clearAllDragStyles();
+      return;
+    }
 
     const prevEl = activeDragElRef.current;
     if (prevEl && prevEl !== target.el) {
       clearDragClass(prevEl);
     }
 
-    if (target?.el === sourceElement) return;
+    if (target.el === sourceElementRef.current) {
+      clearAllDragStyles();
+      return;
+    }
 
-    const [targetNode, targetPath] = getNodeEntry(editor, target?.el);
+    const [targetNode, targetPath] = getSafeNodeEntry(editor, target.el);
 
     // Not support node type in multi column
-    if ([TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FORMULA].includes(targetNode.type)) return;
-    if (!targetNode || (targetPath.length === 0 && ![ORDERED_LIST, UNORDERED_LIST].includes(targetNode.type))) return;
+    if (!targetNode || !targetPath || [TABLE, VIDEO, CODE_BLOCK, WHITEBOARD, FORMULA].includes(targetNode.type)) {
+      clearAllDragStyles();
+      return;
+    }
+    if (targetPath.length === 0 && ![ORDERED_LIST, UNORDERED_LIST].includes(targetNode.type)) {
+      clearAllDragStyles();
+      return;
+    }
 
     // Stop if target node is multi column node with four columns
-    if (targetNode.type === MULTI_COLUMN && targetNode.children.length === 4) return;
+    if (targetNode.type === MULTI_COLUMN && targetNode.children.length === 4) {
+      clearAllDragStyles();
+      return;
+    }
 
     // Add hover style for target node multi column children.
     // Only use a fixed-width zone around each column boundary so the drop
@@ -592,7 +650,10 @@ const SideToolbar = () => {
     if (targetNode.type === MULTI_COLUMN) {
       const multiColumnEl = target.el;
       const columnEls = Array.from(multiColumnEl.querySelectorAll('.sdoc-column-container'));
-      if (!columnEls.length) return;
+      if (!columnEls.length) {
+        clearAllDragStyles();
+        return;
+      }
 
       columnEls.forEach(col =>
         col.classList.remove(
@@ -631,7 +692,7 @@ const SideToolbar = () => {
         activeColumn.classList.add(`sdoc-dragging-${activeDirection}`);
         activeDragElRef.current = activeColumn;
       } else {
-        activeDragElRef.current = null;
+        clearAllDragStyles();
       }
       return;
     }
@@ -653,21 +714,19 @@ const SideToolbar = () => {
       target.el.classList.remove('sdoc-dragging');
       activeDragElRef.current = target.el;
     } else {
-      activeDragElRef.current = null;
+      clearAllDragStyles();
     }
-  }, [editor]);
+  }, [clearAllDragStyles, editor]);
 
-  const clearAllDragStyles = useCallback (() => {
-    const el = activeDragElRef.current;
-    clearDragClass(el);
-    activeDragElRef.current = null;
-  }, []);
-
-  const handleDrop = useCallback (() => {
+  const handleDrop = useCallback(() => {
     const targetEl = activeDragElRef.current;
-    let [targetNode, targetPath] = getNodeEntry(editor, targetEl);
-    let [sourceNode, sourcePath] = getNodeEntry(editor, sourceElement);
-    if (!targetPath || !sourcePath) return;
+    const hasSideDropClass = targetEl?.classList.contains('sdoc-dragging-left')
+      || targetEl?.classList.contains('sdoc-dragging-right');
+    if (!hasSideDropClass) return false;
+
+    let [targetNode, targetPath] = getSafeNodeEntry(editor, targetEl);
+    let [sourceNode, sourcePath] = getSafeNodeEntry(editor, sourceElementRef.current);
+    if (!targetNode || !targetPath || !sourceNode || !sourcePath) return false;
 
     // When source node is list child, it is equal to drag top list node
     const topSourceNode = Node.get(editor, [sourcePath[0]]);
@@ -682,13 +741,15 @@ const SideToolbar = () => {
       if (targetEl.classList.contains('sdoc-dragging-right')) {
         addLastColumnInMultiColumn(editor, topTargetNode, targetPath);
         Transforms.moveNodes(editor, { at: [sourcePath[0]], to: [targetPath[0], targetPath[1] + 1, 0] });
+        return true;
       }
       // Insert source node into middle of multi column
       if (targetEl.classList.contains('sdoc-dragging-left')) {
         addMiddleColumnInMultiColumn(editor, topTargetNode, targetPath);
         Transforms.moveNodes(editor, { at: [sourcePath[0]], to: [targetPath[0], targetPath[1], 0] });
+        return true;
       }
-      return;
+      return false;
     }
 
     // Drop non-multi column into non-multi column situation
@@ -697,7 +758,7 @@ const SideToolbar = () => {
       targetPath = ReactEditor.findPath(editor, targetNode);
     }
 
-    if (Path.equals([sourcePath[0]], [targetPath[0]])) return;
+    if (Path.equals([sourcePath[0]], [targetPath[0]])) return true;
     let leftNode = null;
     let rightNode = null;
     if (targetEl.classList.contains('sdoc-dragging-left')) {
@@ -707,7 +768,7 @@ const SideToolbar = () => {
       leftNode = targetNode;
       rightNode = sourceNode;
     } else {
-      return;
+      return false;
     }
 
     // Form multi column first and then remove source and target node
@@ -715,29 +776,56 @@ const SideToolbar = () => {
     Transforms.removeNodes(editor, { at: Path.next([targetPath[0]]) });
     Transforms.removeNodes(editor, { at: [sourcePath[0]] });
 
-    return;
+    return true;
   }, [editor]);
 
+  const handleDropCapture = useCallback((event) => {
+    const dragTypes = event.dataTransfer?.types;
+    if (!dragTypes?.includes(DRAG_SDOC_EDITOR_ELEMENT)) return;
+
+    const targetEl = activeDragElRef.current;
+    const hasSideDropClass = targetEl?.classList.contains('sdoc-dragging-left')
+      || targetEl?.classList.contains('sdoc-dragging-right');
+    if (!hasSideDropClass) return;
+
+    const handled = handleDrop();
+    if (!handled) {
+      clearAllDragStyles();
+      return;
+    }
+
+    // Only side drops create/extend a multi-column. Stop before the block
+    // handlers can process the same drop and mutate Slate a second time.
+    event.preventDefault();
+    event.stopPropagation();
+    clearAllDragStyles();
+    sourceElementRef.current = null;
+  }, [clearAllDragStyles, handleDrop]);
+
   useEffect(() => {
-    const editorContainer = document.querySelector('.sdoc-article-container');
-    editorContainer.addEventListener('dragover', handleDragover);
-    editorContainer.addEventListener('dragend', clearAllDragStyles);
-    editorContainer.addEventListener('dragleave', clearAllDragStyles);
-    editorContainer.addEventListener('drop', handleDrop);
+    const editorContainer = sideToolbarContainerRef.current?.closest('.sdoc-article-container');
+    if (!editorContainer) return undefined;
+
+    // Capture dragover/drop because block-level handlers stop propagation.
+    editorContainer.addEventListener('dragover', handleDragover, true);
+    editorContainer.addEventListener('dragend', clearAllDragStyles, true);
+    editorContainer.addEventListener('dragleave', clearAllDragStyles, true);
+    editorContainer.addEventListener('drop', handleDropCapture, true);
 
     return () => {
-      editorContainer.removeEventListener('dragover', handleDragover);
-      editorContainer.removeEventListener('dragend', clearAllDragStyles);
-      editorContainer.removeEventListener('dragleave', clearAllDragStyles);
-      editorContainer.removeEventListener('drop', handleDrop);
+      editorContainer.removeEventListener('dragover', handleDragover, true);
+      editorContainer.removeEventListener('dragend', clearAllDragStyles, true);
+      editorContainer.removeEventListener('dragleave', clearAllDragStyles, true);
+      editorContainer.removeEventListener('drop', handleDropCapture, true);
     };
-  }, [handleDragover, clearAllDragStyles, handleDrop]);
+  }, [clearAllDragStyles, handleDragover, handleDropCapture]);
 
   return (
     <>
       {!isMobile && (
         <div
           onAnimationEnd={() => setIsMoving(false)}
+          ref={sideToolbarContainerRef}
           className={classnames('sdoc-side-toolbar-container d-print-none', { 'fade-out': isMoving })}
           style={sidePosition}
         >
