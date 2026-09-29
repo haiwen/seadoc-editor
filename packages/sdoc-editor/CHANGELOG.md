@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.247](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.247) (2026-09-29)
+
+### Bug Fixes
+
+- **wiki-editor:** guard invalid drag targets ([dc0e1e5](https://github.com/haiwen/seadoc-editor/commit/dc0e1e5b1f7f1342aeee5e8c67f1bea4ce228efb))
+
 ## [3.0.246](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.242...%40seafile%2Fsdoc-editor%403.0.246) (2026-09-28)
 
 ### Bug Fixes
