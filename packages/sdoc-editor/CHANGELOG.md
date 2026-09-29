@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.248](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.248) (2026-09-29)
+
+### Bug Fixes
+
+- stabilize side toolbar drag and drop ([f9f1417](https://github.com/haiwen/seadoc-editor/commit/f9f141711acf7d061069d4d338e1501833ca5206))
+
 ## [3.0.247](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.247) (2026-09-29)
 
 ### Bug Fixes

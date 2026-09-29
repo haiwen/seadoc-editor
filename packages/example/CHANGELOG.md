@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.248](https://github.com/haiwen/seadoc-editor/compare/example%400.1.1...example%403.0.248) (2026-09-29)
+
+### Bug Fixes
+
+- fix image preview close toaster bug ([#240](https://github.com/haiwen/seadoc-editor/issues/240)) ([c499f7b](https://github.com/haiwen/seadoc-editor/commit/c499f7b1ac520907b83145badc10a1abb8d61eff))
+- optimize code ([#219](https://github.com/haiwen/seadoc-editor/issues/219)) ([b7f2534](https://github.com/haiwen/seadoc-editor/commit/b7f253485b99183e4a7c95dbc57eb73fc9f8ffd9))
+- resolve wiki link page ui ([#222](https://github.com/haiwen/seadoc-editor/issues/222)) ([abe2478](https://github.com/haiwen/seadoc-editor/commit/abe2478caa2fa15221383c276618579622b5837a))
+
+### Features
+
+- add embed link ([#214](https://github.com/haiwen/seadoc-editor/issues/214)) ([3e3a912](https://github.com/haiwen/seadoc-editor/commit/3e3a9124ebfe33bcd09f0bad60c55bdb2dbc08ab))
+- add export operation ([#231](https://github.com/haiwen/seadoc-editor/issues/231)) ([d5c119b](https://github.com/haiwen/seadoc-editor/commit/d5c119b148559cd829aa5aef4a7f633eff3b39c1))
+- add resizer ([#220](https://github.com/haiwen/seadoc-editor/issues/220)) ([22b0215](https://github.com/haiwen/seadoc-editor/commit/22b021573df75edab89302337b2b36d07fc7f6a8))
+- configure Seadoc video upload limit ([#314](https://github.com/haiwen/seadoc-editor/issues/314)) ([07858e5](https://github.com/haiwen/seadoc-editor/commit/07858e5067ada7977d61dbc9333c491f03b5a464))
+- translation ([#197](https://github.com/haiwen/seadoc-editor/issues/197)) ([e5eaba1](https://github.com/haiwen/seadoc-editor/commit/e5eaba110b9dc17e91a6d80553e5569a2bc3be12))
+
 ## 0.1.1 (2026-02-24)
 
 ### Bug Fixes
