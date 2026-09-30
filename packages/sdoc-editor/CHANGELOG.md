@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.250](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.249...%40seafile%2Fsdoc-editor%403.0.250) (2026-09-30)
+
+### Bug Fixes
+
+- avoid side drop on cancelled drag ([076859d](https://github.com/haiwen/seadoc-editor/commit/076859de0211cf0278cdeabc78e8263012cef916))
+
+## [3.0.249](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.248...%40seafile%2Fsdoc-editor%403.0.249) (2026-09-30)
+
+### Bug Fixes
+
+- scope side toolbar drag events to editor container ([19f8dd3](https://github.com/haiwen/seadoc-editor/commit/19f8dd3d4425f45bcfea64590d548f6421066790))
+
+## [3.0.248](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.248) (2026-09-29)
+
+### Bug Fixes
+
+- stabilize side toolbar drag and drop ([f9f1417](https://github.com/haiwen/seadoc-editor/commit/f9f141711acf7d061069d4d338e1501833ca5206))
+
+## [3.0.247](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.247) (2026-09-29)
+
+### Bug Fixes
+
+- stabilize side toolbar drag and drop ([f9f1417](https://github.com/haiwen/seadoc-editor/commit/f9f141711acf7d061069d4d338e1501833ca5206))
+
 ## [3.0.246](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.242...%40seafile%2Fsdoc-editor%403.0.246) (2026-09-28)
 
 ### Bug Fixes
