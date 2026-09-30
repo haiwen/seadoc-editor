@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.249](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.248...%40seafile%2Fsdoc-editor%403.0.249) (2026-09-30)
+
+### Bug Fixes
+
+- scope side toolbar drag events to editor container ([19f8dd3](https://github.com/haiwen/seadoc-editor/commit/19f8dd3d4425f45bcfea64590d548f6421066790))
+
 ## [3.0.248](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.248) (2026-09-29)
 
 ### Bug Fixes
