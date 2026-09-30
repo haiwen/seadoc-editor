@@ -841,18 +841,11 @@ const SideToolbar = () => {
   }, [handleDrop, isEditorDrag, resetDragState]);
 
   const handleDragEnd = useCallback(() => {
-    // Both the document listener and React's onDragEnd can observe the same
-    // native event. Only the first one owns the drag session and may commit it.
+    // dragend also fires when the user cancels a drag or releases outside the
+    // editor. Only a confirmed drop event may mutate the Slate document.
     if (!isDraggingEditorElementRef.current) return;
-
-    // Some deployed browsers do not deliver the drop event to the editor.
-    // The source draggable still receives dragend, so commit a pending side
-    // drop here as a fallback.
-    if (pendingSideDropRef.current) {
-      handleDrop();
-    }
     resetDragState();
-  }, [handleDrop, resetDragState]);
+  }, [resetDragState]);
 
   useEffect(() => {
     const editorContainer = getEditorContainer();
