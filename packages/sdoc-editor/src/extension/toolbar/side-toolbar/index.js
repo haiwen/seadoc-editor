@@ -34,12 +34,21 @@ const SideToolbar = () => {
   const menuRef = useRef(null);
   const sideToolbarContainerRef = useRef(null);
   const sourceElementRef = useRef(null);
+  const isDraggingEditorElementRef = useRef(false);
+
+  const getEditorContainer = useCallback(() => (
+    sideToolbarContainerRef.current?.closest('.sdoc-article-container')
+  ), []);
 
   const isEventInCurrentEditor = useCallback((event) => {
-    const editorContainer = sideToolbarContainerRef.current?.closest('.sdoc-article-container');
+    const editorContainer = getEditorContainer();
     const eventTarget = event.target || event.currentTarget;
     return Boolean(editorContainer && eventTarget && editorContainer.contains(eventTarget));
-  }, []);
+  }, [getEditorContainer]);
+
+  const isEditorDrag = useCallback(() => (
+    isDraggingEditorElementRef.current
+  ), []);
   const [slateNode, setSlateNode] = useState(null);
   const [sidePosition, setSidePosition] = useState({});
   const [isNodeEmpty, setNodeEmpty] = useState(false);
@@ -53,6 +62,7 @@ const SideToolbar = () => {
   const showSelectedNodesRef = useRef(null);
   const draggedPreviewContainer = useRef(null);
   const activeDragElRef = useRef(null);
+  const pendingSideDropRef = useRef(null);
 
   const onReset = useCallback(() => {
     setShowSideMenu(false);
@@ -227,6 +237,7 @@ const SideToolbar = () => {
   const dragStart = useCallback((event) => {
     event.stopPropagation();
     sourceElementRef.current = null;
+    isDraggingEditorElementRef.current = true;
     // Create the preview container when dragging more than one listNodes
     const noDrag = Path.equals(editor.selection.focus.path, editor.selection.anchor.path);
     if (showSelectedNodesRef.current && showSelectedNodesRef.current.length > 1 && !noDrag ) {
@@ -271,14 +282,13 @@ const SideToolbar = () => {
   const dragOver = useCallback((event) => {
     if (!isEventInCurrentEditor(event)) return;
 
-    const dragTypes = event.dataTransfer.types;
-    if (!dragTypes.includes(DRAG_SDOC_EDITOR_ELEMENT)) return;
+    if (!isEditorDrag()) return;
 
     const overElement = event.currentTarget;
     if (!overElement.classList.contains('sdoc-dragging')) {
       overElement.classList.add('sdoc-dragging');
     }
-  }, [isEventInCurrentEditor]);
+  }, [isEditorDrag, isEventInCurrentEditor]);
 
   const dragLeave = useCallback((event) => {
     if (!isEventInCurrentEditor(event)) return;
@@ -291,8 +301,8 @@ const SideToolbar = () => {
     if (!isEventInCurrentEditor(event)) return;
     const targetElement = event.currentTarget;
     targetElement.classList.remove('sdoc-dragging');
-    const dragTypes = event.dataTransfer.types;
-    if (!dragTypes.includes(DRAG_SDOC_EDITOR_ELEMENT) && dragTypes[0] !== 'Files') return;
+    const dragTypes = event.dataTransfer?.types || [];
+    if (!isEditorDrag() && dragTypes[0] !== 'Files') return;
 
     // Prevent dragging table data to the editor
     if (dragTypes.includes(TABLE_DRAG_KEY)) return;
@@ -532,7 +542,7 @@ const SideToolbar = () => {
 
     // reset
     sourceElementRef.current = null;
-  }, [editor, isEventInCurrentEditor]);
+  }, [editor, isEditorDrag, isEventInCurrentEditor]);
 
   useEffect(() => {
     const eventBus = EventBus.getInstance();
@@ -557,16 +567,19 @@ const SideToolbar = () => {
   const clearAllDragStyles = useCallback(() => {
     clearDragClass(activeDragElRef.current);
     activeDragElRef.current = null;
+    pendingSideDropRef.current = null;
   }, []);
 
-  const handleDragover = useCallback((event) => {
-    event.preventDefault();
+  const resetDragState = useCallback(() => {
+    clearAllDragStyles();
+    sourceElementRef.current = null;
+    isDraggingEditorElementRef.current = false;
+  }, [clearAllDragStyles]);
 
-    const dragTypes = event.dataTransfer?.types;
-    if (!dragTypes?.includes(DRAG_SDOC_EDITOR_ELEMENT)) {
-      clearAllDragStyles();
-      return;
-    }
+  const handleDragover = useCallback((event) => {
+    if (!isEditorDrag()) return;
+
+    event.preventDefault();
 
     const [sourceNode, sourcePath] = getSafeNodeEntry(editor, sourceElementRef.current);
     if (!sourceNode || !sourcePath) {
@@ -590,7 +603,11 @@ const SideToolbar = () => {
     const x = event.clientX;
     const y = event.clientY;
 
-    const editorContainer = event.currentTarget;
+    const editorContainer = getEditorContainer();
+    if (!editorContainer) {
+      clearAllDragStyles();
+      return;
+    }
     const containerRect = editorContainer.getBoundingClientRect();
 
     // Current visible area of editor container
@@ -691,6 +708,10 @@ const SideToolbar = () => {
       if (activeColumn) {
         activeColumn.classList.add(`sdoc-dragging-${activeDirection}`);
         activeDragElRef.current = activeColumn;
+        pendingSideDropRef.current = {
+          element: activeColumn,
+          direction: activeDirection,
+        };
       } else {
         clearAllDragStyles();
       }
@@ -708,21 +729,43 @@ const SideToolbar = () => {
       target.el.classList.remove('sdoc-dragging-right');
       target.el.classList.remove('sdoc-dragging');
       activeDragElRef.current = target.el;
+      pendingSideDropRef.current = {
+        element: target.el,
+        direction: 'left',
+      };
     } else if (isRightDropZone) {
       target.el.classList.add('sdoc-dragging-right');
       target.el.classList.remove('sdoc-dragging-left');
       target.el.classList.remove('sdoc-dragging');
       activeDragElRef.current = target.el;
+      pendingSideDropRef.current = {
+        element: target.el,
+        direction: 'right',
+      };
     } else {
       clearAllDragStyles();
     }
-  }, [clearAllDragStyles, editor]);
+  }, [clearAllDragStyles, editor, getEditorContainer, isEditorDrag]);
+
+  const handleDragLeave = useCallback((event) => {
+    const editorContainer = event.currentTarget;
+    const relatedTarget = event.relatedTarget;
+
+    // Ignore dragleave events from descendants. Some browsers report a null
+    // relatedTarget when moving between block elements, so clearing here
+    // would remove the active drop zone before the drop event arrives.
+    const isLeavingEditor = event.target === editorContainer
+      && (!relatedTarget || !editorContainer.contains(relatedTarget));
+    if (isLeavingEditor) clearAllDragStyles();
+  }, [clearAllDragStyles]);
 
   const handleDrop = useCallback(() => {
-    const targetEl = activeDragElRef.current;
-    const hasSideDropClass = targetEl?.classList.contains('sdoc-dragging-left')
-      || targetEl?.classList.contains('sdoc-dragging-right');
-    if (!hasSideDropClass) return false;
+    const pendingDrop = pendingSideDropRef.current;
+    const targetEl = pendingDrop?.element || activeDragElRef.current;
+    const direction = pendingDrop?.direction
+      || (targetEl?.classList.contains('sdoc-dragging-left') ? 'left' : null)
+      || (targetEl?.classList.contains('sdoc-dragging-right') ? 'right' : null);
+    if (!targetEl || !direction) return false;
 
     let [targetNode, targetPath] = getSafeNodeEntry(editor, targetEl);
     let [sourceNode, sourcePath] = getSafeNodeEntry(editor, sourceElementRef.current);
@@ -738,13 +781,13 @@ const SideToolbar = () => {
     if (COLUMN === targetNode.type) {
       const topTargetNode = Node.get(editor, [targetPath[0]]); // Top multi column Node
       // Insert source node into last of multi column
-      if (targetEl.classList.contains('sdoc-dragging-right')) {
+      if (direction === 'right') {
         addLastColumnInMultiColumn(editor, topTargetNode, targetPath);
         Transforms.moveNodes(editor, { at: [sourcePath[0]], to: [targetPath[0], targetPath[1] + 1, 0] });
         return true;
       }
       // Insert source node into middle of multi column
-      if (targetEl.classList.contains('sdoc-dragging-left')) {
+      if (direction === 'left') {
         addMiddleColumnInMultiColumn(editor, topTargetNode, targetPath);
         Transforms.moveNodes(editor, { at: [sourcePath[0]], to: [targetPath[0], targetPath[1], 0] });
         return true;
@@ -761,10 +804,10 @@ const SideToolbar = () => {
     if (Path.equals([sourcePath[0]], [targetPath[0]])) return true;
     let leftNode = null;
     let rightNode = null;
-    if (targetEl.classList.contains('sdoc-dragging-left')) {
+    if (direction === 'left') {
       leftNode = sourceNode;
       rightNode = targetNode;
-    } else if (targetEl.classList.contains('sdoc-dragging-right')) {
+    } else if (direction === 'right') {
       leftNode = targetNode;
       rightNode = sourceNode;
     } else {
@@ -780,45 +823,55 @@ const SideToolbar = () => {
   }, [editor]);
 
   const handleDropCapture = useCallback((event) => {
-    const dragTypes = event.dataTransfer?.types;
-    if (!dragTypes?.includes(DRAG_SDOC_EDITOR_ELEMENT)) return;
+    if (!isEditorDrag() || !pendingSideDropRef.current) return;
 
-    const targetEl = activeDragElRef.current;
-    const hasSideDropClass = targetEl?.classList.contains('sdoc-dragging-left')
-      || targetEl?.classList.contains('sdoc-dragging-right');
-    if (!hasSideDropClass) return;
+    // Stop the normal block drop before mutating Slate. The actual target and
+    // direction were recorded during dragover, so this path does not depend
+    // on the final drop event target or on a final dragover being delivered.
+    event.preventDefault();
+    event.stopPropagation();
 
     const handled = handleDrop();
     if (!handled) {
-      clearAllDragStyles();
+      resetDragState();
       return;
     }
 
-    // Only side drops create/extend a multi-column. Stop before the block
-    // handlers can process the same drop and mutate Slate a second time.
-    event.preventDefault();
-    event.stopPropagation();
-    clearAllDragStyles();
-    sourceElementRef.current = null;
-  }, [clearAllDragStyles, handleDrop]);
+    resetDragState();
+  }, [handleDrop, isEditorDrag, resetDragState]);
+
+  const handleDragEnd = useCallback(() => {
+    // Both the document listener and React's onDragEnd can observe the same
+    // native event. Only the first one owns the drag session and may commit it.
+    if (!isDraggingEditorElementRef.current) return;
+
+    // Some deployed browsers do not deliver the drop event to the editor.
+    // The source draggable still receives dragend, so commit a pending side
+    // drop here as a fallback.
+    if (pendingSideDropRef.current) {
+      handleDrop();
+    }
+    resetDragState();
+  }, [handleDrop, resetDragState]);
 
   useEffect(() => {
-    const editorContainer = sideToolbarContainerRef.current?.closest('.sdoc-article-container');
+    const editorContainer = getEditorContainer();
     if (!editorContainer) return undefined;
 
-    // Capture dragover/drop because block-level handlers stop propagation.
+    // Keep drag events scoped to the current editor container. Capture phase
+    // still lets this handler run before block-level handlers in the editor.
     editorContainer.addEventListener('dragover', handleDragover, true);
-    editorContainer.addEventListener('dragend', clearAllDragStyles, true);
-    editorContainer.addEventListener('dragleave', clearAllDragStyles, true);
+    editorContainer.addEventListener('dragend', handleDragEnd, true);
+    editorContainer.addEventListener('dragleave', handleDragLeave, true);
     editorContainer.addEventListener('drop', handleDropCapture, true);
 
     return () => {
       editorContainer.removeEventListener('dragover', handleDragover, true);
-      editorContainer.removeEventListener('dragend', clearAllDragStyles, true);
-      editorContainer.removeEventListener('dragleave', clearAllDragStyles, true);
+      editorContainer.removeEventListener('dragend', handleDragEnd, true);
+      editorContainer.removeEventListener('dragleave', handleDragLeave, true);
       editorContainer.removeEventListener('drop', handleDropCapture, true);
     };
-  }, [clearAllDragStyles, handleDragover, handleDropCapture]);
+  }, [getEditorContainer, handleDragEnd, handleDragLeave, handleDragover, handleDropCapture]);
 
   return (
     <>
@@ -835,6 +888,7 @@ const SideToolbar = () => {
               onMouseDown={onMouseDown}
               draggable={true}
               onDragStart={dragStart}
+              onDragEnd={handleDragEnd}
               className='sdoc-side-op-icon'
               onClick={onShowSideMenuToggle}
               onMouseEnter={onMouseEnter}
