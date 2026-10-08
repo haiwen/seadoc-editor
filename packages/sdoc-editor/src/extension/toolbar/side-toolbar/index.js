@@ -17,7 +17,8 @@ import SideMenu from './side-menu';
 
 import './index.css';
 
-const HORIZONTAL_DROP_ZONE_WIDTH = 48;
+// Keep the visual drop indicator narrow, but make the invisible hit area easier to reach.
+const HORIZONTAL_DROP_ZONE_WIDTH = 72;
 
 const getSafeNodeEntry = (editor, element) => {
   try {
@@ -238,6 +239,7 @@ const SideToolbar = () => {
     event.stopPropagation();
     sourceElementRef.current = null;
     isDraggingEditorElementRef.current = true;
+    event.dataTransfer.effectAllowed = 'move';
     // Create the preview container when dragging more than one listNodes
     const noDrag = Path.equals(editor.selection.focus.path, editor.selection.anchor.path);
     if (showSelectedNodesRef.current && showSelectedNodesRef.current.length > 1 && !noDrag ) {
@@ -579,8 +581,6 @@ const SideToolbar = () => {
   const handleDragover = useCallback((event) => {
     if (!isEditorDrag()) return;
 
-    event.preventDefault();
-
     const [sourceNode, sourcePath] = getSafeNodeEntry(editor, sourceElementRef.current);
     if (!sourceNode || !sourcePath) {
       clearAllDragStyles();
@@ -605,6 +605,11 @@ const SideToolbar = () => {
 
     const editorContainer = getEditorContainer();
     if (!editorContainer) {
+      clearAllDragStyles();
+      return;
+    }
+    const eventEditorContainer = event.target?.closest?.('.sdoc-article-container');
+    if (eventEditorContainer && eventEditorContainer !== editorContainer) {
       clearAllDragStyles();
       return;
     }
@@ -706,6 +711,9 @@ const SideToolbar = () => {
       });
 
       if (activeColumn) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.dataTransfer.dropEffect = 'move';
         activeColumn.classList.add(`sdoc-dragging-${activeDirection}`);
         activeDragElRef.current = activeColumn;
         pendingSideDropRef.current = {
@@ -744,12 +752,20 @@ const SideToolbar = () => {
       };
     } else {
       clearAllDragStyles();
+      return;
     }
+    event.preventDefault();
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'move';
   }, [clearAllDragStyles, editor, getEditorContainer, isEditorDrag]);
 
   const handleDragLeave = useCallback((event) => {
     const editorContainer = event.currentTarget;
     const relatedTarget = event.relatedTarget;
+    const pendingDropElement = pendingSideDropRef.current?.element;
+
+    // Preserve a pending move within this editor until drop or dragend.
+    if (pendingDropElement && editorContainer.contains(pendingDropElement)) return;
 
     // Ignore dragleave events from descendants. Some browsers report a null
     // relatedTarget when moving between block elements, so clearing here
@@ -823,22 +839,15 @@ const SideToolbar = () => {
   }, [editor]);
 
   const handleDropCapture = useCallback((event) => {
-    if (!isEditorDrag() || !pendingSideDropRef.current) return;
+    if (!isEditorDrag()) return;
 
-    // Stop the normal block drop before mutating Slate. The actual target and
-    // direction were recorded during dragover, so this path does not depend
-    // on the final drop event target or on a final dragover being delivered.
-    event.preventDefault();
-    event.stopPropagation();
+    // Recheck the final position and stop the normal block drop for side hits.
+    handleDragover(event);
+    if (!pendingSideDropRef.current) return;
 
-    const handled = handleDrop();
-    if (!handled) {
-      resetDragState();
-      return;
-    }
-
+    handleDrop();
     resetDragState();
-  }, [handleDrop, isEditorDrag, resetDragState]);
+  }, [handleDragover, handleDrop, isEditorDrag, resetDragState]);
 
   const handleDragEnd = useCallback(() => {
     // dragend also fires when the user cancels a drag or releases outside the
@@ -851,18 +860,19 @@ const SideToolbar = () => {
     const editorContainer = getEditorContainer();
     if (!editorContainer) return undefined;
 
-    // Keep drag events scoped to the current editor container. Capture phase
-    // still lets this handler run before block-level handlers in the editor.
-    editorContainer.addEventListener('dragover', handleDragover, true);
+    // Side hit areas can extend outside the editor container. Accept them at
+    // document level, while the handlers still validate this editor's drag.
+    const dragEventTarget = editorContainer.ownerDocument;
+    dragEventTarget.addEventListener('dragover', handleDragover, true);
     editorContainer.addEventListener('dragend', handleDragEnd, true);
     editorContainer.addEventListener('dragleave', handleDragLeave, true);
-    editorContainer.addEventListener('drop', handleDropCapture, true);
+    dragEventTarget.addEventListener('drop', handleDropCapture, true);
 
     return () => {
-      editorContainer.removeEventListener('dragover', handleDragover, true);
+      dragEventTarget.removeEventListener('dragover', handleDragover, true);
       editorContainer.removeEventListener('dragend', handleDragEnd, true);
       editorContainer.removeEventListener('dragleave', handleDragLeave, true);
-      editorContainer.removeEventListener('drop', handleDropCapture, true);
+      dragEventTarget.removeEventListener('drop', handleDropCapture, true);
     };
   }, [getEditorContainer, handleDragEnd, handleDragLeave, handleDragover, handleDropCapture]);
 
@@ -881,7 +891,6 @@ const SideToolbar = () => {
               onMouseDown={onMouseDown}
               draggable={true}
               onDragStart={dragStart}
-              onDragEnd={handleDragEnd}
               className='sdoc-side-op-icon'
               onClick={onShowSideMenuToggle}
               onMouseEnter={onMouseEnter}
