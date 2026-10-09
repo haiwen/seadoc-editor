@@ -13,6 +13,27 @@ const updateImageNode = async (editor, element, newUrl, isError = false) => {
   Transforms.setNodes(editor, { data: newData }, { at: nodePath });
 };
 
+// Prevent SSRF: block requests to loopback, link-local (incl. cloud metadata) and private network ranges
+const isForbiddenImageUrl = (urlString) => {
+  try {
+    const { protocol, hostname } = new URL(urlString);
+    if (protocol !== 'http:' && protocol !== 'https:') return true;
+    if (hostname === 'localhost' || hostname === '::1') return true;
+    const ipv4 = hostname.match(/^(\d{1,3})\.(\d{1,3})\.\d{1,3}\.\d{1,3}$/);
+    if (ipv4) {
+      const first = parseInt(ipv4[1], 10);
+      const second = parseInt(ipv4[2], 10);
+      if (first === 127 || first === 10 || first === 0) return true;
+      if (first === 169 && second === 254) return true;
+      if (first === 172 && second >= 16 && second <= 31) return true;
+      if (first === 192 && second === 168) return true;
+    }
+    return false;
+  } catch (e) {
+    return true;
+  }
+};
+
 const useCopyImage = ({ editor, element }) => {
   const { data } = element;
   const { is_copy_error = false } = data;
