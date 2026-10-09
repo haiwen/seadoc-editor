@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly, useSelected } from '@seafile/slate-react';
 import classNames from 'classnames';
-import isUrl from 'is-url';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
+import { normalizeWebUrl } from '../../../utils/url-utils';
 import { focusEditor } from '../../core';
 import { getMenuPosition } from '../../utils';
 import { DEFAULT_EMBED_LINK_HEIGHT, EMBED_LINK_SOURCE, MAX_EMBED_LINK_HEIGHT, MIN_EMBED_LINK_HEIGHT } from './constants';
@@ -32,14 +32,10 @@ const EmbedLink = ({ editor, element }) => {
 
   const { link: originalLink, link_type } = element;
 
-  let link = originalLink;
-  if (link_type === EMBED_LINK_SOURCE.FIGMA) {
-    link = normalizeFigmaEmbedLink(originalLink);
-  }
-
-  const isValidUrl = useMemo(() => {
-    return isUrl(link);
-  }, [link]);
+  const link = useMemo(() => normalizeWebUrl(
+    link_type === EMBED_LINK_SOURCE.FIGMA ? normalizeFigmaEmbedLink(originalLink) : originalLink
+  ), [originalLink, link_type]);
+  const isValidUrl = Boolean(link);
 
   const registerEvent = useCallback((eventList) => {
     eventList.forEach(element => {
@@ -136,7 +132,7 @@ const EmbedLink = ({ editor, element }) => {
   const handleDoubleClick = (event) => {
     event.preventDefault();
     if (!isValidUrl) return;
-    window.open(link, '_blank');
+    window.open(link, '_blank', 'noopener,noreferrer');
     return;
   };
 
@@ -241,7 +237,7 @@ const EmbedLink = ({ editor, element }) => {
           onDeleteEmbedLink={onDeleteEmbedLink}
         />
       }
-      {isShowZoomOut && (
+      {isShowZoomOut && isValidUrl && (
         ReactDOM.createPortal(
           <div className='embed-link-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
             <iframe

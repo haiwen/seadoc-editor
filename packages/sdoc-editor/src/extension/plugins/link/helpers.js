@@ -2,6 +2,7 @@ import { Editor, Transforms, Range, Path, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import slugid from 'slugid';
 import { WIKI_EDITOR } from '../../../constants';
+import { isValidWebUrl, normalizeWebUrl } from '../../../utils/url-utils';
 import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, IMAGE_BLOCK, INSERT_POSITION, LINK, LIST_ITEM, PARAGRAPH } from '../../constants';
 import { getNodeType, getSelectedElems, getAboveNode, getEditorString, replaceNodeChildren, generateEmptyElement } from '../../core';
 
@@ -20,18 +21,13 @@ export const isMenuDisabled = (editor, readonly) => {
   return false; // enable
 };
 
-export const checkLink = (url) => {
-  if (url.indexOf('http') !== 0) {
-    return true;
-  }
-  return false;
-};
+export const checkLink = (url) => !isValidWebUrl(url);
 
 export const genLinkNode = (url, text, nodeId, pageId) => {
   const linkNode = {
     id: slugid.nice(),
     type: 'link',
-    href: url || '',
+    href: normalizeWebUrl(url),
     title: text,
     linked_id: nodeId || '',
     linked_wiki_page_id: pageId || '',
@@ -65,7 +61,7 @@ export const insertLink = (editor, title, url, position = INSERT_POSITION.CURREN
     return;
   }
   if (position === INSERT_POSITION.CURRENT && isMenuDisabled(editor)) return;
-  if (!title || (!url && !linkedNodeId && !selectedPageId)) return;
+  if (!title || (!normalizeWebUrl(url) && !linkedNodeId && !selectedPageId)) return;
 
   let linkNode = genLinkNode(url, title);
   if (linkedNodeId) {
@@ -114,6 +110,8 @@ export const insertLink = (editor, title, url, position = INSERT_POSITION.CURREN
 };
 
 export const updateLink = (editor, newText, newUrl, linkedNodeId, linkedPageId) => {
+  const href = normalizeWebUrl(newUrl);
+  if (!href && !linkedNodeId && !linkedPageId) return false;
 
   // Update children
   const linkAbove = getAboveNode(editor, { match: { type: LINK } });
@@ -145,11 +143,11 @@ export const updateLink = (editor, newText, newUrl, linkedNodeId, linkedPageId) 
         Transforms.setNodes(editor, { title: newText }, { at: linkAbove[1] });
       }
     }
-    if (!linkedNodeId && !linkedPageId && (oldUrl !== newUrl || oldText !== newText)) {
+    if (!linkedNodeId && !linkedPageId && (oldUrl !== href || oldText !== newText)) {
       if (editor.editorType === WIKI_EDITOR) {
-        Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '', linked_wiki_page_id: '' }, { at: linkAbove[1] });
+        Transforms.setNodes(editor, { href, title: newText, linked_id: '', linked_wiki_page_id: '' }, { at: linkAbove[1] });
       } else {
-        Transforms.setNodes(editor, { href: newUrl, title: newText, linked_id: '' }, { at: linkAbove[1] });
+        Transforms.setNodes(editor, { href, title: newText, linked_id: '' }, { at: linkAbove[1] });
       }
     }
     upsertLinkText(editor, { text: newText });

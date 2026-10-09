@@ -1,6 +1,7 @@
 import slugid from 'slugid';
+import { normalizeWebUrl } from '../../../../utils/url-utils';
 import { IMAGE, LINK } from '../../../constants';
-import { getOnlyImageChild, normalizeWebUrl } from '../../image/link-helpers';
+import { getOnlyImageChild } from '../../image/link-helpers';
 
 const linkRule = (element, parseChild) => {
   const { nodeName } = element;
@@ -45,10 +46,12 @@ const linkRule = (element, parseChild) => {
       });
     }
     if (!content) return { id: slugid.nice(), text: '' };
+    const href = normalizeWebUrl(element.getAttribute('href'));
+    if (!href) return { id: slugid.nice(), text: content };
     return {
       id: slugid.nice(),
       type: LINK,
-      href: element.getAttribute('href'),
+      href,
       title: element.getAttribute('title'),
       children: [
         {

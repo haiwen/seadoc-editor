@@ -1,5 +1,8 @@
+/* eslint-disable no-script-url -- Regression tests intentionally exercise unsafe URL schemes. */
 import {
+  checkLink,
   decodeLinkUrl,
+  genLinkNode,
   getLinkFileInfo,
   isCommonFile,
   isExdrawFile,
@@ -49,5 +52,31 @@ describe('link file info helpers', () => {
 
     expect(decodeLinkUrl(url)).toBe(url);
     expect(isSdocFile(getLinkFileInfo(res, url))).toBe(true);
+  });
+});
+
+
+describe('link URL validation', () => {
+  it.each([
+    'javascript://example.com/%0Avoid(document.body.dataset.ipd=1)',
+    'httpx://example.com',
+    'http-invalid',
+    '//example.com',
+    '',
+    null,
+  ])('flags unsafe or invalid links: %p', (url) => {
+    expect(checkLink(url)).toBe(true);
+    expect(genLinkNode(url, 'Caption').href).toBe('');
+  });
+
+  it('normalizes valid links when creating a node', () => {
+    expect(checkLink(' HTTPS://EXAMPLE.COM ')).toBe(false);
+    expect(genLinkNode(' HTTPS://EXAMPLE.COM ', 'Caption').href).toBe('https://example.com/');
+  });
+
+  it('keeps internal block and wiki identifiers without an external URL', () => {
+    expect(genLinkNode('', 'Caption', 'block-id', 'page-id')).toMatchObject({
+      href: '', linked_id: 'block-id', linked_wiki_page_id: 'page-id',
+    });
   });
 });

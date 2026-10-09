@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url -- Regression tests intentionally exercise unsafe URL schemes. */
 /** @jsx jsx */
 import { withReact } from '@seafile/slate-react';
 import context from '../../../../src/context';
@@ -130,7 +131,7 @@ describe('toggle link test', () => {
         <editor>
           <hp>
             <htext> </htext>
-            <ha href='http://localhost:7003' title='新测试链接' linked_id=''>
+            <ha href='http://localhost:7003/' title='新测试链接' linked_id=''>
               新测试链接
             </ha>
             <htext> </htext>
@@ -237,8 +238,15 @@ describe('paste encoded internal file link', () => {
     jest.restoreAllMocks();
   });
 
-  it('looks up file info with the decoded URL', async () => {
+  it.each([
+    ['https://example.com', 'https://example.com'],
+    ['https://example.com:443', 'https://example.com:443'],
+    ['https://EXAMPLE.COM', 'https://EXAMPLE.COM'],
+    ['https://EXAMPLE.COM:443', 'https://example.com'],
+    ['https://example.com', 'https://EXAMPLE.COM:443'],
+  ])('looks up internal files with service URL %s and pasted origin %s', async (serviceUrl, pastedOrigin) => {
     const encodedUrl = 'https://example.com/f/repo/?p=%E4%B8%AD%E6%96%87';
+    const pastedUrl = pastedOrigin + '/f/repo/?p=%E4%B8%AD%E6%96%87';
     const decodedUrl = decodeURIComponent(encodedUrl);
     const insertSdocFileLink = jest.spyOn(sdocLinkHelpers, 'insertSdocFileLink').mockImplementation(() => {});
     const getLinkFilesInfo = jest.spyOn(context, 'getLinkFilesInfo').mockResolvedValue({
@@ -253,7 +261,7 @@ describe('paste encoded internal file link', () => {
         },
       },
     });
-    context.initSSRSettings({ serviceUrl: 'https://example.com' });
+    context.initSSRSettings({ serviceUrl });
 
     const input = (
       <editor>
@@ -264,11 +272,36 @@ describe('paste encoded internal file link', () => {
     const editor = createSdocEditor(input, [withReact, LinkPlugin.editorPlugin]);
 
     await editor.insertData({
-      getData: (type) => type === 'text/plain' ? encodedUrl : '',
+      getData: (type) => type === 'text/plain' ? pastedUrl : '',
       types: ['text/plain'],
     });
 
     expect(getLinkFilesInfo).toHaveBeenCalledWith([encodedUrl]);
     expect(insertSdocFileLink).toHaveBeenCalledWith(editor, '中文.sdoc', 'sdoc-uuid');
+  });
+});
+
+
+describe('unsafe pasted links', () => {
+  it.each([
+    'javascript://example.com/%0Avoid(document.body.dataset.ipd=1)',
+    'JaVaScRiPt://example.com/%0Aalert(1)',
+    'httpx://example.com',
+  ])('pastes an unsafe URL as plain text: %s', async (text) => {
+    const input = (
+      <editor>
+        <hp><cursor /></hp>
+      </editor>
+    );
+    const editor = createSdocEditor(input, [withReact, LinkPlugin.editorPlugin]);
+
+    await editor.insertData({
+      getData: (type) => type === 'text/plain' ? text : '',
+      types: ['text/plain'],
+    });
+
+    expect(formatChildren(editor.children)).toEqual([
+      { type: 'paragraph', children: [{ text }] },
+    ]);
   });
 });

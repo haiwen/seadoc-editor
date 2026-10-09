@@ -74,7 +74,7 @@ describe('linked image test', () => {
         children: [
           {
             type: 'link',
-            url: 'https://dev.seafile.com',
+            url: 'https://dev.seafile.com/',
             title: null,
             children: [{ type: 'image', url: 'image.jpg', alt: null, title: null }]
           }

@@ -1,6 +1,7 @@
 import { Editor, Path, Range, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import slugid from 'slugid';
+import { normalizeWebUrl } from '../../../utils/url-utils';
 import { CODE_BLOCK, INSERT_POSITION, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, TOGGLE_CONTENT, TOGGLE_TITLE_TYPES } from '../../constants';
 import { EMBED_LINK } from '../../constants/element-type';
 import { focusEditor, generateDefaultParagraph, getNode, getNodeType, getParentNode, getSelectedNodeEntryByType, isTextNode } from '../../core';
@@ -43,7 +44,8 @@ export const isInsertEmbedLinkDisabled = (editor, readonly) => {
 };
 
 export const getEmbedLinkType = (text) => {
-  const link = text.trim();
+  const link = normalizeWebUrl(text);
+  if (!link) return null;
   try {
     const url = new URL(link);
     const host = url.hostname.toLowerCase();
@@ -71,7 +73,8 @@ export const getEmbedLinkType = (text) => {
 };
 
 export const normalizeFigmaEmbedLink = (text) => {
-  const link = text.trim();
+  const link = normalizeWebUrl(text);
+  if (!link) return null;
   try {
     const url = new URL(link);
     const host = url.hostname.toLowerCase();
@@ -98,7 +101,7 @@ export const generateEmbedLinkNode = (link, type) => {
   const embedLinkNode = {
     id: slugid.nice(),
     type: EMBED_LINK,
-    link: link,
+    link: normalizeWebUrl(link),
     link_type: type,
     children: [{
       id: slugid.nice(),
@@ -111,7 +114,7 @@ export const generateEmbedLinkNode = (link, type) => {
 
 export const insertEmbedLink = (editor, link, type) => {
   if (isInsertEmbedLinkDisabled(editor)) return;
-  if (editor.selection == null) return;
+  if (editor.selection == null || !normalizeWebUrl(link)) return;
 
   const embedLinkNode = generateEmbedLinkNode(link, type);
   let path = editor.selection?.anchor.path;

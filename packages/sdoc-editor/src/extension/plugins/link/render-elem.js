@@ -2,13 +2,13 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Node, Range } from '@seafile/slate';
 import classnames from 'classnames';
-import isUrl from 'is-url';
-import PropTypes, { element } from 'prop-types';
+import PropTypes from 'prop-types';
 import toaster from '../../../components/toast';
 import { INTERNAL_EVENT } from '../../../constants';
 import { ScrollContext } from '../../../hooks/use-scroll-context';
 import { isMac } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
+import { normalizeWebUrl } from '../../../utils/url-utils';
 import InlineBugFixer from '../../commons/Inline-bug-fix-wrapper';
 import { ELEMENT_TYPE } from '../../constants';
 import { getElementHref, getMenuPosition, isWeChat, unWrapLinkNode } from './helpers';
@@ -86,11 +86,11 @@ class Link extends React.Component {
 
   onLinkClick = (e) => {
     const isModClick = isMac() ? e.metaKey : e.ctrlKey;
-    const { linked_id, linked_wiki_page_id } = this.props.element;
-    const href = getElementHref(element);
+    const { element } = this.props;
+    const { linked_id, linked_wiki_page_id } = element;
     // mod + click
     if (isModClick && !linked_id && !linked_wiki_page_id) {
-      window.open(href, '_blank', 'noreferrer');
+      this.onOpenLink(e);
       return;
     }
     // mod + click on linked wiki page
@@ -99,8 +99,8 @@ class Link extends React.Component {
 
       const parts = href.split('/');
       parts[parts.length - 2] = linked_wiki_page_id;
-      const newHref = parts.join('/');
-      window.open(newHref, '_blank', 'noreferrer');
+      const newHref = normalizeWebUrl(parts.join('/'));
+      if (newHref) window.open(newHref, '_blank', 'noopener,noreferrer');
       return;
     }
 
@@ -121,8 +121,8 @@ class Link extends React.Component {
     event.preventDefault();
 
     const { element, t } = this.props;
-    const href = getElementHref(element);
-    if (!isUrl(href)) {
+    const href = normalizeWebUrl(getElementHref(element));
+    if (!href) {
       toaster.danger(t('The_link_is_invalid'));
       return;
     }
@@ -151,9 +151,12 @@ class Link extends React.Component {
     const linkText = Node.string(element);
 
     if (readonly) {
+      const href = normalizeWebUrl(getElementHref(element));
       return (
         <span className={classnames(className, 'virtual-link')} {...attributes}>
-          <a href={getElementHref(element)} title={linkText} onClick={this.onOpenLink} target='_blank' rel="noreferrer">{children}</a>
+          {href ? (
+            <a href={href} title={linkText} onClick={this.onOpenLink} target='_blank' rel="noopener noreferrer">{children}</a>
+          ) : children}
         </span>
       );
     }

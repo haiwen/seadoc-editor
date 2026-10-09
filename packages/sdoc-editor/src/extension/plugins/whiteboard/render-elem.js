@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { Transforms } from '@seafile/slate';
 import { ReactEditor, useReadOnly, useSelected } from '@seafile/slate-react';
 import classNames from 'classnames';
-import isUrl from 'is-url';
 import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import EventBus from '../../../utils/event-bus';
+import { normalizeWebUrl } from '../../../utils/url-utils';
 import { focusEditor } from '../../core';
 import { getMenuPosition } from '../../utils';
 import WhiteboardHoverMenu from './hover-menu';
@@ -16,7 +16,7 @@ import WhiteboardHoverMenu from './hover-menu';
 import './index.css';
 
 const Whiteboard = ({ editor, element }) => {
-  const { file_path, repo_id, title, link } = element;
+  const { file_path, repo_id, title, link: originalLink } = element;
   const whiteboardRef = useRef();
   const fullscreenRef = useRef();
   const scrollRef = useScrollContext();
@@ -26,9 +26,8 @@ const Whiteboard = ({ editor, element }) => {
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [isShowZoomOut, setIsShowZoomOut] = useState(false);
 
-  const isValidUrl = useMemo(() => {
-    return isUrl(link);
-  }, [link]);
+  const link = useMemo(() => normalizeWebUrl(originalLink), [originalLink]);
+  const isValidUrl = Boolean(link);
 
   useEffect(() => {
     if (!isValidUrl) return;
@@ -181,7 +180,7 @@ const Whiteboard = ({ editor, element }) => {
           onDeleteWhiteboard={onDeleteWhiteboard}
         />
       }
-      {isShowZoomOut && (
+      {isShowZoomOut && isValidUrl && (
         ReactDOM.createPortal(
           <div className='whiteboard-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
             <iframe

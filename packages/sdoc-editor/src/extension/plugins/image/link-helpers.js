@@ -1,21 +1,8 @@
 import context from '../../../context';
+import { normalizeWebUrl } from '../../../utils/url-utils';
 import { getWikiUrl } from '../wiki-link/helpers';
 
-export const normalizeWebUrl = (value = '') => {
-  if (typeof value !== 'string') return '';
-
-  const url = value.trim();
-  if (!/^https?:\/\//i.test(url)) return '';
-
-  try {
-    const parsedUrl = new URL(url);
-    return ['http:', 'https:'].includes(parsedUrl.protocol) && parsedUrl.hostname ? url : '';
-  } catch (error) {
-    return '';
-  }
-};
-
-export const isValidWebUrl = (value = '') => Boolean(normalizeWebUrl(value));
+export { isValidWebUrl, normalizeWebUrl } from '../../../utils/url-utils';
 
 export const isInternalWebUrl = (value = '') => {
   const url = normalizeWebUrl(value);

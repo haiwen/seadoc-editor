@@ -1,11 +1,11 @@
 import { Editor, Transforms, Path, Element, Range } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import isHotkey from 'is-hotkey';
-import isUrl from 'is-url';
 import { INTERNAL_EVENT } from '../../../constants';
 import { removeCommentMarks, replacePastedDataId } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import ObjectUtils from '../../../utils/object-utils';
+import { isValidWebUrl } from '../../../utils/url-utils';
 import { ELEMENT_TYPE, KEYBOARD, PARAGRAPH, CLIPBOARD_FORMAT_KEY, CHECK_LIST_ITEM, ORDERED_LIST, UNORDERED_LIST, TABLE_ROW, TABLE, TABLE_CELL } from '../../constants';
 import { getNodeType, getParentNode, getSelectedNodeByType, isLastNode, generateEmptyElement, focusEditor, getAboveBlockNode, isRangeAcrossBlocks, getStartPoint, getEndPoint, isStartPoint, isEndPoint, getTopLevelBlockNode } from '../../core';
 import { isImage } from '../../utils';
@@ -395,7 +395,7 @@ const withTable = (editor) => {
     if (!text) return;
 
     // Keep URL paste behavior consistent with normal text while preserving multi-cell paste behavior.
-    if (isUrl(text) && !isImage(text) && isInTableSameCell(newEditor)) {
+    if (isValidWebUrl(text) && !isImage(text) && isInTableSameCell(newEditor)) {
       return insertData(data);
     }
 

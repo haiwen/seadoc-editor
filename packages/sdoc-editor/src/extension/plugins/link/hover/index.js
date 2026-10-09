@@ -3,11 +3,11 @@ import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@seafile/slate';
 import { ReactEditor, useReadOnly } from '@seafile/slate-react';
-import isUrl from 'is-url';
 import PropTypes from 'prop-types';
 import toaster from '../../../../components/toast';
 import Tooltip from '../../../../components/tooltip';
 import EventBus from '../../../../utils/event-bus';
+import { normalizeWebUrl } from '../../../../utils/url-utils';
 import { getElementHref, isNodeInCurrentView, isWeChat } from '../helpers';
 
 import './index.css';
@@ -23,8 +23,8 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
   }, []);
 
   const onMouseDown = useCallback((event) => {
-    const href = getElementHref(element);
-    if (!isUrl(href)) {
+    const href = normalizeWebUrl(getElementHref(element));
+    if (!href) {
       event.preventDefault();
       toaster.danger(t('The_link_is_invalid'));
       return;
@@ -32,7 +32,7 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
 
     event.stopPropagation();
     if (!isWeChat()) {
-      window.open(href);
+      window.open(href, '_blank', 'noopener,noreferrer');
     } else {
       // eslint-disable-next-line no-restricted-globals
       location.href = href;

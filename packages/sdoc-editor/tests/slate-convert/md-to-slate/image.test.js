@@ -44,7 +44,7 @@ describe('image test', () => {
               src: 'image.jpg',
               alt: 'alt text',
               title: 'nihadoe',
-              href: 'https://example.com',
+              href: 'https://example.com/',
             },
             children: [{ text: '' }]
           },

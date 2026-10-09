@@ -1,6 +1,6 @@
 import { Node } from '@seafile/slate';
-import { normalizeWebUrl } from '../../extension/plugins/image/link-helpers';
 import isLastCharPunctuation from '../../utils/is-punctuation-mark';
+import { normalizeWebUrl } from '../../utils/url-utils';
 
 const escapeHtmlAttribute = (value) => String(value)
   .replace(/&/g, '&amp;')

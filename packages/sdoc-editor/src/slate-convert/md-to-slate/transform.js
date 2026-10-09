@@ -17,7 +17,7 @@ import {
   DIVIDER,
 } from '../../extension/constants/element-type';
 import { generateDefaultText } from '../../extension/core';
-import { normalizeWebUrl } from '../../extension/plugins/image/link-helpers';
+import { normalizeWebUrl } from '../../utils/url-utils';
 import deserializeHtml from '../html-to-slate';
 
 const INLINE_KEY_MAP = {
