@@ -318,6 +318,28 @@ export const isImageUrlIsFromUpload = (url) => {
   return false;
 };
 
+// Blocks requests to loopback, link-local (incl. cloud metadata) and private network ranges,
+// which a crafted copy/pasted image URL could otherwise force the browser to fetch.
+export const isForbiddenImageUrl = (urlString) => {
+  try {
+    const { protocol, hostname } = new URL(urlString);
+    if (protocol !== 'http:' && protocol !== 'https:') return true;
+    if (hostname === 'localhost' || hostname === '::1') return true;
+    const ipv4 = hostname.match(/^(\d{1,3})\.(\d{1,3})\.\d{1,3}\.\d{1,3}$/);
+    if (ipv4) {
+      const first = parseInt(ipv4[1], 10);
+      const second = parseInt(ipv4[2], 10);
+      if (first === 127 || first === 10 || first === 0) return true;
+      if (first === 169 && second === 254) return true;
+      if (first === 172 && second >= 16 && second <= 31) return true;
+      if (first === 192 && second === 168) return true;
+    }
+    return false;
+  } catch (e) {
+    return true;
+  }
+};
+
 export const isCommentEditor = (editor) => {
   return editor.editorType === COMMENT_EDITOR;
 };
