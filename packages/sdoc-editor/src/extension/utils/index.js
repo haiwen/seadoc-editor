@@ -1,4 +1,4 @@
-import isUrl from 'is-url';
+import { isValidWebUrl, normalizeWebUrl } from '../../utils/url-utils';
 
 export const IMAGE_TYPES = [
   'png',
@@ -9,7 +9,7 @@ export const IMAGE_TYPES = [
 export const isImage = (url) => {
   if (!url) return false;
 
-  if (!isUrl(url)) return false;
+  if (!isValidWebUrl(url)) return false;
 
   const suffix = url.split('.')[1]; // http://xx/mm/*.png
   if (!suffix) return false;
@@ -18,7 +18,11 @@ export const isImage = (url) => {
 };
 
 export const isSameDomain = (currentUrl, targetUrl) => {
-  return String(currentUrl).split('/')[2] === String(targetUrl).split('/')[2];
+  const current = normalizeWebUrl(currentUrl);
+  const target = normalizeWebUrl(targetUrl);
+  if (!current || !target) return false;
+
+  return new URL(current).origin === new URL(target).origin;
 };
 
 export const isOverflowPortByDirection = (targetDom, direction) => {

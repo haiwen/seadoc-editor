@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url -- Regression tests intentionally exercise unsafe URL schemes. */
 import { deserializeHtml } from '../../../src';
 import { formatChildren } from '../../core/utils';
 
@@ -87,7 +88,7 @@ describe('deserialize link', () => {
             type: 'image',
             data: {
               src: 'image.jpg',
-              href: 'https://dev.seafile.com',
+              href: 'https://dev.seafile.com/',
             },
             children: [{ text: '' }]
           }
@@ -123,12 +124,12 @@ describe('deserialize link', () => {
         children: [
           {
             type: 'image',
-            data: { src: 'image.jpg', href: 'https://dev.seafile.com' },
+            data: { src: 'image.jpg', href: 'https://dev.seafile.com/' },
             children: [{ text: '' }]
           },
           {
             type: 'link',
-            href: 'https://dev.seafile.com',
+            href: 'https://dev.seafile.com/',
             title: null,
             children: [{ text: 'Caption' }]
           }
@@ -147,7 +148,7 @@ describe('deserialize link', () => {
           { text: '' },
           {
             type: 'link',
-            href: 'https://dev.seafile.com',
+            href: 'https://dev.seafile.com/',
             title: null,
             children: [{ text: 'Caption' }]
           }
@@ -201,7 +202,7 @@ describe('deserialize link', () => {
         children: [
           {
             type: 'link',
-            href: 'https://dev.seafile.com',
+            href: 'https://dev.seafile.com/',
             title: null,
             children: [{ text: 'https://dev.seafile.com' }]
           }
@@ -225,5 +226,29 @@ describe('deserialize link', () => {
     ]);
     expect(ret[0].children[1].id).toEqual(expect.any(String));
     expect(ret[0].children[1].id).not.toBe('');
+  });
+});
+
+
+describe('unsafe HTML links', () => {
+  it.each([
+    'javascript://example.com/%0Avoid(document.body.dataset.ipd=1)',
+    'JaVaScRiPt://example.com/%0Aalert(1)',
+    'java&#10;script:alert(1)',
+    'data:text/html,test',
+    'httpx://example.com',
+    '//example.com',
+  ])('preserves text without an unsafe link: %s', (href) => {
+    const result = deserializeHtml(`<a href="${href}">Caption</a>`);
+
+    expect(formatChildren(result)).toEqual([
+      { type: 'paragraph', children: [{ text: 'Caption' }] },
+    ]);
+  });
+
+  it('normalizes a valid link before storing it', () => {
+    const result = deserializeHtml('<a href=" HTTPS://EXAMPLE.COM ">Caption</a>');
+
+    expect(result[0].children[0].href).toBe('https://example.com/');
   });
 });

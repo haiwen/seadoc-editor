@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url -- Regression tests intentionally exercise unsafe URL schemes. */
 import { EMBED_LINK_SOURCE } from '../../../../src/extension/plugins/embed-link/constants';
 import { getEmbedLinkType, normalizeFigmaEmbedLink } from '../../../../src/extension/plugins/embed-link/helper';
 
@@ -32,5 +33,19 @@ describe('embed-link helper', () => {
     it('keeps existing embed links unchanged', () => {
       expect(normalizeFigmaEmbedLink('https://embed.figma.com/file/abc/demo?embed-host=share')).toBe('https://embed.figma.com/file/abc/demo?embed-host=share');
     });
+  });
+});
+
+
+describe('unsafe embed URLs', () => {
+  it.each([
+    'javascript://www.figma.com/file/abc/demo',
+    'javascript://cloud.seatable.io/workspace/12/dtable/abc',
+    'ftp://embed.figma.com/file/abc/demo',
+    '//www.figma.com/file/abc/demo',
+    null,
+  ])('rejects non-HTTP(S) URLs: %p', (url) => {
+    expect(getEmbedLinkType(url)).toBeNull();
+    expect(normalizeFigmaEmbedLink(url)).toBeNull();
   });
 });
