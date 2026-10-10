@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.252](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.252) (2026-10-10)
+
+### Bug Fixes
+
+- **editor:** restrict link URLs to HTTP(S) ([#320](https://github.com/haiwen/seadoc-editor/issues/320)) ([3834be6](https://github.com/haiwen/seadoc-editor/commit/3834be611982906ed5f8134703a08b4821cdd5ad))
+
 ## [3.0.251](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.250...%40seafile%2Fsdoc-editor%403.0.251) (2026-10-08)
 
 ### Bug Fixes
