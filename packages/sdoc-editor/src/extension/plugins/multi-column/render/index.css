@@ -13,7 +13,7 @@
   cursor: text;
 }
 
-.sdoc-multicolumn-wrapper .column {
+.sdoc-multicolumn-wrapper .sdoc-column {
   display: flex;
   left: 3px;
   align-items: flex-start;
