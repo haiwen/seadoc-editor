@@ -161,6 +161,10 @@
   left: 10px !important;
 }
 
+.sdoc-more-colors-container:focus {
+  outline: none;
+}
+
 /* commission */
 .menu-group #button-sdoc-highlight-color .sdoc-color-icon {
   position: relative;

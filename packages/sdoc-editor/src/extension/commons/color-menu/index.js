@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { withTranslation } from 'react-i18next';
 import { UncontrolledPopover } from 'reactstrap';
@@ -40,6 +40,7 @@ const ColorMenu = ({
   disabled,
   t,
   setColor,
+  onPickerClose,
   recentUsedColorsKey,
   text,
   defaultColorTip,
@@ -49,15 +50,30 @@ const ColorMenu = ({
 }) => {
   const popoverRef = useRef(null);
   const moreColorsPopoverRef = useRef(null);
+  const moreColorsContainerRef = useRef(null);
 
   const [recentUsedColors, setRecentUsedColors] = useState(LocalStorage.getItem(recentUsedColorsKey, DEFAULT_RECENT_USED_LIST));
   const [isShowMenu, setMenuShow] = useState(false);
   const [isPickerShow, setPickerShow] = useState(false);
 
-  const onSetColor = useCallback((color, shouldClose = true) => {
+  useEffect(() => {
+    if (disabled) {
+      setMenuShow(false);
+      setPickerShow(false);
+    }
+  }, [disabled]);
+
+  const closeMenu = useCallback((shouldFocus = false) => {
+    if (isPickerShow && shouldFocus) onPickerClose && onPickerClose(shouldFocus);
+    if (isShowMenu) popoverRef.current.toggle();
+    setPickerShow(false);
+    setMenuShow(false);
+  }, [isShowMenu, isPickerShow, onPickerClose]);
+
+  const onSetColor = useCallback((color, shouldClose = true, shouldFocus = true) => {
     if (disabled) return;
     const validColor = color || '';
-    setColor(validColor);
+    setColor(validColor, shouldFocus);
     if (validColor !== '' && recentUsedColors[0] !== validColor) {
       let newRecentUsedColors = recentUsedColors.slice(0, 9);
       newRecentUsedColors.unshift(validColor);
@@ -67,13 +83,9 @@ const ColorMenu = ({
 
     updateLastUsedColor && updateLastUsedColor(validColor);
 
-    if (shouldClose) {
-      popoverRef.current.toggle();
-      setMenuShow(!isShowMenu);
-    }
+    if (shouldClose) closeMenu();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recentUsedColors, recentUsedColorsKey, isShowMenu, isPickerShow, disabled]);
+  }, [recentUsedColors, recentUsedColorsKey, disabled, setColor, updateLastUsedColor, closeMenu]);
 
   const setColorProxy = useCallback((event) => {
     if (event.target.className.includes('sdoc-color-item')) {
@@ -83,28 +95,52 @@ const ColorMenu = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recentUsedColors, recentUsedColorsKey, isShowMenu, isPickerShow]);
 
-  const toggle = useCallback(() => {
-    if (isPickerShow) return;
-    popoverRef.current.toggle();
-    setMenuShow(!isShowMenu);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isShowMenu, isPickerShow]);
+  const toggle = useCallback((event) => {
+    if (isShowMenu) {
+      if (moreColorsContainerRef.current?.contains(event?.target)) return;
+      const shouldFocus = moreColorsContainerRef.current?.contains(document.activeElement);
+      closeMenu(shouldFocus);
+    } else {
+      popoverRef.current.toggle();
+      setMenuShow(true);
+    }
+  }, [isShowMenu, closeMenu]);
 
-  const moreColorsPopoverToggle = useCallback(() => {
+  const moreColorsPopoverToggle = useCallback((event) => {
+    const isPickerFocused = moreColorsContainerRef.current?.contains(document.activeElement);
+    if (isPickerShow) {
+      if (isPickerFocused && event?.key !== 'Escape') return;
+      if (isPickerFocused) onPickerClose && onPickerClose(true);
+    }
     moreColorsPopoverRef.current.toggle();
     setPickerShow(!isPickerShow);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [moreColorsPopoverRef, isPickerShow]);
+  }, [moreColorsPopoverRef, isPickerShow, onPickerClose]);
+
+  const onPickerMouseDown = useCallback((event) => {
+    if (!event.target.closest('input, label')) {
+      event.preventDefault();
+      if (event.currentTarget.contains(document.activeElement)) {
+        // Let reused picker inputs refresh their values when switching formats.
+        event.currentTarget.focus({ preventScroll: true });
+      }
+    }
+    eventStopPropagation(event);
+  }, []);
 
   const onClick = useCallback((event) => {
     eventStopPropagation(event);
   }, []);
 
+  const onPickerKeyDown = useCallback((event) => {
+    if (event.key !== 'Enter' || !event.target.matches('input') || event.nativeEvent.isComposing || event.keyCode === 229) return;
+    eventStopPropagation(event);
+    event.currentTarget.focus({ preventScroll: true });
+  }, []);
+
   const onChange = useCallback((color) => {
     const validColor = color.hex;
-    onSetColor(validColor, false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [disabled]);
+    onSetColor(validColor, false, false);
+  }, [onSetColor]);
 
   const setLastUsedColor = useCallback((event) => {
     eventStopPropagation(event);
@@ -218,7 +254,14 @@ const ColorMenu = ({
               ref={moreColorsPopoverRef}
               offset={[0, 0]}
             >
-              <div className="sdoc-more-colors-container" onClick={onClick}>
+              <div
+                className="sdoc-more-colors-container"
+                ref={moreColorsContainerRef}
+                tabIndex={-1}
+                onMouseDown={onPickerMouseDown}
+                onClick={onClick}
+                onKeyDown={onPickerKeyDown}
+              >
                 <ChromePicker
                   disableAlpha={true}
                   color={lastUsedColor || ''}
@@ -247,6 +290,7 @@ ColorMenu.propTypes = {
   lastUsedColor: PropTypes.string,
   updateLastUsedColor: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
+  onPickerClose: PropTypes.func,
 };
 
 export default withTranslation('sdoc-editor')(ColorMenu);

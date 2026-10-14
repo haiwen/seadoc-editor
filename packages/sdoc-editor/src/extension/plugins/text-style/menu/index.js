@@ -69,11 +69,15 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor]);
 
-  const setColor = useCallback((type, color) => {
+  const setColor = useCallback((type, color, shouldFocus = true) => {
     Editor.addMark(editor, type, color);
-    focusEditor(editor);
+    if (shouldFocus) focusEditor(editor);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor]);
+
+  const onPickerClose = useCallback((shouldFocus = true) => {
+    if (shouldFocus) focusEditor(editor);
   }, [editor]);
 
   const increaseFontSize = useCallback((event) => {
@@ -113,7 +117,8 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
         onMouseDown: item.isColor ? () => { } : onMouseDown,
       };
       if (item.isColor) {
-        itemProps['setColor'] = (color) => setColor(item.type, color);
+        itemProps['setColor'] = (color, shouldFocus) => setColor(item.type, color, shouldFocus);
+        itemProps['onPickerClose'] = onPickerClose;
         itemProps['defaultColorTip'] = item.type === TEXT_STYLE_MAP.COLOR ? t('Default') : '';
         itemProps['lastUsedColor'] = item.type === TEXT_STYLE_MAP.COLOR ? lastUsedFontColor : lastUsedHighlightColor;
         itemProps['updateLastUsedColor'] = item.type === TEXT_STYLE_MAP.COLOR ? updateLastUsedFontColor : updateLastUsedHighlightColor;
@@ -122,7 +127,7 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor, lastUsedFontColor, lastUsedHighlightColor, readonly]);
+  }, [editor, lastUsedFontColor, lastUsedHighlightColor, readonly, onPickerClose]);
 
   let list = getTextStyleList(TEXT_STYLE);
   const dropdownList = getTextStyleList(TEXT_STYLE_MORE);

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Editor, Range } from '@seafile/slate';
 import { useFocused, useSlateStatic, useReadOnly } from '@seafile/slate-react';
@@ -24,9 +24,17 @@ const ContextToolbar = () => {
   const inFocus = useFocused();
   const readOnly = useReadOnly();
   const clickedCommentRef = useRef(false);
+  const colorPickerRef = useRef(null);
+  const toolbarStyleRef = useRef(null);
+  const [isPickerFocused, setPickerFocused] = useState(false);
 
   const setContextToolbarPosition = useCallback(() => {
     const el = ref.current;
+    if (colorPickerRef.current?.contains(document.activeElement)) {
+      if (!el.hasAttribute('style') && toolbarStyleRef.current) el.setAttribute('style', toolbarStyleRef.current);
+      toolbarStyleRef.current = null;
+      return;
+    }
     const domSelection = window.getSelection();
     const domRange = getRangeObject(domSelection);
     if (!domRange) return;
@@ -50,6 +58,7 @@ const ContextToolbar = () => {
       // context menu is in current screen
       el.style.display = 'block';
     }
+    toolbarStyleRef.current = el.getAttribute('style');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -61,6 +70,7 @@ const ContextToolbar = () => {
   useEffect(() => {
     const el = ref.current;
     const { selection } = editor;
+    const pickerHasFocus = isPickerFocused && !!colorPickerRef.current?.contains(document.activeElement);
 
     if (!el) {
       return;
@@ -74,7 +84,7 @@ const ContextToolbar = () => {
     if (
       readOnly ||
       !selection ||
-      !inFocus ||
+      (!inFocus && !pickerHasFocus) ||
       Range.isCollapsed(selection) ||
       Editor.string(editor, selection) === '' ||
       getSelectedNodeByType(editor, CODE_BLOCK)
@@ -101,11 +111,23 @@ const ContextToolbar = () => {
     return () => document.removeEventListener('mousedown', handleClickCommentBtn);
   }, []);
 
+  const onFocus = (event) => {
+    colorPickerRef.current = event.target.closest('.sdoc-more-colors-container');
+    setPickerFocused(!!colorPickerRef.current);
+  };
+
+  const onBlur = (event) => {
+    if (!colorPickerRef.current?.contains(event.relatedTarget)) {
+      setPickerFocused(false);
+    }
+  };
+
   const onMouseDown = useCallback((event) => {
     event.preventDefault(); // prevent toolbar from taking focus away from editor
   }, []);
 
   const onMouseMove = useCallback(e => {
+    if (e.target.closest('.sdoc-more-colors-container')) return;
     const isMouseLeftDown = e.buttons === 1;
     if (isMouseLeftDown) {
       const el = ref.current;
@@ -115,7 +137,7 @@ const ContextToolbar = () => {
   }, []);
 
   return createPortal(
-    <div ref={ref} className='sdoc-context-toolbar' onMouseDown={onMouseDown} onMouseOver={onMouseMove}>
+    <div ref={ref} className='sdoc-context-toolbar' onMouseDown={onMouseDown} onMouseOver={onMouseMove} onFocus={onFocus} onBlur={onBlur}>
       <MenuGroup>
         <TextStyleMenuList editor={editor} idPrefix={'sdoc_context_toolbar'} />
       </MenuGroup>
