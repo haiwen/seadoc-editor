@@ -90,6 +90,8 @@ export const DEFAULT_LAST_USED_FONT_COLOR = '#FFFF00';
 export const DEFAULT_LAST_USED_HIGHLIGHT_COLOR = '#FF0000';
 export const DEFAULT_LAST_USED_TABLE_CELL_BACKGROUND_COLOR = '#FF0000';
 
+export const LAST_USED_TEXT_COLORS_KEY = 'sdoc-last-used-text-colors';
+
 // recent used colors key
 export const RECENT_USED_HIGHLIGHT_COLORS_KEY = 'sdoc-recent-used-highlight-colors';
 export const RECENT_USED_FONT_COLORS_KEY = 'sdoc-recent-used-font-colors';
