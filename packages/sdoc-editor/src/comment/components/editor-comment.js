@@ -89,6 +89,17 @@ const EditorComment = ({ editor }) => {
 
   // Comments are updated to modify the current comment
   useEffect(() => {
+    if (isShowComments && Object.keys(commentDetail).length) {
+      const comments = Object.values(element_comments_map).flat();
+      const newCommentDetail = { ...commentDetail };
+      Object.keys(newCommentDetail).forEach(key => {
+        const comment = comments.find(item => item.id === newCommentDetail[key]?.id);
+        if (comment) {
+          newCommentDetail[key] = comment;
+        }
+      });
+      setCommentDetail(newCommentDetail);
+    }
     if (isContextComment && activeElementIds) {
       const unresolvedComments = element_comments_map[activeElementIds[0].element.id].filter(item => !item.resolved);
       if (unresolvedComments.length === 0) {
