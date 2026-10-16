@@ -10,6 +10,7 @@ import { CODE_BLOCK, ELEMENT_TYPE, IMAGE, IMAGE_BLOCK, INSERT_POSITION, PARAGRAP
 import { generateEmptyElement, getNodeType, isTextNode, getParentNode, focusEditor, getAboveBlockNode, generateDefaultParagraph, getTopLevelBlockNode } from '../../core';
 import base64ToUnit8Array from './base64-to-unit8array';
 import ImageCache from './image-cache';
+import { isCurrentServerUrl } from './link-helpers';
 
 export { getImageWikiPageUrl } from './link-helpers';
 
@@ -316,6 +317,99 @@ export const isImageUrlIsFromCopy = (url) => {
 export const isImageUrlIsFromUpload = (url) => {
   if (url && url.startsWith('blob:http')) return true;
   return false;
+};
+
+const isForbiddenIPv4Octets = (first, second) => {
+  if (first === 127 || first === 10 || first === 0) return true;
+  if (first === 169 && second === 254) return true;
+  if (first === 172 && second >= 16 && second <= 31) return true;
+  if (first === 192 && second === 168) return true;
+  return false;
+};
+
+const matchIPv4 = (value) => {
+  const match = value.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+  if (!match) return null;
+  const octets = match.slice(1).map((part) => parseInt(part, 10));
+  if (octets.some((octet) => octet > 255)) return null;
+  return octets;
+};
+
+// Expands a bracketed/bare IPv6 literal (handling "::" compression and a
+// trailing embedded IPv4 address, e.g. "::ffff:127.0.0.1") into 8 16-bit groups.
+const parseIPv6Hostname = (hostname) => {
+  const literal = hostname.startsWith('[') && hostname.endsWith(']') ? hostname.slice(1, -1) : hostname;
+  if (!literal.includes(':')) return null;
+
+  const sides = literal.split('::');
+  if (sides.length > 2) return null;
+
+  const toGroups = (side) => {
+    if (side === '') return [];
+    const parts = side.split(':');
+    const last = parts[parts.length - 1];
+    if (last.includes('.')) {
+      const ipv4 = matchIPv4(last);
+      if (!ipv4) return null;
+      const [a, b, c, d] = ipv4;
+      parts.splice(parts.length - 1, 1, (((a << 8) | b) & 0xffff).toString(16), (((c << 8) | d) & 0xffff).toString(16));
+    }
+    if (parts.some((part) => !/^[0-9a-f]{1,4}$/i.test(part))) return null;
+    return parts.map((part) => parseInt(part, 16));
+  };
+
+  const head = toGroups(sides[0]);
+  const tail = sides.length === 2 ? toGroups(sides[1]) : [];
+  if (head === null || tail === null) return null;
+
+  let groups;
+  if (sides.length === 1) {
+    groups = head;
+  } else {
+    const missing = 8 - head.length - tail.length;
+    if (missing < 0) return null;
+    groups = [...head, ...Array(missing).fill(0), ...tail];
+  }
+
+  return groups.length === 8 ? groups : null;
+};
+
+const isForbiddenIPv6 = (groups) => {
+  const [g0, g1, g2, g3, g4, g5, g6, g7] = groups;
+  // ::1 loopback
+  if (g0 === 0 && g1 === 0 && g2 === 0 && g3 === 0 && g4 === 0 && g5 === 0 && g6 === 0 && g7 === 1) return true;
+  // fe80::/10 link-local
+  if (g0 >= 0xfe80 && g0 <= 0xfebf) return true;
+  // fc00::/7 unique-local
+  if (g0 >= 0xfc00 && g0 <= 0xfdff) return true;
+  // ::ffff:a.b.c.d IPv4-mapped — re-check the embedded IPv4 address
+  if (g0 === 0 && g1 === 0 && g2 === 0 && g3 === 0 && g4 === 0 && g5 === 0xffff) {
+    return isForbiddenIPv4Octets((g6 >> 8) & 0xff, g6 & 0xff);
+  }
+  return false;
+};
+
+// Blocks requests to loopback, link-local (incl. cloud metadata) and private network ranges,
+// which a crafted copy/pasted image URL could otherwise force the browser to fetch. URLs on the
+// deployment's own configured server are explicitly allowed even if that server itself resolves
+// to a private address (e.g. a self-hosted/on-prem instance).
+export const isForbiddenImageUrl = (urlString) => {
+  try {
+    const { protocol, hostname } = new URL(urlString);
+    if (protocol !== 'http:' && protocol !== 'https:') return true;
+    if (isCurrentServerUrl(urlString)) return false;
+    if (hostname === 'localhost') return true;
+
+    if (hostname.startsWith('[') || hostname.includes(':')) {
+      const groups = parseIPv6Hostname(hostname);
+      return groups ? isForbiddenIPv6(groups) : true;
+    }
+
+    const ipv4 = matchIPv4(hostname);
+    return ipv4 ? isForbiddenIPv4Octets(ipv4[0], ipv4[1]) : false;
+  } catch (e) {
+    return true;
+  }
 };
 
 export const isCommentEditor = (editor) => {
