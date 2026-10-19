@@ -21,24 +21,22 @@ export const ColorProvider = (props) => {
   const [lastUsedHighlightColor, setLastUsedHighlightColor] = useState(() => getLastUsedTextColors(storageKey).highlightColor ?? DEFAULT_LAST_USED_HIGHLIGHT_COLOR);
   const [lastUsedTableCellBackgroundColor, updateLastUsedTableCellBackgroundColor] = useState(DEFAULT_LAST_USED_TABLE_CELL_BACKGROUND_COLOR);
 
+  const saveLastUsedTextColor = (colorKey, color) => {
+    if (!storageKey) return;
+    LocalStorage.setItem(storageKey, {
+      ...getLastUsedTextColors(storageKey),
+      [colorKey]: color
+    });
+  };
+
   const updateLastUsedFontColor = (color) => {
     setLastUsedFontColor(color);
-    if (!storageKey) return;
-    try {
-      LocalStorage.setItem(storageKey, { ...getLastUsedTextColors(storageKey), fontColor: color });
-    } catch {
-      return;
-    }
+    saveLastUsedTextColor('fontColor', color);
   };
 
   const updateLastUsedHighlightColor = (color) => {
     setLastUsedHighlightColor(color);
-    if (!storageKey) return;
-    try {
-      LocalStorage.setItem(storageKey, { ...getLastUsedTextColors(storageKey), highlightColor: color });
-    } catch {
-      return;
-    }
+    saveLastUsedTextColor('highlightColor', color);
   };
 
   return (

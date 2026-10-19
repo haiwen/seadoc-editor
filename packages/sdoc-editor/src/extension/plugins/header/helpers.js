@@ -27,15 +27,9 @@ const getCollapsedHeaderState = () => {
 };
 
 const persistCollapsedHeaderState = (collapsedHeaderState) => {
-  try {
-    LocalStorage.setItem(getHeaderStorageKey(), collapsedHeaderState);
-  } catch (error) {
+  if (LocalStorage.setItem(getHeaderStorageKey(), collapsedHeaderState) === false) {
     clearAllHeaderCollapsedState();
-    try {
-      LocalStorage.setItem(getHeaderStorageKey(), collapsedHeaderState);
-    } catch {
-      // Ignore storage failures after cleanup.
-    }
+    LocalStorage.setItem(getHeaderStorageKey(), collapsedHeaderState);
   }
 };
 

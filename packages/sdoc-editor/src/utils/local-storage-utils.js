@@ -1,16 +1,20 @@
 class LocalStorage {
 
   static setItem(key, value) {
-    let savedValue;
-    const valueType = typeof value;
-    if (valueType === 'string') {
-      savedValue = value;
-    } else if (valueType === 'number') {
-      savedValue = value + '';
-    } else {
-      savedValue = JSON.stringify(value);
+    try {
+      let savedValue;
+      const valueType = typeof value;
+      if (valueType === 'string') {
+        savedValue = value;
+      } else if (valueType === 'number') {
+        savedValue = value + '';
+      } else {
+        savedValue = JSON.stringify(value);
+      }
+      return window.localStorage.setItem(key, savedValue);
+    } catch {
+      return false;
     }
-    return window.localStorage.setItem(key, savedValue);
   }
 
   static getItem(key, defaultValue) {
