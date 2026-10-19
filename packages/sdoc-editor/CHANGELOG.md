@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.254](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.253...%40seafile%2Fsdoc-editor%403.0.254) (2026-10-19)
+
+### Bug Fixes
+
+- add URL validation in use-copy-image.js (CWE-918) ([#319](https://github.com/haiwen/seadoc-editor/issues/319)) ([f1728f3](https://github.com/haiwen/seadoc-editor/commit/f1728f3789da72886c17f0014c61de9d4fa9a7f3))
+- sync comment popover data without overwriting drafts ([#324](https://github.com/haiwen/seadoc-editor/issues/324)) ([ed14a79](https://github.com/haiwen/seadoc-editor/commit/ed14a79f90fcb9d5968ca94868f8f40f3c6ee496))
+
+### Features
+
+- persist last selected text and highlight colors ([#323](https://github.com/haiwen/seadoc-editor/issues/323)) ([db37ce3](https://github.com/haiwen/seadoc-editor/commit/db37ce3acc9d573492a70c1535b3a39a3e868acd))
+
 ## [3.0.253](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.252...%40seafile%2Fsdoc-editor%403.0.253) (2026-10-13)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
