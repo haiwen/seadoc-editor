@@ -7,3 +7,4 @@ source_file   = packages/example/public/locales/en/sdoc-editor.json
 type          = KEYVALUEJSON
 minimum_perc  = 0
 resource_name = sdoc-editor
+lang_map = zh_CN: zh-CN, zh_TW: zh-TW, es_AR: es-AR, es_MX: es-MX, lv_LV:lv
