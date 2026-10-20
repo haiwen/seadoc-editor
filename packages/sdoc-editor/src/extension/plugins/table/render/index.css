@@ -53,8 +53,8 @@
 .sdoc-table-wrapper .table-cell {
   display: flex;
   padding: 10px 10px;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-right: 1px solid var(--sdoc-border, #ccc);
+  border-bottom: 1px solid var(--sdoc-border, #ccc);
   line-height: 1.5;
   align-items: flex-start;
 

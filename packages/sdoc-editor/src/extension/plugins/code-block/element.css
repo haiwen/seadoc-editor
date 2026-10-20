@@ -4,8 +4,8 @@
 }
 
 .sdoc-code-block-pre {
-  background: #FAFAFA;
-  border: 1px solid #f0f0f0;
+  background: var(--sdoc-secondary-surface, #FAFAFA);
+  border: 1px solid var(--sdoc-border, #f0f0f0);
   display: flex;
   position: unset;
   overflow: auto;
@@ -46,7 +46,7 @@
 
 .sdoc-code-block-code .sdoc-code-line::before {
   content: counter(number);
-  color: #ccc;
+  color: var(--sdoc-muted, #ccc);
   width: 40px;
   text-align: end;
   position: absolute;
@@ -57,11 +57,11 @@
 .sdoc-code-line .token.prolog,
 .sdoc-code-line .token.doctype,
 .sdoc-code-line .token.cdata {
-  color: slategray;
+  color: var(--sdoc-code-comment, slategray);
 }
 
 .sdoc-code-line .token.punctuation {
-  color: #999;
+  color: var(--sdoc-muted, #999);
 }
 
 .sdoc-code-line .token.namespace {
@@ -75,7 +75,7 @@
 .sdoc-code-line .token.constant,
 .sdoc-code-line .token.symbol,
 .sdoc-code-line .token.deleted {
-  color: #905;
+  color: var(--sdoc-code-value, #905);
   padding: 0rem;
 }
 
@@ -85,7 +85,7 @@
 .sdoc-code-line .token.char,
 .sdoc-code-line .token.builtin,
 .sdoc-code-line .token.inserted {
-  color: #690;
+  color: var(--sdoc-code-string, #690);
 }
 
 .sdoc-code-line .token.operator,
@@ -93,13 +93,13 @@
 .sdoc-code-line .token.url,
 .sdoc-code-line .language-css .token.string,
 .sdoc-code-line .style .token.string {
-  color: #9a6e3a;
+  color: var(--sdoc-code-operator, #9a6e3a);
 }
 
 .sdoc-code-line .token.atrule,
 .sdoc-code-line .token.attr-value,
 .sdoc-code-line .token.keyword {
-  color: #07a;
+  color: var(--sdoc-code-keyword, #07a);
 }
 
 .sdoc-code-line .token.function,
@@ -149,7 +149,7 @@
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon-container.hidden {
-  background: linear-gradient(0deg, #F5F7fA, rgba(245, 247, 250, 0.8));
+  background: linear-gradient(0deg, var(--sdoc-secondary-surface, #F5F7fA), var(--sdoc-secondary-surface, rgba(245, 247, 250, 0.8)));
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon {

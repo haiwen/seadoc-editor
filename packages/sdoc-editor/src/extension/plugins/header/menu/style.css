@@ -3,7 +3,7 @@
   height: 100%;
   width: 140px;
   padding: 6px 8px;
-  border-right: 1px solid #e5e6e8;
+  border-right: 1px solid var(--sdoc-border, #e5e6e8);
   position: relative;
   align-items: center;
 }
@@ -28,12 +28,12 @@
 }
 
 .header-menu .header-toggle:not(.header-toggle-disabled):hover {
-  background: #EFEFEF;
+  background: var(--sdoc-menu-hover, #EFEFEF);
   border-radius: 2px;
 }
 
 .header-menu .header-toggle .sdocfont {
-  color: #666;
+  color: var(--sdoc-text, #666);
   width: 12px;
   height: 24px;
   margin-left: 8px;
@@ -54,9 +54,9 @@
   position: absolute;
   top: 42px;
   left: -1px;
-  background-color: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  background-color: var(--sdoc-menu-bg, #fff);
+  border: 1px solid var(--sdoc-menu-border, #eee);
+  box-shadow: var(--sdoc-menu-shadow, 0 6px 14px rgba(0, 0, 0, 0.1));
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -80,5 +80,5 @@
 .header-menu .header-popover .sdoc-dropdown-menu-item .sdoc-check-mark {
   position: absolute;
   left: 12px;
-  color: #666;
+  color: var(--sdoc-text, #666);
 }

@@ -7,11 +7,11 @@
   min-width: 80px;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 4px 10px #eee;
+  border: 1px solid var(--sdoc-menu-border, #e5e5e5);
+  box-shadow: var(--sdoc-menu-shadow, 0 4px 10px #eee);
   border-radius: 4px;
-  background: #fff;
-  color: #212529;
+  background: var(--sdoc-menu-bg, #fff);
+  color: var(--sdoc-text, #212529);
   z-index: 1080;
 }
 
@@ -25,12 +25,12 @@
 }
 
 .sdoc-menu-container .sdoc-menu-item:hover {
-  background-color: #f5f5f5;
+  background-color: var(--sdoc-menu-hover, #f5f5f5);
 }
 
 .sdoc-menu-container .sdoc-menu-item .menu-item-icon {
   margin-right: 5px;
-  color: #aaa;
+  color: var(--sdoc-muted, #aaa);
 }
 
 .sdoc-menu-container .sdoc-menu-item .sdoc-check-mark {
@@ -39,5 +39,5 @@
   height: 32px;
   line-height: 32px;
   font-size: 13px;
-  color: #666;
+  color: var(--sdoc-text, #666);
 }

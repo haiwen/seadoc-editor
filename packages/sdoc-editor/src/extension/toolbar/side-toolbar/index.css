@@ -11,13 +11,13 @@
 }
 
 .sdoc-side-toolbar-container:hover {
-  background-color: #EFEFEF;
+  background-color: var(--sdoc-hover, #EFEFEF);
 }
 
 .sdoc-side-toolbar-container .sdoc-side-op-icon {
   border-radius: 3px;
   padding: 0px 3px;
-  color: #AFAFAD;
+  color: var(--sdoc-icon, #AFAFAD);
   margin-right: 1px;
   cursor: pointer;
 }
@@ -27,7 +27,7 @@
 }
 
 .sdoc-side-toolbar-container .side-op-icon-active {
-  background-color: #F2F2F2;
+  background-color: var(--sdoc-hover, #F2F2F2);
   border-radius: 2px;
 }
 

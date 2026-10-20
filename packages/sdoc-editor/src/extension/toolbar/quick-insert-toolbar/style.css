@@ -1,5 +1,5 @@
 .sdoc-quick-insert-toolbar .sdoc-dropdown-menu-item.sdoc-dropdown-item-selected {
-  background-color: #e3e3e3;
+  background-color: var(--sdoc-menu-hover, #e3e3e3);
 }
 
 .sdoc-quick-insert-toolbar .sdoc-insert-element-content-wrapper {

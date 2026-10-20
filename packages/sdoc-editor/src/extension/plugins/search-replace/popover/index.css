@@ -3,10 +3,10 @@
   width: 400px;
   height: 280px;
   z-index: 102;
-  background: #fff;
-  border: 1px solid #eee;
+  background: var(--sdoc-menu-bg, #fff);
+  border: 1px solid var(--sdoc-popover-border, #eee);
   border-radius: 8px;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: var(--sdoc-menu-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.1));
 }
 
 .sdoc-search-replace-popover-container.in-wiki {
@@ -19,14 +19,14 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--sdoc-menu-border, #eee);
   pointer-events: none;
   user-select: none;
 }
 
 .sdoc-search-replace-popover-container .sdoc-search-replace-popover-title .sdoc-search-replace-title-text {
   font-weight: 600;
-  color: #333;
+  color: var(--sdoc-text, #333);
 }
 
 .sdoc-search-replace-popover-container .sdoc-search-replace-popover-title .sdoc-search-replace-title-close {
@@ -36,11 +36,11 @@
   display: flex;
   justify-content: center;
   border-radius: 2px;
-  color: #666;
+  color: var(--sdoc-text, #666);
 }
 
 .sdoc-search-replace-popover-container .sdoc-search-replace-popover-title .sdoc-search-replace-title-close:hover {
-  background-color: #EFEFEF;
+  background-color: var(--sdoc-menu-hover, #EFEFEF);
   cursor: pointer;
 }
 

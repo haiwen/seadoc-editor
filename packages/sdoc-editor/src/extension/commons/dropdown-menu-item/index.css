@@ -1,6 +1,6 @@
 /* insert element dropdown item */
 .sdoc-dropdown-item-with-left-icon .sdoc-dropdown-item-content .sdoc-dropdown-item-content-icon {
-  color: #666;
+  color: var(--sdoc-text, #666);
 }
 
 .sdoc-link-dropdown-menu-item .sdoc-dropdown-item-content {

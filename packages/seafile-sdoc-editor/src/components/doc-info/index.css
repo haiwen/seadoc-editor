@@ -6,12 +6,12 @@
 .sdoc-editor-page-header .doc-info .doc-name {
   font-size: 18px;
   font-weight: 700;
-  color: #212529;
+  color: var(--sdoc-text, #212529);
 }
 
 .sdoc-editor-page-header .doc-info .doc-icon {
   margin-left: 0.5rem;
-  color: #999;
+  color: var(--sdoc-muted, #999);
   cursor: pointer;
   font-size: 14px;
   line-height: 1;
@@ -19,7 +19,7 @@
 
 .sdoc-editor-page-header .doc-info .doc-icon:hover {
   margin-left: 0.5rem;
-  color: #666;
+  color: var(--sdoc-text, #666);
 }
 
 .sdoc-editor-page-header .doc-info .sdoc-link {
@@ -59,8 +59,8 @@
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-order {
   display: inline-block;
   font-size: 14px;
-  color: #999;
-  background: #eee;
+  color: var(--sdoc-muted, #999);
+  background: var(--sdoc-secondary-surface, #eee);
   padding: 0 8px;
   height: 20px;
   line-height: 20px;
@@ -95,9 +95,9 @@
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-jump-to {
   line-height: 1;
   font-size: 14px;
-  color: #999;
+  color: var(--sdoc-muted, #999);
 }
 
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-jump-to {
-  color: #666;
+  color: var(--sdoc-text, #666);
 }

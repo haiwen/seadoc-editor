@@ -1,6 +1,6 @@
 .menu-group-item.sdoc-comment-menu-container {
   width: auto;
-  color: #212529;
+  color: var(--sdoc-text, #212529);
   font-size: 14px;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .menu-group-item.sdoc-comment-menu-container .sdocfont {
-  color: #666;
+  color: var(--sdoc-text, #666);
 }
 
 .sdoc-comment-menu-item .sdoc-comments {
@@ -18,7 +18,7 @@
 
 .sdoc-context-menu-divider {
   margin-right: 8px;
-  border-left: 1px solid #e5e5e5;
+  border-left: 1px solid var(--sdoc-border, #e5e5e5);
   width: 1px;
   height: 24px;
 }

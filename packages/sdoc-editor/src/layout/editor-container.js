@@ -10,6 +10,7 @@ import '../assets/css/sdoc-editor-plugins.css';
 import '../assets/css/sdoc-comment-editor-plugin.css';
 import '../assets/css/dropdown-menu.css';
 import '../assets/css/popover.css';
+import '../assets/css/wiki-color-mode.css';
 
 const EditorContainer = ({ children, readonly, fullscreen }) => {
 
