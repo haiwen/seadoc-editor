@@ -54,10 +54,10 @@ const ColorMenu = ({
   const [isShowMenu, setMenuShow] = useState(false);
   const [isPickerShow, setPickerShow] = useState(false);
 
-  const onSetColor = useCallback((color, shouldClose = true) => {
+  const onSetColor = useCallback((color, shouldClose = true, shouldFocus = true) => {
     if (disabled) return;
     const validColor = color || '';
-    setColor(validColor);
+    setColor(validColor, shouldFocus);
     if (validColor !== '' && recentUsedColors[0] !== validColor) {
       let newRecentUsedColors = recentUsedColors.slice(0, 9);
       newRecentUsedColors.unshift(validColor);
@@ -96,13 +96,18 @@ const ColorMenu = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moreColorsPopoverRef, isPickerShow]);
 
+  const onPickerMouseDown = useCallback((event) => {
+    if (event.target.tagName === 'INPUT') eventStopPropagation(event);
+    else event.currentTarget.querySelector('input:focus')?.blur();
+  }, []);
+
   const onClick = useCallback((event) => {
     eventStopPropagation(event);
   }, []);
 
-  const onChange = useCallback((color) => {
+  const onChange = useCallback((color, event) => {
     const validColor = color.hex;
-    onSetColor(validColor, false);
+    onSetColor(validColor, false, event?.target?.tagName !== 'INPUT');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disabled]);
 
@@ -218,7 +223,7 @@ const ColorMenu = ({
               ref={moreColorsPopoverRef}
               offset={[0, 0]}
             >
-              <div className="sdoc-more-colors-container" onClick={onClick}>
+              <div className="sdoc-more-colors-container" onMouseDown={onPickerMouseDown} onClick={onClick}>
                 <ChromePicker
                   disableAlpha={true}
                   color={lastUsedColor || ''}
