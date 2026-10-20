@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.255](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.254...%40seafile%2Fsdoc-editor%403.0.255) (2026-10-20)
+
+### Bug Fixes
+
+- enable direct color value input in text color picker ([#322](https://github.com/haiwen/seadoc-editor/issues/322)) ([57e0dfa](https://github.com/haiwen/seadoc-editor/commit/57e0dfa2121a9a05f536c1865f6c67ea9c58765e))
+
 ## [3.0.254](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.253...%40seafile%2Fsdoc-editor%403.0.254) (2026-10-19)
 
 ### Bug Fixes
