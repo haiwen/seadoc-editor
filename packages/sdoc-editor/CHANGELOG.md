@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.256](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.255...%40seafile%2Fsdoc-editor%403.0.256) (2026-10-21)
+
+### Bug Fixes
+
+- hide section links in plugin editors ([#327](https://github.com/haiwen/seadoc-editor/issues/327)) ([2ed6848](https://github.com/haiwen/seadoc-editor/commit/2ed6848de76b448b0a022f80f33a5c900aa6febd))
+
 ## [3.0.255](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.254...%40seafile%2Fsdoc-editor%403.0.255) (2026-10-20)
 
 ### Bug Fixes
