@@ -2,7 +2,7 @@ import { Transforms, Editor, Element, Path, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import slugid from 'slugid';
-import { WIKI_EDITOR } from '../../../constants';
+import { DOCUMENT_PLUGIN_EDITOR, WIKI_EDITOR } from '../../../constants';
 import { replacePastedDataId } from '../../../node-id/helpers';
 import { normalizeCopyNodes } from '../../../utils/document-utils';
 import {
@@ -523,6 +523,7 @@ export const getSearchedOperations = (sourceMenuSearchMap, isNodeEmpty, event, t
   let menuSearchMap = {};
   if (event.target.value.trim()) {
     Object.keys(sourceMenuSearchMap).forEach((key) => {
+      if (key === 'COPY_LINK_OF_SECTION' && editor.editorType === DOCUMENT_PLUGIN_EDITOR) return;
       const value = sourceMenuSearchMap[key];
       const sourceStr = t(value).toUpperCase();
       const targetStr = event.target.value.trim().toUpperCase();
