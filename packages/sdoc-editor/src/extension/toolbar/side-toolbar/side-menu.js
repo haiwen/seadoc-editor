@@ -5,6 +5,7 @@ import { useSlateStatic } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
 import toaster from '../../../components/toast';
+import { DOCUMENT_PLUGIN_EDITOR } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
 import { ElementPopover } from '../../commons';
@@ -204,7 +205,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
             {!insertBelowMenuSearchMap['searching'] && <div className="sdoc-dropdown-menu-divider"></div>}
 
             {/* other operations menu */}
-            {INTERNAL_LINKED_TYPE.includes(slateNode?.type) && (
+            {editor.editorType !== DOCUMENT_PLUGIN_EDITOR && INTERNAL_LINKED_TYPE.includes(slateNode?.type) && (
               <>
                 <DropdownMenuItem
                   menuConfig={{
