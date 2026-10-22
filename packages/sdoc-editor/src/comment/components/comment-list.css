@@ -257,8 +257,58 @@
 }
 
 .sdoc-popover-menu__item:hover {
-  background-color: #20a0ff;
-  color: #fff;
+  background-color: var(--bs-dropdown-link-hover-bg, #20a0ff);
+  color: var(--bs-dropdown-link-color, #fff);
+}
+
+/* @seafile/comment-editor uses different classes from the legacy editor. */
+.sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content {
+  color: var(--bs-body-color, #212529);
+  border-color: var(--bs-border-color, #ececec);
+}
+
+.sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content:focus-within {
+  border-color: #ff8e03;
+}
+
+.sdoc-comment-list-container .comment-editor-wrapper .article.comment-editor {
+  color: var(--bs-body-color, #212529);
+  caret-color: var(--bs-body-color, #212529);
+}
+
+/* The dependency renders its paragraph placeholder with an inline color. */
+.sdoc-comment-list-container .comment-editor [data-slate-node='element'] > span[contenteditable='false']:not([data-slate-node]) {
+  color: var(--bs-body-secondary-color, #bfbfbf) !important;
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group,
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item {
+  color: var(--bs-body-color, #666);
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:hover:not(:disabled) {
+  background-color: var(--bs-dropdown-link-hover-bg, #EFEFEF);
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:disabled {
+  color: var(--bs-body-secondary-color, #C2C2C2);
+  background-color: transparent;
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item[data-active='true']:not(:disabled) {
+  color: #ED7109;
+}
+
+/* The mention picker is mounted outside the comment drawer. */
+.sdoc-comment-caret-list {
+  background: var(--bs-dropdown-bg, #fff);
+  color: var(--bs-dropdown-link-color, #212529);
+  border-color: var(--bs-dropdown-border-color, #ededed);
+}
+
+.sdoc-comment-caret-list .comment-participant-item.active,
+.sdoc-comment-caret-list .comment-participant-item:hover {
+  background: var(--bs-dropdown-link-hover-bg, #f5f5f5);
 }
 
 .sdoc-comment-editor-wrapper {

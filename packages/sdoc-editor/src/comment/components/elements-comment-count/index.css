@@ -6,11 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: var(--bs-icon-color, #999);
 }
 
 .sdoc-comment-container .comment-container-right .element-comments-count:hover {
-  color: #666;
+  color: var(--bs-body-color, #666);
   cursor: pointer;
 }
 

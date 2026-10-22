@@ -27,14 +27,14 @@
 .sdoc-comment-drawer .comments-panel-body__header .comment-participant-avatar img {
   width: 28px;
   height: 28px;
-  border: 2px solid #fff;
+  border: 2px solid var(--bs-body-bg, #fff);
   line-height: 2rem;
   border-radius: 50%;
   display: inline-block;
-  background: #ced4da no-repeat center/cover;
+  background: var(--bs-bg-secondary-color, #ced4da) no-repeat center/cover;
   position: relative;
   text-align: center;
-  color: #868e96;
+  color: var(--bs-body-secondary-color, #868e96);
   font-weight: 600;
   vertical-align: bottom;
   font-size: .875rem;
@@ -48,8 +48,8 @@
   margin-right: -0.5rem;
   height: 20px;
   width: 20px;
-  background-color: #fff;
-  border: 1px solid #fff;
+  background-color: var(--bs-body-bg, #fff);
+  border: 1px solid var(--bs-body-bg, #fff);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
   justify-content: center;
   overflow: hidden;
   background-color: rgba(0, 0, 0, .6);
-  border: 2px solid #fff;
+  border: 2px solid var(--bs-body-bg, #fff);
 }
 
 .sdoc-comment-drawer .comment-participants-more .sdocfont {
