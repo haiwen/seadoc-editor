@@ -12,14 +12,14 @@
 .sdoc-file-render:hover .sdoc-file-text-link a {
   text-decoration: underline;
   text-underline-position: under;
-  text-decoration-color: rgb(55 53 47 / 25%);
+  text-decoration-color: var(--sdoc-border, rgb(55 53 47 / 25%));
   padding: 3px 0;
   border-radius: 3px;
 }
 
 .sdoc-file-card-link {
   position: relative;
-  background-color: #f3f3f3;
+  background-color: var(--sdoc-secondary-surface, #f3f3f3);
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
@@ -33,7 +33,7 @@
 
 .sdoc-file-render .sdoc-file-link-icon {
   padding-right: 5px;
-  color: #666;
+  color: var(--sdoc-icon, #666);
 }
 
 .sdoc-file-card-link .sdoc-file-link-icon :first-child {
@@ -58,11 +58,11 @@
 .sdoc-file-render .sdoc-file-text-link.sdoc-no-file-link-icon a,
 .sdoc-file-render .sdoc-file-text-link a,
 .sdoc-file-render .sdoc-file-card-link a {
-  color: #212529;
+  color: var(--sdoc-text, #212529);
   font-weight: 500;
   text-decoration: underline;
   text-underline-position: under;
-  text-decoration-color: rgb(55 53 47 / 25%);
+  text-decoration-color: var(--sdoc-border, rgb(55 53 47 / 25%));
 }
 
 .sdoc-file-render .sdoc-file-text-link.sdoc-no-file-link-icon a:hover,
@@ -70,7 +70,7 @@
 .sdoc-file-render .sdoc-file-card-link a:hover {
   text-decoration: underline;
   text-underline-position: under;
-  text-decoration-color: rgb(55 53 47 / 25%);
+  text-decoration-color: var(--sdoc-border, rgb(55 53 47 / 25%));
   padding: 3px 0;
   border-radius: 3px;
 }
