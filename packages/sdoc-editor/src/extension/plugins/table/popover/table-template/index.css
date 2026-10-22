@@ -3,7 +3,7 @@
 }
 
 .sdoc-table-template-popover .popover {
-  background-color: var(--sdoc-menu-bg, #fff);
+  background-color: var(--bs-dropdown-bg, #fff);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -14,22 +14,22 @@
   padding: 10px;
   width: 310px;
   height: 100%;
-  background-color: var(--sdoc-menu-bg, #fff);
+  background-color: var(--bs-dropdown-bg, #fff);
 }
 
 .sdoc-table-template-view-table {
   padding: 10px;
   margin: 10px 5px;
-  border: 1px solid var(--sdoc-menu-border, #e2e3e6);
+  border: 1px solid var(--bs-dropdown-border-color, #e2e3e6);
   cursor: pointer;
 }
 
 .sdoc-table-template-view-table:hover {
-  box-shadow: 0 0 3px 2px var(--sdoc-border, #e2e3e6);
+  box-shadow: 0 0 3px 2px var(--bs-border-color, #e2e3e6);
 }
 
 .sdoc-table-template-view-table.active {
-  box-shadow: 0 0 3px 2px var(--sdoc-border, #e2e3e6);
+  box-shadow: 0 0 3px 2px var(--bs-border-color, #e2e3e6);
 }
 
 .sdoc-table-template-view-table .sdoc-table-template-row .sdoc-table-template-cell {

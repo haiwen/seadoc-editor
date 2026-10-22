@@ -2,10 +2,10 @@
   position: absolute;
   height: 40px;
   padding: 8px;
-  background-color: #fff;
-  border: 1px solid #eee;
+  background-color: var(--bs-dropdown-bg, #fff);
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
   border-radius: 8px;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: var(--bs-dropdown-box-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.1));
   z-index: 100;
   display: flex;
 }
@@ -16,19 +16,19 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  color: #212529;
+  color: var(--bs-body-color, #212529);
   cursor: pointer;
   border-radius: 3px;
 }
 
 .sdoc-callout-hover-menu .callout-menu-item:hover {
-  background-color: #EFEFEF;
+  background-color: var(--bs-dropdown-link-hover-bg, #EFEFEF);
 }
 
 .sdoc-callout-hover-menu .callout-menu-item .sdocfont {
   line-height: 1;
   font-size: 14px;
-  color: #666;
+  color: var(--bs-icon-color, #666);
 }
 
 .sdoc-callout-hover-menu .callout-menu-item .sdoc-arrow-down {
@@ -37,11 +37,11 @@
 
 .sdoc-callout-hover-menu .callout-menu-item.color-active,
 .sdoc-callout-hover-menu .callout-menu-item.icon-active {
-  background-color: #EFEFEF;
+  background-color: var(--bs-dropdown-link-hover-bg, #EFEFEF);
   border-radius: 2px;
 }
 
 .sdoc-callout-hover-menu .callout-menu-divider {
-  border-left: 1px solid #ccc;
+  border-left: 1px solid var(--bs-dropdown-divider-bg, #ccc);
   margin: 4px 8px;
 }

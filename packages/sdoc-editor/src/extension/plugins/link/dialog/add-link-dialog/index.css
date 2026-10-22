@@ -52,7 +52,7 @@
 }
 
 .selected-linked-block-wrapper .sdoc-file-icon-toggle {
-  color: #666;
+  color: var(--bs-icon-color, #666);
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -84,7 +84,7 @@
 }
 
 .selected-linked-block-wrapper .link-block-wrapper {
-  border: 1px solid rgba(0, 40, 100, 0.12);
+  border: 1px solid var(--bs-dropdown-border-color, rgba(0, 40, 100, 0.12));
   max-height: 400px;
   width: 100%;
   height: fit-content;
@@ -93,11 +93,12 @@
   overflow-y: auto;
   box-sizing: border-box;
   position: absolute;
-  background-color: white;
+  background-color: var(--bs-dropdown-bg, white);
+  color: var(--bs-dropdown-link-color, #212529);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--bs-dropdown-box-shadow, 0 0 6px rgba(0, 0, 0, 0.12));
   border-radius: 3px;
   user-select: none;
 }
@@ -113,7 +114,7 @@
 
 .link-block-wrapper .select-block-wrapper .title {
   margin-left: 5px;
-  color: #666;
+  color: var(--bs-body-color, #666);
   font-size: 14px;
 }
 
@@ -126,12 +127,12 @@
   width: 100%;
   padding: 5px 0;
   display: flex;
-  color: #495057;
+  color: var(--bs-body-color, #495057);
   cursor: pointer;
 }
 
 .link-block-wrapper .link-header-block-container:hover {
-  background-color: rgb(245, 245, 245);
+  background-color: var(--bs-dropdown-link-hover-bg, rgb(245, 245, 245));
 }
 
 .link-block-wrapper .link-header-block-container .heading-prefix {
@@ -162,7 +163,7 @@
 .selected-linked-block .sdoc-header-4,
 .selected-linked-block .sdoc-header-5,
 .selected-linked-block .sdoc-header-6 {
-  color: #495057;
+  color: var(--bs-body-color, #495057);
   font-size: 15px !important;
   font-weight: normal;
   overflow: hidden;
@@ -176,7 +177,7 @@
 
 .link-block-wrapper .select-block-wrapper blockquote,
 .link-block-wrapper .link-block-container blockquote {
-  border-left: 4px solid #ddd;
+  border-left: 4px solid var(--bs-border-color, #ddd);
 }
 
 .link-block-wrapper .select-block-wrapper blockquote p,
@@ -190,7 +191,7 @@
 }
 
 .selected-linked-block-wrapper .link-block-wrapper .linked-block-item:hover {
-  background-color: rgb(245, 245, 245);
+  background-color: var(--bs-dropdown-link-hover-bg, rgb(245, 245, 245));
 }
 
 .selected-linked-block-wrapper .link-block-wrapper .dropdown-item {

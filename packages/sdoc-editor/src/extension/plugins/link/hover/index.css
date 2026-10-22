@@ -3,10 +3,10 @@
   padding: 8px;
   display: flex;
   position: absolute;
-  background-color: var(--sdoc-menu-bg, #fff);
-  border: 1px solid var(--sdoc-popover-border, #eee);
+  background-color: var(--bs-dropdown-bg, #fff);
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
   border-radius: 8px;
-  box-shadow: var(--sdoc-menu-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.1));
+  box-shadow: var(--bs-dropdown-box-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.1));
   z-index: 101;
 }
 
@@ -14,9 +14,9 @@
   width: 8px;
   height: 8px;
   transform: rotate(45deg);
-  background: var(--sdoc-menu-bg, #fff);
-  border-right: 1px solid var(--sdoc-popover-border, rgba(0, 40, 100, 0.12));
-  border-bottom: 1px solid var(--sdoc-popover-border, rgba(0, 40, 100, 0.12));
+  background: var(--bs-dropdown-bg, #fff);
+  border-right: 1px solid var(--bs-popover-border-color, rgba(0, 40, 100, 0.12));
+  border-bottom: 1px solid var(--bs-popover-border-color, rgba(0, 40, 100, 0.12));
   position: absolute;
   top: 31px;
   right: 50%;
@@ -25,7 +25,7 @@
 
 .link-op-menu-link {
   font-size: 12px;
-  color: var(--sdoc-text, #212529);
+  color: var(--bs-body-color, #212529);
   padding: 0 5px;
   border-radius: 2px;
   line-height: 20px;
@@ -34,13 +34,13 @@
 
 .link-op-menu-link:hover {
   text-decoration: none;
-  background: var(--sdoc-menu-hover, #EFEFEF);
-  color: var(--sdoc-text, #212529);
+  background: var(--bs-dropdown-link-hover-bg, #EFEFEF);
+  color: var(--bs-body-color, #212529);
 }
 
 .link-op-icons {
   margin-left: 8px;
-  border-left: 1px solid var(--sdoc-menu-border, #e5e5e5);
+  border-left: 1px solid var(--bs-dropdown-divider-bg, #e5e5e5);
 }
 
 .link-op-icon {
@@ -53,13 +53,13 @@
 
 .link-op-icon .sdocfont {
   font-size: 14px;
-  color: var(--sdoc-icon, #666);
+  color: var(--bs-icon-color, #666);
 }
 
 .link-op-icon:hover {
-  background: var(--sdoc-menu-hover, #EFEFEF);
+  background: var(--bs-dropdown-link-hover-bg, #EFEFEF);
 }
 
 .seafile-ed-hovermenu-mouseclick {
-  background-color: var(--sdoc-menu-hover, #e5e5e5);
+  background-color: var(--bs-dropdown-link-hover-bg, #e5e5e5);
 }

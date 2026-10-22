@@ -1,5 +1,5 @@
 .sdoc-wiki-viewer-outline {
-  border-left: 1px solid var(--sdoc-border, #ddd);
+  border-left: 1px solid var(--bs-border-color, #ddd);
   padding: .5rem 1rem .5rem 0;
 }
 
@@ -13,7 +13,7 @@
 .sdoc-wiki-viewer-outline .outline-h2 {
   margin-left: 20px;
   line-height: 2.5;
-  color: var(--sdoc-text, #364149);
+  color: var(--bs-body-color, #364149);
   white-space: nowrap;
   cursor: pointer;
 }
@@ -25,7 +25,7 @@
 .sdoc-wiki-viewer-outline .outline-h3 {
   margin-left: 40px;
   line-height: 2.5;
-  color: var(--sdoc-text, #364149);
+  color: var(--bs-body-color, #364149);
   white-space: nowrap;
   cursor: pointer;
 }

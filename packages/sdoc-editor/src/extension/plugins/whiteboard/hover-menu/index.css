@@ -8,13 +8,13 @@
 .sdoc-whiteboard-hover-menu-container .hover-menu-container {
   height: 40px;
   padding: 8px;
-  background-color: #fff;
+  background-color: var(--bs-dropdown-bg, #fff);
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #eee;
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
   border-radius: 8px;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: var(--bs-dropdown-box-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.10));
 }
 
 .sdoc-whiteboard-hover-menu-container .hover-menu-container>span {
@@ -23,13 +23,13 @@
 
 .sdoc-whiteboard-hover-menu-container .hover-menu-container>span:not(:last-of-type) {
   padding: 0 8px;
-  border-right: 1px solid #e5e5e5;
+  border-right: 1px solid var(--bs-dropdown-divider-bg, #e5e5e5);
 }
 
 .sdoc-whiteboard-hover-menu-container .hover-menu-container .op-item {
   position: relative;
   font-size: 12px;
-  color: #212529;
+  color: var(--bs-body-color, #212529);
   padding: 0 5px;
   border-radius: 2px;
   min-width: 24px;
@@ -41,11 +41,11 @@
 
 .sdoc-whiteboard-hover-menu-container .hover-menu-container .op-item:hover {
   text-decoration: none;
-  background: #EFEFEF;
+  background: var(--bs-dropdown-link-hover-bg, #EFEFEF);
 }
 
 .sdoc-whiteboard-hover-menu-container .hover-menu-container .sdocfont {
   line-height: 1;
   font-size: 14px;
-  color: #666;
+  color: var(--bs-icon-color, #666);
 }

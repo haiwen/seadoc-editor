@@ -64,16 +64,16 @@
   margin-top: 4px;
   padding: 8px 0;
   flex-direction: column;
-  border: 1px solid var(--sdoc-menu-border, #e5e5e5);
-  box-shadow: var(--sdoc-menu-shadow, 0 4px 10px #eee);
+  border: 1px solid var(--bs-dropdown-border-color, #e5e5e5);
+  box-shadow: var(--bs-dropdown-box-shadow, 0 4px 10px #eee);
   border-radius: 4px;
-  background: var(--sdoc-menu-bg, #fff);
+  background: var(--bs-dropdown-bg, #fff);
   z-index: 10;
 }
 
 .select-popover .option-item-divider {
   margin-top: 8px;
-  border-top: 1px solid var(--sdoc-menu-border, #EFEFEF);
+  border-top: 1px solid var(--bs-dropdown-divider-bg, #EFEFEF);
 }
 
 .select-popover .sdoc-field-setting {
@@ -121,7 +121,7 @@
 }
 
 .select-popover .option-item:hover {
-  background-color: var(--sdoc-menu-hover, #F5F5F5);
+  background-color: var(--bs-dropdown-link-hover-bg, #F5F5F5);
 }
 
 .select-popover .option-item.active {

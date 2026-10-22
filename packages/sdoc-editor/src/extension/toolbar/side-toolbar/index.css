@@ -11,13 +11,13 @@
 }
 
 .sdoc-side-toolbar-container:hover {
-  background-color: var(--sdoc-hover, #EFEFEF);
+  background-color: var(--bs-nav-hover-bg, #EFEFEF);
 }
 
 .sdoc-side-toolbar-container .sdoc-side-op-icon {
   border-radius: 3px;
   padding: 0px 3px;
-  color: var(--sdoc-icon, #AFAFAD);
+  color: var(--bs-icon-color, #AFAFAD);
   margin-right: 1px;
   cursor: pointer;
 }
@@ -27,7 +27,7 @@
 }
 
 .sdoc-side-toolbar-container .side-op-icon-active {
-  background-color: var(--sdoc-hover, #F2F2F2);
+  background-color: var(--bs-nav-hover-bg, #F2F2F2);
   border-radius: 2px;
 }
 

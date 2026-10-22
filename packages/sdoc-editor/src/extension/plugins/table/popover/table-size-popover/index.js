@@ -132,7 +132,7 @@ const TableSizePopover = ({
       e.preventDefault();
       if (ref.current['firstRender']) {
         ref.current['firstRender'] = false;
-        onTemplateItemSelectedStyle('var(--sdoc-menu-hover, #e3e3e3)');
+        onTemplateItemSelectedStyle('var(--bs-dropdown-link-hover-bg, #e3e3e3)');
         return;
       }
       handleSizeDown(e);
@@ -142,7 +142,7 @@ const TableSizePopover = ({
     if (keyCode === UpArrow) {
       e.preventDefault();
       if (isInitSize) {
-        onTemplateItemSelectedStyle('var(--sdoc-menu-hover, #e3e3e3)');
+        onTemplateItemSelectedStyle('var(--bs-dropdown-link-hover-bg, #e3e3e3)');
       } else {
         handleSizeDown(e);
       }

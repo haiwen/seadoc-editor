@@ -90,7 +90,7 @@
   padding: 0.25rem 0;
   clear: both;
   font-weight: 400;
-  color: var(--sdoc-text, #212529);
+  color: var(--bs-body-color, #212529);
   height: 30px;
   border-radius: 2px;
   font-size: 14px;
@@ -128,5 +128,5 @@
 
 .sdoc-comments-participants-popover .sdoc-searched-collaborator .sdoc-searched-collaborator-operation .sdocfont {
   font-size: 14px;
-  color: var(--sdoc-text, #666);
+  color: var(--bs-body-color, #666);
 }

@@ -61,11 +61,11 @@ const TableCell = ({ attributes, element, children }) => {
   }
 
   if (rowIndex === 0) {
-    style.borderTop = '1px solid var(--sdoc-border, #ddd)';
+    style.borderTop = '1px solid var(--bs-border-color, #ddd)';
   }
 
   if (cellIndex === 0) {
-    style.borderLeft = '1px solid var(--sdoc-border, #ddd)';
+    style.borderLeft = '1px solid var(--bs-border-color, #ddd)';
   }
 
   const { rowspan = 1, colspan = 1 } = element;
@@ -224,11 +224,11 @@ function renderTableCell(props) {
     }
 
     if (rowIndex === 0) {
-      style.borderTop = '1px solid #ddd';
+      style.borderTop = '1px solid var(--bs-border-color, #ddd)';
     }
 
     if (cellIndex === 0) {
-      style.borderLeft = '1px solid #ddd';
+      style.borderLeft = '1px solid var(--bs-border-color, #ddd)';
     }
 
     const { rowspan = 1, colspan = 1 } = element;

@@ -332,7 +332,7 @@
 /* link */
 .sdoc-editor__article .virtual-link a,
 .sdoc-editor__article .virtual-link {
-  color: var(--sdoc-text, #212529);
+  color: var(--bs-body-color, #212529);
   font-weight: 500;
   text-decoration: underline;
   text-underline-position: under;

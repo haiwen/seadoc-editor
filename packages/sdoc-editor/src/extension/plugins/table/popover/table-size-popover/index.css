@@ -1,7 +1,7 @@
 .sdoc-selected-table-size-container .sdoc-selected-table-tools-container {
   padding-bottom: 8px;
   margin-bottom: 8px;
-  border-bottom: 1px solid var(--sdoc-menu-border, #eee);
+  border-bottom: 1px solid var(--bs-dropdown-divider-bg, #eee);
 }
 
 .sdoc-selected-table-size-popover .sdoc-selected-table-size-custom {
@@ -14,7 +14,7 @@
 
 .sdoc-selected-table-size-popover .sdoc-selected-table-size-custom:hover {
   cursor: pointer;
-  background: var(--sdoc-menu-hover, #f5f5f5);
+  background: var(--bs-dropdown-link-hover-bg, #f5f5f5);
   border-radius: 4px;
 }
 
@@ -28,22 +28,22 @@
 
 .sdoc-selected-table-size-popover .sdoc-table-size-row {
   flex-direction: row;
-  border-bottom: 1px solid var(--sdoc-border, #ccc);
+  border-bottom: 1px solid var(--bs-border-color, #ccc);
   width: fit-content;
 }
 
 .sdoc-selected-table-size-popover .sdoc-table-size-row:first-child {
-  border-top: 1px solid var(--sdoc-border, #ccc);
+  border-top: 1px solid var(--bs-border-color, #ccc);
 }
 
 .sdoc-selected-table-size-popover .sdoc-table-size-cell {
-  border-right: 1px solid var(--sdoc-border, #ccc);
+  border-right: 1px solid var(--bs-border-color, #ccc);
   width: 20px;
   height: 15px;
 }
 
 .sdoc-selected-table-size-popover .sdoc-table-size-row .sdoc-table-size-cell:first-child {
-  border-left: 1px solid var(--sdoc-border, #ccc);
+  border-left: 1px solid var(--bs-border-color, #ccc);
 }
 
 .sdoc-selected-table-size-popover .sdoc-table-size-cell.active {

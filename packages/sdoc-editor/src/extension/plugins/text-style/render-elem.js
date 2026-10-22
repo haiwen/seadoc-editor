@@ -63,9 +63,9 @@ const renderText = (props, editor) => {
 
   if (leaf[TEXT_STYLE_MAP.COLOR]) {
     const color = leaf[TEXT_STYLE_MAP.COLOR];
-    // Keep the stored mark intact. Only opted-in Wiki pages redefine this token.
+    // Theme the legacy default color without changing stored document marks.
     const isDefaultColor = typeof color === 'string' && /^(#333333|#333|rgb\(\s*51\s*,\s*51\s*,\s*51\s*\)|rgba\(\s*51\s*,\s*51\s*,\s*51\s*,\s*1\s*\))$/i.test(color.trim());
-    style['color'] = isDefaultColor ? `var(--sdoc-default-text, ${color})` : color;
+    style['color'] = isDefaultColor ? `var(--bs-editor-default-text-color, ${color})` : color;
   }
 
   if (leaf[TEXT_STYLE_MAP.HIGHLIGHT_COLOR]) {

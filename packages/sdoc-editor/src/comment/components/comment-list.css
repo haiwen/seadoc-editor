@@ -26,7 +26,7 @@
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--sdoc-text, #212529);
+  color: var(--bs-body-color, #212529);
   text-wrap: auto;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .sdoc-context-comment-popover-wrapper .non-global-comment-input-wrapper {
-  border-bottom: 1px solid var(--sdoc-border, #ececec);
+  border-bottom: 1px solid var(--bs-border-color, #ececec);
 }
 
 .sdoc-comment-list-container .sdoc-context-comment-popover-wrapper:last-child .non-global-comment-input-wrapper {
@@ -58,7 +58,7 @@
 
 .sdoc-comment-list-container .comment-item-list .context-comment-item-selected-text-container {
   padding: 16px 16px 0 16px;
-  color: var(--sdoc-text, #666);
+  color: var(--bs-body-color, #666);
   display: flex;
 }
 
@@ -71,7 +71,7 @@
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  color: var(--sdoc-text, #212529);
+  color: var(--bs-body-color, #212529);
 }
 
 .sdoc-comment-list-container .comment-item {
@@ -130,7 +130,7 @@
 /* footer */
 .comment-item .comment-footer {
   display: flex;
-  color: var(--sdoc-text, #666);
+  color: var(--bs-body-color, #666);
   font-size: 14px;
   margin-left: 35px;
   margin-top: 16px;
@@ -176,14 +176,14 @@
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .name {
-  color: var(--sdoc-text, #212529);
+  color: var(--bs-body-color, #212529);
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .time {
-  color: var(--sdoc-text, #666);
+  color: var(--bs-body-color, #666);
   font-size: 12px;
   line-height: 16px;
   display: inline-flex;
@@ -222,15 +222,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--sdoc-surface, #fff);
-  color: var(--sdoc-text, #666);
+  background-color: var(--bs-body-bg, #fff);
+  color: var(--bs-body-color, #666);
   overflow: hidden;
   border-radius: 2px;
 }
 
 .sdoc-comment-list-container .comment-ui-container.active .comment-operation:hover {
   cursor: pointer;
-  background-color: var(--sdoc-hover, #EFEFEF);
+  background-color: var(--bs-nav-hover-bg, #EFEFEF);
 }
 
 .sdoc-comment-menu {
@@ -239,7 +239,7 @@
 }
 
 .sdoc-popover-menu {
-  background: var(--sdoc-surface, rgb(255, 255, 255));
+  background: var(--bs-body-bg, rgb(255, 255, 255));
   width: 140px;
   padding: 8px 0;
   height: auto;
@@ -252,8 +252,8 @@
   font-size: 14px;
   background-color: transparent;
   cursor: default;
-  color: var(--sdoc-text, #202428);
-  background-color: var(--sdoc-surface, #fff);
+  color: var(--bs-body-color, #202428);
+  background-color: var(--bs-body-bg, #fff);
 }
 
 .sdoc-popover-menu__item:hover {
@@ -262,7 +262,7 @@
 }
 
 .sdoc-comment-editor-wrapper {
-  border: 1px solid var(--sdoc-border, #ececec);
+  border: 1px solid var(--bs-border-color, #ececec);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-radius: 3px;
@@ -315,7 +315,7 @@
 }
 
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor:focus {
-  border: 1px solid var(--sdoc-border, rgba(0, 0, 0, .12));
+  border: 1px solid var(--bs-border-color, rgba(0, 0, 0, .12));
 }
 
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor-user-info {
@@ -386,7 +386,7 @@
 
 .sdoc-comment-list-container-popover {
   z-index: 102;
-  background-color: var(--sdoc-surface, rgba(255, 255, 255));
+  background-color: var(--bs-body-bg, rgba(255, 255, 255));
   box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 4px 8px 3px rgba(0, 0, 0, .15);
   border-radius: 5px;
 }
@@ -395,7 +395,7 @@
   max-height: 260px;
   margin-bottom: 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--sdoc-border, #ececec);
+  border-bottom: 1px solid var(--bs-border-color, #ececec);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper {
@@ -404,13 +404,13 @@
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control[readonly] {
-  background-color: var(--sdoc-surface, #fff);
+  background-color: var(--bs-body-bg, #fff);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control {
   font-size: 14px;
   font-weight: unset;
-  border: 1px solid var(--sdoc-border, #ececec);
+  border: 1px solid var(--bs-border-color, #ececec);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper.active .form-control {
@@ -419,7 +419,7 @@
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control:focus {
   box-shadow: none;
-  border-color: var(--sdoc-border, #e1e2e5);
+  border-color: var(--bs-border-color, #e1e2e5);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control::placeholder {

@@ -1,9 +1,10 @@
 .sdoc-editor__article {
+  color: var(--bs-body-color, #212529);
   width: 100%;
   min-height: 800px;
   padding: 40px 60px;
-  background-color: var(--sdoc-surface, #fff);
-  border: 1px solid var(--sdoc-border, #e5e6e8);
+  background-color: var(--bs-body-bg, #fff);
+  border: 1px solid var(--bs-border-color, #e5e6e8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
   font-size: 11pt;
 }
@@ -14,7 +15,7 @@
 }
 
 .sdoc-editor__article>div {
-  caret-color: var(--sdoc-text, blue);
+  caret-color: var(--bs-body-color, blue);
 }
 
 .sdoc-editor__article .sdoc-drag-cover::before {
