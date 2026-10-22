@@ -350,6 +350,23 @@
   cursor: pointer;
 }
 
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link,
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link a,
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-text-link a,
+[data-bs-theme="dark"] .sdoc-file-render .sdoc-file-text-link a,
+[data-bs-theme="dark"] .sdoc-editor-container.fullscreen a {
+  color: var(--bs-link-color, #ff8000);
+  text-decoration-color: currentColor;
+}
+
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link:hover,
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link a:hover,
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-text-link a:hover,
+[data-bs-theme="dark"] .sdoc-file-render .sdoc-file-text-link a:hover {
+  color: var(--bs-link-hover-color, #c60);
+  text-decoration-color: currentColor;
+}
+
 /* temporary selection */
 .sdoc-editor__article .sdoc-temporary-selection {
   padding: 3px 0;
