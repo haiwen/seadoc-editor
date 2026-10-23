@@ -10,6 +10,7 @@ const renderText = (props, editor) => {
 
   let markedChildren = React.cloneElement(children);
   let style = {};
+  let commentHighlightClass = '';
   // The following is a workaround for a Chromium bug where,
   // if you have an inline at the end of a block,
   // clicking the end of a block puts the cursor inside the inline
@@ -51,9 +52,11 @@ const renderText = (props, editor) => {
     // Multi comment or only one comment
     if (commentRest.length > 1) {
       style['backgroundColor'] = 'rgba(129, 237, 247)';
+      commentHighlightClass = 'sdoc-comment-highlight-multiple';
     }
     if (commentRest.length === 1 ) {
       style['backgroundColor'] = 'rgba(129, 237, 247, 0.5)';
+      commentHighlightClass = 'sdoc-comment-highlight';
     }
   }
 
@@ -67,6 +70,11 @@ const renderText = (props, editor) => {
 
   if (leaf[TEXT_STYLE_MAP.HIGHLIGHT_COLOR]) {
     style['backgroundColor'] = leaf[TEXT_STYLE_MAP.HIGHLIGHT_COLOR];
+  }
+
+  // Let dark mode restyle comment highlights only when no other background wins.
+  if (commentHighlightClass && !leaf.computed_background_color && !leaf[TEXT_STYLE_MAP.HIGHLIGHT_COLOR]) {
+    rest[commentHighlightClass] = true;
   }
 
   if (leaf[TEXT_STYLE_MAP.FONT_SIZE]) {

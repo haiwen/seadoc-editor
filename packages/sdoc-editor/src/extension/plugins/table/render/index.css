@@ -68,6 +68,11 @@
   border-left-color: var(--bs-border-color) !important;
 }
 
+/* render-cell.js sets the light selection color inline. */
+[data-bs-theme="dark"] .sdoc-table-wrapper .table-cell.cell-selected {
+  background-color: var(--bs-tr-active-bg) !important;
+}
+
 .sdoc-cell-container {
   width: 100%;
 }

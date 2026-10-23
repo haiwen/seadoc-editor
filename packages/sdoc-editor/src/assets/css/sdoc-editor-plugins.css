@@ -372,3 +372,16 @@
   padding: 3px 0;
   background-color: #a9c9ed;
 }
+
+[data-bs-theme="dark"] .sdoc-editor__article .sdoc-temporary-selection {
+  background-color: var(--bs-tr-active-bg);
+}
+
+/* Comment highlights are inline light colors; keep their hue so light text stays readable. */
+[data-bs-theme="dark"] .sdoc-comment-highlight {
+  background-color: rgba(129, 237, 247, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-highlight-multiple {
+  background-color: rgba(129, 237, 247, 0.4) !important;
+}

@@ -246,6 +246,7 @@
 
 [data-bs-theme="dark"] .sdoc-comment-list-container .comment-ui-container .comment-operation {
   color: var(--bs-body-color);
+  background-color: transparent;
 }
 
 .sdoc-comment-list-container .comment-ui-container.active .comment-operation:hover {
@@ -254,7 +255,7 @@
 }
 
 [data-bs-theme="dark"] .sdoc-comment-list-container .comment-ui-container.active .comment-operation:hover {
-  background-color: var(--bs-nav-hover-bg);
+  background-color: var(--bs-icon-btn-hover-bg-color);
 }
 
 .sdoc-comment-menu {
