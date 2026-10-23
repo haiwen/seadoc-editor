@@ -35,7 +35,8 @@ const splitTextNode = (node) => {
 
 const matchSearchWordPosition = (node, searchWord) => {
   const content = Node.string(node);
-  const regex = new RegExp(searchWord, 'gi');
+  const escapedSearchWord = searchWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(escapedSearchWord, 'gi');
 
   const matches = [...content.matchAll(regex)];
   return matches.map(match => match.index) || [];
