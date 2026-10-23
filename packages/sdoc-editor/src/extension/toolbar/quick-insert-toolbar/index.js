@@ -279,7 +279,7 @@ const QuickInsertBlockMenu = ({
   }, [quickInsertMenuSearchMap, isDisableImage, onInsertImageToggle, isDisableVideo, isDisableMultiColumn, onInsertVideoToggle, isDisableTable, editor, createTable, callback, handleClosePopover, openLinkDialog, addEmbedLinkDialog, onInsertCodeBlock, isDisableCallout, onInsertCheckList, isEmptyNode, onInsertCallout, onInsertList, onInsert, createMultiColumn, isDisableHeader]);
 
   const getSelectItemDom = (selectIndex) => {
-    const dropDownItemWrapper = downDownWrapperRef.current;
+    const dropDownItemWrapper = downDownWrapperRef.current.querySelector('.sdoc-side-menu-inner-container');
     const searchedDropDownItemWrapper = [];
     Array.from(dropDownItemWrapper.children).forEach((item) => {
       if (!Array.from(item.classList).includes('sdoc-dropdown-menu-item-hidden')) {
@@ -351,7 +351,8 @@ const QuickInsertBlockMenu = ({
   }, [handleKeyDown]);
 
   const clearSelectStyle = useCallback(() => {
-    const domList = Array.from(downDownWrapperRef.current.children);
+    const dropDownItemWrapper = downDownWrapperRef.current.querySelector('.sdoc-side-menu-inner-container');
+    const domList = Array.from(dropDownItemWrapper.children);
     domList.forEach((dom) => dom.classList.remove(SELECTED_ITEM_CLASS_NAME));
   }, []);
 
