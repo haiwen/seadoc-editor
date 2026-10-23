@@ -12,9 +12,13 @@
 .sdoc-file-link-render:hover .sdoc-file-text-link a {
   text-decoration: underline;
   text-underline-position: under;
-  text-decoration-color: var(--bs-border-color, rgb(55 53 47 / 25%));
+  text-decoration-color: rgb(55 53 47 / 25%);
   padding: 3px 0;
   border-radius: 3px;
+}
+
+[data-bs-theme="dark"] .sdoc-file-link-render:hover .sdoc-file-text-link a {
+  text-decoration-color: var(--bs-border-color);
 }
 
 .sdoc-file-link-render .sdoc-file-text-link a {
@@ -22,21 +26,30 @@
   font-weight: 500;
   text-decoration: underline;
   text-underline-position: under;
-  text-decoration-color: var(--bs-border-color, rgb(55 53 47 / 25%));
+  text-decoration-color: rgb(55 53 47 / 25%);
+}
+
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-text-link a {
+  text-decoration-color: var(--bs-border-color);
 }
 
 .sdoc-file-link-render .sdoc-file-text-link.sdoc-no-file-link-icon a:hover,
 .sdoc-file-link-render .sdoc-file-text-link a:hover {
   text-decoration: underline;
   text-underline-position: under;
-  text-decoration-color: var(--bs-border-color, rgb(55 53 47 / 25%));
+  text-decoration-color: rgb(55 53 47 / 25%);
   padding: 3px 0;
   border-radius: 3px;
 }
 
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-text-link.sdoc-no-file-link-icon a:hover,
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-text-link a:hover {
+  text-decoration-color: var(--bs-border-color);
+}
+
 .sdoc-file-card-link {
   position: relative;
-  background-color: var(--bs-bg-file-card-color, #f3f3f3);
+  background-color: #f3f3f3;
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
@@ -48,9 +61,17 @@
   margin-right: 1px;
 }
 
+[data-bs-theme="dark"] .sdoc-file-card-link {
+  background-color: var(--bs-bg-file-card-color);
+}
+
 .sdoc-file-link-render .sdoc-file-link-icon {
   padding-right: 5px;
-  color: var(--bs-icon-color, #9aa0ac);
+  color: #9aa0ac;
+}
+
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-link-icon {
+  color: var(--bs-icon-color);
 }
 
 .sdoc-file-card-link .sdoc-file-link-icon :first-child {

@@ -22,7 +22,11 @@
 }
 
 .sdoc-comment-drawer .sdoc-comment-resize-handler:hover {
-  border-left: 1px solid var(--bs-border-color, #d8d8d8);
+  border-left: 1px solid #d8d8d8;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .sdoc-comment-resize-handler:hover {
+  border-left: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-resize-handler .sdoc-comment-move-dragger {
@@ -43,7 +47,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--bs-border-color, #EAECEF);
+  border-bottom: 1px solid #EAECEF;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .comments-panel-header {
+  border-bottom: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-drawer .comments-panel-header .comments-panel-header-left {
@@ -71,9 +79,13 @@
 .comments-panel-header-right .sdoc-file-checked {
   position: absolute;
   left: 12px;
-  color: var(--bs-body-secondary-color, #798d99);
+  color: #798d99;
   font-size: 12px;
   font-weight: 400;
+}
+
+[data-bs-theme="dark"] .comments-panel-header-right .sdoc-file-checked {
+  color: var(--bs-body-secondary-color);
 }
 
 
@@ -110,8 +122,12 @@
 }
 
 .sdoc-comment-drawer .comments-panel-body__header .comment-count-tip {
-  color: var(--bs-body-secondary-color, #999);
+  color: #999;
   font-size: 12px;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .comments-panel-body__header .comment-count-tip {
+  color: var(--bs-body-secondary-color);
 }
 
 .sdoc-comment-drawer .comments-panel-body__content {
@@ -121,7 +137,11 @@
   padding-top: 0px;
   margin-bottom: 16px;
   overflow: auto;
-  border-bottom: 1px solid var(--bs-border-color, #e1e2e5);
+  border-bottom: 1px solid #e1e2e5;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .comments-panel-body__content {
+  border-bottom: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-drawer .comments-panel-body__content .sdoc-comment-list-container {
@@ -154,7 +174,11 @@
 .sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control {
   font-size: 14px;
   font-weight: unset;
-  border: 1px solid var(--bs-border-color, #ececec);
+  border: 1px solid #ececec;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control {
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper.active .form-control {
@@ -163,7 +187,11 @@
 
 .sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control:focus {
   box-shadow: none;
-  border-color: var(--bs-border-color, #e1e2e5);
+  border-color: #e1e2e5;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control:focus {
+  border-color: var(--bs-border-color);
 }
 
 .sdoc-comment-drawer .comments-panel-body .global-comment-input-wrapper .form-control::placeholder {
@@ -208,7 +236,11 @@
 }
 
 .sdoc-comment-drawer .sdoc-comment-list-container .comment-ui-container:hover {
-  background-color: var(--bs-nav-hover-bg, rgba(0, 0, 0, 0.04));
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .sdoc-comment-list-container .comment-ui-container:hover {
+  background-color: var(--bs-nav-hover-bg);
 }
 
 .sdoc-comment-drawer .sdoc-comment-list-container .comment-ui-container.active .comment-item:hover {
@@ -285,7 +317,7 @@
 .sdoc-comment-drawer .sdoc-comment-list-container .comment-item-selected-text-container {
   width: 100%;
   height: auto;
-  color: var(--bs-body-color, #666);
+  color: #666;
   display: flex;
   align-items: center;
   padding: 0px 0px 16px 0px;
@@ -294,8 +326,16 @@
   overflow: hidden;
 }
 
+[data-bs-theme="dark"] .sdoc-comment-drawer .sdoc-comment-list-container .comment-item-selected-text-container {
+  color: var(--bs-body-color);
+}
+
 .sdoc-comment-drawer .sdoc-comment-list-container .comment-item-selected-text-container .comment-item-selected-text {
-  color: var(--bs-body-color, #666);
+  color: #666;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .sdoc-comment-list-container .comment-item-selected-text-container .comment-item-selected-text {
+  color: var(--bs-body-color);
 }
 
 .sdoc-comment-drawer .sdoc-comment-list-container .detail-context-comment {
@@ -308,8 +348,12 @@
 
 .sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container {
   padding: 16px 16px 0 16px;
-  color: var(--bs-body-color, #666);
+  color: #666;
   display: flex;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container {
+  color: var(--bs-body-color);
 }
 
 .sdoc-comment-drawer .sdoc-comment-list-container .context-comment-item-selected-text-container .sdoc-quote-left {
@@ -341,8 +385,12 @@
 }
 
 .sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper .comment-operation .sdoc-confirm {
-  color: var(--bs-body-color, rgb(70, 77, 90));
+  color: rgb(70, 77, 90);
   font-weight: unset;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper .comment-operation .sdoc-confirm {
+  color: var(--bs-body-color);
 }
 
 .sdoc-comment-drawer .sdoc-comment-list-container .global-comment-item-detail-wrapper .comment-item:not(:last-child) {

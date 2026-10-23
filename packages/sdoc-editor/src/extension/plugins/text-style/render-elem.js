@@ -2,7 +2,7 @@ import React from 'react';
 import { TEXT_STYLE_MAP } from '../../constants';
 import { generatorFontFamily } from '../font/helpers';
 import Caret from './caret';
-import { isTextCommentExist } from './helpers';
+import { getThemedTextColor, isTextCommentExist } from './helpers';
 
 const renderText = (props, editor) => {
   const { attributes, children, leaf } = props;
@@ -62,10 +62,7 @@ const renderText = (props, editor) => {
   }
 
   if (leaf[TEXT_STYLE_MAP.COLOR]) {
-    const color = leaf[TEXT_STYLE_MAP.COLOR];
-    // Theme the legacy default color without changing stored document marks.
-    const isDefaultColor = typeof color === 'string' && /^(#333333|#333|rgb\(\s*51\s*,\s*51\s*,\s*51\s*\)|rgba\(\s*51\s*,\s*51\s*,\s*51\s*,\s*1\s*\))$/i.test(color.trim());
-    style['color'] = isDefaultColor ? `var(--bs-editor-default-text-color, ${color})` : color;
+    style['color'] = getThemedTextColor(leaf[TEXT_STYLE_MAP.COLOR]);
   }
 
   if (leaf[TEXT_STYLE_MAP.HIGHLIGHT_COLOR]) {

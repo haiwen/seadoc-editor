@@ -4,9 +4,13 @@
   min-height: 800px;
   padding: 40px 60px;
   background-color: var(--bs-body-bg, #fff);
-  border: 1px solid var(--bs-border-color, #e5e6e8);
+  border: 1px solid #e5e6e8;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
   font-size: 11pt;
+}
+
+[data-bs-theme="dark"] .sdoc-editor__article {
+  border: 1px solid var(--bs-border-color);
 }
 
 .mobile .sdoc-editor__article {
@@ -15,7 +19,11 @@
 }
 
 .sdoc-editor__article>div {
-  caret-color: var(--bs-body-color, blue);
+  caret-color: blue;
+}
+
+[data-bs-theme="dark"] .sdoc-editor__article>div {
+  caret-color: var(--bs-body-color);
 }
 
 .sdoc-editor__article .sdoc-drag-cover::before {

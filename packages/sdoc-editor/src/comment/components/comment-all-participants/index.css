@@ -31,14 +31,19 @@
   line-height: 2rem;
   border-radius: 50%;
   display: inline-block;
-  background: var(--bs-bg-secondary-color, #ced4da) no-repeat center/cover;
+  background: #ced4da no-repeat center/cover;
   position: relative;
   text-align: center;
-  color: var(--bs-body-secondary-color, #868e96);
+  color: #868e96;
   font-weight: 600;
   vertical-align: bottom;
   font-size: .875rem;
   user-select: none;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-drawer .comments-panel-body__header .comment-participant-avatar img {
+  background: var(--bs-bg-secondary-color) no-repeat center/cover;
+  color: var(--bs-body-secondary-color);
 }
 
 .sdoc-comment-drawer .comments-panel-body__header .add-comments-participants {

@@ -49,7 +49,11 @@
 }
 
 .sdoc-context-comment-popover-wrapper .non-global-comment-input-wrapper {
-  border-bottom: 1px solid var(--bs-border-color, #ececec);
+  border-bottom: 1px solid #ececec;
+}
+
+[data-bs-theme="dark"] .sdoc-context-comment-popover-wrapper .non-global-comment-input-wrapper {
+  border-bottom: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-list-container .sdoc-context-comment-popover-wrapper:last-child .non-global-comment-input-wrapper {
@@ -58,8 +62,12 @@
 
 .sdoc-comment-list-container .comment-item-list .context-comment-item-selected-text-container {
   padding: 16px 16px 0 16px;
-  color: var(--bs-body-color, #666);
+  color: #666;
   display: flex;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-item-list .context-comment-item-selected-text-container {
+  color: var(--bs-body-color);
 }
 
 .comment-item-list .context-comment-item-selected-text-container .sdoc-quote-left {
@@ -130,10 +138,14 @@
 /* footer */
 .comment-item .comment-footer {
   display: flex;
-  color: var(--bs-body-color, #666);
+  color: #666;
   font-size: 14px;
   margin-left: 35px;
   margin-top: 16px;
+}
+
+[data-bs-theme="dark"] .comment-item .comment-footer {
+  color: var(--bs-body-color);
 }
 
 .comment-item .comment-footer .comments-count {
@@ -183,11 +195,15 @@
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .time {
-  color: var(--bs-body-color, #666);
+  color: #666;
   font-size: 12px;
   line-height: 16px;
   display: inline-flex;
   align-items: center;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-header .comment-author__info .time {
+  color: var(--bs-body-color);
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .time .comment-success-resolved {
@@ -223,14 +239,22 @@
   align-items: center;
   justify-content: center;
   background-color: var(--bs-body-bg, #fff);
-  color: var(--bs-body-color, #666);
+  color: #666;
   overflow: hidden;
   border-radius: 2px;
 }
 
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-ui-container .comment-operation {
+  color: var(--bs-body-color);
+}
+
 .sdoc-comment-list-container .comment-ui-container.active .comment-operation:hover {
   cursor: pointer;
-  background-color: var(--bs-nav-hover-bg, #EFEFEF);
+  background-color: #EFEFEF;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-ui-container.active .comment-operation:hover {
+  background-color: var(--bs-nav-hover-bg);
 }
 
 .sdoc-comment-menu {
@@ -264,7 +288,11 @@
 /* @seafile/comment-editor uses different classes from the legacy editor. */
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content {
   color: var(--bs-body-color, #212529);
-  border-color: var(--bs-border-color, #ececec);
+  border-color: #ececec;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content {
+  border-color: var(--bs-border-color);
 }
 
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content:focus-within {
@@ -278,21 +306,38 @@
 
 /* The dependency renders its paragraph placeholder with an inline color. */
 .sdoc-comment-list-container .comment-editor [data-slate-node='element'] > span[contenteditable='false']:not([data-slate-node]) {
-  color: var(--bs-body-secondary-color, #bfbfbf) !important;
+  color: #bfbfbf !important;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor [data-slate-node='element'] > span[contenteditable='false']:not([data-slate-node]) {
+  color: var(--bs-body-secondary-color) !important;
 }
 
 .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group,
 .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item {
-  color: var(--bs-body-color, #666);
+  color: #666;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group,
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item {
+  color: var(--bs-body-color);
 }
 
 .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:hover:not(:disabled) {
-  background-color: var(--bs-dropdown-link-hover-bg, #EFEFEF);
+  background-color: #EFEFEF;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:hover:not(:disabled) {
+  background-color: var(--bs-dropdown-link-hover-bg);
 }
 
 .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:disabled {
-  color: var(--bs-body-secondary-color, #C2C2C2);
+  color: #C2C2C2;
   background-color: transparent;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:disabled {
+  color: var(--bs-body-secondary-color);
 }
 
 .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item[data-active='true']:not(:disabled) {
@@ -312,11 +357,15 @@
 }
 
 .sdoc-comment-editor-wrapper {
-  border: 1px solid var(--bs-border-color, #ececec);
+  border: 1px solid #ececec;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-radius: 3px;
   transition: border-color 0.3s ease;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-editor-wrapper {
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-editor-wrapper:focus-within {
@@ -365,7 +414,11 @@
 }
 
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor:focus {
-  border: 1px solid var(--bs-border-color, rgba(0, 0, 0, .12));
+  border: 1px solid rgba(0, 0, 0, .12);
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-wrapper .comment-editor:focus {
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor-user-info {
@@ -445,7 +498,11 @@
   max-height: 260px;
   margin-bottom: 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--bs-border-color, #ececec);
+  border-bottom: 1px solid #ececec;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container-popover .comment-item-list {
+  border-bottom: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper {
@@ -460,7 +517,11 @@
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control {
   font-size: 14px;
   font-weight: unset;
-  border: 1px solid var(--bs-border-color, #ececec);
+  border: 1px solid #ececec;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control {
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper.active .form-control {
@@ -469,7 +530,11 @@
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control:focus {
   box-shadow: none;
-  border-color: var(--bs-border-color, #e1e2e5);
+  border-color: #e1e2e5;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control:focus {
+  border-color: var(--bs-border-color);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control::placeholder {

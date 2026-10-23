@@ -1,6 +1,10 @@
 .sdoc-wiki-viewer-outline {
-  border-left: 1px solid var(--bs-border-color, #ddd);
+  border-left: 1px solid #ddd;
   padding: .5rem 1rem .5rem 0;
+}
+
+[data-bs-theme="dark"] .sdoc-wiki-viewer-outline {
+  border-left: 1px solid var(--bs-border-color);
 }
 
 .sdoc-wiki-viewer-outline .outline-h2,
@@ -13,9 +17,13 @@
 .sdoc-wiki-viewer-outline .outline-h2 {
   margin-left: 20px;
   line-height: 2.5;
-  color: var(--bs-body-color, #364149);
+  color: #364149;
   white-space: nowrap;
   cursor: pointer;
+}
+
+[data-bs-theme="dark"] .sdoc-wiki-viewer-outline .outline-h2 {
+  color: var(--bs-body-color);
 }
 
 .sdoc-wiki-viewer-outline .outline-h2:hover {
@@ -25,9 +33,13 @@
 .sdoc-wiki-viewer-outline .outline-h3 {
   margin-left: 40px;
   line-height: 2.5;
-  color: var(--bs-body-color, #364149);
+  color: #364149;
   white-space: nowrap;
   cursor: pointer;
+}
+
+[data-bs-theme="dark"] .sdoc-wiki-viewer-outline .outline-h3 {
+  color: var(--bs-body-color);
 }
 
 .sdoc-wiki-viewer-outline .outline-h3:hover {

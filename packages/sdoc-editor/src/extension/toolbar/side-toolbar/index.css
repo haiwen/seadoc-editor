@@ -11,15 +11,23 @@
 }
 
 .sdoc-side-toolbar-container:hover {
-  background-color: var(--bs-nav-hover-bg, #EFEFEF);
+  background-color: #EFEFEF;
+}
+
+[data-bs-theme="dark"] .sdoc-side-toolbar-container:hover {
+  background-color: var(--bs-nav-hover-bg);
 }
 
 .sdoc-side-toolbar-container .sdoc-side-op-icon {
   border-radius: 3px;
   padding: 0px 3px;
-  color: var(--bs-icon-color, #AFAFAD);
+  color: #AFAFAD;
   margin-right: 1px;
   cursor: pointer;
+}
+
+[data-bs-theme="dark"] .sdoc-side-toolbar-container .sdoc-side-op-icon {
+  color: var(--bs-icon-color);
 }
 
 .sdoc-side-toolbar-container .sdoc-side-op-icon :first-child {
@@ -27,8 +35,12 @@
 }
 
 .sdoc-side-toolbar-container .side-op-icon-active {
-  background-color: var(--bs-nav-hover-bg, #F2F2F2);
+  background-color: #F2F2F2;
   border-radius: 2px;
+}
+
+[data-bs-theme="dark"] .sdoc-side-toolbar-container .side-op-icon-active {
+  background-color: var(--bs-nav-hover-bg);
 }
 
 @keyframes fade-out {

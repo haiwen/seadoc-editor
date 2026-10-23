@@ -6,12 +6,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--bs-icon-color, #999);
+  color: #999;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-container .comment-container-right .element-comments-count {
+  color: var(--bs-icon-color);
 }
 
 .sdoc-comment-container .comment-container-right .element-comments-count:hover {
-  color: var(--bs-body-color, #666);
+  color: #666;
   cursor: pointer;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-container .comment-container-right .element-comments-count:hover {
+  color: var(--bs-body-color);
 }
 
 .sdoc-comment-container .comment-container-right .element-comments-count-value {

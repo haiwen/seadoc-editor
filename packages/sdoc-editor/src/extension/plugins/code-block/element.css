@@ -4,11 +4,16 @@
 }
 
 .sdoc-code-block-pre {
-  background: var(--bs-bg-code, #FAFAFA);
-  border: 1px solid var(--bs-border-color, #f0f0f0);
+  background: #FAFAFA;
+  border: 1px solid #f0f0f0;
   display: flex;
   position: unset;
   overflow: auto;
+}
+
+[data-bs-theme="dark"] .sdoc-code-block-pre {
+  background: var(--bs-bg-code);
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-code-block-pre::after {
@@ -46,11 +51,15 @@
 
 .sdoc-code-block-code .sdoc-code-line::before {
   content: counter(number);
-  color: var(--bs-body-secondary-color, #ccc);
+  color: #ccc;
   width: 40px;
   text-align: end;
   position: absolute;
   left: -50px;
+}
+
+[data-bs-theme="dark"] .sdoc-code-block-code .sdoc-code-line::before {
+  color: var(--bs-body-secondary-color);
 }
 
 .sdoc-code-line .token.comment,
@@ -61,7 +70,11 @@
 }
 
 .sdoc-code-line .token.punctuation {
-  color: var(--bs-body-secondary-color, #999);
+  color: #999;
+}
+
+[data-bs-theme="dark"] .sdoc-code-line .token.punctuation {
+  color: var(--bs-body-secondary-color);
 }
 
 .sdoc-code-line .token.namespace {
@@ -149,7 +162,11 @@
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon-container.hidden {
-  background: linear-gradient(0deg, var(--bs-bg-code, #F5F7fA), var(--bs-bg-code, rgba(245, 247, 250, 0.8)));
+  background: linear-gradient(0deg, var(--bs-bg-code, #F5F7fA), rgba(245, 247, 250, 0.8));
+}
+
+[data-bs-theme="dark"] .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon-container.hidden {
+  background: linear-gradient(0deg, var(--bs-bg-code, #F5F7fA), var(--bs-bg-code));
 }
 
 .sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon {

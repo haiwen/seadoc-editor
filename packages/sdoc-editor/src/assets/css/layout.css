@@ -80,9 +80,13 @@
   padding: 0 10px;
   background-color: var(--bs-body-bg, #fff);
   user-select: none;
-  border-bottom: 1px solid var(--bs-border-color, #e5e6e8);
+  border-bottom: 1px solid #e5e6e8;
   position: relative;
   z-index: 102;
+}
+
+[data-bs-theme="dark"] .sdoc-editor-container .sdoc-editor-toolbar {
+  border-bottom: 1px solid var(--bs-border-color);
 }
 
 .sdoc-editor-container .sdoc-editor-toolbar .sdoc-editor-toolbar-right-menu {
