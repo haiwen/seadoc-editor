@@ -44,8 +44,16 @@
   border-radius: 2px;
 }
 
+[data-bs-theme="dark"] .wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .wiki-outline-context {
+  background-color: var(--bs-body-secondary-color);
+}
+
 .wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .active {
   background-color: rgb(50, 48, 44);
+}
+
+[data-bs-theme="dark"] .wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .active {
+  background-color: var(--bs-body-color);
 }
 
 .wiki-outline-wrapper .wiki-outline-popover {
@@ -55,11 +63,16 @@
   max-height: 538px;
   padding: 12px;
   margin-right: 10px;
-  background-color: white;
+  background-color: var(--bs-dropdown-bg, white);
   box-shadow: rgba(15, 15, 15, 0.04) 0px 0px 0px 1px, rgba(15, 15, 15, 0.03) 0px 3px 6px, rgba(15, 15, 15, 0.06) 0px 9px 24px;
   border: 1px solid rgba(55, 53, 47, 0.06);
   border-radius: 14px;
   overflow-y: auto;
+}
+
+[data-bs-theme="dark"] .wiki-outline-wrapper .wiki-outline-popover {
+  box-shadow: var(--bs-dropdown-box-shadow);
+  border: 1px solid var(--bs-dropdown-border-color);
 }
 
 .wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container {
@@ -74,13 +87,25 @@
   font-size: 14px;
 }
 
+[data-bs-theme="dark"] .wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item {
+  color: var(--bs-body-color);
+}
+
 .wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .wiki-outline-active {
-  color: rgb(35, 131, 226)
+  color: rgb(35, 131, 226);
+}
+
+[data-bs-theme="dark"] .wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .wiki-outline-active {
+  color: var(--bs-primary);
 }
 
 .wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item:hover {
   background: rgba(55, 53, 47, 0.06);
   border-radius: 6px;
+}
+
+[data-bs-theme="dark"] .wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item:hover {
+  background: var(--bs-dropdown-link-hover-bg);
 }
 
 .sdoc-outline-container {
@@ -102,6 +127,11 @@
   border-bottom: 1px solid #dbdbdb;
 }
 
+[data-bs-theme="dark"] .sdoc-outline-header {
+  color: var(--bs-body-secondary-color);
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
 .sdoc-outline-header__title {
   font-size: 14px;
   line-height: 1.1;
@@ -118,9 +148,17 @@
   color: #666;
 }
 
+[data-bs-theme="dark"] .sdoc-outline-header__close {
+  color: var(--bs-body-color);
+}
+
 .sdoc-outline-header__close:hover {
   background-color: #EFEFEF;
   border-radius: 2px;
+}
+
+[data-bs-theme="dark"] .sdoc-outline-header__close:hover {
+  background-color: var(--bs-nav-hover-bg);
 }
 
 .sdoc-outline-list-container {
@@ -152,7 +190,7 @@
   cursor: pointer;
   width: 28px;
   height: 28px;
-  background: #fff;
+  background: var(--bs-body-bg, #fff);
   border-radius: 0 50% 50% 0;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
   display: flex;
@@ -164,10 +202,18 @@
   pointer-events: all;
 }
 
+[data-bs-theme="dark"] .sdoc-outline-menu {
+  color: var(--bs-body-secondary-color);
+}
+
 .sdoc-outline-menu.disabled {
   opacity: .65;
 }
 
 .sdoc-outline-menu:not(.disabled):hover {
   color: #666;
+}
+
+[data-bs-theme="dark"] .sdoc-outline-menu:not(.disabled):hover {
+  color: var(--bs-body-color);
 }

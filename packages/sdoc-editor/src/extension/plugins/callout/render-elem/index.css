@@ -11,6 +11,11 @@
   display: flex;
 }
 
+/* Recompute inherited text color with the light tokens scoped to filled callouts. */
+.sdoc-callout-container[data-bs-theme="light"] {
+  color: var(--bs-body-color);
+}
+
 .sdoc-callout-container .callout-content {
   flex: 1;
   position: relative;

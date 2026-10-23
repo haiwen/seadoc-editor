@@ -26,7 +26,7 @@
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #212529;
+  color: var(--bs-body-color, #212529);
   text-wrap: auto;
 }
 
@@ -52,6 +52,10 @@
   border-bottom: 1px solid #ececec;
 }
 
+[data-bs-theme="dark"] .sdoc-context-comment-popover-wrapper .non-global-comment-input-wrapper {
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
 .sdoc-comment-list-container .sdoc-context-comment-popover-wrapper:last-child .non-global-comment-input-wrapper {
   border-bottom: none !important;
 }
@@ -60,6 +64,10 @@
   padding: 16px 16px 0 16px;
   color: #666;
   display: flex;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-item-list .context-comment-item-selected-text-container {
+  color: var(--bs-body-color);
 }
 
 .comment-item-list .context-comment-item-selected-text-container .sdoc-quote-left {
@@ -71,7 +79,7 @@
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  color: #212529;
+  color: var(--bs-body-color, #212529);
 }
 
 .sdoc-comment-list-container .comment-item {
@@ -136,6 +144,10 @@
   margin-top: 16px;
 }
 
+[data-bs-theme="dark"] .comment-item .comment-footer {
+  color: var(--bs-body-color);
+}
+
 .comment-item .comment-footer .comments-count {
   display: flex;
   align-items: center;
@@ -176,7 +188,7 @@
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .name {
-  color: #212529;
+  color: var(--bs-body-color, #212529);
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
@@ -188,6 +200,10 @@
   line-height: 16px;
   display: inline-flex;
   align-items: center;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-header .comment-author__info .time {
+  color: var(--bs-body-color);
 }
 
 .sdoc-comment-list-container .comment-header .comment-author__info .time .comment-success-resolved {
@@ -222,15 +238,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: var(--bs-body-bg, #fff);
   color: #666;
   overflow: hidden;
   border-radius: 2px;
 }
 
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-ui-container .comment-operation {
+  color: var(--bs-body-color);
+  background-color: transparent;
+}
+
 .sdoc-comment-list-container .comment-ui-container.active .comment-operation:hover {
   cursor: pointer;
   background-color: #EFEFEF;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-ui-container.active .comment-operation:hover {
+  background-color: var(--bs-icon-btn-hover-bg-color);
 }
 
 .sdoc-comment-menu {
@@ -239,7 +264,7 @@
 }
 
 .sdoc-popover-menu {
-  background: rgb(255, 255, 255);
+  background: var(--bs-body-bg, rgb(255, 255, 255));
   width: 140px;
   padding: 8px 0;
   height: auto;
@@ -252,13 +277,84 @@
   font-size: 14px;
   background-color: transparent;
   cursor: default;
-  color: #202428;
-  background-color: #fff;
+  color: var(--bs-body-color, #202428);
+  background-color: var(--bs-body-bg, #fff);
 }
 
 .sdoc-popover-menu__item:hover {
-  background-color: #20a0ff;
-  color: #fff;
+  background-color: var(--bs-dropdown-link-hover-bg, #20a0ff);
+  color: var(--bs-dropdown-link-color, #fff);
+}
+
+/* @seafile/comment-editor uses different classes from the legacy editor. */
+.sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content {
+  color: var(--bs-body-color, #212529);
+  border-color: #ececec;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content {
+  border-color: var(--bs-border-color);
+}
+
+.sdoc-comment-list-container .comment-editor-wrapper .comment-editor-content:focus-within {
+  border-color: #ff8e03;
+}
+
+.sdoc-comment-list-container .comment-editor-wrapper .article.comment-editor {
+  color: var(--bs-body-color, #212529);
+  caret-color: var(--bs-body-color, #212529);
+}
+
+/* The dependency renders its paragraph placeholder with an inline color. */
+.sdoc-comment-list-container .comment-editor [data-slate-node='element'] > span[contenteditable='false']:not([data-slate-node]) {
+  color: #bfbfbf !important;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor [data-slate-node='element'] > span[contenteditable='false']:not([data-slate-node]) {
+  color: var(--bs-body-secondary-color) !important;
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group,
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item {
+  color: #666;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group,
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item {
+  color: var(--bs-body-color);
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:hover:not(:disabled) {
+  background-color: #EFEFEF;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:hover:not(:disabled) {
+  background-color: var(--bs-dropdown-link-hover-bg);
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:disabled {
+  color: #C2C2C2;
+  background-color: transparent;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item:disabled {
+  color: var(--bs-body-secondary-color);
+}
+
+.sdoc-comment-list-container .comment-editor-toolbar .comment-editor-menu-group .comment-editor-menu-group-item[data-active='true']:not(:disabled) {
+  color: #ED7109;
+}
+
+/* The mention picker is mounted outside the comment drawer. */
+.sdoc-comment-caret-list {
+  background: var(--bs-dropdown-bg, #fff);
+  color: var(--bs-dropdown-link-color, #212529);
+  border-color: var(--bs-dropdown-border-color, #ededed);
+}
+
+.sdoc-comment-caret-list .comment-participant-item.active,
+.sdoc-comment-caret-list .comment-participant-item:hover {
+  background: var(--bs-dropdown-link-hover-bg, #f5f5f5);
 }
 
 .sdoc-comment-editor-wrapper {
@@ -267,6 +363,10 @@
   border-top-right-radius: 3px;
   border-radius: 3px;
   transition: border-color 0.3s ease;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-editor-wrapper {
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-editor-wrapper:focus-within {
@@ -316,6 +416,10 @@
 
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor:focus {
   border: 1px solid rgba(0, 0, 0, .12);
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container .comment-editor-wrapper .comment-editor:focus {
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-list-container .comment-editor-wrapper .comment-editor-user-info {
@@ -386,7 +490,7 @@
 
 .sdoc-comment-list-container-popover {
   z-index: 102;
-  background-color: rgba(255, 255, 255);
+  background-color: var(--bs-body-bg, rgba(255, 255, 255));
   box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 4px 8px 3px rgba(0, 0, 0, .15);
   border-radius: 5px;
 }
@@ -398,19 +502,27 @@
   border-bottom: 1px solid #ececec;
 }
 
+[data-bs-theme="dark"] .sdoc-comment-list-container-popover .comment-item-list {
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper {
   padding: 0px 16px 16px 16px;
   width: 100%;
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control[readonly] {
-  background-color: #fff;
+  background-color: var(--bs-body-bg, #fff);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control {
   font-size: 14px;
   font-weight: unset;
   border: 1px solid #ececec;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control {
+  border: 1px solid var(--bs-border-color);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper.active .form-control {
@@ -420,6 +532,10 @@
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control:focus {
   box-shadow: none;
   border-color: #e1e2e5;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control:focus {
+  border-color: var(--bs-border-color);
 }
 
 .sdoc-comment-list-container-popover .non-global-comment-input-wrapper .form-control::placeholder {

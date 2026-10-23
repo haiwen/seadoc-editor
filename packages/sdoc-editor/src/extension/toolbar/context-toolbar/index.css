@@ -4,10 +4,10 @@
   width: auto;
   height: 42px;
   z-index: 101;
-  background-color: #fff;
-  border: 1px solid #eee;
+  background-color: var(--bs-dropdown-bg, #fff);
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
   border-radius: 8px;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: var(--bs-dropdown-box-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.1));
 }
 
 .sdoc-context-toolbar .menu-group {

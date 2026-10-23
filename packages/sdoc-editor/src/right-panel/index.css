@@ -19,3 +19,7 @@
   overflow: hidden;
   border-left: 1px solid #d8d8d8;
 }
+
+[data-bs-theme="dark"] .sdoc-content-right-panel-wrapper .sdoc-content-right-panel {
+  border-left: 1px solid var(--bs-border-color);
+}

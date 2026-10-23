@@ -6,7 +6,7 @@
 .sdoc-editor-page-header .doc-info .doc-name {
   font-size: 18px;
   font-weight: 700;
-  color: #212529;
+  color: var(--bs-body-color, #212529);
 }
 
 .sdoc-editor-page-header .doc-info .doc-icon {
@@ -17,9 +17,17 @@
   line-height: 1;
 }
 
+[data-bs-theme="dark"] .sdoc-editor-page-header .doc-info .doc-icon {
+  color: var(--bs-body-secondary-color);
+}
+
 .sdoc-editor-page-header .doc-info .doc-icon:hover {
   margin-left: 0.5rem;
   color: #666;
+}
+
+[data-bs-theme="dark"] .sdoc-editor-page-header .doc-info .doc-icon:hover {
+  color: var(--bs-body-color);
 }
 
 .sdoc-editor-page-header .doc-info .sdoc-link {
@@ -69,6 +77,11 @@
   cursor: default;
 }
 
+[data-bs-theme="dark"] .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-order {
+  color: var(--bs-body-secondary-color);
+  background: var(--bs-body-secondary-bg);
+}
+
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-published-tip {
   display: inline-block;
   font-size: 14px;
@@ -98,6 +111,14 @@
   color: #999;
 }
 
+[data-bs-theme="dark"] .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc .sdoc-jump-to {
+  color: var(--bs-body-secondary-color);
+}
+
 .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-jump-to {
   color: #666;
+}
+
+[data-bs-theme="dark"] .sdoc-editor-page-header .sdoc-revision-info .sdoc-revision-source-doc:hover .sdoc-jump-to {
+  color: var(--bs-body-color);
 }

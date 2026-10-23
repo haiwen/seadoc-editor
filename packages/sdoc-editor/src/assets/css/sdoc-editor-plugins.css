@@ -332,7 +332,7 @@
 /* link */
 .sdoc-editor__article .virtual-link a,
 .sdoc-editor__article .virtual-link {
-  color: #212529;
+  color: var(--bs-body-color, #212529);
   font-weight: 500;
   text-decoration: underline;
   text-underline-position: under;
@@ -350,8 +350,38 @@
   cursor: pointer;
 }
 
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link,
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link a,
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-text-link a,
+[data-bs-theme="dark"] .sdoc-file-render .sdoc-file-text-link a,
+[data-bs-theme="dark"] .sdoc-editor-container.fullscreen a {
+  color: var(--bs-link-color, #ff8000);
+  text-decoration-color: currentColor;
+}
+
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link:hover,
+[data-bs-theme="dark"] .sdoc-editor__article .virtual-link a:hover,
+[data-bs-theme="dark"] .sdoc-file-link-render .sdoc-file-text-link a:hover,
+[data-bs-theme="dark"] .sdoc-file-render .sdoc-file-text-link a:hover {
+  color: var(--bs-link-hover-color, #c60);
+  text-decoration-color: currentColor;
+}
+
 /* temporary selection */
 .sdoc-editor__article .sdoc-temporary-selection {
   padding: 3px 0;
   background-color: #a9c9ed;
+}
+
+[data-bs-theme="dark"] .sdoc-editor__article .sdoc-temporary-selection {
+  background-color: var(--bs-tr-active-bg);
+}
+
+/* Comment highlights are inline light colors; keep their hue so light text stays readable. */
+[data-bs-theme="dark"] .sdoc-comment-highlight {
+  background-color: rgba(129, 237, 247, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .sdoc-comment-highlight-multiple {
+  background-color: rgba(129, 237, 247, 0.4) !important;
 }

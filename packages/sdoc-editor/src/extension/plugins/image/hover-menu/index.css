@@ -11,9 +11,9 @@
   justify-content: flex-start;
   align-items: center;
   border-radius: 8px;
-  background-color: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--bs-dropdown-bg, #fff);
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
+  box-shadow: var(--bs-dropdown-box-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.1));
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .op-group-item:first-child {
@@ -33,7 +33,7 @@
 .sdoc-image-hover-menu-container .hover-menu-container .op-item {
   position: relative;
   font-size: 12px;
-  color: #212529;
+  color: var(--bs-body-color, #212529);
   padding: 0 5px;
   border-radius: 2px;
   min-width: 24px;
@@ -45,7 +45,7 @@
 
 .sdoc-image-hover-menu-container .hover-menu-container .op-item:hover {
   text-decoration: none;
-  background: #EFEFEF;
+  background: var(--bs-dropdown-link-hover-bg, #EFEFEF);
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .op-item.disabled {
@@ -62,12 +62,12 @@
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .active {
-  background: #EFEFEF;
+  background: var(--bs-dropdown-link-hover-bg, #EFEFEF);
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .sdocfont {
   font-size: 14px;
-  color: #666;
+  color: var(--bs-icon-color, #666);
 }
 
 .sdoc-image-hover-menu-container .hover-menu-container .sdoc-arrow-down {
@@ -78,9 +78,9 @@
   position: absolute;
   top: 32px;
   left: 0px;
-  background-color: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--bs-dropdown-bg, #fff);
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
+  box-shadow: var(--bs-dropdown-box-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.1));
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@
 .sdoc-image-hover-menu-container .sdoc-image-popover .sdoc-check-mark {
   position: absolute;
   left: 12px;
-  color: #666;
+  color: var(--bs-icon-color, #666);
 }
 
 .sdoc-image-hover-menu-container .align-popover {

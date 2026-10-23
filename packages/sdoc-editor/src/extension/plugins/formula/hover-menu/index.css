@@ -10,20 +10,20 @@
   height: 40px;
   width: 100%;
   padding: 8px;
-  background-color: #fff;
+  background-color: var(--bs-dropdown-bg, #fff);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid #eee;
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
   border-radius: 8px;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.10);
-  color: #212529;
+  box-shadow: var(--bs-dropdown-box-shadow, 0 6px 14px 0 rgba(0, 0, 0, 0.10));
+  color: var(--bs-body-color, #212529);
 }
 
 .sdoc-formula-hover-menu-container .sdocfont {
   line-height: 1;
   font-size: 14px;
-  color: #666;
+  color: var(--bs-icon-color, #666);
 }
 
 .sdoc-formula-hover-menu-container .hover-menu-container .active {
@@ -69,11 +69,11 @@
 .sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-divider {
   height: 20px;
   width: 1px;
-  background-color: #e5e5e5;
+  background-color: var(--bs-dropdown-divider-bg, #e5e5e5);
   margin: 0 8px;
 }
 
 .sdoc-formula-hover-menu-container .hover-menu-container .op-item:hover {
   text-decoration: none;
-  background: #F5F5F5;
+  background: var(--bs-dropdown-link-hover-bg, #F5F5F5);
 }

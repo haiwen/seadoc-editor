@@ -9,9 +9,9 @@
 }
 
 .sdoc-comments-participants-popover .sdoc-selected-participants {
-  background-color: #f6f6f6;
+  background-color: var(--bs-bg-secondary-color, #f6f6f6);
   padding: 5px;
-  border-bottom: 1px solid #dde2ea;
+  border-bottom: 1px solid var(--bs-border-color, #dde2ea);
   border-radius: 3px 3px 0 0;
   min-height: 34px;
 }
@@ -24,7 +24,7 @@
   padding: 0 8px 0 2px;
   font-size: 13px;
   border-radius: 10px;
-  background: #eaeaea;
+  background: var(--bs-nav-hover-bg, #eaeaea);
 }
 
 .sdoc-comments-participants-popover .sdoc-selected-participant img {
@@ -37,7 +37,7 @@
 .sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-name {
   margin-left: 4px;
   flex: 1 1;
-  color: #16181b;
+  color: var(--bs-body-color, #16181b);
 }
 
 .sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-delete {
@@ -53,11 +53,11 @@
 .sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-delete .sdocfont {
   display: inline-block;
   font-size: 14px;
-  color: #909090;
+  color: var(--bs-icon-color, #909090);
 }
 
 .sdoc-comments-participants-popover .sdoc-selected-participant .sdoc-selected-participant-delete:hover .sdocfont {
-  color: #5a5a5a;
+  color: var(--bs-body-color, #5a5a5a);
 }
 
 .sdoc-comments-participants-popover .sdoc-search-collaborators {
@@ -90,7 +90,7 @@
   padding: 0.25rem 0;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: var(--bs-body-color, #212529);
   height: 30px;
   border-radius: 2px;
   font-size: 14px;
@@ -98,7 +98,7 @@
 
 .sdoc-comments-participants-popover .sdoc-searched-collaborator:hover {
   cursor: pointer;
-  background-color: #f8f9fa;
+  background-color: var(--bs-dropdown-link-hover-bg, #f8f9fa);
 }
 
 .sdoc-comments-participants-popover .sdoc-searched-collaborator img {
@@ -115,7 +115,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-left: 4px;
-  color: #16181b;
+  color: var(--bs-body-color, #16181b);
 }
 
 .sdoc-comments-participants-popover .sdoc-searched-collaborator .sdoc-searched-collaborator-operation {
@@ -128,5 +128,5 @@
 
 .sdoc-comments-participants-popover .sdoc-searched-collaborator .sdoc-searched-collaborator-operation .sdocfont {
   font-size: 14px;
-  color: #666;
+  color: var(--bs-body-color, #666);
 }

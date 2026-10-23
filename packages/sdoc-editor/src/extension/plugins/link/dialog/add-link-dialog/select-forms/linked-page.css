@@ -25,7 +25,7 @@
 }
 
 .sdoc-wiki-link-page-item:hover {
-  background-color: #f5f5f5;
+  background-color: var(--bs-dropdown-link-hover-bg, #f5f5f5);
 }
 
 .sdoc-wiki-link-page-item .toggle-icon-container {
@@ -34,7 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #666;
+  color: var(--bs-icon-color, #666);
   font-size: 12px;
   border-radius: 3px;
 }
@@ -55,7 +55,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 6px;
-  color: #666;
+  color: var(--bs-icon-color, #666);
 }
 
 .sdoc-wiki-link-page-main {
@@ -96,7 +96,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 6px;
-  color: #666;
+  color: var(--bs-icon-color, #666);
 }
 
 .selected-wiki-linked-page .page-name {
@@ -139,7 +139,7 @@
 }
 
 .sdoc-search-close-icon:hover {
-  background-color: #efefef;
+  background-color: var(--bs-dropdown-link-hover-bg, #efefef);
 }
 
 .sdoc-search-close-icon .sdocfont {

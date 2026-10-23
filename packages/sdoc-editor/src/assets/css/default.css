@@ -9,12 +9,12 @@
 }
 
 .sdoc-icon-btn:hover {
-  background-color: #EFEFEF;
+  background-color: var(--bs-nav-hover-bg, #EFEFEF);
   cursor: pointer;
 }
 
 .sdoc-icon-btn .sdocfont {
-  color: #666;
+  color: var(--bs-icon-color, #666);
   font-size: 16px;
 }
 

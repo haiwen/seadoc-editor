@@ -3,8 +3,8 @@
   padding: 10px;
   left: 0;
   top: 36.5px;
-  background-color: #fff;
-  border: 1px solid #eee;
+  background-color: var(--bs-dropdown-bg, #fff);
+  border: 1px solid var(--bs-dropdown-border-color, #eee);
   border-radius: 3px;
   z-index: 100;
 }

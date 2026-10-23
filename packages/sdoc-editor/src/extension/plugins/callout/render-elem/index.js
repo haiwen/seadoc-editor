@@ -120,6 +120,8 @@ const renderCallout = ({ attributes, children, element }, editor) => {
         ref={calloutRef}
         className='sdoc-callout-container'
         style={containerStyle}
+        // Callout fills are light document colors, so their content keeps light theme colors.
+        data-bs-theme={containerStyle.backgroundColor !== 'transparent' ? 'light' : undefined}
       >
         {element.callout_icon && (
           <div className='callout-icon'>

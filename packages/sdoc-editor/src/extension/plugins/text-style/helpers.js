@@ -72,3 +72,11 @@ export const isTextCommentExist = (commentClass, editor) => {
   });
   return comment ? true : false;
 };
+
+const LEGACY_DEFAULT_TEXT_COLOR = /^(#333333|#333|rgb\(\s*51\s*,\s*51\s*,\s*51\s*\)|rgba\(\s*51\s*,\s*51\s*,\s*51\s*,\s*1\s*\))$/i;
+
+// Theme the legacy default color without changing stored document marks.
+export const getThemedTextColor = (color) => {
+  if (typeof color !== 'string' || !LEGACY_DEFAULT_TEXT_COLOR.test(color.trim())) return color;
+  return `var(--bs-document-text-color, ${color})`;
+};
