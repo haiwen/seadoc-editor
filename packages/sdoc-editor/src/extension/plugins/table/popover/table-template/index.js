@@ -32,7 +32,13 @@ const TableTemplate = ({ editor, targetId, templateRef, handleClosePopover, call
         const newPosition = [position[0] - 1, position[1]];
         ref.current.position = newPosition;
         setPosition(newPosition);
+      } else {
+        const initialPosition = [-1, -1];
+        ref.current.position = initialPosition;
+        setPosition(initialPosition);
+        ref.current.toggle();
       }
+      return;
     }
     if (keyCode === RightArrow) {
       e.preventDefault();
@@ -84,12 +90,20 @@ const TableTemplate = ({ editor, targetId, templateRef, handleClosePopover, call
     }
   }, [handleClickTemplate, handleClosePopover]);
 
+  const openWithKeyboard = useCallback(() => {
+    const firstPosition = [0, 0];
+    ref.current.position = firstPosition;
+    setPosition(firstPosition);
+    ref.current.toggle();
+  }, []);
+
   useImperativeHandle(templateRef, () => {
     return {
       handleTableTemplateKeyDown: handleTableTemplateKeyDown,
+      openWithKeyboard: openWithKeyboard,
       uncontrolledTemplatePopoverRef: ref
     };
-  });
+  }, [handleTableTemplateKeyDown, openWithKeyboard]);
 
   useEffect(() => {
     ref.current.position = [-1, -1];

@@ -35,6 +35,9 @@ const QuickInsertBlockMenu = ({
 }) => {
   const editor = useSlateStatic();
   const tableSizeRef = useRef(null);
+  const videoMenuRef = useRef(null);
+  const videoMenuKeyboardNavigationRef = useRef(false);
+  const videoMenuSelectIndexRef = useRef(-1);
   const inputWrapperRef = useRef(null);
   const downDownWrapperRef = useRef(null);
   const { t } = useTranslation('sdoc-editor');
@@ -215,9 +218,16 @@ const QuickInsertBlockMenu = ({
         <DropdownMenuItem isHidden={!quickInsertMenuSearchMap[VIDEO]} disabled={isDisableVideo} key="sdoc-insert-menu-video" menuConfig={{ ...SIDE_INSERT_MENUS_CONFIG[ELEMENT_TYPE.VIDEO] }} className="pr-2">
           <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
           <UncontrolledPopover
+            ref={videoMenuRef}
             target='sdoc-side-menu-item-video'
             trigger="hover"
-            className="sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover"
+            className="sdoc-dropdown-menu sdoc-sub-dropdown-menu sdoc-insert-video-menu-popover sdoc-quick-insert-video-menu-popover"
+            onEntered={() => {
+              if (!videoMenuKeyboardNavigationRef.current) return;
+              const videoMenuItems = document.querySelectorAll('.sdoc-quick-insert-video-menu-popover .popover.show .sdoc-dropdown-menu-item');
+              videoMenuItems.forEach((item) => item.classList.remove(SELECTED_ITEM_CLASS_NAME));
+              if (videoMenuItems.length > 0) videoMenuItems[0].classList.add(SELECTED_ITEM_CLASS_NAME);
+            }}
             popperClassName="sdoc-popover-box-shadow"
             placement="right-start"
             hideArrow={true}
@@ -290,13 +300,67 @@ const QuickInsertBlockMenu = ({
     return currentSelectItem;
   };
 
+  const getVideoMenuItems = useCallback(() => {
+    const videoMenu = document.querySelector('.sdoc-quick-insert-video-menu-popover .popover.show .sdoc-insert-video-menu-popover-container');
+    return videoMenu ? Array.from(videoMenu.querySelectorAll('.sdoc-dropdown-menu-item')) : [];
+  }, []);
+
+  const setVideoMenuSelection = useCallback((index) => {
+    const videoMenuItems = getVideoMenuItems();
+    videoMenuItems.forEach((item) => item.classList.remove(SELECTED_ITEM_CLASS_NAME));
+    if (index >= 0 && index < videoMenuItems.length) {
+      videoMenuSelectIndexRef.current = index;
+      videoMenuItems[index].classList.add(SELECTED_ITEM_CLASS_NAME);
+    }
+  }, [getVideoMenuItems]);
+
   const handleKeyDown = useCallback((e) => {
-    if (document.getElementsByClassName('sdoc-selected-table-size-popover')[0]) {
+    const { UpArrow, DownArrow, LeftArrow, RightArrow, Enter, Esc } = KeyCodes;
+    const tableSizePopover = document.querySelector('.sdoc-selected-table-size-popover.show');
+    if (tableSizePopover) {
       tableSizeRef.current.handleTableSizeKeyDown(e);
       return;
     }
 
-    const { UpArrow, DownArrow, Enter, Esc } = KeyCodes;
+    const videoMenuPopover = document.querySelector('.sdoc-quick-insert-video-menu-popover .popover.show');
+    if (!videoMenuPopover) {
+      videoMenuKeyboardNavigationRef.current = false;
+      videoMenuSelectIndexRef.current = -1;
+    }
+    if (videoMenuPopover && videoMenuKeyboardNavigationRef.current) {
+      const videoMenuItems = getVideoMenuItems();
+      if (e.keyCode === UpArrow || e.keyCode === DownArrow) {
+        e.preventDefault();
+        if (videoMenuItems.length === 0) return;
+        const direction = e.keyCode === DownArrow ? 1 : -1;
+        const nextIndex = (videoMenuSelectIndexRef.current + direction + videoMenuItems.length) % videoMenuItems.length;
+        setVideoMenuSelection(nextIndex);
+        return;
+      }
+      if (e.keyCode === Enter) {
+        e.preventDefault();
+        videoMenuItems[videoMenuSelectIndexRef.current]?.click();
+        return;
+      }
+      if (e.keyCode === LeftArrow) {
+        e.preventDefault();
+        videoMenuKeyboardNavigationRef.current = false;
+        videoMenuSelectIndexRef.current = -1;
+        setVideoMenuSelection(-1);
+        videoMenuRef.current.toggle();
+        return;
+      }
+    }
+
+    if (e.keyCode === LeftArrow && videoMenuPopover) {
+      e.preventDefault();
+      videoMenuKeyboardNavigationRef.current = false;
+      videoMenuSelectIndexRef.current = -1;
+      setVideoMenuSelection(-1);
+      videoMenuRef.current.toggle();
+      return;
+    }
+
     const renderItems = [];
     Reflect.ownKeys(dropDownItems).forEach((key) => {
       if (quickInsertMenuSearchMap[key]) renderItems.push(key);
@@ -308,17 +372,32 @@ const QuickInsertBlockMenu = ({
       const currentSelectItem = getSelectItemDom(currentSelectIndex);
       if (currentSelectItem) currentSelectItem.classList.remove(SELECTED_ITEM_CLASS_NAME);
       if (currentSelectIndex > -1) {
-        setCurrentSelectIndex(currentSelectIndex - 1);
+        setCurrentSelectIndex(currentSelectIndex === 0 ? renderItems.length - 1 : currentSelectIndex - 1);
       }
     }
 
     if (keyCode === DownArrow) {
       e.preventDefault();
-      if (currentSelectIndex === renderItems.length - 1) return;
+      if (renderItems.length === 0) return;
       const currentSelectItem = getSelectItemDom(currentSelectIndex);
       if (currentSelectItem) currentSelectItem.classList.remove(SELECTED_ITEM_CLASS_NAME);
-      if (currentSelectIndex < renderItems.length - 1) {
-        setCurrentSelectIndex(currentSelectIndex + 1);
+      setCurrentSelectIndex(currentSelectIndex === renderItems.length - 1 ? 0 : currentSelectIndex + 1);
+    }
+
+    if (keyCode === RightArrow && currentSelectIndex > -1) {
+      const selectedItem = renderItems[currentSelectIndex];
+      if (dropDownItems[selectedItem]?.props.disabled) return;
+      if (selectedItem === TABLE && tableSizeRef.current?.uncontrolledPopoverRef?.current) {
+        e.preventDefault();
+        tableSizeRef.current.selectFirstMenuItem();
+        tableSizeRef.current.uncontrolledPopoverRef.current.toggle();
+      }
+      if (selectedItem === VIDEO && videoMenuRef.current) {
+        e.preventDefault();
+        videoMenuKeyboardNavigationRef.current = true;
+        videoMenuSelectIndexRef.current = 0;
+        if (!videoMenuPopover) videoMenuRef.current.toggle();
+        requestAnimationFrame(() => setVideoMenuSelection(0));
       }
     }
 
@@ -326,8 +405,17 @@ const QuickInsertBlockMenu = ({
       e.preventDefault();
       if (currentSelectIndex === -1) return;
       const item = renderItems[currentSelectIndex];
+      if (dropDownItems[item]?.props.disabled) return;
       if (item === TABLE) {
+        tableSizeRef.current.selectFirstMenuItem();
         tableSizeRef.current.uncontrolledPopoverRef.current.toggle();
+        return;
+      }
+      if (item === VIDEO && videoMenuRef.current) {
+        videoMenuKeyboardNavigationRef.current = true;
+        videoMenuSelectIndexRef.current = 0;
+        if (!videoMenuPopover) videoMenuRef.current.toggle();
+        requestAnimationFrame(() => setVideoMenuSelection(0));
         return;
       }
       if (dropDownItems[item]) {
@@ -340,7 +428,7 @@ const QuickInsertBlockMenu = ({
       e.preventDefault();
       handleClosePopover();
     }
-  }, [currentSelectIndex, dropDownItems, handleClosePopover, quickInsertMenuSearchMap]);
+  }, [currentSelectIndex, dropDownItems, getVideoMenuItems, handleClosePopover, quickInsertMenuSearchMap, setVideoMenuSelection]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
@@ -372,7 +460,7 @@ const QuickInsertBlockMenu = ({
       clearSelectStyle();
       const currentSelectItem = getSelectItemDom(currentSelectIndex);
       if (currentSelectItem) {
-        onHandleOverflowScroll(currentSelectItem, downDownWrapperRef);
+        onHandleOverflowScroll(currentSelectItem, downDownWrapperRef, !getSelectItemDom(currentSelectIndex + 1));
         currentSelectItem.classList.add(SELECTED_ITEM_CLASS_NAME);
       }
     }
