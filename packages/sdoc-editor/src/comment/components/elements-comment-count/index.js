@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getCommentElementById } from '../../utils';
+import { getCommentedElementIds } from '../../helper';
 import ElementCommentCount from './element-comment-count';
 
 import './index.css';
@@ -8,33 +8,29 @@ import './index.css';
 const ElementsCommentCount = ({ elementCommentsMap, selectionElement, editor, onSelectElement }) => {
   if (!elementCommentsMap) return null;
 
+  const commentsByElement = {};
+  Object.entries(elementCommentsMap).forEach(([originElementId, comments]) => {
+    comments.filter(comment => !comment.resolved).forEach(comment => {
+      const elementId = comment.detail.element_id_list
+        ? getCommentedElementIds(editor, comment.detail.text_comment_id)[0]
+        : originElementId;
+      if (!elementId) return;
+      if (!commentsByElement[elementId]) commentsByElement[elementId] = [];
+      commentsByElement[elementId].push(comment);
+    });
+  });
+
   return (
     <div className="elements-comments-count">
-      {Object.keys(elementCommentsMap).map(originElementId => {
-        const comments = elementCommentsMap[originElementId];
-        if (!Array.isArray(comments) || comments.length === 0) return null;
-
-        let elementId = originElementId;
-        const elementIdList = comments[0].detail?.element_id_list ?? [];
-        if (elementIdList.length > 1) {
-          const existedId = elementIdList.find(id => getCommentElementById(id, editor));
-          if (existedId) {
-            elementId = existedId;
-          } else {
-            return null;
-          }
-        }
-        const unresolvedComment = comments.filter(item => !item.resolved);
-        const unresolvedCommentCount = unresolvedComment.length;
-        if (unresolvedCommentCount === 0) return null;
+      {Object.entries(commentsByElement).map(([elementId, comments]) => {
         return (
           <ElementCommentCount
-            key={`${originElementId}-${elementId}`}
+            key={elementId}
             elementId={elementId}
             isElementSelected={selectionElement && selectionElement.id === elementId}
-            commentsCount={unresolvedCommentCount}
+            commentsCount={comments.length}
             editor={editor}
-            onSelectElement={onSelectElement}
+            onSelectElement={() => onSelectElement(elementId, false, comments)}
           />
         );
       })}

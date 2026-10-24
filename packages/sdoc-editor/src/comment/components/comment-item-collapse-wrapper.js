@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { COMMENT_URL_CLASSNAME } from '../constants';
-import { getCommentedTextsByElementId } from '../helper';
+import { getCommentedElementIds, getCommentedTextsByElementId } from '../helper';
 import { useNotificationContext } from '../hooks/notification-hooks';
 
 const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, editor, replyCount, setCurrentCommentGroup, t, deleteUnseenNotifications }) => {
@@ -15,6 +15,11 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
   const { notificationsInfo } = useNotificationContext();
   const [commentContent, setCommentContent] = useState('');
   const [replyContent, setReplyContent] = useState('');
+  const [commentedElementIds, setCommentedElementIds] = useState([]);
+
+  useEffect(() => {
+    setCommentedElementIds(getCommentedElementIds(editor, topLevelComment.detail.text_comment_id));
+  }, [editor, editor.children, topLevelComment.detail.text_comment_id]);
 
   const CommentItemListRef = useRef();
   const timeoutRef = useRef(null);
@@ -91,11 +96,13 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
 
   const handleScrollToArticle = useCallback( (e) => {
     e.stopPropagation();
-    if (!element) return;
-    const dom = ReactEditor.toDOMNode(editor, element);
+    const dom = topLevelComment.detail.element_id_list
+      ? document.querySelector(`[data-id="${commentedElementIds[0]}"]`)
+      : element && ReactEditor.toDOMNode(editor, element);
+    if (!dom) return;
     const headerHeight = 56 + 37;
     scrollRef.current.scrollTo({ top: dom.offsetTop - headerHeight, behavior: 'smooth' });
-  }, [editor, element, scrollRef]);
+  }, [commentedElementIds, editor, element, scrollRef, topLevelComment.detail.element_id_list]);
 
   const onItemClick = useCallback((event) => {
     event.stopPropagation();
@@ -117,7 +124,7 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
         <div className={classNames('comment-item-selected-text-container', { 'detail-context-comment': topLevelComment.detail.element_id_list?.length > 0 })} onClick={handleScrollToArticle}>
           <i className="sdocfont sdoc-quote-left mr-2"></i>
           <div className="comment-item-selected-text">
-            {topLevelComment.detail.element_id_list.map((elementId, index) => {
+            {commentedElementIds.map((elementId, index) => {
               return (<div className='context-comment-item-selected-text' key={index}>{getCommentedTextsByElementId(elementId, topLevelComment.detail.text_comment_id)}</div>);
             })}
           </div>

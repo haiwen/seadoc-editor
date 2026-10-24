@@ -1,6 +1,8 @@
-import { Node, Text } from '@seafile/slate';
+import { Editor, Node, Text, Transforms } from '@seafile/slate';
 import deepCopy from 'deep-copy';
 import slugid from 'slugid';
+import context from '../context';
+import { CLIPBOARD_CUT_COMMENT_KEY, CLIPBOARD_ORIGIN_SDOC_KEY } from '../extension/constants';
 import ObjectUtils from '../utils/object-utils';
 import * as OPERATION from './constants';
 
@@ -100,12 +102,60 @@ export const replacePastedDataId = (pastedData) => {
   });
 };
 
-export const removeCommentMarks = (fragment) => {
+const getCommentTextLengths = (nodes) => {
+  const lengths = {};
+  for (const [node] of Node.texts({ children: nodes })) {
+    if (node.text === '') continue;
+    for (const key of Object.keys(node)) {
+      if (key.startsWith('sdoc_comment_')) {
+        lengths[key] = (lengths[key] || 0) + node.text.length;
+      }
+    }
+  }
+  return lengths;
+};
+
+export const getFullyCutCommentKeys = (editor) => {
+  const selectedLengths = getCommentTextLengths(editor.getFragment());
+  const documentLengths = getCommentTextLengths(editor.children);
+  return Object.keys(selectedLengths).filter(key => selectedLengths[key] === documentLengths[key]);
+};
+
+const pastedCutCommentIds = new Set();
+
+export const getPastedCommentKeys = (data) => {
+  const commentKeys = data.getData(`application/${CLIPBOARD_CUT_COMMENT_KEY}`);
+  if (!commentKeys || data.getData(`text/${CLIPBOARD_ORIGIN_SDOC_KEY}`) !== context.getSetting('docUuid')) return;
+  const { id, commentKeys: keys } = JSON.parse(commentKeys);
+  return pastedCutCommentIds.has(id) ? [] : keys;
+};
+
+export const consumePastedCommentKeys = (data, editor, previousChildren) => {
+  if (editor.children === previousChildren || !getPastedCommentKeys(data)?.length) return;
+  const { id } = JSON.parse(data.getData(`application/${CLIPBOARD_CUT_COMMENT_KEY}`));
+  pastedCutCommentIds.add(id);
+};
+
+export const removeEmptyCommentMarks = (editor) => {
+  Editor.withoutNormalizing(editor, () => {
+    for (const [node, path] of Editor.nodes(editor, {
+      at: [],
+      match: n => Text.isText(n) && n.text === '',
+    })) {
+      const commentKeys = Object.keys(node).filter(key => key.startsWith('sdoc_comment_'));
+      if (commentKeys.length) {
+        Transforms.unsetNodes(editor, commentKeys, { at: path });
+      }
+    }
+  });
+};
+
+export const removeCommentMarks = (fragment, preservedCommentKeys = []) => {
   const cleanNode = (node) => {
     if (Text.isText(node)) {
       const newNode = { ...node };
       for (const key of Object.keys(newNode)) {
-        if (key.startsWith('sdoc_comment') || key.startsWith('removed_')) {
+        if ((key.startsWith('sdoc_comment') && !preservedCommentKeys.includes(key)) || key.startsWith('removed_')) {
           delete newNode[key];
         }
       }

@@ -1,8 +1,8 @@
-import { Editor, Transforms, Path, Element, Range } from '@seafile/slate';
+import { Editor, Transforms, Path, Element, Range, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import isHotkey from 'is-hotkey';
 import { INTERNAL_EVENT } from '../../../constants';
-import { removeCommentMarks, replacePastedDataId } from '../../../node-id/helpers';
+import { consumePastedCommentKeys, getPastedCommentKeys, removeCommentMarks, removeEmptyCommentMarks, replacePastedDataId } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import ObjectUtils from '../../../utils/object-utils';
 import { isValidWebUrl } from '../../../utils/url-utils';
@@ -31,6 +31,26 @@ const getInlineLinkNodes = (nodes) => {
   });
 
   return hasOnlyOneLink && hasOnlyEmptyTextAndLink ? linkNodes : null;
+};
+
+const getCutTextNodes = (nodes, text, commentKeys) => {
+  const children = [];
+  let offset = 0;
+  for (const [leaf] of Node.texts({ children: nodes })) {
+    if (!leaf.text) continue;
+    const start = text.indexOf(leaf.text, offset);
+    if (start === -1) continue;
+    // Keep the line breaks already produced by the clipboard serializer.
+    if (start > offset) children.push({ text: text.slice(offset, start) });
+    const child = { text: leaf.text };
+    for (const key of commentKeys) {
+      if (key in leaf) child[key] = leaf[key];
+    }
+    children.push(child);
+    offset = start + leaf.text.length;
+  }
+  if (offset < text.length) children.push({ text: text.slice(offset) });
+  return children;
 };
 
 const withTable = (editor) => {
@@ -327,16 +347,16 @@ const withTable = (editor) => {
   };
 
   // copy: mod + c
-  newEditor.setFragmentData = (dataTransfer) => {
+  newEditor.setFragmentData = (dataTransfer, originEvent) => {
 
     const selectedNode = getSelectedNodeByType(newEditor, ELEMENT_TYPE.TABLE);
     if (!selectedNode) {
-      return setFragmentData(dataTransfer);
+      return setFragmentData(dataTransfer, originEvent);
     }
 
     const { tableSelectedRange } = newEditor;
     if (ObjectUtils.isSameObject(tableSelectedRange, EMPTY_SELECTED_RANGE)) {
-      return setFragmentData(dataTransfer);
+      return setFragmentData(dataTransfer, originEvent);
     }
 
     return setTableFragmentData(newEditor, dataTransfer);
@@ -347,7 +367,8 @@ const withTable = (editor) => {
     const { tableSelectedRange } = newEditor;
 
     if (selectedNode && !ObjectUtils.isSameObject(tableSelectedRange, EMPTY_SELECTED_RANGE)) {
-      setTableFragmentData(newEditor, event.clipboardData);
+      event.preventDefault();
+      newEditor.setFragmentData(event.clipboardData, 'cut');
 
       const deleteType = deleteHandler(newEditor);
 
@@ -360,6 +381,7 @@ const withTable = (editor) => {
       // range selection delete
       if (deleteType === 'range') {
         deleteTableRangeData(newEditor);
+        removeEmptyCommentMarks(newEditor);
         return;
       }
       return;
@@ -374,24 +396,35 @@ const withTable = (editor) => {
       return;
     }
 
+    const text = data.getData('text/plain');
     const fragment = data.getData(`application/${CLIPBOARD_FORMAT_KEY}`);
     if (fragment) {
       const decoded = decodeURIComponent(window.atob(fragment));
-      const parsedData = JSON.parse(decoded);
+      const preservedCommentKeys = getPastedCommentKeys(data);
+      const parsedData = removeCommentMarks(JSON.parse(decoded), preservedCommentKeys);
+      const previousChildren = newEditor.children;
       if (Array.isArray(parsedData) && parsedData.some(item => item.type === ELEMENT_TYPE.TABLE)) {
         const tableElement = parsedData.find(item => item.type === ELEMENT_TYPE.TABLE);
         insertMultipleRowsAndColumns(newEditor, tableElement.children, tableElement.columns);
+        consumePastedCommentKeys(data, newEditor, previousChildren);
         return;
       }
 
       const linkNodes = getInlineLinkNodes(parsedData);
       if (linkNodes && isInTableSameCell(newEditor)) {
-        const cleanedLinkNodes = removeCommentMarks(linkNodes);
-        return Transforms.insertNodes(newEditor, replacePastedDataId(cleanedLinkNodes));
+        const result = Transforms.insertNodes(newEditor, replacePastedDataId(linkNodes));
+        consumePastedCommentKeys(data, newEditor, previousChildren);
+        return result;
+      }
+
+      if (preservedCommentKeys && text && isInTableSameCell(newEditor)) {
+        const textNodes = getCutTextNodes(parsedData, text, preservedCommentKeys);
+        const result = newEditor.insertFragment(replacePastedDataId(textNodes));
+        consumePastedCommentKeys(data, newEditor, previousChildren);
+        return result;
       }
     }
 
-    const text = data.getData('text/plain');
     if (!text) return;
 
     // Keep URL paste behavior consistent with normal text while preserving multi-cell paste behavior.
