@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.257](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.256...%40seafile%2Fsdoc-editor%403.0.257) (2026-10-24)
+
+### Bug Fixes
+
+- correct MathJax script URL ([#331](https://github.com/haiwen/seadoc-editor/issues/331)) ([18b61a3](https://github.com/haiwen/seadoc-editor/commit/18b61a34d3619db44c0667a4f370af4d4a2864e2))
+- escape regex metacharacters in search input ([#330](https://github.com/haiwen/seadoc-editor/issues/330)) ([01af924](https://github.com/haiwen/seadoc-editor/commit/01af9241e4ed97f0170b7bc28b1b02ff4672ae84))
+
 ## [3.0.256](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.255...%40seafile%2Fsdoc-editor%403.0.256) (2026-10-21)
 
 ### Bug Fixes
