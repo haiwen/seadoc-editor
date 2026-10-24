@@ -17,6 +17,7 @@ const TableSizePopover = ({
   const maxSize = [10, 10];
   const [displaySize, setDisplaySize] = useState([5, 10]);
   const [selectedSize, setSelectedSize] = useState([1, 1]);
+  const [isTemplateSelected, setIsTemplateSelected] = useState(false);
   const ref = useRef(null);
   const templateRef = useRef(null);
 
@@ -52,9 +53,13 @@ const TableSizePopover = ({
   }, [selectedSize, ref]);
 
   const onTemplateItemSelectedStyle = useCallback((color) => {
-    const templateEl = document.getElementById('sdoc-table-template-review-btn');
-    templateEl.style['backgroundColor'] = color;
+    setIsTemplateSelected(Boolean(color));
   }, []);
+
+  const selectFirstMenuItem = useCallback(() => {
+    ref.current['firstRender'] = false;
+    onTemplateItemSelectedStyle('#f5f5f5');
+  }, [onTemplateItemSelectedStyle]);
 
   const handleSizeDown = useCallback((e) => {
     const { keyCode } = e;
@@ -97,9 +102,8 @@ const TableSizePopover = ({
     const { keyCode } = e;
     const { UpArrow, DownArrow, Enter, RightArrow, LeftArrow, Esc } = KeyCodes;
     const isInitSize = selectedSize[0] === 1 && selectedSize[1] === 1;
-    const templateEl = document.getElementById('sdoc-table-template-review-btn');
     // Currently focusing on the template menu item
-    if (templateEl.style['background-color']) {
+    if (isTemplateSelected) {
       if (keyCode === DownArrow) {
         e.preventDefault();
         onTemplateItemSelectedStyle('');
@@ -113,8 +117,11 @@ const TableSizePopover = ({
       }
       if (keyCode === Enter) {
         e.preventDefault();
-        onTemplateItemSelectedStyle('');
-        templateRef.current.uncontrolledTemplatePopoverRef.current.toggle();
+        templateRef.current.openWithKeyboard();
+      }
+      if (keyCode === RightArrow) {
+        e.preventDefault();
+        templateRef.current.openWithKeyboard();
       }
       if (keyCode === Esc) {
         e.preventDefault();
@@ -132,7 +139,7 @@ const TableSizePopover = ({
       e.preventDefault();
       if (ref.current['firstRender']) {
         ref.current['firstRender'] = false;
-        onTemplateItemSelectedStyle('#e3e3e3');
+        onTemplateItemSelectedStyle('#f5f5f5');
         return;
       }
       handleSizeDown(e);
@@ -142,7 +149,7 @@ const TableSizePopover = ({
     if (keyCode === UpArrow) {
       e.preventDefault();
       if (isInitSize) {
-        onTemplateItemSelectedStyle('#e3e3e3');
+        onTemplateItemSelectedStyle('#f5f5f5');
       } else {
         handleSizeDown(e);
       }
@@ -163,11 +170,17 @@ const TableSizePopover = ({
       e.preventDefault();
       handleClosePopover();
     }
-  }, [handleClosePopover, handleSizeDown, onTemplateItemSelectedStyle, selectedSize]);
+  }, [handleClosePopover, handleSizeDown, isTemplateSelected, onTemplateItemSelectedStyle, selectedSize]);
+
+  const onPopoverClosed = useCallback(() => {
+    setIsTemplateSelected(false);
+    ref.current['firstRender'] = true;
+  }, []);
 
   useImperativeHandle(tableSizeRef, () => {
     return {
       handleTableSizeKeyDown: handleTableSizeKeyDown,
+      selectFirstMenuItem: selectFirstMenuItem,
       uncontrolledPopoverRef: ref
     };
   });
@@ -206,6 +219,7 @@ const TableSizePopover = ({
       placement={placement}
       hideArrow={true}
       fade={false}
+      onClosed={onPopoverClosed}
       ref={ref}
       popperClassName={`${popperClassName} sdoc-popover-box-shadow`}
       offset={offset}
@@ -216,6 +230,7 @@ const TableSizePopover = ({
             id="sdoc-table-template-review-btn"
             text="Table_template"
             iconClassname="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"
+            isSelected={isTemplateSelected}
           />
         </div>
         <div className="sdoc-table-size-select">
@@ -246,10 +261,10 @@ TableSizePopover.propTypes = {
 
 export default TableSizePopover;
 
-const MenuItem = ({ id, className, text, iconClassname }) => {
+const MenuItem = ({ id, className, text, iconClassname, isSelected }) => {
   const { t } = useTranslation('sdoc-editor');
   return (
-    <div id={id} className={classnames('sdoc-selected-table-size-custom', { className })}>
+    <div id={id} className={classnames('sdoc-selected-table-size-custom', className, { 'keyboard-selected': isSelected })}>
       <span>{t(text)}</span>
       <i className={iconClassname}></i>
     </div>
