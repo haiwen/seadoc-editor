@@ -38,6 +38,7 @@ const QuickInsertBlockMenu = ({
   const videoMenuRef = useRef(null);
   const videoMenuKeyboardNavigationRef = useRef(false);
   const videoMenuSelectIndexRef = useRef(-1);
+  const preserveSearchInputFocusRef = useRef(false);
   const inputWrapperRef = useRef(null);
   const downDownWrapperRef = useRef(null);
   const { t } = useTranslation('sdoc-editor');
@@ -456,7 +457,8 @@ const QuickInsertBlockMenu = ({
     if (currentSelectIndex === -1) {
       onHandleInputFocus(true);
     } else {
-      onHandleInputFocus(false);
+      if (!preserveSearchInputFocusRef.current) onHandleInputFocus(false);
+      preserveSearchInputFocusRef.current = false;
       clearSelectStyle();
       const currentSelectItem = getSelectItemDom(currentSelectIndex);
       if (currentSelectItem) {
@@ -464,12 +466,15 @@ const QuickInsertBlockMenu = ({
         currentSelectItem.classList.add(SELECTED_ITEM_CLASS_NAME);
       }
     }
-  }, [clearSelectStyle, currentSelectIndex, downDownWrapperRef, onHandleInputFocus]);
+  }, [clearSelectStyle, currentSelectIndex, downDownWrapperRef, onHandleInputFocus, quickInsertMenuSearchMap]);
 
   const onChange = useCallback((e) => {
     if (!downDownWrapperRef.current.isInputtingChinese) {
       const newMenuSearchMap = getSearchedOperations(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, true, e, t, editor);
+      const hasResults = Object.keys(newMenuSearchMap).length > 0;
+      preserveSearchInputFocusRef.current = hasResults;
       setQuickInsertMenuSearchMap(newMenuSearchMap);
+      setCurrentSelectIndex(hasResults ? 0 : -1);
     }
   }, [editor, t]);
 
