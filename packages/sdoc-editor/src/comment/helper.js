@@ -1,4 +1,4 @@
-import { Editor, Element, Text, Transforms } from '@seafile/slate';
+import { Editor, Element, Node, Text, Transforms } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import { WIKI_EDITOR } from '../constants';
 import context from '../context';
@@ -96,6 +96,27 @@ export const getSelectedElemIds = (editor) => {
   return selectedElemId;
 };
 
+export const getCommentedElementIds = (editor, textCommentId) => {
+  if (!textCommentId) return [];
+  const commentMark = `sdoc_comment_${textCommentId}`;
+  const elementIds = new Set();
+
+  for (const [, path] of Editor.nodes(editor, {
+    at: [],
+    match: n => Text.isText(n) && n.text !== '' && commentMark in n,
+    voids: true,
+  })) {
+    const blockEntry = Editor.above(editor, {
+      at: path,
+      match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    });
+    if (blockEntry?.[0].id) {
+      elementIds.add(blockEntry[0].id);
+    }
+  }
+  return Array.from(elementIds);
+};
+
 export const getCommentedTextsByElementId = (elementId, textCommentId) => {
   const container = document.querySelector(`[data-id='${elementId}']`);
   if (!container) return [];
@@ -149,15 +170,15 @@ export const updateElementsAttrs = (activeElementIds, editor, text_comment_id) =
 export const updateCommentedElementsAttrs = (activeElementIds, editor, text_comment_id, resolved = false, isDeleteComment = false) => {
   if (Array.isArray(activeElementIds)) {
     Editor.withoutNormalizing(editor, () => {
-      for (const elemId of activeElementIds) {
+      for (const elemId of getCommentedElementIds(editor, text_comment_id)) {
         // const { element } = elem;
         const dom = document.querySelector(`[data-id="${elemId}"]`);
         if (!dom) continue;
 
         const domNode = ReactEditor.toSlateNode(editor, dom);
         const domNodePath = findPath(editor, domNode);
-        domNode.children.forEach((child, index) => {
-          const childPath = [...domNodePath, index];
+        for (const [child, path] of Node.texts(domNode)) {
+          const childPath = [...domNodePath, ...path];
           if (Text.isText(child) && (`sdoc_comment_${text_comment_id}` in child)) {
             Transforms.unsetNodes(editor, [`sdoc_comment_${text_comment_id}`], {
               at: childPath,
@@ -172,7 +193,7 @@ export const updateCommentedElementsAttrs = (activeElementIds, editor, text_comm
               }
             );
           }
-        });
+        }
       }
     });
   }

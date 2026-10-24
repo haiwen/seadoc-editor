@@ -1,12 +1,13 @@
 import { Editor, Range, Text } from '@seafile/slate';
-import { CLIPBOARD_FORMAT_KEY, RECENT_COPY_CONTENT } from '../extension/constants';
+import slugid from 'slugid';
+import { CLIPBOARD_CUT_COMMENT_KEY, CLIPBOARD_FORMAT_KEY, RECENT_COPY_CONTENT } from '../extension/constants';
 import { getSlateFragmentAttribute, normalizeCopyNodes } from '../utils/document-utils';
 import LocalStorage from '../utils/local-storage-utils';
-import { decorateOperation, removeCommentMarks, replacePastedDataId } from './helpers';
+import { consumePastedCommentKeys, decorateOperation, getFullyCutCommentKeys, getPastedCommentKeys, removeCommentMarks, removeEmptyCommentMarks, replacePastedDataId } from './helpers';
 
 
 const withNodeId = (editor) => {
-  const { apply, insertText } = editor;
+  const { apply, insertText, setFragmentData, deleteFragment } = editor;
   const newEditor = editor;
 
   newEditor.apply = (op) => {
@@ -54,6 +55,20 @@ const withNodeId = (editor) => {
     insertText(text);
   };
 
+  newEditor.setFragmentData = (data, originEvent) => {
+    const commentKeys = originEvent === 'cut' ? getFullyCutCommentKeys(editor) : null;
+    setFragmentData(data, originEvent);
+    if (commentKeys) {
+      data.setData(`application/${CLIPBOARD_CUT_COMMENT_KEY}`, JSON.stringify({ id: slugid.nice(), commentKeys }));
+    }
+  };
+
+  newEditor.deleteFragment = (direction) => {
+    const result = deleteFragment(direction);
+    removeEmptyCommentMarks(newEditor);
+    return result;
+  };
+
   // rewrite insert fragment data
   newEditor.insertFragmentData = (data) => {
     const fragment = data.getData(`application/${CLIPBOARD_FORMAT_KEY}`) || getSlateFragmentAttribute(data);
@@ -63,14 +78,16 @@ const withNodeId = (editor) => {
       const parsed = JSON.parse(decoded);
 
       // Clean context comment style when pasting commented context
-      const cleaned = removeCommentMarks(parsed);
+      const cleaned = removeCommentMarks(parsed, getPastedCommentKeys(data));
 
       const newData = replacePastedDataId(cleaned);
       const normalizeNewData = normalizeCopyNodes(newEditor, newData);
 
       LocalStorage.setItem(RECENT_COPY_CONTENT, normalizeNewData);
 
+      const previousChildren = newEditor.children;
       newEditor.insertFragment(normalizeNewData);
+      consumePastedCommentKeys(data, newEditor, previousChildren);
       return newEditor;
     }
   };
