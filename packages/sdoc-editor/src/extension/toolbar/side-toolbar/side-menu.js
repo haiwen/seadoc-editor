@@ -43,7 +43,7 @@ const SideMenu = forwardRef(({ slateNode, isNodeEmpty, menuPosition, onReset }, 
   }, [editor, onReset, slateNode]);
 
   const onCut = useCallback(() => {
-    onCopyNode(editor, slateNode);
+    onCopyNode(editor, slateNode, 'cut');
     onDeleteNode(editor, slateNode);
     onReset();
   }, [editor, onReset, slateNode]);

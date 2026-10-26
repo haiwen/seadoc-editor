@@ -140,6 +140,8 @@ export const TABLE_DRAG_KEY = 'drag-table/json';
 
 export const CLIPBOARD_ORIGIN_SDOC_KEY = 'origin-sdoc-uuid';
 
+export const CLIPBOARD_CUT_COMMENT_KEY = 'sdoc-cut-comment-keys';
+
 export const INSERT_FILE_DISPLAY_TYPE = ['text_link', 'icon_link', 'card_link'];
 
 export const INSERT_POSITION = {

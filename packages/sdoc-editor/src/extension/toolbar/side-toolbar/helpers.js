@@ -3,8 +3,8 @@ import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import slugid from 'slugid';
 import { DOCUMENT_PLUGIN_EDITOR, WIKI_EDITOR } from '../../../constants';
-import { replacePastedDataId } from '../../../node-id/helpers';
-import { normalizeCopyNodes } from '../../../utils/document-utils';
+import { replacePastedDataId, setCutCommentData } from '../../../node-id/helpers';
+import { normalizeCopyNodes, setOriginSdocKey } from '../../../utils/document-utils';
 import {
   ORDERED_LIST, UNORDERED_LIST, PARAGRAPH, CHECK_LIST_ITEM, TABLE, CODE_BLOCK, BLOCKQUOTE,
   LIST_ITEM_CORRELATION_TYPE, ADD_POSITION_OFFSET_TYPE, INSERT_POSITION, ELEMENT_TYPE, CALL_OUT,
@@ -260,7 +260,7 @@ export const setSelection = (editor, element) => {
   }
 };
 
-export const onCopyNode = (editor, element) => {
+export const onCopyNode = (editor, element, originEvent = 'copy') => {
   if (element.type === ELEMENT_TYPE.CODE_BLOCK) {
     setClipboardCodeBlockData(element);
     return;
@@ -278,6 +278,10 @@ export const onCopyNode = (editor, element) => {
   }
 
   const newData = editor.setFragmentData(new DataTransfer());
+  if (originEvent === 'cut') {
+    setOriginSdocKey({ clipboardData: newData });
+    setCutCommentData(editor, newData);
+  }
   copy('copy', {
     onCopy: (clipboardData) => {
       newData.types.forEach((type) => {

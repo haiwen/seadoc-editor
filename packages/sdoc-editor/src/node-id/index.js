@@ -1,13 +1,30 @@
-import { Editor, Range, Text, Transforms } from '@seafile/slate';
-import { CLIPBOARD_FORMAT_KEY, RECENT_COPY_CONTENT } from '../extension/constants';
+import { Editor, Node, Range, Text, Transforms } from '@seafile/slate';
+import { BLOCKQUOTE, CLIPBOARD_FORMAT_KEY, RECENT_COPY_CONTENT } from '../extension/constants';
+import { getSelectedNodeByType } from '../extension/core';
 import { getSlateFragmentAttribute, normalizeCopyNodes } from '../utils/document-utils';
 import LocalStorage from '../utils/local-storage-utils';
-import { decorateOperation, removeCommentMarks, replacePastedDataId } from './helpers';
+import { consumePastedCommentKeys, decorateOperation, getPastedCommentKeys, removeCommentMarks, removeEmptyCommentMarks, replacePastedDataId, setPastedCommentBatchConsumed } from './helpers';
 
 
 const withNodeId = (editor) => {
-  const { apply, insertText, insertBreak, insertSoftBreak } = editor;
+  const { apply, insertText, deleteFragment, insertBreak, insertSoftBreak, undo, redo } = editor;
   const newEditor = editor;
+
+  newEditor.undo = () => {
+    const { undos } = newEditor.history;
+    const batch = undos[undos.length - 1];
+    const result = undo();
+    setPastedCommentBatchConsumed(batch, false);
+    return result;
+  };
+
+  newEditor.redo = () => {
+    const { redos } = newEditor.history;
+    const batch = redos[redos.length - 1];
+    const result = redo();
+    setPastedCommentBatchConsumed(batch, true);
+    return result;
+  };
 
   newEditor.apply = (op) => {
     const newOp = decorateOperation(newEditor, op);
@@ -65,6 +82,12 @@ const withNodeId = (editor) => {
     insertText(text);
   };
 
+  newEditor.deleteFragment = (direction) => {
+    const result = deleteFragment(direction);
+    removeEmptyCommentMarks(newEditor);
+    return result;
+  };
+
   // rewrite insert fragment data
   newEditor.insertFragmentData = (data) => {
     const fragment = data.getData(`application/${CLIPBOARD_FORMAT_KEY}`) || getSlateFragmentAttribute(data);
@@ -74,14 +97,19 @@ const withNodeId = (editor) => {
       const parsed = JSON.parse(decoded);
 
       // Clean context comment style when pasting commented context
-      const cleaned = removeCommentMarks(parsed);
+      const replacedNodes = newEditor.selection && Range.isExpanded(newEditor.selection) && !getSelectedNodeByType(newEditor, BLOCKQUOTE)
+        ? Node.fragment(newEditor, newEditor.selection) : [];
+      const preservedCommentKeys = getPastedCommentKeys(data, newEditor, replacedNodes);
+      const cleaned = removeCommentMarks(parsed, preservedCommentKeys, newEditor.commentsLoaded ? newEditor.element_comments_map : undefined);
 
       const newData = replacePastedDataId(cleaned);
       const normalizeNewData = normalizeCopyNodes(newEditor, newData);
 
       LocalStorage.setItem(RECENT_COPY_CONTENT, normalizeNewData);
 
+      const previousChildren = newEditor.children;
       newEditor.insertFragment(normalizeNewData);
+      consumePastedCommentKeys(data, newEditor, previousChildren);
       return newEditor;
     }
   };

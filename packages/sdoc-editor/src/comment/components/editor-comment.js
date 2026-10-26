@@ -30,12 +30,12 @@ const EditorComment = ({ editor }) => {
     setIsClickedContextComment(false);
   }, [editor]);
 
-  const onSelectElement = useCallback((elementId, isClickInContext = false) => {
+  const onSelectElement = useCallback((elementId, isClickInContext = false, originElementId = elementId) => {
     if (!isClickInContext) {
       hiddenComment();
       const activeElementIds = [elementId];
       setActiveElementIds(activeElementIds);
-      const unresolvedComments = element_comments_map[elementId].filter(item => !item.resolved);
+      const unresolvedComments = element_comments_map[originElementId].filter(item => !item.resolved);
 
       setIsShowComments(true);
       setCommentDetail({ ...unresolvedComments });

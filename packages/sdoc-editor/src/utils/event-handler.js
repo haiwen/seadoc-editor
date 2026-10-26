@@ -3,6 +3,7 @@ import isHotkey from 'is-hotkey';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../constants';
 import { ELEMENT_TYPE } from '../extension/constants';
 import { getSelectedNodeByType } from '../extension/core/queries/';
+import { setCutCommentData } from '../node-id/helpers';
 import EventBus from '../utils/event-bus';
 import { setOriginSdocKey } from './document-utils';
 
@@ -117,6 +118,7 @@ class EventProxy {
 
   onCut = (event) => {
     setOriginSdocKey(event);
+    setCutCommentData(this.editor, event.clipboardData);
     if (this.editor.cut) {
       this.editor.cut(event);
     }
