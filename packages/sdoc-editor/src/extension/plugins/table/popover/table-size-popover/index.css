@@ -12,7 +12,8 @@
   min-height: 32px;
 }
 
-.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom:hover {
+.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom:hover,
+.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom.keyboard-selected {
   cursor: pointer;
   background: #f5f5f5;
   border-radius: 4px;

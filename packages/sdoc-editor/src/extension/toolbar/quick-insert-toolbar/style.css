@@ -1,9 +1,21 @@
-.sdoc-quick-insert-toolbar .sdoc-dropdown-menu-item.sdoc-dropdown-item-selected {
-  background-color: #e3e3e3;
+.sdoc-quick-insert-toolbar .sdoc-dropdown-menu-item.sdoc-dropdown-item-selected,
+.sdoc-quick-insert-video-menu-popover .sdoc-dropdown-menu-item.sdoc-dropdown-item-selected {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
 }
 
 .sdoc-quick-insert-toolbar .sdoc-insert-element-content-wrapper {
   max-height: 278px;
   overflow-y: auto;
   padding: 0 8px 8px;
+}
+
+.sdoc-quick-insert-toolbar .sdoc-insert-element-content-wrapper .sdoc-dropdown-menu-item-no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0;
+  height: auto;
+  color: #666666;
+  font-size: 14px;
 }

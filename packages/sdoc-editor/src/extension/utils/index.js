@@ -47,19 +47,23 @@ export const isOverflowPortByDirection = (targetDom, direction) => {
   }
 };
 
-export const onHandleOverflowScroll = (currentSelectItem, downDownWrapperRef) => {
-  const { bottom: curBottom, top: curTop } = currentSelectItem.getBoundingClientRect();
-  const { bottom: containerBottom } = downDownWrapperRef.current.parentNode.getBoundingClientRect();
-  const { top: containerTop } = downDownWrapperRef.current.getBoundingClientRect();
+export const onHandleOverflowScroll = (currentSelectItem, downDownWrapperRef, isLastItem) => {
+  const scrollContainer = downDownWrapperRef.current;
 
-  if (curBottom > containerBottom) {
-    const scrollTop = downDownWrapperRef.current.scrollTop + 100;
-    downDownWrapperRef.current.scrollTo({ top: scrollTop, behavior: 'smooth' });
+  if (isLastItem) {
+    scrollContainer.scrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+    return;
   }
 
-  if (curTop < containerTop) {
-    const scrollTop = downDownWrapperRef.current.scrollTop - 100;
-    downDownWrapperRef.current.scrollTo({ top: scrollTop, behavior: 'smooth' });
+  const { bottom: itemBottom, top: itemTop } = currentSelectItem.getBoundingClientRect();
+  const containerRect = scrollContainer.getBoundingClientRect();
+  const containerTop = containerRect.top + scrollContainer.clientTop;
+  const containerBottom = containerTop + scrollContainer.clientHeight;
+
+  if (itemBottom > containerBottom) {
+    scrollContainer.scrollTop += itemBottom - containerBottom;
+  } else if (itemTop < containerTop) {
+    scrollContainer.scrollTop -= containerTop - itemTop;
   }
 };
 
@@ -76,4 +80,3 @@ export const getMenuPosition = (element, editor) => {
   }
   return menuPosition;
 };
-
