@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.258](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.257...%40seafile%2Fsdoc-editor%403.0.258) (2026-10-28)
+
+### Bug Fixes
+
+- prevent inserted text from inheriting comment marks ([#329](https://github.com/haiwen/seadoc-editor/issues/329)) ([1c3697b](https://github.com/haiwen/seadoc-editor/commit/1c3697bd3763e6067943c32b88d8796dbbd0dd9a))
+
 ## [3.0.257](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.256...%40seafile%2Fsdoc-editor%403.0.257) (2026-10-24)
 
 ### Bug Fixes
