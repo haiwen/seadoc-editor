@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import context from '../../context';
 import { COMMENT_URL_CLASSNAME } from '../constants';
-import { getCommentedTextsByElementId, getPrimaryElementId, updateCommentedElementsAttrs } from '../helper';
+import { getCommentedElementIds, getCommentedTextsByElementId, getPrimaryElementId, updateCommentedElementsAttrs } from '../helper';
 import { useCommentContext } from '../hooks/comment-hooks/use-comment-context';
 import CommentDeletePopover from './comment-delete-popover';
 import CommentItemContent from './comment-item-content';
@@ -36,8 +36,13 @@ const CommentItemWrapper = forwardRef(({
   const { dispatch } = useCommentContext();
   const scrollRef = useRef(document.querySelector('.sdoc-scroll-container'));
   const [isShowDeletePopover, setIsShowDeletePopover] = useState(false);
+  const [commentedElementIds, setCommentedElementIds] = useState([]);
   const commentOpToolsId = `commentOpTools_${comment?.id}`;
   const style = !isGlobalComment && isCollapseCommentEditor ? { maxHeight: '341px' } : {};
+
+  useEffect(() => {
+    setCommentedElementIds(getCommentedElementIds(editor, comment.detail.text_comment_id));
+  }, [editor, editor.children, comment.detail.text_comment_id]);
 
   const deleteComment = useCallback(async (commentId) => {
     await context.deleteComment(commentId);
@@ -255,7 +260,7 @@ const CommentItemWrapper = forwardRef(({
             <div className="context-comment-item-selected-text-container">
               <i className="sdocfont sdoc-quote-left mr-2"></i>
               <div className="context-comment-items">
-                {comment.detail.element_id_list.map((elementId, index) => {
+                {commentedElementIds.map((elementId, index) => {
                   return (<div className="context-comment-item-selected-text" key={index}>{getCommentedTextsByElementId(elementId, comment.detail.text_comment_id)}</div>);
                 })}
               </div>

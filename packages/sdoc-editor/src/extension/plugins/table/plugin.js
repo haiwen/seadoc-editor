@@ -1,15 +1,15 @@
-import { Editor, Transforms, Path, Element, Range } from '@seafile/slate';
+import { Editor, Transforms, Path, Element, Range, Node } from '@seafile/slate';
 import { ReactEditor } from '@seafile/slate-react';
 import isHotkey from 'is-hotkey';
 import { INTERNAL_EVENT } from '../../../constants';
-import { removeCommentMarks, replacePastedDataId } from '../../../node-id/helpers';
+import { consumePastedCommentKeys, getPastedCommentKeys, removeCommentMarks, removeEmptyCommentMarks, replacePastedDataId } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import ObjectUtils from '../../../utils/object-utils';
 import { isValidWebUrl } from '../../../utils/url-utils';
 import { ELEMENT_TYPE, KEYBOARD, PARAGRAPH, CLIPBOARD_FORMAT_KEY, CHECK_LIST_ITEM, ORDERED_LIST, UNORDERED_LIST, TABLE_ROW, TABLE, TABLE_CELL } from '../../constants';
 import { getNodeType, getParentNode, getSelectedNodeByType, isLastNode, generateEmptyElement, focusEditor, getAboveBlockNode, isRangeAcrossBlocks, getStartPoint, getEndPoint, isStartPoint, isEndPoint, getTopLevelBlockNode } from '../../core';
 import { isImage } from '../../utils';
-import { TABLE_MAX_ROWS, EMPTY_SELECTED_RANGE, TABLE_ELEMENT, TABLE_ELEMENT_POSITION, TABLE_CELL_MIN_WIDTH, TABLE_ROW_MIN_HEIGHT } from './constants';
+import { TABLE_MAX_ROWS, TABLE_MAX_COLUMNS, EMPTY_SELECTED_RANGE, TABLE_ELEMENT, TABLE_ELEMENT_POSITION, TABLE_CELL_MIN_WIDTH, TABLE_ROW_MIN_HEIGHT } from './constants';
 import { getSelectedInfo, insertTableElement, removeTable, insertMultipleRowsAndColumns, setTableFragmentData,
   deleteTableRangeData, focusCell, deleteHandler, isTableLocation, isLastTableCell,
   deleteTableSelectCells,
@@ -31,6 +31,44 @@ const getInlineLinkNodes = (nodes) => {
   });
 
   return hasOnlyOneLink && hasOnlyEmptyTextAndLink ? linkNodes : null;
+};
+
+const getCutTextNodes = (nodes, html, commentKeys) => {
+  const leaves = Array.from(Node.texts({ children: nodes }), ([leaf]) => leaf);
+  const leavesById = new Map(leaves.map(leaf => [leaf.id, leaf]));
+  const div = document.createElement('div');
+  // Keep carriage returns from being normalized by the HTML parser.
+  div.innerHTML = html.replace(/\r/g, '&#13;');
+  div.hidden = true;
+  document.body.appendChild(div);
+  // A selection within one text node can lose its leaf wrapper when cloned.
+  const singleLeaf = leaves.length === 1 && !div.querySelector('[data-slate-leaf]') ? leaves[0] : undefined;
+  const children = [];
+  const appendText = (node) => {
+    if (node.nodeType === window.Node.TEXT_NODE) {
+      if (!node.textContent) return;
+      const leafElement = node.parentElement.closest('[data-slate-leaf]');
+      const leaf = leavesById.get(leafElement?.getAttribute('data-id')) || singleLeaf;
+      const child = { text: node.textContent };
+      if (leaf && (singleLeaf || node.parentElement.closest('[data-slate-string]'))) {
+        for (const key of commentKeys) {
+          if (key in leaf) child[key] = leaf[key];
+        }
+      }
+      children.push(child);
+      return;
+    }
+    if (node.nodeType !== window.Node.ELEMENT_NODE) return;
+    node.childNodes.forEach(appendText);
+    // Match the line breaks produced by Slate's clipboard serializer.
+    const display = window.getComputedStyle(node).getPropertyValue('display');
+    if (display === 'block' || display === 'list' || node.tagName === 'BR') {
+      children.push({ text: '\n' });
+    }
+  };
+  appendText(div);
+  document.body.removeChild(div);
+  return children;
 };
 
 const withTable = (editor) => {
@@ -347,6 +385,7 @@ const withTable = (editor) => {
     const { tableSelectedRange } = newEditor;
 
     if (selectedNode && !ObjectUtils.isSameObject(tableSelectedRange, EMPTY_SELECTED_RANGE)) {
+      event.preventDefault();
       setTableFragmentData(newEditor, event.clipboardData);
 
       const deleteType = deleteHandler(newEditor);
@@ -360,6 +399,7 @@ const withTable = (editor) => {
       // range selection delete
       if (deleteType === 'range') {
         deleteTableRangeData(newEditor);
+        removeEmptyCommentMarks(newEditor);
         return;
       }
       return;
@@ -374,24 +414,47 @@ const withTable = (editor) => {
       return;
     }
 
+    const text = data.getData('text/plain');
     const fragment = data.getData(`application/${CLIPBOARD_FORMAT_KEY}`);
     if (fragment) {
       const decoded = decodeURIComponent(window.atob(fragment));
-      const parsedData = JSON.parse(decoded);
-      if (Array.isArray(parsedData) && parsedData.some(item => item.type === ELEMENT_TYPE.TABLE)) {
-        const tableElement = parsedData.find(item => item.type === ELEMENT_TYPE.TABLE);
-        insertMultipleRowsAndColumns(newEditor, tableElement.children, tableElement.columns);
+      const parsed = JSON.parse(decoded);
+      const tableElement = Array.isArray(parsed) && parsed.find(item => item.type === ELEMENT_TYPE.TABLE);
+      let replacedNodes = [];
+      if (tableElement) {
+        const { table, rowIndex, cellIndex } = getSelectedInfo(newEditor);
+        replacedNodes = table.children
+          .slice(rowIndex, Math.min(TABLE_MAX_ROWS, rowIndex + tableElement.children.length))
+          .flatMap(row => row.children.slice(cellIndex, Math.min(TABLE_MAX_COLUMNS, cellIndex + tableElement.columns.length)));
+      } else if (Range.isExpanded(newEditor.selection)) {
+        replacedNodes = Node.fragment(newEditor, newEditor.selection);
+      }
+      const preservedCommentKeys = getPastedCommentKeys(data, newEditor, replacedNodes);
+      const parsedData = removeCommentMarks(parsed, preservedCommentKeys, newEditor.commentsLoaded ? newEditor.element_comments_map : undefined);
+      const previousChildren = newEditor.children;
+      if (tableElement) {
+        const pastedTable = parsedData.find(item => item.type === ELEMENT_TYPE.TABLE);
+        insertMultipleRowsAndColumns(newEditor, pastedTable.children, pastedTable.columns);
+        consumePastedCommentKeys(data, newEditor, previousChildren);
         return;
       }
 
       const linkNodes = getInlineLinkNodes(parsedData);
       if (linkNodes && isInTableSameCell(newEditor)) {
-        const cleanedLinkNodes = removeCommentMarks(linkNodes);
-        return Transforms.insertNodes(newEditor, replacePastedDataId(cleanedLinkNodes));
+        const result = Transforms.insertNodes(newEditor, replacePastedDataId(linkNodes));
+        consumePastedCommentKeys(data, newEditor, previousChildren);
+        return result;
+      }
+
+      if (preservedCommentKeys && text) {
+        const textNodes = getCutTextNodes(parsedData, data.getData('text/html'), preservedCommentKeys);
+        if (!isInTableSameCell(newEditor)) Transforms.insertText(newEditor, '');
+        const result = newEditor.insertFragment(replacePastedDataId(textNodes));
+        consumePastedCommentKeys(data, newEditor, previousChildren);
+        return result;
       }
     }
 
-    const text = data.getData('text/plain');
     if (!text) return;
 
     // Keep URL paste behavior consistent with normal text while preserving multi-cell paste behavior.

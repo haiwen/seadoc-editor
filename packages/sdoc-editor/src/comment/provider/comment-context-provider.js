@@ -10,6 +10,7 @@ const CommentContextProvider = ({ children, editor }) => {
   useCommentsMount(dispatch);
 
   useEffect(() => {
+    editor.commentsLoaded = !commentsInfo.isFetching && !commentsInfo.error;
     editor.element_comments_map = {};
     if (Object.keys(commentsInfo.element_comments_map).length) {
       editor.element_comments_map = commentsInfo.element_comments_map;
@@ -17,7 +18,7 @@ const CommentContextProvider = ({ children, editor }) => {
       eventBus.dispatch(INTERNAL_EVENT.RELOAD_COMMENT);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [commentsInfo.element_comments_map]);
+  }, [commentsInfo.element_comments_map, commentsInfo.isFetching, commentsInfo.error]);
 
   return (
     <CommentContext.Provider value={{ commentsInfo, dispatch }}>

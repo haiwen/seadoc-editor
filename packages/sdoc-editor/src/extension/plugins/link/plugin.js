@@ -2,6 +2,7 @@ import { Transforms, Node, Editor, Range, Element, Text } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import context from '../../../context';
+import { getPastedCommentKeys } from '../../../node-id/helpers';
 import EventBus from '../../../utils/event-bus';
 import { normalizeWebUrl } from '../../../utils/url-utils';
 import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
@@ -33,7 +34,7 @@ const withLink = (editor) => {
     const text = normalizeWebUrl(pastedText);
     const selectedElems = getSelectedElems(newEditor);
     const isCodeContext = selectedElems.some(elem => [CODE_BLOCK, CODE_LINE].includes(elem?.type));
-    if (isCodeContext) {
+    if (isCodeContext || getPastedCommentKeys(data) !== undefined) {
       return insertData(data);
     }
     // Internal link, insert sdoc file link
