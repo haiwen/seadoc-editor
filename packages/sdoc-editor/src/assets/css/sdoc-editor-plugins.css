@@ -355,3 +355,7 @@
   padding: 3px 0;
   background-color: #a9c9ed;
 }
+
+.sdoc-editor__article .sdoc-color-selection {
+  background-color: #a9c9ed !important;
+}
