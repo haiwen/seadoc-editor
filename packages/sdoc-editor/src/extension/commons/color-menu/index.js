@@ -46,10 +46,19 @@ const ColorMenu = ({
   defaultColor,
   lastUsedColor,
   updateLastUsedColor,
+  onColorPickerUnmount,
 }) => {
   const popoverRef = useRef(null);
   const moreColorsPopoverRef = useRef(null);
   const pickerDragsRef = useRef([]);
+  const pickerContainerRef = useRef(null);
+
+  const setPickerContainer = useCallback((element) => {
+    if (!element && pickerContainerRef.current) {
+      onColorPickerUnmount?.(pickerContainerRef.current);
+    }
+    pickerContainerRef.current = element;
+  }, [onColorPickerUnmount]);
 
   const { recentUsedColors: recentUsedColorsMap, updateRecentUsedColors } = useColorContext();
   const recentUsedColors = recentUsedColorsMap[recentUsedColorsKey];
@@ -260,6 +269,7 @@ const ColorMenu = ({
               offset={[0, 0]}
             >
               <div
+                ref={setPickerContainer}
                 className="sdoc-more-colors-container"
                 onMouseDownCapture={onPickerDragStart}
                 onTouchStartCapture={onPickerDragStart}
@@ -294,6 +304,7 @@ ColorMenu.propTypes = {
   lastUsedColor: PropTypes.string,
   updateLastUsedColor: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
+  onColorPickerUnmount: PropTypes.func,
 };
 
 export default withTranslation('sdoc-editor')(ColorMenu);

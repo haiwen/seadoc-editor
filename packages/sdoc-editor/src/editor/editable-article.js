@@ -30,7 +30,15 @@ const EditableArticle = ({
   updateSlateValue,
 }) => {
   const { cursors } = useCursors(editor);
-  const decorate = usePipDecorate(editor);
+  const [isColorInputFocused, setColorInputFocused] = useState(false);
+  const pipDecorate = usePipDecorate(editor);
+  const decorate = (entry) => {
+    const ranges = pipDecorate(entry);
+    if (isColorInputFocused && entry[0] === editor && editor.selection && Range.isExpanded(editor.selection)) {
+      ranges.push({ ...editor.selection, 'sdoc-color-selection': true });
+    }
+    return ranges;
+  };
   const forceUpdate = useForceUpdate();
   const [cursorState, setCursorState] = useState({
     top: 0,
@@ -311,7 +319,7 @@ const EditableArticle = ({
     <Slate editor={editor} value={slateValue} onChange={updateSlateValue}>
       <ArticleContainer editor={editor}>
         <Fragment>
-          {!isMobile && <ContextToolbar />}
+          {!isMobile && <ContextToolbar isColorInputFocused={isColorInputFocused} onColorInputFocusChange={setColorInputFocused} />}
           <SetNodeToDecorations />
           <Editable
             scrollSelectionIntoView={handleScrollIntoView}
