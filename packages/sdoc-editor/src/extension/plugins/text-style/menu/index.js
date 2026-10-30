@@ -135,12 +135,12 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
           <Component key={index} {...itemProps} />
         );
       })}
-      <MoreDropdown>
+      <MoreDropdown id={idPrefix ? `${idPrefix}_sdoc-more-text-operations` : 'sdoc-more-text-operations'}>
         {dropdownList.map((itemProps, index) => <MenuItem key={index} {...itemProps} />)}
-        <FontSizeScale disabled={isDisabled()} onClick={increaseFontSize} id="sdoc-increase-font-size" tipMessage={t('Increase_font_size')}>
+        <FontSizeScale disabled={isDisabled()} onClick={increaseFontSize} id={idPrefix ? `${idPrefix}_sdoc-increase-font-size` : 'sdoc-increase-font-size'} tipMessage={t('Increase_font_size')}>
           <i className="sdocfont sdoc-increase-font-size"></i>
         </FontSizeScale>
-        <FontSizeScale disabled={isDisabled()} onClick={reduceFontSize} id="sdoc-reduce-font-size" tipMessage={t('Reduce_font_size')}>
+        <FontSizeScale disabled={isDisabled()} onClick={reduceFontSize} id={idPrefix ? `${idPrefix}_sdoc-reduce-font-size` : 'sdoc-reduce-font-size'} tipMessage={t('Reduce_font_size')}>
           <i className="sdocfont sdoc-reduce-font-size"></i>
         </FontSizeScale>
       </MoreDropdown>

@@ -118,6 +118,7 @@ const ColorMenu = ({
   }, [recentUsedColors, lastUsedColor, disabled]);
 
   const buttonId = `button-${id}`;
+  const moreColorsId = `${id}-more-colors`;
 
   return (
     <>
@@ -207,12 +208,12 @@ const ColorMenu = ({
               </div>
             </div>
             <div className="sdoc-colors-divider"></div>
-            <div className={classnames('sdoc-more-colors pr-2', { 'show-pick': isPickerShow })} id="sdoc-more-colors">
+            <div className={classnames('sdoc-more-colors pr-2', { 'show-pick': isPickerShow })} id={moreColorsId}>
               <span>{t('More_color')}</span>
               <i className="sdocfont sdoc-arrow-right"></i>
             </div>
             <UncontrolledPopover
-              target="sdoc-more-colors"
+              target={moreColorsId}
               className="sdoc-more-colors-popover"
               trigger="hover"
               placement="right"
