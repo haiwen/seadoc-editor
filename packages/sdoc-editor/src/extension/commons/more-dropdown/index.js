@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Tooltip from '../../../components/tooltip';
 
 const MoreDropdown = ({
+  buttonId = 'sdoc-more-text-operations',
   isRichEditor = true,
   className = 'menu-group-item',
   disabled,
@@ -19,7 +20,6 @@ const MoreDropdown = ({
     'rich-icon-btn-hover': isRichEditor && !disabled,
     'btn btn-icon btn-secondary btn-active': !isRichEditor,
   });
-  const buttonId = 'sdoc-more-text-operations';
   const { t } = useTranslation('sdoc-editor');
 
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -62,6 +62,7 @@ const MoreDropdown = ({
 };
 
 MoreDropdown.propTypes = {
+  buttonId: PropTypes.string,
   disabled: PropTypes.bool,
   isRichEditor: PropTypes.bool,
   children: PropTypes.array.isRequired,
