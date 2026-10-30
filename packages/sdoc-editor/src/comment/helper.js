@@ -5,6 +5,48 @@ import context from '../context';
 import { findPath } from '../extension/core';
 import { useScrollContext } from '../hooks/use-scroll-context';
 
+const commentPositionsCache = new WeakMap();
+
+export const getCommentedElementIds = (editor, textCommentId, fallbackIds = []) => {
+  if (!textCommentId) return fallbackIds;
+  let cache = commentPositionsCache.get(editor);
+
+  if (!cache) {
+    cache = { blocks: new WeakMap() };
+    commentPositionsCache.set(editor, cache);
+  }
+  if (cache.children !== editor.children) {
+    const locations = new Map();
+    for (const [blockIndex, block] of editor.children.entries()) {
+      let positions = cache.blocks.get(block);
+      if (!positions) {
+        positions = new Map();
+        for (const [node, path] of Node.texts(block)) {
+          if (node.text === '') continue;
+          const commentKeys = Object.keys(node).filter(key => key.startsWith('sdoc_comment_'));
+          if (!commentKeys.length) continue;
+          const [element] = Editor.above(editor, {
+            at: [blockIndex, ...path],
+            match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+          });
+          for (const key of commentKeys) {
+            if (!positions.has(key)) positions.set(key, new Set());
+            positions.get(key).add(element.id);
+          }
+        }
+        cache.blocks.set(block, positions);
+      }
+      for (const [key, elementIds] of positions) {
+        if (!locations.has(key)) locations.set(key, []);
+        locations.get(key).push(...elementIds);
+      }
+    }
+    cache.children = editor.children;
+    cache.locations = locations;
+  }
+  return cache.locations.get(`sdoc_comment_${textCommentId}`) || fallbackIds;
+};
+
 export const getSelectionRange = () => {
   if (window.getSelection) {
     const sel = window.getSelection();
@@ -94,38 +136,6 @@ export const getSelectedElemIds = (editor) => {
   }
 
   return selectedElemId;
-};
-
-const commentedElementIdsCache = new WeakMap();
-
-export const getCommentedElementIds = (editor, textCommentId) => {
-  if (!textCommentId) return [];
-  let cached = commentedElementIdsCache.get(editor);
-  if (cached?.children !== editor.children) {
-    const elementIdsByComment = new Map();
-    for (const [node, path] of Editor.nodes(editor, {
-      at: [],
-      match: n => Text.isText(n) && n.text !== '',
-      voids: true,
-    })) {
-      const commentKeys = Object.keys(node).filter(key => key.startsWith('sdoc_comment_'));
-      if (!commentKeys.length) continue;
-      const blockEntry = Editor.above(editor, {
-        at: path,
-        match: n => Element.isElement(n) && Editor.isBlock(editor, n),
-      });
-      if (blockEntry?.[0].id) {
-        for (const key of commentKeys) {
-          if (!elementIdsByComment.has(key)) elementIdsByComment.set(key, new Set());
-          elementIdsByComment.get(key).add(blockEntry[0].id);
-        }
-      }
-    }
-    const index = new Map(Array.from(elementIdsByComment, ([key, ids]) => [key, Array.from(ids)]));
-    cached = { children: editor.children, index };
-    commentedElementIdsCache.set(editor, cached);
-  }
-  return cached.index.get(`sdoc_comment_${textCommentId}`) || [];
 };
 
 export const getCommentedTextsByElementId = (elementId, textCommentId) => {
