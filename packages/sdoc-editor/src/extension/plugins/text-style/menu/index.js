@@ -17,7 +17,7 @@ import FontSizeScale from '../../font/menu/font-size/font-size-scale';
 import { unWrapLinkNode } from '../../link/helpers';
 import { getValue, isMenuDisabled, addMark, removeMark } from '../helpers';
 
-const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, readonly }) => {
+const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, readonly, onColorPickerUnmount }) => {
   let selectedFontSize = getFontSize(editor);
   let selectedFontSizeValue = selectedFontSize;
   const enableSeafileAI = context.getSetting('enableSeafileAI');
@@ -113,6 +113,7 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
         onMouseDown: item.isColor ? () => { } : onMouseDown,
       };
       if (item.isColor) {
+        itemProps['onColorPickerUnmount'] = onColorPickerUnmount;
         itemProps['setColor'] = (color, shouldFocus) => setColor(item.type, color, shouldFocus);
         itemProps['defaultColorTip'] = item.type === TEXT_STYLE_MAP.COLOR ? t('Default') : '';
         itemProps['lastUsedColor'] = item.type === TEXT_STYLE_MAP.COLOR ? lastUsedFontColor : lastUsedHighlightColor;
@@ -122,7 +123,7 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor, lastUsedFontColor, lastUsedHighlightColor, readonly]);
+  }, [editor, lastUsedFontColor, lastUsedHighlightColor, readonly, onColorPickerUnmount]);
 
   let list = getTextStyleList(TEXT_STYLE);
   const dropdownList = getTextStyleList(TEXT_STYLE_MORE);
@@ -135,12 +136,12 @@ const TextStyleMenuList = ({ editor, t, isRichEditor, className, idPrefix, reado
           <Component key={index} {...itemProps} />
         );
       })}
-      <MoreDropdown>
+      <MoreDropdown id={idPrefix ? `${idPrefix}_sdoc-more-text-operations` : 'sdoc-more-text-operations'}>
         {dropdownList.map((itemProps, index) => <MenuItem key={index} {...itemProps} />)}
-        <FontSizeScale disabled={isDisabled()} onClick={increaseFontSize} id="sdoc-increase-font-size" tipMessage={t('Increase_font_size')}>
+        <FontSizeScale disabled={isDisabled()} onClick={increaseFontSize} id={idPrefix ? `${idPrefix}_sdoc-increase-font-size` : 'sdoc-increase-font-size'} tipMessage={t('Increase_font_size')}>
           <i className="sdocfont sdoc-increase-font-size"></i>
         </FontSizeScale>
-        <FontSizeScale disabled={isDisabled()} onClick={reduceFontSize} id="sdoc-reduce-font-size" tipMessage={t('Reduce_font_size')}>
+        <FontSizeScale disabled={isDisabled()} onClick={reduceFontSize} id={idPrefix ? `${idPrefix}_sdoc-reduce-font-size` : 'sdoc-reduce-font-size'} tipMessage={t('Reduce_font_size')}>
           <i className="sdocfont sdoc-reduce-font-size"></i>
         </FontSizeScale>
       </MoreDropdown>
@@ -158,6 +159,7 @@ TextStyleMenuList.propTypes = {
   className: PropTypes.string,
   editor: PropTypes.object,
   isCommentEditor: PropTypes.bool, // Apply for comment editor
+  onColorPickerUnmount: PropTypes.func,
 };
 
 export default withTranslation('sdoc-editor')(TextStyleMenuList);

@@ -1,13 +1,13 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { withTranslation } from 'react-i18next';
 import { UncontrolledPopover } from 'reactstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../components/tooltip';
-import LocalStorage from '../../../utils/local-storage-utils';
+import { useColorContext } from '../../../hooks/use-color-context';
 import { eventStopPropagation } from '../../../utils/mouse-event';
-import { DEFAULT_COLORS, STANDARD_COLORS, DEFAULT_RECENT_USED_LIST } from '../../constants';
+import { DEFAULT_COLORS, STANDARD_COLORS } from '../../constants';
 import ColorItem from './color-item';
 
 import './index.css';
@@ -46,23 +46,36 @@ const ColorMenu = ({
   defaultColor,
   lastUsedColor,
   updateLastUsedColor,
+  onColorPickerUnmount,
 }) => {
   const popoverRef = useRef(null);
   const moreColorsPopoverRef = useRef(null);
+  const pickerDragsRef = useRef([]);
+  const pickerContainerRef = useRef(null);
 
-  const [recentUsedColors, setRecentUsedColors] = useState(LocalStorage.getItem(recentUsedColorsKey, DEFAULT_RECENT_USED_LIST));
+  const setPickerContainer = useCallback((element) => {
+    if (!element && pickerContainerRef.current) {
+      onColorPickerUnmount?.(pickerContainerRef.current);
+    }
+    pickerContainerRef.current = element;
+  }, [onColorPickerUnmount]);
+
+  const { recentUsedColors: recentUsedColorsMap, updateRecentUsedColors } = useColorContext();
+  const recentUsedColors = recentUsedColorsMap[recentUsedColorsKey];
   const [isShowMenu, setMenuShow] = useState(false);
   const [isPickerShow, setPickerShow] = useState(false);
 
-  const onSetColor = useCallback((color, shouldClose = true, shouldFocus = true) => {
+  useEffect(() => () => {
+    pickerDragsRef.current.forEach(drag => drag.cleanup());
+  }, []);
+
+  const onSetColor = useCallback((color, shouldClose = true, shouldFocus = true, shouldRecord = true) => {
     if (disabled) return;
     const validColor = color || '';
     setColor(validColor, shouldFocus);
-    if (validColor !== '' && recentUsedColors[0] !== validColor) {
-      let newRecentUsedColors = recentUsedColors.slice(0, 9);
-      newRecentUsedColors.unshift(validColor);
-      LocalStorage.setItem(recentUsedColorsKey, newRecentUsedColors);
-      setRecentUsedColors(newRecentUsedColors);
+    if (shouldRecord) {
+      pickerDragsRef.current.filter(drag => drag.ended).forEach(drag => drag.finish());
+      updateRecentUsedColors(recentUsedColorsKey, validColor);
     }
 
     updateLastUsedColor && updateLastUsedColor(validColor);
@@ -72,16 +85,14 @@ const ColorMenu = ({
       setMenuShow(!isShowMenu);
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recentUsedColors, recentUsedColorsKey, isShowMenu, isPickerShow, disabled]);
+  }, [disabled, setColor, recentUsedColorsKey, updateRecentUsedColors, updateLastUsedColor, isShowMenu]);
 
   const setColorProxy = useCallback((event) => {
     if (event.target.className.includes('sdoc-color-item')) {
       const color = event.target.dataset.color;
       onSetColor(color);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recentUsedColors, recentUsedColorsKey, isShowMenu, isPickerShow]);
+  }, [onSetColor]);
 
   const toggle = useCallback(() => {
     if (isPickerShow) return;
@@ -101,23 +112,57 @@ const ColorMenu = ({
     else event.currentTarget.querySelector('input:focus')?.blur();
   }, []);
 
+  const onPickerDragStart = useCallback((event) => {
+    if (disabled || event.target.tagName === 'INPUT' || (event.type === 'mousedown' && event.button !== 0)) return;
+    const pickerWindow = event.currentTarget.ownerDocument.defaultView;
+    const drag = { startTime: event.timeStamp, color: null, ended: false };
+    const endEvents = ['mouseup', 'touchend', 'touchcancel'];
+    const onEnd = (endEvent) => {
+      drag.ended = true;
+      drag.endTime = endEvent.timeStamp;
+      endEvents.forEach(type => pickerWindow.removeEventListener(type, onEnd));
+      // react-color's Saturation can deliver its trailing change up to 50ms after mouseup.
+      drag.timer = setTimeout(drag.finish, 50);
+    };
+    drag.cleanup = () => {
+      endEvents.forEach(type => pickerWindow.removeEventListener(type, onEnd));
+      clearTimeout(drag.timer);
+    };
+    drag.finish = () => {
+      drag.cleanup();
+      updateRecentUsedColors(recentUsedColorsKey, drag.color);
+      pickerDragsRef.current = pickerDragsRef.current.filter(item => item !== drag);
+    };
+    pickerDragsRef.current.push(drag);
+    endEvents.forEach(type => pickerWindow.addEventListener(type, onEnd));
+  }, [disabled, recentUsedColorsKey, updateRecentUsedColors]);
+
   const onClick = useCallback((event) => {
     eventStopPropagation(event);
   }, []);
 
   const onChange = useCallback((color, event) => {
+    if (disabled) return;
     const validColor = color.hex;
-    onSetColor(validColor, false, event?.target?.tagName !== 'INPUT');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [disabled]);
+    const isDrag = ['mousedown', 'mousemove', 'touchstart', 'touchmove'].includes(event?.type);
+    if (isDrag) {
+      const drags = pickerDragsRef.current;
+      const drag = drags.slice().reverse().find(item => event.timeStamp >= item.startTime && (!item.ended || event.timeStamp <= item.endTime));
+      if (!drag) return;
+      drag.color = validColor;
+      // A trailing change from an earlier drag must not overwrite a newer selection.
+      if (drag !== drags[drags.length - 1]) return;
+    }
+    onSetColor(validColor, false, isDrag || event?.target?.tagName !== 'INPUT', !isDrag);
+  }, [disabled, onSetColor]);
 
   const setLastUsedColor = useCallback((event) => {
     eventStopPropagation(event);
     onSetColor(lastUsedColor, false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recentUsedColors, lastUsedColor, disabled]);
+  }, [lastUsedColor, onSetColor]);
 
   const buttonId = `button-${id}`;
+  const moreColorsId = `${id}-more-colors`;
 
   return (
     <>
@@ -207,12 +252,12 @@ const ColorMenu = ({
               </div>
             </div>
             <div className="sdoc-colors-divider"></div>
-            <div className={classnames('sdoc-more-colors pr-2', { 'show-pick': isPickerShow })} id="sdoc-more-colors">
+            <div className={classnames('sdoc-more-colors pr-2', { 'show-pick': isPickerShow })} id={moreColorsId}>
               <span>{t('More_color')}</span>
               <i className="sdocfont sdoc-arrow-right"></i>
             </div>
             <UncontrolledPopover
-              target="sdoc-more-colors"
+              target={moreColorsId}
               className="sdoc-more-colors-popover"
               trigger="hover"
               placement="right"
@@ -223,7 +268,14 @@ const ColorMenu = ({
               ref={moreColorsPopoverRef}
               offset={[0, 0]}
             >
-              <div className="sdoc-more-colors-container" onMouseDown={onPickerMouseDown} onClick={onClick}>
+              <div
+                ref={setPickerContainer}
+                className="sdoc-more-colors-container"
+                onMouseDownCapture={onPickerDragStart}
+                onTouchStartCapture={onPickerDragStart}
+                onMouseDown={onPickerMouseDown}
+                onClick={onClick}
+              >
                 <ChromePicker
                   disableAlpha={true}
                   color={lastUsedColor || ''}
@@ -252,6 +304,7 @@ ColorMenu.propTypes = {
   lastUsedColor: PropTypes.string,
   updateLastUsedColor: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
+  onColorPickerUnmount: PropTypes.func,
 };
 
 export default withTranslation('sdoc-editor')(ColorMenu);

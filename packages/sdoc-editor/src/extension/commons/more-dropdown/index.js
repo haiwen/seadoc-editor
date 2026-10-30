@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Tooltip from '../../../components/tooltip';
 
 const MoreDropdown = ({
+  id = 'sdoc-more-text-operations',
   isRichEditor = true,
   className = 'menu-group-item',
   disabled,
@@ -19,7 +20,6 @@ const MoreDropdown = ({
     'rich-icon-btn-hover': isRichEditor && !disabled,
     'btn btn-icon btn-secondary btn-active': !isRichEditor,
   });
-  const buttonId = 'sdoc-more-text-operations';
   const { t } = useTranslation('sdoc-editor');
 
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -33,16 +33,16 @@ const MoreDropdown = ({
 
   return (
     <>
-      <button className={validClassName} type="button" aria-label='more' id={buttonId}>
+      <button className={validClassName} type="button" aria-label='more' id={id}>
         <i className="sdocfont sdoc-more"></i>
         {!isShowMenu && (
-          <Tooltip target={buttonId}>
+          <Tooltip target={id}>
             {t('More_operation')}
           </Tooltip>
         )}
       </button>
       <UncontrolledPopover
-        target={buttonId}
+        target={id}
         className="sdoc-dropdown-menu"
         popperClassName="sdoc-popover-box-shadow"
         trigger="legacy"
@@ -62,6 +62,7 @@ const MoreDropdown = ({
 };
 
 MoreDropdown.propTypes = {
+  id: PropTypes.string,
   disabled: PropTypes.bool,
   isRichEditor: PropTypes.bool,
   children: PropTypes.array.isRequired,
