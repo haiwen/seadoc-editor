@@ -158,7 +158,7 @@ const EditableArticle = ({
 
     const isModClick = isMac() ? event.metaKey : event.ctrlKey;
 
-    if (event.key === 'ArrowLeft' && !isModClick) {
+    if (event.key === 'ArrowLeft' && !isModClick && !event.shiftKey) {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset', reverse: true });
       const hiddenMovePoint = editor.selection ? getSkippedHiddenHeaderMovePoint(editor, editor.selection.focus, true) : null;
@@ -183,7 +183,7 @@ const EditableArticle = ({
       return;
     }
 
-    if (event.key === 'ArrowRight' && !isModClick) {
+    if (event.key === 'ArrowRight' && !isModClick && !event.shiftKey) {
       event.preventDefault();
       Transforms.move(editor, { unit: 'offset' });
       const hiddenMovePoint = editor.selection ? getSkippedHiddenHeaderMovePoint(editor, editor.selection.focus) : null;
