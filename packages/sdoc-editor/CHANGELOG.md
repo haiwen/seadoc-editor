@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## Unreleased
+
+### Bug Fixes
+
+- preserve native Shift+Left/Right text selection from a collapsed caret in SeaDoc and Wiki editors, including selection across paragraphs
+
 ## [3.0.260](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.259...%40seafile%2Fsdoc-editor%403.0.260) (2026-11-02)
 
 ### Bug Fixes
