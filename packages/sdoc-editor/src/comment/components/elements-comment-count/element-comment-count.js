@@ -29,9 +29,7 @@ const ElementCommentCount = ({ elementId, isElementSelected, commentsCount, edit
 
   useEffect(() => {
     updatePosition();
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [editor.children, updatePosition]);
 
   useEffect(() => {
     const scrollDom = scrollRef.current;

@@ -24,7 +24,7 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
   const [showEditor, setShowEditor] = useState(false);
   const [isScrollDisplayed, setIsScrollDisplayed] = useState(false);
   const [globalCommentContent, setGlobalCommentContent] = useState(null);
-  const { commentList, commentType, setCommentType, dispatch } = useCommentList();
+  const { commentList, commentType, setCommentType, dispatch } = useCommentList(editor);
 
   const detectScroll = useCallback(() => {
     if (!contentRef.current) return;
@@ -43,10 +43,10 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
   useEffect(() => {
     detectScroll();
     // When a comment is updated, update the comment details page
-    if (activeCommentGroup) {
+    if (activeCommentGroup && !commentList.includes(activeCommentGroup)) {
       const newActiveCommentGroup = commentList.find(item => item.id === activeCommentGroup.id);
       setActiveCommentGroup(newActiveCommentGroup);
-      deleteUnseenNotifications && deleteUnseenNotifications(newActiveCommentGroup);
+      newActiveCommentGroup && deleteUnseenNotifications && deleteUnseenNotifications(newActiveCommentGroup);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentList, detectScroll]);
