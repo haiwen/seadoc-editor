@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.261](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.260...%40seafile%2Fsdoc-editor%403.0.261) (2026-11-02)
+
+### Bug Fixes
+
+- preserve shift-arrow text selection ([#340](https://github.com/haiwen/seadoc-editor/issues/340)) ([d27548a](https://github.com/haiwen/seadoc-editor/commit/d27548accabcc1f60520aa8200435a84d22b24c6))
+
 ## Unreleased
 
 ### Bug Fixes
