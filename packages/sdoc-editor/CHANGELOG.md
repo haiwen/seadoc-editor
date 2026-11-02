@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.260](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.259...%40seafile%2Fsdoc-editor%403.0.260) (2026-11-02)
+
+### Bug Fixes
+
+- regroup comment bubbles by current paragraph ([#337](https://github.com/haiwen/seadoc-editor/issues/337)) ([0acb80f](https://github.com/haiwen/seadoc-editor/commit/0acb80f080cb36065f48b04642c0a3505217d22e))
+
 ## [3.0.259](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.258...%40seafile%2Fsdoc-editor%403.0.259) (2026-10-29)
 
 ### Bug Fixes
