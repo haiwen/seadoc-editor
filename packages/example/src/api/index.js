@@ -126,8 +126,7 @@ class EditorApi {
   }
 
   isInternalFileLink(url) {
-    // eslint-disable-next-line no-useless-escape
-    var re = new RegExp(`${this.serviceUrl}/lib/[0-9a-f\-]{36}/file.*`);
+    var re = new RegExp(`${this.serviceUrl}/lib/[0-9a-f-]{36}/file.*`);
     return re.test(url);
   }
 
@@ -144,8 +143,7 @@ class EditorApi {
   }
 
   isInternalDirLink(url) {
-    // eslint-disable-next-line no-useless-escape
-    var re = new RegExp(`${this.serviceUrl}/#[a-z\-]*?/lib/[0-9a-f\-]{36}.*`);
+    var re = new RegExp(`${this.serviceUrl}/#[a-z-]*?/lib/[0-9a-f-]{36}.*`);
     return re.test(url);
   }
 
