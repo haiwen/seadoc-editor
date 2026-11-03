@@ -3,6 +3,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import urlJoin from 'url-join';
 import context from '../../../context';
+import { normalizeWebUrl } from '../../../utils/url-utils';
 import { CODE_BLOCK, ELEMENT_TYPE, VIDEO, INSERT_POSITION, PARAGRAPH, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, TABLE, TOGGLE_TITLE_TYPES } from '../../constants';
 import { generateEmptyElement, getNodeType, isTextNode, isLastNode, getParentNode, focusEditor, getAboveBlockNode, generateDefaultParagraph } from '../../core';
 import { ONE_GB, ONE_MB, ONE_KB } from './constants';
@@ -51,32 +52,36 @@ export const generateVideoNode = (src, videoInfo) => {
 };
 
 export const parseVideoLink = (url) => {
-  if (!url) return false;
+  const link = normalizeWebUrl(url);
+  if (!link) return false;
+
+  const parsedUrl = new URL(link);
+  const { hostname, pathname } = parsedUrl;
 
   // Youtube url conversion
-  if (url.includes('youtube.com')) {
-    const videoId = new URL(url).searchParams.get('v');
-    const videoUrl = videoId ? `https://www.youtube.com/embed/${videoId}/?rel=0` : false;
+  if (hostname === 'youtube.com' || hostname.endsWith('.youtube.com')) {
+    const videoId = parsedUrl.searchParams.get('v');
+    const videoUrl = videoId ? `https://www.youtube.com/embed/${encodeURIComponent(videoId)}/?rel=0` : false;
     return videoUrl;
   }
 
   // Tencent url conversion
-  if (url.includes('v.qq.com')) {
-    const vidMatch = url.match(/\/([^\/]+)\.html/);
-    const videoUrl = vidMatch?.[1] ? `https://v.qq.com/txp/iframe/player.html?vid=${vidMatch[1]}` : false;
+  if (hostname === 'v.qq.com') {
+    const vidMatch = pathname.match(/\/([^/]+)\.html/);
+    const videoUrl = vidMatch?.[1] ? `https://v.qq.com/txp/iframe/player.html?vid=${encodeURIComponent(vidMatch[1])}` : false;
     return videoUrl;
   }
 
   // Bilibili url conversion
-  if (url.includes('bilibili.com')) {
-    const vidMatch = url.match(/\/video\/(BV[0-9A-Za-z]+)/);
+  if (hostname === 'bilibili.com' || hostname.endsWith('.bilibili.com')) {
+    const vidMatch = pathname.match(/\/video\/(BV[0-9A-Za-z]+)/);
     const videoUrl = vidMatch?.[1] ? `https://player.bilibili.com/player.html?bvid=${vidMatch[1]}&autoplay=0` : false;
     return videoUrl;
   }
 
   // Youku url conversion
-  if (url.includes('v.youku.com')) {
-    const vidMatch = url.match(/id_([A-Za-z0-9=]+)\.html/);
+  if (hostname === 'v.youku.com') {
+    const vidMatch = pathname.match(/id_([A-Za-z0-9=]+)\.html/);
     const videoUrl = vidMatch?.[1] ? `https://player.youku.com/embed/${vidMatch[1]}` : false;
     return videoUrl;
   }

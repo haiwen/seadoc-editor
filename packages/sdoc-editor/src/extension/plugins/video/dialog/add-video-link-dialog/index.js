@@ -2,17 +2,12 @@ import React, { Fragment, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal, ModalBody, ModalFooter, Alert, Label, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { insertVideo } from '../../helpers';
+import { insertVideo, parseVideoLink } from '../../helpers';
 
 const AddVideoLinkDialog = ({ editor, className, closeDialog, handleSubmit }) => {
   const { t } = useTranslation('sdoc-editor');
   const [linkErrorMessage, setLinkErrorMessage] = useState('');
   const [url, setURL] = useState('');
-
-  const isValidVideoLink = (link) => {
-    const videoRegex = /v\.qq\.com|youtube\.com|v\.youku\.com|bilibili\.com/i;
-    return videoRegex.test(link);
-  };
 
   const submit = useCallback(() => {
     setLinkErrorMessage('');
@@ -22,7 +17,7 @@ const AddVideoLinkDialog = ({ editor, className, closeDialog, handleSubmit }) =>
       return;
     }
 
-    if (!isValidVideoLink(url)) {
+    if (!parseVideoLink(url)) {
       setLinkErrorMessage(t('The_link_address_is_invalid'));
       return;
     }
