@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.262](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.261...%40seafile%2Fsdoc-editor%403.0.262) (2026-11-04)
+
+### Bug Fixes
+
+- address CodeQL security alerts ([#345](https://github.com/haiwen/seadoc-editor/issues/345)) ([9807019](https://github.com/haiwen/seadoc-editor/commit/9807019d616e9233401e7c0182514ac8ae898b99))
+
 ## [3.0.261](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.260...%40seafile%2Fsdoc-editor%403.0.261) (2026-11-02)
 
 ### Bug Fixes
