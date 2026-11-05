@@ -484,6 +484,8 @@ export function renderImageBlock(props, editor) {
   const { align } = element;
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const isSelected = useSelected();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const readOnly = useReadOnly();
 
   let justifyContent = '';
   if (align) {
@@ -496,7 +498,7 @@ export function renderImageBlock(props, editor) {
       style={{ display: 'flex', justifyContent: `${justifyContent}` }}
       {...attributes}
       onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
-      contentEditable='true'
+      contentEditable={!readOnly}
       suppressContentEditableWarning
     >
       {children}
