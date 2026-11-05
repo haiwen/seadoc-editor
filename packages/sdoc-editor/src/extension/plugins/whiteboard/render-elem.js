@@ -26,7 +26,18 @@ const Whiteboard = ({ editor, element }) => {
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [isShowZoomOut, setIsShowZoomOut] = useState(false);
 
-  const link = useMemo(() => normalizeWebUrl(originalLink), [originalLink]);
+  const link = useMemo(() => {
+    const normalizedLink = normalizeWebUrl(originalLink);
+    if (!normalizedLink) return '';
+
+    const url = new URL(normalizedLink);
+    if (!url.searchParams.has('filetype') || !url.searchParams.has('readonly')) return normalizedLink;
+
+    url.searchParams.delete('filetype');
+    url.searchParams.delete('readonly');
+    url.pathname = `${url.pathname.replace(/\/$/, '')}/embed-link/`;
+    return url.href;
+  }, [originalLink]);
   const isValidUrl = Boolean(link);
 
   useEffect(() => {
@@ -83,6 +94,10 @@ const Whiteboard = ({ editor, element }) => {
   const handleDoubleClick = (event) => {
     event.preventDefault();
     if (!isValidUrl) return;
+    if (readOnly) {
+      openFullscreen(event);
+      return;
+    }
     const siteRoot = context.getSetting('siteRoot');
     const url = `${siteRoot}lib/${repo_id}/file${file_path}`;
     window.open(url, '_blank');
