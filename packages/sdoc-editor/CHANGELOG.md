@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.263](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.262...%40seafile%2Fsdoc-editor%403.0.263) (2026-11-06)
+
+### Bug Fixes
+
+- respect read-only mode in image blocks ([#347](https://github.com/haiwen/seadoc-editor/issues/347)) ([c6b6860](https://github.com/haiwen/seadoc-editor/commit/c6b68607bab70bb259d45e58eaf7820b7a4b936b))
+
 ## [3.0.262](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.261...%40seafile%2Fsdoc-editor%403.0.262) (2026-11-04)
 
 ### Bug Fixes
