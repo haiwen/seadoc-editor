@@ -92,6 +92,7 @@ const withImage = (editor) => {
       const nextPath = Path.next([path[0]]);
 
       const p = generateEmptyElement(ELEMENT_TYPE.PARAGRAPH);
+      if (fragment[0].align) p.align = fragment[0].align;
       p.children = [singleImage];
       Transforms.insertNodes(editor, p, { at: nextPath });
       // There will be a space before and after the image

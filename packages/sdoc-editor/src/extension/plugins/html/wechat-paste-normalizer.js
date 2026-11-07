@@ -30,6 +30,22 @@ const addWechatCommentReplyBreaks = (fragment) => {
   });
 };
 
+const normalizeWechatImageBlocks = (fragment) => {
+  const images = fragment.querySelectorAll('#js_content.rich_media_content > section > img.rich_pages.wxw-img');
+  images.forEach(image => {
+    if (image.style.display !== 'block' && image.getAttribute('type') !== 'block') return;
+
+    const section = image.parentElement;
+    if (Array.from(section.childNodes).some(node => node !== image && (node.nodeType !== 3 || node.textContent.trim()))) return;
+
+    const paragraph = fragment.ownerDocument.createElement('p');
+    Array.from(section.attributes).forEach(({ name, value }) => paragraph.setAttribute(name, value));
+    paragraph.append(...section.childNodes);
+    section.replaceWith(paragraph);
+  });
+};
+
 export const normalizeWechatPastedFragment = (fragment) => {
   addWechatCommentReplyBreaks(fragment);
+  normalizeWechatImageBlocks(fragment);
 };
