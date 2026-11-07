@@ -8,10 +8,10 @@ import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import EventBus from '../../../utils/event-bus';
-import { normalizeWebUrl } from '../../../utils/url-utils';
 import { focusEditor } from '../../core';
 import { getMenuPosition } from '../../utils';
 import WhiteboardHoverMenu from './hover-menu';
+import { getWhiteboardPreviewLink } from './preview-link';
 
 import './index.css';
 
@@ -26,18 +26,10 @@ const Whiteboard = ({ editor, element }) => {
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [isShowZoomOut, setIsShowZoomOut] = useState(false);
 
-  const link = useMemo(() => {
-    const normalizedLink = normalizeWebUrl(originalLink);
-    if (!normalizedLink) return '';
-
-    const url = new URL(normalizedLink);
-    if (!url.searchParams.has('filetype') || !url.searchParams.has('readonly')) return normalizedLink;
-
-    url.searchParams.delete('filetype');
-    url.searchParams.delete('readonly');
-    url.pathname = `${url.pathname.replace(/\/$/, '')}/embed-link/`;
-    return url.href;
-  }, [originalLink]);
+  const shareContext = context.getSetting('sdocShareContext');
+  const serviceUrl = context.getSetting('serviceUrl');
+  const link = useMemo(() => getWhiteboardPreviewLink(originalLink, serviceUrl, shareContext),
+    [originalLink, serviceUrl, shareContext]);
   const isValidUrl = Boolean(link);
 
   useEffect(() => {
@@ -94,7 +86,7 @@ const Whiteboard = ({ editor, element }) => {
   const handleDoubleClick = (event) => {
     event.preventDefault();
     if (!isValidUrl) return;
-    if (readOnly) {
+    if (shareContext) {
       openFullscreen(event);
       return;
     }
