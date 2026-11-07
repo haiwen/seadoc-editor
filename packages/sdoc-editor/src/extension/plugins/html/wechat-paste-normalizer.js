@@ -30,6 +30,44 @@ const addWechatCommentReplyBreaks = (fragment) => {
   });
 };
 
+const normalizeWechatImageBlocks = (fragment) => {
+  const images = new Set(Array.from(fragment.querySelectorAll('#js_content.rich_media_content > section > img.rich_pages.wxw-img'))
+    .filter(image => image.style.display === 'block' || image.getAttribute('type') === 'block'));
+  const sections = new Set(Array.from(images, image => image.parentElement));
+  sections.forEach(section => {
+    if (Array.from(section.querySelectorAll('*')).some(node =>
+      !node.matches('p, span, b, strong, i, code, del, ins, a, br, img')
+      || (node.nodeName === 'P' && node.parentElement !== section))) return;
+
+    let paragraph;
+    const paragraphs = [];
+    Array.from(section.childNodes).forEach(node => {
+      if (node.nodeName === 'P') {
+        paragraph = null;
+        return;
+      }
+      const isBlockImage = images.has(node);
+      if (isBlockImage) paragraph = null;
+      if (!paragraph) {
+        paragraph = fragment.ownerDocument.createElement('p');
+        paragraph.style.cssText = section.style.cssText;
+        if (section.hasAttribute('align')) paragraph.setAttribute('align', section.getAttribute('align'));
+        section.insertBefore(paragraph, node);
+        paragraphs.push(paragraph);
+      }
+      paragraph.append(node);
+      if (isBlockImage) paragraph = null;
+    });
+    paragraphs.forEach(node => {
+      [node.firstChild, node.lastChild].forEach(child => {
+        if (child?.nodeType === 3 && /^[\t\r\n ]*$/.test(child.textContent)) child.remove();
+      });
+      if (/^[\t\r\n ]*$/.test(node.textContent) && !node.querySelector('img, br')) node.remove();
+    });
+  });
+};
+
 export const normalizeWechatPastedFragment = (fragment) => {
   addWechatCommentReplyBreaks(fragment);
+  normalizeWechatImageBlocks(fragment);
 };
