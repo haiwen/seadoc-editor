@@ -4,6 +4,9 @@
   height: auto;
   display: flex;
   align-items: center;
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .video-loading-placeholder .video-file-icon {

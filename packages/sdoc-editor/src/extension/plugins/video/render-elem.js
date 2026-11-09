@@ -43,6 +43,11 @@ const Video = ({ element, editor }) => {
     setIsLoaded(true);
   };
 
+  const onLoadingPlaceholderInteraction = useCallback((event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  }, []);
+
   const onClickVideo = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -198,7 +203,12 @@ const Video = ({ element, editor }) => {
   return (
     <>
       {!isLoaded && (
-        <div className='video-loading-placeholder'>
+        <div
+          className='video-loading-placeholder'
+          contentEditable={false}
+          onPointerDown={onLoadingPlaceholderInteraction}
+          onClick={onLoadingPlaceholderInteraction}
+        >
           <img className='video-file-icon' src={videoFileIcon()} alt='' />
           <div className='video-file-info'>
             <div>{videoName}</div>
