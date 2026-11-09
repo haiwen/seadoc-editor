@@ -15,5 +15,5 @@ export const getWhiteboardPreviewLink = (originalLink, serviceUrl, shareContext)
   if (!match) return '';
   const token = encodeURIComponent(shareContext.shareToken);
   const parent = encodeURIComponent(shareContext.sdocUuid);
-  return `${service.replace(/\/$/, '')}/smart-link/${match[1].toLowerCase()}/share/${token}/sdoc/${parent}/`;
+  return `${service.replace(/\/$/, '')}/smart-link/${match[1].toLowerCase()}/share/${token}/?sdoc_uuid=${parent}`;
 };
