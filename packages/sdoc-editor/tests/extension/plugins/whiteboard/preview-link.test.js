@@ -12,7 +12,7 @@ describe('whiteboard share preview routing', () => {
 
   it('uses the share gateway without storing a token in the node', () => {
     expect(getWhiteboardPreviewLink(internal, service, share)).toBe(
-      `${service}/api/v2.1/share-links/${share.shareToken}/seadoc/${share.sdocUuid}/whiteboards/${uuid}/preview/`);
+      `${service}/smart-link/${uuid}/share/${share.shareToken}/sdoc/${share.sdocUuid}/`);
   });
 
   it.each([
