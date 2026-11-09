@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.264](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.263...%40seafile%2Fsdoc-editor%403.0.264) (2026-11-09)
+
+### Bug Fixes
+
+- preserve WeChat image paragraphs and text styles on paste ([#348](https://github.com/haiwen/seadoc-editor/issues/348)) ([459ead5](https://github.com/haiwen/seadoc-editor/commit/459ead5cd4f6c0191cbd2423a1ff62a856fa1ac1))
+
 ## [3.0.263](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.262...%40seafile%2Fsdoc-editor%403.0.263) (2026-11-06)
 
 ### Bug Fixes
