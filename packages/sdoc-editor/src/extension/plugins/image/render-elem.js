@@ -8,6 +8,7 @@ import Tooltip from '../../../components/tooltip';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
 import context from '../../../context';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
+import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
 import { ADDED_STYLE, DELETED_STYLE, IMAGE_BLOCK } from '../../constants';
 import { IMAGE_BORDER_TYPE } from './constants';
@@ -365,7 +366,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                         <span className='op-group-item'>
                           <span
                             aria-label={t('Full_screen_mode')}
-                            className='op-item'
+                            className={classNames('op-item', { 'is-mobile': isMobile })}
                             id={readOnlyFullscreenTargetId}
                             onClick={(event) => {
                               event.preventDefault();
@@ -376,9 +377,11 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                             tabIndex={0}
                           >
                             <i className='sdocfont sdoc-fullscreen'/>
-                            <Tooltip target={readOnlyFullscreenTargetId} placement='top' fade={true}>
-                              {t('Full_screen_mode')}
-                            </Tooltip>
+                            {!isMobile && (
+                              <Tooltip target={readOnlyFullscreenTargetId} placement='top' fade={true}>
+                                {t('Full_screen_mode')}
+                              </Tooltip>
+                            )}
                           </span>
                         </span>
                       </span>

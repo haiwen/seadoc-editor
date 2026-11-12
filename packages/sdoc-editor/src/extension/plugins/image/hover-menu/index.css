@@ -48,6 +48,10 @@
   background: #EFEFEF;
 }
 
+.sdoc-image-hover-menu-container .hover-menu-container .op-item.is-mobile:hover {
+  background: transparent;
+}
+
 .sdoc-image-hover-menu-container .hover-menu-container .op-item.disabled {
   color: #999;
   cursor: not-allowed;
