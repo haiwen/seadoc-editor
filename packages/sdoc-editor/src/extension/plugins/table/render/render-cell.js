@@ -61,11 +61,11 @@ const TableCell = ({ attributes, element, children }) => {
   }
 
   if (rowIndex === 0) {
-    style.borderTop = '1px solid #ddd';
+    style.borderTop = '1px solid #ccc';
   }
 
   if (cellIndex === 0) {
-    style.borderLeft = '1px solid #ddd';
+    style.borderLeft = '1px solid #ccc';
   }
 
   const { rowspan = 1, colspan = 1 } = element;
@@ -161,6 +161,7 @@ const TableCell = ({ attributes, element, children }) => {
       {...attributes}
       style={{ ...style }}
       className={classnames('table-cell', attributes.className, highlightClass, {
+        'sdoc-table-header': rowIndex === 0,
         [CELL_SELECTED]: isSelected,
         'cell-light-height-left-border': isSelectedFirstCell,
         'cell-light-height-right-border': isSelectedLastCell,
@@ -224,11 +225,11 @@ function renderTableCell(props) {
     }
 
     if (rowIndex === 0) {
-      style.borderTop = '1px solid #ddd';
+      style.borderTop = '1px solid #ccc';
     }
 
     if (cellIndex === 0) {
-      style.borderLeft = '1px solid #ddd';
+      style.borderLeft = '1px solid #ccc';
     }
 
     const { rowspan = 1, colspan = 1 } = element;
@@ -239,7 +240,7 @@ function renderTableCell(props) {
       <div
         {...attributes}
         style={{ ...style }}
-        className={classnames('table-cell', highlightClass, attributes.className)}
+        className={classnames('table-cell', highlightClass, attributes.className, { 'sdoc-table-header': rowIndex === 0 })}
         data-id={element.id}
       >
         <div className='sdoc-cell-container'>{children}</div>
