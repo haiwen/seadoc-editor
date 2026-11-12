@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/tooltip';
 import { WIKI_EDITOR } from '../../../../constants';
+import { isMobile } from '../../../../utils/common-utils';
 import { ElementPopover } from '../../../commons';
 import { MENUS_CONFIG_MAP, TEXT_ALIGN, PARAGRAPH, IMAGE_BLOCK, TABLE, BLOCKQUOTE, CALL_OUT, MULTI_COLUMN, LIST_ITEM } from '../../../constants';
 import { generateEmptyElement } from '../../../core';
@@ -315,16 +316,17 @@ const ImageHoverMenu = ({ editor, menuRef, menuPosition, element, parentNodeEntr
           )}
           <span className='op-group-item'>
             <span
+              aria-label={t('Full_screen_mode')}
               id='sdoc_image_full_screen_mode'
               role="button"
-              className='op-item'
+              className={classnames('op-item', { 'is-mobile': isMobile })}
               onClick={(e) => {
                 e.stopPropagation();
                 setIsShowImagePreview(!isShowImagePreview);
               }}
             >
               <i className='sdocfont sdoc-fullscreen'/>
-              {isShowTooltip && (
+              {isShowTooltip && !isMobile && (
                 <Tooltip target='sdoc_image_full_screen_mode' placement='top' fade={true}>
                   {t('Full_screen_mode')}
                 </Tooltip>
