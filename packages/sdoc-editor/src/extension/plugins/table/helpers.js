@@ -12,7 +12,7 @@ import {
   getNode, findPath, replaceNodeChildren, replaceNode, getSelectedNodeEntryByType, getAboveBlockNode
 } from '../../core';
 import {
-  TABLE_MAX_ROWS, TABLE_MAX_COLUMNS, EMPTY_SELECTED_RANGE, TABLE_ROW_MIN_HEIGHT, TABLE_CELL_MIN_WIDTH,
+  TABLE_MAX_ROWS, TABLE_MAX_COLUMNS, EMPTY_SELECTED_RANGE, TABLE_ROW_MIN_HEIGHT, TABLE_CELL_MIN_WIDTH, TABLE_CELL_DEFAULT_MIN_WIDTH,
   TABLE_ELEMENT, TABLE_ELEMENT_POSITION, TABLE_ROW_STYLE, INHERIT_CELL_STYLE_WHEN_SELECT_MULTIPLE, INHERIT_CELL_STYLE_WHEN_SELECT_SINGLE, TABLE_ALTERNATE_HIGHLIGHT_CLASS_MAP, CELL_SELECTED, DRAG_HANDLER_COLUMN, DRAG_HANDLER_ROW
 } from './constants';
 
@@ -116,7 +116,7 @@ export const generateEmptyTable = (editor, tableProps) => {
     const tableRow = generateTableRow(editor, colsCount, i);
     children.push(tableRow);
   }
-  const columnWidth = Math.max(TABLE_CELL_MIN_WIDTH, parseInt(editor.width / colsCount));
+  const columnWidth = Math.max(TABLE_CELL_DEFAULT_MIN_WIDTH, parseInt(editor.width / colsCount));
   let columns = [];
   for (let i = 0; i < colsCount; i++) {
     columns.push({ width: columnWidth });

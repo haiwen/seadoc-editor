@@ -3,7 +3,7 @@ import { ReactEditor } from '@seafile/slate-react';
 import copy from 'copy-to-clipboard';
 import slugid from 'slugid';
 import { TOGGLE_TITLE_TYPES } from '../../constants';
-import { BLOCKQUOTE, CALL_OUT, CHECK_LIST_ITEM, CODE_BLOCK, FORMULA, LIST_ITEM, MULTI_COLUMN, SUBTITLE, TITLE } from '../../constants/element-type';
+import { BLOCKQUOTE, CALL_OUT, CHECK_LIST_ITEM, CODE_BLOCK, FORMULA, LIST_ITEM, MULTI_COLUMN, SUBTITLE, TABLE, TITLE } from '../../constants/element-type';
 import { focusEditor, generateDefaultText, getNodeType } from '../../core';
 
 export const isInsertFormulaMenuDisabled = (editor, readonly) => {
@@ -26,6 +26,7 @@ export const isInsertFormulaMenuDisabled = (editor, readonly) => {
       if (type === MULTI_COLUMN) return true;
       if (type === BLOCKQUOTE) return true;
       if (type === CALL_OUT) return true;
+      if (type === TABLE) return true;
       if (Editor.isVoid(editor, n)) return true;
 
       return false;
