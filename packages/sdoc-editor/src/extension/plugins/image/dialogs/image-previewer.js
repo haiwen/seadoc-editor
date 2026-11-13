@@ -1,6 +1,8 @@
 import React from 'react';
 import Lightbox from '@seafile/react-image-lightbox';
 import PropTypes from 'prop-types';
+import { INTERNAL_EVENT } from '../../../../constants';
+import EventBus from '../../../../utils/event-bus';
 import { getImageURL } from '../helpers';
 
 import '@seafile/react-image-lightbox/style.css';
@@ -21,6 +23,23 @@ class ImagePreviewer extends React.Component {
       imageIndex: this.images.findIndex((item) => item === imageUrl)
     };
   }
+
+  componentDidMount() {
+    const eventBus = EventBus.getInstance();
+    this.unsubscribeCloseImagePreviewer = eventBus.subscribe(INTERNAL_EVENT.CLOSE_IMAGE_PREVIEWER, this.closeImagePreviewer);
+    eventBus.dispatch(INTERNAL_EVENT.IMAGE_PREVIEWER_OPENED, { editor: this.props.editor });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeCloseImagePreviewer();
+    const eventBus = EventBus.getInstance();
+    eventBus.dispatch(INTERNAL_EVENT.IMAGE_PREVIEWER_CLOSED, { editor: this.props.editor });
+  }
+
+  closeImagePreviewer = ({ editor } = {}) => {
+    if (editor !== this.props.editor) return;
+    this.props.toggleImagePreviewer();
+  };
 
   getImageNodes = (nodes) => {
     let nodeIndex = 0;
