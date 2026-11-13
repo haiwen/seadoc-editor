@@ -1,4 +1,4 @@
-import { Editor, Node, Path, Range, Transforms } from '@seafile/slate';
+import { Editor, Path, Range, Transforms } from '@seafile/slate';
 import isHotkey from 'is-hotkey';
 import { PARAGRAPH, VIDEO } from '../../constants';
 import { focusEditor, generateEmptyElement, getNextNode, getPrevNode, getSelectedNodeEntryByType } from '../../core';
@@ -36,7 +36,8 @@ const withVideo = (editor) => {
           if (Editor.hasPath(newEditor, previousPath)) {
             const [previousNode] = Editor.node(newEditor, previousPath);
             if (previousNode.type === VIDEO) {
-              if (Node.string(paragraphNode) === '') {
+              const isEmptyParagraph = paragraphNode.children.every(child => typeof child.text === 'string' && child.text.length === 0);
+              if (isEmptyParagraph) {
                 Transforms.removeNodes(newEditor, { at: paragraphPath });
               }
               focusEditor(newEditor, previousPath);
