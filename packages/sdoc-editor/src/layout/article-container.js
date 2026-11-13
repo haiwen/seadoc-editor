@@ -12,7 +12,16 @@ export default function ArticleContainer({ editor, children }) {
   const [containerStyle, setContainerStyle] = useState({});
 
   useEffect(() => {
-    editor.width = articleRef.current.children[0].clientWidth;
+    const article = articleRef.current.children[0];
+    const updateWidth = () => {
+      editor.width = article.clientWidth;
+    };
+    updateWidth();
+    const resizeObserver = new ResizeObserver(updateWidth);
+    resizeObserver.observe(article);
+    return () => {
+      resizeObserver.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
