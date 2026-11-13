@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.265](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.264...%40seafile%2Fsdoc-editor%403.0.265) (2026-11-13)
+
+### Bug Fixes
+
+- prevent editing video loading placeholder ([#349](https://github.com/haiwen/seadoc-editor/issues/349)) ([b9f82ae](https://github.com/haiwen/seadoc-editor/commit/b9f82aea46b8e27db12820b845db25f085c0dab9))
+- unify sdoc table borders and default header styles ([#350](https://github.com/haiwen/seadoc-editor/issues/350)) ([84c8a01](https://github.com/haiwen/seadoc-editor/commit/84c8a017b525185fcee04adae8ba967abfe5ca03))
+
+### Features
+
+- expose image preview lifecycle and close events ([#351](https://github.com/haiwen/seadoc-editor/issues/351)) ([8902976](https://github.com/haiwen/seadoc-editor/commit/8902976aa837b5622e6bc1b49ba5e588c809807d))
+
 ## [3.0.264](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.263...%40seafile%2Fsdoc-editor%403.0.264) (2026-11-09)
 
 ### Bug Fixes

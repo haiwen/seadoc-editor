@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.265](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.264...%40seafile%2Fseafile-sdoc-editor%403.0.265) (2026-11-13)
+
+### Features
+
+- expose image preview lifecycle and close events ([#351](https://github.com/seafileltd/sea-sdoc-editor/issues/351)) ([8902976](https://github.com/seafileltd/sea-sdoc-editor/commit/8902976aa837b5622e6bc1b49ba5e588c809807d))
+
 ## [3.0.264](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.263...%40seafile%2Fseafile-sdoc-editor%403.0.264) (2026-11-09)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
