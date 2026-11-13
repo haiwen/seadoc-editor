@@ -5,6 +5,7 @@ import { useReadOnly } from '@seafile/slate-react';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { getVideoURL, formatFileSize, videoFileIcon, updateVideo } from './helpers';
 import HoverMenu from './hover-menu';
+import useUploadVideo from './use-upload-video';
 
 import './index.css';
 
@@ -15,7 +16,7 @@ const Video = ({ element, editor }) => {
   const resizerRef = useRef(null);
   const resizeStartXRef = useRef(0);
   const resizeStartWidthRef = useRef(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedVideoSrc, setLoadedVideoSrc] = useState(null);
   const [isSelected, setIsSelected] = useState(false);
   const [videoStates, setVideoStates] = useState({});
   const [menuPosition, setMenuPosition] = useState({});
@@ -28,6 +29,8 @@ const Video = ({ element, editor }) => {
   const isEmbeddableLink = data?.is_embeddable_link;
   const readOnly = useReadOnly();
   const { t } = useTranslation('sdoc-editor');
+  const { isUploadLoading } = useUploadVideo({ editor, element });
+  const isLoaded = loadedVideoSrc === data.src;
 
   const handlePlay = () => {
     setVideoStates(prev => ({ ...prev, [element.id]: false }));
@@ -39,9 +42,9 @@ const Video = ({ element, editor }) => {
 
   const isPaused = videoStates[element.id] ?? true;
 
-  const handleVideoLoad = () => {
-    setIsLoaded(true);
-  };
+  const handleVideoLoad = useCallback(() => {
+    setLoadedVideoSrc(data.src);
+  }, [data.src]);
 
   const onLoadingPlaceholderInteraction = useCallback((event) => {
     event.preventDefault();
@@ -166,7 +169,7 @@ const Video = ({ element, editor }) => {
       }
       document.removeEventListener('click', onClickOutside);
     };
-  }, [onClickOutside]);
+  }, [handleVideoLoad, onClickOutside]);
 
   useEffect(() => {
     let observerRefValue = null;
@@ -202,7 +205,7 @@ const Video = ({ element, editor }) => {
 
   return (
     <>
-      {!isLoaded && (
+      {(!isLoaded || isUploadLoading) && (
         <div
           className='video-loading-placeholder'
           contentEditable={false}
@@ -225,15 +228,15 @@ const Video = ({ element, editor }) => {
         data-id={element.id}
         className='sdoc-video-wrapper'
         contentEditable={false}
-        style={{ display: isLoaded ? 'flex' : 'none' }}
+        style={{ display: isLoaded && !isUploadLoading ? 'flex' : 'none' }}
         onClick={onClickVideo}
       >
         <div
           className='sdoc-video-inner'
           ref={wrapperRef}
-          style={{ visibility: isLoaded ? 'visible' : 'hidden', ...getVideoWidthStyle() }}
+          style={{ visibility: isLoaded && !isUploadLoading ? 'visible' : 'hidden', ...getVideoWidthStyle() }}
         >
-          {!isEmbeddableLink && (
+          {!data.file_uuid && !isEmbeddableLink && (
             <>
               <video
                 className='sdoc-video-element'
@@ -257,7 +260,7 @@ const Video = ({ element, editor }) => {
               </div>
             </>
           )}
-          {isEmbeddableLink && (
+          {!data.file_uuid && isEmbeddableLink && (
             <iframe
               className='sdoc-video-element'
               ref={videoRef}

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import slugid from 'slugid';
 import toaster from '../../../components/toast';
 import { INTERNAL_EVENT, WIKI_EDITOR } from '../../../constants';
-import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
 import { ELEMENT_TYPE, FORMULA, INSERT_POSITION, LOCAL_IMAGE, LOCAL_VIDEO } from '../../constants';
 import AIModule from '../../plugins/ai/ai-module/index.js';
@@ -14,6 +14,7 @@ import { CustomTableSizeDialog, SplitCellSettingDialog } from '../../plugins/tab
 import { formatSeadocVideoSizeLimit, SEADOC_VIDEO_SIZE_LIMIT } from '../../plugins/video/constants/index.js';
 import AddVideoLinkDialog from '../../plugins/video/dialog/add-video-link-dialog/index.js';
 import { insertVideo } from '../../plugins/video/helpers';
+import VideoCache from '../../plugins/video/video-cache';
 import FileLinkInsertDialog from '../file-insert-dialog/index.js';
 import SelectFileDialog from '../select-file-dialog/index.js';
 import SelectLibFileDialog from '../select-lib-file-dialog/index.js';
@@ -55,6 +56,7 @@ const InsertElementDialog = ({ editor }) => {
 
   const onVideoFileChanged = useCallback((event) => {
     const files = event.target.files;
+    if (!files.length) return;
     const videoSizeLimit = SEADOC_VIDEO_SIZE_LIMIT;
     // Show warning for 3s and no further insertion if the video file exceeds the default limit.
     if (files[0].size > videoSizeLimit) {
@@ -63,14 +65,13 @@ const InsertElementDialog = ({ editor }) => {
       return;
     }
 
-    context.uploadLocalVideo(files).then(fileUrl => {
-      insertVideo(validEditor, files, fileUrl, validEditor.selection, insertPosition);
-      if (uploadLocalVideoInputRef.current) {
-        uploadLocalVideoInputRef.current.value = '';
-      }
-    });
+    const file = files[0];
+    const fileUuid = slugid.nice();
+    VideoCache.saveVideo(fileUuid, file);
+    insertVideo(validEditor, [{ name: file.name, size: file.size, file_uuid: fileUuid }], [''], validEditor.selection, insertPosition);
+    event.target.value = '';
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validEditor, uploadLocalImageInputRef, insertPosition, slateNode]);
+  }, [validEditor, uploadLocalVideoInputRef, insertPosition, slateNode]);
 
   const handleOpenLinkModal = useCallback(({ element: formulaElement, editor } ) => {
     if (formulaElement && editor) {

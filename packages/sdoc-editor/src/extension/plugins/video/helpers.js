@@ -47,8 +47,10 @@ export const isInsertVideoMenuDisabled = (editor, readonly) => {
 
 export const generateVideoNode = (src, videoInfo) => {
   const element = generateEmptyElement(VIDEO);
-  const { name, size, is_embeddable_link } = videoInfo;
-  return [{ ...element, data: { src, name, size, is_embeddable_link } }];
+  const { name, size, is_embeddable_link, file_uuid } = videoInfo;
+  const data = { src, name, size, is_embeddable_link };
+  if (file_uuid) data.file_uuid = file_uuid;
+  return [{ ...element, data }];
 };
 
 export const parseVideoLink = (url) => {
@@ -96,7 +98,7 @@ export const insertVideo = (editor, videoFiles, srcList, selection, position = I
     if (isInsertVideoMenuDisabled(editor)) return;
   }
 
-  const videoInfo = { name: videoFiles[0].name || null, size: videoFiles[0].size || null, is_embeddable_link: videoFiles[0].isEmbeddableLink || false };
+  const videoInfo = { name: videoFiles[0].name || null, size: videoFiles[0].size || null, is_embeddable_link: videoFiles[0].isEmbeddableLink || false, file_uuid: videoFiles[0].file_uuid };
   let videoNodes;
   // Return when embedding an invalid youtube, tencent or bilibili video url
   if (videoInfo.is_embeddable_link) {
@@ -155,7 +157,7 @@ export const insertVideo = (editor, videoFiles, srcList, selection, position = I
 export const getVideoURL = (data, editor) => {
   const { src: url } = data;
 
-  if (url && url.startsWith('http')) return url;
+  if (url && (url.startsWith('http') || url.startsWith('blob:'))) return url;
 
   const serviceUrl = context.getSetting('serviceUrl');
   let assetsUrl = context.getSetting('assetsUrl');
