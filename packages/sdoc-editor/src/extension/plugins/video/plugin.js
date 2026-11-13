@@ -5,7 +5,7 @@ import { focusEditor, generateEmptyElement, getNextNode, getPrevNode, getSelecte
 import { onCopyNode } from '../../toolbar/side-toolbar/helpers';
 
 const withVideo = (editor) => {
-  const { isVoid, onHotKeyDown } = editor;
+  const { isVoid, deleteBackward, onHotKeyDown } = editor;
   const newEditor = editor;
 
   // Make video as void node
@@ -17,6 +17,38 @@ const withVideo = (editor) => {
     }
 
     return isVoid(elem);
+  };
+
+  newEditor.deleteBackward = (unit) => {
+    const { selection } = newEditor;
+
+    if (selection && Range.isCollapsed(selection)) {
+      const paragraphEntry = Editor.above(newEditor, {
+        at: selection,
+        match: node => node.type === PARAGRAPH,
+        mode: 'lowest',
+      });
+
+      if (paragraphEntry) {
+        const [paragraphNode, paragraphPath] = paragraphEntry;
+        if (paragraphPath.at(-1) > 0 && Editor.isStart(newEditor, selection.anchor, paragraphPath)) {
+          const previousPath = Path.previous(paragraphPath);
+          if (Editor.hasPath(newEditor, previousPath)) {
+            const [previousNode] = Editor.node(newEditor, previousPath);
+            if (previousNode.type === VIDEO) {
+              const isEmptyParagraph = paragraphNode.children.every(child => typeof child.text === 'string' && child.text.length === 0);
+              if (isEmptyParagraph) {
+                Transforms.removeNodes(newEditor, { at: paragraphPath });
+              }
+              focusEditor(newEditor, previousPath);
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    return deleteBackward(unit);
   };
 
   newEditor.onHotKeyDown = (event) => {

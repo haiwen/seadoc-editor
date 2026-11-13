@@ -77,6 +77,7 @@
   transform: translateY(-50%);
   left: 46.3%;
   font-size: 48px;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
   color: #666666;
 }
