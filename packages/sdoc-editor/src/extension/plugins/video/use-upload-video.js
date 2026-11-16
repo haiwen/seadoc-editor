@@ -8,20 +8,26 @@ import { getErrorMsg } from '../../../utils/common-utils';
 import VideoCache from './video-cache';
 
 const updateVideoInsertOperation = (editor, element, data) => {
-  const insertOperation = editor.history.undos
+  const insertionOperation = editor.history.undos
     .flatMap(batch => batch.operations)
-    .find(operation => operation.type === 'insert_node' && operation.node?.id === element.id);
+    .find(operation => {
+      if (operation.type === 'insert_node') return operation.node?.id === element.id;
+      if (operation.type === 'set_node') return operation.newProperties?.id === element.id;
+      return false;
+    });
 
-  if (insertOperation) {
+  if (insertionOperation?.type === 'insert_node') {
     // Keep redo from restoring the pending-upload state.
-    insertOperation.node = { ...insertOperation.node, data };
+    insertionOperation.node = { ...insertionOperation.node, data };
+  } else if (insertionOperation?.type === 'set_node') {
+    insertionOperation.newProperties = { ...insertionOperation.newProperties, data };
   }
 };
 
 const useUploadVideo = ({ editor, element }) => {
   const { data } = element;
   const [isLoading, setIsLoading] = useState(() => Boolean(data.file_uuid && VideoCache.getVideo(data.file_uuid)));
-  const [isUploadComplete, setIsUploadComplete] = useState(false);
+  const [isUploadComplete, setIsUploadComplete] = useState(() => Boolean(data.is_upload_complete));
 
   useEffect(() => {
     const { file_uuid } = data;
@@ -36,7 +42,7 @@ const useUploadVideo = ({ editor, element }) => {
         if (uploadedUrls && uploadedUrls[0]) {
           try {
             const nodePath = ReactEditor.findPath(editor, element);
-            const newData = { ...data, src: uploadedUrls[0] };
+            const newData = { ...data, src: uploadedUrls[0], is_upload_complete: true };
             delete newData.file_uuid;
             HistoryEditor.withoutSaving(editor, () => {
               Transforms.setNodes(editor, { data: newData }, { at: nodePath });
