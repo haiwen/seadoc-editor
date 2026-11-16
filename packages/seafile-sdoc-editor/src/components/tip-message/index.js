@@ -21,6 +21,7 @@ class TipMessage extends React.Component {
       lastSavedAt: '',
     };
     this.saveTimer = null;
+    this.isTokenExpired = false;
   }
 
   componentDidMount() {
@@ -80,6 +81,8 @@ class TipMessage extends React.Component {
   };
 
   onTokenExpiredError = (msg) => {
+    if (this.isTokenExpired) return;
+    this.isTokenExpired = true;
     const { t } = this.props;
     const message = t('Token_expired_Please_refresh_the_page');
     toaster.closeAll();
@@ -87,6 +90,7 @@ class TipMessage extends React.Component {
   };
 
   onPendingOpExceedLimit = () => {
+    if (this.isTokenExpired) return;
     const { t } = this.props;
     toaster.closeAll();
     const message = t('Pending_operations_exceed_limit');
@@ -94,6 +98,7 @@ class TipMessage extends React.Component {
   };
 
   onDisconnect = () => {
+    if (this.isTokenExpired) return;
     const { t, isEditMode } = this.props;
     if (!isEditMode) return;
     const message = t('Server_is_not_connected_Operation_will_be_sent_to_server_later');
@@ -101,6 +106,7 @@ class TipMessage extends React.Component {
   };
 
   onReconnectError = () => {
+    if (this.isTokenExpired) return;
     if (!this.isConnectError) {
       this.isConnectError = true;
       const { t } = this.props;
@@ -111,11 +117,13 @@ class TipMessage extends React.Component {
   };
 
   onConnect = () => {
+    if (this.isTokenExpired) return;
     this.isConnectError = false;
     toaster.closeAll();
   };
 
   onReconnect = () => {
+    if (this.isTokenExpired) return;
     this.isConnectError = false;
     const { t } = this.props;
     const message = t('Server_is_reconnected');
