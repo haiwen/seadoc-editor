@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.266](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.265...%40seafile%2Fsdoc-editor%403.0.266) (2026-11-16)
+
+### Bug Fixes
+
+* disable mobile image fullscreen button hover and tooltips ([#352](https://github.com/haiwen/seadoc-editor/issues/352)) ([16f8b96](https://github.com/haiwen/seadoc-editor/commit/16f8b9623535b62843acc23f7cb33d480e69b8fa))
+
+
 ## [3.0.265](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.264...%40seafile%2Fsdoc-editor%403.0.265) (2026-11-13)
 
 ### Bug Fixes
