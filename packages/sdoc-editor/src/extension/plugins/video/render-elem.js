@@ -29,8 +29,9 @@ const Video = ({ element, editor }) => {
   const isEmbeddableLink = data?.is_embeddable_link;
   const readOnly = useReadOnly();
   const { t } = useTranslation('sdoc-editor');
-  const { isUploadLoading } = useUploadVideo({ editor, element });
+  const { isUploadLoading, isUploadComplete } = useUploadVideo({ editor, element });
   const isLoaded = loadedVideoSrc === data.src;
+  const isVideoVisible = (isLoaded || isUploadComplete) && !isUploadLoading;
 
   const handlePlay = () => {
     setVideoStates(prev => ({ ...prev, [element.id]: false }));
@@ -205,7 +206,7 @@ const Video = ({ element, editor }) => {
 
   return (
     <>
-      {(!isLoaded || isUploadLoading) && (
+      {!isVideoVisible && (
         <div
           className='video-loading-placeholder'
           contentEditable={false}
@@ -228,13 +229,13 @@ const Video = ({ element, editor }) => {
         data-id={element.id}
         className='sdoc-video-wrapper'
         contentEditable={false}
-        style={{ display: isLoaded && !isUploadLoading ? 'flex' : 'none' }}
+        style={{ display: isVideoVisible ? 'flex' : 'none' }}
         onClick={onClickVideo}
       >
         <div
           className='sdoc-video-inner'
           ref={wrapperRef}
-          style={{ visibility: isLoaded && !isUploadLoading ? 'visible' : 'hidden', ...getVideoWidthStyle() }}
+          style={{ visibility: isVideoVisible ? 'visible' : 'hidden', ...getVideoWidthStyle() }}
         >
           {!data.file_uuid && !isEmbeddableLink && (
             <>
