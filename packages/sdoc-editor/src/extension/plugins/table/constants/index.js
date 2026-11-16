@@ -12,6 +12,8 @@ export const TABLE_ROW_MIN_HEIGHT = 42;
 
 export const TABLE_CELL_MIN_WIDTH = 35;
 
+export const TABLE_CELL_DEFAULT_MIN_WIDTH = 120;
+
 export const TABLE_ELEMENT = {
   TABLE: 'table',
   ROW: 'row',

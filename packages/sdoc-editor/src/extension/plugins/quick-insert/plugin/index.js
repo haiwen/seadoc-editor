@@ -1,7 +1,7 @@
 import { Editor, Node, Range, Transforms } from '@seafile/slate';
 import { KeyCodes } from '../../../../constants';
 import { CODE_BLOCK, TABLE, QUICK_INSERT, MULTI_COLUMN, TOGGLE_HEADER } from '../../../constants';
-import { focusEditor, getTopLevelBlockNode } from '../../../core';
+import { focusEditor, getTopLevelBlockNode, getSelectedNodeEntryByType } from '../../../core';
 import { getBeforeText } from '../../list/helpers';
 import { genQuickInsert, getQuickInsertEntity, transformToText } from '../helper';
 
@@ -19,7 +19,7 @@ const withQuickInsert = (editor) => {
     const blockNode = topBlockEntry[0];
 
     // Disable quick insert for code block and table
-    if ([CODE_BLOCK, TABLE].includes(blockNode.type)) {
+    if ([CODE_BLOCK, TABLE].includes(blockNode.type) || getSelectedNodeEntryByType(editor, TABLE)) {
       return insertText(text);
     }
 

@@ -4,7 +4,7 @@ import slugid from 'slugid';
 import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import EventBus from '../../../utils/event-bus';
-import { CODE_BLOCK, INSERT_POSITION, SUBTITLE, TITLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, WHITEBOARD, TOGGLE_CONTENT, TOGGLE_TITLE_TYPES } from '../../constants';
+import { CODE_BLOCK, INSERT_POSITION, SUBTITLE, TITLE, TABLE, LIST_ITEM, CHECK_LIST_ITEM, MULTI_COLUMN, BLOCKQUOTE, CALL_OUT, WHITEBOARD, TOGGLE_CONTENT, TOGGLE_TITLE_TYPES } from '../../constants';
 import { focusEditor, generateDefaultParagraph, getNode, getNodeType, getParentNode, getSelectedNodeEntryByType, isTextNode } from '../../core';
 
 export const isInsertWhiteboardMenuDisabled = (editor, readonly) => {
@@ -31,6 +31,7 @@ export const isInsertWhiteboardMenuDisabled = (editor, readonly) => {
       if (type === MULTI_COLUMN) return true;
       if (type === BLOCKQUOTE) return true;
       if (type === CALL_OUT) return true;
+      if (type === TABLE) return true;
       if (Editor.isVoid(editor, n)) return true;
 
       return false;

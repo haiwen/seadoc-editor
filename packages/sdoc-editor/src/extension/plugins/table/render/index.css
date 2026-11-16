@@ -60,6 +60,11 @@
 
 }
 
+.sdoc-table-wrapper .table-cell .sdoc-image-wrapper {
+  /* Leave room for image margins and cursor placeholders. */
+  max-width: calc(100% - 0.3em - 5px);
+}
+
 .sdoc-cell-container {
   width: 100%;
 }
