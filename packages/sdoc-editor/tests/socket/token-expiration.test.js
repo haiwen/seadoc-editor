@@ -13,10 +13,11 @@ jest.mock('../../src/socket/socket-manager', () => ({
 }));
 jest.mock('../../src/utils/debug', () => ({ clientDebug: jest.fn(), serverDebug: jest.fn() }));
 jest.mock('react-i18next', () => ({ withTranslation: () => Component => Component }));
+// CI runs tests before building the workspace package entry point.
 jest.mock('@seafile/sdoc-editor', () => ({
   EventBus: jest.requireActual('../../src/utils/event-bus').default,
   toaster: { warning: jest.fn(), danger: jest.fn(), success: jest.fn(), closeAll: jest.fn() },
-}));
+}), { virtual: true });
 
 describe('Socket expiry refresh message', () => {
   let root;
