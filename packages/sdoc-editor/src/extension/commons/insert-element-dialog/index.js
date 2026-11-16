@@ -49,7 +49,7 @@ const InsertElementDialog = ({ editor }) => {
 
   const handleDisplayAlert = useCallback(() => {
     setTimeout(() => {
-      toaster.warning(t('The_video_file_exceeds_the_size_limit', { size: formatSeadocVideoSizeLimit() }), { duration: 3 });
+      toaster.warning(t('The_video_file_exceeds_the_size_limit', { size: formatSeadocVideoSizeLimit() }), { duration: 5 });
     }, 0);
   }, [t]);
 

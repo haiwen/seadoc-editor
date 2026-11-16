@@ -54,6 +54,13 @@ const Video = ({ element, editor }) => {
     setIsSelected(true);
   }, []);
 
+  const onClickVideoPlay = useCallback((event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsSelected(true);
+    videoRef.current?.play();
+  }, []);
+
   const setPosition = useCallback((elem) => {
     if (elem) {
       const { top, left } = elem.getBoundingClientRect();
@@ -253,6 +260,7 @@ const Video = ({ element, editor }) => {
               <div className='sdoc-video-play sdocfont sdoc-play'
                 style={{ visibility: isPaused ? 'visible' : 'hidden' }}
                 contentEditable='false'
+                onClick={onClickVideoPlay}
               >
               </div>
             </>
