@@ -7,20 +7,39 @@ import context from '../../../context';
 import { getErrorMsg } from '../../../utils/common-utils';
 import VideoCache from './video-cache';
 
-const updateVideoInsertOperation = (editor, element, data) => {
-  const insertionOperation = editor.history.undos
-    .flatMap(batch => batch.operations)
-    .find(operation => {
-      if (operation.type === 'insert_node') return operation.node?.id === element.id;
-      if (operation.type === 'set_node') return operation.newProperties?.id === element.id;
-      return false;
-    });
+const updateVideoNodeInHistory = (node, videoId, data) => {
+  if (node?.id === videoId) {
+    return { ...node, data };
+  }
 
-  if (insertionOperation?.type === 'insert_node') {
-    // Keep redo from restoring the pending-upload state.
-    insertionOperation.node = { ...insertionOperation.node, data };
-  } else if (insertionOperation?.type === 'set_node') {
-    insertionOperation.newProperties = { ...insertionOperation.newProperties, data };
+  if (!Array.isArray(node?.children)) return node;
+
+  let hasUpdatedChild = false;
+  const children = node.children.map(child => {
+    const updatedChild = updateVideoNodeInHistory(child, videoId, data);
+    hasUpdatedChild = hasUpdatedChild || updatedChild !== child;
+    return updatedChild;
+  });
+
+  return hasUpdatedChild ? { ...node, children } : node;
+};
+
+const updateVideoInsertOperation = (editor, element, data) => {
+  for (const operation of editor.history.undos.flatMap(batch => batch.operations)) {
+    if (operation.type === 'insert_node') {
+      const node = updateVideoNodeInHistory(operation.node, element.id, data);
+      if (node !== operation.node) {
+        // Keep redo from restoring a pending video, including one nested in a wrapper.
+        operation.node = node;
+        return;
+      }
+    } else if (operation.type === 'set_node') {
+      const newProperties = updateVideoNodeInHistory(operation.newProperties, element.id, data);
+      if (newProperties !== operation.newProperties) {
+        operation.newProperties = newProperties;
+        return;
+      }
+    }
   }
 };
 
