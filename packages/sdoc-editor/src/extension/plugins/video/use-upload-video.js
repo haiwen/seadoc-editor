@@ -25,19 +25,21 @@ const updateVideoNodeInHistory = (node, videoId, data) => {
 };
 
 const updateVideoInsertOperation = (editor, element, data) => {
-  for (const operation of editor.history.undos.flatMap(batch => batch.operations)) {
-    if (operation.type === 'insert_node') {
-      const node = updateVideoNodeInHistory(operation.node, element.id, data);
-      if (node !== operation.node) {
-        // Keep redo from restoring a pending video, including one nested in a wrapper.
-        operation.node = node;
-        return;
-      }
-    } else if (operation.type === 'set_node') {
-      const newProperties = updateVideoNodeInHistory(operation.newProperties, element.id, data);
-      if (newProperties !== operation.newProperties) {
-        operation.newProperties = newProperties;
-        return;
+  for (const history of [editor.history.undos, editor.history.redos]) {
+    for (const operation of history.flatMap(batch => batch.operations)) {
+      if (operation.type === 'insert_node') {
+        const node = updateVideoNodeInHistory(operation.node, element.id, data);
+        if (node !== operation.node) {
+          // Keep undo and redo from restoring a pending video, including one nested in a wrapper.
+          operation.node = node;
+          return;
+        }
+      } else if (operation.type === 'set_node') {
+        const newProperties = updateVideoNodeInHistory(operation.newProperties, element.id, data);
+        if (newProperties !== operation.newProperties) {
+          operation.newProperties = newProperties;
+          return;
+        }
       }
     }
   }
@@ -59,18 +61,19 @@ const useUploadVideo = ({ editor, element }) => {
       try {
         const uploadedUrls = await context.uploadLocalVideo([file]);
         if (uploadedUrls && uploadedUrls[0]) {
+          const newData = { ...data, src: uploadedUrls[0], is_upload_complete: true };
+          delete newData.file_uuid;
+          updateVideoInsertOperation(editor, element, newData);
+
           try {
             const nodePath = ReactEditor.findPath(editor, element);
-            const newData = { ...data, src: uploadedUrls[0], is_upload_complete: true };
-            delete newData.file_uuid;
             HistoryEditor.withoutSaving(editor, () => {
               Transforms.setNodes(editor, { data: newData }, { at: nodePath });
             });
-            updateVideoInsertOperation(editor, element, newData);
-            uploadComplete = true;
           } catch {
             // The video node may have been removed while the upload was in progress.
           }
+          uploadComplete = true;
         } else {
           throw new Error('Video upload returned no file URL.');
         }
