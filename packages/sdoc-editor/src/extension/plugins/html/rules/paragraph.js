@@ -5,6 +5,7 @@ const paragraphRule = (element, parseChild) => {
   const { nodeName, childNodes } = element;
   if (nodeName === 'P' && element.parentElement.nodeName !== 'LI') {
     const children = parseChild(childNodes);
+    if (element.closest('td, th')) return children;
     const align = element.style.textAlign || element.getAttribute('align');
     return {
       id: slugid.nice(),
