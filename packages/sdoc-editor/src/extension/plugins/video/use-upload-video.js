@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Transforms } from '@seafile/slate';
+import { Node, Transforms } from '@seafile/slate';
 import { HistoryEditor } from '@seafile/slate-history';
 import { ReactEditor } from '@seafile/slate-react';
 import toaster from '../../../components/toast';
@@ -82,7 +82,10 @@ const useUploadVideo = ({ editor, element }) => {
         toaster.danger(errorMessage);
         try {
           const nodePath = ReactEditor.findPath(editor, element);
-          Transforms.removeNodes(editor, { at: nodePath });
+          const nodeAtPath = Node.get(editor, nodePath);
+          if (nodeAtPath.id === element.id && nodeAtPath.data?.file_uuid === file_uuid) {
+            Transforms.removeNodes(editor, { at: nodePath });
+          }
         } catch {
           // The video node may have been removed while the upload was in progress.
         }
