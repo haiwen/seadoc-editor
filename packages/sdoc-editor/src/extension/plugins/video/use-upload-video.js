@@ -67,9 +67,12 @@ const useUploadVideo = ({ editor, element }) => {
 
           try {
             const nodePath = ReactEditor.findPath(editor, element);
-            HistoryEditor.withoutSaving(editor, () => {
-              Transforms.setNodes(editor, { data: newData }, { at: nodePath });
-            });
+            const nodeAtPath = Node.get(editor, nodePath);
+            if (nodeAtPath.id === element.id && nodeAtPath.data?.file_uuid === file_uuid) {
+              HistoryEditor.withoutSaving(editor, () => {
+                Transforms.setNodes(editor, { data: newData }, { at: nodePath });
+              });
+            }
           } catch {
             // The video node may have been removed while the upload was in progress.
           }
