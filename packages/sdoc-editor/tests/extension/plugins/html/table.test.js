@@ -5,6 +5,7 @@ import withHtml from '../../../../src/extension/plugins/html/plugin';
 import withParagraph from '../../../../src/extension/plugins/paragraph/plugin';
 import withTable from '../../../../src/extension/plugins/table/plugin';
 import { formatChildren } from '../../../core/utils';
+import { reloadTableFromServer } from './fixtures/server-table-reload';
 
 const usageTableHtml = `
   <table>
@@ -135,6 +136,96 @@ describe('deserialize table', () => {
     const [table] = deserializePastedHtml('<table><tr><td><p></p></td></tr></table>');
 
     expect(formatChildren(table.children[0].children[0].children)).toEqual([{ text: '' }]);
+  });
+
+  describe.each(['td', 'th'])('%s content after server reload', (tag) => {
+    it.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])('converts %s to plain text', (heading) => {
+      const [table] = deserializePastedHtml(`<table><tr><${tag}><${heading}><strong style="color: #ff0000">Important</strong> <a href="https://example.com">Link</a></${heading}></${tag}></tr></table>`);
+      const children = table.children[0].children[0].children;
+
+      expect(formatChildren(children)).toEqual([{ text: 'Important Link' }]);
+      expect(reloadTableFromServer(table)).toEqual(table);
+    });
+
+    it('takes all text from a quote including nested blocks', () => {
+      const [table] = deserializePastedHtml(`<table><tr><${tag}><blockquote><h3><i>Quote</i></h3><ul><li><h4>Item</h4><blockquote><p>Details</p></blockquote><ol><li><p>Nested</p></li></ol></li></ul><p>After</p></blockquote></${tag}></tr></table>`);
+      const cell = table.children[0].children[0];
+
+      expect(formatChildren(cell.children)).toEqual([{ text: 'QuoteItemDetailsNestedAfter' }]);
+      expect(Node.string(cell)).toBe('QuoteItemDetailsNestedAfter');
+      expect(reloadTableFromServer(table)).toEqual(table);
+    });
+
+    it('takes nested table text and keeps surrounding inline content', () => {
+      const [table] = deserializePastedHtml(`<table><tr><${tag}><strong>Before</strong><table><tr><td>Inner</td></tr></table><a href="https://example.com">After</a></${tag}></tr></table>`);
+
+      expect(formatChildren(table.children[0].children[0].children)).toEqual([
+        { text: 'Before', bold: true },
+        { text: 'Inner' },
+        { type: 'link', href: 'https://example.com/', title: null, children: [{ text: 'After' }] },
+      ]);
+      expect(reloadTableFromServer(table)).toEqual(table);
+    });
+
+    it('keeps code lines, blank lines, indentation and trailing newlines', () => {
+      const code = 'const x = 1;\n\n  console.log(x);\n';
+      const [table] = deserializePastedHtml(`<table><tr><${tag}><pre><code>${code}</code></pre></${tag}></tr></table>`);
+      const cell = table.children[0].children[0];
+
+      expect(Node.string(cell)).toBe(code);
+      expect(cell.children.every(child => typeof child.text === 'string')).toBe(true);
+      expect(reloadTableFromServer(table)).toEqual(table);
+    });
+
+    it('normalizes blocks inside list items without removing paragraph or list structure', () => {
+      const [table] = deserializePastedHtml(`<table><tr><${tag}><ul><li><p>First</p><p><strong>Second</strong></p><pre><code>line 1\nline 2</code></pre></li></ul></${tag}></tr></table>`);
+      const item = table.children[0].children[0].children[0].children[0];
+
+      expect(item.children.map(child => child.type)).toEqual(['paragraph', 'paragraph', 'paragraph']);
+      expect(item.children.map(Node.string)).toEqual(['First', 'Second', 'line 1\nline 2']);
+      expect(item.children[1].children[0]).toMatchObject({ text: 'Second', bold: true });
+      expect(reloadTableFromServer(table)).toEqual(table);
+    });
+
+    it.each(['<h3></h3>', '<blockquote></blockquote>', '<pre><code></code></pre>', '<hr>'])('keeps an empty cell valid for %s', (content) => {
+      const [table] = deserializePastedHtml(`<table><tr><${tag}>${content}</${tag}></tr></table>`);
+
+      expect(formatChildren(table.children[0].children[0].children)).toEqual([{ text: '' }]);
+      expect(reloadTableFromServer(table)).toEqual(table);
+    });
+  });
+
+  it('keeps headings, quotes and code blocks outside cells as blocks', () => {
+    const nodes = deserializePastedHtml('<h3>Heading</h3><blockquote><p>Quote</p></blockquote><pre><code>Code</code></pre><table><tr><td><h3>Cell</h3></td></tr></table>');
+
+    expect(nodes.map(node => node.type)).toEqual(['header3', 'blockquote', 'code_block', 'table']);
+    expect(nodes.map(Node.string)).toEqual(['Heading', 'Quote', 'Code', 'Cell']);
+  });
+
+  it('preserves pasted cell content through JSON save, server normalization and editor reload', () => {
+    const makeEditor = () => {
+      const editor = withParagraph(withTable(withHtml(withReact(createEditor()))));
+      editor.width = 900;
+      return editor;
+    };
+    const editor = makeEditor();
+    editor.children = [{ type: 'paragraph', children: [{ text: '' }] }];
+    Transforms.select(editor, { path: [0, 0], offset: 0 });
+    editor.insertData({
+      types: ['text/html', 'text/plain'],
+      getData: type => type === 'text/html' ? '<table><tr><th><h3><strong>Important</strong></h3></th><td><blockquote><p><i>Quote</i></p></blockquote></td><td><pre><code>first\nsecond</code></pre></td><td><ul><li><h4>Item</h4><ol><li>Nested</li></ol></li></ul></td></tr></table>' : '',
+    });
+    const pastedTable = editor.children.find(node => node.type === 'table');
+    const reloadedTable = reloadTableFromServer(pastedTable);
+
+    expect(pastedTable.children[0].children.map(Node.string)).toEqual(['Important', 'Quote', 'first\nsecond', 'ItemNested']);
+    expect(reloadedTable).toEqual(pastedTable);
+    const reloadedEditor = makeEditor();
+    reloadedEditor.children = [reloadedTable, { type: 'paragraph', children: [{ text: '' }] }];
+    Editor.normalize(reloadedEditor, { force: true });
+    expect(reloadedEditor.children[0]).toEqual(pastedTable);
+    expect(formatChildren(reloadedEditor.children[0].children[0].children[0].children)).toEqual([{ text: 'Important' }]);
+    expect(formatChildren(reloadedEditor.children[0].children[0].children[1].children)).toEqual([{ text: 'Quote' }]);
   });
 
   it('keeps paragraphs outside table cells as blocks', () => {

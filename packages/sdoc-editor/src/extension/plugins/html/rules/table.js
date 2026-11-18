@@ -2,6 +2,7 @@ import slugid from 'slugid';
 import { TABLE, TABLE_CELL, TABLE_ROW } from '../../../constants';
 
 const ROW_GROUP_TAGS = ['THEAD', 'TBODY', 'TFOOT'];
+const CELL_TEXT_BLOCK_TAGS = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'PRE', 'HR', 'TABLE'];
 
 const createEmptyCell = (isCombined = false) => ({
   id: slugid.nice(),
@@ -42,6 +43,11 @@ const normalizeRowGroup = (rows) => {
 
 const tableRule = (element, parseChild) => {
   const { nodeName, childNodes } = element;
+  // Read unsupported cell blocks before other rules turn them into block nodes.
+  if (CELL_TEXT_BLOCK_TAGS.includes(nodeName) && element.closest('td, th')) {
+    return { id: slugid.nice(), text: element.textContent };
+  }
+
   if (nodeName === 'TABLE') {
     const elements = Array.from(element.children);
     const caption = elements.find(child => child.nodeName === 'CAPTION');
