@@ -1,3 +1,51 @@
+.sdoc-side-menu .sdoc-quick-insert-toolbar .sdoc-side-menu-search-wrapper {
+  position: relative;
+  padding: 8px;
+}
+
+.sdoc-quick-insert-toolbar .sdoc-side-menu-search-wrapper input {
+  padding-right: 32px;
+}
+
+.sdoc-quick-insert-toolbar .sdoc-side-menu-search-wrapper input:not(:focus) {
+  border-color: rgba(0, 40, 100, 0.12);
+}
+
+.sdoc-quick-insert-toolbar .sdoc-quick-insert-clear-search {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #666666;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.sdoc-quick-insert-toolbar .sdoc-quick-insert-clear-search:hover {
+  background-color: #efefef;
+}
+
+.sdoc-quick-insert-toolbar .sdoc-quick-insert-clear-search:focus-visible {
+  outline: 2px solid #3e84f7;
+}
+
+.sdoc-quick-insert-toolbar .sdoc-quick-insert-clear-search .sdocfont {
+  font-size: 12px;
+}
+
+.sdoc-quick-insert-video-menu-popover .sdoc-insert-video-menu-popover-container .sdoc-dropdown-menu-item {
+  padding: 0 8px;
+  font-size: 14px;
+}
+
 .sdoc-quick-insert-toolbar .sdoc-dropdown-menu-item.sdoc-dropdown-item-selected,
 .sdoc-quick-insert-video-menu-popover .sdoc-dropdown-menu-item.sdoc-dropdown-item-selected {
   background-color: rgba(0, 0, 0, 0.04);
