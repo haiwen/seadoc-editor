@@ -4,6 +4,7 @@ import { Slate, withReact } from '@seafile/slate-react';
 import { createRoot } from 'react-dom/client';
 import { Simulate } from 'react-dom/test-utils';
 import QuickInsertBlockMenu from '../../../src/extension/toolbar/quick-insert-toolbar';
+import EventBus from '../../../src/utils/event-bus';
 
 jest.mock('react-i18next', () => {
   const t = (key) => key;
@@ -12,8 +13,6 @@ jest.mock('react-i18next', () => {
     withTranslation: () => (Component) => Component,
   };
 });
-
-jest.mock('../../../src/extension/plugins/table/popover/table-size-popover', () => () => null);
 
 describe('Quick insert search', () => {
   let container;
@@ -135,6 +134,51 @@ describe('Quick insert search', () => {
     }
     await changeSearch('video');
     expect(visibleItems()).toHaveLength(1);
+  });
+
+  describe.each(['clearing', 'changing'])('%s search', (action) => {
+    it.each([
+      { name: 'video', search: 'video', enterCount: 1, selector: '.sdoc-quick-insert-video-menu-popover .popover.show' },
+      { name: 'table', search: 'table', enterCount: 1, selector: '.sdoc-selected-table-size-popover.show' },
+      { name: 'table template', search: 'table', enterCount: 2, selector: '.sdoc-table-template-popover' },
+    ])('closes the $name submenu and restores main menu keyboard actions', async ({ search, enterCount, selector }) => {
+      const dispatch = jest.spyOn(EventBus.getInstance(), 'dispatch');
+      await changeSearch(search);
+      for (let i = 0; i < enterCount; i++) {
+        await pressKey('Enter', 13);
+      }
+      expect(document.querySelector(selector)).not.toBeNull();
+
+      if (action === 'clearing') {
+        await act(async () => clearButton().click());
+        await act(async () => jest.runOnlyPendingTimers());
+      } else {
+        await changeSearch('image');
+      }
+      expect(document.querySelector('.sdoc-quick-insert-video-menu-popover .popover.show')).toBeNull();
+      expect(document.querySelector('.sdoc-selected-table-size-popover.show')).toBeNull();
+      expect(document.querySelector('.sdoc-table-template-popover')).toBeNull();
+      expect(document.activeElement).toBe(input);
+      expect(onInsert).not.toHaveBeenCalled();
+      expect(dispatch).not.toHaveBeenCalled();
+      if (action === 'clearing') {
+        expect(input.value).toBe('');
+        expect(container.querySelector('.sdoc-dropdown-item-selected')).toBeNull();
+        await pressKey('Enter', 13);
+        expect(onInsert).not.toHaveBeenCalled();
+        expect(dispatch).not.toHaveBeenCalled();
+      }
+
+      await changeSearch(search);
+      for (let i = 0; i < enterCount; i++) {
+        await pressKey('Enter', 13);
+      }
+      expect(document.querySelector(selector)).not.toBeNull();
+      await changeSearch('image');
+      await pressKey('Enter', 13);
+      expect(onInsert).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith('insert_element', expect.objectContaining({ type: 'local-image' }));
+    });
   });
 
   it('updates the controlled input during composition and filters after composition ends', async () => {

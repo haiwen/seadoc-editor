@@ -451,6 +451,17 @@ const QuickInsertBlockMenu = ({
   }, []);
 
   useEffect(() => {
+    if (document.querySelector('.sdoc-quick-insert-video-menu-popover .popover.show')) {
+      videoMenuRef.current?.toggle();
+    }
+    if (document.querySelector('.sdoc-selected-table-size-popover.show')) {
+      tableSizeRef.current?.uncontrolledPopoverRef.current?.toggle();
+    }
+    videoMenuKeyboardNavigationRef.current = false;
+    videoMenuSelectIndexRef.current = -1;
+  }, [searchValue]);
+
+  useEffect(() => {
     clearSelectStyle();
     if (currentSelectIndex === -1) return;
     const currentSelectItem = getSelectItemDom(currentSelectIndex);
