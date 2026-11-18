@@ -1,6 +1,16 @@
 const WECHAT_REPLY_BREAK_ATTRIBUTE = 'data-sdoc-wechat-reply-break';
 const WECHAT_REPLY_SELECTOR = 'div.discuss_media.js_reply_item[data-reply-id][data-content-id]';
 
+const normalizeWechatPageContent = (fragment) => {
+  const articles = fragment.querySelectorAll('#js_article.rich_media');
+  if (articles.length !== 1) return;
+
+  const article = articles[0];
+  if (article.parentElement !== fragment || !article.querySelector('#js_content.rich_media_content')) return;
+
+  fragment.replaceChildren(article);
+};
+
 const addWechatCommentReplyBreaks = (fragment) => {
   const replies = fragment.querySelectorAll(WECHAT_REPLY_SELECTOR);
   replies.forEach((reply) => {
@@ -68,6 +78,7 @@ const normalizeWechatImageBlocks = (fragment) => {
 };
 
 export const normalizeWechatPastedFragment = (fragment) => {
+  normalizeWechatPageContent(fragment);
   addWechatCommentReplyBreaks(fragment);
   normalizeWechatImageBlocks(fragment);
 };
