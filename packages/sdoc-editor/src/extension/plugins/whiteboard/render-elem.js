@@ -8,10 +8,10 @@ import { INTERNAL_EVENT } from '../../../constants';
 import context from '../../../context';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import EventBus from '../../../utils/event-bus';
-import { normalizeWebUrl } from '../../../utils/url-utils';
 import { focusEditor } from '../../core';
 import { getMenuPosition } from '../../utils';
 import WhiteboardHoverMenu from './hover-menu';
+import { getWhiteboardPreviewLink } from './preview-link';
 
 import './index.css';
 
@@ -26,7 +26,10 @@ const Whiteboard = ({ editor, element }) => {
   const [menuPosition, setMenuPosition] = useState({ top: '', left: '' });
   const [isShowZoomOut, setIsShowZoomOut] = useState(false);
 
-  const link = useMemo(() => normalizeWebUrl(originalLink), [originalLink]);
+  const shareContext = context.getSetting('sdocShareContext');
+  const serviceUrl = context.getSetting('serviceUrl');
+  const link = useMemo(() => getWhiteboardPreviewLink(originalLink, serviceUrl, shareContext),
+    [originalLink, serviceUrl, shareContext]);
   const isValidUrl = Boolean(link);
 
   useEffect(() => {
@@ -83,6 +86,10 @@ const Whiteboard = ({ editor, element }) => {
   const handleDoubleClick = (event) => {
     event.preventDefault();
     if (!isValidUrl) return;
+    if (shareContext) {
+      openFullscreen(event);
+      return;
+    }
     const siteRoot = context.getSetting('siteRoot');
     const url = `${siteRoot}lib/${repo_id}/file${file_path}`;
     window.open(url, '_blank');
