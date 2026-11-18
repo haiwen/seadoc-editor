@@ -9,6 +9,20 @@ const normalizeWechatPageContent = (fragment) => {
   if (article.parentElement !== fragment || !article.querySelector('#js_content.rich_media_content')) return;
 
   fragment.replaceChildren(article);
+
+  fragment.querySelectorAll('*').forEach((node) => {
+    if (node.style?.display === 'none') node.remove();
+  });
+
+  fragment.querySelectorAll('img').forEach((image) => {
+    let visibility;
+    for (let node = image; node !== fragment; node = node.parentElement) {
+      if (!visibility && ['visible', 'hidden', 'collapse'].includes(node.style.visibility)) {
+        visibility = node.style.visibility;
+      }
+    }
+    if (visibility === 'hidden' || visibility === 'collapse') image.remove();
+  });
 };
 
 const addWechatCommentReplyBreaks = (fragment) => {
