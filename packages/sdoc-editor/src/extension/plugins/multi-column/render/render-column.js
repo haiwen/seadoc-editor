@@ -22,7 +22,7 @@ const Column = ({ attributes, element, children }) => {
   return (
     <div
       {...attributes}
-      className={classnames('column', attributes.className)}
+      className={classnames('sdoc-column', attributes.className)}
       data-id={element.id}
       style={{ width: `${columnWidth}px` }}
     >
