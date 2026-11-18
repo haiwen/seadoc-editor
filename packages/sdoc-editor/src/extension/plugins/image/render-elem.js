@@ -10,6 +10,7 @@ import context from '../../../context';
 import { useScrollContext } from '../../../hooks/use-scroll-context';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
+import { ElementPopover } from '../../commons';
 import { ADDED_STYLE, DELETED_STYLE, IMAGE_BLOCK } from '../../constants';
 import { IMAGE_BORDER_TYPE } from './constants';
 import Svg from './copy-image-error-svg';
@@ -39,11 +40,16 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const [isShowImagePlaceholder, setIsShowImagePlaceholder] = useState(false);
   const [isShowImageHoverMenu, setIsShowImageHoverMenu] = useState(false);
   const [isShowReadOnlyImagePreview, setIsShowReadOnlyImagePreview] = useState(false);
+  const [isShowTooltip, setIsShowTooltip] = useState(false);
   const [menuPosition, setMenuPosition] = useState({});
   const [caption, setCaption] = useState(data?.caption || '');
   const { isCopyImageLoading, isCopyImageError, setCopyImageLoading } = useCopyImage({ editor, element });
   const { isUploadLoading, isUploadError } = useUploadImage({ editor, element });
   const [canEditable, setCanEditable] = useState(true);
+
+  useEffect(() => {
+    setIsShowTooltip(true);
+  }, []);
 
   const registerEvent = useCallback((eventList) => {
     eventList.forEach(element => {
@@ -135,8 +141,9 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
     let resizeObserver = null;
 
     if (isShowImageHoverMenu) {
-      registerEvent([{ 'eventName': 'mousedown', 'event': onHideImageHoverMenu }]);
+      if (!readOnly) registerEvent([{ 'eventName': 'mousedown', 'event': onHideImageHoverMenu }]);
       scrollRef.current && scrollRef.current.addEventListener('scroll', onScroll);
+      scrollRef.current && scrollRef.current.addEventListener('load', onScroll, true);
       observerRefValue = scrollRef.current;
 
       resizeObserver = new ResizeObserver(() => {
@@ -145,7 +152,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
         }
       });
 
-      resizeObserver.observe(scrollRef.current);
+      scrollRef.current && resizeObserver.observe(scrollRef.current);
     } else {
       unregisterEvent([{ 'eventName': 'mousedown', 'event': onHideImageHoverMenu }]);
       scrollRef.current && scrollRef.current.removeEventListener('scroll', onScroll);
@@ -154,13 +161,14 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
       unregisterEvent([{ 'eventName': 'mousedown', 'event': onHideImageHoverMenu }]);
       if (observerRefValue) {
         observerRefValue.removeEventListener('scroll', onScroll);
+        observerRefValue.removeEventListener('load', onScroll, true);
       }
       if (resizeObserver) {
         resizeObserver.disconnect();
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isShowImageHoverMenu, onHideImageHoverMenu]);
+  }, [isShowImageHoverMenu, onHideImageHoverMenu, readOnly]);
 
   const onImageColumnToggle = useCallback(() => {
     // Handle switching to empty data and switching back
@@ -189,7 +197,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const imageHref = normalizeWebUrl(data.href);
 
   const onClickImage = useCallback(() => {
-    if (readOnly) return;
+    if (readOnly && !isMobile) return;
     setPosition();
     setIsShowImageHoverMenu(true);
   }, [readOnly, setPosition]);
@@ -339,7 +347,18 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
           >
             <span className='sdoc-image-inner'>
               <span className={classNames('sdoc-image-content', { 'upload-error': isUploadError })}>
-                <span className='sdoc-image-visual' style={imageStyle}>
+                <span
+                  className='sdoc-image-visual'
+                  style={imageStyle}
+                  onMouseEnter={readOnly ? () => {
+                    setPosition();
+                    setIsShowImageHoverMenu(true);
+                  } : undefined}
+                  onMouseLeave={readOnly ? () => {
+                    if (imageHoverMenuRef.current?.contains(document.activeElement)) return;
+                    setIsShowImageHoverMenu(false);
+                  } : undefined}
+                >
                   {isWikiPageLink ? (
                     <a
                       className='sdoc-image-page-link'
@@ -361,31 +380,45 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                     </span>
                   )}
                   {readOnly && (
-                    <span className='sdoc-image-hover-menu-container sdoc-image-readonly-fullscreen-container'>
-                      <span className='hover-menu-container'>
-                        <span className='op-group-item'>
-                          <span
-                            aria-label={t('Full_screen_mode')}
-                            className={classNames('op-item', { 'is-mobile': isMobile })}
-                            id={readOnlyFullscreenTargetId}
-                            onClick={(event) => {
-                              event.preventDefault();
-                              event.stopPropagation();
-                              setIsShowReadOnlyImagePreview(true);
-                            }}
-                            role='button'
-                            tabIndex={0}
-                          >
-                            <i className='sdocfont sdoc-fullscreen'/>
-                            {!isMobile && (
-                              <Tooltip target={readOnlyFullscreenTargetId} placement='top' fade={true}>
-                                {t('Full_screen_mode')}
-                              </Tooltip>
-                            )}
+                    <ElementPopover>
+                      <span
+                        className={classNames('sdoc-image-hover-menu-container sdoc-image-readonly-fullscreen-container', { 'is-visible': isShowImageHoverMenu })}
+                        ref={imageHoverMenuRef}
+                        style={menuPosition}
+                        onFocus={() => {
+                          setPosition();
+                          setIsShowImageHoverMenu(true);
+                        }}
+                        onBlur={(event) => {
+                          if (event.currentTarget.contains(event.relatedTarget) || event.currentTarget.matches(':hover') || imageRef.current?.closest('.sdoc-image-visual')?.matches(':hover')) return;
+                          setIsShowImageHoverMenu(false);
+                        }}
+                      >
+                        <span className='hover-menu-container'>
+                          <span className='op-group-item'>
+                            <span
+                              aria-label={t('Full_screen_mode')}
+                              className={classNames('op-item', { 'is-mobile': isMobile })}
+                              id={readOnlyFullscreenTargetId}
+                              onClick={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                setIsShowReadOnlyImagePreview(true);
+                              }}
+                              role='button'
+                              tabIndex={0}
+                            >
+                              <i className='sdocfont sdoc-fullscreen'/>
+                              {isShowTooltip && !isMobile && (
+                                <Tooltip target={readOnlyFullscreenTargetId} placement='top' fade={true}>
+                                  {t('Full_screen_mode')}
+                                </Tooltip>
+                              )}
+                            </span>
                           </span>
                         </span>
                       </span>
-                    </span>
+                    </ElementPopover>
                   )}
                   {(isCopyImageLoading || isUploadLoading) && <ImageLoader copyright={t('Image_is_uploading')}/>}
                   {(isUploadError) && <ImageLoader copyright={t('Image_is_upload_error')} isError={true} />}
