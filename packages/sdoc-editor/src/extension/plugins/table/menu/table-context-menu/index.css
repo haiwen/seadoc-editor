@@ -4,11 +4,11 @@
   max-width: 480px !important;
 }
 
-.sdoc-table-context-menu .insert-number {
+.sdoc-table-context-menu .sdoc-insert-number {
   margin-left: 50px;
 }
 
-.sdoc-table-context-menu .insert-number-input {
+.sdoc-table-context-menu .sdoc-insert-number-input {
   width: 36px;
   height: 20px;
   margin-right: .25rem;
@@ -18,18 +18,18 @@
   transition: none;
 }
 
-.sdoc-table-context-menu .dropdown-item:disabled .insert-number-input {
+.sdoc-table-context-menu .dropdown-item:disabled .sdoc-insert-number-input {
   color: #adb5bd;
 }
 
-.side-extendable {
+.sdoc-side-extendable {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 12px;
 }
 
-.side-extendable .sdoc-arrow-right {
+.sdoc-side-extendable .sdoc-arrow-right {
   color: #666;
   font-size: 12px;
 }

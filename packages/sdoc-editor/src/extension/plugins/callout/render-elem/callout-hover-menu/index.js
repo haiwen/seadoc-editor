@@ -41,13 +41,13 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
   }, []);
 
   const firstItemClass = classNames({
-    'callout-menu-item': true,
-    'color-active': isShowColorSelector,
+    'sdoc-callout-menu-item': true,
+    'sdoc-color-active': isShowColorSelector,
   });
 
   const secondItemClass = classNames({
-    'callout-menu-item': true,
-    'icon-active': isShowIcon,
+    'sdoc-callout-menu-item': true,
+    'sdoc-icon-active': isShowIcon,
   });
 
   const handleRemoveIcon = () => {
@@ -66,7 +66,7 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
             {t('Background_color')}
           </Tooltip>
         )}
-        <div className='callout-menu-divider'></div>
+        <div className='sdoc-callout-menu-divider'></div>
         <div id='select_callout_icon' className={secondItemClass} onClick={onIconToggle}>
           <span className='sdocfont sdoc-callout-icon mr-1'></span>
           <span className='sdocfont sdoc-arrow-down'></span>
@@ -82,8 +82,8 @@ export default function CalloutHoverMenu({ editor, element, popoverPosition }) {
         {isShowIcon && (
           <IconSelector editor={editor} element={element} onCloseSelector={onCloseSelector} />
         )}
-        <div className='callout-menu-divider'></div>
-        <div className='callout-menu-item' onClick={handleRemoveIcon}>{t('Remove_icon')}</div>
+        <div className='sdoc-callout-menu-divider'></div>
+        <div className='sdoc-callout-menu-item' onClick={handleRemoveIcon}>{t('Remove_icon')}</div>
       </div>
     </ElementPopover>
   );

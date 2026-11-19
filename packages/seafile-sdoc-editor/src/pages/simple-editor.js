@@ -101,8 +101,8 @@ const SimpleEditor = ({ isStarred, isDraft, showComment, showDocOperations = tru
 
   if (errorMessage) {
     return (
-      <div className='error-page'>
-        <div className='error-tip'>{t(errorMessage)}</div>
+      <div className='sdoc-error-page'>
+        <div className='sdoc-error-tip'>{t(errorMessage)}</div>
       </div>
     );
   }

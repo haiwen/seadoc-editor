@@ -189,7 +189,7 @@ class TableContextMenu extends React.Component {
           </button>
           <button
             ref={this.horizontalAlignRef}
-            className="dropdown-item side-extendable"
+            className="dropdown-item sdoc-side-extendable"
           >
             <span>{t('Horizontal_align')}</span>
             <i className='sdocfont sdoc-arrow-right'></i>
@@ -197,7 +197,7 @@ class TableContextMenu extends React.Component {
           {this.horizontalAlignRef.current && <HorizontalAlignPopover target={this.horizontalAlignRef} editor={editor} readonly={readonly} horizontalAlign={horizontalAlign} />}
           <button
             ref={this.verticalAlignRef}
-            className="dropdown-item side-extendable"
+            className="dropdown-item sdoc-side-extendable"
           >
             <span>{t('Vertical_align')}</span>
             <i className='sdocfont sdoc-arrow-right'></i>
@@ -205,7 +205,7 @@ class TableContextMenu extends React.Component {
           {this.verticalAlignRef.current && <VerticalAlignPopover target={this.verticalAlignRef} editor={editor} readonly={readonly} verticalAlign={verticalAlign} />}
           <button
             ref={this.colorSelectorRef}
-            className="dropdown-item side-extendable"
+            className="dropdown-item sdoc-side-extendable"
           >
             <span>{t('Background_color')}</span>
             <i className='sdocfont sdoc-arrow-right'></i>

@@ -70,12 +70,12 @@ class SimpleViewer extends React.Component {
       <ErrorBoundary>
         <Layout>
           <Header>
-            <div className="doc-info">
-              <h2 className="doc-name my-0">{docName}</h2>
+            <div className="sdoc-doc-info">
+              <h2 className="sdoc-doc-name my-0">{docName}</h2>
               {sharePermissionText && <span className="sdoc-share-permission ml-2">{sharePermissionText}</span>}
             </div>
-            <div className="doc-ops">
-              {downloadURL && <a href={downloadURL} className="op-item"><i className="sdocfont sdoc-download"></i></a>}
+            <div className="sdoc-doc-ops">
+              {downloadURL && <a href={downloadURL} className="sdoc-op-item"><i className="sdocfont sdoc-download"></i></a>}
             </div>
           </Header>
           <Content>

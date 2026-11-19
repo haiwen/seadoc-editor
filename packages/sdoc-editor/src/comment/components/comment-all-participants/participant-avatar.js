@@ -13,10 +13,10 @@ const ParticipantAvatar = ({ participant, index, showMore }) => {
   const { name, avatar_url } = participant;
   const id = `comment-participant-avatar-${index}-${Math.floor(Math.random() * 1000)}`;
   return (
-    <div className={classnames('comment-participant-avatar', { 'position-relative': showMore })} id={id}>
+    <div className={classnames('sdoc-comment-participant-avatar', { 'position-relative': showMore })} id={id}>
       <img src={avatar_url} alt='' />
       {showTooltip && (<Tooltip target={id}>{name}</Tooltip>)}
-      {showMore && (<div className="comment-participants-more"><i className="sdocfont sdoc-more"></i></div>)}
+      {showMore && (<div className="sdoc-comment-participants-more"><i className="sdocfont sdoc-more"></i></div>)}
     </div>
   );
 };

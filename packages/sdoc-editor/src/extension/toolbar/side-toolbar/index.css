@@ -31,7 +31,7 @@
   border-radius: 2px;
 }
 
-@keyframes fade-out {
+@keyframes sdoc-fade-out {
   from {
     opacity: 1;
   }
@@ -41,6 +41,6 @@
   }
 }
 
-.fade-out {
-  animation: fade-out 0.15s ease-out;
+.sdoc-fade-out {
+  animation: sdoc-fade-out 0.15s ease-out;
 }

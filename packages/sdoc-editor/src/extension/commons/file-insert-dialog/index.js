@@ -224,7 +224,7 @@ const FileLinkInsertDialog = ({ editor, element, closeDialog }) => {
       style={{ ...position, position: 'absolute' }}
     >
       {header.length !== 0 && (<div className='sdoc-history-files-header'>{header}</div>)}
-      <div className={classNames('sdoc-history-files', { 'no-header': header.length === 0 })}>
+      <div className={classNames('sdoc-history-files', { 'sdoc-no-header': header.length === 0 })}>
         {files.map((item) => {
           return (
             <div
@@ -234,20 +234,20 @@ const FileLinkInsertDialog = ({ editor, element, closeDialog }) => {
                 onSelect(item);
               }}
             >
-              <img className='file-item-img' src={getSdocFileIcon()} alt='' />
-              <span className='file-item-name'>{item.name}</span>
+              <img className='sdoc-file-item-img' src={getSdocFileIcon()} alt='' />
+              <span className='sdoc-file-item-name'>{item.name}</span>
             </div>
           );
         })}
         {!hiddenMoreMenu && (
           <div className='sdoc-history-files-item' onClick={onShowMore}>
-            <i className='file-item-more sdocfont sdoc-more'/>
-            <span className="more-text">{t('More')}</span>
+            <i className='sdoc-file-item-more sdocfont sdoc-more'/>
+            <span className="sdoc-more-text">{t('More')}</span>
           </div>)}
       </div>
       <div className='sdoc-history-files-add' onClick={onCreateFile}>
         <i className='sdocfont sdoc-append'/>
-        <span className='new-file-name'>
+        <span className='sdoc-new-file-name'>
           {newFileName ? t('Create_file_name_sdoc', { file_name_sdoc: createFileName }) : t(createFileTipDefault)}
         </span>
       </div>

@@ -21,7 +21,7 @@ class MenuItem extends React.Component {
     const { children, itemClass, iconClass, isChecked } = this.props;
 
     const containerClass = `sdoc-menu-item ${itemClass || ''}`;
-    const itemIconClass = `menu-item-icon ${iconClass || ''}`;
+    const itemIconClass = `sdoc-menu-item-icon ${iconClass || ''}`;
 
     return (
       <span className={containerClass} onClick={this.onClick}>

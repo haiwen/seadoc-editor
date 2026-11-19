@@ -29,7 +29,7 @@ const PluginsOperations = () => {
     }
 
     return (
-      <span className="op-item sdoc-plugin-operation-btn-container" id={iconIdMap[name]} onClick={(e) => onClick(e, name)} key={name}>
+      <span className="sdoc-op-item sdoc-plugin-operation-btn-container" id={iconIdMap[name]} onClick={(e) => onClick(e, name)} key={name}>
         {iconDom}
         {name === 'sdoc-info' && (
           <Tooltip target={iconIdMap[name]}>

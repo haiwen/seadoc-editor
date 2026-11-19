@@ -62,16 +62,16 @@ const GlobalCommentHeader = ({ toggle, activeCommentGroup, setCurrentCommentGrou
   }, []);
 
   return (
-    <div className="comments-panel-header">
-      <div className="comments-panel-header-left">
+    <div className="sdoc-comments-panel-header">
+      <div className="sdoc-comments-panel-header-left">
         {activeCommentGroup && (
-          <div className="goback sdoc-icon-btn" onClick={goBack}>
+          <div className="sdoc-goback sdoc-icon-btn" onClick={goBack}>
             <i className="sdocfont sdoc-previous-page" style={{ transform: 'scale(1.2)' }}></i>
           </div>
         )}
-        <span className="title">{activeCommentGroup ? t('Comment_details') : `${t(commentType)}${commentList.length > 0 ? ` (${commentList.length})` : ''}`}</span>
+        <span className="sdoc-title">{activeCommentGroup ? t('Comment_details') : `${t(commentType)}${commentList.length > 0 ? ` (${commentList.length})` : ''}`}</span>
       </div>
-      <div ref={panelHeaderRef} className="comments-panel-header-right">
+      <div ref={panelHeaderRef} className="sdoc-comments-panel-header-right">
         {!activeCommentGroup && (
           <Dropdown className='mr-1' isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
             <DropdownToggle tag='div' className='sdoc-icon-btn' id='comment-types'>

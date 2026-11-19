@@ -114,16 +114,16 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
     <div
       id={`comment-item-wrapper_${topLevelComment.id}`}
       className={classNames(
-        'comment-collapse-wrapper',
-        'comment-ui-container',
+        'sdoc-comment-collapse-wrapper',
+        'sdoc-comment-ui-container',
         { 'sdoc-resolved': topLevelComment.resolved, 'd-flex flex-column': element }
       )}
       onClick={onItemClick}
     >
       {topLevelComment.detail.element_id_list && (
-        <div className={classNames('comment-item-selected-text-container', { 'detail-context-comment': topLevelComment.detail.element_id_list?.length > 0 })} onClick={handleScrollToArticle}>
+        <div className={classNames('sdoc-comment-item-selected-text-container', { 'sdoc-detail-context-comment': topLevelComment.detail.element_id_list?.length > 0 })} onClick={handleScrollToArticle}>
           <i className="sdocfont sdoc-quote-left mr-2"></i>
-          <div className="comment-item-selected-text">
+          <div className="sdoc-comment-item-selected-text">
             {commentedElementIds.map((elementId, index) => {
               return (<div className='context-comment-item-selected-text' key={index}>{getCommentedTextsByElementId(elementId, topLevelComment.detail.text_comment_id)}</div>);
             })}
@@ -131,21 +131,21 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
         </div>
       )}
       {element && (
-        <div className="comment-item-selected-text-container" onClick={handleScrollToArticle}>
+        <div className="sdoc-comment-item-selected-text-container" onClick={handleScrollToArticle}>
           <i className="sdocfont sdoc-quote-left mr-2"></i>
-          <div className="comment-item-selected-text">{Node.string(element)}</div>
+          <div className="sdoc-comment-item-selected-text">{Node.string(element)}</div>
         </div>
       )}
-      <div className="comment-item-list" ref={CommentItemListRef}>
-        <div className='comment-item'>
-          <div className='comment-header'>
-            <div className='comment-author'>
-              <span className='comment-author__avatar'><img alt='' src={topLevelComment.avatar_url} /></span>
-              <span className='comment-author__info'>
-                <span className='name'>{topLevelComment.user_name}</span>
-                <span className='time'>
+      <div className="sdoc-comment-item-list" ref={CommentItemListRef}>
+        <div className='sdoc-comment-item'>
+          <div className='sdoc-comment-header'>
+            <div className='sdoc-comment-author'>
+              <span className='sdoc-comment-author__avatar'><img alt='' src={topLevelComment.avatar_url} /></span>
+              <span className='sdoc-comment-author__info'>
+                <span className='sdoc-name'>{topLevelComment.user_name}</span>
+                <span className='sdoc-time'>
                   {dayjs(topLevelComment.updated_at).format('MM-DD HH:mm')}
-                  {topLevelComment?.resolved && (<span className='comment-success-resolved sdocfont sdoc-mark-as-resolved'/>)}
+                  {topLevelComment?.resolved && (<span className='sdoc-comment-success-resolved sdocfont sdoc-mark-as-resolved'/>)}
                 </span>
               </span>
             </div>
@@ -153,18 +153,18 @@ const CommentItemCollapseWrapper = ({ element, topLevelComment, latestReply, edi
               <div className="sdoc-unread-message-tip"></div>
             )}
           </div>
-          <div className='comment-content'>
+          <div className='sdoc-comment-content'>
             <div dangerouslySetInnerHTML={{ __html: commentContent }}/>
           </div>
           {replyCount !== 0 && (
-            <div className='comment-footer'>
-              <span className='comments-count'>
+            <div className='sdoc-comment-footer'>
+              <span className='sdoc-comments-count'>
                 <i className='sdocfont sdoc-comments'/>
-                <span className='comments-count-number'>{replyCount}</span>
+                <span className='sdoc-comments-count-number'>{replyCount}</span>
               </span>
-              <div className='comment-author'>
-                <span className='comment-author__avatar'><img alt='' src={latestReply.avatar_url} /></span>
-                <div className='comment-author__latest-reply'>
+              <div className='sdoc-comment-author'>
+                <span className='sdoc-comment-author__avatar'><img alt='' src={latestReply.avatar_url} /></span>
+                <div className='sdoc-comment-author__latest-reply'>
                   <div dangerouslySetInnerHTML={{ __html: replyContent }}></div>
                 </div>
               </div>

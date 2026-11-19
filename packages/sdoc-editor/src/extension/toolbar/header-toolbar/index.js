@@ -63,7 +63,7 @@ const HeaderToolbar = ({ editor, readonly = false, isEdit }) => {
           <TextAlignMenu editor={editor} readonly={readonly} />
           <CalloutMenu editor={editor} readonly={readonly} />
         </MenuGroup>)}
-      <MenuGroup className='menu-group sdoc-editor-toolbar-right-menu'>
+      <MenuGroup className='sdoc-menu-group sdoc-editor-toolbar-right-menu'>
         <SearchReplaceMenu editor={editor} readonly={readonly} />
       </MenuGroup>
     </div>

@@ -11,30 +11,30 @@
   max-width: 200px;
 }
 
-.sdoc-comment-caret-list .comment-participant-item {
+.sdoc-comment-caret-list .sdoc-comment-participant-item {
   padding: 5px 0;
 }
 
-.sdoc-comment-caret-list .comment-participant-item.active,
-.sdoc-comment-caret-list .comment-participant-item:hover {
+.sdoc-comment-caret-list .sdoc-comment-participant-item.active,
+.sdoc-comment-caret-list .sdoc-comment-participant-item:hover {
   background: #f5f5f5;
   cursor: pointer;
 }
 
-.sdoc-comment-caret-list .comment-participant-item .comment-participant-container {
+.sdoc-comment-caret-list .sdoc-comment-participant-item .sdoc-comment-participant-container {
   display: flex;
   align-items: center;
   padding: 0 8px;
 }
 
-.sdoc-comment-caret-list .comment-participant-item .comment-participant-avatar {
+.sdoc-comment-caret-list .sdoc-comment-participant-item .sdoc-comment-participant-avatar {
   width: 16px;
   height: 16px;
   border-radius: 50%;
   vertical-align: middle;
 }
 
-.sdoc-comment-caret-list .comment-participant-item .comment-participant-name {
+.sdoc-comment-caret-list .sdoc-comment-participant-item .sdoc-comment-participant-name {
   margin-left: 4px;
   font-size: 14px;
   flex: 1;

@@ -46,9 +46,9 @@ const ElementCommentCount = ({ elementId, isElementSelected, commentsCount, edit
   }
 
   return (
-    <div className="element-comments-count" style={style} onClick={onClick}>
+    <div className="sdoc-element-comments-count" style={style} onClick={onClick}>
       <i className="sdocfont sdoc-comment-count"></i>
-      <div className="element-comments-count-value">{commentsCount}</div>
+      <div className="sdoc-element-comments-count-value">{commentsCount}</div>
     </div>
   );
 };

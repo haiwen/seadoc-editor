@@ -216,31 +216,31 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
   return (
     <div
       ref={fileLinkInsertRef}
-      className={classNames('wiki-history-files-content popover')}
+      className={classNames('sdoc-wiki-history-files-content popover')}
       style={{ ...position, position: 'absolute', opacity: Object.keys(position).length ? 1 : 0 }}
     >
-      {header.length !== 0 && (<div className='wiki-history-files-header'>{header}</div>)}
-      <div className={classNames('sdoc-history-files', { 'no-header': header.length === 0 })}>
+      {header.length !== 0 && (<div className='sdoc-wiki-history-files-header'>{header}</div>)}
+      <div className={classNames('sdoc-history-files', { 'sdoc-no-header': header.length === 0 })}>
         {files.map((item) => {
           return (
             <div
               key={item.doc_uuid}
-              className={classNames('sdoc-history-files-item', { 'files-item-has-dir': item?.path })}
+              className={classNames('sdoc-history-files-item', { 'sdoc-files-item-has-dir': item?.path })}
               onClick={() => {
                 onSelect(item);
               }}
             >
               {item?.icon && (
-                <span className='file-item-emoticons'>{item.icon}</span>
+                <span className='sdoc-file-item-emoticons'>{item.icon}</span>
               )}
               {!item?.icon && (
                 <>
-                  {item?.isDir ? <span className='file-item-icon sf3-font sf3-font-files2'/> : <span className='file-item-icon sf3-font sf3-font-file'/>}
+                  {item?.isDir ? <span className='sdoc-file-item-icon sf3-font sf3-font-files2'/> : <span className='sdoc-file-item-icon sf3-font sf3-font-file'/>}
                 </>
               )}
-              <span className='file-item-name-wrapper'>
-                <span className='file-item-name'>{item.name}</span>
-                {item?.path && <span className='name-dir'>{item.path}</span>}
+              <span className='sdoc-file-item-name-wrapper'>
+                <span className='sdoc-file-item-name'>{item.name}</span>
+                {item?.path && <span className='sdoc-name-dir'>{item.path}</span>}
               </span>
             </div>
           );
@@ -249,7 +249,7 @@ const WikiFileLinkInsertDialog = ({ editor, element, closeDialog }) => {
       </div>
       <div className='sdoc-history-files-add' onClick={onOpenCreateDialog}>
         <i className='sdocfont sdoc-append'/>
-        <span className='new-file-name'>
+        <span className='sdoc-new-file-name'>
           {newFileName ? t('Create_file_name_sdoc', { file_name_sdoc: createFileName }) : t(createFileTipDefault)}
         </span>
       </div>

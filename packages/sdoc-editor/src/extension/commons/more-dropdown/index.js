@@ -8,7 +8,7 @@ import Tooltip from '../../../components/tooltip';
 const MoreDropdown = ({
   buttonId = 'sdoc-more-text-operations',
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   disabled,
   children
 }) => {
@@ -52,7 +52,7 @@ const MoreDropdown = ({
         fade={false}
         ref={popoverRef}
       >
-        <div className="menu-group">
+        <div className="sdoc-menu-group">
           {children}
         </div>
       </UncontrolledPopover>

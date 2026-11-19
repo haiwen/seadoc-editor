@@ -1,11 +1,11 @@
-.video-hover-menu-container {
+.sdoc-video-hover-menu-container {
   position: absolute;
   height: 42px;
   z-index: 101;
   width: auto;
 }
 
-.video-hover-menu-container .hover-menu-container {
+.sdoc-video-hover-menu-container .sdoc-hover-menu-container {
   height: 40px;
   padding: 8px;
   background-color: #fff;
@@ -17,12 +17,12 @@
   box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.10);
 }
 
-.video-hover-menu-container .hover-menu-container>span:not(:last-of-type) {
+.sdoc-video-hover-menu-container .sdoc-hover-menu-container>span:not(:last-of-type) {
   padding-right: 8px;
   border-right: 1px solid #e5e5e5;
 }
 
-.video-hover-menu-container .hover-menu-container .op-item {
+.sdoc-video-hover-menu-container .sdoc-hover-menu-container .sdoc-op-item {
   position: relative;
   font-size: 12px;
   color: #212529;
@@ -35,17 +35,17 @@
   justify-content: center;
 }
 
-.video-hover-menu-container .hover-menu-container .op-item:hover {
+.sdoc-video-hover-menu-container .sdoc-hover-menu-container .sdoc-op-item:hover {
   text-decoration: none;
   background: #EFEFEF;
 }
 
-.video-hover-menu-container .op-group-item:first-child .op-item:last-child,
-.video-hover-menu-container .op-group-item:not(:first-child) .op-item {
+.sdoc-video-hover-menu-container .sdoc-op-group-item:first-child .sdoc-op-item:last-child,
+.sdoc-video-hover-menu-container .sdoc-op-group-item:not(:first-child) .sdoc-op-item {
   margin-left: 8px;
 }
 
-.video-hover-menu-container .hover-menu-container .sdocfont {
+.sdoc-video-hover-menu-container .sdoc-hover-menu-container .sdocfont {
   line-height: 1;
   font-size: 14px;
   color: #666;

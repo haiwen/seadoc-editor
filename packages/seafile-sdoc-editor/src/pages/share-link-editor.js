@@ -30,8 +30,8 @@ const ShareLinkEditor = ({ showComment, t, plugins = [], collaborators, mathJaxS
 
   if (errorMessage) {
     return (
-      <div className='error-page'>
-        <div className='error-tip'>{t(errorMessage)}</div>
+      <div className='sdoc-error-page'>
+        <div className='sdoc-error-tip'>{t(errorMessage)}</div>
       </div>
     );
   }
@@ -44,7 +44,7 @@ const ShareLinkEditor = ({ showComment, t, plugins = [], collaborators, mathJaxS
             {!isSeafileClient() &&
             <Header>
               <DocInfo />
-              <div className='doc-ops'>
+              <div className='sdoc-doc-ops'>
                 <CollaboratorsOperation />
                 <ShareLinkMoreOperations />
               </div>

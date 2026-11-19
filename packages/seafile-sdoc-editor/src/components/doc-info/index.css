@@ -1,15 +1,15 @@
-.sdoc-editor-page-header .doc-info {
+.sdoc-editor-page-header .sdoc-doc-info {
   display: flex;
   align-items: center;
 }
 
-.sdoc-editor-page-header .doc-info .doc-name {
+.sdoc-editor-page-header .sdoc-doc-info .sdoc-doc-name {
   font-size: 18px;
   font-weight: 700;
   color: #212529;
 }
 
-.sdoc-editor-page-header .doc-info .doc-icon {
+.sdoc-editor-page-header .sdoc-doc-info .sdoc-doc-icon {
   margin-left: 0.5rem;
   color: #999;
   cursor: pointer;
@@ -17,24 +17,24 @@
   line-height: 1;
 }
 
-.sdoc-editor-page-header .doc-info .doc-icon:hover {
+.sdoc-editor-page-header .sdoc-doc-info .sdoc-doc-icon:hover {
   margin-left: 0.5rem;
   color: #666;
 }
 
-.sdoc-editor-page-header .doc-info .sdoc-link {
+.sdoc-editor-page-header .sdoc-doc-info .sdoc-link {
   font-size: 14px;
 }
 
-.sdoc-editor-page-header .doc-info .sdoc-freezed {
+.sdoc-editor-page-header .sdoc-doc-info .sdoc-freezed {
   color: red;
 }
 
-.sdoc-editor-page-header .doc-state {
+.sdoc-editor-page-header .sdoc-doc-state {
   font-size: 0.8125rem;
 }
 
-.sdoc-editor-page-header .doc-info .sdoc-revision-avatar {
+.sdoc-editor-page-header .sdoc-doc-info .sdoc-revision-avatar {
   width: 44px;
   margin-right: 6px;
 }

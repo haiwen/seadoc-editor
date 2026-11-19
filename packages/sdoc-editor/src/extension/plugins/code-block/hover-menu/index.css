@@ -6,7 +6,7 @@
   max-width: 250px;
 }
 
-.sdoc-code-block-hover-menu-container .hover-menu-container {
+.sdoc-code-block-hover-menu-container .sdoc-hover-menu-container {
   height: 40px;
   width: 100%;
   padding: 8px;
@@ -26,15 +26,15 @@
   color: #666;
 }
 
-.sdoc-code-block-hover-menu-container .hover-menu-container .active {
+.sdoc-code-block-hover-menu-container .sdoc-hover-menu-container .active {
   text-decoration: none;
 }
 
-.sdoc-code-block-hover-menu-container .hover-menu-container .op-item.active .sdoc-auto-linefeed {
+.sdoc-code-block-hover-menu-container .sdoc-hover-menu-container .sdoc-op-item.active .sdoc-auto-linefeed {
   color: #ff8000;
 }
 
-.sdoc-code-block-hover-menu-container .hover-menu-container .op-item {
+.sdoc-code-block-hover-menu-container .sdoc-hover-menu-container .sdoc-op-item {
   position: relative;
   height: 100%;
   width: 100%;
@@ -44,11 +44,11 @@
   line-height: 24px;
 }
 
-.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-item.sdoc-code-block-hover-operation-lang .op-item {
+.sdoc-code-block-hover-menu-container .sdoc-code-block-hover-operation-item.sdoc-code-block-hover-operation-lang .sdoc-op-item {
   padding-left: 8px;
 }
 
-.sdoc-code-block-hover-menu-container .hover-menu-container .sdoc-code-block-hover-operation-lang .sdocfont {
+.sdoc-code-block-hover-menu-container .sdoc-hover-menu-container .sdoc-code-block-hover-operation-lang .sdocfont {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +78,7 @@
   margin: 0 8px;
 }
 
-.sdoc-code-block-hover-menu-container .hover-menu-container .op-item:hover {
+.sdoc-code-block-hover-menu-container .sdoc-hover-menu-container .sdoc-op-item:hover {
   text-decoration: none;
   background: #F5F5F5;
 }
@@ -117,7 +117,7 @@
   font-size: 14px;
 }
 
-.langs-list-empty {
+.sdoc-langs-list-empty {
   padding: 10px;
   width: 100%;
   font-size: 13px;
@@ -126,7 +126,7 @@
   vertical-align: middle;
 }
 
-.sdoc-langs-list-container .langs-list-ul {
+.sdoc-langs-list-container .sdoc-langs-list-ul {
   list-style: none;
   overflow-y: auto;
   max-height: 280px;
@@ -135,7 +135,7 @@
   margin-bottom: 0;
 }
 
-.sdoc-langs-list-container .langs-list-ul .langs-list-li {
+.sdoc-langs-list-container .sdoc-langs-list-ul .sdoc-langs-list-li {
   position: relative;
   white-space: nowrap;
   cursor: pointer;
@@ -148,15 +148,15 @@
   justify-content: space-between;
 }
 
-.sdoc-langs-list-container .langs-list-ul .langs-list-li:hover {
+.sdoc-langs-list-container .sdoc-langs-list-ul .sdoc-langs-list-li:hover {
   background-color: rgba(0, 0, 0, 0.04);
   border-radius: 4px;
 }
 
-.sdoc-langs-list-container .langs-list-ul .langs-list-li .li-check-mark {
+.sdoc-langs-list-container .sdoc-langs-list-ul .sdoc-langs-list-li .sdoc-li-check-mark {
   opacity: 0;
 }
 
-.sdoc-langs-list-container .langs-list-ul .langs-list-li .li-checked {
+.sdoc-langs-list-container .sdoc-langs-list-ul .sdoc-langs-list-li .sdoc-li-checked {
   opacity: 1;
 }

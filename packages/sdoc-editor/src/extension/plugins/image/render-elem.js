@@ -278,7 +278,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const image = (
     <img
       ref={imageRef}
-      className={classNames({ 'image-selected': !readOnly && isSelected })}
+      className={classNames({ 'sdoc-image-selected': !readOnly && isSelected })}
       onClick={onClickImage}
       src={getImageURL(data, editor)}
       style={getImageStyle()}
@@ -346,7 +346,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
             onMouseOver={(e) => selectImageWhenSelectPartial(e, editor, element, isSelected)}
           >
             <span className='sdoc-image-inner'>
-              <span className={classNames('sdoc-image-content', { 'upload-error': isUploadError })}>
+              <span className={classNames('sdoc-image-content', { 'sdoc-upload-error': isUploadError })}>
                 <span
                   className='sdoc-image-visual'
                   style={imageStyle}
@@ -382,7 +382,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                   {readOnly && (
                     <ElementPopover>
                       <span
-                        className={classNames('sdoc-image-hover-menu-container sdoc-image-readonly-fullscreen-container', { 'is-visible': isShowImageHoverMenu })}
+                        className={classNames('sdoc-image-hover-menu-container sdoc-image-readonly-fullscreen-container', { 'sdoc-is-visible': isShowImageHoverMenu })}
                         ref={imageHoverMenuRef}
                         style={menuPosition}
                         onFocus={() => {
@@ -394,11 +394,11 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                           setIsShowImageHoverMenu(false);
                         }}
                       >
-                        <span className='hover-menu-container'>
-                          <span className='op-group-item'>
+                        <span className='sdoc-hover-menu-container'>
+                          <span className='sdoc-op-group-item'>
                             <span
                               aria-label={t('Full_screen_mode')}
-                              className={classNames('op-item', { 'is-mobile': isMobile })}
+                              className={classNames('sdoc-op-item', { 'sdoc-is-mobile': isMobile })}
                               id={readOnlyFullscreenTargetId}
                               onClick={(event) => {
                                 event.preventDefault();
@@ -423,10 +423,10 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
                   {(isCopyImageLoading || isUploadLoading) && <ImageLoader copyright={t('Image_is_uploading')}/>}
                   {(isUploadError) && <ImageLoader copyright={t('Image_is_upload_error')} isError={true} />}
                   {!readOnly && isSelected && (
-                    <span className='image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
+                    <span className='sdoc-image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
                   )}
                   {isResizing && (
-                    <span className='image-size'>
+                    <span className='sdoc-image-size'>
                       <span>{t('Width')}{':'}{parseInt(movingWidth || imageRef.current?.clientWidth)}</span>
                       <span>&nbsp;&nbsp;</span>
                       <span>{t('Height')}{':'}{imageRef.current.clientHeight}</span>

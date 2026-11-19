@@ -87,8 +87,8 @@ const RowHeader = ({ row, index, addIconPosition, setAddIconPosition, setInsertR
   return (
     <div
       className={classnames('sdoc-table-row-header', {
-        'range-selected': isSelectedARow && isSelectedSomeRow,
-        'range-selected-tip': (!isSelectedARow && isSelectedSomeRow) || currentCellPath[pathLength - 2] === index,
+        'sdoc-range-selected': isSelectedARow && isSelectedSomeRow,
+        'sdoc-range-selected-tip': (!isSelectedARow && isSelectedSomeRow) || currentCellPath[pathLength - 2] === index,
         'drag': canDrag,
       })}
       style={{ height: rowHeight }}

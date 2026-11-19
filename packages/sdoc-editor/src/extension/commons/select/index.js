@@ -97,24 +97,24 @@ class Select extends React.Component {
     const isActive = isShowSelector || isSelected;
 
     return (
-      <span ref={this.setSelectorRef} className={`select-container ${selectClass || ''}`}>
-        <span className={`control-container ${isActive ? 'active' : ''}`} onClick={this.onSelectToggle}>
-          {!currentOption && <span className='label placeholder'>{placeholder}</span>}
+      <span ref={this.setSelectorRef} className={`sdoc-select-container ${selectClass || ''}`}>
+        <span className={`sdoc-control-container ${isActive ? 'active' : ''}`} onClick={this.onSelectToggle}>
+          {!currentOption && <span className='sdoc-select-label placeholder'>{placeholder}</span>}
           {currentOption &&
             <>
-              <span className={`control-icon ${currentOption.iconClass}`}></span>
+              <span className={`sdoc-control-icon ${currentOption.iconClass}`}></span>
               <span className='control-label'>{currentOption.label}</span>
             </>
           }
-          <span className='operation'>
-            <i className="sdocfont sdoc-arrow-down arrow"></i>
+          <span className='sdoc-select-operation'>
+            <i className="sdocfont sdoc-arrow-down sdoc-select-arrow"></i>
           </span>
         </span>
         {isShowSelector && (
-          <span className="select-popover">
+          <span className="sdoc-select-popover">
             <FieldSetting option={currentOption} onUpdateOption={this.onUpdateOption} />
-            <span className='option-item-divider'></span>
-            <span className="option-item-wrapper" ref={this.setContainerRef}>
+            <span className='sdoc-option-item-divider'></span>
+            <span className="sdoc-option-item-wrapper" ref={this.setContainerRef}>
               {options.map(option => {
                 const isActive = option.value === (currentOption && currentOption.value);
                 return (

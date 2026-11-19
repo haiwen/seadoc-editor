@@ -88,21 +88,21 @@ const CommentItemReply = ({
   };
 
   return (
-    <div className='comment-item' ref={itemRef}>
-      <div className='comment-header'>
-        <div className='comment-author'>
-          <span className='comment-author__avatar'><img alt='' src={reply.avatar_url} /></span>
-          <span className='comment-author__info'>
-            <span className='name'>{reply.user_name}</span>
-            <span className='time'>
+    <div className='sdoc-comment-item' ref={itemRef}>
+      <div className='sdoc-comment-header'>
+        <div className='sdoc-comment-author'>
+          <span className='sdoc-comment-author__avatar'><img alt='' src={reply.avatar_url} /></span>
+          <span className='sdoc-comment-author__info'>
+            <span className='sdoc-name'>{reply.user_name}</span>
+            <span className='sdoc-time'>
               {dayjs(reply.updated_at).format('MM-DD HH:mm')}
             </span>
           </span>
         </div>
         {isActive && user.username === reply.author && (
-          <div className='comment-item-operation-wrapper'>
+          <div className='sdoc-comment-item-operation-wrapper'>
             <Dropdown id={replyOpToolsId} isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
-              <DropdownToggle tag='div' className='comment-operation'>
+              <DropdownToggle tag='div' className='sdoc-comment-operation'>
                 <i className='sdocfont sdoc-more'></i>
               </DropdownToggle>
               <DropdownMenu className='sdoc-dropdown-menu' container={container}>
@@ -113,7 +113,7 @@ const CommentItemReply = ({
           </div>
         )}
       </div>
-      <div className='comment-content' onClick={onCommentContentClick}>
+      <div className='sdoc-comment-content' onClick={onCommentContentClick}>
         {!isEditing && <div dangerouslySetInnerHTML={{ __html: editorContent }}></div>}
       </div>
       {isEditing && <SeafileCommentEditor {...commentEditorProps} />}

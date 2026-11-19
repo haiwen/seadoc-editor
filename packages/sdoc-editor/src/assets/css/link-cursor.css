@@ -3,20 +3,20 @@
   overflow: auto;
 }
 
-.slate-content.hide-native-cursor {
+.sdoc-slate-content.sdoc-hide-native-cursor {
   caret-color: transparent;
 }
 
-.custom-cursor {
+.sdoc-custom-cursor {
   position: absolute;
   width: 1px;
   height: 1.2em;
   background-color: blue;
-  animation: blink 1s infinite;
+  animation: sdoc-cursor-blink 1s infinite;
 }
 
-.custom-cursor.link-start::after,
-.custom-cursor.next-start::after {
+.sdoc-custom-cursor.link-start::after,
+.sdoc-custom-cursor.next-start::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -26,8 +26,8 @@
   background-color: blue;
 }
 
-.custom-cursor.link-end::after,
-.custom-cursor.prev-end::after {
+.sdoc-custom-cursor.link-end::after,
+.sdoc-custom-cursor.prev-end::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -37,7 +37,7 @@
   background-color: blue;
 }
 
-@keyframes blink {
+@keyframes sdoc-cursor-blink {
   0%, 100% {
     opacity: 1;
   }

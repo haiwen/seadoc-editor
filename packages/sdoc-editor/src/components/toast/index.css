@@ -16,7 +16,7 @@
   transition: all 240ms cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
-@keyframes openAnimation {
+@keyframes sdoc-toast-open-animation {
   from {
     opacity: 0;
     transform: translateY(-120%);
@@ -27,7 +27,7 @@
   }
 }
 
-@keyframes closeAnimation {
+@keyframes sdoc-toast-close-animation {
   from {
     transform: scale(1);
     opacity: 1;
@@ -41,11 +41,11 @@
 
 .sdoc-toast-container.entering,
 .sdoc-toast-container.entered {
-  animation: openAnimation 240ms cubic-bezier(0.175, 0.885, 0.320, 1.175) both;
+  animation: sdoc-toast-open-animation 240ms cubic-bezier(0.175, 0.885, 0.320, 1.175) both;
 }
 
 .sdoc-toast-container.exiting {
-  animation: closeAnimation 120ms cubic-bezier(0.4, 0.0, 1, 1) both;
+  animation: sdoc-toast-close-animation 120ms cubic-bezier(0.4, 0.0, 1, 1) both;
 }
 
 .sdoc-toast-alert-container {
@@ -80,27 +80,27 @@
   color: rgb(236, 76, 71);
 }
 
-.sdoc-toast-alert-container .toast-alert-icon {
+.sdoc-toast-alert-container .sdoc-toast-alert-icon {
   margin-right: 10px;
   width: 14px;
   height: 20px;
   line-height: 20px;
 }
 
-.sdoc-toast-alert-container .toast-text-title {
+.sdoc-toast-alert-container .sdoc-toast-text-title {
   margin: 0;
   font-weight: 600;
   font-size: 14px;
   color: #435a6f;
 }
 
-.sdoc-toast-alert-container .toast-text-child {
+.sdoc-toast-alert-container .sdoc-toast-text-child {
   font-size: 14px;
   color: #666;
   margin: 0;
 }
 
-.sdoc-toast-alert-container .toast-close {
+.sdoc-toast-alert-container .sdoc-toast-close {
   text-align: center;
   cursor: pointer;
   height: 24px;
@@ -113,6 +113,6 @@
   opacity: 0.5;
 }
 
-.sdoc-toast-alert-container .toast-close:hover {
+.sdoc-toast-alert-container .sdoc-toast-close:hover {
   opacity: 1;
 }

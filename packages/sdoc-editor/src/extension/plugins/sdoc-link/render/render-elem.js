@@ -208,7 +208,7 @@ const SdocFileLink = ({ editor, element, children, attributes }) => {
         {[SDOC_LINK_TYPE.ICON_LINK, SDOC_LINK_TYPE.CARD_LINK].includes(element.display_type) && (
           <span className='sdoc-file-link-icon' style={style}>
             {element.type !== WIKI_LINK && (
-              <img className='file-link-img' src={getSdocFileIcon()} alt='' />
+              <img className='sdoc-file-link-img' src={getSdocFileIcon()} alt='' />
             )}
             {element.type === WIKI_LINK && (
               <>

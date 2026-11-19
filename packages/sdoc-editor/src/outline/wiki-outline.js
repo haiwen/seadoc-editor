@@ -88,7 +88,7 @@ const WikiOutline = ({ doc = [], editor }) => {
 
   return (
     <div
-      className='sdoc-outline-wrapper wiki-outline-wrapper'
+      className='sdoc-outline-wrapper sdoc-wiki-outline-wrapper'
       onMouseLeave={() => {
         setIsShowOutlinePopover(false);
       }}
@@ -101,7 +101,7 @@ const WikiOutline = ({ doc = [], editor }) => {
         )}
       </div>
       {isShowOutlinePopover && (
-        <div className='wiki-outline-popover' ref={wikiOutlineRef}>
+        <div className='sdoc-wiki-outline-popover' ref={wikiOutlineRef}>
           <div className="sdoc-outline-list-container">
             {wikiOutlineList.map(({ item, path }, index) => <OutlineItem key={index} item={item} itemPath={path} editor={editor} />)}
           </div>

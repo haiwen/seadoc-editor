@@ -41,7 +41,7 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
       {isDraft && <DraftDropdown />}
       {(isStarIconShown && !mobileLogin) && (
         <>
-          <button id="sdoc-starred-btn" className={`doc-icon sdocfont ${isStarred ? 'sdoc-starred' : 'sdoc-unstarred'} border-0 p-0 bg-transparent`}
+          <button id="sdoc-starred-btn" className={`sdoc-doc-icon sdocfont ${isStarred ? 'sdoc-starred' : 'sdoc-unstarred'} border-0 p-0 bg-transparent`}
             aria-label={isStarred ? t('Unstar') : t('Star')}
             onClick={toggleStar}>
           </button>
@@ -49,13 +49,13 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
         </>
       )}
       {(isShowInternalLink && !mobileLogin) && (
-        <span id="sdoc-internal-link" className='doc-icon'>
+        <span id="sdoc-internal-link" className='sdoc-doc-icon'>
           <span className='internal-link sdocfont sdoc-link' onClick={onInternalLinkClick}></span>
           <Tooltip target="sdoc-internal-link">{t('Internal_link')}</Tooltip>
         </span>
       )}
       {isFreezed && (
-        <span id="sdoc-doc-frozen" className="doc-icon">
+        <span id="sdoc-doc-frozen" className="sdoc-doc-icon">
           <img src={freezedImg} alt={t('Document_frozen')} width='16px'/>
           <Tooltip target="sdoc-doc-frozen">{t('Document_frozen')}</Tooltip>
         </span>
@@ -66,8 +66,8 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
 
   if (!isSdocRevision) {
     return (
-      <div className='doc-info'>
-        <div className='doc-name'>{docName}</div>
+      <div className='sdoc-doc-info'>
+        <div className='sdoc-doc-name'>{docName}</div>
         {docInfo}
       </div>
     );
@@ -78,14 +78,14 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
   const revisionId = context.getSetting('revisionId');
 
   return (
-    <div className="sdoc-revision-info doc-info">
+    <div className="sdoc-revision-info sdoc-doc-info">
       <div className="sdoc-revision-avatar"><img src={RevisionAvatar} alt='' /></div>
       <div className="sdoc-revision-detail">
         <div className="doc-name-container d-flex align-items-center justify-content-start w-100">
-          <div className="doc-name">{oldDocName}</div>
+          <div className="sdoc-doc-name">{oldDocName}</div>
           <div className="sdoc-revision-order">{t('Revision') + ' ' + revisionId}</div>
           {isShowInternalLink && (
-            <span id="doc-internal-link" className='doc-icon'>
+            <span id="doc-internal-link" className='sdoc-doc-icon'>
               <span className='internal-link sdocfont sdoc-link' onClick={onInternalLinkClick}></span>
               <Tooltip target="doc-internal-link">{t('Internal_link')}</Tooltip>
             </span>
@@ -101,7 +101,7 @@ const DocInfo = ({ t, isStarred, isDraft, isEditMode, isPublished = false, initC
           )}
           {!isPublished && <TipMessage isEditMode={isEditMode} />}
         </div>
-        <div className="doc-state">
+        <div className="sdoc-doc-state">
           <span className="mr-2">{t('Created_at')}</span>
           <span>{DateUtils.format(revisionCreatedAt, 'YYYY-MM-DD HH:MM')}</span>
         </div>

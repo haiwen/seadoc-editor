@@ -28,8 +28,8 @@ const OutlineItem = ({ node, activeId, itemPath, editor }) => {
   }, [editor, itemPath, node]);
 
   const className = classNames({
-    'outline-h2': node.type === 'header2',
-    'outline-h3': node.type === 'header3',
+    'sdoc-outline-h2': node.type === 'header2',
+    'sdoc-outline-h3': node.type === 'header3',
     'active': node.id === activeId,
   });
 

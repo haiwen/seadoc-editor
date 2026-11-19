@@ -215,17 +215,17 @@ const Video = ({ element, editor }) => {
     <>
       {!isVideoVisible && (
         <div
-          className='video-loading-placeholder'
+          className='sdoc-video-loading-placeholder'
           contentEditable={false}
           onPointerDown={onLoadingPlaceholderInteraction}
           onClick={onLoadingPlaceholderInteraction}
         >
-          <img className='video-file-icon' src={videoFileIcon()} alt='' />
-          <div className='video-file-info'>
+          <img className='sdoc-video-file-icon' src={videoFileIcon()} alt='' />
+          <div className='sdoc-video-file-info'>
             <div>{videoName}</div>
-            <div className='file-size'>
+            <div className='sdoc-file-size'>
               <span>{formatFileSize(videoSize)} — </span>
-              <div className='loading-spinner'>
+              <div className='sdoc-loading-spinner'>
                 <div className='spinner'></div>
               </div>
             </div>
@@ -288,10 +288,10 @@ const Video = ({ element, editor }) => {
             </iframe>
           )}
           {!readOnly && isSelected && (
-            <span className='image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
+            <span className='sdoc-image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
           )}
           {isResizing && (
-            <span className='image-size'>
+            <span className='sdoc-image-size'>
               <span>{t('Width')}{':'}{parseInt(movingWidth || videoRef.current?.clientWidth)}</span>
               <span>&nbsp;&nbsp;</span>
               <span>{t('Height')}{':'}{videoRef.current.clientHeight}</span>

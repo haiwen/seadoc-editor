@@ -144,7 +144,7 @@ const FileLink = ({ editor, element, children, attributes }) => {
       {...attributes}
       data-id={element.id}
       contentEditable={false}
-      className={classnames('sdoc-file-link-render', { 'file-link-selected': isSelected }, { 'sdoc-file-card-link': element.display_type === FILE_LINK_TYPE.CARD_LINK } )}
+      className={classnames('sdoc-file-link-render', { 'sdoc-file-link-render-selected': isSelected }, { 'sdoc-file-card-link': element.display_type === FILE_LINK_TYPE.CARD_LINK } )}
       onClick={onClickFile}
       style={element.display_type === FILE_LINK_TYPE.CARD_LINK ? style : {}}
     >
@@ -152,7 +152,7 @@ const FileLink = ({ editor, element, children, attributes }) => {
         {[FILE_LINK_TYPE.ICON_LINK, FILE_LINK_TYPE.CARD_LINK].includes(element.display_type) && (
           <span className='sdoc-file-link-icon' style={style}>
             {!fileTypeIcon && <i className="sdocfont sdoc-link-file"></i>}
-            {fileTypeIcon && <img className='file-link-img' src={fileTypeIcon} alt='' />}
+            {fileTypeIcon && <img className='sdoc-file-link-img' src={fileTypeIcon} alt='' />}
           </span>
         )}
         <span className='sdoc-file-text-link' style={style}>

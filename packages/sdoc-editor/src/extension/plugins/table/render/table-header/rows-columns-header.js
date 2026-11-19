@@ -16,7 +16,7 @@ const RowsColumnsHeader = ({ selectRange, tableSize }) => {
 
   return (
     <div
-      className={classnames('sdoc-table-rows-columns-header d-print-none', { 'range-selected': isSelectedAllTableCells })}
+      className={classnames('sdoc-table-rows-columns-header d-print-none', { 'sdoc-range-selected': isSelectedAllTableCells })}
       contentEditable={false}
       onClick={selectRange}
     >

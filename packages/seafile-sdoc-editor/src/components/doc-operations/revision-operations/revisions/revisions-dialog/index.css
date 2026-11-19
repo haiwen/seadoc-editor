@@ -1,28 +1,28 @@
-.revisions-dialog {
+.sdoc-revisions-dialog {
   width: 700px;
   max-width: 700px;
   height: calc(100% - 56px);
 }
 
-.revisions-dialog .modal-content {
+.sdoc-revisions-dialog .modal-content {
   height: 100%;
   overflow: hidden;
 }
 
-.revisions-dialog .revisions-body {
+.sdoc-revisions-dialog .sdoc-revisions-body {
   height: calc(100% - 50px);
   padding: 0;
   overflow: hidden;
 }
 
-.revisions-dialog .sdoc-revisions-container {
+.sdoc-revisions-dialog .sdoc-revisions-container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.revisions-dialog .sdoc-revisions-container .sdoc-revisions-header {
+.sdoc-revisions-dialog .sdoc-revisions-container .sdoc-revisions-header {
   height: 41px;
   width: calc(100% - 32px);
   border-bottom: 1px solid rgba(0, 40, 100, 0.12);
@@ -32,26 +32,26 @@
   justify-content: center;
 }
 
-.revisions-dialog .sdoc-revisions-container .sdoc-revisions-content {
+.sdoc-revisions-dialog .sdoc-revisions-container .sdoc-revisions-content {
   flex: 1;
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0 16px 16px 16px;
 }
 
-.revisions-dialog .sdoc-revisions-container .sdoc-revisions-list {
+.sdoc-revisions-dialog .sdoc-revisions-container .sdoc-revisions-list {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.revisions-dialog .sdoc-revisions-container.loading {
+.sdoc-revisions-dialog .sdoc-revisions-container.loading {
   align-items: center;
   justify-content: center;
 }
 
-.revisions-dialog .revisions-body .sdoc-revision {
+.sdoc-revisions-dialog .sdoc-revisions-body .sdoc-revision {
   height: 41px;
   width: 100%;
   display: flex;
@@ -60,23 +60,23 @@
   border-bottom: 1px solid rgba(0, 40, 100, 0.12);
 }
 
-.revisions-dialog .revisions-body .sdoc-revision.operating {
+.sdoc-revisions-dialog .sdoc-revisions-body .sdoc-revision.operating {
   background-color: #EFEFEF;
 }
 
-.revisions-dialog .revisions-body .sdoc-revision:hover {
+.sdoc-revisions-dialog .sdoc-revisions-body .sdoc-revision:hover {
   cursor: pointer;
   background-color: #EFEFEF;
 }
 
-.revisions-dialog .sdoc-revision-name-header,
-.revisions-dialog .sdoc-revision-user-header,
-.revisions-dialog .sdoc-revision-time-header {
+.sdoc-revisions-dialog .sdoc-revision-name-header,
+.sdoc-revisions-dialog .sdoc-revision-user-header,
+.sdoc-revisions-dialog .sdoc-revision-time-header {
   padding-left: 9px;
   color: #666;
 }
 
-.revisions-dialog .sdoc-revision .sdoc-revision-user {
+.sdoc-revisions-dialog .sdoc-revision .sdoc-revision-user {
   height: 100%;
   overflow: hidden;
   display: flex;
@@ -84,7 +84,7 @@
   padding-left: 9px;
 }
 
-.revisions-dialog .sdoc-revision .sdoc-revision-name {
+.sdoc-revisions-dialog .sdoc-revision .sdoc-revision-name {
   height: 100%;
   overflow: hidden;
   display: flex;
@@ -92,14 +92,14 @@
   padding-left: 9px;
 }
 
-.revisions-dialog .sdoc-revision .sdoc-revision-name-content {
+.sdoc-revisions-dialog .sdoc-revision .sdoc-revision-name-content {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.revisions-dialog .sdoc-revision .sdoc-revision-time {
+.sdoc-revisions-dialog .sdoc-revision .sdoc-revision-time {
   height: 100%;
   padding-left: 9px;
   overflow: hidden;
@@ -107,17 +107,17 @@
   align-items: center;
 }
 
-.revisions-dialog .revisions-body .sdoc-revision.loading {
+.sdoc-revisions-dialog .sdoc-revisions-body .sdoc-revision.loading {
   height: 40px;
   align-items: center;
   border-bottom: none;
 }
 
-.revisions-dialog .sdoc-revision.loading:hover {
+.sdoc-revisions-dialog .sdoc-revision.loading:hover {
   background-color: unset;
 }
 
-.revisions-dialog .sdoc-revision-operations {
+.sdoc-revisions-dialog .sdoc-revision-operations {
   height: 100%;
   width: 100%;
   display: flex;

@@ -159,7 +159,7 @@
   align-items: center;
 }
 
-.sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon .icon-container {
+.sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon .sdoc-icon-container {
   width: 32px;
   height: 20px;
   background-color: #999;
@@ -170,7 +170,7 @@
   cursor: pointer;
 }
 
-.sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon .icon-container .sdocfont {
+.sdoc-code-block-pre.exceeding-height .sdoc-code-block-hidden-icon .sdoc-icon-container .sdocfont {
   color: #fff;
   font-size: 12px;
   text-shadow: none;

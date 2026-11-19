@@ -89,16 +89,16 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
   return (
     <ElementPopover>
       <div className="sdoc-link-hover-menu-container" style={menuPosition}>
-        <div className='hover-menu-container'>
-          <span className='op-group-item'>
-            <span role="button" className={classnames('op-item', { 'ml-0': readOnly })}>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onClick={handleClickOpenLink}>{t('Open_link')}</a>
+        <div className='sdoc-hover-menu-container'>
+          <span className='sdoc-op-group-item'>
+            <span role="button" className={classnames('sdoc-op-item', { 'ml-0': readOnly })}>
+              <a href={url} target="_blank" rel="noopener noreferrer" className="sdoc-link-op-menu-link" onClick={handleClickOpenLink}>{t('Open_link')}</a>
             </span>
           </span>
           {!readOnly && (
             <>
-              <span className='op-group-item'>
-                <span id='sdoc_link_copy' role="button" className='op-item' onClick={onCopy}>
+              <span className='sdoc-op-group-item'>
+                <span id='sdoc_link_copy' role="button" className='sdoc-op-item' onClick={onCopy}>
                   <i className='sdocfont sdoc-copy'></i>
                 </span>
                 {isShowTooltip && (
@@ -109,7 +109,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                 <span
                   id='display_sdoc_link'
                   role="button"
-                  className={`op-item ${isShowDisplayStylePopover ? 'link-style-icon-active' : '' }`}
+                  className={`sdoc-op-item ${isShowDisplayStylePopover ? 'sdoc-link-style-icon-active' : '' }`}
                   onClick={onShowProver}
                 >
                   <i className={classnames('mr-1', SDOC_LINK_TYPE_CONFIG[selectedType].icon)}></i>
@@ -141,8 +141,8 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                   </Tooltip>
                 )}
               </span>
-              <span className='op-group-item'>
-                <span id='delete_sdoc_link' role="button" className={'op-item'} onClick={onUnwrapFileLinkNode}>
+              <span className='sdoc-op-group-item'>
+                <span id='delete_sdoc_link' role="button" className={'sdoc-op-item'} onClick={onUnwrapFileLinkNode}>
                   <i className='sdocfont sdoc-unlink'></i>
                 </span>
                 {isShowTooltip && (
@@ -150,7 +150,7 @@ const SdocLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                     {t('Remove_link')}
                   </Tooltip>
                 )}
-                <span id='sdoc_link_preview' role="button" className='op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
+                <span id='sdoc_link_preview' role="button" className='sdoc-op-item' onClick={() => handleOpenLinkPreview('sdoc-file-preview')}>
                   <i className='sdocfont sdoc-eye'></i>
                 </span>
                 {isShowTooltip && (

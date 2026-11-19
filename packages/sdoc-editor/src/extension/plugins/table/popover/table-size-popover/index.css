@@ -13,7 +13,7 @@
 }
 
 .sdoc-selected-table-size-popover .sdoc-selected-table-size-custom:hover,
-.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom.keyboard-selected {
+.sdoc-selected-table-size-popover .sdoc-selected-table-size-custom.sdoc-keyboard-selected {
   cursor: pointer;
   background: #f5f5f5;
   border-radius: 4px;

@@ -14,7 +14,7 @@ const renderDivider = ({ attributes, children, element }) => {
       {...attributes}
       contentEditable='false'
       suppressContentEditableWarning
-      className={`sdoc-divider-container ${isSelected ? 'is-selected' : ''}`}
+      className={`sdoc-divider-container ${isSelected ? 'sdoc-is-selected' : ''}`}
     >
       {children}
       <div className="sdoc-divider-element"></div>

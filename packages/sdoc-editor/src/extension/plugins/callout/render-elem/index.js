@@ -122,11 +122,11 @@ const renderCallout = ({ attributes, children, element }, editor) => {
         style={containerStyle}
       >
         {element.callout_icon && (
-          <div className='callout-icon'>
+          <div className='sdoc-callout-icon-wrapper'>
             <span className={'sdoc-emoji ' + element.callout_icon}>{calloutIcon}</span>
           </div>
         )}
-        <div className='callout-content'>
+        <div className='sdoc-callout-content'>
           {children}
           {isShowPlaceholder() && <div contentEditable={false} className='sdoc-callout-placeholder d-print-none'>{t('Please_enter')}...</div>}
         </div>

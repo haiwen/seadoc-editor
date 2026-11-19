@@ -30,7 +30,7 @@ const LinkedRepoList = ({ onRepoClick }) => {
         {enableRepos.map(item => {
           return (
             <div key={item.repo_id} className="sdoc-dropdown-menu-item" onClick={() => onRepoClick(item)}>
-              <img className='lib-icon' src={iconUrl} width="20" alt='' />
+              <img className='sdoc-lib-icon' src={iconUrl} width="20" alt='' />
               <div className='item-text'>
                 {item.repo_name}
               </div>

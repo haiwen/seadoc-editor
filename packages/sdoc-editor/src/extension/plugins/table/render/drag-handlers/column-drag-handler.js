@@ -6,11 +6,11 @@ const ColumnDragHandler = ({ left }) => {
 
   return (
     <div
-      className='table-cell-width-just position-absolute resizing d-print-none'
+      className='sdoc-table-cell-width-just position-absolute resizing d-print-none'
       contentEditable={false}
       style={{ left }}
     >
-      <div className="table-cell-width-just-color-tip"></div>
+      <div className="sdoc-table-cell-width-just-color-tip"></div>
     </div>
   );
 };

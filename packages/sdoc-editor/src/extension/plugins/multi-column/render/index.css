@@ -13,7 +13,7 @@
   cursor: text;
 }
 
-.sdoc-multicolumn-wrapper .column {
+.sdoc-multicolumn-wrapper .sdoc-multicolumn-column {
   display: flex;
   left: 3px;
   align-items: flex-start;
@@ -29,12 +29,12 @@
   white-space: pre-wrap;
 }
 
-.sdoc-multicolumn-container .column-resize-handler {
+.sdoc-multicolumn-container .sdoc-column-resize-handler {
   height: 100%;
   position: absolute;
 }
 
-.sdoc-multicolumn-container .column-resize-handler .column-width-just {
+.sdoc-multicolumn-container .sdoc-column-resize-handler .sdoc-column-width-just {
   height: 100%;
   width: 4px;
   top: 0;
@@ -44,8 +44,8 @@
   cursor: col-resize;
 }
 
-.sdoc-multicolumn-container .column-resize-handler .column-width-just.active,
-.sdoc-multicolumn-container .column-resize-handler .column-width-just:hover {
+.sdoc-multicolumn-container .sdoc-column-resize-handler .sdoc-column-width-just.active,
+.sdoc-multicolumn-container .sdoc-column-resize-handler .sdoc-column-width-just:hover {
   background-color: lightgray;
   cursor: col-resize;
 }

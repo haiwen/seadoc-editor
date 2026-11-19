@@ -19,7 +19,7 @@
   background: #dbdbdb;
 }
 
-.sdoc-draft-menu .draft-popover {
+.sdoc-draft-menu .sdoc-draft-popover {
   position: absolute;
   top: 25px;
   left: 0;
@@ -32,12 +32,12 @@
   z-index: 10;
 }
 
-.sdoc-draft-menu .draft-popover .draft-menu-item {
+.sdoc-draft-menu .sdoc-draft-popover .sdoc-draft-menu-item {
   cursor: pointer;
   width: 100%;
   padding: 4px 12px;
 }
 
-.sdoc-draft-menu .draft-popover .draft-menu-item:hover {
+.sdoc-draft-menu .sdoc-draft-popover .sdoc-draft-menu-item:hover {
   background-color: #EFEFEF;
 }

@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.sdoc-divider-container.is-selected {
+.sdoc-divider-container.sdoc-is-selected {
   border-radius: 4px;
   background-color: Highlight;
 }

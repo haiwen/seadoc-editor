@@ -121,10 +121,10 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
         style={{ paddingLeft: depth === 0 ? 0 : 22 }}
       >
         <div className={classNames('sdoc-wiki-link-page-item', {
-          'is-dir': page.isDir,
+          'sdoc-is-dir': page.isDir,
         })}>
           {page.isDir &&
-            <span className={classNames('toggle-icon-container', { 'opened': !isCollapsed(page.id) })} onClick={(e) => {
+            <span className={classNames('sdoc-toggle-icon-container', { 'opened': !isCollapsed(page.id) })} onClick={(e) => {
               e.stopPropagation();
               toggleDir(page.id);
             }}>
@@ -133,13 +133,13 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
           <span className='sdoc-wiki-link-page-main'
             onClick={(e) => handleSelect(e, page.id)}
           >
-            {page.icon && <span className="page-icon">{page.icon}</span>}
+            {page.icon && <span className="sdoc-linked-page-icon">{page.icon}</span>}
             {!page.icon && (
               <>
-                {page.isDir ? <span className='page-icon sdocfont sdoc-wiki-files'/> : <span className='page-icon sdocfont sdoc-wiki-file'/>}
+                {page.isDir ? <span className='sdoc-linked-page-icon sdocfont sdoc-wiki-files'/> : <span className='sdoc-linked-page-icon sdocfont sdoc-wiki-file'/>}
               </>
             )}
-            <span className="page-name">{page.name}</span>
+            <span className="sdoc-linked-page-name">{page.name}</span>
           </span>
         </div>
         {page.isDir && !isCollapsed(page.id) && item.children.length > 0 && (
@@ -155,20 +155,20 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
 
 
   return (
-    <div className="form-group selected-linked-block-wrapper">
+    <div className="form-group sdoc-selected-linked-block-wrapper">
       <div
         className={classNames('form-control', { 'expanded': isOpenSelect })}
         onClick={() => {
           setIsOpenSelect(!isOpenSelect);
         }}
       >
-        <span className='selected-wiki-linked-page'>
+        <span className='sdoc-selected-wiki-linked-page'>
           <PageDisplay pageId={displayedWikiPage} wikiPageList={wikiPageList} />
         </span>
         <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-down'></i>
       </div>
       {isOpenSelect && (
-        <div className='link-block-wrapper sdoc-wiki-link-page'>
+        <div className='sdoc-link-block-wrapper sdoc-wiki-link-page'>
           <div className='sdoc-page-search-container'>
             <div className='sdocfont sdoc-find-replace sdoc-search'></div>
             <Input innerRef={searchRef} className='sdoc-search-input' onKeyUp={handleInputKeyDown} onChange={handleSearchInputChange} id='sdoc-search' placeholder={t('Search_page')} />
@@ -185,7 +185,7 @@ const LinkedPagesForm = ({ editor, element, setSelectedPageId, setSelectedBlockI
             return renderPage(item, wikiPageList, 0, true);
           })}
           {isOpenSearch && searchResult.length === 0 &&
-            <div className='no-search-result'>{t('No_page_results')}</div>
+            <div className='sdoc-no-search-result'>{t('No_page_results')}</div>
           }
         </div>
       )}

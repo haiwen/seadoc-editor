@@ -18,11 +18,11 @@
   font-size: 16px;
 }
 
-.linked-block-highlight-overlay {
+.sdoc-linked-block-highlight-overlay {
   position: relative;
 }
 
-.linked-block-highlight-overlay::after {
+.sdoc-linked-block-highlight-overlay::after {
   content: '';
   position: absolute;
   inset: 0;

@@ -48,25 +48,25 @@ class CollaboratorsPopover extends React.PureComponent {
         isOpen={isOpen}
         toggle={toggle}
         placement="bottom-end"
-        popperClassName='collaborators-popover sdoc-popover-box-shadow '
+        popperClassName='sdoc-collaborators-popover sdoc-popover-box-shadow '
         trigger="legacy"
         hideArrow={true}
         fade={false}
         security='fixed'
       >
         <PopoverHeader className='popover-header'>{t('Online_members')}{' '}({collaborators.length})</PopoverHeader>
-        <PopoverBody className="popover-container">
-          <div className="content-list">
+        <PopoverBody className="sdoc-collaborators-popover-container">
+          <div className="sdoc-collaborators-content-list">
             {collaborators.map((item, index) => {
               const name = index === 0 ? `${item.name} (${t('Me')})` : item.name;
               const canEditName = index === 0 && canEdit;
               const isEditName = index === 0 && isRenaming;
               return (
-                <div key={index} className="collaborator-details">
-                  <span className="collaborator-tag" />
-                  <img className="collaborator-avatar" alt={name} src={item.avatar_url} />
+                <div key={index} className="sdoc-collaborator-details">
+                  <span className="sdoc-collaborator-tag" />
+                  <img className="sdoc-collaborator-avatar" alt={name} src={item.avatar_url} />
                   {!isEditName && (
-                    <span className="collaborator-name">{name}</span>
+                    <span className="sdoc-collaborator-name">{name}</span>
                   )}
                   {isEditName && (
                     <Rename

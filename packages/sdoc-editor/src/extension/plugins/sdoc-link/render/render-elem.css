@@ -47,11 +47,11 @@
   transform: translateY(-50%);
 }
 
-.sdoc-file-render .sdoc-file-link-icon .file-link-img {
+.sdoc-file-render .sdoc-file-link-icon .sdoc-file-link-img {
   width: 20px;
 }
 
-.sdoc-file-card-link .sdoc-file-link-icon .file-link-img {
+.sdoc-file-card-link .sdoc-file-link-icon .sdoc-file-link-img {
   width: 28px;
 }
 

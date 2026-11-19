@@ -1,9 +1,9 @@
-.doc-ops {
+.sdoc-doc-ops {
   display: flex;
   align-items: center;
 }
 
-.doc-ops .op-item {
+.sdoc-doc-ops .sdoc-op-item {
   margin-left: 10px;
   display: flex;
   align-items: center;
@@ -15,22 +15,22 @@
   border-radius: 3px;
 }
 
-.doc-ops .collaborators-op-item {
+.sdoc-doc-ops .sdoc-collaborators-op-item {
   width: 40px;
 }
 
-.doc-ops .op-item .sdocfont {
+.sdoc-doc-ops .sdoc-op-item .sdocfont {
   font-size: 16px;
   color: #666;
   cursor: pointer;
 }
 
-.doc-ops .op-item:hover {
+.sdoc-doc-ops .sdoc-op-item:hover {
   background-color: #EFEFEF;
   cursor: pointer;
 }
 
-.doc-ops .popover-wrapper {
+.sdoc-doc-ops .popover-wrapper {
   width: 300px;
 }
 
@@ -93,7 +93,7 @@
   border-color: #ff8000;
 }
 
-.doc-ops #op-edit {
+.sdoc-doc-ops #op-edit {
   width: 44px;
   height: 44px;
 }

@@ -25,7 +25,7 @@ export const removeMarks = (editor) => {
 
 export const markdownTableRenderer = (searchResult) => {
   if (!searchResult) return '';
-  return <div className='md-rendered-html' dangerouslySetInnerHTML={{ __html: searchResult }} />;
+  return <div className='sdoc-md-rendered-html' dangerouslySetInnerHTML={{ __html: searchResult }} />;
 };
 
 export const isRangeOverlapping = (rangeA, rangeB) => {

@@ -12,7 +12,7 @@ class CommonMenu extends Component {
   }
 
   getClassName = () => {
-    const { isRichEditor = true, className = 'menu-group-item', disabled } = this.props;
+    const { isRichEditor = true, className = 'sdoc-menu-group-item', disabled } = this.props;
 
     let itemClass = 'btn btn-icon btn-secondary btn-active d-flex';
     if (!isRichEditor) {

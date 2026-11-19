@@ -14,7 +14,7 @@
   pointer-events: all;
 }
 
-.wiki-outline-wrapper {
+.sdoc-wiki-outline-wrapper {
   position: fixed;
   top: 100px;
   right: 0;
@@ -27,28 +27,28 @@
   max-height: 400px;
 }
 
-.wiki-outline-wrapper .sdoc-outline-container {
+.sdoc-wiki-outline-wrapper .sdoc-outline-container {
   width: 59px;
 }
 
-.wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container {
+.sdoc-wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container {
   flex: none;
   max-height: 400px;
   overflow-y: hidden;
 }
 
-.wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .wiki-outline-context {
+.sdoc-wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .sdoc-wiki-outline-context {
   background-color: rgb(227, 226, 224);
   height: 2px;
   box-shadow: none;
   border-radius: 2px;
 }
 
-.wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .active {
+.sdoc-wiki-outline-wrapper .sdoc-outline-container .sdoc-outline-list-container .sdoc-outline-item .active {
   background-color: rgb(50, 48, 44);
 }
 
-.wiki-outline-wrapper .wiki-outline-popover {
+.sdoc-wiki-outline-wrapper .sdoc-wiki-outline-popover {
   position: absolute;
   right: 0;
   width: 242px;
@@ -62,11 +62,11 @@
   overflow-y: auto;
 }
 
-.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container {
+.sdoc-wiki-outline-wrapper .sdoc-wiki-outline-popover .sdoc-outline-list-container {
   padding: 6px;
 }
 
-.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item {
+.sdoc-wiki-outline-wrapper .sdoc-wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item {
   color: rgb(120, 119, 116);
   transition: color 0.15s;
   cursor: pointer;
@@ -74,11 +74,11 @@
   font-size: 14px;
 }
 
-.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .wiki-outline-active {
+.sdoc-wiki-outline-wrapper .sdoc-wiki-outline-popover .sdoc-outline-list-container .sdoc-wiki-outline-active {
   color: rgb(35, 131, 226)
 }
 
-.wiki-outline-wrapper .wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item:hover {
+.sdoc-wiki-outline-wrapper .sdoc-wiki-outline-popover .sdoc-outline-list-container .sdoc-outline-item:hover {
   background: rgba(55, 53, 47, 0.06);
   border-radius: 6px;
 }

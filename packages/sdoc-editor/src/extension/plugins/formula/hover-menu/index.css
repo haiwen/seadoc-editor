@@ -6,7 +6,7 @@
   max-width: 250px;
 }
 
-.sdoc-formula-hover-menu-container .hover-menu-container {
+.sdoc-formula-hover-menu-container .sdoc-hover-menu-container {
   height: 40px;
   width: 100%;
   padding: 8px;
@@ -26,11 +26,11 @@
   color: #666;
 }
 
-.sdoc-formula-hover-menu-container .hover-menu-container .active {
+.sdoc-formula-hover-menu-container .sdoc-hover-menu-container .active {
   text-decoration: none;
 }
 
-.sdoc-formula-hover-menu-container .hover-menu-container .op-item {
+.sdoc-formula-hover-menu-container .sdoc-hover-menu-container .sdoc-op-item {
   position: relative;
   height: 100%;
   width: 100%;
@@ -40,11 +40,11 @@
   line-height: 20px;
 }
 
-.sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-item.sdoc-formula-hover-operation-lang .op-item {
+.sdoc-formula-hover-menu-container .sdoc-formula-hover-operation-item.sdoc-formula-hover-operation-lang .sdoc-op-item {
   padding: 0 5px;
 }
 
-.sdoc-formula-hover-menu-container .hover-menu-container .sdoc-formula-hover-operation-lang .sdocfont {
+.sdoc-formula-hover-menu-container .sdoc-hover-menu-container .sdoc-formula-hover-operation-lang .sdocfont {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -73,7 +73,7 @@
   margin: 0 8px;
 }
 
-.sdoc-formula-hover-menu-container .hover-menu-container .op-item:hover {
+.sdoc-formula-hover-menu-container .sdoc-hover-menu-container .sdoc-op-item:hover {
   text-decoration: none;
   background: #F5F5F5;
 }

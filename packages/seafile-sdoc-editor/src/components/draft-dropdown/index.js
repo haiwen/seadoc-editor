@@ -61,8 +61,8 @@ class DraftDropdownMenu extends React.Component {
           {t('Draft')}
         </span>
         {isDropdownMenuOpen && (
-          <ul className="draft-popover list-unstyled m-0">
-            <li className="draft-menu-item" onClick={this.unmark}>{t('Unmark_as_draft')}</li>
+          <ul className="sdoc-draft-popover list-unstyled m-0">
+            <li className="sdoc-draft-menu-item" onClick={this.unmark}>{t('Unmark_as_draft')}</li>
           </ul>
         )}
       </div>

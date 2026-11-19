@@ -152,7 +152,7 @@ const CommentList = ({
               isClickedContextComment={isClickedContextComment}
               closeComment={closeComment}
             />
-            <div className='non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
+            <div className='sdoc-non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
               {isEmptyComment && (
                 <SeafileCommentEditor
                   settings={{ ...context.getSettings(), mediaUrl: context.getSetting('mediaUrl') + 'comment-editor/' }}
@@ -202,7 +202,7 @@ const CommentList = ({
         );
       })}
       {Object.values(commentDetail).length === 0 && (
-        <div className='non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
+        <div className='sdoc-non-global-comment-input-wrapper' style={{ paddingTop: isEmptyComment ? '16px' : '' }}>
           {isEmptyComment && (
             <SeafileCommentEditor
               type="comment"

@@ -62,10 +62,10 @@ class InsertTableElement extends Component {
         disabled={isDisabled}
       >
         {this.getTip()}
-        <div className="insert-number d-flex align-items-center">
+        <div className="sdoc-insert-number d-flex align-items-center">
           <Input
             disabled={isDisabled}
-            className="insert-number-input"
+            className="sdoc-insert-number-input"
             onMouseDown={e => {
               e.stopPropagation();
             }}

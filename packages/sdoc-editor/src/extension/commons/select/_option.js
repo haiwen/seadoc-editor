@@ -19,11 +19,11 @@ class Option extends React.Component {
 
   render() {
     const { option, isActive, optionClass } = this.props;
-    const className = `option-item ${optionClass || ''} ${isActive ? 'active' : ''}`;
+    const className = `sdoc-option-item ${optionClass || ''} ${isActive ? 'active' : ''}`;
     return (
       <span className={className} onClick={this.onClick}>
-        {option.iconClass && <span className={`item-icon ${option.iconClass}`}></span>}
-        <span className="label">{option.label}</span>
+        {option.iconClass && <span className={`sdoc-item-icon ${option.iconClass}`}></span>}
+        <span className="sdoc-select-label">{option.label}</span>
       </span>
     );
   }

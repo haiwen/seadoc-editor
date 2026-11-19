@@ -67,8 +67,8 @@ const ColumnHeader = ({ index, column, addIconPosition, setAddIconPosition, setI
   return (
     <div
       className={classnames('sdoc-table-column-header h-100', {
-        'range-selected': isSelectedAColumn && isSelectedRangeColumn,
-        'range-selected-tip': (!isSelectedAColumn && isSelectedRangeColumn) || currentCellPath[pathLength - 1] === index,
+        'sdoc-range-selected': isSelectedAColumn && isSelectedRangeColumn,
+        'sdoc-range-selected-tip': (!isSelectedAColumn && isSelectedRangeColumn) || currentCellPath[pathLength - 1] === index,
         'drag': canDrag,
       })}
       ref={columnHeaderRef}

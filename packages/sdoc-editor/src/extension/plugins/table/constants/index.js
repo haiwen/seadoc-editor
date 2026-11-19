@@ -72,5 +72,5 @@ export const RESIZE_HANDLER_FIRST_COLUMN = 'first_column';
 export const DRAG_HANDLER_ROW = 'row';
 export const DRAG_HANDLER_COLUMN = 'column';
 
-export const CELL_SELECTED = 'cell-selected';
+export const CELL_SELECTED = 'sdoc-cell-selected';
 

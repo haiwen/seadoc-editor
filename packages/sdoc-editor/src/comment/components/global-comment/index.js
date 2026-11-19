@@ -141,10 +141,10 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
 
   return (
     <div className="sdoc-comment-drawer">
-      <div className="comments-panel-wrapper">
+      <div className="sdoc-comments-panel-wrapper">
         <GlobalCommentHeader toggle={closePlugin} activeCommentGroup={activeCommentGroup} setCurrentCommentGroup={setCurrentCommentGroup} commentType={commentType} setCommentType={setCommentType} commentList={commentList} />
-        <div className="comments-panel-body">
-          <div ref={contentRef} className="comments-panel-body__content">
+        <div className="sdoc-comments-panel-body">
+          <div ref={contentRef} className="sdoc-comments-panel-body__content">
             <div id="global-comment-list-container" className="sdoc-comment-list-container">
               {!activeCommentGroup && Array.isArray(commentList) && commentList.map(comment => {
                 const replyCount = comment.replies?.length;
@@ -181,7 +181,7 @@ const GlobalComment = ({ editor, deleteUnseenNotifications, t }) => {
               )}
             </div>
           </div>
-          <div className={classNames('global-comment-input-wrapper', { 'active': globalCommentContent?.trim() } )}>
+          <div className={classNames('sdoc-global-comment-input-wrapper', { 'active': globalCommentContent?.trim() } )}>
             {!showEditor && (
               <Input
                 value={globalCommentContent?.trim() ? '.....' : ''}

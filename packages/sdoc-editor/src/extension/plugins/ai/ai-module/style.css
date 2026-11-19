@@ -67,7 +67,7 @@
   overflow: hidden;
 }
 
-.sdoc-ai-module-container .sdoc-ai-operations .op-type {
+.sdoc-ai-module-container .sdoc-ai-operations .sdoc-op-type {
   color: #666;
   font-size: 14px;
   min-height: 32px;
@@ -111,25 +111,25 @@
   color: #666;
 }
 
-.md-rendered-html table {
+.sdoc-md-rendered-html table {
   border-collapse: collapse;
   border: 1px solid #ccc;
 }
 
-.md-rendered-html th,
-.md-rendered-html tr,
-.md-rendered-html td {
+.sdoc-md-rendered-html th,
+.sdoc-md-rendered-html tr,
+.sdoc-md-rendered-html td {
   padding: 6px;
   border: 1px solid #ccc;
 }
 
-.md-rendered-html p {
+.sdoc-md-rendered-html p {
   padding: 5px 0;
   line-height: 1.5;
   margin-bottom: 0 !important;
 }
 
-.md-rendered-html ul,
-.md-rendered-html ol {
+.sdoc-md-rendered-html ul,
+.sdoc-md-rendered-html ol {
   padding: 0 0 0 20px !important;
 }

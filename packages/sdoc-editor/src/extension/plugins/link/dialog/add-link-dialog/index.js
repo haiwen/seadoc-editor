@@ -117,7 +117,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
   }, [closeDialog]);
 
   const handleOnChangeBlock = (e) => {
-    const block = e.target.closest('.linked-block-item') || e.currentTarget.querySelector('.linked-header-block-item');
+    const block = e.target.closest('.sdoc-linked-block-item') || e.currentTarget.querySelector('.sdoc-linked-header-block-item');
     if (block) {
       const clone = block.cloneNode(true);
       const displayContainer = document.getElementById('selected-block-display');
@@ -160,7 +160,7 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
         .map(node => `<!--${node.id}-->\n${slateToMdString([node])}`)
         .join('\n\n');
       const ids = list.map(n => n.id);
-      const processor = createProcessor(ids, 'linked-block-item');
+      const processor = createProcessor(ids, 'sdoc-linked-block-item');
       const file = await processor.process(mdValue);
 
       setHtmlString(String(file));
@@ -198,23 +198,23 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
             />
             {titleErrorMessage && <Alert color="danger" className="mt-2">{t(titleErrorMessage)}</Alert>}
           </div>
-          <div className="select-btn">
+          <div className="sdoc-select-btn">
             <div
-              className={classnames('link-address-btn', { 'active': activeTab === 'url' })}
+              className={classnames('sdoc-link-address-btn', { 'active': activeTab === 'url' })}
               onClick={() => setActiveTab('url')}
             >
               {t('Link_address')}
             </div>
             {editor.editorType === WIKI_EDITOR &&
               <div
-                className={classnames('link-page-btn', { 'active': activeTab === 'page' })}
+                className={classnames('sdoc-link-page-btn', { 'active': activeTab === 'page' })}
                 onClick={() => setActiveTab('page')}
               >
                 {t('Link_page')}
               </div>
             }
             <div
-              className={classnames('link-block-btn', { 'active': activeTab === 'block' })}
+              className={classnames('sdoc-link-block-btn', { 'active': activeTab === 'block' })}
               onClick={() => setActiveTab('block')}
             >
               {t('Link_block')}
@@ -239,75 +239,75 @@ const AddLinkDialog = ({ editor, className, element, insertPosition, slateNode, 
             </div>
           )}
           {activeTab === 'block' && (
-            <div className="form-group selected-linked-block-wrapper">
+            <div className="form-group sdoc-selected-linked-block-wrapper">
               <div
                 className={classnames('form-control', { 'expanded': isOpenSelect })}
                 onClick={() => {
                   setIsOpenSelect(!isOpenSelect);
                 }}
               >
-                <span id='selected-block-display' className='selected-linked-block'></span>
+                <span id='selected-block-display' className='sdoc-selected-linked-block'></span>
                 <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-down'></i>
               </div>
               {isOpenSelect && (
-                <div className='link-block-wrapper'>
+                <div className='sdoc-link-block-wrapper'>
                   {headerList.length > 0 &&
-                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectHeader })}
+                    <div className={classnames('sdoc-select-block-wrapper', { 'expanded': isOpenSelectHeader })}
                       onClick={(e) => setIsOpenSelectHeader(!isOpenSelectHeader)}
                     >
                       <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
-                      <div className='title'>{t('Header')}</div>
+                      <div className='sdoc-title'>{t('Header')}</div>
                     </div>
                   }
                   {isOpenSelectHeader &&
                     headerList.map((header, key) => {
                       const headerContext = Node.string(header);
                       return (
-                        <div className='link-header-block-container' key={key} onClick={(e) => handleOnChangeBlock(e)}>
-                          <div className='heading-prefix'>{HEADER_TAG[header.type]}</div>
-                          <div data-id={header.id} className='linked-header-block-item'>{headerContext}</div>
+                        <div className='sdoc-link-header-block-container' key={key} onClick={(e) => handleOnChangeBlock(e)}>
+                          <div className='sdoc-heading-prefix'>{HEADER_TAG[header.type]}</div>
+                          <div data-id={header.id} className='sdoc-linked-header-block-item'>{headerContext}</div>
                         </div>
                       );
                     })
                   }
                   {imagesHTML &&
-                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectImageBlock })}
+                    <div className={classnames('sdoc-select-block-wrapper', { 'expanded': isOpenSelectImageBlock })}
                       onClick={(e) => setIsOpenSelectImageBlock(!isOpenSelectImageBlock)}
                     >
                       <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
-                      <div className='title'>{t('Image')}</div>
+                      <div className='sdoc-title'>{t('Image')}</div>
                     </div>
                   }
                   {isOpenSelectImageBlock && (
-                    <div className='link-block-container'
+                    <div className='sdoc-link-block-container'
                       dangerouslySetInnerHTML={{ __html: imagesHTML }}
                       onClick={(e) => handleOnChangeBlock(e)}
                     />
                   )}
                   {codeBlockHTML &&
-                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectCodeBlock })}
+                    <div className={classnames('sdoc-select-block-wrapper', { 'expanded': isOpenSelectCodeBlock })}
                       onClick={(e) => setIsOpenSelectCodeBlock(!isOpenSelectCodeBlock)}
                     >
                       <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
-                      <div className='title'>{t('Code_block')}</div>
+                      <div className='sdoc-title'>{t('Code_block')}</div>
                     </div>
                   }
                   {isOpenSelectCodeBlock && (
-                    <div className='link-block-container'
+                    <div className='sdoc-link-block-container'
                       dangerouslySetInnerHTML={{ __html: codeBlockHTML }}
                       onClick={(e) => handleOnChangeBlock(e)}
                     />
                   )}
                   {blockquoteHTML &&
-                    <div className={classnames('select-block-wrapper', { 'expanded': isOpenSelectBlockquote })}
+                    <div className={classnames('sdoc-select-block-wrapper', { 'expanded': isOpenSelectBlockquote })}
                       onClick={(e) => setIsOpenSelectBlockquote(!isOpenSelectBlockquote)}
                     >
                       <i className='sdoc-file-icon sdoc-file-icon-toggle sdocfont sdoc-arrow-right'></i>
-                      <div className='title'>{t('Quote')}</div>
+                      <div className='sdoc-title'>{t('Quote')}</div>
                     </div>
                   }
                   {isOpenSelectBlockquote && (
-                    <div className='link-block-container'
+                    <div className='sdoc-link-block-container'
                       dangerouslySetInnerHTML={{ __html: blockquoteHTML }}
                       onClick={(e) => handleOnChangeBlock(e)}
                     />

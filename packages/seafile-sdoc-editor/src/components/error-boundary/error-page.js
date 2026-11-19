@@ -17,9 +17,9 @@ function ErrorPage({ t }) {
   }, []);
 
   return (
-    <div className='error-page'>
-      <span className='error-tip'>{t('Sdoc_error_tip')}</span>
-      <Button className='error-button' onClick={() => normalizeSdoc()}>{t('Repair')}</Button>
+    <div className='sdoc-error-page'>
+      <span className='sdoc-error-tip'>{t('Sdoc_error_tip')}</span>
+      <Button className='sdoc-error-button' onClick={() => normalizeSdoc()}>{t('Repair')}</Button>
     </div>
   );
 }

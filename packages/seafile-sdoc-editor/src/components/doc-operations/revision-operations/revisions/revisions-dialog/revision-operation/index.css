@@ -18,8 +18,8 @@
   color: #666;
 }
 
-.revisions-body .sdoc-revision:hover .sdoc-revision-operation-toggle,
-.revisions-dialog .revisions-body .sdoc-revision.operating .sdoc-revision-operation-toggle {
+.sdoc-revisions-body .sdoc-revision:hover .sdoc-revision-operation-toggle,
+.sdoc-revisions-dialog .sdoc-revisions-body .sdoc-revision.operating .sdoc-revision-operation-toggle {
   display: inline-block;
 }
 

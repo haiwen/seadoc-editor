@@ -160,7 +160,7 @@ const TableCell = ({ attributes, element, children }) => {
     <div
       {...attributes}
       style={{ ...style }}
-      className={classnames('table-cell', attributes.className, highlightClass, {
+      className={classnames('sdoc-table-cell', attributes.className, highlightClass, {
         'sdoc-table-header': rowIndex === 0,
         [CELL_SELECTED]: isSelected,
         'cell-light-height-left-border': isSelectedFirstCell,
@@ -240,7 +240,7 @@ function renderTableCell(props) {
       <div
         {...attributes}
         style={{ ...style }}
-        className={classnames('table-cell', highlightClass, attributes.className, { 'sdoc-table-header': rowIndex === 0 })}
+        className={classnames('sdoc-table-cell', highlightClass, attributes.className, { 'sdoc-table-header': rowIndex === 0 })}
         data-id={element.id}
       >
         <div className='sdoc-cell-container'>{children}</div>

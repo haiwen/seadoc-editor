@@ -110,13 +110,13 @@ class HeaderMenu extends React.Component {
     const itemList = [PARAGRAPH, 'divider', TITLE, SUBTITLE, 'divider', ...HEADERS];
 
     return (
-      <div className='header-menu'>
-        <div ref={this.setMenuToggle} className={classnames('header-toggle', { 'header-toggle-disabled': disabled })} onClick={disabled ? () => {} : this.onToggleClick}>
+      <div className='sdoc-header-menu'>
+        <div ref={this.setMenuToggle} className={classnames('sdoc-header-toggle', { 'sdoc-header-toggle-disabled': disabled })} onClick={disabled ? () => {} : this.onToggleClick}>
           <span className='active'>{t(HEADER_TITLE_MAP[currentType])}</span>
           <span className={headerIconClass}></span>
         </div>
         {isShowHeaderPopover && (
-          <div ref={this.setMenuRef} className={classnames('header-popover sdoc-dropdown-menu', { 'sdoc-dropdown-menu-mobile': isMobile })}>
+          <div ref={this.setMenuRef} className={classnames('sdoc-header-popover sdoc-dropdown-menu', { 'sdoc-dropdown-menu-mobile': isMobile })}>
             {itemList.map((item, index) => {
               if (item === 'divider') {
                 return (<div key={index} className='sdoc-dropdown-menu-divider'></div>);

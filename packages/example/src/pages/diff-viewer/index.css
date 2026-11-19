@@ -204,7 +204,7 @@
   background-color: #FFECD9 !important;
 }
 
-.sdoc-file-history-versions .history-list-item.item-active .history-info .time {
+.sdoc-file-history-versions .history-list-item.item-active .history-info .sdoc-time {
   color: #ff8000;
 }
 
@@ -288,7 +288,7 @@
   justify-content: center;
 }
 
-.history-info .time {
+.history-info .sdoc-time {
   color: #000;
 }
 

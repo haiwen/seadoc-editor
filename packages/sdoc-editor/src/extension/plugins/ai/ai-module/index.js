@@ -553,12 +553,12 @@ export default function AIModule({ editor, element, closeModule }) {
             {!searchValue && (
               <div className='sdoc-ai-operations sdoc-dropdown-menu'>
                 <div>
-                  <div className='op-type'>{t('Suggestion')}</div>
+                  <div className='sdoc-op-type'>{t('Suggestion')}</div>
                   <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.CONTINUATION} onClick={onContinuationClick}/>
                 </div>
                 <div className="sdoc-dropdown-menu-divider"></div>
                 <div>
-                  <div className='op-type'>{t('Edit')}</div>
+                  <div className='sdoc-op-type'>{t('Edit')}</div>
                   <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.MORE_FLUENT} onClick={onMoreFluentClick} />
                   <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.MORE_DETAILS} onClick={onMoreDetailsClick} />
                   <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.MORE_CONCISE} onClick={onMoreConciseClick} />
@@ -566,7 +566,7 @@ export default function AIModule({ editor, element, closeModule }) {
                 </div>
                 <div className="sdoc-dropdown-menu-divider"></div>
                 <div>
-                  <div className='op-type'>{t('Translate')}</div>
+                  <div className='sdoc-op-type'>{t('Translate')}</div>
                   <DropdownMenuItem menuConfig={OPERATION_MENUS_CONFIG.TRANSLATE}>
                     <i className="sdocfont sdoc-arrow-right sdoc-dropdown-item-right-icon"></i>
                     <LangSubMenu target={OPERATION_MENUS_CONFIG.TRANSLATE.id} onTranslateClick={onTranslateClick}/>

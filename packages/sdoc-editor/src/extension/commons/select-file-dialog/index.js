@@ -199,9 +199,9 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
 
   return (
     <Modal isOpen={true} autoFocus={true} zIndex={1071} returnFocusAfterClose={false} className="sdoc-file-select-dialog" contentClassName="sdoc-file-select-modal" toggle={closeDialog}>
-      <div className='modal-header-container'>
-        <h5 className='modal-title-container'>{t(modalTitle)}</h5>
-        <div className='modal-operation-container'>
+      <div className='sdoc-modal-header-container'>
+        <h5 className='sdoc-modal-title-container'>{t(modalTitle)}</h5>
+        <div className='sdoc-modal-operation-container'>
           {enableMetadata &&
             <div className='sdoc-toggle-view'>
               <div className={classnames('sdocfont sdoc-tree-view', { 'active': isTreeView })} onClick={onClickTreeView} />
@@ -214,7 +214,7 @@ const SelectSdocFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallb
       <ModalBody className='p-0'>
         <div className='sdoc-file-select-container'>
           <div className='sdoc-file-select-wrapper'>
-            <div className={classnames('sdoc-file-left-panel', { 'with-right-metadata-panel': currentSelectedFile })}>
+            <div className={classnames('sdoc-file-left-panel', { 'sdoc-with-right-metadata-panel': currentSelectedFile })}>
               <div className='sdoc-files-search-popover-container'>
                 <div className='sdoc-search-wrapper'>
                   <div className='sdocfont sdoc-find-replace sdoc-search'></div>

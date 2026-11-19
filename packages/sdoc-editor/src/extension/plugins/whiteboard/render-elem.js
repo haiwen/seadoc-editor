@@ -153,7 +153,7 @@ const Whiteboard = ({ editor, element }) => {
 
   return (
     <>
-      <div className={classNames('sdoc-whiteboard-container', { 'isSelected': isSelected })} onDoubleClick={handleDoubleClick} scrolling='no' >
+      <div className={classNames('sdoc-whiteboard-container', { 'sdoc-isSelected': isSelected })} onDoubleClick={handleDoubleClick} scrolling='no' >
         <div className='sdoc-whiteboard-title'>{title}</div>
         {isValidUrl && (
           <>
@@ -164,7 +164,7 @@ const Whiteboard = ({ editor, element }) => {
               ref={whiteboardRef}
             >
             </iframe>
-            <div className='iframe-overlay' onDoubleClick={handleDoubleClick} onClick={handleOnClick}></div>
+            <div className='sdoc-iframe-overlay' onDoubleClick={handleDoubleClick} onClick={handleOnClick}></div>
           </>
         )}
         {!isValidUrl && (
@@ -182,7 +182,7 @@ const Whiteboard = ({ editor, element }) => {
       }
       {isShowZoomOut && isValidUrl && (
         ReactDOM.createPortal(
-          <div className='whiteboard-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
+          <div className='sdoc-whiteboard-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
             <iframe
               title={title}
               className='sdoc-whiteboard-element-full-screen'

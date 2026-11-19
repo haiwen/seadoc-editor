@@ -60,7 +60,7 @@ const Outline = ({ editor }) => {
   return (
     <div className="sdoc-wiki-viewer-outline">
       {headerList.length === 0 && (
-        <div className="empty-container">{t('No_out_line')}</div>
+        <div className="sdoc-empty-container">{t('No_out_line')}</div>
       )}
       {headerList.length > 0 && headerList.map(({ node, path }, index) => {
         return <OutlineItem key={index} node={node} itemPath={path} editor={editor} activeId={activeId} />;

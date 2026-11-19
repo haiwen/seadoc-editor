@@ -124,7 +124,7 @@ const ResizeWidth = ({ minWidth, maxWidth, resizeWidth: resizeWidthAPI, resizeWi
 
   return (
     <div
-      className="sdoc-resize-width-handler resize-handler-placement-right"
+      className="sdoc-resize-width-handler sdoc-resize-handler-placement-right"
       ref={handlerRef}
       onMouseDown={onMouseDown}
       onMouseOver={onMouseOver}

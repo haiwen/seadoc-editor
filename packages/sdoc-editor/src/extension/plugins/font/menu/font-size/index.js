@@ -11,7 +11,7 @@ import './index.css';
 
 const FontSize = ({
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   editor,
   readonly
 }) => {
@@ -40,7 +40,7 @@ const FontSize = ({
   }, [editor, selectedFontSize, isShowMenu]);
 
   const validClassName = classnames(className, 'sdoc-menu-with-dropdown sdoc-font-size-menu', {
-    'menu-show': isShowMenu,
+    'sdoc-menu-show': isShowMenu,
     'disabled': disabled,
     'rich-icon-btn d-flex': isRichEditor,
     'rich-icon-btn-disabled': isRichEditor && disabled,

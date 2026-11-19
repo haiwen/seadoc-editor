@@ -39,9 +39,9 @@ const FormulaHoverMenu = ({ editor, element, menuPosition, onDeleteFormula, t, o
   return (
     <ElementPopover>
       <div className="sdoc-formula-hover-menu-container" style={menuPosition}>
-        <div className='hover-menu-container'>
+        <div className='sdoc-hover-menu-container'>
           <div id='sdoc_formula_edit' className="sdoc-formula-hover-operation-item">
-            <div role="button" className="op-item" onClick={onEditFormula}>
+            <div role="button" className="sdoc-op-item" onClick={onEditFormula}>
               <i className='sdocfont sdoc-rename'></i>
             </div>
             {isShowTooltip && (
@@ -52,7 +52,7 @@ const FormulaHoverMenu = ({ editor, element, menuPosition, onDeleteFormula, t, o
           </div>
           <div className="sdoc-formula-hover-operation-divider"></div>
           <div id='sdoc_formula_copy' className="sdoc-formula-hover-operation-item">
-            <div role="button" className="op-item" onClick={onCopy}>
+            <div role="button" className="sdoc-op-item" onClick={onCopy}>
               <i className='sdocfont sdoc-copy'></i>
             </div>
             {isShowTooltip && (
@@ -63,7 +63,7 @@ const FormulaHoverMenu = ({ editor, element, menuPosition, onDeleteFormula, t, o
           </div>
           <div className="sdoc-formula-hover-operation-divider"></div>
           <div id='sdoc_formula_delete' className="sdoc-formula-hover-operation-item">
-            <div role="button" className="op-item" onClick={onDelete}>
+            <div role="button" className="sdoc-op-item" onClick={onDelete}>
               <i className='sdocfont sdoc-delete'></i>
             </div>
             {isShowTooltip && (

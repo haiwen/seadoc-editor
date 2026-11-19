@@ -28,7 +28,7 @@ html, body, #root {
   margin: 10px;
 }
 
-.app .tip-message {
+.app .sdoc-tip-message {
   display: flex;
   justify-content: center;
   margin-top: 20px;

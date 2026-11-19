@@ -11,7 +11,7 @@
   text-decoration-color: rgb(55 53 47 / 25%);
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-wrapper {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-wrapper {
   /* 100vh - toolbar height*/
   height: calc(100vh - 100px);
   display: flex;
@@ -19,7 +19,7 @@
   background: #fff;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header {
   padding: 0 16px;
   height: 44px;
   display: flex;
@@ -28,13 +28,13 @@
   border-bottom: 1px solid #EAECEF;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header .sdoc-file-preview-panel-header-left {
   display: flex;
   align-items: center;
   overflow: hidden;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header-right .file-preview-full-screen {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header-right .sdoc-file-preview-full-screen {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -44,18 +44,18 @@
   margin-right: 8px;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header-right .file-preview-full-screen:hover {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header-right .sdoc-file-preview-full-screen:hover {
   border-radius: 3px;
   background-color: #EFEFEF;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header-right .file-preview-full-screen .sdocfont {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header-right .sdoc-file-preview-full-screen .sdocfont {
   color: #666;
   font-size: 16px;
 }
 
 
-.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .detail-header-icon-container {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header .sdoc-file-preview-panel-header-left .sdoc-detail-header-icon-container {
   align-items: center;
   display: flex;
   flex-shrink: 0;
@@ -64,7 +64,7 @@
   width: 32px
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .name.ellipsis {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header .sdoc-file-preview-panel-header-left .sdoc-name.ellipsis {
   color: var(--bs-body-color);
   font-size: 1rem;
   line-height: 1.5rem;
@@ -75,17 +75,17 @@
   text-overflow: ellipsis;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-left .title {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header .sdoc-file-preview-panel-header-left .sdoc-title {
   color: #212529;
   font-size: 16px;
   font-weight: 500;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-header .file-preview-panel-header-right {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-header .sdoc-file-preview-panel-header-right {
   display: flex;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-body {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-body {
   display: flex;
   flex: 1 1;
   flex-direction: column;
@@ -93,28 +93,28 @@
   overflow-y: auto;
 }
 
-.file-preview-panel-body .file-preview-container {
+.sdoc-file-preview-panel-body .sdoc-file-preview-container {
   overflow: auto;
 }
 
-.sdoc-file-preview-drawer .file-preview-panel-body .sdoc-article-container {
+.sdoc-file-preview-drawer .sdoc-file-preview-panel-body .sdoc-article-container {
   width: 100% !important;
   padding: 0px;
   pointer-events: none;
   user-select: auto;
 }
 
-.file-preview-panel-body .sdoc-article-container .article.sdoc-editor__article {
+.sdoc-file-preview-panel-body .sdoc-article-container .article.sdoc-editor__article {
   border: none;
   box-shadow: none;
   padding: 8px 16px;
 }
 
-.file-preview-panel-body .sdoc-article-container .sdoc-table-wrapper {
+.sdoc-file-preview-panel-body .sdoc-article-container .sdoc-table-wrapper {
   max-width: none !important;
 }
 
-.zoom-out-container {
+.sdoc-zoom-out-container {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
@@ -124,7 +124,7 @@
   z-index: 9999;
 }
 
-.file-preview-zoom-out-container {
+.sdoc-file-preview-zoom-out-container {
   pointer-events: auto;
   background: #fff;
   border-radius: 12px;
@@ -133,7 +133,7 @@
   overflow: auto;
 }
 
-.file-preview-zoom-out-container .article {
+.sdoc-file-preview-zoom-out-container .article {
   padding: 40px;
   pointer-events: none;
 }

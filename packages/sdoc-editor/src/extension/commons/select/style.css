@@ -1,11 +1,11 @@
-.select-container {
+.sdoc-select-container {
   position: relative;
   display: inline-block;
   margin: 0 5px;
   font-weight: normal;
 }
 
-.select-container .control-container {
+.sdoc-select-container .sdoc-control-container {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -19,31 +19,31 @@
   user-select: none;
 }
 
-.select-container .control-container.active,
-.select-container .control-container:hover {
+.sdoc-select-container .sdoc-control-container.active,
+.sdoc-select-container .sdoc-control-container:hover {
   border: 1px solid #3C88FD;
   box-shadow: 0 0 0 2px rgb(70 127 207 / 25%);
 }
 
-.select-container .control-container .placeholder {
+.sdoc-select-container .sdoc-control-container .placeholder {
   color: #BFBFBF;
 }
 
-.select-container .control-container .control-icon {
+.sdoc-select-container .sdoc-control-container .sdoc-control-icon {
   font-size: 13px;
   color: rgb(170, 170, 170);
   cursor: default;
   margin-right: 5px;
 }
 
-.select-container .control-container .operation {
+.sdoc-select-container .sdoc-control-container .sdoc-select-operation {
   margin-left: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.select-container .control-container .arrow {
+.sdoc-select-container .sdoc-control-container .sdoc-select-arrow {
   color: #949494;
   display: inline-block;
   font-size: 12px;
@@ -51,11 +51,11 @@
   transition: all .1s;
 }
 
-.select-container .control-container .arrow:hover {
+.sdoc-select-container .sdoc-control-container .sdoc-select-arrow:hover {
   color: #666;
 }
 
-.select-container .select-popover {
+.sdoc-select-container .sdoc-select-popover {
   position: absolute;
   left: 0;
   display: flex;
@@ -71,18 +71,18 @@
   z-index: 10;
 }
 
-.select-popover .option-item-divider {
+.sdoc-select-popover .sdoc-option-item-divider {
   margin-top: 8px;
   border-top: 1px solid #EFEFEF;
 }
 
-.select-popover .sdoc-field-setting {
+.sdoc-select-popover .sdoc-field-setting {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.select-popover .sdoc-field-setting .icon-container {
+.sdoc-select-popover .sdoc-field-setting .sdoc-icon-container {
   position: absolute;
   right: 10px;
   display: flex;
@@ -90,25 +90,25 @@
   justify-content: center;
 }
 
-.select-popover .sdoc-field-setting .sdoc-text-style {
+.sdoc-select-popover .sdoc-field-setting .sdoc-text-style {
   font-size: 14px;
   color: #aaa;
 }
 
-.select-popover .sdoc-field-setting .op-icon {
+.sdoc-select-popover .sdoc-field-setting .sdoc-op-icon {
   font-size: 12px;
   transform: rotate(90deg);
   color: #aaa;
 }
 
-.select-popover .option-item-wrapper {
+.sdoc-select-popover .sdoc-option-item-wrapper {
   flex: 1;
   min-height: 0;
   min-width: 0;
   overflow: auto;
 }
 
-.select-popover .option-item {
+.sdoc-select-popover .sdoc-option-item {
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -120,30 +120,30 @@
   white-space: nowrap;
 }
 
-.select-popover .option-item:hover {
+.sdoc-select-popover .sdoc-option-item:hover {
   background-color: #F5F5F5;
 }
 
-.select-popover .option-item.active {
+.sdoc-select-popover .sdoc-option-item.active {
   background-color: #39A0FF;
   color: #fff;
 }
 
-.select-popover .option-item.disable {
+.sdoc-select-popover .sdoc-option-item.disable {
   color: #aaa;
   cursor: default;
 }
 
-.select-popover .option-item .item-icon {
+.sdoc-select-popover .sdoc-option-item .sdoc-item-icon {
   font-size: 14px;
   color: rgb(170, 170, 170);
   cursor: default;
 }
 
-.select-popover .option-item.active .item-icon {
+.sdoc-select-popover .sdoc-option-item.active .sdoc-item-icon {
   color: #fff;
 }
 
-.select-popover .option-item .label {
+.sdoc-select-popover .sdoc-option-item .sdoc-select-label {
   margin: 0 5px;
 }

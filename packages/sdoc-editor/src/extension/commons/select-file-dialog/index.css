@@ -19,7 +19,7 @@
   border-color: #FF8000;
 }
 
-.sdoc-file-select-dialog .modal-header-container {
+.sdoc-file-select-dialog .sdoc-modal-header-container {
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -30,7 +30,7 @@
   border-bottom: 1px solid #e9ecef;
 }
 
-.sdoc-file-select-dialog .modal-title-container {
+.sdoc-file-select-dialog .sdoc-modal-title-container {
   flex: 0 1 auto;
   white-space: nowrap;
   position: relative;
@@ -48,12 +48,12 @@
   cursor: pointer;
 }
 
-.sdoc-file-select-dialog .modal-header-container .sdoc-sm-close {
+.sdoc-file-select-dialog .sdoc-modal-header-container .sdoc-sm-close {
   font-size: 16px;
   color: #666666;
 }
 
-.sdoc-file-select-dialog .modal-header-container .sdoc-sm-close:hover {
+.sdoc-file-select-dialog .sdoc-modal-header-container .sdoc-sm-close:hover {
   background-color: #EFEFEF;
   border-radius: 3px;
   height: 28px;
@@ -126,7 +126,7 @@
   width: 100%;
 }
 
-.sdoc-file-left-panel.with-right-metadata-panel {
+.sdoc-file-left-panel.sdoc-with-right-metadata-panel {
   width: 398px;
 }
 
@@ -138,7 +138,7 @@
   width: 100%;
 }
 
-.sdoc-file-select-dialog .modal-header-container .modal-operation-container {
+.sdoc-file-select-dialog .sdoc-modal-header-container .sdoc-modal-operation-container {
   display: flex;
   align-items: center;
 }
