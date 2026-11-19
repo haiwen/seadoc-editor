@@ -154,6 +154,9 @@ const EditableArticle = ({
   }, [editor.selection]);
 
   const onKeyDown = useCallback((event) => {
+    if (ReactEditor.isComposing(editor) || event.keyCode === 229) {
+      return true;
+    }
 
     const { scrollTop, clientHeight } = scrollRef.current;
 
