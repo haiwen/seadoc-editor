@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.269](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.268...%40seafile%2Fsdoc-editor%403.0.269) (2026-11-19)
+
+### Bug Fixes
+
+- **styles:** namespace editor classes and animations ([#365](https://github.com/haiwen/seadoc-editor/issues/365)) ([9bed713](https://github.com/haiwen/seadoc-editor/commit/9bed713a0a76a639da1f04c99c8a4a5f53349df3))
+
 ## [3.0.268](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.267...%40seafile%2Fsdoc-editor%403.0.268) (2026-11-19)
 
 ### Bug Fixes
