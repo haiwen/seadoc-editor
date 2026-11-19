@@ -80,7 +80,7 @@ describe('link URL security at rendering and opening boundaries', () => {
     act(() => root.render(
       <LinkHover editor={{}} element={{ href }} menuPosition={{}} />
     ));
-    act(() => document.querySelector('.link-op-menu-link').dispatchEvent(
+    act(() => document.querySelector('.sdoc-link-op-menu-link').dispatchEvent(
       new MouseEvent('mousedown', { bubbles: true, cancelable: true })
     ));
 
