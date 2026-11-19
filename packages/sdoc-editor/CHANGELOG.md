@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.268](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.267...%40seafile%2Fsdoc-editor%403.0.268) (2026-11-19)
+
+### Bug Fixes
+
+- **video:** improved the upload(add an immediate loading, cache the s… ([#355](https://github.com/haiwen/seadoc-editor/issues/355)) ([6a9fade](https://github.com/haiwen/seadoc-editor/commit/6a9fade7f8a8936e2b397b5c4a4e3d5638507434))
+
 ## [3.0.267](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.212...%40seafile%2Fsdoc-editor%403.0.267) (2026-11-19)
 
 ### Bug Fixes
