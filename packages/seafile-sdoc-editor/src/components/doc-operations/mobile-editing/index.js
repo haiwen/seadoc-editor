@@ -21,7 +21,7 @@ export default function MobileEditing() {
   }, []);
 
   return (
-    <span className='op-item' id='op-edit' onClick={onEditToggle}>
+    <span className='sdoc-op-item' id='op-edit' onClick={onEditToggle}>
       {t(insertText)}
     </span>
   );

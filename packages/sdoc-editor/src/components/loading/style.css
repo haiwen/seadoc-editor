@@ -1,10 +1,10 @@
-.empty-loading-page {
+.sdoc-empty-loading-page {
   position: fixed;
   height: 100%;
   width: 100%;
 }
 
-.page-centered {
+.sdoc-page-centered {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -12,26 +12,26 @@
   transform: translate(-50%, -50%);
 }
 
-.lds-ripple {
+.sdoc-lds-ripple {
   display: inline-block;
   position: relative;
   width: 64px;
   height: 64px;
 }
 
-.lds-ripple div {
+.sdoc-lds-ripple div {
   position: absolute;
   border: 4px solid #eb8205;
   opacity: 1;
   border-radius: 50%;
-  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: sdoc-lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
-.lds-ripple div:nth-child(2) {
+.sdoc-lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
 
-@keyframes lds-ripple {
+@keyframes sdoc-lds-ripple {
   0% {
     top: 28px;
     left: 28px;

@@ -173,7 +173,7 @@ const WikiEditor = forwardRef(({ editor: propsEditor, document, isReloading, isW
                 <EditableArticle editor={validEditor} slateValue={slateValue} updateSlateValue={onValueChange} showComment={showComment} />
               </div>
               <WikiOutline doc={slateValue} editor={validEditor} />
-              <SearchReplaceMenu editor={validEditor} className='wiki-search-and-replace' readonly={isWikiReadOnly} />
+              <SearchReplaceMenu editor={validEditor} className='sdoc-wiki-search-and-replace' readonly={isWikiReadOnly} />
             </ScrollContext.Provider>
           </div>
         </ColorProvider>

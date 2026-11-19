@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.sdoc-history-files-content .no-header {
+.sdoc-history-files-content .sdoc-no-header {
   margin-top: 8px;
   width: 100%;
 }
@@ -43,23 +43,23 @@
   align-items: flex-start;
 }
 
-.sdoc-history-files-content .sdoc-history-files .file-item-img {
+.sdoc-history-files-content .sdoc-history-files .sdoc-file-item-img {
   width: 21.6px;
   margin-right: 6px;
 }
 
-.sdoc-history-files-content .sdoc-history-files .sdoc-history-files-item .file-item-name {
+.sdoc-history-files-content .sdoc-history-files .sdoc-history-files-item .sdoc-file-item-name {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.sdoc-history-files-content .sdoc-history-files .sdoc-history-files-item .file-item-more {
+.sdoc-history-files-content .sdoc-history-files .sdoc-history-files-item .sdoc-file-item-more {
   font-size: 16px;
   margin-left: 2px;
 }
 
-.sdoc-history-files-content .sdoc-history-files .sdoc-history-files-item .more-text {
+.sdoc-history-files-content .sdoc-history-files .sdoc-history-files-item .sdoc-more-text {
   margin-left: 10px;
 }
 
@@ -84,7 +84,7 @@
   margin-right: 10px;
 }
 
-.sdoc-history-files-content .sdoc-history-files-add .new-file-name {
+.sdoc-history-files-content .sdoc-history-files-add .sdoc-new-file-name {
   text-wrap: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

@@ -31,13 +31,13 @@ class Alert extends React.PureComponent {
     const iconClass = this.getIconClass(intent);
     return (
       <div className={`sdoc-toast-alert-container ${intent || 'success'}`}>
-        <div className="toast-alert-icon"><i className={iconClass} /></div>
+        <div className="sdoc-toast-alert-icon"><i className={iconClass} /></div>
         <div className="toast-text-container">
-          <p className="toast-text-title">{title}</p>
-          {children ? <p className="toast-text-child">{children}</p> : null}
+          <p className="sdoc-toast-text-title">{title}</p>
+          {children ? <p className="sdoc-toast-text-child">{children}</p> : null}
         </div>
         {isRemovable && (
-          <div onClick={onRemove} className="toast-close">
+          <div onClick={onRemove} className="sdoc-toast-close">
             <span>&times;</span>
           </div>
         )}

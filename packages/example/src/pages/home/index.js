@@ -19,7 +19,7 @@ class Home extends React.Component {
           <Link to='/share-link-editor'>Share link editor</Link>
           <Link to='/publish-revision-diff-viewer'>PublishedRevisionDiffViewer</Link>
         </div>
-        <div className='tip-message'>请点击上面链接，测试不同的编辑器功能</div>
+        <div className='sdoc-tip-message'>请点击上面链接，测试不同的编辑器功能</div>
       </div>
     );
   }

@@ -22,7 +22,7 @@
   background-color: #f5f5f5;
 }
 
-.sdoc-file-wrapper .file-icon {
+.sdoc-file-wrapper .sdoc-file-list-icon {
   height: 36px;
   width: 36px;
 }
@@ -57,7 +57,7 @@
   color: #666;
 }
 
-.sdoc-item-user-container .item-divide {
+.sdoc-item-user-container .sdoc-item-divide {
   margin: 0 5px;
   transform: translateY(-1px);
 }

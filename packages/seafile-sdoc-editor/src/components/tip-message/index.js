@@ -161,12 +161,12 @@ class TipMessage extends React.Component {
     const { isSaved, isSaving, lastSavedAt } = this.state;
 
     if (isSaving && !isSaved) {
-      return <span className="tip-message">{t('Saving')}</span>;
+      return <span className="sdoc-tip-message">{t('Saving')}</span>;
     }
 
     if (lastSavedAt) {
       return (
-        <span className='tip-message'>
+        <span className='sdoc-tip-message'>
           <span className='sdocfont sdoc-save-tip mr-2'></span>
           <span className='save-time'>{dayjs(lastSavedAt).format('HH:mm')}</span>
         </span>

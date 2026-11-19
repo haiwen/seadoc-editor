@@ -23,7 +23,7 @@ const IconSelector = ({ editor, element, onCloseSelector }) => {
       {Object.keys(CALLOUT_ICON_MAP).map(key => {
         const content = CALLOUT_ICON_MAP[key];
         return (
-          <div key={key} className='icon-item'>
+          <div key={key} className='sdoc-icon-item'>
             <span className={'sdoc-emoji ' + key} data-image={key}>{content}</span>
           </div>
         );

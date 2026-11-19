@@ -68,11 +68,11 @@ const RowResizeHandler = ({ rowIndex, initRowBottom = 0, table, hideResizeHandle
 
   return (
     <div
-      className='table-row-height-just position-absolute resizing d-print-none'
+      className='sdoc-table-row-height-just position-absolute resizing d-print-none'
       contentEditable={false}
       style={style}
     >
-      <div className="table-row-height-just-color-tip"></div>
+      <div className="sdoc-table-row-height-just-color-tip"></div>
     </div>
   );
 };

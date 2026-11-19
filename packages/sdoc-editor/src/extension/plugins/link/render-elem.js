@@ -147,13 +147,13 @@ class Link extends React.Component {
   render() {
     const { attributes, children, element, editor, readonly } = this.props;
     const { isShowLinkMenu, menuPosition } = this.state;
-    const className = isShowLinkMenu ? 'seafile-ed-hovermenu-mouseclick' : null;
+    const className = isShowLinkMenu ? 'sdoc-seafile-ed-hovermenu-mouseclick' : null;
     const linkText = Node.string(element);
 
     if (readonly) {
       const href = normalizeWebUrl(getElementHref(element));
       return (
-        <span className={classnames(className, 'virtual-link')} {...attributes}>
+        <span className={classnames(className, 'sdoc-virtual-link')} {...attributes}>
           {href ? (
             <a href={href} title={linkText} onClick={this.onOpenLink} target='_blank' rel="noopener noreferrer">{children}</a>
           ) : children}
@@ -164,7 +164,7 @@ class Link extends React.Component {
     return (
       <>
         <span className={className} {...attributes} onClick={this.onLinkClick}>
-          <span ref={this.setRef} className='virtual-link' title={linkText}>
+          <span ref={this.setRef} className='sdoc-virtual-link' title={linkText}>
             <InlineBugFixer />
             {children}
             <InlineBugFixer />

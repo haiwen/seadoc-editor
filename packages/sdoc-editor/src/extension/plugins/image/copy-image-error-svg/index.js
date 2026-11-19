@@ -8,7 +8,7 @@ const Svg = ({ t, isSelected, imageRef }) => {
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 360 360'
       preserveAspectRatio='xMinYMin meet'
-      className={classNames('sdoc-image-placeholder-wrapper', { 'image-selected': isSelected })}
+      className={classNames('sdoc-image-placeholder-wrapper', { 'sdoc-image-selected': isSelected })}
       ref={imageRef}
       draggable={false}
     >

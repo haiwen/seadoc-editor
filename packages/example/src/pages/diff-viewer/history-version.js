@@ -20,8 +20,8 @@ const HistoryVersion = ({ currentVersion, historyVersion, onSelectHistoryVersion
       onClick={onClick}
     >
       <div className="history-info">
-        <div className="name">{name}</div>
-        <div className="time">{dayjs(ctime).format('YYYY-MM-DD HH:mm')}</div>
+        <div className="sdoc-name">{name}</div>
+        <div className="sdoc-time">{dayjs(ctime).format('YYYY-MM-DD HH:mm')}</div>
         <div className="owner">
           <span className="squire-icon"></span>
           <span>{creator_name}</span>

@@ -66,14 +66,14 @@ class FieldSetting extends React.Component {
     const { bold: isBold, italic: isItalic } = option || {};
 
     const { isShowMenu } = this.state;
-    const className = `sdoc-field-setting ${isDisable ? 'disable' : ''} option-item`;
+    const className = `sdoc-field-setting ${isDisable ? 'disable' : ''} sdoc-option-item`;
 
     return (
       <span ref={this.setSettingRef} className={className} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <span className='sdocfont sdoc-text-style'/>
-        <span className="label">{t('Font_style')}</span>
-        <span className="icon-container">
-          <span className="sdocfont sdoc-caret-up op-icon"></span>
+        <span className="sdoc-select-label">{t('Font_style')}</span>
+        <span className="sdoc-icon-container">
+          <span className="sdocfont sdoc-caret-up sdoc-op-icon"></span>
         </span>
         {isShowMenu && (
           <Menu position={this.state.position}>

@@ -3,14 +3,14 @@
   padding: .5rem 1rem .5rem 0;
 }
 
-.sdoc-wiki-viewer-outline .outline-h2,
-.sdoc-wiki-viewer-outline .outline-h3 {
+.sdoc-wiki-viewer-outline .sdoc-outline-h2,
+.sdoc-wiki-viewer-outline .sdoc-outline-h3 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.sdoc-wiki-viewer-outline .outline-h2 {
+.sdoc-wiki-viewer-outline .sdoc-outline-h2 {
   margin-left: 20px;
   line-height: 2.5;
   color: #364149;
@@ -18,11 +18,11 @@
   cursor: pointer;
 }
 
-.sdoc-wiki-viewer-outline .outline-h2:hover {
+.sdoc-wiki-viewer-outline .sdoc-outline-h2:hover {
   color: #eb8205;
 }
 
-.sdoc-wiki-viewer-outline .outline-h3 {
+.sdoc-wiki-viewer-outline .sdoc-outline-h3 {
   margin-left: 40px;
   line-height: 2.5;
   color: #364149;
@@ -30,16 +30,16 @@
   cursor: pointer;
 }
 
-.sdoc-wiki-viewer-outline .outline-h3:hover {
+.sdoc-wiki-viewer-outline .sdoc-outline-h3:hover {
   color: #eb8205;
 }
 
-.sdoc-wiki-viewer-outline .empty-container {
+.sdoc-wiki-viewer-outline .sdoc-empty-container {
   margin-top: 10px;
   text-align: center;
 }
 
-.sdoc-wiki-viewer-outline .outline-h2.active,
-.sdoc-wiki-viewer-outline .outline-h3.active {
+.sdoc-wiki-viewer-outline .sdoc-outline-h2.active,
+.sdoc-wiki-viewer-outline .sdoc-outline-h3.active {
   color: #eb8205;
 }

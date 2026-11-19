@@ -11,7 +11,7 @@
   display: flex;
 }
 
-.sdoc-callout-container .callout-content {
+.sdoc-callout-container .sdoc-callout-content {
   flex: 1;
   position: relative;
   overflow: auto;
@@ -40,17 +40,17 @@
   color: block;
 }
 
-.sdoc-callout-container .callout-icon {
+.sdoc-callout-container .sdoc-callout-icon-wrapper {
   width: 18px;
   margin-right: 8px;
   margin-top: 2px;
 }
 
-.sdoc-callout-container .callout-icon .sdoc-emoji {
+.sdoc-callout-container .sdoc-callout-icon-wrapper .sdoc-emoji {
   font-size: 16px;
 }
 
-.sdoc-editor__article .callout-content .list-container {
+.sdoc-editor__article .sdoc-callout-content .list-container {
   margin: 0;
   padding-left: 2.2em !important;
 }

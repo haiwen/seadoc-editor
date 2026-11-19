@@ -25,19 +25,19 @@ const LangList = React.forwardRef(({ langsData, onSelectLang, selectedLanguageTe
 
   if (!langsData.length) {
     return (
-      <div className='langs-list-empty'>
+      <div className='sdoc-langs-list-empty'>
         <span>{ t('Search_not_found')}</span>
       </div>
     );
   }
 
   return (
-    <ul className='langs-list-ul'>
+    <ul className='sdoc-langs-list-ul'>
       {langsData.map((item, index) => {
         return (
           <li
             ref={el => ref.current[index] = el}
-            className={`langs-list-li ${selectedLanguageText === item.text ? 'active' : ''} ${selectedIndex === index ? 'hover' : ''}`}
+            className={`sdoc-langs-list-li ${selectedLanguageText === item.text ? 'active' : ''} ${selectedIndex === index ? 'hover' : ''}`}
             id={item.value}
             key={item.value}
             onClick={() => {
@@ -45,7 +45,7 @@ const LangList = React.forwardRef(({ langsData, onSelectLang, selectedLanguageTe
             }}
           >
             {item.text}
-            <span className={`li-check-mark ${selectedLanguageText === item.text ? 'li-checked' : ''}`}>
+            <span className={`sdoc-li-check-mark ${selectedLanguageText === item.text ? 'sdoc-li-checked' : ''}`}>
               <i className='sdocfont sdoc-check-mark'></i>
             </span>
           </li>
@@ -181,16 +181,16 @@ const CodeBlockHoverMenu = ({ style, language, menuPosition, onChangeLanguage, o
   return (
     <ElementPopover>
       <div className="sdoc-code-block-hover-menu-container" style={menuPosition}>
-        <div className='hover-menu-container'>
+        <div className='sdoc-hover-menu-container'>
           <div className="sdoc-code-block-hover-operation-item sdoc-code-block-hover-operation-lang">
-            <div role="button" className={`op-item ${isShowlangsList ? 'active' : ''}`} onClick={onShowLangs}>
+            <div role="button" className={`sdoc-op-item ${isShowlangsList ? 'active' : ''}`} onClick={onShowLangs}>
               <span>{selectedLanguageText}</span>
               <i className='sdocfont sdoc-arrow-down'></i>
             </div>
           </div>
           <div className="sdoc-code-block-hover-operation-divider"></div>
           <div id='sdoc_code_block_auto_wrap' className="sdoc-code-block-hover-operation-item">
-            <div role="button" className={`op-item ${white_space === 'normal' ? 'active' : ''}`} onClick={onAutoLineWrap}>
+            <div role="button" className={`sdoc-op-item ${white_space === 'normal' ? 'active' : ''}`} onClick={onAutoLineWrap}>
               <i className='sdocfont sdoc-auto-linefeed'></i>
             </div>
             {isShowTooltip && (
@@ -201,7 +201,7 @@ const CodeBlockHoverMenu = ({ style, language, menuPosition, onChangeLanguage, o
           </div>
           <div className="sdoc-code-block-hover-operation-divider"></div>
           <div id='sdoc_code_block_copy' className="sdoc-code-block-hover-operation-item">
-            <div role="button" className="op-item" onClick={onCopyCodeBlock}>
+            <div role="button" className="sdoc-op-item" onClick={onCopyCodeBlock}>
               <i className='sdocfont sdoc-copy'></i>
             </div>
             {isShowTooltip && (
@@ -212,7 +212,7 @@ const CodeBlockHoverMenu = ({ style, language, menuPosition, onChangeLanguage, o
           </div>
           <div className="sdoc-code-block-hover-operation-divider"></div>
           <div id='sdoc_code_block_delete' className="sdoc-code-block-hover-operation-item">
-            <div role="button" className="op-item" onClick={onDelete}>
+            <div role="button" className="sdoc-op-item" onClick={onDelete}>
               <i className='sdocfont sdoc-delete'></i>
             </div>
             {isShowTooltip && (

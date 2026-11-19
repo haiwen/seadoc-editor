@@ -13,7 +13,7 @@ export default function ShareOperation() {
   }, []);
 
   return (
-    <span className='op-item' id={id} onClick={onShareToggle}>
+    <span className='sdoc-op-item' id={id} onClick={onShareToggle}>
       <i className='sdocfont sdoc-share'></i>
       <Tooltip target={id}>
         {t('Share')}

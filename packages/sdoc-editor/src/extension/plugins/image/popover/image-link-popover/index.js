@@ -82,7 +82,7 @@ const ImageLinkPopover = ({ editor, href = '', linkedPageId = '', linkedWikiId =
           )}
           {isWiki && linkedPage && (
             <div
-              className='sdoc-image-link-result is-active'
+              className='sdoc-image-link-result sdoc-is-active'
             >
               <span className='sdoc-image-link-result-icon'>
                 {linkedPage?.icon || <i className={classNames('sdocfont', linkedPage?.isDir ? 'sdoc-wiki-files' : 'sdoc-wiki-file')}/>}

@@ -4,7 +4,7 @@ import './index.css';
 
 const FileLoading = () => {
   return (
-    <span className="file-loading-icon file-loading-tip"></span>
+    <span className="sdoc-file-loading-icon sdoc-file-loading-tip"></span>
   );
 };
 

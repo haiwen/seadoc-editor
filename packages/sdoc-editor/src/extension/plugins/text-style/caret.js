@@ -39,9 +39,9 @@ const Caret = ({ cursor_color: color, name }) => {
 
   return (
     <>
-      <span className='caret-item' contentEditable={false} style={caretStyles}>
+      <span className='sdoc-caret-item' contentEditable={false} style={caretStyles}>
         <span style={{ position: 'relative' }}>
-          <span name={name} className='caret-name' contentEditable={false} style={cursorStyles}/>
+          <span name={name} className='sdoc-caret-name' contentEditable={false} style={cursorStyles}/>
         </span>
       </span>
     </>

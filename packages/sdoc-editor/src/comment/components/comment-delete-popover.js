@@ -54,12 +54,12 @@ const CommentDeletePopover = ({ type, setIsShowDeletePopover, deleteConfirm, tar
       target={targetId}
       onClick={event => event.stopPropagation()}
       placement={isGlobalComment ? 'bottom' : 'left'}
-      className='comment-delete-popover'
+      className='sdoc-comment-delete-popover'
       isOpen={true}
     >
-      <div className='comment-delete-popover-container' ref={popoverRef}>
+      <div className='sdoc-comment-delete-popover-container' ref={popoverRef}>
         <div className='delete-tip'>{t(`Are_you_sure_to_delete_this_${type === 'comment' ? 'comment' : 'reply'}`)}</div>
-        <div className='delete-control mt-5'>
+        <div className='sdoc-delete-control mt-5'>
           <button className='btn btn-secondary mr-2' onClick={onDeleteCancel}>{t('Cancel')}</button>
           <button className='btn btn-primary' onClick={handleConfirm}>{t('Confirm')}</button>
         </div>

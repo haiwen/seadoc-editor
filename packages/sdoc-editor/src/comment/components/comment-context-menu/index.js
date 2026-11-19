@@ -24,7 +24,7 @@ const CommentContextMenu = ({ isRichEditor }) => {
   const commentProps = {
     id: 'context-toolbar-comment',
     isRichEditor,
-    className: 'menu-group-item sdoc-comment-menu-container',
+    className: 'sdoc-menu-group-item sdoc-comment-menu-container',
     disabled: false,
     isActive: false,
     onMouseDown: onCommentClick,

@@ -74,13 +74,13 @@ const ListView = ({ onSelectedFile, fileType, t, searchContent, isOpenSearch }) 
           <div key={file._id} className='sdoc-file-wrapper'
             onClick={(e) => onSelectFile(e, { id: file._id, name: file._name, path: filePath })}
           >
-            <img className='file-icon' src={fileTypeIcon} alt="" />
+            <img className='sdoc-file-list-icon' src={fileTypeIcon} alt="" />
             <div className="sdoc-item-content">
               <div className="sdoc-item-name ellipsis" title={file._name}>{file._name}</div>
               <div className="sdoc-item-path ellipsis" title={dirPath}>{dirPath}</div>
               <div className="sdoc-item-user-container ellipsis" >
                 <div className='item-user'>{username}</div>
-                <div className='item-divide'>|</div>
+                <div className='sdoc-item-divide'>|</div>
                 <div className='item-adjust-time'>{fileAdjustTime}</div>
               </div>
             </div>

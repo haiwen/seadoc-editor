@@ -94,7 +94,7 @@ class CollaboratorsOperation extends React.PureComponent {
 
     return (
       <>
-        <span className='op-item collaborators-op-item' id="collaborators">
+        <span className='sdoc-op-item sdoc-collaborators-op-item' id="collaborators">
           <i className='sdocfont sdoc-user mr-1'></i>
           {collaborators.length}
         </span>

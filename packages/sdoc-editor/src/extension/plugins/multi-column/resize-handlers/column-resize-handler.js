@@ -6,7 +6,7 @@ const ColumnResizeHandler = ({ index, isDraggingResizeHandler, adjustingCell, ha
 
   return (
     <div
-      className={`column-width-just ${isActive ? 'active' : ''}`}
+      className={`sdoc-column-width-just ${isActive ? 'active' : ''}`}
       onMouseDown={(event) => {
         event.preventDefault();
         handleMouseDown(index, event);

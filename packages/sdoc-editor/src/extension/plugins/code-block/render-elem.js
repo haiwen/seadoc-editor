@@ -138,7 +138,7 @@ const CodeBlock = ({ attributes, children, element, editor }) => {
         {isCodeBlockOverflow && (
           <div className={classnames('sdoc-code-block-hidden-icon-container', { 'hidden': !showAllCode })}>
             <span className="sdoc-code-block-hidden-icon" onClick={toggleHidden} contentEditable={false} suppressContentEditableWarning>
-              <span className='icon-container'>
+              <span className='sdoc-icon-container'>
                 {!showAllCode ? <i className="sdocfont sdoc-arrow-down"></i> : <i className="sdocfont sdoc-arrow-up"></i>}
               </span>
             </span>

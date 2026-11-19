@@ -1,10 +1,10 @@
-.menu-group-item.sdoc-ask-ai-menu-container {
+.sdoc-menu-group-item.sdoc-ask-ai-menu-container {
   width: auto;
   color: #212529;
   font-size: 14px;
 }
 
-.menu-group-item.sdoc-ask-ai-menu-container .sdoc-ask-ai-menu-item {
+.sdoc-menu-group-item.sdoc-ask-ai-menu-container .sdoc-ask-ai-menu-item {
   padding: 4px;
 }
 

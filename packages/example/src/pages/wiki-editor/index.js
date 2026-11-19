@@ -62,10 +62,10 @@ const SdocWikiViewerThird = () => {
               <div id="wiki-page-title" className='wiki-page-title'>
                 <div className='wiki-page-icon' style={{ height: iconHeight }}></div>
                 <div className='ops'>
-                  <span className='op-item mr-2' onClick={onAddIconToggle}>add icon</span>
-                  <span className='op-item' onClick={onAddCoverClick}>add cover</span>
+                  <span className='sdoc-op-item mr-2' onClick={onAddIconToggle}>add icon</span>
+                  <span className='sdoc-op-item' onClick={onAddCoverClick}>add cover</span>
                 </div>
-                <div className='title'>Header</div>
+                <div className='sdoc-title'>Header</div>
               </div>
               <SdocWikiEditor
                 scrollRef={ref}

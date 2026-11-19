@@ -6,7 +6,7 @@ import Tooltip from '../../../components/tooltip';
 
 const MenuItem = ({
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   disabled,
   isActive,
   type,

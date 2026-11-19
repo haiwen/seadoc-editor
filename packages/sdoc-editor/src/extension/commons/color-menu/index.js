@@ -32,7 +32,7 @@ const modifiers = [
 
 const ColorMenu = ({
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   ariaLabel,
   iconClass,
   id,
@@ -170,7 +170,7 @@ const ColorMenu = ({
         type="button"
         aria-label={ariaLabel}
         className={classnames(className, 'sdoc-color-menu sdoc-menu-with-dropdown', {
-          'menu-show': isShowMenu,
+          'sdoc-menu-show': isShowMenu,
           'disabled': disabled,
           'rich-icon-btn d-flex': isRichEditor,
           'rich-icon-btn-disabled': isRichEditor && disabled,
@@ -180,9 +180,9 @@ const ColorMenu = ({
         id={buttonId}
         disabled={disabled}
       >
-        <div className={classnames('last-used-color-container sdoc-menu-with-dropdown-icon', { 'disabled': disabled })} onClick={setLastUsedColor}>
+        <div className={classnames('sdoc-last-used-color-container sdoc-menu-with-dropdown-icon', { 'disabled': disabled })} onClick={setLastUsedColor}>
           <i className={classnames(iconClass, 'sdoc-color-icon')} />
-          <div className="last-used-color"style={{ backgroundColor: lastUsedColor || 'unset' }}></div>
+          <div className="sdoc-last-used-color"style={{ backgroundColor: lastUsedColor || 'unset' }}></div>
         </div>
         <div id={id} className="sdoc-color-toggle sdoc-menu-with-dropdown-triangle">
           <i className={`sdoc-menu-with-dropdown-triangle-icon sdocfont sdoc-${isShowMenu ? 'arrow-up' : 'arrow-down'}`}></i>
@@ -252,7 +252,7 @@ const ColorMenu = ({
               </div>
             </div>
             <div className="sdoc-colors-divider"></div>
-            <div className={classnames('sdoc-more-colors pr-2', { 'show-pick': isPickerShow })} id={moreColorsId}>
+            <div className={classnames('sdoc-more-colors pr-2', { 'sdoc-show-pick': isPickerShow })} id={moreColorsId}>
               <span>{t('More_color')}</span>
               <i className="sdocfont sdoc-arrow-right"></i>
             </div>

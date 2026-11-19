@@ -31,7 +31,7 @@ const DocOperations = ({ isShowChanges, isPublished = false, changes, handleView
 
   if (isMobile) {
     return (
-      <div className="doc-ops">
+      <div className="sdoc-doc-ops">
         {/* you can only share after entering the browsing page */}
         {(!isSdocRevision && !mobileLogin && !isEdit) && <ShareOperation />}
         {!isSdocRevision && <MobileEditing />}
@@ -40,7 +40,7 @@ const DocOperations = ({ isShowChanges, isPublished = false, changes, handleView
   }
 
   return (
-    <div className='doc-ops'>
+    <div className='sdoc-doc-ops'>
       <RevisionOperations
         isShowChanges={isShowChanges}
         isPublished={isPublished}

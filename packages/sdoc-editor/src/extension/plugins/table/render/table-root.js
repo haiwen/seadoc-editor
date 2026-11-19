@@ -43,9 +43,9 @@ const TableRoot = ({ attributes, columns = [], children }) => {
         >
           <div
             className={classnames('sdoc-table-scroll-wrapper', {
-              'scroll-at-center': scrollLeft + width !== allWidth && scrollLeft > 0,
-              'scroll-at-right': scrollLeft + width === allWidth,
-              'scroll-at-left': scrollLeft === 0,
+              'sdoc-scroll-at-center': scrollLeft + width !== allWidth && scrollLeft > 0,
+              'sdoc-scroll-at-right': scrollLeft + width === allWidth,
+              'sdoc-scroll-at-left': scrollLeft === 0,
             })}
             ref={tableScrollWrapper}
             onScroll={onScroll}

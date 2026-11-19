@@ -264,7 +264,7 @@ export default TableSizePopover;
 const MenuItem = ({ id, className, text, iconClassname, isSelected }) => {
   const { t } = useTranslation('sdoc-editor');
   return (
-    <div id={id} className={classnames('sdoc-selected-table-size-custom', className, { 'keyboard-selected': isSelected })}>
+    <div id={id} className={classnames('sdoc-selected-table-size-custom', className, { 'sdoc-keyboard-selected': isSelected })}>
       <span>{t(text)}</span>
       <i className={iconClassname}></i>
     </div>

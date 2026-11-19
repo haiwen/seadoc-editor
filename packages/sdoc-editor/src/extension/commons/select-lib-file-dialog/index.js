@@ -62,9 +62,9 @@ const SelectLibFileDialog = ({ editor, dialogType, closeDialog, insertLinkCallba
 
   return (
     <Modal isOpen={true} autoFocus={true} zIndex={1071} returnFocusAfterClose={false} className="sdoc-file-select-dialog" contentClassName="sdoc-file-select-modal" toggle={closeDialog}>
-      <div className='modal-header-container'>
-        <h5 className='modal-title-container'>{t('Select_file')}</h5>
-        <div className='modal-operation-container'>
+      <div className='sdoc-modal-header-container'>
+        <h5 className='sdoc-modal-title-container'>{t('Select_file')}</h5>
+        <div className='sdoc-modal-operation-container'>
           <div className='sdocfont sdoc-sm-close sdoc-close-dialog' onClick={closeDialog}></div>
         </div>
       </div>

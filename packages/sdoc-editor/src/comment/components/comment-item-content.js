@@ -104,15 +104,15 @@ const CommentItemContent = ({
   };
 
   return (
-    <div className='comment-item'>
-      <div className='comment-header'>
-        <div className='comment-author'>
-          <span className='comment-author__avatar'><img alt='' src={comment.avatar_url} /></span>
-          <span className='comment-author__info'>
-            <span className='name'>{comment.user_name}</span>
-            <span className='time'>
+    <div className='sdoc-comment-item'>
+      <div className='sdoc-comment-header'>
+        <div className='sdoc-comment-author'>
+          <span className='sdoc-comment-author__avatar'><img alt='' src={comment.avatar_url} /></span>
+          <span className='sdoc-comment-author__info'>
+            <span className='sdoc-name'>{comment.user_name}</span>
+            <span className='sdoc-time'>
               {dayjs(comment.updated_at).format('MM-DD HH:mm')}
-              {comment?.resolved && (<span className='comment-success-resolved sdocfont sdoc-mark-as-resolved'/>)}
+              {comment?.resolved && (<span className='sdoc-comment-success-resolved sdocfont sdoc-mark-as-resolved'/>)}
             </span>
           </span>
         </div>
@@ -120,10 +120,10 @@ const CommentItemContent = ({
           <span className="sdoc-unread-message-tip"></span>
         )}
         {isActive && [comment?.user_email, comment?.author].includes(user.username) && (
-          <div className='d-flex comment-item-operation-wrapper'>
+          <div className='d-flex sdoc-comment-item-operation-wrapper'>
             {(!comment.resolved || comment?.isContextComment) && (
               <>
-                <div id={`tooltip_${menuId}`} className="comment-operation mr-2" onClick={markAsResolved}>
+                <div id={`tooltip_${menuId}`} className="sdoc-comment-operation mr-2" onClick={markAsResolved}>
                   <i className='sdocfont sdoc-check-mark'></i>
                 </div>
                 {!isDropdownOpen && (
@@ -134,7 +134,7 @@ const CommentItemContent = ({
               </>
             )}
             <Dropdown id={targetId} isOpen={isDropdownOpen} toggle={() => setDropdownOpen(!isDropdownOpen)}>
-              <DropdownToggle tag='div' className='comment-operation'>
+              <DropdownToggle tag='div' className='sdoc-comment-operation'>
                 <i className='sdocfont sdoc-more'></i>
               </DropdownToggle>
               <DropdownMenu className='sdoc-dropdown-menu' container={container}>
@@ -151,7 +151,7 @@ const CommentItemContent = ({
           </div>
         )}
       </div>
-      <div className='comment-content' onClick={onCommentContentClick}>
+      <div className='sdoc-comment-content' onClick={onCommentContentClick}>
         {!isEditing && <div dangerouslySetInnerHTML={{ __html: editorContent }}></div>}
       </div>
       {isEditing && <SeafileCommentEditor {...commentEditorProps} />}

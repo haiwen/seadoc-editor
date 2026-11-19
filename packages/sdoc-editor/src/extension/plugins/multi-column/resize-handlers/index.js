@@ -39,8 +39,8 @@ const ResizeHandlers = ({ element, handleResizeColumn }) => {
     const path = ReactEditor.findPath(editor, element);
     const [node] = Editor.node(editor, path);
     const domNode = ReactEditor.toDOMNode(editor, node);
-    if (!domNode.querySelectorAll('.column')) return;
-    const childNodes = Array.from(domNode.querySelectorAll('.column'));
+    if (!domNode.querySelectorAll('.sdoc-multicolumn-column')) return;
+    const childNodes = Array.from(domNode.querySelectorAll('.sdoc-multicolumn-column'));
 
     const onMouseMove = (event) => {
       event.preventDefault();
@@ -115,14 +115,14 @@ const ResizeHandlers = ({ element, handleResizeColumn }) => {
   let leftAccumulator = 0;
   const columns = Array.isArray(column) ? column : [];
   return (
-    <div className='column-resize-handler d-print-none' contentEditable={false}>
+    <div className='sdoc-column-resize-handler d-print-none' contentEditable={false}>
       {columns.map((column, index) => {
         leftAccumulator += (column.width);
         const left = leftAccumulator;
         return (
           <React.Fragment key={index}>
             {index === 0 && (
-              <div className="column-width-just" style={{ left: '-15px' }} />
+              <div className="sdoc-column-width-just" style={{ left: '-15px' }} />
             )}
             <ColumnResizeHandler
               key={index}

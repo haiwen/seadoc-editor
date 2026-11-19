@@ -107,7 +107,7 @@
   width: 100%;
 }
 
-.sdoc-editor-container.mobile .sdoc-editor-content.readonly.no-outline {
+.sdoc-editor-container.mobile .sdoc-editor-content.readonly.sdoc-no-outline {
   min-width: 100% !important;
   width: 100% !important;
 }

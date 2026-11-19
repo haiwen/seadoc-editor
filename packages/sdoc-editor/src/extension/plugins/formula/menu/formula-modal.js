@@ -46,7 +46,7 @@ const FormulaModal = ({ editor, formula, onCloseModal }) => {
   }, [editor, modifyPath, newFormula, onCloseModal]);
 
   return (
-    <Modal isOpen={true} toggle={onCloseModal} autoFocus={false} wrapClassName='formula-dialog-wrapper'>
+    <Modal isOpen={true} toggle={onCloseModal} autoFocus={false} wrapClassName='sdoc-formula-dialog-wrapper'>
       <ModalHeader toggle={onCloseModal}>{t('Insert_formula')}</ModalHeader>
       <ModalBody>
         <div className="form-group">
@@ -59,7 +59,7 @@ const FormulaModal = ({ editor, formula, onCloseModal }) => {
             onChange={onFormulaChange}
           />
         </div>
-        <div ref={formulaPreviewRef} className="formula-preview"></div>
+        <div ref={formulaPreviewRef} className="sdoc-formula-preview"></div>
       </ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={onCloseModal}>{t('Cancel')}</Button>

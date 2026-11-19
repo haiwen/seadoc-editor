@@ -43,7 +43,7 @@ const EditorContent = ({
 
   const className = classNames('sdoc-editor-content', {
     'readonly': readonly,
-    'no-outline': !showOutline,
+    'sdoc-no-outline': !showOutline,
   });
 
   // If you don't display comment, use Fragment to replace CommentProvider

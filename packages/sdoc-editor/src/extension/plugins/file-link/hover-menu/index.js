@@ -59,15 +59,15 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
   return (
     <ElementPopover>
       <div className="sdoc-file-link-hover-menu-container" style={menuPosition}>
-        <div className='hover-menu-container'>
-          <span className='op-group-item'>
-            <span role="button" className={classnames('op-item', { 'ml-0': readOnly })}>
-              <a href={getUrl(element.doc_uuid)} target="_blank" rel="noopener noreferrer" className="link-op-menu-link">{t('Open_link')}</a>
+        <div className='sdoc-hover-menu-container'>
+          <span className='sdoc-op-group-item'>
+            <span role="button" className={classnames('sdoc-op-item', { 'ml-0': readOnly })}>
+              <a href={getUrl(element.doc_uuid)} target="_blank" rel="noopener noreferrer" className="sdoc-link-op-menu-link">{t('Open_link')}</a>
             </span>
           </span>
           {!readOnly && (
-            <span className='op-group-item'>
-              <span id='copy_link' role="button" className='op-item' onClick={onCopy}>
+            <span className='sdoc-op-group-item'>
+              <span id='copy_link' role="button" className='sdoc-op-item' onClick={onCopy}>
                 <i className='sdocfont sdoc-copy'></i>
               </span>
               {isShowTooltip && (
@@ -78,7 +78,7 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
               <span
                 id='select_style'
                 role="button"
-                className={classnames('op-item', { 'link-style-icon-active': isShowDisplayStylePopover })}
+                className={classnames('sdoc-op-item', { 'sdoc-link-style-icon-active': isShowDisplayStylePopover })}
                 onClick={onShowProver}
               >
                 <i className={classnames('mr-1', FILE_LINK_TYPE_CONFIG[selectedType].icon)}></i>
@@ -109,7 +109,7 @@ const FileLinkHoverMenu = ({ editor, menuPosition, element, onUnwrapFileLinkNode
                   {t('Select_style')}
                 </Tooltip>
               )}
-              <span id='delete_link' role="button" className='op-item' onClick={onUnwrapFileLinkNode}>
+              <span id='delete_link' role="button" className='sdoc-op-item' onClick={onUnwrapFileLinkNode}>
                 <i className='sdocfont sdoc-unlink'></i>
               </span>
               {isShowTooltip && (

@@ -20,11 +20,11 @@
   margin: 0;
 }
 
-.formula-dialog-wrapper .form-check-label {
+.sdoc-formula-dialog-wrapper .form-check-label {
   margin-bottom: 4px;
 }
 
-.formula-dialog-wrapper .formula-preview {
+.sdoc-formula-dialog-wrapper .sdoc-formula-preview {
   padding: 10px;
   border: 2px dashed #ebebeb;
   min-height: 40px;

@@ -81,19 +81,19 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
   return (
     <>
       <div className="sdoc-file-preview-drawer">
-        <div className="file-preview-panel-wrapper">
-          <div className="file-preview-panel-header">
-            <div className="file-preview-panel-header-left">
-              <div className="detail-header-icon-container">
+        <div className="sdoc-file-preview-panel-wrapper">
+          <div className="sdoc-file-preview-panel-header">
+            <div className="sdoc-file-preview-panel-header-left">
+              <div className="sdoc-detail-header-icon-container">
                 <img src={fileTypeIcon} width='32px' height='32px' alt="" />
               </div>
-              <span className="name ellipsis" title={title}>{title}</span>
+              <span className="sdoc-name ellipsis" title={title}>{title}</span>
             </div>
-            <div className="file-preview-panel-header-right">
+            <div className="sdoc-file-preview-panel-header-right">
               <div
                 id='file-preview_full_screen_mode'
                 role="button"
-                className='file-preview-full-screen'
+                className='sdoc-file-preview-full-screen'
                 onClick={openFullscreen}
               >
                 <i className='sdocfont sdoc-fullscreen'/>
@@ -103,7 +103,7 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
               </div>
             </div>
           </div>
-          <div className="file-preview-panel-body">
+          <div className="sdoc-file-preview-panel-body">
             {isReloading && (
               <div className="h-100 w-100 d-flex align-items-center justify-content-center">
                 <FileLoading />
@@ -111,7 +111,7 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
             )}
             {Component && !isReloading && (
               <ScrollContext.Provider value={{ scrollRef: { current: null } }}>
-                <div className='file-preview-container' ref={filePreviewRef}>
+                <div className='sdoc-file-preview-container' ref={filePreviewRef}>
                   <Component
                     key={docUuid}
                     editor={readonlyEditor}
@@ -125,10 +125,10 @@ const FilePreviewWrapper = ({ docUuid, title }) => {
       </div>
       {isShowZoomOut && Component && (
         ReactDOM.createPortal(
-          <div className='zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
+          <div className='sdoc-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
             <ScrollContext.Provider value={{ scrollRef: { current: null } }}>
               <div
-                className='file-preview-zoom-out-container'
+                className='sdoc-file-preview-zoom-out-container'
                 ref={filePreviewRef}
                 onClick={(e) => e.stopPropagation()}
               >

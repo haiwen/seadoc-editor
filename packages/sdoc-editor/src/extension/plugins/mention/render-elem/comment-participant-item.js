@@ -34,10 +34,10 @@ const CommentParticipantItem = ({ participant, setScrollTop, onSelectParticipant
   const active = participantIndex === activeParticipantIndex;
 
   return (
-    <div className={`comment-participant-item ${active ? 'active' : ''}`} ref={ref} onClick={selectParticipant}>
-      <div className="comment-participant-container">
-        <img className="comment-participant-avatar" alt={participant.name} src={participant.avatar_url} />
-        <div className="comment-participant-name">{participant.name}</div>
+    <div className={`sdoc-comment-participant-item ${active ? 'active' : ''}`} ref={ref} onClick={selectParticipant}>
+      <div className="sdoc-comment-participant-container">
+        <img className="sdoc-comment-participant-avatar" alt={participant.name} src={participant.avatar_url} />
+        <div className="sdoc-comment-participant-name">{participant.name}</div>
       </div>
     </div>
   );

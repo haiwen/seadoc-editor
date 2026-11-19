@@ -1,4 +1,4 @@
-.error-page {
+.sdoc-error-page {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -7,10 +7,10 @@
   overflow: hidden;
 }
 
-.error-page .error-tip {
+.sdoc-error-page .sdoc-error-tip {
   color: red;
 }
 
-.error-page .error-button {
+.sdoc-error-page .sdoc-error-button {
   margin-top: 20px;
 }

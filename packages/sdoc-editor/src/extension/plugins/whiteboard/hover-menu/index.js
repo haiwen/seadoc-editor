@@ -24,24 +24,24 @@ const WhiteboardHoverMenu = ({ isValidUrl, menuPosition, onOpen, openFullscreen,
   return (
     <ElementPopover>
       <div className="sdoc-whiteboard-hover-menu-container" style={menuPosition}>
-        <div className='hover-menu-container'>
+        <div className='sdoc-hover-menu-container'>
           {isValidUrl && (
-            <span className='op-group-item'>
+            <span className='sdoc-op-group-item'>
               <span
                 id='sdoc_whiteboard_open'
                 role="button"
-                className='op-item'
+                className='sdoc-op-item'
                 onClick={onOpen}
               >
                 <span className='mr-1'>{t('Open')}</span>
               </span>
             </span>
           )}
-          <span className='op-group-item'>
+          <span className='sdoc-op-group-item'>
             <span
               id='sdoc_whiteboard_delete'
               role="button"
-              className='op-item'
+              className='sdoc-op-item'
               onClick={onDeleteWhiteboard}
             >
               <i className='sdocfont sdoc-delete'/>
@@ -52,11 +52,11 @@ const WhiteboardHoverMenu = ({ isValidUrl, menuPosition, onOpen, openFullscreen,
             </span>
           </span>
           {isValidUrl && (
-            <span className='op-group-item'>
+            <span className='sdoc-op-group-item'>
               <span
                 id='sdoc_whiteboard_full_screen_mode'
                 role="button"
-                className='op-item'
+                className='sdoc-op-item'
                 onClick={openFullscreen}
               >
                 <i className='sdocfont sdoc-fullscreen icon-font'/>

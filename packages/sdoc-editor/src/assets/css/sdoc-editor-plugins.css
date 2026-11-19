@@ -21,12 +21,12 @@
   line-height: 1.125;
 }
 
-.sdoc-editor__article .sdoc-header-title .caret-item,
-.sdoc-editor__article .sdoc-header-subtitle .caret-item,
-.sdoc-editor__article .sdoc-header-1 .caret-item,
-.sdoc-editor__article .sdoc-header-4 .caret-item,
-.sdoc-editor__article .sdoc-header-5 .caret-item,
-.sdoc-editor__article .sdoc-header-6 .caret-item {
+.sdoc-editor__article .sdoc-header-title .sdoc-caret-item,
+.sdoc-editor__article .sdoc-header-subtitle .sdoc-caret-item,
+.sdoc-editor__article .sdoc-header-1 .sdoc-caret-item,
+.sdoc-editor__article .sdoc-header-4 .sdoc-caret-item,
+.sdoc-editor__article .sdoc-header-5 .sdoc-caret-item,
+.sdoc-editor__article .sdoc-header-6 .sdoc-caret-item {
   height: 1.2em !important;
 }
 
@@ -202,7 +202,7 @@
   pointer-events: none;
 }
 
-.sdoc-image-readonly-fullscreen-container.is-visible,
+.sdoc-image-readonly-fullscreen-container.sdoc-is-visible,
 .sdoc-image-readonly-fullscreen-container:focus-within {
   opacity: 1;
   visibility: visible;
@@ -251,11 +251,11 @@
   color: #bec0bf
 }
 
-.sdoc-editor__article .image-selected {
+.sdoc-editor__article .sdoc-image-selected {
   box-shadow: 0 0 0 2px #007bff;
 }
 
-.sdoc-editor__article .image-resizer {
+.sdoc-editor__article .sdoc-image-resizer {
   width: 10px;
   height: 10px;
   position: absolute;
@@ -289,7 +289,7 @@
   background-color: #efefef;
 }
 
-.sdoc-editor__article .image-size {
+.sdoc-editor__article .sdoc-image-size {
   display: inline-block;
   padding: 5px;
   white-space: nowrap;
@@ -316,21 +316,21 @@
 }
 
 /* caret */
-.sdoc-editor__article .caret-item .caret-name::before {
+.sdoc-editor__article .sdoc-caret-item .sdoc-caret-name::before {
   content: attr(name);
 }
 
-.sdoc-editor__article .caret-item .caret-name {
+.sdoc-editor__article .sdoc-caret-item .sdoc-caret-name {
   display: none;
 }
 
-.sdoc-editor__article .caret-item:hover .caret-name {
+.sdoc-editor__article .sdoc-caret-item:hover .sdoc-caret-name {
   display: block;
 }
 
 /* link */
-.sdoc-editor__article .virtual-link a,
-.sdoc-editor__article .virtual-link {
+.sdoc-editor__article .sdoc-virtual-link a,
+.sdoc-editor__article .sdoc-virtual-link {
   color: #212529;
   font-weight: 500;
   text-decoration: underline;
@@ -338,8 +338,8 @@
   text-decoration-color: rgb(55 53 47 / 25%);
 }
 
-.sdoc-editor__article .virtual-link a:hover,
-.sdoc-editor__article .virtual-link:hover {
+.sdoc-editor__article .sdoc-virtual-link a:hover,
+.sdoc-editor__article .sdoc-virtual-link:hover {
   text-decoration: underline;
   text-underline-position: under;
   text-decoration-color: rgb(55 53 47 / 25%);

@@ -55,7 +55,7 @@ class OutlineItem extends React.PureComponent {
       'pl-5': type === 'header2',
       'pl-7': type === 'header3',
       'active': isHighlighted,
-      'wiki-outline-active': isActive
+      'sdoc-wiki-outline-active': isActive
     });
 
     if (isDisplayHorizontalBar) {
@@ -76,7 +76,7 @@ class OutlineItem extends React.PureComponent {
     if (isDisplayHorizontalBar) {
       return (
         <div className={outlineItemClass}>
-          <div className={classNames('wiki-outline-context', { 'active': isActive })} style={{ width: HEADER_OUTLINE_WIDTH_MAPPING[type] }}/>
+          <div className={classNames('sdoc-wiki-outline-context', { 'active': isActive })} style={{ width: HEADER_OUTLINE_WIDTH_MAPPING[type] }}/>
         </div>
       );
     }

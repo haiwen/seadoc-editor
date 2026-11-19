@@ -5,7 +5,7 @@ import Tooltip from '../../../../../components/tooltip';
 
 const FontSizeScale = ({
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   children,
   id,
   disabled,

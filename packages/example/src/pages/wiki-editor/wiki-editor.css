@@ -66,7 +66,7 @@
   align-items: center;
 }
 
-.wiki-editor-container .wiki-page-title .ops .op-item {
+.wiki-editor-container .wiki-page-title .ops .sdoc-op-item {
   border-radius: 4px;
   color: #949491;
   cursor: pointer;
@@ -74,7 +74,7 @@
   padding: 2px 8px;
 }
 
-.wiki-editor-container .wiki-page-title .ops .op-item:hover {
+.wiki-editor-container .wiki-page-title .ops .sdoc-op-item:hover {
   background-color: #efefef;
   border-radius: 4px;
 }

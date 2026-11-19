@@ -47,12 +47,12 @@ const VideoHoverMenu = ({ editor, menuPosition, element, videoRef, setIsSelected
 
   return (
     <ElementPopover>
-      <div className="video-hover-menu-container d-print-none" style={menuPosition}>
-        <div className='hover-menu-container'>
+      <div className="sdoc-video-hover-menu-container d-print-none" style={menuPosition}>
+        <div className='sdoc-hover-menu-container'>
           {!readOnly && (
             <>
-              <span className='op-group-item'>
-                <span id='sdoc_video_copy' role="button" className='op-item' onClick={onCopy}>
+              <span className='sdoc-op-group-item'>
+                <span id='sdoc_video_copy' role="button" className='sdoc-op-item' onClick={onCopy}>
                   <i className='sdocfont sdoc-copy'></i>
                 </span>
                 {isShowTooltip && (
@@ -61,7 +61,7 @@ const VideoHoverMenu = ({ editor, menuPosition, element, videoRef, setIsSelected
                   </Tooltip>
                 )}
                 <span
-                  id='sdoc_video_delete' role="button" className='op-item' onClick={onDeleteVideo}>
+                  id='sdoc_video_delete' role="button" className='sdoc-op-item' onClick={onDeleteVideo}>
                   <i className='sdocfont sdoc-delete'/>
                   {isShowTooltip &&
                     <Tooltip target='sdoc_video_delete' placement='top' fade={true}>
@@ -69,11 +69,11 @@ const VideoHoverMenu = ({ editor, menuPosition, element, videoRef, setIsSelected
                     </Tooltip>}
                 </span>
               </span>
-              <span className='op-group-item'>
+              <span className='sdoc-op-group-item'>
                 <span
                   id='sdoc_video_full_screen_mode'
                   role="button"
-                  className='op-item'
+                  className='sdoc-op-item'
                   onClick={handleFullScreen}
                 >
                   <i className='sdocfont sdoc-fullscreen'/>

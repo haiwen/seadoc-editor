@@ -10,7 +10,7 @@ const SampleTable = ({ alternateColor, onClickTemplate, curPositon }) => {
   // generate table
   const renderTableRow = useCallback((row, column) => new Array(row).fill(null).map((_, index) => (
     <div
-      className={`sdoc-table-template-row table-row ${getCellHighlightClassName(alternateColor, index)}`}
+      className={`sdoc-table-template-row sdoc-table-row ${getCellHighlightClassName(alternateColor, index)}`}
       key={`sdoc-template-table-row-${index}`}
       onClick={() => {
         onClickTemplate(alternateColor);

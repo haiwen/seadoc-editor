@@ -61,9 +61,9 @@ const EditableArticle = ({
     }
 
     // Remove linked block overlay style when operating
-    const highlightedNode = document.querySelector('.linked-block-highlight-overlay');
+    const highlightedNode = document.querySelector('.sdoc-linked-block-highlight-overlay');
     if (highlightedNode) {
-      highlightedNode.classList.remove('linked-block-highlight-overlay');
+      highlightedNode.classList.remove('sdoc-linked-block-highlight-overlay');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -337,14 +337,14 @@ const EditableArticle = ({
             onCompositionStart={eventProxy.onCompositionStart}
             id='sdoc-editor'
             aria-label='textbox'
-            className={`slate-content ${
-              cursorState.type ? 'hide-native-cursor' : ''
+            className={`sdoc-slate-content ${
+              cursorState.type ? 'sdoc-hide-native-cursor' : ''
             }`}
           />
 
           {cursorState.type && (
             <div
-              className={`custom-cursor ${cursorState.type}`}
+              className={`sdoc-custom-cursor ${cursorState.type}`}
               style={{
                 top: cursorState.top,
                 left: cursorState.left,

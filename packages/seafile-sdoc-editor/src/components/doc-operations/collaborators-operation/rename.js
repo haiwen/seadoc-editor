@@ -74,7 +74,7 @@ class Rename extends React.Component {
 
   render() {
     return (
-      <div className="rename-container">
+      <div className="sdoc-rename-container">
         <input
           ref={this.inputRef}
           value={this.state.name}

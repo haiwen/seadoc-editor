@@ -9,7 +9,7 @@
   box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.1);
 }
 
-.sdoc-search-replace-popover-container.in-wiki {
+.sdoc-search-replace-popover-container.sdoc-in-wiki {
   z-index: 1000;
   right: 0px;
   left: unset !important;

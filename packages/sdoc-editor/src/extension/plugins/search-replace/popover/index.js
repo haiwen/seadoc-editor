@@ -177,7 +177,7 @@ const SearchReplacePopover = ({ editor, closePopover, readonly }) => {
     createPortal(
       <>
         <div
-          className={classNames('sdoc-search-replace-popover-container', { 'in-wiki': editor.editorType === WIKI_EDITOR })}
+          className={classNames('sdoc-search-replace-popover-container', { 'sdoc-in-wiki': editor.editorType === WIKI_EDITOR })}
           onMouseDown={handleStartMove}
           onMouseMove={handleMouseMove}
           onMouseUp={handleFinishMove}

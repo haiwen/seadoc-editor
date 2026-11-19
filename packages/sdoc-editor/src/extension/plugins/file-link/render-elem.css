@@ -1,4 +1,4 @@
-.file-link-selected,
+.sdoc-file-link-render-selected,
 .sdoc-file-link-render:hover {
   background-color: rgb(153 153 153 / 15%) !important;
   padding: 3px 0;
@@ -64,11 +64,11 @@
   transform: translateY(-50%);
 }
 
-.sdoc-file-link-render .sdoc-file-link-icon .file-link-img {
+.sdoc-file-link-render .sdoc-file-link-icon .sdoc-file-link-img {
   width: 20px;
 }
 
-.sdoc-file-card-link .sdoc-file-link-icon .file-link-img {
+.sdoc-file-card-link .sdoc-file-link-icon .sdoc-file-link-img {
   width: 28px;
 }
 

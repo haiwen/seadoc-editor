@@ -7,7 +7,7 @@ import AIIcon from '../ai-icon';
 
 const MenuItem = ({
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   disabled,
   isActive,
   type,

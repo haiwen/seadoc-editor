@@ -186,9 +186,9 @@ const RevisionsDialog = ({ updateRevisionsCount, toggle }) => {
 
   return (
     <>
-      <Modal isOpen={true} toggle={toggle} className="revisions-dialog">
+      <Modal isOpen={true} toggle={toggle} className="sdoc-revisions-dialog">
         <SdocModalHeader toggle={toggle}>{t('Revision')}</SdocModalHeader>
-        <ModalBody className="revisions-body">
+        <ModalBody className="sdoc-revisions-body">
           {renderContent()}
         </ModalBody>
       </Modal>

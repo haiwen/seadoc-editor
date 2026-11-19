@@ -20,7 +20,7 @@ import './index.css';
 
 const InsertToolbar = ({
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   editor,
   readonly
 }) => {
@@ -45,7 +45,7 @@ const InsertToolbar = ({
   }, [isShowMenu]);
 
   const validClassName = classnames(className, 'sdoc-menu-with-dropdown sdoc-insert-toolbar-btn', {
-    'menu-show': isShowMenu,
+    'sdoc-menu-show': isShowMenu,
     'disabled': disabled,
     'rich-icon-btn d-flex': isRichEditor,
     'rich-icon-btn-disabled': isRichEditor && disabled,

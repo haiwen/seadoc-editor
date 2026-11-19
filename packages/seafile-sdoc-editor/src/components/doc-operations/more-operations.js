@@ -167,7 +167,7 @@ const MoreOperations = ({ isStarred, t }) => {
       isOpen={isDropdownOpen}
       toggle={(event) => toggleDropdown(event, isDropdownOpen)}
     >
-      <DropdownToggle id={id} className="op-item" tag="span">
+      <DropdownToggle id={id} className="sdoc-op-item" tag="span">
         <i className='sdocfont sdoc-more'></i>
       </DropdownToggle>
       {!isDropdownOpen && (

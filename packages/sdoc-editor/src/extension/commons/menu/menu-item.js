@@ -7,7 +7,7 @@ import { SDOC_LINK } from '../../constants';
 
 const MenuItem = ({
   isRichEditor = true,
-  className = 'menu-group-item',
+  className = 'sdoc-menu-group-item',
   disabled,
   isActive,
   type,

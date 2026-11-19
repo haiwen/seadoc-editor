@@ -204,7 +204,7 @@ const EmbedLink = ({ editor, element }) => {
     <>
       <div
         ref={embedLinkContainerRef}
-        className={classNames('sdoc-embed-link-container', { 'isSelected': isSelected })}
+        className={classNames('sdoc-embed-link-container', { 'sdoc-isSelected': isSelected })}
         style={{ height: getEmbedLinkHeight(), maxHeight: MAX_EMBED_LINK_HEIGHT }}
         onDoubleClick={handleDoubleClick}
         scrolling='no'
@@ -218,9 +218,9 @@ const EmbedLink = ({ editor, element }) => {
               ref={EmbedLinkRef}
             >
             </iframe>
-            <div className='iframe-overlay' onDoubleClick={handleDoubleClick} onClick={handleOnClick}></div>
+            <div className='sdoc-iframe-overlay' onDoubleClick={handleDoubleClick} onClick={handleOnClick}></div>
             {!readOnly && isSelected && (
-              <span className='image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
+              <span className='sdoc-image-resizer' ref={resizerRef} onMouseDown={onResizeStart}></span>
             )}
           </>
         )}
@@ -239,7 +239,7 @@ const EmbedLink = ({ editor, element }) => {
       }
       {isShowZoomOut && isValidUrl && (
         ReactDOM.createPortal(
-          <div className='embed-link-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
+          <div className='sdoc-embed-link-zoom-out-container' onClick={() => setIsShowZoomOut(false)}>
             <iframe
               title={link}
               className={`sdoc-embed-link-element-full-screen ${link_type}`}

@@ -31,15 +31,15 @@ const CommentAllParticipants = () => {
 
   return (
     <>
-      <div className="comments-participants-container">
-        <div className="comments-participants-editor-target" id={commentsParticipantsId}></div>
+      <div className="sdoc-comments-participants-container">
+        <div className="sdoc-comments-participants-editor-target" id={commentsParticipantsId}></div>
         {participants.slice(0, 14).map((participant, index) => {
           const { username } = participant;
           return (
             <ParticipantAvatar key={username} participant={participant} index={index} showMore={participantsCount > 13 && index === 13} />
           );
         })}
-        <div className="add-comments-participants" id={addParticipantId} onClick={toggle}>
+        <div className="sdoc-add-comments-participants" id={addParticipantId} onClick={toggle}>
           <i className="sdocfont sdoc-add"></i>
         </div>
         {isDidMount && (<Tooltip target={addParticipantId}>{t('Add_participants')}</Tooltip>)}

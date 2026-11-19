@@ -23,7 +23,7 @@ const PresentationOperation = () => {
   }, [closePlugin, plugins]);
 
   return (
-    <span className='op-item' id={id} onClick={onPresentationToggle}>
+    <span className='sdoc-op-item' id={id} onClick={onPresentationToggle}>
       <i className='sdocfont sdoc-presentation'></i>
       <Tooltip target={id}>
         {t('Presentation')}

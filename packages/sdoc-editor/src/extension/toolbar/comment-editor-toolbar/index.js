@@ -16,7 +16,7 @@ const CommentEditorToolbar = ({ editor, readonly = false, onSubmit, submitBtnTex
   const eventBus = EventBus.getInstance();
   return (
     <div className='sdoc-comment-editor-toolbar'>
-      <MenuGroup className="menu-group sdoc-comment-editor-menu-group">
+      <MenuGroup className="sdoc-menu-group sdoc-comment-editor-menu-group">
         <CommentEditorTextStyleMenuList editor={editor} readonly={readonly} />
         <QuoteMenu editor={editor} readonly={readonly} />
         <ListMenu editor={editor} type={UNORDERED_LIST} readonly={readonly}/>

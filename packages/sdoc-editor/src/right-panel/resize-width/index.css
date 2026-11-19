@@ -6,7 +6,7 @@
   width: 6px;
 }
 
-.sdoc-resize-width-handler.resize-handler-placement-right {
+.sdoc-resize-width-handler.sdoc-resize-handler-placement-right {
   left: 0;
   right: auto;
 }

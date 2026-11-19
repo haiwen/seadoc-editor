@@ -228,12 +228,12 @@ const CommentItemWrapper = forwardRef(({
     }
   }, [isActive]);
 
-  const className = classNames('comment-ui-container', {
+  const className = classNames('sdoc-comment-ui-container', {
     'active': isActive,
     'sdoc-resolved': comment?.resolved,
     'd-flex flex-column': element,
-    'global-comment-item-detail-wrapper': isGlobalComment,
-    'comment-item-detail-wrapper': !isGlobalComment
+    'sdoc-global-comment-item-detail-wrapper': isGlobalComment,
+    'sdoc-comment-item-detail-wrapper': !isGlobalComment
   });
 
   const handleScrollToArticle = useCallback((e) => {
@@ -249,17 +249,17 @@ const CommentItemWrapper = forwardRef(({
   return (
     <div id={`comment-item-wrapper_${newCommentId}`} className={className} onClick={onItemClick}>
       {element && (
-        <div className="comment-item-selected-text-container" onClick={handleScrollToArticle}>
+        <div className="sdoc-comment-item-selected-text-container" onClick={handleScrollToArticle}>
           <i className="sdocfont sdoc-quote-left mr-2"></i>
-          <div className="comment-item-selected-text">{Node.string(element)}</div>
+          <div className="sdoc-comment-item-selected-text">{Node.string(element)}</div>
         </div>
       )}
       {!isEmptyComment && (
-        <div ref={listRef} className="comment-item-list" style={style}>
+        <div ref={listRef} className="sdoc-comment-item-list" style={style}>
           {comment.detail.element_id_list && !isGlobalComment && (
-            <div className="context-comment-item-selected-text-container">
+            <div className="sdoc-context-comment-item-selected-text-container">
               <i className="sdocfont sdoc-quote-left mr-2"></i>
-              <div className="context-comment-items">
+              <div className="sdoc-context-comment-items">
                 {commentedElementIds.map((elementId, index) => {
                   return (<div className="context-comment-item-selected-text" key={index}>{getCommentedTextsByElementId(elementId, comment.detail.text_comment_id)}</div>);
                 })}

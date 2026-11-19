@@ -116,7 +116,7 @@ const SideToolbar = () => {
       if (isShowSideMenu) return;
       let dom = e.target;
       while (dom?.dataset?.root !== 'true') {
-        if (dom.className === 'column') {
+        if (dom.className === 'sdoc-multicolumn-column') {
           return;
         }
         if (!dom.parentNode) return;
@@ -882,7 +882,7 @@ const SideToolbar = () => {
         <div
           onAnimationEnd={() => setIsMoving(false)}
           ref={sideToolbarContainerRef}
-          className={classnames('sdoc-side-toolbar-container d-print-none', { 'fade-out': isMoving })}
+          className={classnames('sdoc-side-toolbar-container d-print-none', { 'sdoc-fade-out': isMoving })}
           style={sidePosition}
         >
           {slateNode && (

@@ -53,15 +53,15 @@
 }
 
 /* common */
-.sdoc-table-wrapper .sdoc-table-row-header.range-selected,
-.sdoc-table-wrapper .sdoc-table-column-header.range-selected,
-.sdoc-table-wrapper .sdoc-table-rows-columns-header.range-selected {
+.sdoc-table-wrapper .sdoc-table-row-header.sdoc-range-selected,
+.sdoc-table-wrapper .sdoc-table-column-header.sdoc-range-selected,
+.sdoc-table-wrapper .sdoc-table-rows-columns-header.sdoc-range-selected {
   background-color: #81868F !important;
 }
 
-.sdoc-table-wrapper .sdoc-table-row-header.range-selected-tip,
-.sdoc-table-wrapper .sdoc-table-column-header.range-selected-tip,
-.sdoc-table-wrapper .sdoc-table-rows-columns-header.range-selected-tip {
+.sdoc-table-wrapper .sdoc-table-row-header.sdoc-range-selected-tip,
+.sdoc-table-wrapper .sdoc-table-column-header.sdoc-range-selected-tip,
+.sdoc-table-wrapper .sdoc-table-rows-columns-header.sdoc-range-selected-tip {
   background-color: rgb(233, 235, 237);
 }
 

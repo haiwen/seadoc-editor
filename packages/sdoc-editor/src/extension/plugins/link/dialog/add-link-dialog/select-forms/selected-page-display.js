@@ -7,13 +7,13 @@ export const PageDisplay = ({ pageId, wikiPageList }) => {
 
   return (
     <>
-      {page.icon && <span className="page-icon">{page.icon}</span>}
+      {page.icon && <span className="sdoc-linked-page-icon">{page.icon}</span>}
       {!page.icon && (
         <>
-          {page.isDir ? <span className='page-icon sdocfont sdoc-wiki-files'/> : <span className='page-icon sdocfont sdoc-wiki-file'/>}
+          {page.isDir ? <span className='sdoc-linked-page-icon sdocfont sdoc-wiki-files'/> : <span className='sdoc-linked-page-icon sdocfont sdoc-wiki-file'/>}
         </>
       )}
-      <span className="page-name">{page.name}</span>
+      <span className="sdoc-linked-page-name">{page.name}</span>
     </>
   );
 };

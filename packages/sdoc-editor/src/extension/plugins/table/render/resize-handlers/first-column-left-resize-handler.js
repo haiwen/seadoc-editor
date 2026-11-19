@@ -64,12 +64,12 @@ const FirstColumnResizeHandler = ({ column, left: initLeft, table, cellIndex, ro
 
   return (
     <div
-      className='table-cell-width-just resizing position-fixed d-print-none'
+      className='sdoc-table-cell-width-just resizing position-fixed d-print-none'
       contentEditable={false}
       style={style}
       ref={resizeHandler}
     >
-      <div className="table-cell-width-just-color-tip"></div>
+      <div className="sdoc-table-cell-width-just-color-tip"></div>
     </div>
   );
 

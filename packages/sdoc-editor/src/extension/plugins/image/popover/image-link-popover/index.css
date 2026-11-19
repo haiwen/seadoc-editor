@@ -93,7 +93,7 @@
 }
 
 .sdoc-image-link-result:hover,
-.sdoc-image-link-result.is-active {
+.sdoc-image-link-result.sdoc-is-active {
   background: #f5f5f5;
 }
 

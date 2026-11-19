@@ -16,7 +16,7 @@ export default function AIContextMenu({ isRichEditor }) {
   const aiProps = {
     id: 'context-toolbar-ai',
     isRichEditor,
-    className: 'menu-group-item sdoc-ask-ai-menu-container',
+    className: 'sdoc-menu-group-item sdoc-ask-ai-menu-container',
     disabled: false,
     isActive: false,
     onMouseDown: onAiClick,

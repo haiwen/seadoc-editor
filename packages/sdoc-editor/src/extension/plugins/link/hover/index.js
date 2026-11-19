@@ -57,7 +57,7 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
     if (linkedNodeEntry) {
       const node = linkedNodeEntry[0];
       const linkedDomNode = ReactEditor.toDOMNode(editor, node);
-      linkedDomNode.classList.add('linked-block-highlight-overlay');
+      linkedDomNode.classList.add('sdoc-linked-block-highlight-overlay');
 
       // Scroll linked node to view if not in current view
       if (!isNodeInCurrentView(linkedDomNode)) {
@@ -72,14 +72,14 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
   return (
     <>
       {createPortal(
-        <div id="link-op-menu" className="link-op-menu" style={menuPosition}>
+        <div id="link-op-menu" className="sdoc-link-op-menu" style={menuPosition}>
           {linked_id || linked_wiki_page_id ?
-            <span className="link-op-menu-link" onClick={handleOnClick}>{t('Go_to_link')}</span> :
-            <span target="_blank" rel="noopener noreferrer" className="link-op-menu-link" onMouseDown={onMouseDown}>{t('Open_link')}</span>
+            <span className="sdoc-link-op-menu-link" onClick={handleOnClick}>{t('Go_to_link')}</span> :
+            <span target="_blank" rel="noopener noreferrer" className="sdoc-link-op-menu-link" onMouseDown={onMouseDown}>{t('Open_link')}</span>
           }
           {!readOnly && (
-            <div className="link-op-icons d-flex">
-              <span id='edit-link' role="button" className="link-op-icon" onClick={onEditLink}>
+            <div className="sdoc-link-op-icons d-flex">
+              <span id='edit-link' role="button" className="sdoc-link-op-icon" onClick={onEditLink}>
                 <i className="sdocfont sdoc-rename"></i>
               </span>
               {isShowTooltip && (
@@ -87,7 +87,7 @@ const LinkHover = ({ editor, element, menuPosition, onDeleteLink, onEditLink }) 
                   {t('Edit_link')}
                 </Tooltip>
               )}
-              <span id='delete-link' role="button" className="link-op-icon" onClick={onDeleteLink}>
+              <span id='delete-link' role="button" className="sdoc-link-op-icon" onClick={onDeleteLink}>
                 <i className="sdocfont sdoc-unlink"></i>
               </span>
               {isShowTooltip && (

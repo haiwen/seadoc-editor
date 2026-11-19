@@ -6,17 +6,17 @@ const CommentItemResolvedReply = ({ reply, t }) => {
 
   return (
     <Fragment>
-      <div className='comment-item'>
-        <div className='comment-header'>
-          <div className='comment-author'>
-            <span className='comment-author__avatar'><img alt='' src={reply.avatar_url}/></span>
-            <span className='comment-author__info'>
-              <span className='name'>{reply.user_name}</span>
-              <span className='time'>{dayjs(reply.updated_at).format('MM-DD HH:mm')}</span>
+      <div className='sdoc-comment-item'>
+        <div className='sdoc-comment-header'>
+          <div className='sdoc-comment-author'>
+            <span className='sdoc-comment-author__avatar'><img alt='' src={reply.avatar_url}/></span>
+            <span className='sdoc-comment-author__info'>
+              <span className='sdoc-name'>{reply.user_name}</span>
+              <span className='sdoc-time'>{dayjs(reply.updated_at).format('MM-DD HH:mm')}</span>
             </span>
           </div>
         </div>
-        <p className='comment-content'>
+        <p className='sdoc-comment-content'>
           {reply.reply === 'True' && <span>{t('Mark_as_Resolved')}</span>}
           {reply.reply === 'False' && <span>{t('Resubmitted')}</span>}
         </p>

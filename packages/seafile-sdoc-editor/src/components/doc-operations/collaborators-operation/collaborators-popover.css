@@ -1,9 +1,9 @@
-.collaborators-popover.popover {
+.sdoc-collaborators-popover.popover {
   width: 300px;
   max-width: 300px;
 }
 
-.collaborators-popover .popover-container {
+.sdoc-collaborators-popover .sdoc-collaborators-popover-container {
   padding: 0;
   margin: 0;
   max-height: 360px;
@@ -12,7 +12,7 @@
   justify-content: center;
 }
 
-.collaborators-popover .popover-header {
+.sdoc-collaborators-popover .popover-header {
   height: 50px;
   min-height: 50px;
   display: flex;
@@ -25,7 +25,7 @@
   background: #fff;
 }
 
-.collaborators-popover .popover-container .content-list {
+.sdoc-collaborators-popover .sdoc-collaborators-popover-container .sdoc-collaborators-content-list {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
   padding: 5px 0;
 }
 
-.content-list .collaborator-details {
+.sdoc-collaborators-content-list .sdoc-collaborator-details {
   position: relative;
   height: 32px;
   line-height: 32px;
@@ -44,11 +44,11 @@
   padding: 3px 12px;
 }
 
-.content-list .collaborator-details:hover {
+.sdoc-collaborators-content-list .sdoc-collaborator-details:hover {
   background-color: #f8f8f8;
 }
 
-.content-list .collaborator-details .collaborator-tag {
+.sdoc-collaborators-content-list .sdoc-collaborator-details .sdoc-collaborator-tag {
   margin-right: 8px;
   height: 5px;
   width: 5px;
@@ -57,7 +57,7 @@
   overflow: hidden;
 }
 
-.content-list .collaborator-details .collaborator-avatar {
+.sdoc-collaborators-content-list .sdoc-collaborator-details .sdoc-collaborator-avatar {
   margin-right: 8px;
   height: 20px;
   width: 20px;
@@ -65,7 +65,7 @@
   overflow: hidden;
 }
 
-.content-list .collaborator-details .collaborator-name {
+.sdoc-collaborators-content-list .sdoc-collaborator-details .sdoc-collaborator-name {
   max-width: calc(100% - 20px);
   overflow: hidden;
   white-space: nowrap;
@@ -73,20 +73,20 @@
   color: #212529;
 }
 
-.content-list .collaborator-details .sdocfont {
+.sdoc-collaborators-content-list .sdoc-collaborator-details .sdocfont {
   position: absolute;
   right: 12px;
   font-size: 14px;
   display: inline-block;
 }
 
-.content-list .collaborator-details .sdocfont:hover {
+.sdoc-collaborators-content-list .sdoc-collaborator-details .sdocfont:hover {
   color: #666;
   cursor: pointer;
 }
 
 
-.content-list .collaborator-details .rename-container input {
+.sdoc-collaborators-content-list .sdoc-collaborator-details .sdoc-rename-container input {
   box-sizing: content-box;
   padding: 2px 3px;
   max-width: 100%;
@@ -100,7 +100,7 @@
 }
 
 
-.content-list .collaborator-details .rename-container input:focus {
+.sdoc-collaborators-content-list .sdoc-collaborator-details .sdoc-rename-container input:focus {
   background-color: #fff;
   border-color: #1991eb;
   outline: 0;
