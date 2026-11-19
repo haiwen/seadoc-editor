@@ -3,12 +3,935 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.267](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.212...%40seafile%2Fsdoc-editor%403.0.267) (2026-11-19)
+
+### Bug Fixes
+
+- limit full-page WeChat paste to article content ([#362](https://github.com/haiwen/seadoc-editor/issues/362)) ([1847984](https://github.com/haiwen/seadoc-editor/commit/1847984ff10dc14206b5e4be6b3dc9c74e8a4507))
+- mount mobile image fullscreen button outside article and preserve tap behavior ([#363](https://github.com/haiwen/seadoc-editor/issues/363)) ([92414dd](https://github.com/haiwen/seadoc-editor/commit/92414dd88cd2e69a7ed442c5062bdefed7d95a82))
+- prevent cursor movement during IME composition ([#364](https://github.com/haiwen/seadoc-editor/issues/364)) ([5fca934](https://github.com/haiwen/seadoc-editor/commit/5fca93477bae1ee0c47c442d44b9968e13d977c1))
+
 ## [3.0.266](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.265...%40seafile%2Fsdoc-editor%403.0.266) (2026-11-16)
 
 ### Bug Fixes
 
-* disable mobile image fullscreen button hover and tooltips ([#352](https://github.com/haiwen/seadoc-editor/issues/352)) ([16f8b96](https://github.com/haiwen/seadoc-editor/commit/16f8b9623535b62843acc23f7cb33d480e69b8fa))
+- disable mobile image fullscreen button hover and tooltips ([#352](https://github.com/haiwen/seadoc-editor/issues/352)) ([16f8b96](https://github.com/haiwen/seadoc-editor/commit/16f8b9623535b62843acc23f7cb33d480e69b8fa))
 
+## [3.0.265](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.264...%40seafile%2Fsdoc-editor%403.0.265) (2026-11-13)
+
+### Bug Fixes
+
+- prevent editing video loading placeholder ([#349](https://github.com/haiwen/seadoc-editor/issues/349)) ([b9f82ae](https://github.com/haiwen/seadoc-editor/commit/b9f82aea46b8e27db12820b845db25f085c0dab9))
+- unify sdoc table borders and default header styles ([#350](https://github.com/haiwen/seadoc-editor/issues/350)) ([84c8a01](https://github.com/haiwen/seadoc-editor/commit/84c8a017b525185fcee04adae8ba967abfe5ca03))
+
+### Features
+
+- expose image preview lifecycle and close events ([#351](https://github.com/haiwen/seadoc-editor/issues/351)) ([8902976](https://github.com/haiwen/seadoc-editor/commit/8902976aa837b5622e6bc1b49ba5e588c809807d))
+
+## [3.0.264](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.263...%40seafile%2Fsdoc-editor%403.0.264) (2026-11-09)
+
+### Bug Fixes
+
+- preserve WeChat image paragraphs and text styles on paste ([#348](https://github.com/haiwen/seadoc-editor/issues/348)) ([459ead5](https://github.com/haiwen/seadoc-editor/commit/459ead5cd4f6c0191cbd2423a1ff62a856fa1ac1))
+
+## [3.0.263](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.262...%40seafile%2Fsdoc-editor%403.0.263) (2026-11-06)
+
+### Bug Fixes
+
+- respect read-only mode in image blocks ([#347](https://github.com/haiwen/seadoc-editor/issues/347)) ([c6b6860](https://github.com/haiwen/seadoc-editor/commit/c6b68607bab70bb259d45e58eaf7820b7a4b936b))
+
+## [3.0.262](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.261...%40seafile%2Fsdoc-editor%403.0.262) (2026-11-04)
+
+### Bug Fixes
+
+- address CodeQL security alerts ([#345](https://github.com/haiwen/seadoc-editor/issues/345)) ([9807019](https://github.com/haiwen/seadoc-editor/commit/9807019d616e9233401e7c0182514ac8ae898b99))
+
+## [3.0.261](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.260...%40seafile%2Fsdoc-editor%403.0.261) (2026-11-02)
+
+### Bug Fixes
+
+- preserve shift-arrow text selection ([#340](https://github.com/haiwen/seadoc-editor/issues/340)) ([d27548a](https://github.com/haiwen/seadoc-editor/commit/d27548accabcc1f60520aa8200435a84d22b24c6))
+
+## [3.0.260](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.259...%40seafile%2Fsdoc-editor%403.0.260) (2026-11-02)
+
+### Bug Fixes
+
+- regroup comment bubbles by current paragraph ([#337](https://github.com/haiwen/seadoc-editor/issues/337)) ([0acb80f](https://github.com/haiwen/seadoc-editor/commit/0acb80f080cb36065f48b04642c0a3505217d22e))
+
+## [3.0.259](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.258...%40seafile%2Fsdoc-editor%403.0.259) (2026-10-29)
+
+### Bug Fixes
+
+- preserve comments on first paste of fully cut text ([#332](https://github.com/haiwen/seadoc-editor/issues/332)) ([c886348](https://github.com/haiwen/seadoc-editor/commit/c88634801e9826945d174c88933f06f45547c0cc))
+
+## [3.0.258](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.257...%40seafile%2Fsdoc-editor%403.0.258) (2026-10-28)
+
+### Bug Fixes
+
+- prevent inserted text from inheriting comment marks ([#329](https://github.com/haiwen/seadoc-editor/issues/329)) ([1c3697b](https://github.com/haiwen/seadoc-editor/commit/1c3697bd3763e6067943c32b88d8796dbbd0dd9a))
+
+## [3.0.257](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.256...%40seafile%2Fsdoc-editor%403.0.257) (2026-10-24)
+
+### Bug Fixes
+
+- correct MathJax script URL ([#331](https://github.com/haiwen/seadoc-editor/issues/331)) ([18b61a3](https://github.com/haiwen/seadoc-editor/commit/18b61a34d3619db44c0667a4f370af4d4a2864e2))
+- escape regex metacharacters in search input ([#330](https://github.com/haiwen/seadoc-editor/issues/330)) ([01af924](https://github.com/haiwen/seadoc-editor/commit/01af9241e4ed97f0170b7bc28b1b02ff4672ae84))
+
+## [3.0.256](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.255...%40seafile%2Fsdoc-editor%403.0.256) (2026-10-21)
+
+### Bug Fixes
+
+- hide section links in plugin editors ([#327](https://github.com/haiwen/seadoc-editor/issues/327)) ([2ed6848](https://github.com/haiwen/seadoc-editor/commit/2ed6848de76b448b0a022f80f33a5c900aa6febd))
+
+## [3.0.255](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.254...%40seafile%2Fsdoc-editor%403.0.255) (2026-10-20)
+
+### Bug Fixes
+
+- enable direct color value input in text color picker ([#322](https://github.com/haiwen/seadoc-editor/issues/322)) ([57e0dfa](https://github.com/haiwen/seadoc-editor/commit/57e0dfa2121a9a05f536c1865f6c67ea9c58765e))
+
+## [3.0.254](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.253...%40seafile%2Fsdoc-editor%403.0.254) (2026-10-19)
+
+### Bug Fixes
+
+- add URL validation in use-copy-image.js (CWE-918) ([#319](https://github.com/haiwen/seadoc-editor/issues/319)) ([f1728f3](https://github.com/haiwen/seadoc-editor/commit/f1728f3789da72886c17f0014c61de9d4fa9a7f3))
+- sync comment popover data without overwriting drafts ([#324](https://github.com/haiwen/seadoc-editor/issues/324)) ([ed14a79](https://github.com/haiwen/seadoc-editor/commit/ed14a79f90fcb9d5968ca94868f8f40f3c6ee496))
+
+### Features
+
+- persist last selected text and highlight colors ([#323](https://github.com/haiwen/seadoc-editor/issues/323)) ([db37ce3](https://github.com/haiwen/seadoc-editor/commit/db37ce3acc9d573492a70c1535b3a39a3e868acd))
+
+## [3.0.253](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.252...%40seafile%2Fsdoc-editor%403.0.253) (2026-10-13)
+
+## [3.0.252](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.246...%40seafile%2Fsdoc-editor%403.0.252) (2026-10-10)
+
+### Bug Fixes
+
+- **editor:** restrict link URLs to HTTP(S) ([#320](https://github.com/haiwen/seadoc-editor/issues/320)) ([3834be6](https://github.com/haiwen/seadoc-editor/commit/3834be611982906ed5f8134703a08b4821cdd5ad))
+
+## [3.0.246](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.242...%40seafile%2Fsdoc-editor%403.0.246) (2026-09-28)
+
+### Bug Fixes
+
+- **wiki-editor:** improve block insertions ([#316](https://github.com/haiwen/seadoc-editor/issues/316)) ([3309f9c](https://github.com/haiwen/seadoc-editor/commit/3309f9cac5ceec75228d241e1b4ef83fcb2c9e22))
+
+### Features
+
+- configure Seadoc video upload limit ([#314](https://github.com/haiwen/seadoc-editor/issues/314)) ([07858e5](https://github.com/haiwen/seadoc-editor/commit/07858e5067ada7977d61dbc9333c491f03b5a464))
+
+## [3.0.242](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.241...%40seafile%2Fsdoc-editor%403.0.242) (2026-09-17)
+
+### Bug Fixes
+
+- dismiss context toolbar tooltips before hiding ([#313](https://github.com/haiwen/seadoc-editor/issues/313)) ([5518075](https://github.com/haiwen/seadoc-editor/commit/55180751faa77735ee13f23979c619aa17664fc4))
+
+## [3.0.241](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.239...%40seafile%2Fsdoc-editor%403.0.241) (2026-09-13)
+
+### Bug Fixes
+
+- print hide editor elements ([#312](https://github.com/haiwen/seadoc-editor/issues/312)) ([b2d75f2](https://github.com/haiwen/seadoc-editor/commit/b2d75f297445c86a31b9e9bc91d413e5e346f815))
+
+## [3.0.239](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.238...%40seafile%2Fsdoc-editor%403.0.239) (2026-09-08)
+
+### Bug Fixes
+
+- show active state for code block auto wrap ([#310](https://github.com/haiwen/seadoc-editor/issues/310)) ([84e8da2](https://github.com/haiwen/seadoc-editor/commit/84e8da2ae5a30cb3167024a4e7402ef4537a80b7))
+- support special superlink's display ([#309](https://github.com/haiwen/seadoc-editor/issues/309)) ([6793837](https://github.com/haiwen/seadoc-editor/commit/679383783badc8df3a50d7153fa1226f894d4e4b))
+
+## [3.0.238](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.237...%40seafile%2Fsdoc-editor%403.0.238) (2026-09-03)
+
+### Bug Fixes
+
+- hide placeholders when printing ([#307](https://github.com/haiwen/seadoc-editor/issues/307)) ([77e2d9d](https://github.com/haiwen/seadoc-editor/commit/77e2d9d02f884f69934392de9bd8db6d0015fc51))
+
+## [3.0.237](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.236...%40seafile%2Fsdoc-editor%403.0.237) (2026-09-01)
+
+### Bug Fixes
+
+- make wiki outline height content driven ([#306](https://github.com/haiwen/seadoc-editor/issues/306)) ([714c87e](https://github.com/haiwen/seadoc-editor/commit/714c87e3cc02a733aeeab0a58642ae65af577c0a))
+
+## [3.0.236](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.235...%40seafile%2Fsdoc-editor%403.0.236) (2026-09-01)
+
+## [3.0.235](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.234...%40seafile%2Fsdoc-editor%403.0.235) (2026-08-25)
+
+### Bug Fixes
+
+- normalize WeChat code snippets on paste ([#303](https://github.com/haiwen/seadoc-editor/issues/303)) ([8ae0fe6](https://github.com/haiwen/seadoc-editor/commit/8ae0fe6015b719cd692c136354a6e373a5afaa84))
+
+## [3.0.234](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.233...%40seafile%2Fsdoc-editor%403.0.234) (2026-08-21)
+
+## [3.0.233](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.232...%40seafile%2Fsdoc-editor%403.0.233) (2026-08-21)
+
+### Bug Fixes
+
+- **link:** handle encoded file URLs ([#304](https://github.com/haiwen/seadoc-editor/issues/304)) ([cde722e](https://github.com/haiwen/seadoc-editor/commit/cde722e1304aa20b50a961de4570e6bdb61f0463))
+
+## [3.0.232](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.231...%40seafile%2Fsdoc-editor%403.0.232) (2026-08-19)
+
+### Bug Fixes
+
+- remove file insertion menu logic ([#301](https://github.com/haiwen/seadoc-editor/issues/301)) ([59d0641](https://github.com/haiwen/seadoc-editor/commit/59d06413b2561ec8edd20e17d49ba9da8b5ae941))
+
+## [3.0.231](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.230...%40seafile%2Fsdoc-editor%403.0.231) (2026-08-17)
+
+## [3.0.230](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.228...%40seafile%2Fsdoc-editor%403.0.230) (2026-08-11)
+
+## [3.0.228](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.227...%40seafile%2Fsdoc-editor%403.0.228) (2026-08-05)
+
+### Bug Fixes
+
+- fix diff view bug ([0421cc7](https://github.com/haiwen/seadoc-editor/commit/0421cc7b26174ca9d493fa444e6642711d8bdc4e))
+
+## [3.0.227](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.226...%40seafile%2Fsdoc-editor%403.0.227) (2026-08-05)
+
+### Bug Fixes
+
+- scope deleted image styles to diff views ([#298](https://github.com/haiwen/seadoc-editor/issues/298)) ([09283fe](https://github.com/haiwen/seadoc-editor/commit/09283fe6f6ecd202895333f91c955dc1b5f6ff27))
+
+## [3.0.226](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.225...%40seafile%2Fsdoc-editor%403.0.226) (2026-08-05)
+
+### Bug Fixes
+
+- disable image display switch in list items ([#297](https://github.com/haiwen/seadoc-editor/issues/297)) ([497d39c](https://github.com/haiwen/seadoc-editor/commit/497d39cfd198246c3b412e41b3c51cf84b2c4627))
+
+## [3.0.225](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.224...%40seafile%2Fsdoc-editor%403.0.225) (2026-08-04)
+
+### Bug Fixes
+
+- preserve links pasted into table cells ([#296](https://github.com/haiwen/seadoc-editor/issues/296)) ([27751f5](https://github.com/haiwen/seadoc-editor/commit/27751f5e26c1dc21659a61335b26c2e6e72a6e6d))
+
+## [3.0.224](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.223...%40seafile%2Fsdoc-editor%403.0.224) (2026-07-31)
+
+## [3.0.223](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.222...%40seafile%2Fsdoc-editor%403.0.223) (2026-07-27)
+
+## [3.0.222](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.221...%40seafile%2Fsdoc-editor%403.0.222) (2026-07-25)
+
+### Bug Fixes
+
+- **search:** handle highlight canvas boundaries ([#287](https://github.com/haiwen/seadoc-editor/issues/287)) ([fa68ede](https://github.com/haiwen/seadoc-editor/commit/fa68edecc1f97df7c48445fe345e67c79e304640))
+
+## [3.0.221](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.220...%40seafile%2Fsdoc-editor%403.0.221) (2026-07-23)
+
+### Bug Fixes
+
+- fix delete before table bug ([#286](https://github.com/haiwen/seadoc-editor/issues/286)) ([b531006](https://github.com/haiwen/seadoc-editor/commit/b531006efccf24b602ddd28828466e7a008a4f38))
+
+## [3.0.220](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.219...%40seafile%2Fsdoc-editor%403.0.220) (2026-07-21)
+
+### Features
+
+- **image:** support URL and wiki page links ([#8994](https://github.com/haiwen/seadoc-editor/issues/8994)) ([#281](https://github.com/haiwen/seadoc-editor/issues/281)) ([eef1c74](https://github.com/haiwen/seadoc-editor/commit/eef1c742d9d57235e913bd88025bbd0547cbadb5))
+
+## [3.0.219](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.218...%40seafile%2Fsdoc-editor%403.0.219) (2026-07-21)
+
+### Performance Improvements
+
+- optimize caret style ([2b18e03](https://github.com/haiwen/seadoc-editor/commit/2b18e03ebe92da5f0f7918fee51b8bbafe2cccab))
+
+## [3.0.218](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.216...%40seafile%2Fsdoc-editor%403.0.218) (2026-07-20)
+
+### Performance Improvements
+
+- optimize tooltip style ([#283](https://github.com/haiwen/seadoc-editor/issues/283)) ([f041915](https://github.com/haiwen/seadoc-editor/commit/f0419150b6fdf81ede23b1abc79c3685ce0ab45b))
+
+## [3.0.216](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.207...%40seafile%2Fsdoc-editor%403.0.216) (2026-07-15)
+
+### Bug Fixes
+
+- fix toggle outline bug when header is hidden ([#277](https://github.com/haiwen/seadoc-editor/issues/277)) ([30f9219](https://github.com/haiwen/seadoc-editor/commit/30f9219bee3a05372d3f35b2136830a1fee614dc))
+
+### Performance Improvements
+
+- optimize caret style ([c0d8ab8](https://github.com/haiwen/seadoc-editor/commit/c0d8ab8f8bf7a6a2073839bc1906fb5aa7b567ca))
+
+## [3.0.207](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.206...%40seafile%2Fsdoc-editor%403.0.207) (2026-06-26)
+
+### Performance Improvements
+
+- optimize code ([#270](https://github.com/haiwen/seadoc-editor/issues/270)) ([aa91faa](https://github.com/haiwen/seadoc-editor/commit/aa91faa7f4fd59375736ba564e1ffe517bd9f262))
+
+## [3.0.206](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.205...%40seafile%2Fsdoc-editor%403.0.206) (2026-06-25)
+
+## [3.0.205](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.204...%40seafile%2Fsdoc-editor%403.0.205) (2026-06-25)
+
+### Performance Improvements
+
+- intergrate localstorage ([1ce0552](https://github.com/haiwen/seadoc-editor/commit/1ce0552c4ca696de8933931ff63d0523b282eea8))
+- optimize header plugin interactive ([#265](https://github.com/haiwen/seadoc-editor/issues/265)) ([f2bef66](https://github.com/haiwen/seadoc-editor/commit/f2bef6676d00964baf556ffe4e71e60f3f0f1c77))
+
+## [3.0.204](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.203...%40seafile%2Fsdoc-editor%403.0.204) (2026-06-24)
+
+## [3.0.203](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.202...%40seafile%2Fsdoc-editor%403.0.203) (2026-06-24)
+
+## [3.0.202](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.201...%40seafile%2Fsdoc-editor%403.0.202) (2026-06-24)
+
+## [3.0.201](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.200...%40seafile%2Fsdoc-editor%403.0.201) (2026-06-23)
+
+## [3.0.200](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.199...%40seafile%2Fsdoc-editor%403.0.200) (2026-06-16)
+
+## [3.0.199](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.198...%40seafile%2Fsdoc-editor%403.0.199) (2026-06-13)
+
+## [3.0.198](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.197...%40seafile%2Fsdoc-editor%403.0.198) (2026-06-13)
+
+## [3.0.197](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.196...%40seafile%2Fsdoc-editor%403.0.197) (2026-06-12)
+
+## [3.0.196](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.194...%40seafile%2Fsdoc-editor%403.0.196) (2026-06-11)
+
+## [3.0.194](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.193...%40seafile%2Fsdoc-editor%403.0.194) (2026-06-09)
+
+## [3.0.193](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.192...%40seafile%2Fsdoc-editor%403.0.193) (2026-06-08)
+
+## [3.0.192](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.191...%40seafile%2Fsdoc-editor%403.0.192) (2026-06-08)
+
+### Bug Fixes
+
+- fix wiki sdoc preview bug ([00c3c87](https://github.com/haiwen/seadoc-editor/commit/00c3c87ed03566924be13f5340be17e709be4842))
+
+## [3.0.191](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.190...%40seafile%2Fsdoc-editor%403.0.191) (2026-06-08)
+
+### Performance Improvements
+
+- optimize embed link ([#257](https://github.com/haiwen/seadoc-editor/issues/257)) ([b33ac5c](https://github.com/haiwen/seadoc-editor/commit/b33ac5c2f8428d3bb772e9e803bbda2b0ee6d06c))
+
+## [3.0.190](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.184...%40seafile%2Fsdoc-editor%403.0.190) (2026-06-06)
+
+### Features
+
+- support seatable.io embed link ([#255](https://github.com/haiwen/seadoc-editor/issues/255)) ([3da82e8](https://github.com/haiwen/seadoc-editor/commit/3da82e8d9984d3f932d5a054396e4e1222618e08))
+
+## [3.0.184](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.183...%40seafile%2Fsdoc-editor%403.0.184) (2026-06-03)
+
+## [3.0.183](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.175...%40seafile%2Fsdoc-editor%403.0.183) (2026-06-03)
+
+## [3.0.175](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.174...%40seafile%2Fsdoc-editor%403.0.175) (2026-05-27)
+
+## [3.0.174](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.173...%40seafile%2Fsdoc-editor%403.0.174) (2026-05-26)
+
+## [3.0.173](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.171...%40seafile%2Fsdoc-editor%403.0.173) (2026-05-26)
+
+## [3.0.171](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.170...%40seafile%2Fsdoc-editor%403.0.171) (2026-05-25)
+
+### Bug Fixes
+
+- fix copy pycharm code bug ([#247](https://github.com/haiwen/seadoc-editor/issues/247)) ([3a925a4](https://github.com/haiwen/seadoc-editor/commit/3a925a4ecfe66d4aed3929e3749f9658b0cdca6b))
+
+## [3.0.170](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.168...%40seafile%2Fsdoc-editor%403.0.170) (2026-05-22)
+
+## [3.0.168](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.167...%40seafile%2Fsdoc-editor%403.0.168) (2026-05-21)
+
+### Performance Improvements
+
+- optimize code ([b34cdb5](https://github.com/haiwen/seadoc-editor/commit/b34cdb5728ccece47ad2d22fa588b333a2ba325e))
+
+## [3.0.167](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.166...%40seafile%2Fsdoc-editor%403.0.167) (2026-05-15)
+
+## [3.0.166](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.165...%40seafile%2Fsdoc-editor%403.0.166) (2026-05-11)
+
+### Bug Fixes
+
+- fix image preview close toaster bug ([#240](https://github.com/haiwen/seadoc-editor/issues/240)) ([c499f7b](https://github.com/haiwen/seadoc-editor/commit/c499f7b1ac520907b83145badc10a1abb8d61eff))
+
+## [3.0.165](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.164...%40seafile%2Fsdoc-editor%403.0.165) (2026-05-11)
+
+## [3.0.164](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.163...%40seafile%2Fsdoc-editor%403.0.164) (2026-05-11)
+
+### Reverts
+
+- Revert "feat: add insert file link in quick insert menu (#238)" (#239) ([f524eb1](https://github.com/haiwen/seadoc-editor/commit/f524eb1422b444db4e46bc479f1617d53bf84f71)), closes [#238](https://github.com/haiwen/seadoc-editor/issues/238) [#239](https://github.com/haiwen/seadoc-editor/issues/239)
+
+## [3.0.163](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.162...%40seafile%2Fsdoc-editor%403.0.163) (2026-05-11)
+
+### Features
+
+- add insert file link in quick insert menu ([#238](https://github.com/haiwen/seadoc-editor/issues/238)) ([0c6b38a](https://github.com/haiwen/seadoc-editor/commit/0c6b38aa51ac33f6d013e9c1471f68880d59c7ba))
+
+## [3.0.162](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.161...%40seafile%2Fsdoc-editor%403.0.162) (2026-05-09)
+
+### Bug Fixes
+
+- fix tab in blockquoute bug ([#237](https://github.com/haiwen/seadoc-editor/issues/237)) ([5825d45](https://github.com/haiwen/seadoc-editor/commit/5825d45d53d55cba75eabc5d4f0b8acee46b8bbe))
+
+## [3.0.161](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.160...%40seafile%2Fsdoc-editor%403.0.161) (2026-05-09)
+
+### Bug Fixes
+
+- fix tab in callout bug ([#234](https://github.com/haiwen/seadoc-editor/issues/234)) ([3ea1db8](https://github.com/haiwen/seadoc-editor/commit/3ea1db8f248f8303c902431ef36d66a5405736c8))
+
+## [3.0.160](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.159...%40seafile%2Fsdoc-editor%403.0.160) (2026-05-08)
+
+## [3.0.159](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.158...%40seafile%2Fsdoc-editor%403.0.159) (2026-05-07)
+
+## [3.0.158](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.157...%40seafile%2Fsdoc-editor%403.0.158) (2026-05-07)
+
+## [3.0.157](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.156...%40seafile%2Fsdoc-editor%403.0.157) (2026-05-06)
+
+## [3.0.156](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.155...%40seafile%2Fsdoc-editor%403.0.156) (2026-04-30)
+
+## [3.0.155](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.154...%40seafile%2Fsdoc-editor%403.0.155) (2026-04-29)
+
+### Bug Fixes
+
+- fix table diff bug ([#232](https://github.com/haiwen/seadoc-editor/issues/232)) ([bfa39f6](https://github.com/haiwen/seadoc-editor/commit/bfa39f6affea41ebd9e9d97acff0383eae16538d))
+
+## [3.0.154](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.153...%40seafile%2Fsdoc-editor%403.0.154) (2026-04-29)
+
+## [3.0.153](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.152...%40seafile%2Fsdoc-editor%403.0.153) (2026-04-28)
+
+## [3.0.152](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.151...%40seafile%2Fsdoc-editor%403.0.152) (2026-04-27)
+
+## [3.0.151](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.150...%40seafile%2Fsdoc-editor%403.0.151) (2026-04-24)
+
+## [3.0.150](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.149...%40seafile%2Fsdoc-editor%403.0.150) (2026-04-24)
+
+## [3.0.149](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.148...%40seafile%2Fsdoc-editor%403.0.149) (2026-04-21)
+
+## [3.0.148](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.147...%40seafile%2Fsdoc-editor%403.0.148) (2026-04-21)
+
+## [3.0.147](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.146...%40seafile%2Fsdoc-editor%403.0.147) (2026-04-21)
+
+## [3.0.146](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.145...%40seafile%2Fsdoc-editor%403.0.146) (2026-04-21)
+
+## [3.0.145](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.143...%40seafile%2Fsdoc-editor%403.0.145) (2026-04-20)
+
+## [3.0.143](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.142...%40seafile%2Fsdoc-editor%403.0.143) (2026-04-20)
+
+## [3.0.142](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.138...%40seafile%2Fsdoc-editor%403.0.142) (2026-04-15)
+
+### Bug Fixes
+
+- optimize icon ([#225](https://github.com/haiwen/seadoc-editor/issues/225)) ([1ab2d8e](https://github.com/haiwen/seadoc-editor/commit/1ab2d8ea0e68dcf68ad3de64d2b0d95238fb3cbf))
+
+## [3.0.138](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.137...%40seafile%2Fsdoc-editor%403.0.138) (2026-04-14)
+
+## [3.0.137](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.136...%40seafile%2Fsdoc-editor%403.0.137) (2026-04-13)
+
+## [3.0.136](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.135...%40seafile%2Fsdoc-editor%403.0.136) (2026-04-13)
+
+### Bug Fixes
+
+- resolve code block ([#223](https://github.com/haiwen/seadoc-editor/issues/223)) ([260222f](https://github.com/haiwen/seadoc-editor/commit/260222f05d600e55f987fa68e2dce5a60711eca1))
+
+## [3.0.135](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.134...%40seafile%2Fsdoc-editor%403.0.135) (2026-04-13)
+
+## [3.0.134](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.133...%40seafile%2Fsdoc-editor%403.0.134) (2026-04-13)
+
+### Bug Fixes
+
+- resolve wiki link page ui ([#222](https://github.com/haiwen/seadoc-editor/issues/222)) ([abe2478](https://github.com/haiwen/seadoc-editor/commit/abe2478caa2fa15221383c276618579622b5837a))
+
+## [3.0.133](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.132...%40seafile%2Fsdoc-editor%403.0.133) (2026-04-09)
+
+## [3.0.132](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.131...%40seafile%2Fsdoc-editor%403.0.132) (2026-04-07)
+
+### Bug Fixes
+
+- resolve wiki link page ([#221](https://github.com/haiwen/seadoc-editor/issues/221)) ([e6f372a](https://github.com/haiwen/seadoc-editor/commit/e6f372a01285c771661991264bbd2867c7ad2ce3))
+
+## [3.0.131](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.130...%40seafile%2Fsdoc-editor%403.0.131) (2026-04-07)
+
+### Features
+
+- add resizer ([#220](https://github.com/haiwen/seadoc-editor/issues/220)) ([22b0215](https://github.com/haiwen/seadoc-editor/commit/22b021573df75edab89302337b2b36d07fc7f6a8))
+
+## [3.0.130](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.129...%40seafile%2Fsdoc-editor%403.0.130) (2026-04-03)
+
+## [3.0.129](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.128...%40seafile%2Fsdoc-editor%403.0.129) (2026-04-03)
+
+## [3.0.128](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.127...%40seafile%2Fsdoc-editor%403.0.128) (2026-04-02)
+
+## [3.0.127](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.126...%40seafile%2Fsdoc-editor%403.0.127) (2026-04-02)
+
+## [3.0.126](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.125...%40seafile%2Fsdoc-editor%403.0.126) (2026-04-01)
+
+## [3.0.125](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.124...%40seafile%2Fsdoc-editor%403.0.125) (2026-03-30)
+
+### Features
+
+- add embed link ([#214](https://github.com/haiwen/seadoc-editor/issues/214)) ([3e3a912](https://github.com/haiwen/seadoc-editor/commit/3e3a9124ebfe33bcd09f0bad60c55bdb2dbc08ab))
+
+## [3.0.124](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.123...%40seafile%2Fsdoc-editor%403.0.124) (2026-03-28)
+
+## [3.0.123](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.122...%40seafile%2Fsdoc-editor%403.0.123) (2026-03-27)
+
+## [3.0.122](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.121...%40seafile%2Fsdoc-editor%403.0.122) (2026-03-25)
+
+## [3.0.121](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.120...%40seafile%2Fsdoc-editor%403.0.121) (2026-03-23)
+
+### Features
+
+- add search in wiki ([#210](https://github.com/haiwen/seadoc-editor/issues/210)) ([a570825](https://github.com/haiwen/seadoc-editor/commit/a57082524b1c5d92347d77e1a8c558e7690fc886))
+
+## [3.0.120](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.119...%40seafile%2Fsdoc-editor%403.0.120) (2026-03-20)
+
+## [3.0.119](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.118...%40seafile%2Fsdoc-editor%403.0.119) (2026-03-20)
+
+## [3.0.118](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.117...%40seafile%2Fsdoc-editor%403.0.118) (2026-03-19)
+
+### Performance Improvements
+
+- optimize file view interactive ([#208](https://github.com/haiwen/seadoc-editor/issues/208)) ([bd69513](https://github.com/haiwen/seadoc-editor/commit/bd69513bf0cce129428724a2365769bea1075c8c))
+
+## [3.0.117](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.116...%40seafile%2Fsdoc-editor%403.0.117) (2026-03-18)
+
+### Bug Fixes
+
+- fix paste list html into sdoc bug ([#207](https://github.com/haiwen/seadoc-editor/issues/207)) ([c7a7bb0](https://github.com/haiwen/seadoc-editor/commit/c7a7bb0a693e655240c4a677f708c2efa1b277fd))
+
+## [3.0.116](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.115...%40seafile%2Fsdoc-editor%403.0.116) (2026-03-17)
+
+## [3.0.115](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.114...%40seafile%2Fsdoc-editor%403.0.115) (2026-03-17)
+
+### Features
+
+- translation ([#197](https://github.com/haiwen/seadoc-editor/issues/197)) ([e5eaba1](https://github.com/haiwen/seadoc-editor/commit/e5eaba110b9dc17e91a6d80553e5569a2bc3be12))
+
+## [3.0.114](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.113...%40seafile%2Fsdoc-editor%403.0.114) (2026-03-16)
+
+### Performance Improvements
+
+- add control for file-view ([#206](https://github.com/haiwen/seadoc-editor/issues/206)) ([b86071c](https://github.com/haiwen/seadoc-editor/commit/b86071cb6571bc760cdf0a88c45ceb79afa8b09c))
+
+## [3.0.113](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.112...%40seafile%2Fsdoc-editor%403.0.113) (2026-03-16)
+
+## [3.0.112](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.111...%40seafile%2Fsdoc-editor%403.0.112) (2026-03-13)
+
+## [3.0.111](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.110...%40seafile%2Fsdoc-editor%403.0.111) (2026-03-13)
+
+## [3.0.110](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.109...%40seafile%2Fsdoc-editor%403.0.110) (2026-03-12)
+
+## [3.0.109](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.108...%40seafile%2Fsdoc-editor%403.0.109) (2026-03-11)
+
+### Bug Fixes
+
+- fix copy link into codeblock problem ([#204](https://github.com/haiwen/seadoc-editor/issues/204)) ([6f00893](https://github.com/haiwen/seadoc-editor/commit/6f00893ca55e122b2949dd1c0757e3e15a87e7f1))
+
+## [3.0.108](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.107...%40seafile%2Fsdoc-editor%403.0.108) (2026-03-11)
+
+### Bug Fixes
+
+- resolve readonly ui ([#203](https://github.com/haiwen/seadoc-editor/issues/203)) ([01ab4d2](https://github.com/haiwen/seadoc-editor/commit/01ab4d20fd72bbfa871900c182d9bc60d286cd56))
+
+## [3.0.107](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.106...%40seafile%2Fsdoc-editor%403.0.107) (2026-03-10)
+
+## [3.0.106](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.105...%40seafile%2Fsdoc-editor%403.0.106) (2026-03-10)
+
+## [3.0.105](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.104...%40seafile%2Fsdoc-editor%403.0.105) (2026-03-09)
+
+## [3.0.104](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.103...%40seafile%2Fsdoc-editor%403.0.104) (2026-03-06)
+
+## [3.0.103](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.102...%40seafile%2Fsdoc-editor%403.0.103) (2026-03-06)
+
+## [3.0.102](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.101...%40seafile%2Fsdoc-editor%403.0.102) (2026-03-06)
+
+## [3.0.101](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.100...%40seafile%2Fsdoc-editor%403.0.101) (2026-03-05)
+
+## [3.0.100](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.99...%40seafile%2Fsdoc-editor%403.0.100) (2026-03-05)
+
+## [3.0.99](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.98...%40seafile%2Fsdoc-editor%403.0.99) (2026-03-05)
+
+## [3.0.98](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.97...%40seafile%2Fsdoc-editor%403.0.98) (2026-03-05)
+
+### Bug Fixes
+
+- resolve code block ([9b3da45](https://github.com/haiwen/seadoc-editor/commit/9b3da45c27ede1a49d27efe23bcff872286c77eb))
+
+## [3.0.97](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.96...%40seafile%2Fsdoc-editor%403.0.97) (2026-03-04)
+
+## [3.0.96](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.95...%40seafile%2Fsdoc-editor%403.0.96) (2026-03-04)
+
+### Bug Fixes
+
+- resolve hidden height ([#199](https://github.com/haiwen/seadoc-editor/issues/199)) ([27a0667](https://github.com/haiwen/seadoc-editor/commit/27a0667ab07984018e44313686d0f56fd60032ba))
+
+## [3.0.95](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.94...%40seafile%2Fsdoc-editor%403.0.95) (2026-03-03)
+
+## [3.0.94](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.93...%40seafile%2Fsdoc-editor%403.0.94) (2026-03-03)
+
+### Performance Improvements
+
+- optimize code ([d6167a0](https://github.com/haiwen/seadoc-editor/commit/d6167a0a6633cc470de1613eadb3765b4c884867))
+
+## [3.0.93](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.92...%40seafile%2Fsdoc-editor%403.0.93) (2026-03-03)
+
+### Performance Improvements
+
+- optimize code ([#198](https://github.com/haiwen/seadoc-editor/issues/198)) ([d97bcb4](https://github.com/haiwen/seadoc-editor/commit/d97bcb440d3aeba3fe0b2e57cff36016436bc6f7))
+
+## [3.0.92](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.91...%40seafile%2Fsdoc-editor%403.0.92) (2026-03-03)
+
+## [3.0.91](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.90...%40seafile%2Fsdoc-editor%403.0.91) (2026-03-02)
+
+## [3.0.90](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.89...%40seafile%2Fsdoc-editor%403.0.90) (2026-03-02)
+
+### Performance Improvements
+
+- optimize code ([075eca2](https://github.com/haiwen/seadoc-editor/commit/075eca2bf9cd2f06a98e0008fe27d4a142640308))
+
+## [3.0.89](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.86...%40seafile%2Fsdoc-editor%403.0.89) (2026-03-02)
+
+## [3.0.86](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.85...%40seafile%2Fsdoc-editor%403.0.86) (2026-02-25)
+
+## [3.0.85](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.83...%40seafile%2Fsdoc-editor%403.0.85) (2026-02-24)
+
+### Features
+
+- optimize code block hidden ([#193](https://github.com/haiwen/seadoc-editor/issues/193)) ([8a697c8](https://github.com/haiwen/seadoc-editor/commit/8a697c8fb9d542ae373fd7562d938ff9b1599575))
+
+## [3.0.83](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.82...%40seafile%2Fsdoc-editor%403.0.83) (2026-02-12)
+
+### Bug Fixes
+
+- optimize whiteboard ([#194](https://github.com/haiwen/seadoc-editor/issues/194)) ([20fdd82](https://github.com/haiwen/seadoc-editor/commit/20fdd82275ef54f99f01370f47f4eeec7a5ef8eb))
+
+## [3.0.82](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.81...%40seafile%2Fsdoc-editor%403.0.82) (2026-02-11)
+
+### Features
+
+- support dragging to form multicolumn ([#192](https://github.com/haiwen/seadoc-editor/issues/192)) ([e50c380](https://github.com/haiwen/seadoc-editor/commit/e50c380114167f705fb19bea44e9f719239c7503))
+
+## [3.0.81](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.80...%40seafile%2Fsdoc-editor%403.0.81) (2026-02-05)
+
+### Bug Fixes
+
+- fix link bug ([ac276ac](https://github.com/haiwen/seadoc-editor/commit/ac276ac49a17d8f90243bc59acdc20aeef0c4f17))
+
+## [3.0.80](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.79...%40seafile%2Fsdoc-editor%403.0.80) (2026-02-03)
+
+### Features
+
+- optimize editor state ([#191](https://github.com/haiwen/seadoc-editor/issues/191)) ([7a46276](https://github.com/haiwen/seadoc-editor/commit/7a4627690a68aa6c82950e33b7d1be599272b4af))
+
+## [3.0.79](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.78...%40seafile%2Fsdoc-editor%403.0.79) (2026-02-03)
+
+### Features
+
+- add source url for revision editor ([49b8a62](https://github.com/haiwen/seadoc-editor/commit/49b8a6230cfb65494093728ff1cf796f77b7bbbd))
+
+## [3.0.78](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.77...%40seafile%2Fsdoc-editor%403.0.78) (2026-02-02)
+
+### Features
+
+- add formula ([#190](https://github.com/haiwen/seadoc-editor/issues/190)) ([596ff0b](https://github.com/haiwen/seadoc-editor/commit/596ff0b5666e39be9f80ac5eac8a8b5c385ed3b2))
+
+## [3.0.77](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.211...%40seafile%2Fsdoc-editor%403.0.77) (2026-01-31)
+
+## [3.0.76](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.210...%40seafile%2Fsdoc-editor%403.0.76) (2026-01-31)
+
+## [3.0.75](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.209...%40seafile%2Fsdoc-editor%403.0.75) (2026-01-31)
+
+## [3.0.74](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.73...%40seafile%2Fsdoc-editor%403.0.74) (2026-01-28)
+
+## [3.0.73](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.72...%40seafile%2Fsdoc-editor%403.0.73) (2026-01-27)
+
+### Bug Fixes
+
+- optimize image icon ([#186](https://github.com/haiwen/seadoc-editor/issues/186)) ([95449c5](https://github.com/haiwen/seadoc-editor/commit/95449c58eee72318d9b7e674c1639f5ba920f2d7))
+
+## [3.0.72](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.71...%40seafile%2Fsdoc-editor%403.0.72) (2026-01-26)
+
+### Bug Fixes
+
+- optimize css ([#185](https://github.com/haiwen/seadoc-editor/issues/185)) ([94cc6b6](https://github.com/haiwen/seadoc-editor/commit/94cc6b6eba2fdee16df16af76333041ebf74766d))
+
+### Features
+
+- add link page ([#183](https://github.com/haiwen/seadoc-editor/issues/183)) ([86d46a0](https://github.com/haiwen/seadoc-editor/commit/86d46a08acf6a42964d3ec7277c45f10bd3e40d6))
+
+## [3.0.71](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.70...%40seafile%2Fsdoc-editor%403.0.71) (2026-01-21)
+
+## [3.0.70](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.69...%40seafile%2Fsdoc-editor%403.0.70) (2026-01-20)
+
+## [3.0.69](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.68...%40seafile%2Fsdoc-editor%403.0.69) (2026-01-19)
+
+### Bug Fixes
+
+- optimize multi column width ([#181](https://github.com/haiwen/seadoc-editor/issues/181)) ([95ab5b0](https://github.com/haiwen/seadoc-editor/commit/95ab5b07ba0ebf06e347391b864f109580213e5e))
+
+## [3.0.68](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.67...%40seafile%2Fsdoc-editor%403.0.68) (2026-01-16)
+
+## [3.0.67](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.66...%40seafile%2Fsdoc-editor%403.0.67) (2026-01-16)
+
+## [3.0.66](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.65...%40seafile%2Fsdoc-editor%403.0.66) (2026-01-15)
+
+## [3.0.65](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.64...%40seafile%2Fsdoc-editor%403.0.65) (2026-01-15)
+
+## [3.0.64](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.63...%40seafile%2Fsdoc-editor%403.0.64) (2026-01-15)
+
+## [3.0.63](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.62...%40seafile%2Fsdoc-editor%403.0.63) (2026-01-15)
+
+### Bug Fixes
+
+- keep link style ([#180](https://github.com/haiwen/seadoc-editor/issues/180)) ([8bb133f](https://github.com/haiwen/seadoc-editor/commit/8bb133f32816c6a89d67b608a113c7eaa2725988))
+
+### Features
+
+- add shortcut key for sdoc link ([#177](https://github.com/haiwen/seadoc-editor/issues/177)) ([9975fe8](https://github.com/haiwen/seadoc-editor/commit/9975fe8ab14d59b23e5bac36245fd570b2d02ba7))
+- toggle-cursor-between-editor-and-title ([#179](https://github.com/haiwen/seadoc-editor/issues/179)) ([4d8acaf](https://github.com/haiwen/seadoc-editor/commit/4d8acafb0bd531b1d5eb15dd6f9602baf4d045e9))
+- transfer url to file link ([#175](https://github.com/haiwen/seadoc-editor/issues/175)) ([66ed379](https://github.com/haiwen/seadoc-editor/commit/66ed37966496ef1d2abee1775491a780d41def6a))
+
+## [3.0.62](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.61...%40seafile%2Fsdoc-editor%403.0.62) (2026-01-15)
+
+## [3.0.61](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.60...%40seafile%2Fsdoc-editor%403.0.61) (2026-01-14)
+
+## [3.0.60](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.59...%40seafile%2Fsdoc-editor%403.0.60) (2026-01-14)
+
+## [3.0.59](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.58...%40seafile%2Fsdoc-editor%403.0.59) (2026-01-14)
+
+## [3.0.58](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.57...%40seafile%2Fsdoc-editor%403.0.58) (2026-01-14)
+
+## [3.0.57](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.56...%40seafile%2Fsdoc-editor%403.0.57) (2026-01-12)
+
+### Bug Fixes
+
+- resolve long title css ([#174](https://github.com/haiwen/seadoc-editor/issues/174)) ([5ba431f](https://github.com/haiwen/seadoc-editor/commit/5ba431fb93c1112d99a404f0653c6e1160232e0a))
+
+## [3.0.56](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.55...%40seafile%2Fsdoc-editor%403.0.56) (2026-01-09)
+
+### Performance Improvements
+
+- optimize code ([495a816](https://github.com/haiwen/seadoc-editor/commit/495a8168b192276c4dba676b34be7ee17c3dadd2))
+
+## [3.0.55](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.54...%40seafile%2Fsdoc-editor%403.0.55) (2026-01-09)
+
+### Bug Fixes
+
+- add wiki link ([#170](https://github.com/haiwen/seadoc-editor/issues/170)) ([2dfe1d5](https://github.com/haiwen/seadoc-editor/commit/2dfe1d583a7b0f4407cfb0c6f361e310885fa006))
+
+### Features
+
+- insert file view ([#173](https://github.com/haiwen/seadoc-editor/issues/173)) ([78acbe5](https://github.com/haiwen/seadoc-editor/commit/78acbe583a7a2d567497d24386611ee0946202ad))
+
+## [3.0.54](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.53...%40seafile%2Fsdoc-editor%403.0.54) (2026-01-07)
+
+## [3.0.53](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.52...%40seafile%2Fsdoc-editor%403.0.53) (2026-01-07)
+
+### Bug Fixes
+
+- add shortcut key ([#169](https://github.com/haiwen/seadoc-editor/issues/169)) ([98cdf50](https://github.com/haiwen/seadoc-editor/commit/98cdf50102949db585562b67220db2530c9a7661))
+- insert list text to check list ([#172](https://github.com/haiwen/seadoc-editor/issues/172)) ([97ed816](https://github.com/haiwen/seadoc-editor/commit/97ed81651676c6a3cb74debe0dc5d6004d5c4aaf))
+- update list css ([#171](https://github.com/haiwen/seadoc-editor/issues/171)) ([ce26c33](https://github.com/haiwen/seadoc-editor/commit/ce26c335c367684c4cf45364e5f99299a634c27d))
+
+## [3.0.52](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.51...%40seafile%2Fsdoc-editor%403.0.52) (2026-01-07)
+
+## [3.0.51](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.208...%40seafile%2Fsdoc-editor%403.0.51) (2026-01-06)
+
+## [3.0.50](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.49...%40seafile%2Fsdoc-editor%403.0.50) (2026-01-05)
+
+## [3.0.49](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.48...%40seafile%2Fsdoc-editor%403.0.49) (2026-01-04)
+
+### Bug Fixes
+
+- resolve ai module ([#168](https://github.com/haiwen/seadoc-editor/issues/168)) ([afd7d9d](https://github.com/haiwen/seadoc-editor/commit/afd7d9de8f9ee11e61770f1603aa4eacf3410be5))
+
+## [3.0.48](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.47...%40seafile%2Fsdoc-editor%403.0.48) (2025-12-30)
+
+### Bug Fixes
+
+- change diff view to revision update editor bug ([#167](https://github.com/haiwen/seadoc-editor/issues/167)) ([ee10131](https://github.com/haiwen/seadoc-editor/commit/ee1013125eefd57be04e9a34d16181d6fbe0a35e))
+- optimize video cursor ([#165](https://github.com/haiwen/seadoc-editor/issues/165)) ([22cb724](https://github.com/haiwen/seadoc-editor/commit/22cb7249ce17fdb72610bd8c522dc55f8dfc2926))
+- resolve list position ([#166](https://github.com/haiwen/seadoc-editor/issues/166)) ([5149d05](https://github.com/haiwen/seadoc-editor/commit/5149d05bdae10bb3df8dbba8c0adfb288487f4f3))
+- update version ([f2de7d4](https://github.com/haiwen/seadoc-editor/commit/f2de7d4eec551936cfe401add589f3fbe6e4d150))
+
+## [3.0.47](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.46...%40seafile%2Fsdoc-editor%403.0.47) (2025-12-26)
+
+### Bug Fixes
+
+- optimize color ([f160d65](https://github.com/haiwen/seadoc-editor/commit/f160d656a87f84fb44d8891ba192816698aa7bb1))
+
+## [3.0.46](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.45...%40seafile%2Fsdoc-editor%403.0.46) (2025-12-26)
+
+## [3.0.45](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.44...%40seafile%2Fsdoc-editor%403.0.45) (2025-12-26)
+
+### Bug Fixes
+
+- directly show ai module when click side bar aio ([#161](https://github.com/haiwen/seadoc-editor/issues/161)) ([112810b](https://github.com/haiwen/seadoc-editor/commit/112810b9a01be57af5342bd3a5fdab53dbf82bc0))
+
+## [3.0.44](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.43...%40seafile%2Fsdoc-editor%403.0.44) (2025-12-25)
+
+## [3.0.43](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.42...%40seafile%2Fsdoc-editor%403.0.43) (2025-12-25)
+
+## [3.0.42](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.41...%40seafile%2Fsdoc-editor%403.0.42) (2025-12-25)
+
+### Bug Fixes
+
+- optimize style ([#163](https://github.com/haiwen/seadoc-editor/issues/163)) ([d703082](https://github.com/haiwen/seadoc-editor/commit/d703082e9d67e5ecc37b0692e50156f1ad02df4f))
+- update color ([#164](https://github.com/haiwen/seadoc-editor/issues/164)) ([7f4c868](https://github.com/haiwen/seadoc-editor/commit/7f4c868c55ceb9db6425e5251683b9c0deb8b1d1))
+
+## [3.0.41](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.40...%40seafile%2Fsdoc-editor%403.0.41) (2025-12-24)
+
+### Bug Fixes
+
+- update translation ([ee726af](https://github.com/haiwen/seadoc-editor/commit/ee726afba0daff9fc8ff08dfef25d4a61e282f94))
+
+### Performance Improvements
+
+- optimize file-link interactive ([#162](https://github.com/haiwen/seadoc-editor/issues/162)) ([6d20eef](https://github.com/haiwen/seadoc-editor/commit/6d20eef81e53ca96d5841b9eb567ee764a23bbc1))
+
+## [3.0.40](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.39...%40seafile%2Fsdoc-editor%403.0.40) (2025-12-23)
+
+### Features
+
+- add rename func for file view ([#160](https://github.com/haiwen/seadoc-editor/issues/160)) ([b37eacc](https://github.com/haiwen/seadoc-editor/commit/b37eacc638cb9c471a8fea1110eef48d8c00db79))
+
+## [3.0.39](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.38...%40seafile%2Fsdoc-editor%403.0.39) (2025-12-23)
+
+### Features
+
+- add resize for video ([#159](https://github.com/haiwen/seadoc-editor/issues/159)) ([eedfccf](https://github.com/haiwen/seadoc-editor/commit/eedfccf2de398daa054d4e6832ce1e5f3ff6dc5c))
+
+## [3.0.38](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.37...%40seafile%2Fsdoc-editor%403.0.38) (2025-12-22)
+
+### Features
+
+- add resize feature for file-view ([#158](https://github.com/haiwen/seadoc-editor/issues/158)) ([010a0f4](https://github.com/haiwen/seadoc-editor/commit/010a0f41531dfee59ef1f81a348ec7477ca7a7aa))
+
+## [3.0.37](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.36...%40seafile%2Fsdoc-editor%403.0.37) (2025-12-20)
+
+### Features
+
+- optimize image ciewer ([#155](https://github.com/haiwen/seadoc-editor/issues/155)) ([3ccb6d8](https://github.com/haiwen/seadoc-editor/commit/3ccb6d8eb1e80a75cdf83ab79901586094f9c9fa))
+
+## [3.0.36](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.35...%40seafile%2Fsdoc-editor%403.0.36) (2025-12-20)
+
+## [3.0.35](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.34...%40seafile%2Fsdoc-editor%403.0.35) (2025-12-20)
+
+## [3.0.34](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.33...%40seafile%2Fsdoc-editor%403.0.34) (2025-12-20)
+
+## [3.0.33](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.32...%40seafile%2Fsdoc-editor%403.0.33) (2025-12-20)
+
+## [3.0.32](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.31...%40seafile%2Fsdoc-editor%403.0.32) (2025-12-20)
+
+## [3.0.31](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.30...%40seafile%2Fsdoc-editor%403.0.31) (2025-12-20)
+
+## [3.0.30](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.29...%40seafile%2Fsdoc-editor%403.0.30) (2025-12-19)
+
+## [3.0.29](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.28...%40seafile%2Fsdoc-editor%403.0.29) (2025-12-19)
+
+## [3.0.28](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.27...%40seafile%2Fsdoc-editor%403.0.28) (2025-12-19)
+
+## [3.0.27](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.26...%40seafile%2Fsdoc-editor%403.0.27) (2025-12-18)
+
+## [3.0.26](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.25...%40seafile%2Fsdoc-editor%403.0.26) (2025-12-18)
+
+## [3.0.25](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.24...%40seafile%2Fsdoc-editor%403.0.25) (2025-12-15)
+
+### Features
+
+- support list type in ai ([#154](https://github.com/haiwen/seadoc-editor/issues/154)) ([f8ae937](https://github.com/haiwen/seadoc-editor/commit/f8ae93723170205a63aa0a4346c10eb769b95998))
+
+## [3.0.24](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.23...%40seafile%2Fsdoc-editor%403.0.24) (2025-12-12)
+
+### Bug Fixes
+
+- adjust menu order ([#152](https://github.com/haiwen/seadoc-editor/issues/152)) ([1e81261](https://github.com/haiwen/seadoc-editor/commit/1e8126163683ffe7dbfe64e153451e828939c43b))
+
+### Features
+
+- transfer exdraw smart link into whiteboard element ([#153](https://github.com/haiwen/seadoc-editor/issues/153)) ([09e12ab](https://github.com/haiwen/seadoc-editor/commit/09e12abc74d2b503316afe31a5fd2724705b86bb))
+
+## [3.0.23](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.22...%40seafile%2Fsdoc-editor%403.0.23) (2025-12-10)
+
+## [3.0.22](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.21...%40seafile%2Fsdoc-editor%403.0.22) (2025-12-10)
+
+## [3.0.21](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.20...%40seafile%2Fsdoc-editor%403.0.21) (2025-12-09)
+
+### Bug Fixes
+
+- optimize code ([#151](https://github.com/haiwen/seadoc-editor/issues/151)) ([449ff0a](https://github.com/haiwen/seadoc-editor/commit/449ff0aae276e1fe521d033384c3e841dfc2ebfc))
+
+## [3.0.20](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.19...%40seafile%2Fsdoc-editor%403.0.20) (2025-12-09)
+
+### Bug Fixes
+
+- collapse all initial selections to start point ([#149](https://github.com/haiwen/seadoc-editor/issues/149)) ([fa968bf](https://github.com/haiwen/seadoc-editor/commit/fa968bfc17caa4034a28316713220d36cd6057bf))
+
+## [3.0.19](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.18...%40seafile%2Fsdoc-editor%403.0.19) (2025-12-06)
+
+## [3.0.18](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.17...%40seafile%2Fsdoc-editor%403.0.18) (2025-12-05)
+
+## [3.0.17](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.16...%40seafile%2Fsdoc-editor%403.0.17) (2025-12-05)
+
+## [3.0.16](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.15...%40seafile%2Fsdoc-editor%403.0.16) (2025-12-05)
+
+## [3.0.15](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.14...%40seafile%2Fsdoc-editor%403.0.15) (2025-12-05)
+
+### Bug Fixes
+
+- show table size popver ([#148](https://github.com/haiwen/seadoc-editor/issues/148)) ([3bd7e32](https://github.com/haiwen/seadoc-editor/commit/3bd7e32ad51685e1dd77af202917e5b964eee21d))
+
+## [3.0.14](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.13...%40seafile%2Fsdoc-editor%403.0.14) (2025-12-05)
+
+## [3.0.13](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.12...%40seafile%2Fsdoc-editor%403.0.13) (2025-12-05)
+
+## [3.0.12](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.11...%40seafile%2Fsdoc-editor%403.0.12) (2025-12-05)
+
+## [3.0.11](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.10...%40seafile%2Fsdoc-editor%403.0.11) (2025-12-04)
+
+## [3.0.10](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.9...%40seafile%2Fsdoc-editor%403.0.10) (2025-12-03)
+
+### Performance Improvements
+
+- update iconfont ([96ae051](https://github.com/haiwen/seadoc-editor/commit/96ae0512b7cdb634441dcc0439eb510bc207f888))
+
+## [3.0.9](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.8...%40seafile%2Fsdoc-editor%403.0.9) (2025-12-02)
+
+## [3.0.8](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.7...%40seafile%2Fsdoc-editor%403.0.8) (2025-11-26)
+
+### Bug Fixes
+
+- optimize sdoc link ([58782e3](https://github.com/haiwen/seadoc-editor/commit/58782e37b3b973c68de284af60deed549fc2b633))
+
+### Features
+
+- update image viewer ([#146](https://github.com/haiwen/seadoc-editor/issues/146)) ([f204036](https://github.com/haiwen/seadoc-editor/commit/f204036939921130ef9c07ea78174bb96517a9c7))
+
+## [3.0.7](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.6...%40seafile%2Fsdoc-editor%403.0.7) (2025-11-20)
+
+## [3.0.6](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.206...%40seafile%2Fsdoc-editor%403.0.6) (2025-11-19)
+
+## [3.0.5](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.4...%40seafile%2Fsdoc-editor%403.0.5) (2025-11-18)
+
+### Bug Fixes
+
+- fix revision comment bug ([a2905c4](https://github.com/haiwen/seadoc-editor/commit/a2905c4806e330b8c1cb6f6dc5e6eb927ab0c9d9))
+- optimize css ([d2b6a0e](https://github.com/haiwen/seadoc-editor/commit/d2b6a0e742818dcba728b4f1d6f16e709cb159fe))
+
+## [3.0.4](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.205...%40seafile%2Fsdoc-editor%403.0.4) (2025-11-17)
+
+## [3.0.3](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.2...%40seafile%2Fsdoc-editor%403.0.3) (2025-11-17)
+
+### Features
+
+- optimize code-block dragging ([cda6890](https://github.com/haiwen/seadoc-editor/commit/cda6890c7635e24149befd5753935362b30573bd))
+
+## [3.0.2](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.1...%40seafile%2Fsdoc-editor%403.0.2) (2025-11-14)
+
+## [3.0.1](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.204...%40seafile%2Fsdoc-editor%403.0.1) (2025-11-13)
+
+### Bug Fixes
+
+- fix copy blockquote content into blockquote bug ([d1b7eb2](https://github.com/haiwen/seadoc-editor/commit/d1b7eb2f9d7440229d0294b7e083819b2dcda898))
+
+### Features
+
+- add file-view plugin ([0a3f2f2](https://github.com/haiwen/seadoc-editor/commit/0a3f2f2d9879861664d4b7334684f965c91c4eba))
+- add select module ([82a1a7c](https://github.com/haiwen/seadoc-editor/commit/82a1a7c4b0e8ff323a00321c6d16a7f87f161cd8))
+- optimize drap rule ([cb38619](https://github.com/haiwen/seadoc-editor/commit/cb38619f84fcadcd5af77a0075687f368a3cffc0))
+- support dragging codeblock into list ([43d4f35](https://github.com/haiwen/seadoc-editor/commit/43d4f35791932d2ba42286ef6666f2597f9fc502))
+
+# [3.0.0](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.201...%40seafile%2Fsdoc-editor%403.0.0) (2025-11-03)
+
+## [2.0.201](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.200...%40seafile%2Fsdoc-editor%402.0.201) (2025-11-03)
+
+### Features
+
+- add video link in wki ([58ec301](https://github.com/haiwen/seadoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
+- insert video below blocks ([b729201](https://github.com/haiwen/seadoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
+
+## [3.0.266](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.265...%40seafile%2Fsdoc-editor%403.0.266) (2026-11-16)
+
+### Bug Fixes
+
+- disable mobile image fullscreen button hover and tooltips ([#352](https://github.com/haiwen/seadoc-editor/issues/352)) ([16f8b96](https://github.com/haiwen/seadoc-editor/commit/16f8b9623535b62843acc23f7cb33d480e69b8fa))
 
 ## [3.0.265](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.264...%40seafile%2Fsdoc-editor%403.0.265) (2026-11-13)
 

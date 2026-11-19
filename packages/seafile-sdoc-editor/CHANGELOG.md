@@ -3,6 +3,518 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.267](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.212...%40seafile%2Fseafile-sdoc-editor%403.0.267) (2026-11-19)
+
+## [3.0.266](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.265...%40seafile%2Fseafile-sdoc-editor%403.0.266) (2026-11-16)
+
+## [3.0.265](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.264...%40seafile%2Fseafile-sdoc-editor%403.0.265) (2026-11-13)
+
+### Features
+
+- expose image preview lifecycle and close events ([#351](https://github.com/seafileltd/sea-sdoc-editor/issues/351)) ([8902976](https://github.com/seafileltd/sea-sdoc-editor/commit/8902976aa837b5622e6bc1b49ba5e588c809807d))
+
+## [3.0.264](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.263...%40seafile%2Fseafile-sdoc-editor%403.0.264) (2026-11-09)
+
+## [3.0.263](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.262...%40seafile%2Fseafile-sdoc-editor%403.0.263) (2026-11-06)
+
+## [3.0.262](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.261...%40seafile%2Fseafile-sdoc-editor%403.0.262) (2026-11-04)
+
+## [3.0.261](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.260...%40seafile%2Fseafile-sdoc-editor%403.0.261) (2026-11-02)
+
+## [3.0.260](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.259...%40seafile%2Fseafile-sdoc-editor%403.0.260) (2026-11-02)
+
+## [3.0.259](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.258...%40seafile%2Fseafile-sdoc-editor%403.0.259) (2026-10-29)
+
+## [3.0.258](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.257...%40seafile%2Fseafile-sdoc-editor%403.0.258) (2026-10-28)
+
+## [3.0.257](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.256...%40seafile%2Fseafile-sdoc-editor%403.0.257) (2026-10-24)
+
+## [3.0.256](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.255...%40seafile%2Fseafile-sdoc-editor%403.0.256) (2026-10-21)
+
+## [3.0.255](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.254...%40seafile%2Fseafile-sdoc-editor%403.0.255) (2026-10-20)
+
+## [3.0.254](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.253...%40seafile%2Fseafile-sdoc-editor%403.0.254) (2026-10-19)
+
+## [3.0.253](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.252...%40seafile%2Fseafile-sdoc-editor%403.0.253) (2026-10-13)
+
+## [3.0.252](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.246...%40seafile%2Fseafile-sdoc-editor%403.0.252) (2026-10-10)
+
+## [3.0.246](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.242...%40seafile%2Fseafile-sdoc-editor%403.0.246) (2026-09-28)
+
+### Features
+
+- configure Seadoc video upload limit ([#314](https://github.com/seafileltd/sea-sdoc-editor/issues/314)) ([07858e5](https://github.com/seafileltd/sea-sdoc-editor/commit/07858e5067ada7977d61dbc9333c491f03b5a464))
+
+## [3.0.242](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.241...%40seafile%2Fseafile-sdoc-editor%403.0.242) (2026-09-17)
+
+## [3.0.241](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.239...%40seafile%2Fseafile-sdoc-editor%403.0.241) (2026-09-13)
+
+## [3.0.239](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.238...%40seafile%2Fseafile-sdoc-editor%403.0.239) (2026-09-08)
+
+## [3.0.238](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.237...%40seafile%2Fseafile-sdoc-editor%403.0.238) (2026-09-03)
+
+## [3.0.237](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.236...%40seafile%2Fseafile-sdoc-editor%403.0.237) (2026-09-01)
+
+## [3.0.236](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.235...%40seafile%2Fseafile-sdoc-editor%403.0.236) (2026-09-01)
+
+## [3.0.235](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.234...%40seafile%2Fseafile-sdoc-editor%403.0.235) (2026-08-25)
+
+## [3.0.234](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.233...%40seafile%2Fseafile-sdoc-editor%403.0.234) (2026-08-21)
+
+## [3.0.233](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.232...%40seafile%2Fseafile-sdoc-editor%403.0.233) (2026-08-21)
+
+## [3.0.232](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.231...%40seafile%2Fseafile-sdoc-editor%403.0.232) (2026-08-19)
+
+## [3.0.231](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.230...%40seafile%2Fseafile-sdoc-editor%403.0.231) (2026-08-17)
+
+## [3.0.230](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.228...%40seafile%2Fseafile-sdoc-editor%403.0.230) (2026-08-11)
+
+## [3.0.228](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.227...%40seafile%2Fseafile-sdoc-editor%403.0.228) (2026-08-05)
+
+## [3.0.227](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.226...%40seafile%2Fseafile-sdoc-editor%403.0.227) (2026-08-05)
+
+## [3.0.226](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.225...%40seafile%2Fseafile-sdoc-editor%403.0.226) (2026-08-05)
+
+## [3.0.225](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.224...%40seafile%2Fseafile-sdoc-editor%403.0.225) (2026-08-04)
+
+## [3.0.224](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.223...%40seafile%2Fseafile-sdoc-editor%403.0.224) (2026-07-31)
+
+## [3.0.223](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.222...%40seafile%2Fseafile-sdoc-editor%403.0.223) (2026-07-27)
+
+### Bug Fixes
+
+- encode export file paths ([#289](https://github.com/seafileltd/sea-sdoc-editor/issues/289)) ([99cf2a6](https://github.com/seafileltd/sea-sdoc-editor/commit/99cf2a64a17d9156866e0209e3794575508d9792))
+
+## [3.0.222](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.221...%40seafile%2Fseafile-sdoc-editor%403.0.222) (2026-07-25)
+
+## [3.0.221](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.220...%40seafile%2Fseafile-sdoc-editor%403.0.221) (2026-07-23)
+
+## [3.0.220](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.219...%40seafile%2Fseafile-sdoc-editor%403.0.220) (2026-07-21)
+
+## [3.0.219](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.218...%40seafile%2Fseafile-sdoc-editor%403.0.219) (2026-07-21)
+
+## [3.0.218](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.216...%40seafile%2Fseafile-sdoc-editor%403.0.218) (2026-07-20)
+
+## [3.0.216](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.207...%40seafile%2Fseafile-sdoc-editor%403.0.216) (2026-07-15)
+
+### Bug Fixes
+
+- fix toggle outline bug when header is hidden ([#277](https://github.com/seafileltd/sea-sdoc-editor/issues/277)) ([30f9219](https://github.com/seafileltd/sea-sdoc-editor/commit/30f9219bee3a05372d3f35b2136830a1fee614dc))
+
+## [3.0.207](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.206...%40seafile%2Fseafile-sdoc-editor%403.0.207) (2026-06-26)
+
+## [3.0.206](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.205...%40seafile%2Fseafile-sdoc-editor%403.0.206) (2026-06-25)
+
+## [3.0.205](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.204...%40seafile%2Fseafile-sdoc-editor%403.0.205) (2026-06-25)
+
+## [3.0.204](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.203...%40seafile%2Fseafile-sdoc-editor%403.0.204) (2026-06-24)
+
+## [3.0.203](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.202...%40seafile%2Fseafile-sdoc-editor%403.0.203) (2026-06-24)
+
+## [3.0.202](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.201...%40seafile%2Fseafile-sdoc-editor%403.0.202) (2026-06-24)
+
+## [3.0.201](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.200...%40seafile%2Fseafile-sdoc-editor%403.0.201) (2026-06-23)
+
+## [3.0.200](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.199...%40seafile%2Fseafile-sdoc-editor%403.0.200) (2026-06-16)
+
+## [3.0.199](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.198...%40seafile%2Fseafile-sdoc-editor%403.0.199) (2026-06-13)
+
+## [3.0.198](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.197...%40seafile%2Fseafile-sdoc-editor%403.0.198) (2026-06-13)
+
+## [3.0.197](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.196...%40seafile%2Fseafile-sdoc-editor%403.0.197) (2026-06-12)
+
+## [3.0.196](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.194...%40seafile%2Fseafile-sdoc-editor%403.0.196) (2026-06-11)
+
+## [3.0.194](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.193...%40seafile%2Fseafile-sdoc-editor%403.0.194) (2026-06-09)
+
+## [3.0.193](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.192...%40seafile%2Fseafile-sdoc-editor%403.0.193) (2026-06-08)
+
+## [3.0.192](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.191...%40seafile%2Fseafile-sdoc-editor%403.0.192) (2026-06-08)
+
+## [3.0.191](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.190...%40seafile%2Fseafile-sdoc-editor%403.0.191) (2026-06-08)
+
+## [3.0.190](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.184...%40seafile%2Fseafile-sdoc-editor%403.0.190) (2026-06-06)
+
+## [3.0.184](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.183...%40seafile%2Fseafile-sdoc-editor%403.0.184) (2026-06-03)
+
+## [3.0.183](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.175...%40seafile%2Fseafile-sdoc-editor%403.0.183) (2026-06-03)
+
+## [3.0.175](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.174...%40seafile%2Fseafile-sdoc-editor%403.0.175) (2026-05-27)
+
+## [3.0.174](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.173...%40seafile%2Fseafile-sdoc-editor%403.0.174) (2026-05-26)
+
+## [3.0.173](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.171...%40seafile%2Fseafile-sdoc-editor%403.0.173) (2026-05-26)
+
+## [3.0.171](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.170...%40seafile%2Fseafile-sdoc-editor%403.0.171) (2026-05-25)
+
+## [3.0.170](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.168...%40seafile%2Fseafile-sdoc-editor%403.0.170) (2026-05-22)
+
+## [3.0.168](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.167...%40seafile%2Fseafile-sdoc-editor%403.0.168) (2026-05-21)
+
+## [3.0.167](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.166...%40seafile%2Fseafile-sdoc-editor%403.0.167) (2026-05-15)
+
+## [3.0.166](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.165...%40seafile%2Fseafile-sdoc-editor%403.0.166) (2026-05-11)
+
+## [3.0.165](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.164...%40seafile%2Fseafile-sdoc-editor%403.0.165) (2026-05-11)
+
+## [3.0.164](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.163...%40seafile%2Fseafile-sdoc-editor%403.0.164) (2026-05-11)
+
+## [3.0.163](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.162...%40seafile%2Fseafile-sdoc-editor%403.0.163) (2026-05-11)
+
+## [3.0.162](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.161...%40seafile%2Fseafile-sdoc-editor%403.0.162) (2026-05-09)
+
+## [3.0.161](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.160...%40seafile%2Fseafile-sdoc-editor%403.0.161) (2026-05-09)
+
+## [3.0.160](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.159...%40seafile%2Fseafile-sdoc-editor%403.0.160) (2026-05-08)
+
+## [3.0.159](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.158...%40seafile%2Fseafile-sdoc-editor%403.0.159) (2026-05-07)
+
+## [3.0.158](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.157...%40seafile%2Fseafile-sdoc-editor%403.0.158) (2026-05-07)
+
+## [3.0.157](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.156...%40seafile%2Fseafile-sdoc-editor%403.0.157) (2026-05-06)
+
+## [3.0.156](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.155...%40seafile%2Fseafile-sdoc-editor%403.0.156) (2026-04-30)
+
+## [3.0.155](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.154...%40seafile%2Fseafile-sdoc-editor%403.0.155) (2026-04-29)
+
+## [3.0.154](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.153...%40seafile%2Fseafile-sdoc-editor%403.0.154) (2026-04-29)
+
+## [3.0.153](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.152...%40seafile%2Fseafile-sdoc-editor%403.0.153) (2026-04-28)
+
+### Features
+
+- add export operation ([#231](https://github.com/seafileltd/sea-sdoc-editor/issues/231)) ([d5c119b](https://github.com/seafileltd/sea-sdoc-editor/commit/d5c119b148559cd829aa5aef4a7f633eff3b39c1))
+
+## [3.0.152](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.151...%40seafile%2Fseafile-sdoc-editor%403.0.152) (2026-04-27)
+
+## [3.0.151](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.150...%40seafile%2Fseafile-sdoc-editor%403.0.151) (2026-04-24)
+
+## [3.0.150](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.149...%40seafile%2Fseafile-sdoc-editor%403.0.150) (2026-04-24)
+
+## [3.0.149](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.148...%40seafile%2Fseafile-sdoc-editor%403.0.149) (2026-04-21)
+
+## [3.0.148](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.147...%40seafile%2Fseafile-sdoc-editor%403.0.148) (2026-04-21)
+
+## [3.0.147](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.146...%40seafile%2Fseafile-sdoc-editor%403.0.147) (2026-04-21)
+
+## [3.0.146](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.145...%40seafile%2Fseafile-sdoc-editor%403.0.146) (2026-04-21)
+
+## [3.0.145](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.143...%40seafile%2Fseafile-sdoc-editor%403.0.145) (2026-04-20)
+
+## [3.0.143](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.142...%40seafile%2Fseafile-sdoc-editor%403.0.143) (2026-04-20)
+
+## [3.0.142](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.138...%40seafile%2Fseafile-sdoc-editor%403.0.142) (2026-04-15)
+
+## [3.0.138](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.137...%40seafile%2Fseafile-sdoc-editor%403.0.138) (2026-04-14)
+
+## [3.0.137](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.136...%40seafile%2Fseafile-sdoc-editor%403.0.137) (2026-04-13)
+
+## [3.0.136](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.135...%40seafile%2Fseafile-sdoc-editor%403.0.136) (2026-04-13)
+
+## [3.0.135](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.134...%40seafile%2Fseafile-sdoc-editor%403.0.135) (2026-04-13)
+
+## [3.0.134](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.133...%40seafile%2Fseafile-sdoc-editor%403.0.134) (2026-04-13)
+
+## [3.0.133](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.132...%40seafile%2Fseafile-sdoc-editor%403.0.133) (2026-04-09)
+
+## [3.0.132](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.131...%40seafile%2Fseafile-sdoc-editor%403.0.132) (2026-04-07)
+
+## [3.0.131](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.130...%40seafile%2Fseafile-sdoc-editor%403.0.131) (2026-04-07)
+
+## [3.0.130](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.129...%40seafile%2Fseafile-sdoc-editor%403.0.130) (2026-04-03)
+
+## [3.0.129](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.128...%40seafile%2Fseafile-sdoc-editor%403.0.129) (2026-04-03)
+
+## [3.0.128](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.127...%40seafile%2Fseafile-sdoc-editor%403.0.128) (2026-04-02)
+
+## [3.0.127](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.126...%40seafile%2Fseafile-sdoc-editor%403.0.127) (2026-04-02)
+
+### Bug Fixes
+
+- resolve file name ([#217](https://github.com/seafileltd/sea-sdoc-editor/issues/217)) ([51b1e7a](https://github.com/seafileltd/sea-sdoc-editor/commit/51b1e7a0e37a1d65f2b8b451133546903d17923c))
+
+## [3.0.126](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.125...%40seafile%2Fseafile-sdoc-editor%403.0.126) (2026-04-01)
+
+## [3.0.125](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.124...%40seafile%2Fseafile-sdoc-editor%403.0.125) (2026-03-30)
+
+## [3.0.124](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.123...%40seafile%2Fseafile-sdoc-editor%403.0.124) (2026-03-28)
+
+## [3.0.123](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.122...%40seafile%2Fseafile-sdoc-editor%403.0.123) (2026-03-27)
+
+## [3.0.122](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.121...%40seafile%2Fseafile-sdoc-editor%403.0.122) (2026-03-25)
+
+## [3.0.121](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.120...%40seafile%2Fseafile-sdoc-editor%403.0.121) (2026-03-23)
+
+### Features
+
+- add search in wiki ([#210](https://github.com/seafileltd/sea-sdoc-editor/issues/210)) ([a570825](https://github.com/seafileltd/sea-sdoc-editor/commit/a57082524b1c5d92347d77e1a8c558e7690fc886))
+
+## [3.0.120](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.119...%40seafile%2Fseafile-sdoc-editor%403.0.120) (2026-03-20)
+
+## [3.0.119](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.118...%40seafile%2Fseafile-sdoc-editor%403.0.119) (2026-03-20)
+
+## [3.0.118](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.117...%40seafile%2Fseafile-sdoc-editor%403.0.118) (2026-03-19)
+
+## [3.0.117](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.116...%40seafile%2Fseafile-sdoc-editor%403.0.117) (2026-03-18)
+
+## [3.0.116](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.115...%40seafile%2Fseafile-sdoc-editor%403.0.116) (2026-03-17)
+
+## [3.0.115](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.114...%40seafile%2Fseafile-sdoc-editor%403.0.115) (2026-03-17)
+
+## [3.0.114](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.113...%40seafile%2Fseafile-sdoc-editor%403.0.114) (2026-03-16)
+
+## [3.0.113](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.112...%40seafile%2Fseafile-sdoc-editor%403.0.113) (2026-03-16)
+
+## [3.0.112](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.111...%40seafile%2Fseafile-sdoc-editor%403.0.112) (2026-03-13)
+
+## [3.0.111](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.110...%40seafile%2Fseafile-sdoc-editor%403.0.111) (2026-03-13)
+
+### Bug Fixes
+
+- revision bug ([c5b636c](https://github.com/seafileltd/sea-sdoc-editor/commit/c5b636c25088825ccd428f7bceb08fcfbb2479ce))
+
+## [3.0.110](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.109...%40seafile%2Fseafile-sdoc-editor%403.0.110) (2026-03-12)
+
+## [3.0.109](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.108...%40seafile%2Fseafile-sdoc-editor%403.0.109) (2026-03-11)
+
+## [3.0.108](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.107...%40seafile%2Fseafile-sdoc-editor%403.0.108) (2026-03-11)
+
+## [3.0.107](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.106...%40seafile%2Fseafile-sdoc-editor%403.0.107) (2026-03-10)
+
+## [3.0.106](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.105...%40seafile%2Fseafile-sdoc-editor%403.0.106) (2026-03-10)
+
+## [3.0.105](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.104...%40seafile%2Fseafile-sdoc-editor%403.0.105) (2026-03-09)
+
+## [3.0.104](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.103...%40seafile%2Fseafile-sdoc-editor%403.0.104) (2026-03-06)
+
+## [3.0.103](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.102...%40seafile%2Fseafile-sdoc-editor%403.0.103) (2026-03-06)
+
+## [3.0.102](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.101...%40seafile%2Fseafile-sdoc-editor%403.0.102) (2026-03-06)
+
+## [3.0.101](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.100...%40seafile%2Fseafile-sdoc-editor%403.0.101) (2026-03-05)
+
+## [3.0.100](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.99...%40seafile%2Fseafile-sdoc-editor%403.0.100) (2026-03-05)
+
+## [3.0.99](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.98...%40seafile%2Fseafile-sdoc-editor%403.0.99) (2026-03-05)
+
+## [3.0.98](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.97...%40seafile%2Fseafile-sdoc-editor%403.0.98) (2026-03-05)
+
+## [3.0.97](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.96...%40seafile%2Fseafile-sdoc-editor%403.0.97) (2026-03-04)
+
+## [3.0.96](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.95...%40seafile%2Fseafile-sdoc-editor%403.0.96) (2026-03-04)
+
+## [3.0.95](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.94...%40seafile%2Fseafile-sdoc-editor%403.0.95) (2026-03-03)
+
+## [3.0.94](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.93...%40seafile%2Fseafile-sdoc-editor%403.0.94) (2026-03-03)
+
+## [3.0.93](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.92...%40seafile%2Fseafile-sdoc-editor%403.0.93) (2026-03-03)
+
+## [3.0.92](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.91...%40seafile%2Fseafile-sdoc-editor%403.0.92) (2026-03-03)
+
+## [3.0.91](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.90...%40seafile%2Fseafile-sdoc-editor%403.0.91) (2026-03-02)
+
+## [3.0.90](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.89...%40seafile%2Fseafile-sdoc-editor%403.0.90) (2026-03-02)
+
+## [3.0.89](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.86...%40seafile%2Fseafile-sdoc-editor%403.0.89) (2026-03-02)
+
+## [3.0.86](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.85...%40seafile%2Fseafile-sdoc-editor%403.0.86) (2026-02-25)
+
+## [3.0.85](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.83...%40seafile%2Fseafile-sdoc-editor%403.0.85) (2026-02-24)
+
+## [3.0.83](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.82...%40seafile%2Fseafile-sdoc-editor%403.0.83) (2026-02-12)
+
+## [3.0.82](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.81...%40seafile%2Fseafile-sdoc-editor%403.0.82) (2026-02-11)
+
+## [3.0.81](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.80...%40seafile%2Fseafile-sdoc-editor%403.0.81) (2026-02-05)
+
+## [3.0.80](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.79...%40seafile%2Fseafile-sdoc-editor%403.0.80) (2026-02-03)
+
+### Features
+
+- optimize editor state ([#191](https://github.com/seafileltd/sea-sdoc-editor/issues/191)) ([7a46276](https://github.com/seafileltd/sea-sdoc-editor/commit/7a4627690a68aa6c82950e33b7d1be599272b4af))
+
+## [3.0.79](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.78...%40seafile%2Fseafile-sdoc-editor%403.0.79) (2026-02-03)
+
+## [3.0.78](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.77...%40seafile%2Fseafile-sdoc-editor%403.0.78) (2026-02-02)
+
+### Features
+
+- add formula ([#190](https://github.com/seafileltd/sea-sdoc-editor/issues/190)) ([596ff0b](https://github.com/seafileltd/sea-sdoc-editor/commit/596ff0b5666e39be9f80ac5eac8a8b5c385ed3b2))
+
+## [3.0.77](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.128...%40seafile%2Fseafile-sdoc-editor%403.0.77) (2026-01-31)
+
+## [3.0.76](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.127...%40seafile%2Fseafile-sdoc-editor%403.0.76) (2026-01-31)
+
+## [3.0.75](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.126...%40seafile%2Fseafile-sdoc-editor%403.0.75) (2026-01-31)
+
+## [3.0.74](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.73...%40seafile%2Fseafile-sdoc-editor%403.0.74) (2026-01-28)
+
+## [3.0.73](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.72...%40seafile%2Fseafile-sdoc-editor%403.0.73) (2026-01-27)
+
+## [3.0.72](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.71...%40seafile%2Fseafile-sdoc-editor%403.0.72) (2026-01-26)
+
+### Bug Fixes
+
+- optimize slate focus ([#184](https://github.com/seafileltd/sea-sdoc-editor/issues/184)) ([c2bc32d](https://github.com/seafileltd/sea-sdoc-editor/commit/c2bc32d3faa9533145277d4e8ed767614aeadeb4))
+
+## [3.0.71](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.70...%40seafile%2Fseafile-sdoc-editor%403.0.71) (2026-01-21)
+
+## [3.0.70](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.69...%40seafile%2Fseafile-sdoc-editor%403.0.70) (2026-01-20)
+
+## [3.0.69](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.68...%40seafile%2Fseafile-sdoc-editor%403.0.69) (2026-01-19)
+
+## [3.0.68](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.67...%40seafile%2Fseafile-sdoc-editor%403.0.68) (2026-01-16)
+
+## [3.0.67](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.66...%40seafile%2Fseafile-sdoc-editor%403.0.67) (2026-01-16)
+
+## [3.0.66](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.65...%40seafile%2Fseafile-sdoc-editor%403.0.66) (2026-01-15)
+
+## [3.0.65](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.64...%40seafile%2Fseafile-sdoc-editor%403.0.65) (2026-01-15)
+
+## [3.0.64](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.63...%40seafile%2Fseafile-sdoc-editor%403.0.64) (2026-01-15)
+
+## [3.0.63](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.62...%40seafile%2Fseafile-sdoc-editor%403.0.63) (2026-01-15)
+
+### Features
+
+- toggle-cursor-between-editor-and-title ([#179](https://github.com/seafileltd/sea-sdoc-editor/issues/179)) ([4d8acaf](https://github.com/seafileltd/sea-sdoc-editor/commit/4d8acafb0bd531b1d5eb15dd6f9602baf4d045e9))
+
+## [3.0.62](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.61...%40seafile%2Fseafile-sdoc-editor%403.0.62) (2026-01-15)
+
+## [3.0.61](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.60...%40seafile%2Fseafile-sdoc-editor%403.0.61) (2026-01-14)
+
+## [3.0.60](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.59...%40seafile%2Fseafile-sdoc-editor%403.0.60) (2026-01-14)
+
+## [3.0.59](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.58...%40seafile%2Fseafile-sdoc-editor%403.0.59) (2026-01-14)
+
+## [3.0.58](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.57...%40seafile%2Fseafile-sdoc-editor%403.0.58) (2026-01-14)
+
+## [3.0.57](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.56...%40seafile%2Fseafile-sdoc-editor%403.0.57) (2026-01-12)
+
+## [3.0.56](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.55...%40seafile%2Fseafile-sdoc-editor%403.0.56) (2026-01-09)
+
+## [3.0.55](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.54...%40seafile%2Fseafile-sdoc-editor%403.0.55) (2026-01-09)
+
+### Bug Fixes
+
+- add wiki link ([#170](https://github.com/seafileltd/sea-sdoc-editor/issues/170)) ([2dfe1d5](https://github.com/seafileltd/sea-sdoc-editor/commit/2dfe1d583a7b0f4407cfb0c6f361e310885fa006))
+
+## [3.0.54](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.53...%40seafile%2Fseafile-sdoc-editor%403.0.54) (2026-01-07)
+
+## [3.0.53](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.52...%40seafile%2Fseafile-sdoc-editor%403.0.53) (2026-01-07)
+
+## [3.0.52](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.51...%40seafile%2Fseafile-sdoc-editor%403.0.52) (2026-01-07)
+
+### Performance Improvements
+
+- optimize code ([a1ea331](https://github.com/seafileltd/sea-sdoc-editor/commit/a1ea33126c381644665df792fab9480a6c2917fb))
+
+## [3.0.51](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.125...%40seafile%2Fseafile-sdoc-editor%403.0.51) (2026-01-06)
+
+## [3.0.50](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.49...%40seafile%2Fseafile-sdoc-editor%403.0.50) (2026-01-05)
+
+## [3.0.49](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.48...%40seafile%2Fseafile-sdoc-editor%403.0.49) (2026-01-04)
+
+## [3.0.48](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.47...%40seafile%2Fseafile-sdoc-editor%403.0.48) (2025-12-30)
+
+## [3.0.47](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.46...%40seafile%2Fseafile-sdoc-editor%403.0.47) (2025-12-26)
+
+## [3.0.46](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.45...%40seafile%2Fseafile-sdoc-editor%403.0.46) (2025-12-26)
+
+## [3.0.45](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.44...%40seafile%2Fseafile-sdoc-editor%403.0.45) (2025-12-26)
+
+## [3.0.44](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.43...%40seafile%2Fseafile-sdoc-editor%403.0.44) (2025-12-25)
+
+## [3.0.43](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.42...%40seafile%2Fseafile-sdoc-editor%403.0.43) (2025-12-25)
+
+## [3.0.42](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.41...%40seafile%2Fseafile-sdoc-editor%403.0.42) (2025-12-25)
+
+## [3.0.41](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.40...%40seafile%2Fseafile-sdoc-editor%403.0.41) (2025-12-24)
+
+## [3.0.40](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.39...%40seafile%2Fseafile-sdoc-editor%403.0.40) (2025-12-23)
+
+## [3.0.39](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.38...%40seafile%2Fseafile-sdoc-editor%403.0.39) (2025-12-23)
+
+## [3.0.38](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.37...%40seafile%2Fseafile-sdoc-editor%403.0.38) (2025-12-22)
+
+## [3.0.37](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.36...%40seafile%2Fseafile-sdoc-editor%403.0.37) (2025-12-20)
+
+## [3.0.36](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.35...%40seafile%2Fseafile-sdoc-editor%403.0.36) (2025-12-20)
+
+## [3.0.35](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.34...%40seafile%2Fseafile-sdoc-editor%403.0.35) (2025-12-20)
+
+## [3.0.34](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.33...%40seafile%2Fseafile-sdoc-editor%403.0.34) (2025-12-20)
+
+## [3.0.33](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.32...%40seafile%2Fseafile-sdoc-editor%403.0.33) (2025-12-20)
+
+## [3.0.32](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.31...%40seafile%2Fseafile-sdoc-editor%403.0.32) (2025-12-20)
+
+## [3.0.31](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.30...%40seafile%2Fseafile-sdoc-editor%403.0.31) (2025-12-20)
+
+## [3.0.30](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.29...%40seafile%2Fseafile-sdoc-editor%403.0.30) (2025-12-19)
+
+## [3.0.29](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.28...%40seafile%2Fseafile-sdoc-editor%403.0.29) (2025-12-19)
+
+## [3.0.28](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.27...%40seafile%2Fseafile-sdoc-editor%403.0.28) (2025-12-19)
+
+## [3.0.27](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.26...%40seafile%2Fseafile-sdoc-editor%403.0.27) (2025-12-18)
+
+## [3.0.26](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.25...%40seafile%2Fseafile-sdoc-editor%403.0.26) (2025-12-18)
+
+## [3.0.25](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.24...%40seafile%2Fseafile-sdoc-editor%403.0.25) (2025-12-15)
+
+## [3.0.24](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.23...%40seafile%2Fseafile-sdoc-editor%403.0.24) (2025-12-12)
+
+## [3.0.23](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.22...%40seafile%2Fseafile-sdoc-editor%403.0.23) (2025-12-10)
+
+## [3.0.22](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.21...%40seafile%2Fseafile-sdoc-editor%403.0.22) (2025-12-10)
+
+## [3.0.21](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.20...%40seafile%2Fseafile-sdoc-editor%403.0.21) (2025-12-09)
+
+## [3.0.20](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.19...%40seafile%2Fseafile-sdoc-editor%403.0.20) (2025-12-09)
+
+## [3.0.19](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.18...%40seafile%2Fseafile-sdoc-editor%403.0.19) (2025-12-06)
+
+## [3.0.18](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.17...%40seafile%2Fseafile-sdoc-editor%403.0.18) (2025-12-05)
+
+## [3.0.17](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.16...%40seafile%2Fseafile-sdoc-editor%403.0.17) (2025-12-05)
+
+## [3.0.16](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.15...%40seafile%2Fseafile-sdoc-editor%403.0.16) (2025-12-05)
+
+## [3.0.15](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.14...%40seafile%2Fseafile-sdoc-editor%403.0.15) (2025-12-05)
+
+## [3.0.14](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.13...%40seafile%2Fseafile-sdoc-editor%403.0.14) (2025-12-05)
+
+## [3.0.13](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.12...%40seafile%2Fseafile-sdoc-editor%403.0.13) (2025-12-05)
+
+## [3.0.12](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.11...%40seafile%2Fseafile-sdoc-editor%403.0.12) (2025-12-05)
+
+## [3.0.11](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.10...%40seafile%2Fseafile-sdoc-editor%403.0.11) (2025-12-04)
+
+## [3.0.10](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.9...%40seafile%2Fseafile-sdoc-editor%403.0.10) (2025-12-03)
+
+## [3.0.9](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.8...%40seafile%2Fseafile-sdoc-editor%403.0.9) (2025-12-02)
+
+## [3.0.8](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.7...%40seafile%2Fseafile-sdoc-editor%403.0.8) (2025-11-26)
+
+## [3.0.7](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.6...%40seafile%2Fseafile-sdoc-editor%403.0.7) (2025-11-20)
+
+## [3.0.6](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.123...%40seafile%2Fseafile-sdoc-editor%403.0.6) (2025-11-19)
+
+## [3.0.5](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.4...%40seafile%2Fseafile-sdoc-editor%403.0.5) (2025-11-18)
+
+## [3.0.4](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.122...%40seafile%2Fseafile-sdoc-editor%403.0.4) (2025-11-17)
+
+## [3.0.3](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.2...%40seafile%2Fseafile-sdoc-editor%403.0.3) (2025-11-17)
+
+## [3.0.2](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.1...%40seafile%2Fseafile-sdoc-editor%403.0.2) (2025-11-14)
+
+## [3.0.1](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.121...%40seafile%2Fseafile-sdoc-editor%403.0.1) (2025-11-13)
+
+# [3.0.0](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.118...%40seafile%2Fseafile-sdoc-editor%403.0.0) (2025-11-03)
+
+## [2.0.118](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.117...%40seafile%2Fseafile-sdoc-editor%402.0.118) (2025-11-03)
+
 ## [3.0.266](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.265...%40seafile%2Fseafile-sdoc-editor%403.0.266) (2026-11-16)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
@@ -1135,7 +1647,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
 
 # [3.0.0](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.118...@seafile/seafile-sdoc-editor@3.0.0) (2025-11-03)
-
 
 ## [2.0.212](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.128...%40seafile%2Fseafile-sdoc-editor%402.0.212) (2026-11-19)
 
