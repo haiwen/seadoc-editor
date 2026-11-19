@@ -145,7 +145,7 @@ class SocketManager {
     }
 
     // Operations are execute failure
-    const { error_type } = result;
+    const { error_type } = result || {};
     if (
       error_type === 'load_document_content_error' ||
       error_type === 'save_operations_to_database_error' ||
@@ -186,6 +186,10 @@ class SocketManager {
         this._sendingOperations = null;
         this.sendNextOperations();
       });
+    } else {
+      this.state = STATE.NEED_RELOAD;
+      this._sendingOperations = null;
+      this.dispatchConnectState('sync_server_operations_error');
     }
   };
 
