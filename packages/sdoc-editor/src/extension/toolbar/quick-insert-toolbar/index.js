@@ -26,6 +26,9 @@ import { SELECTED_ITEM_CLASS_NAME } from './const';
 
 import './style.css';
 
+// Compensate for the submenu's 8px padding and 1px border to align its first item.
+const VIDEO_MENU_OFFSET = [-9, 6];
+
 const QuickInsertBlockMenu = ({
   insertPosition = INSERT_POSITION.CURRENT,
   slateNode,
@@ -38,11 +41,11 @@ const QuickInsertBlockMenu = ({
   const videoMenuRef = useRef(null);
   const videoMenuKeyboardNavigationRef = useRef(false);
   const videoMenuSelectIndexRef = useRef(-1);
-  const preserveSearchInputFocusRef = useRef(false);
   const inputWrapperRef = useRef(null);
   const downDownWrapperRef = useRef(null);
   const { t } = useTranslation('sdoc-editor');
-  const [currentSelectIndex, setCurrentSelectIndex] = useState(-1); // -1 is input focus position
+  const [searchValue, setSearchValue] = useState('');
+  const [currentSelectIndex, setCurrentSelectIndex] = useState(-1); // -1 means no menu item is selected
   const [quickInsertMenuSearchMap, setQuickInsertMenuSearchMap] = useState(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP);
 
   const onInsertImageToggle = useCallback(() => {
@@ -233,7 +236,7 @@ const QuickInsertBlockMenu = ({
             placement="right-start"
             hideArrow={true}
             fade={false}
-            offset={[0, 6]}
+            offset={VIDEO_MENU_OFFSET}
           >
             <div className="sdoc-insert-video-menu-popover-container">
               <div className="sdoc-dropdown-menu-item" onClick={onInsertVideoToggle}>{t('Upload_local_video')}</div>
@@ -316,6 +319,7 @@ const QuickInsertBlockMenu = ({
   }, [getVideoMenuItems]);
 
   const handleKeyDown = useCallback((e) => {
+    if (e.isComposing || e.keyCode === 229 || downDownWrapperRef.current?.isInputtingChinese) return;
     const { UpArrow, DownArrow, LeftArrow, RightArrow, Enter, Esc } = KeyCodes;
     const tableSizePopover = document.querySelector('.sdoc-selected-table-size-popover.show');
     if (tableSizePopover) {
@@ -370,8 +374,6 @@ const QuickInsertBlockMenu = ({
 
     if (keyCode === UpArrow) {
       e.preventDefault();
-      const currentSelectItem = getSelectItemDom(currentSelectIndex);
-      if (currentSelectItem) currentSelectItem.classList.remove(SELECTED_ITEM_CLASS_NAME);
       if (currentSelectIndex > -1) {
         setCurrentSelectIndex(currentSelectIndex === 0 ? renderItems.length - 1 : currentSelectIndex - 1);
       }
@@ -380,8 +382,6 @@ const QuickInsertBlockMenu = ({
     if (keyCode === DownArrow) {
       e.preventDefault();
       if (renderItems.length === 0) return;
-      const currentSelectItem = getSelectItemDom(currentSelectIndex);
-      if (currentSelectItem) currentSelectItem.classList.remove(SELECTED_ITEM_CLASS_NAME);
       setCurrentSelectIndex(currentSelectIndex === renderItems.length - 1 ? 0 : currentSelectIndex + 1);
     }
 
@@ -445,38 +445,51 @@ const QuickInsertBlockMenu = ({
     domList.forEach((dom) => dom.classList.remove(SELECTED_ITEM_CLASS_NAME));
   }, []);
 
-  const onHandleInputFocus = useCallback((isFocus) => {
-    if (inputWrapperRef.current) {
-      setTimeout(() => {
-        isFocus ? inputWrapperRef.current.focus() : inputWrapperRef.current.blur();
-      }, 50);
-    }
+  useEffect(() => {
+    const focusTimer = setTimeout(() => inputWrapperRef.current?.focus(), 50);
+    return () => clearTimeout(focusTimer);
   }, []);
 
   useEffect(() => {
-    if (currentSelectIndex === -1) {
-      onHandleInputFocus(true);
-    } else {
-      if (!preserveSearchInputFocusRef.current) onHandleInputFocus(false);
-      preserveSearchInputFocusRef.current = false;
-      clearSelectStyle();
-      const currentSelectItem = getSelectItemDom(currentSelectIndex);
-      if (currentSelectItem) {
-        onHandleOverflowScroll(currentSelectItem, downDownWrapperRef, !getSelectItemDom(currentSelectIndex + 1));
-        currentSelectItem.classList.add(SELECTED_ITEM_CLASS_NAME);
-      }
+    if (document.querySelector('.sdoc-quick-insert-video-menu-popover .popover.show')) {
+      videoMenuRef.current?.toggle();
     }
-  }, [clearSelectStyle, currentSelectIndex, downDownWrapperRef, onHandleInputFocus, quickInsertMenuSearchMap]);
+    if (document.querySelector('.sdoc-selected-table-size-popover.show')) {
+      tableSizeRef.current?.uncontrolledPopoverRef.current?.toggle();
+    }
+    videoMenuKeyboardNavigationRef.current = false;
+    videoMenuSelectIndexRef.current = -1;
+  }, [searchValue]);
+
+  useEffect(() => {
+    clearSelectStyle();
+    if (currentSelectIndex === -1) return;
+    const currentSelectItem = getSelectItemDom(currentSelectIndex);
+    if (currentSelectItem) {
+      onHandleOverflowScroll(currentSelectItem, downDownWrapperRef, !getSelectItemDom(currentSelectIndex + 1));
+      currentSelectItem.classList.add(SELECTED_ITEM_CLASS_NAME);
+    }
+  }, [clearSelectStyle, currentSelectIndex, quickInsertMenuSearchMap]);
 
   const onChange = useCallback((e) => {
+    setSearchValue(e.target.value);
     if (!downDownWrapperRef.current.isInputtingChinese) {
       const newMenuSearchMap = getSearchedOperations(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP, true, e, t, editor);
       const hasResults = Object.keys(newMenuSearchMap).length > 0;
-      preserveSearchInputFocusRef.current = hasResults;
       setQuickInsertMenuSearchMap(newMenuSearchMap);
       setCurrentSelectIndex(hasResults ? 0 : -1);
     }
   }, [editor, t]);
+
+  const onClearSearch = useCallback((e) => {
+    e.stopPropagation();
+    setSearchValue('');
+    setQuickInsertMenuSearchMap(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP);
+    setCurrentSelectIndex(-1);
+    clearSelectStyle();
+    downDownWrapperRef.current.scrollTop = 0;
+    inputWrapperRef.current.focus();
+  }, [clearSelectStyle]);
 
   const onCompositionStart = useCallback(() => {
     downDownWrapperRef.current.isInputtingChinese = true;
@@ -492,11 +505,27 @@ const QuickInsertBlockMenu = ({
       <div className='sdoc-side-menu-search-wrapper'>
         <Input
           innerRef={inputWrapperRef}
+          value={searchValue}
           placeholder={t('Search_1')}
           onChange={onChange}
           onCompositionStart={onCompositionStart}
           onCompositionEnd={onCompositionEnd}
         />
+        {searchValue && (
+          <button
+            type="button"
+            className="sdoc-quick-insert-clear-search"
+            aria-label={t('Delete')}
+            title={t('Delete')}
+            onMouseDown={(e) => e.preventDefault()}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+            }}
+            onClick={onClearSearch}
+          >
+            <i className="sdocfont sdoc-sm-close" aria-hidden="true"></i>
+          </button>
+        )}
       </div>
       <div className='sdoc-insert-element-content-wrapper' ref={downDownWrapperRef}>
         <div className='sdoc-side-menu-inner-container'>
