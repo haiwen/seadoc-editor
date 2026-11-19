@@ -23,6 +23,10 @@ class SocketClient {
     this.socket.on('connect', this.onConnected);
     this.socket.on('disconnect', this.onDisconnected);
     this.socket.on('connect_error', this.onConnectError);
+    this.socket.on('token-expired', () => {
+      const socketManager = SocketManager.getInstance();
+      socketManager.dispatchConnectState('token_expired');
+    });
     this.socket.on('join-room', this.onJoinRoom);
     this.socket.on('leave-room', this.onLeaveRoom);
     this.socket.on('user-updated', this.onUserUpdated);
@@ -130,7 +134,7 @@ class SocketClient {
     clientDebug('connect_error. %s', error.type);
     clientDebug('connect_error. %O', error.context);
 
-    if (error.message === 'jwt expired') {
+    if (error.data?.code === 'token_expired' || error.message === 'jwt expired') {
       const socketManager = SocketManager.getInstance();
       socketManager.dispatchConnectState('token_expired');
       return;
@@ -228,6 +232,9 @@ class SocketClient {
     this.socket.emit('sync-document', { doc_uuid: docUuid, version: clientVersion }, (result) => {
       if (result.success) {
         socketManager.onGetRecentOperations(result);
+      } else {
+        const errorType = result.error_type === 'token_expired' ? 'token_expired' : 'sync_server_operations_error';
+        socketManager.dispatchConnectState(errorType);
       }
     });
   };

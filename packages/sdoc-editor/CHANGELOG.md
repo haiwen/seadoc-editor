@@ -1636,6 +1636,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - add video link in wki ([58ec301](https://github.com/seafileltd/sea-sdoc-editor/commit/58ec301b68083d510ed735500f65f0126a90e074))
 - insert video below blocks ([b729201](https://github.com/seafileltd/sea-sdoc-editor/commit/b729201fd9da6e99f94992f71f6571d1694023be))
 
+## [2.0.212](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%402.0.211...%40seafile%2Fsdoc-editor%402.0.212) (2026-11-19)
+
+### Bug Fixes
+
+- handle socket expiry and sync failures in 2.0 ([#356](https://github.com/haiwen/seadoc-editor/issues/356)) ([c742152](https://github.com/haiwen/seadoc-editor/commit/c742152001f3a1c32620e35e28207cccbe2fd68f))
+
 ## [2.0.211](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/sdoc-editor@2.0.210...@seafile/sdoc-editor@2.0.211) (2026-01-31)
 
 **Note:** Version bump only for package @seafile/sdoc-editor

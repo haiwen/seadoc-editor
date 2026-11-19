@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
 
-
-
-
-
 ## [3.0.265](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.264...%40seafile%2Fseafile-sdoc-editor%403.0.265) (2026-11-13)
 
 ### Features
@@ -1139,6 +1135,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
 
 # [3.0.0](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.118...@seafile/seafile-sdoc-editor@3.0.0) (2025-11-03)
+
+
+## [2.0.212](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%402.0.128...%40seafile%2Fseafile-sdoc-editor%402.0.212) (2026-11-19)
+
+### Bug Fixes
+
+- handle socket expiry and sync failures in 2.0 ([#356](https://github.com/haiwen/seadoc-editor/issues/356)) ([c742152](https://github.com/haiwen/seadoc-editor/commit/c742152001f3a1c32620e35e28207cccbe2fd68f))
 
 ## [2.0.128](https://github.com/seafileltd/sea-sdoc-editor/compare/@seafile/seafile-sdoc-editor@2.0.127...@seafile/seafile-sdoc-editor@2.0.128) (2026-01-31)
 
