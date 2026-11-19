@@ -194,17 +194,16 @@
   white-space: nowrap;
 }
 
-.sdoc-editor__article .sdoc-image-readonly-fullscreen-container {
+.sdoc-image-readonly-fullscreen-container {
   top: -42px;
   left: -3px;
-  z-index: auto;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.sdoc-editor__article .sdoc-image-visual:hover .sdoc-image-readonly-fullscreen-container,
-.sdoc-editor__article .sdoc-image-readonly-fullscreen-container:focus-within {
+.sdoc-image-readonly-fullscreen-container.is-visible,
+.sdoc-image-readonly-fullscreen-container:focus-within {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
