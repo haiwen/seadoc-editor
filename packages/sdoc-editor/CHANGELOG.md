@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.271](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.270...%40seafile%2Fsdoc-editor%403.0.271) (2026-11-20)
+
+### Bug Fixes
+
+- **styles:** prevent dropdown styles from overriding side menu ([a886209](https://github.com/haiwen/seadoc-editor/commit/a886209b08cbc2400346d94c2fd869360739768b))
+
 ## [3.0.270](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.269...%40seafile%2Fsdoc-editor%403.0.270) (2026-11-20)
 
 ### Bug Fixes
