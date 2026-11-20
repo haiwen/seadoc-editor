@@ -2,7 +2,7 @@
   position: absolute;
 }
 
-.sdoc-side-menu {
+.sdoc-side-menu.sdoc-dropdown-menu {
   padding: 0;
   position: absolute;
   background-color: #fff;
