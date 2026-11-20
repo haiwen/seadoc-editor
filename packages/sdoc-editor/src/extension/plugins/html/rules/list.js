@@ -116,14 +116,6 @@ const listRule = (element, parseChild) => {
       children: parseChild(validChildNodes)
     };
   }
-  if (nodeName === 'LI' && element.firstChild && PARAGRAPH_TAGS.includes(element.firstChild.nodeName)) {
-    return {
-      id: slugid.nice(),
-      type: LIST_ITEM,
-      children: parseChild(childNodes)
-    };
-  }
-
   if (nodeName === 'LI') {
     const parsedChildren = parseChild(childNodes);
     return {

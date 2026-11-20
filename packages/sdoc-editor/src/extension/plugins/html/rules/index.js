@@ -10,13 +10,13 @@ import tableRule from './table';
 import textRule from './text';
 
 const rules = [
+  tableRule,
   blockquoteRule,
   codeBlockRule,
   headerRule,
   imageRule,
   linkRule,
   listRule,
-  tableRule,
   hrRule,
   paragraphRule,
   textRule,
