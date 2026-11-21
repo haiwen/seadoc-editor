@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.272](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.271...%40seafile%2Fsdoc-editor%403.0.272) (2026-11-21)
+
+### Bug Fixes
+
+- **mathjax:** enable formula support for all document viewers ([eb5a5cf](https://github.com/haiwen/seadoc-editor/commit/eb5a5cfc4eb5c75d41ba6014f7159a21742e5432))
+- **mathjax:** preserve shared script and glyph cache lifecycle ([25691b0](https://github.com/haiwen/seadoc-editor/commit/25691b0f84521d7fe8a060e44218bcfadb1490ce))
+
 ## [3.0.271](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.270...%40seafile%2Fsdoc-editor%403.0.271) (2026-11-20)
 
 ### Bug Fixes

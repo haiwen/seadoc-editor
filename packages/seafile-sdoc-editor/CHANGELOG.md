@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.272](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.271...%40seafile%2Fseafile-sdoc-editor%403.0.272) (2026-11-21)
+
+### Bug Fixes
+
+- **mathjax:** enable formula support for all document viewers ([eb5a5cf](https://github.com/seafileltd/sea-sdoc-editor/commit/eb5a5cfc4eb5c75d41ba6014f7159a21742e5432))
+
 ## [3.0.271](https://github.com/seafileltd/sea-sdoc-editor/compare/%40seafile%2Fseafile-sdoc-editor%403.0.270...%40seafile%2Fseafile-sdoc-editor%403.0.271) (2026-11-20)
 
 **Note:** Version bump only for package @seafile/seafile-sdoc-editor
