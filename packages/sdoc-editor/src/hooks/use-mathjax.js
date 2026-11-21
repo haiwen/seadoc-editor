@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+let mathJaxUsers = 0;
+
 const useMathJax = (mathJaxSource) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -7,33 +9,42 @@ const useMathJax = (mathJaxSource) => {
       setIsLoading(false);
       return;
     }
-    window.MathJax = {
-      options: {
-        enableMenu: false
-      },
-      tex: {
-        inlineMath: [['$', '$']],
-        displayMath: [['$$', '$$']]
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
-    if (!document.querySelector('#mathjax')) {
-      const script = document.createElement('script');
+
+    mathJaxUsers += 1;
+    let script = document.getElementById('mathjax');
+    if (!script) {
+      window.MathJax = {
+        options: {
+          enableMenu: false
+        },
+        tex: {
+          inlineMath: [['$', '$']],
+          displayMath: [['$$', '$$']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+      script = document.createElement('script');
       script.src = mathJaxSource;
       script.id = 'mathjax';
-      document.body.appendChild(script);
-      script.onload = () => {
-        setIsLoading(false);
-      };
-    } else {
-      setIsLoading(false);
     }
 
+    const onLoad = () => setIsLoading(false);
+    if (typeof window.MathJax?.tex2svg === 'function') {
+      setIsLoading(false);
+    } else {
+      script.addEventListener('load', onLoad);
+    }
+    if (!script.isConnected) document.body.appendChild(script);
+
     return () => {
-      const script = document.getElementById('mathjax');
-      script && script.parentNode.removeChild(script);
+      script.removeEventListener('load', onLoad);
+      mathJaxUsers -= 1;
+      // Other editors and viewers may still reference the shared glyph cache.
+      if (mathJaxUsers > 0) return;
+      script.remove();
+      document.getElementById('MJX-SVG-global-cache')?.remove();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
