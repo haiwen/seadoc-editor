@@ -28,6 +28,7 @@ const DiffViewer = ({ currentContent, lastContent, didMountCallback, mathJaxSour
 
   return (
     <SDocViewer
+      mathJaxSource={mathJaxSource}
       document={{ elements: diff.value }}
       showToolbar={false}
       showOutline={false}

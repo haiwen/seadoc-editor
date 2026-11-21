@@ -51,6 +51,7 @@ const RevisionDiffViewer = ({ editor, revisionContent, didMountCallback, mathJax
   return (
     <>
       <SDocViewer
+        mathJaxSource={mathJaxSource}
         editor={editor}
         document={{ elements: diff.value }}
         showToolbar={true}
