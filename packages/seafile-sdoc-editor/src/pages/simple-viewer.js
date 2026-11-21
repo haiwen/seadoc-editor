@@ -63,7 +63,6 @@ class SimpleViewer extends React.Component {
       showOutline: isMobile ? false : true,
       showComment: false,
       mathJaxSource: this.props.mathJaxSource,
-      enableMathJax: true,
     };
 
     return (

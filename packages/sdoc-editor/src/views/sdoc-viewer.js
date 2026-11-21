@@ -18,9 +18,8 @@ import ReadOnlyArticle from './readonly-article';
 import '../assets/css/sdoc-viewer.css';
 
 
-const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false, showComment = false, plugins = [], enableMathJax = false, mathJaxSource = MATH_JAX_SOURCE_RUL, isDiffView = false }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { isLoadingMathJax } = enableMathJax ? useMathJax(mathJaxSource) : { isLoadingMathJax: false };
+const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false, showComment = false, plugins = [], mathJaxSource = MATH_JAX_SOURCE_RUL, isDiffView = false }) => {
+  const { isLoadingMathJax } = useMathJax(mathJaxSource);
 
   if (!context.api) {
     context.initApi();
@@ -42,7 +41,7 @@ const SDocViewer = ({ editor, document, showToolbar = false, showOutline = false
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (enableMathJax && isLoadingMathJax) {
+  if (isLoadingMathJax) {
     return <Loading />;
   }
 

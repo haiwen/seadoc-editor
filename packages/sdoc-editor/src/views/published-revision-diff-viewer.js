@@ -53,6 +53,7 @@ const PublishedRevisionDiffViewer = ({ isShowChanges, revisionContent, didMountC
   const document = { elements: (isShowChanges && diff?.value) || revisionContent.elements };
   return (
     <SDocViewer
+      mathJaxSource={mathJaxSource}
       document={document}
       showToolbar={true}
       showOutline={true}
