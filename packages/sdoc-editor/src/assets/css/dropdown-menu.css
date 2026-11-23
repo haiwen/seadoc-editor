@@ -15,6 +15,11 @@
   border-top: 1px solid #eee;
 }
 
+.sdoc-dropdown-menu .dropdown-item {
+  font-size: 14px;
+  color: #212529;
+}
+
 .sdoc-dropdown-menu .sdoc-dropdown-menu-item {
   height: 32px;
   width: 100%;

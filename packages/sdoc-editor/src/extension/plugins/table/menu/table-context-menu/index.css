@@ -22,7 +22,7 @@
   color: #adb5bd;
 }
 
-.sdoc-side-extendable {
+.sdoc-table-context-menu .dropdown-item.sdoc-side-extendable {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -135,11 +135,6 @@
   box-shadow: unset;
 }
 
-.sdoc-dropdown-menu .dropdown-item {
-  font-size: 14px;
-  color: #212529;
-}
-
 /* doc comment add editor */
 .sdoc-comment-drawer .sdoc-comments-panel-body .sdoc-global-comment-input-wrapper {
   padding: 0 16px;
