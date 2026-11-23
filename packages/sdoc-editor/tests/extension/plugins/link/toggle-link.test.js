@@ -282,6 +282,33 @@ describe('paste encoded internal file link', () => {
 });
 
 
+describe('paste external links without embedding', () => {
+  it.each([
+    'https://cloud.seatable.io/dtable/external-links/c1dd1a14d584484088cf/',
+    'https://www.figma.com/design/abc/demo',
+  ])('pastes %s as a regular link', async (text) => {
+    context.initSSRSettings({ serviceUrl: 'https://seafile.example.com' });
+    const input = (
+      <editor>
+        <hp><cursor /></hp>
+      </editor>
+    );
+    const editor = createSdocEditor(input, [withReact, LinkPlugin.editorPlugin]);
+
+    await editor.insertData({
+      getData: (type) => type === 'text/plain' ? text : '',
+      types: ['text/plain'],
+    });
+
+    expect(editor.children).toHaveLength(1);
+    expect(editor.children[0].children).toContainEqual(expect.objectContaining({
+      type: 'link',
+      href: text,
+      children: [expect.objectContaining({ text })],
+    }));
+  });
+});
+
 describe('unsafe pasted links', () => {
   it.each([
     'javascript://example.com/%0Avoid(document.body.dataset.ipd=1)',

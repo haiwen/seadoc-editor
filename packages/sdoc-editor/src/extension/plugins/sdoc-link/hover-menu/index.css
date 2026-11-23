@@ -91,12 +91,12 @@
   white-space: nowrap;
 }
 
-.sdoc-file-link-hover-menu-container .sdoc-file-display-style-popover .sdoc-dropdown-item {
+.sdoc-link-hover-menu-container .sdoc-file-display-style-popover .sdoc-dropdown-menu-item {
   padding: 0 12px 0 38px;
   position: relative;
 }
 
-.sdoc-file-link-hover-menu-container .sdoc-file-display-style-popover .sdoc-dropdown-menu-item .sdoc-check-mark {
+.sdoc-link-hover-menu-container .sdoc-file-display-style-popover .sdoc-dropdown-menu-item .sdoc-check-mark {
   position: absolute;
   left: 12px;
 }

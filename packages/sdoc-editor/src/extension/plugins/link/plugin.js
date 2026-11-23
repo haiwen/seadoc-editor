@@ -8,7 +8,6 @@ import { normalizeWebUrl } from '../../../utils/url-utils';
 import { CODE_BLOCK, CODE_LINE, ELEMENT_TYPE, INSERT_POSITION, LINK, ORDERED_LIST, UNORDERED_LIST } from '../../constants';
 import { getEditorString, getNodeType, getSelectedElems, getSelectedNodeByType } from '../../core';
 import { isImage, isSameDomain } from '../../utils';
-import { getEmbedLinkType, insertEmbedLink } from '../embed-link/helper';
 import { insertFileLink } from '../file-link/helpers';
 import { insertSdocFileLink } from '../sdoc-link/helpers';
 import { insertWhiteboard } from '../whiteboard/helper';
@@ -104,12 +103,6 @@ const withLink = (editor) => {
           Transforms.insertNodes(newEditor, link);
         }
       } else {
-        // Paste Seatable or Figma link
-        const embedLinkType = getEmbedLinkType(text);
-        if (embedLinkType) {
-          insertEmbedLink(newEditor, text, embedLinkType);
-          return;
-        }
         const link = genLinkNode(text, text);
         Transforms.insertNodes(newEditor, link);
       }

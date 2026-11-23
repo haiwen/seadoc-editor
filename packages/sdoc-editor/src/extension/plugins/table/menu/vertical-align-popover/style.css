@@ -3,21 +3,21 @@
     flex-direction: column;
 }
 
-.sdoc-table-alignment-menu {
-    min-width: 96px !important;
+.sdoc-dropdown-menu.sdoc-table-alignment-menu {
+    min-width: 96px;
 }
 
-.sdoc-table-alignment-menu .sdoc-dropdown-menu-item {
-    padding: 4px 12px 4px 38px !important;
+.sdoc-dropdown-menu.sdoc-table-alignment-menu .sdoc-dropdown-menu-item {
+    padding: 4px 12px 4px 38px;
 }
 
-.sdoc-table-alignment-menu .sdoc-dropdown-menu-item .sdoc-check-mark {
+.sdoc-dropdown-menu.sdoc-table-alignment-menu .sdoc-dropdown-menu-item .sdoc-check-mark {
     position: absolute;
     left: 20px;
-    font-size: 14px !important;
+    font-size: 14px;
     display: none;
 }
 
-.sdoc-table-alignment-menu .sdoc-dropdown-menu-item .sdoc-check-mark.active {
+.sdoc-dropdown-menu.sdoc-table-alignment-menu .sdoc-dropdown-menu-item .sdoc-check-mark.active {
     display: inline;
 }
