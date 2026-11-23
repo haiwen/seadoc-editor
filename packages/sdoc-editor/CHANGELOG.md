@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.274](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.273...%40seafile%2Fsdoc-editor%403.0.274) (2026-11-23)
+
+### Bug Fixes
+
+- restore image hover menu layout ([#368](https://github.com/haiwen/seadoc-editor/issues/368)) ([107aca7](https://github.com/haiwen/seadoc-editor/commit/107aca71bd4c1931d9eacb5427f162ec224939b1))
+
 ## [3.0.273](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.272...%40seafile%2Fsdoc-editor%403.0.273) (2026-11-21)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
