@@ -15,7 +15,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seafileltd/sea-sdoc-editor.git"
+    "url": "git+https://github.com/haiwen/seadoc-editor.git",
+    "directory": "packages/seafile-sdoc-editor"
   },
   "scripts": {
     "test": "node ./__tests__/seafile-sdoc-editor.test.js",

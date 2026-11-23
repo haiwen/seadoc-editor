@@ -1,0 +1,69 @@
+name: Publish npm packages
+
+on:
+  push:
+    tags:
+      - '@seafile/seafile-sdoc-editor@*'
+
+jobs:
+  publish-sdoc-editor:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Check release versions
+        run: |
+          node <<'JS'
+          const core = require('./packages/sdoc-editor/package.json');
+          const wrapper = require('./packages/seafile-sdoc-editor/package.json');
+          const coreRange = wrapper.dependencies[core.name];
+          if (process.env.GITHUB_REF_NAME !== `${wrapper.name}@${wrapper.version}` ||
+              core.version !== wrapper.version ||
+              ![core.version, `^${core.version}`].includes(coreRange)) {
+            throw new Error('The release tag, package versions, and wrapper dependency must match.');
+          }
+          JS
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
+
+      - name: Publish sdoc-editor with OIDC
+        run: npm publish --workspace @seafile/sdoc-editor
+
+  publish-seafile-sdoc-editor:
+    needs: publish-sdoc-editor
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
+
+      - name: Publish seafile-sdoc-editor with OIDC
+        run: npm publish --workspace @seafile/seafile-sdoc-editor
