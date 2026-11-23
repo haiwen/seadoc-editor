@@ -3,8 +3,7 @@
   "version": "independent",
   "npmClient": "npm",
   "command": {
-    "publish": {
-      "bump": "patch",
+    "version": {
       "ignoreChanges": ["**/*.md"],
       "message": "chore(release): publish",
       "conventionalCommits": true

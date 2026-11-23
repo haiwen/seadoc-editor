@@ -1,6 +1,11 @@
 {
   "name": "@seafile/sdoc-editor",
   "version": "3.0.275",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haiwen/seadoc-editor.git",
+    "directory": "packages/sdoc-editor"
+  },
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
