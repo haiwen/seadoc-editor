@@ -3,6 +3,7 @@ import { Editor, Path } from '@seafile/slate';
 import { ReactEditor, useSlateStatic } from '@seafile/slate-react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import { isMobile } from '../../../../utils/common-utils';
 
 const Column = ({ attributes, element, children }) => {
   const editor = useSlateStatic();
@@ -24,7 +25,7 @@ const Column = ({ attributes, element, children }) => {
       {...attributes}
       className={classnames('sdoc-multicolumn-column', attributes.className)}
       data-id={element.id}
-      style={{ width: `${columnWidth}px` }}
+      style={isMobile ? undefined : { width: `${columnWidth}px` }}
     >
       <div className='sdoc-column-container'>
         {children}
