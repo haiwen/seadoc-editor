@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useTranslation, withTranslation } from 'react-i18next';
 import { Input, UncontrolledPopover } from 'reactstrap';
 import { Transforms } from '@seafile/slate';
 import { useSlateStatic } from '@seafile/slate-react';
 import PropTypes from 'prop-types';
+import Tooltip from '../../../components/tooltip';
 import { DOCUMENT_PLUGIN_EDITOR, INTERNAL_EVENT, KeyCodes, WIKI_EDITOR } from '../../../constants';
 import { isMobile } from '../../../utils/common-utils';
 import EventBus from '../../../utils/event-bus';
@@ -44,6 +45,7 @@ const QuickInsertBlockMenu = ({
   const inputWrapperRef = useRef(null);
   const downDownWrapperRef = useRef(null);
   const { t } = useTranslation('sdoc-editor');
+  const clearSearchButtonId = useId();
   const [searchValue, setSearchValue] = useState('');
   const [currentSelectIndex, setCurrentSelectIndex] = useState(-1); // -1 means no menu item is selected
   const [quickInsertMenuSearchMap, setQuickInsertMenuSearchMap] = useState(SIDE_QUICK_INSERT_MENUS_SEARCH_MAP);
@@ -512,19 +514,22 @@ const QuickInsertBlockMenu = ({
           onCompositionEnd={onCompositionEnd}
         />
         {searchValue && (
-          <button
-            type="button"
-            className="sdoc-quick-insert-clear-search"
-            aria-label={t('Delete')}
-            title={t('Delete')}
-            onMouseDown={(e) => e.preventDefault()}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
-            }}
-            onClick={onClearSearch}
-          >
-            <i className="sdocfont sdoc-sm-close" aria-hidden="true"></i>
-          </button>
+          <>
+            <button
+              id={clearSearchButtonId}
+              type="button"
+              className="sdoc-quick-insert-clear-search"
+              aria-label={t('Clear')}
+              onMouseDown={(e) => e.preventDefault()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+              }}
+              onClick={onClearSearch}
+            >
+              <i className="sdocfont sdoc-sm-close" aria-hidden="true"></i>
+            </button>
+            <Tooltip target={`[id="${clearSearchButtonId}"]`}>{t('Clear')}</Tooltip>
+          </>
         )}
       </div>
       <div className='sdoc-insert-element-content-wrapper' ref={downDownWrapperRef}>
