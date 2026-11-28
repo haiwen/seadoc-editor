@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.277](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.276...%40seafile%2Fsdoc-editor%403.0.277) (2026-11-28)
+
+### Bug Fixes
+
+- mobile column layout and skip unchanged image resize saves ([#373](https://github.com/haiwen/seadoc-editor/issues/373)) ([a4f857d](https://github.com/haiwen/seadoc-editor/commit/a4f857d376f9a1c6898676f7d01f89cfb27cb4b6))
+- use the shared tooltip for the quick insert clear button ([#372](https://github.com/haiwen/seadoc-editor/issues/372)) ([145cef5](https://github.com/haiwen/seadoc-editor/commit/145cef511d307c9f4f3e644ea222f08d83d71365))
+
 ## [3.0.276](https://github.com/haiwen/seadoc-editor/compare/%40seafile%2Fsdoc-editor%403.0.275...%40seafile%2Fsdoc-editor%403.0.276) (2026-11-23)
 
 **Note:** Version bump only for package @seafile/sdoc-editor
