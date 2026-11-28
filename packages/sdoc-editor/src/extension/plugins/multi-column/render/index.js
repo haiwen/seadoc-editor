@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useReadOnly, useSlateStatic } from '@seafile/slate-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { isMobile } from '../../../../utils/common-utils';
 import { LAST_COLUMN_MARGIN_RIGHT_WIDTH } from '../constants';
 import { getCurrentPageWidth, updateColumnWidth } from '../helper';
 import ResizeHandlers from '../resize-handlers';
@@ -14,7 +15,7 @@ const MultiColumn = ({ className, attributes, children, element }) => {
   const multiColumn = useRef(null);
   const [style, setStyle] = useState(element.style ? { ...element.style } : {});
   const multiColumnContainerClassName = classNames('sdoc-multicolumn-container', className);
-  const [pageWidth, setPageWidth] = useState(getCurrentPageWidth(editor));
+  const [pageWidth, setPageWidth] = useState(isMobile ? 0 : getCurrentPageWidth(editor));
   const readOnly = useReadOnly();
 
   const handleResizeColumn = (newColumn) => {
@@ -22,12 +23,14 @@ const MultiColumn = ({ className, attributes, children, element }) => {
   };
 
   useEffect(() => {
+    if (isMobile) return;
     setPageWidth(getCurrentPageWidth(editor));
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   , []);
 
   useEffect(() => {
+    if (isMobile) return;
     const sdocEditorPage = document.getElementById('sdoc-editor');
     if (!sdocEditorPage) return;
 
@@ -63,9 +66,9 @@ const MultiColumn = ({ className, attributes, children, element }) => {
 
   return (
     <MultiColumnRoot attributes={attributes}>
-      <div className={multiColumnContainerClassName} style={style} ref={multiColumn} data-id={element.id}>
+      <div className={multiColumnContainerClassName} style={isMobile ? undefined : style} ref={multiColumn} data-id={element.id}>
         {children}
-        {!readOnly && <ResizeHandlers
+        {!isMobile && !readOnly && <ResizeHandlers
           element={element}
           handleResizeColumn={handleResizeColumn}
         />}

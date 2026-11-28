@@ -49,3 +49,22 @@
   background-color: lightgray;
   cursor: col-resize;
 }
+
+.sdoc-editor-container.mobile .sdoc-multicolumn-wrapper,
+.sdoc-editor-container.mobile .sdoc-multicolumn-container,
+.sdoc-editor-container.mobile .sdoc-multicolumn-column {
+  display: block;
+}
+
+.sdoc-editor-container.mobile .sdoc-multicolumn-wrapper {
+  margin: 0;
+}
+
+.sdoc-editor-container.mobile .sdoc-multicolumn-container {
+  min-height: 0;
+}
+
+.sdoc-editor-container.mobile .sdoc-column-container {
+  width: 100%;
+  padding: 0;
+}

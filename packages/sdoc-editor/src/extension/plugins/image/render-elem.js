@@ -33,6 +33,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const imageHoverMenuRef = useRef(null);
   const urlRef = useRef(element?.data);
   const resizerRef = useRef(null);
+  const resizeStartWidthRef = useRef(null);
   const imageCaptionInputRef = useRef(null);
   const scrollRef = useScrollContext();
   const [movingWidth, setMovingWidth] = useState(null);
@@ -87,8 +88,12 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
       },
     ]);
 
-    const newData = { ...element.data, width: imageRef.current.width };
-    updateImage(editor, newData);
+    const width = imageRef.current.width;
+    if (width !== resizeStartWidthRef.current) {
+      updateImage(editor, { ...element.data, width });
+    }
+    imageRef.current.removeAttribute('width');
+    setMovingWidth(null);
 
     // Reset hover menu position
     setTimeout(() => {
@@ -102,6 +107,7 @@ const Image = ({ element, editor, style, className, attributes, children, isSele
   const onResizeStart = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
+    resizeStartWidthRef.current = imageRef.current.width;
     setIsShowImageHoverMenu(false);
     setIsResizing(true);
     registerEvent([
